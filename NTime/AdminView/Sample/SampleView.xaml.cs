@@ -13,17 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace StartupWPF
+namespace StartupWPF.Sample
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for SampleView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class SampleView : UserControl
     {
-        public MainWindow()
+        public SampleView()
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
         }
     }
 }
