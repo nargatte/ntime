@@ -1,6 +1,6 @@
 ﻿namespace BaseCore.DataBase
 {
-    public class ReaderOrder
+    public class ReaderOrder : IEntityId
     {
         public ReaderOrder()
         {

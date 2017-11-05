@@ -2,7 +2,7 @@
 
 namespace BaseCore.DataBase
 {
-    public class TimeRead
+    public class TimeRead : IEntityId
     {
         public TimeRead()
         {

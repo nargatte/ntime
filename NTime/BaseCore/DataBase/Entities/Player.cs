@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BaseCore.DataBase
 {
-    public class Player
+    public class Player : IEntityId
     {
         public Player()
         {

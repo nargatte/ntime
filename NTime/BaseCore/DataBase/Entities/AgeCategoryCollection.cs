@@ -3,13 +3,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BaseCore.DataBase
 {
-    public class AgeCategoryTemplateCollection
+    public class AgeCategoryCollection : IEntityId
     {
-        public AgeCategoryTemplateCollection()
+        public AgeCategoryCollection()
         {
         }
 
-        public AgeCategoryTemplateCollection(string name)
+        public AgeCategoryCollection(string name)
         {
             Name = name;
         }

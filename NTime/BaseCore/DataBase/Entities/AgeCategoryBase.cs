@@ -2,7 +2,7 @@
 
 namespace BaseCore.DataBase
 {
-    public abstract class AgeCategoryBase
+    public abstract class AgeCategoryBase : IEntityId
     {
         public AgeCategoryBase()
         {
