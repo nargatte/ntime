@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 
 namespace BaseCore.DataBase
 {
@@ -14,7 +14,6 @@ namespace BaseCore.DataBase
 
         public int CompetitionId { get; set; }
         public virtual Competition Competition { get; set; }
-
-        public virtual ICollection<Player> Players { get; set; }
+        public virtual ObservableCollection<Player> Players { get; set; }
     }
 }

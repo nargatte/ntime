@@ -1,20 +1,42 @@
-﻿<Window x:Class="StartupWPF.MainWindow"
+﻿<Window x:Class="AdminView.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:StartupWPF"
+        xmlns:local="clr-namespace:AdminView"
         xmlns:sample="clr-namespace:StartupWPF.Sample"
+        xmlns:players="clr-namespace:AdminView.Players"
+        xmlns:competitionChoice="clr-namespace:AdminView.CompetitionChoice"
+        xmlns:scores="clr-namespace:AdminView.Scores"
+        xmlns:settings="clr-namespace:AdminView.Settings"
         xmlns:converters="clr-namespace:StartupWPF.XamlConverters"
+        xmlns:addCompetition="clr-namespace:AdminView.AddCompetition"
         mc:Ignorable="d"
+        Background="AliceBlue"
+        WindowState="Maximized"
         Title="MainWindow" Height="350" Width="525">
     <Window.Resources>
         <DataTemplate DataType="{x:Type sample:SampleViewModel}">
             <sample:SampleView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type competitionChoice:CompetitionChoiceViewModel}">
+            <competitionChoice:CompetitionChoiceView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type players:PlayersViewModel}">
+            <players:PlayersView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type settings:SettingsViewModel}">
+            <settings:SettingsView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type scores:ScoresViewModel}">
+            <scores:ScoresView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type addCompetition:AddCompetitionViewModel}">
+            <addCompetition:AddCompetitionView/>
+        </DataTemplate>
         <converters:DateToStringConverterClass x:Key="DateToStringConverter"/>
     </Window.Resources>
     <Grid>
-        <ContentControl Content="{Binding CurrentViewModel}"/>
+        <ContentControl Content="{Binding CurrentViewModel}" Width="Auto" Height="Auto"/>
     </Grid>
 </Window>

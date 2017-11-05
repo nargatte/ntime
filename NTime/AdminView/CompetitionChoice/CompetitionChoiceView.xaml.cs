@@ -13,17 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace AdminView
+namespace AdminView.CompetitionChoice
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for CompetitionChoiceView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class CompetitionChoiceView : UserControl
     {
-        public MainWindow()
+        public CompetitionChoiceView()
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
         }
     }
 }

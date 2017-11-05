@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace BaseCore.DataBase
@@ -43,6 +43,6 @@ namespace BaseCore.DataBase
         public int AgeCategoryId { get; set; }
         public virtual AgeCategory AgeCategory { get; set; }
 
-        public virtual ICollection<TimeRead> TimeReads { get; set; }
+        public virtual ObservableCollection<TimeRead> TimeReads { get; set; }
     }
 }

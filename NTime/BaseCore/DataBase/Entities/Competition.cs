@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
 
@@ -44,12 +44,12 @@ namespace BaseCore.DataBase
         public int CompetitionTypeId { get; set; }
         public virtual CompetitionType CompetitionType { get; set; }
 
-        public virtual ICollection<Player> Players { get; set; }
+        public virtual ObservableCollection<Player> Players { get; set; }
 
-        public virtual ICollection<ExtraPlayerInfo> ExtraPlayerInfos { get; set; }
+        public virtual ObservableCollection<ExtraPlayerInfo> ExtraPlayerInfos { get; set; }
 
-        public virtual ICollection<Distance> Distances { get; set; }
+        public virtual ObservableCollection<Distance> Distances { get; set; }
 
-        public virtual ICollection<AgeCategory> AgeCategories { get; set; }
+        public virtual ObservableCollection<AgeCategory> AgeCategories { get; set; }
     }
 }

@@ -55,18 +55,38 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddCompetition\AddCompetitionView.xaml.cs">
+      <DependentUpon>AddCompetitionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddCompetition\AddCompetitionViewModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CompetitionChoice\CompetitionChoiceViewModel.cs" />
+    <Compile Include="CompetitionChoice\CompetitionChoiceView.xaml.cs">
+      <DependentUpon>CompetitionChoiceView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Players\PlayersView.xaml.cs">
+      <DependentUpon>PlayersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Players\PlayersViewModel.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="Sample\SampleView.xaml.cs">
       <DependentUpon>SampleView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Sample\SampleViewModel.cs" />
+    <Compile Include="Scores\ScoresView.xaml.cs">
+      <DependentUpon>ScoresView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scores\ScoresViewModel.cs" />
+    <Compile Include="Settings\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\SettingsViewModel.cs" />
     <Compile Include="ValidatableBindableBase.cs" />
     <Compile Include="XamlConverters\DateToStringConverterClass.cs" />
   </ItemGroup>
@@ -90,6 +110,19 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Properties\DataSources\BaseCore.DataBase.AgeCategory.datasource" />
+    <None Include="Properties\DataSources\BaseCore.DataBase.AgeCategoryBase.datasource" />
+    <None Include="Properties\DataSources\BaseCore.DataBase.AgeCategoryTemplate.datasource" />
+    <None Include="Properties\DataSources\BaseCore.DataBase.AgeCategoryTemplateCollection.datasource" />
+    <None Include="Properties\DataSources\BaseCore.DataBase.Competition.datasource" />
+    <None Include="Properties\DataSources\BaseCore.DataBase.CompetitionType.datasource" />
+    <None Include="Properties\DataSources\BaseCore.DataBase.Distance.datasource" />
+    <None Include="Properties\DataSources\BaseCore.DataBase.ExtraPlayerInfo.datasource" />
+    <None Include="Properties\DataSources\BaseCore.DataBase.NTimeDBContext.datasource" />
+    <None Include="Properties\DataSources\BaseCore.DataBase.NTimeDBInitializer.datasource" />
+    <None Include="Properties\DataSources\BaseCore.DataBase.Player.datasource" />
+    <None Include="Properties\DataSources\BaseCore.DataBase.ReaderOrder.datasource" />
+    <None Include="Properties\DataSources\BaseCore.DataBase.TimeRead.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -99,22 +132,47 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Priniting\" />
     <Folder Include="Validation\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="AddCompetition\AddCompetitionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CompetitionChoice\CompetitionChoiceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Players\PlayersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Sample\SampleView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Scores\ScoresView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Settings\SettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AdminViewCore\AdminViewCore.csproj">
       <Project>{6dfe680c-04ca-4744-8180-96c4e13abfb4}</Project>
       <Name>AdminViewCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BaseCore\BaseCore.csproj">
+      <Project>{becbcdb2-14bb-45bc-acef-2b00f7fd70e2}</Project>
+      <Name>BaseCore</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

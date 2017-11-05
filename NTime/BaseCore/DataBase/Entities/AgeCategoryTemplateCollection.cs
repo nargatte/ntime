@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace BaseCore.DataBase
@@ -19,6 +19,6 @@ namespace BaseCore.DataBase
         [StringLength(256), Required]
         public string Name { get; set; }
 
-        public virtual ICollection<AgeCategoryTemplate> AgeCategoryTemplates { get; set; }
+        public virtual ObservableCollection<AgeCategoryTemplate> AgeCategoryTemplates { get; set; }
     }
 }
