@@ -111,5 +111,11 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AdminViewCore\AdminViewCore.csproj">
+      <Project>{6dfe680c-04ca-4744-8180-96c4e13abfb4}</Project>
+      <Name>AdminViewCore</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
