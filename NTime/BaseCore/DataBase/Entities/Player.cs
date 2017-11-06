@@ -12,10 +12,10 @@ namespace BaseCore.DataBase
 
         public int Id { get; set; }
         
-        [StringLength(256), Required]
+        [StringLength(255), Required]
         public string FirstName { get; set; }
 
-        [StringLength(256), Required]
+        [StringLength(255), Required]
         public string SecondName { get; set; }
 
         [Required]
@@ -23,12 +23,12 @@ namespace BaseCore.DataBase
 
         public bool IsMale { get; set; }
 
-        [StringLength(256)]
+        [StringLength(255)]
         public string Team { get; set; }
 
         public int StartNumber { get; set; }
 
-        [StringLength(256)]
+        [StringLength(255)]
         public string FullCategory { get; set; }
 
         public int CompetitionId { get; set; }

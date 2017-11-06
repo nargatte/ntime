@@ -13,10 +13,10 @@ namespace BaseCore.DataBase
 
         public int Id { get; set; }
 
-        [StringLength(256), Required]
+        [StringLength(255), Required]
         public string Name { get; set; }
 
-        [StringLength(256), Required]
+        [StringLength(255), Required]
         public string ShortName { get; set; }
 
         public int CompetitionId { get; set; }

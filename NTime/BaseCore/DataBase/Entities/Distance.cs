@@ -20,7 +20,7 @@ namespace BaseCore.DataBase
 
         public int Id { get; set; }
 
-        [StringLength(256), Required]
+        [StringLength(255), Required]
         public string Name { get; set; }
 
         public decimal Length { get; set; }

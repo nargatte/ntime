@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
+using System.Runtime.Remoting.Messaging;
 
 namespace BaseCore.DataBase
 {
@@ -26,7 +27,7 @@ namespace BaseCore.DataBase
         public int Id { get; set; }
 
         [Required]
-        [StringLength(256)]
+        [StringLength(255)]
         public string Name { get; set; }
 
         public DateTime EventDate { get; set; }
@@ -36,17 +37,21 @@ namespace BaseCore.DataBase
         [StringLength(2000)]
         public string Link { get; set; }
 
-        [StringLength(256)]
+        [StringLength(255)]
         public string Organiser { get; set; }
 
-        [StringLength(256)]
+        [StringLength(255)]
         public string City { get; set; }
 
         public int CompetitionTypeId { get; set; }
         public virtual CompetitionType CompetitionType { get; set; }
 
         [NotMapped]
-        public CompetitionTypeEnum CompetitionTypeEnum => (CompetitionTypeEnum) CompetitionTypeId;
+        public CompetitionTypeEnum CompetitionTypeEnum
+        {
+            get => (CompetitionTypeEnum) CompetitionTypeId;
+            set => CompetitionTypeId = (int) value;
+        }
 
         public virtual ICollection<Player> Players { get; set; }
 

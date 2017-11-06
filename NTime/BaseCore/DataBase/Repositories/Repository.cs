@@ -8,17 +8,14 @@ namespace BaseCore.DataBase
     public class Repository<T> : IRepository<T>
         where T : class, IEntityId
     { 
-        public async Task<int> AddAsync(T item)
+        public async Task<T> AddAsync(T item)
         {
-            int id = -1;
             await NTimeDBContext.ContextDoAsync(async ctx =>
             {
                 ctx.Entry(item).State = EntityState.Added;
                 await ctx.SaveChangesAsync();
-                id = item.Id;
             });
-            if (id == -1) throw new Exception("Wrong Id");
-            return id;
+            return item;
         }
 
         public async Task AddRangeAsync(IEnumerable<T> items)

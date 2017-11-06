@@ -24,7 +24,7 @@ namespace BaseCore.DataBase
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
-        [StringLength(20)]
+        [StringLength(255)]
         public string Name { get; set; }
     }
 }
