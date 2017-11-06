@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace AdminView.Scores
 {
-    class ScoresViewModel : BindableBase
+    class ScoresViewModel : BindableBase, IViewModel
     {
+        public void DetachAllEvents()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -10,30 +10,44 @@ using AdminView.Settings;
 
 namespace AdminView
 {
-    class MainViewModel : BindableBase
+    class MainViewModel : BindableBase, IViewModel
     {
-        private BindableBase _currentViewModel;
+        private IViewModel _currentViewModel;
         private CompetitionChoiceViewModel _competitionChoiceViewModel;
         private PlayersViewModel _playersViewModel;
         private SettingsViewModel _settingsViewModel;
         private ScoresViewModel _scoresViewModel;
-        private AddCompetition.AddCompetitionViewModel _addCompetitionViewModel;
 
 
         public MainViewModel()
         {
-            _competitionChoiceViewModel = new CompetitionChoiceViewModel();
-            _addCompetitionViewModel = new AddCompetition.AddCompetitionViewModel();
-            CurrentViewModel = _addCompetitionViewModel;
+            NavToCompetitionChoiceView();
         }
 
+        private void NavToCompetitionChoiceView()
+        {
+            CurrentViewModel?.DetachAllEvents();
+            _competitionChoiceViewModel = new CompetitionChoiceViewModel();
+            _competitionChoiceViewModel.PlayersViewRequested += NavToPlayersView;
+            CurrentViewModel = _competitionChoiceViewModel;
+        }
 
-        public BindableBase CurrentViewModel
+        private void NavToPlayersView()
+        {
+            CurrentViewModel?.DetachAllEvents();
+            _playersViewModel = new PlayersViewModel();
+            CurrentViewModel = _playersViewModel;
+        }
+
+        public void DetachAllEvents()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IViewModel CurrentViewModel
         {
             get { return _currentViewModel; }
             set { SetProperty(ref _currentViewModel, value); }
         }
-
-
     }
 }

@@ -18,33 +18,11 @@ namespace AdminView.AddCompetition
     /// <summary>
     /// Interaction logic for AddCompetitionView.xaml
     /// </summary>
-    public partial class AddCompetitionView : UserControl
+    public partial class AddCompetitionView : Window
     {
         public AddCompetitionView()
         {
             InitializeComponent();
-        }
-
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void UserControl_Loaded_1()
-        {
-
-        }
-
-        private void UserControl_Loaded_2(object sender, RoutedEventArgs e)
-        {
-
-            // Do not load your data at design time.
-            // if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
-            // {
-            // 	//Load your data here and assign the result to the CollectionViewSource.
-            // 	System.Windows.Data.CollectionViewSource myCollectionViewSource = (System.Windows.Data.CollectionViewSource)this.Resources["Resource Key for CollectionViewSource"];
-            // 	myCollectionViewSource.Source = your data
-            // }
         }
     }
 }

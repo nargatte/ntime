@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace AdminView.Settings
 {
-    class SettingsViewModel : BindableBase
+    class SettingsViewModel : BindableBase, IViewModel
     {
+        public void DetachAllEvents()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

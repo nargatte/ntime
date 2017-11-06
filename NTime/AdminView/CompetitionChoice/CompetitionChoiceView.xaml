@@ -7,6 +7,22 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical" Grid.Row="0">
+            <TextBlock Text="Witamy w NTime" HorizontalAlignment="Center"/>
+            <TextBlock Text="Pomożemy Ci szybko i sprawnie przeprowadzić zawody" TextWrapping="Wrap"/>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Row="1">
+            <TextBlock Margin="10" Text="Wybierz istniejące zawody" HorizontalAlignment="Center"/>
+            <ListView>
+               
+            </ListView>
+            <Button Margin="10"  HorizontalAlignment="Center" MaxWidth="150" Height="50" VerticalAlignment="Bottom" Command="{Binding DisplayAddCompetitionViewCmd}">
+                <TextBlock Text="Stwórz nowe zawody" TextWrapping="Wrap" TextAlignment="Center"/>
+            </Button>
+        </StackPanel>
     </Grid>
 </UserControl>

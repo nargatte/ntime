@@ -67,6 +67,7 @@
     <Compile Include="CompetitionChoice\CompetitionChoiceView.xaml.cs">
       <DependentUpon>CompetitionChoiceView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -164,6 +165,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Styles\TabControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AdminViewCore\AdminViewCore.csproj">
@@ -174,6 +179,10 @@
       <Project>{becbcdb2-14bb-45bc-acef-2b00f7fd70e2}</Project>
       <Name>BaseCore</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\add.png" />
+    <Resource Include="Images\delete.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

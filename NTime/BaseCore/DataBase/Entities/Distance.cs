@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace BaseCore.DataBase
@@ -30,8 +30,8 @@ namespace BaseCore.DataBase
         public int CompetitionId { get; set; }
         public virtual Competition Competition { get; set; }
 
-        public virtual ObservableCollection<ReaderOrder> ReaderOrders { get; set; }
+        public virtual ICollection<ReaderOrder> ReaderOrders { get; set; }
 
-        public virtual ObservableCollection<Player> Players { get; set; }
+        public virtual ICollection<Player> Players { get; set; }
     }
 }

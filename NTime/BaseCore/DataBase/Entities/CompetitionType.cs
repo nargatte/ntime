@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 
 namespace BaseCore.DataBase
 {
@@ -16,6 +16,6 @@ namespace BaseCore.DataBase
 
         public static implicit operator CompetitionType(CompetitionTypeEnum @enum) => new CompetitionType(@enum);
 
-        public virtual ObservableCollection<Competition> Competitions { get; set; }
+        public virtual ICollection<Competition> Competitions { get; set; }
     }
 }

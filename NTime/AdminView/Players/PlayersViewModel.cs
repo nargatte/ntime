@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace AdminView.Players
 {
-    class PlayersViewModel : BindableBase
+    class PlayersViewModel : BindableBase, IViewModel
     {
+        public void DetachAllEvents()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
