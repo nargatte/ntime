@@ -7,7 +7,7 @@
              xmlns:DataBase="clr-namespace:BaseCore.DataBase;assembly=BaseCore" x:Class="AdminView.AddCompetition.AddCompetitionView"
              mc:Ignorable="d" 
              WindowStyle="None"
-            WindowStartupLocation="CenterOwner"
+             WindowStartupLocation="CenterScreen"
              Width="300" Height="350"
              d:DesignHeight="350" d:DesignWidth="300">
     <Window.Resources>

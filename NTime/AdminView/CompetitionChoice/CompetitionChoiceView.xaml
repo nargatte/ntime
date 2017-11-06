@@ -11,20 +11,20 @@
             <RowDefinition Height="1.3*"/>
             <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Vertical" Grid.Row="0">
+        <StackPanel Orientation="Vertical" Grid.Row="0" Margin="0, 50, 0, 30">
             <TextBlock Text="Witamy w NTime" HorizontalAlignment="Center" FontWeight="Bold" FontSize="20"/>
             <TextBlock Text="Pomożemy Ci szybko i sprawnie przeprowadzić zawody" TextWrapping="Wrap" FontSize="16" TextAlignment="Center"/>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Row="1">
-            <Button Margin="10"  HorizontalAlignment="Center" MaxWidth="150" Height="40" VerticalAlignment="Bottom" Command="{Binding DisplayAddCompetitionViewCmd}">
-                <TextBlock Text="Stwórz nowe zawody" TextWrapping="Wrap" TextAlignment="Center"/>
+            <Button Margin="0, 10, 0, 20"  HorizontalAlignment="Center" MaxWidth="150" Height="40" VerticalAlignment="Bottom" Command="{Binding DisplayAddCompetitionViewCmd}">
+                <TextBlock Text="Stwórz nowe zawody" TextWrapping="Wrap" TextAlignment="Center" FontWeight="Bold"/>
             </Button>
-            <TextBlock Margin="10" Text="Wybierz istniejące zawody" HorizontalAlignment="Center"/>
+            <TextBlock Margin="10" Text="Wybierz istniejące zawody" HorizontalAlignment="Center" FontSize="16"/>
             <ListView>
                
             </ListView>
-            <Button Margin="92.5,10"  HorizontalAlignment="Center" MaxWidth="150" Height="40" VerticalAlignment="Bottom" Command="{Binding GoToCompetitionCmd}">
-                <TextBlock Text="Przejdź do wybranych zawodów" TextWrapping="Wrap" TextAlignment="Center"/>
+            <Button Margin="0, 40" HorizontalAlignment="Center" MaxWidth="150" Height="40" VerticalAlignment="Bottom" Command="{Binding GoToCompetitionCmd}">
+                <TextBlock Text="Przejdź do wybranych zawodów" TextWrapping="Wrap" TextAlignment="Center" FontWeight="Bold"/>
             </Button>
         </StackPanel>
     </Grid>
