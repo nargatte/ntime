@@ -38,13 +38,12 @@
         <converters:DateToStringConverterClass x:Key="DateToStringConverter"/>
     </Window.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
+        <ContentControl Content="{Binding CurrentViewModel}" Width="Auto" Height="Auto" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+    </Grid>
+        <!--<Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Image />
-        <ContentControl Content="{Binding CurrentViewModel}" Width="Auto" Height="Auto" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-
-    </Grid>
+        <Image />-->
 </Window>

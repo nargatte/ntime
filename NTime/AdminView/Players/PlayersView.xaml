@@ -3,31 +3,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+            xmlns:converters="clr-namespace:AdminView.XamlConverters"
              xmlns:local="clr-namespace:AdminView.Players"
              xmlns:DataBase="clr-namespace:BaseCore.DataBase;assembly=BaseCore" x:Class="AdminView.Players.PlayersView"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <CollectionViewSource x:Key="playerViewSource" Source="{Binding Path=Players}"/>
+        <converters:BoolToSexConverterClass x:Key="BoolToSexConverter"/>
     </UserControl.Resources>
     <Grid DataContext="{StaticResource playerViewSource}">
 
         <DataGrid x:Name="playerDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="-13,64,-87,36" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="startNumberColumn" Width="SizeToHeader" Header="Start Number" Binding="{Binding StartNumber}"/>
-                <DataGridTextColumn x:Name="firstNameColumn" Width="SizeToHeader" Header="First Name" Binding="{Binding FirstName}"/>
-                <DataGridTextColumn x:Name="lastNameColumn" Width="SizeToHeader" Header="Last Name" Binding="{Binding LastName}"/>
-                <DataGridTextColumn x:Name="extraPlayerInfoIdColumn" Width="SizeToHeader" Header="Extra Player Info Id" Binding="{Binding ExtraPlayerInfoId}"/>
-                <DataGridTextColumn x:Name="teamColumn" Width="SizeToHeader" Header="Team" Binding="{Binding Team}"/>
-                <DataGridTemplateColumn x:Name="birthDateColumn" Width="SizeToHeader" Header="Birth Date">
+                <DataGridTextColumn x:Name="startNumberColumn" Width="SizeToHeader" Header="Numer" Binding="{Binding StartNumber}"/>
+                <DataGridTextColumn x:Name="firstNameColumn" Width="SizeToHeader" Header="Imię" Binding="{Binding FirstName}"/>
+                <DataGridTextColumn x:Name="lastNameColumn" Width="SizeToHeader" Header="Nazwisko" Binding="{Binding LastName}"/>
+                <DataGridTextColumn x:Name="extraPlayerInfoIdColumn" Width="SizeToHeader" Header="Dodatkowe info" Binding="{Binding ExtraPlayerInfoId}"/>
+                <DataGridTextColumn x:Name="teamColumn" Width="SizeToHeader" Header="Klub" Binding="{Binding Team}"/>
+                <DataGridTemplateColumn x:Name="birthDateColumn" Width="SizeToHeader" Header="Data urodzenia">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <DatePicker SelectedDate="{Binding BirthDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn x:Name="fullCategoryColumn" Width="SizeToHeader" Header="Full Category" Binding="{Binding FullCategory}"/>
-                <DataGridCheckBoxColumn x:Name="isMaleColumn" Width="SizeToHeader" Header="Is Male" Binding="{Binding IsMale}"/>
+                <DataGridTextColumn x:Name="fullCategoryColumn" Width="SizeToHeader" Header="kategoria" Binding="{Binding FullCategory}"/>
+                <DataGridTextColumn x:Name="isMaleColumn" Width="SizeToHeader" Header="Płeć" Binding="{Binding IsMale, Converter={StaticResource BoolToSexConverter}}"/>
             </DataGrid.Columns>
         </DataGrid>
 

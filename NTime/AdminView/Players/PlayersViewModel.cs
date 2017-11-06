@@ -14,6 +14,7 @@ namespace AdminView.Players
         {
             Players = new ObservableCollection<Player>();
             FillPlayersCollection();
+            TabTitle = "Zawodnicy";
         }
 
         private void FillPlayersCollection()
@@ -24,10 +25,10 @@ namespace AdminView.Players
                 {
                     LastName = "Kierzkowski",
                     FirstName = "Jan",
-                    Team = "Pedały Zgierz",
+                    Team = "Niezniszczalni Zgierz",
                     BirthDate = new DateTime(1994, 10, 09),
-                    IsMale = false,
-                    StartNumber = 69
+                    IsMale = true,
+                    StartNumber = 18
                 });
             }
         }

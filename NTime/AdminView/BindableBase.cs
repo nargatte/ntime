@@ -19,6 +19,14 @@ namespace AdminView
             PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
+
+        private string _tabTitle;
+        public string TabTitle
+        {
+            get { return _tabTitle; }
+            set { SetProperty(ref _tabTitle, value); }
+        }
+
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged(this, new PropertyChangedEventArgs(propertyName));

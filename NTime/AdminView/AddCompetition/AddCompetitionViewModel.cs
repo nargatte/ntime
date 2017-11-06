@@ -10,7 +10,6 @@ namespace AdminView.AddCompetition
 {
     class AddCompetitionViewModel : BindableBase, IViewModel
     {
-
         AddCompetitionView view;
         public AddCompetitionViewModel()
         {

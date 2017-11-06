@@ -20,9 +20,9 @@ namespace AdminView.CompetitionChoice
 
         private void OnViewLoaded()
         {
-            var repository = new CompetitionRepository();
-            AddCompetitions(repository);
-            DownloadCompetitions(repository);
+            //var repository = new CompetitionRepository();
+            //AddCompetitions(repository);
+            //DownloadCompetitions(repository);
         }
 
         private async void AddCompetitions(CompetitionRepository repository)

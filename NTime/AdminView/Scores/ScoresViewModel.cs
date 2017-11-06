@@ -8,9 +8,21 @@ namespace AdminView.Scores
 {
     class ScoresViewModel : BindableBase, IViewModel
     {
+        public ScoresViewModel()
+        {
+            TabTitle = "Wyniki";
+        }
+
         public void DetachAllEvents()
         {
             throw new NotImplementedException();
+        }
+
+        private string _tabTitle;
+        public string TabTitle
+        {
+            get { return _tabTitle; }
+            set { SetProperty(ref _tabTitle, value); }
         }
     }
 }

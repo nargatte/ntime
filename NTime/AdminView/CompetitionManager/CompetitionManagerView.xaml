@@ -3,15 +3,102 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:AdminView.CompetitionManager"
+            xmlns:sample="clr-namespace:StartupWPF.Sample"
+            xmlns:players="clr-namespace:AdminView.Players"
+            xmlns:competitionChoice="clr-namespace:AdminView.CompetitionChoice"
+            xmlns:scores="clr-namespace:AdminView.Scores"
+            xmlns:settings="clr-namespace:AdminView.Settings"
+            xmlns:converters="clr-namespace:AdminView.XamlConverters"
+            xmlns:addCompetition="clr-namespace:AdminView.AddCompetition"
+            xmlns:competitionManager="clr-namespace:AdminView.CompetitionManager"
+            xmlns:local="clr-namespace:AdminView.CompetitionManager"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <ResourceDictionary Source="/Styles/TabControl.xaml"></ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <TabControl Margin="5" Style="{DynamicResource ResourceKey=styleTabControl}">
-            <TabItem Header="Ustawienia" Style="{DynamicResource ResourceKey=styleTabItemLeft}">
+        <TabControl Margin="5" Style="{DynamicResource ResourceKey=styleTabControl}" 
+                    ItemsSource="{Binding TabItems}">
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding TabTitle}" />
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+            <TabControl.Resources>
+                <LinearGradientBrush x:Key="gradientBrushTabControlHeader" StartPoint="0,0.5" EndPoint="1,0.5">
+                    <GradientStop Color="#002E8A" Offset="0" />
+                    <GradientStop Color="#0071B7" Offset="0.5" />
+                    <GradientStop Color="#002E8A" Offset="1" />
+                </LinearGradientBrush>
+                <LinearGradientBrush x:Key="gradientBrushSegmentedTabItem" StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Color="#4C8BC0" Offset="0" />
+                    <GradientStop Color="#015CA3" Offset="0.49" />
+                    <GradientStop Color="#024795" Offset="0.50" />
+                    <GradientStop Color="#2C5198" Offset="1" />
+                </LinearGradientBrush>
+                <LinearGradientBrush x:Key="gradientBrushSegmentedActiveTabItem" StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Color="#000098" Offset="0" />
+                    <GradientStop Color="#000075" Offset="0.33" />
+                    <GradientStop Color="#000075" Offset="0.66" />
+                    <GradientStop Color="#000082" Offset="1" />
+                </LinearGradientBrush>
+                <Style TargetType="{x:Type TabItem}">
+                    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type TabItem}">
+                                <Border x:Name="rightBorder"
+                        Background="{StaticResource ResourceKey=gradientBrushSegmentedTabItem}"
+                        BorderThickness="0,0,1,0"
+                        BorderBrush="#032A6B">
+                                    <Border x:Name="leftBorder"
+                            BorderThickness="1,0,0,0"
+                            BorderBrush="#2172B1">
+                                        <ContentPresenter x:Name="ContentSite"
+                                    ContentSource="Header"
+                                    Grid.Row="1"
+                                    HorizontalAlignment="Stretch"
+                                    Margin="20,4,20,5"
+                                    RecognizesAccessKey="True"
+                                    VerticalAlignment="Center"
+                                    TextBlock.FontSize="14"
+                                    TextBlock.Foreground="#FFFFFF">
+                                            <ContentPresenter.Effect>
+                                                <DropShadowEffect BlurRadius="0.0"
+                                            Color="#032A6B"
+                                            Direction="90"
+                                            Opacity="1"
+                                            ShadowDepth="1" />
+                                            </ContentPresenter.Effect>
+                                        </ContentPresenter>
+                                    </Border>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="rightBorder"
+                                Property="Background"
+                                Value="{StaticResource ResourceKey=gradientBrushSegmentedActiveTabItem}" />
+                                        <Setter TargetName="leftBorder"
+                                Property="BorderThickness"
+                                Value="0" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+                <DataTemplate DataType="{x:Type players:PlayersViewModel}" >
+                    <players:PlayersView/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type settings:SettingsViewModel}">
+                    <settings:SettingsView/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type scores:ScoresViewModel}">
+                    <scores:ScoresView/>
+                </DataTemplate>
+            </TabControl.Resources>
+            <!--<TabItem Header="Ustawienia" Style="{DynamicResource ResourceKey=styleTabItemLeft}">
                 <TextBlock>The content for General tab.</TextBlock>
             </TabItem>
             <TabItem Header="Zawodnicy" Style="{DynamicResource ResourceKey=styleTabItemDefault}">
@@ -28,7 +115,7 @@
             </TabItem>
             <TabItem Header="Drukowanie" Style="{DynamicResource ResourceKey=styleTabItemRight}">
                 <TextBlock>The content for Tools tab.</TextBlock>
-            </TabItem>
+            </TabItem>-->
         </TabControl>
     </Grid>
 </UserControl>

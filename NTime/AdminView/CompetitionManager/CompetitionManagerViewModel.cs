@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AdminView;
+using AdminView.Settings;
+using AdminView.Players;
+using AdminView.Scores;
 
 namespace AdminView.CompetitionManager
 {
@@ -11,7 +16,20 @@ namespace AdminView.CompetitionManager
         public CompetitionManagerViewModel()
         {
             GoToCompetitionCmd = new RelayCommand(OnGoToCompetition, CanGoToCompetition);
+            TabItems = new ObservableCollection<BindableBase>()
+            {
+                new PlayersViewModel(), new SettingsViewModel(), new ScoresViewModel()
+            };
         }
+
+
+        private ObservableCollection<BindableBase> _tabItems;
+        public ObservableCollection<BindableBase> TabItems
+        {
+            get { return _tabItems; }
+            set { SetProperty(ref _tabItems, value); }
+        }
+
 
         private void OnGoToCompetition()
         {
