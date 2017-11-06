@@ -45,6 +45,16 @@
                             </ContentPresenter>
                         </Border>
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="rightBorder"
+                                Property="Background"
+                                Value="{StaticResource ResourceKey=gradientBrushSegmentedActiveTabItem}" />
+                            <Setter TargetName="leftBorder"
+                                Property="BorderThickness"
+                                Value="0" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

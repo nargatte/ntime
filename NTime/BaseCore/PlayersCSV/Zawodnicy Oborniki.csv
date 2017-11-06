@@ -1,0 +1,718 @@
+id_z;nr_startowy;imie;nazwisko;miejscowosc;klub;data_urodzenia;plec;rower;distanceId;czas_startu;kategoria;kat_wiek;nr_grupy;nazwa_dystansu;dlugosc
+11066;194;Janusz;Pietruszewski;NOWOGARD;LKK Nowogard;1949-02-23;M;inny;;09:12:00;MINI M6i;M6;;MINI 90km;90
+11091;514;Piotr;Przybył;Pniewy;;1992-11-25;M;szosowy;;10:15:00;MINI M2s;M2;;MINI 90km;90
+10902;686;Marek;Mierzwiczak;Oborniki;OTC  OBORNIKI;1956-03-20;M;szosowy;;10:51:00;MINI M6s;M6;;MINI 90km;90
+10931;298;Bartosz;Cieślewicz;Września;;1984-04-05;M;szosowy;;09:33:00;MINI M3s;M3;;MINI 90km;90
+10945;605;MARCIN;PULWICKI;OBORNIKI;DT4You;1958-06-23;M;szosowy;;10:33:00;MINI M5s;M5;;MINI 90km;90
+10956;361;Tobiasz;Wybraniec;Wrocław;Pierońskie hanysy;1983-05-27;M;szosowy;;09:45:00;MINI M3s;M3;;MINI 90km;90
+11254;329;Dariusz;Obst;Plewiska;Kwiatowe Cycling Team;1964-09-26;M;szosowy;;09:39:00;MINI M5s;M5;;MINI 90km;90
+11268;337;Agnieszka;Piechowiak;Oborniki;;1992-01-07;K;szosowy;;09:39:00;MINI M2s;M2;;MINI 90km;90
+11282;146;Łukasz;Szrubkowski;Jelenia Góra;;1979-10-21;M;szosowy;;09:00:00;MEGA M3s;M3;;MEGA 180km;180
+11292;122;Sławomir;Spławski;Oborniki;Merx Team Wągrowiec;1984-07-03;M;szosowy;;08:54:00;MEGA M3s;M3;;MEGA 180km;180
+11117;225;Andrzej;Wiśniewski;Stare Polichno;;1965-06-10;M;inny;;09:18:00;MINI M5i;M5;;MINI 90km;90
+11134;552;Roman;Turowicz;Kolobrzeg;;1967-05-13;M;szosowy;;10:24:00;MINI M4s;M4;;MINI 90km;90
+10990;156;Arkadiusz  +15min;Pietruszewki  +15min;NOWOGARD;LKK Nowogard;1973-04-03;M;szosowy;;08:48:00;MINI M4s;M4;;MINI 90km;90
+10981;447;Dariusz;Czarniecki;Środa Śląska;CCC Środa Śląska;1963-10-19;M;szosowy;;10:03:00;MINI M5s;M5;;MINI 90km;90
+11274;348;Marcin;Gryboś;Mogilno;;1980-08-30;M;szosowy;;09:42:00;MINI M3s;M3;;MINI 90km;90
+11189;47;Zbigniew;Kreft;Śrem;Ciacho Team;1964-10-09;M;szosowy;;08:39:00;MEGA M5s;M5;;MEGA 180km;180
+10764;141;Mariusz;Truszkiewicz;Gryfino;;1967-02-22;M;szosowy;;09:00:00;MEGA M4s;M4;;MEGA 180km;180
+10786;229;Katarzyna;Adamowicz;Kluczbork;Katarzyna Adamowicz;1970-08-17;K;inny;;09:18:00;MINI K4i;K4;;MINI 90km;90
+10808;106;zdzislaw;kalinowski;choszczno;KALDOR;1957-10-05;M;szosowy;;08:51:00;MEGA M5s;M5;;MEGA 180km;180
+10827;101;Piotr;Protasiewicz;Konin;KTK IMAGE CYCLING TEAM;1970-12-20;M;szosowy;;08:51:00;MEGA M4s;M4;;MEGA 180km;180
+10838;180;Elżbieta;Buraczyńska;Olesnica;Bike Team Oleśnica;1956-10-22;K;inny;;09:09:00;MINI K6i;K6;;MINI 90km;90
+10845;252;DOMINIK;FRĄCKOWIAK;LESZNO;IMPOL WIENIAWA;1979-04-23;M;szosowy;;09:24:00;MINI M3s;M3;;MINI 90km;90
+10852;24;Mariusz;Kurlapski;Świdwin;Mareblue Team Świdwin;1975-05-31;M;inny;;08:33:00;MEGA M4i;M4;;MEGA 180km;180
+10890;576;Sebastian;Szaraniec;Luboń;54;1977-10-08;M;szosowy;;10:27:00;MINI M3s;M3;;MINI 90km;90
+10478;168;Eugeniusz;Brodziak;Międzyrzecz;Team Międzyrzecz;1957-01-06;M;inny;;09:06:00;MINI M5i;M5;;MINI 90km;90
+10483;219;Waldemar;Kraus;Gorzòw Wlkp.;Kolarze z Górki Ciśnij TEAM;1979-12-03;M;inny;;09:15:00;MINI M3i;M3;;MINI 90km;90
+10490;487;Waldemar;Olejarski;Konin;KTK ImageCyclingTeam;1963-02-25;M;szosowy;;10:09:00;MINI M5s;M5;;MINI 90km;90
+10499;242;Mariusz;Niedzielski;Milicz;Baryczanie Milicz;1969-07-09;M;szosowy;;09:21:00;MINI M4s;M4;;MINI 90km;90
+10508;157;Sebastian;Śledzik;Szamotuły;Drużyna Szpiku;1968-10-02;M;szosowy;;09:03:00;MEGA M4s;M4;;MEGA 180km;180
+10527;297;Seweryn;Makuch;Wilczyn;;1981-12-19;M;szosowy;;09:33:00;MINI M3s;M3;;MINI 90km;90
+10534;169;Barbara;Mikołajczak;Poznań;MTB Zeelandia Team;1976-10-15;K;inny;;09:06:00;MINI K4i;K4;;MINI 90km;90
+10539;1;PIOTR +15min;STACHOWIAK +15min;POZNAŃ;;1973-11-10;M;inny;;08:15:00;MINI M4i;M4;;MINI 90km;90
+10546;604;Damian;Dubiel;Szamotuły;Nasz Fyrtel Szamotuły;1975-11-24;M;szosowy;;10:33:00;MINI M4s;M4;;MINI 90km;90
+10553;556;Mieczysław;Sztendel;Łódź;Jastrzębie Łaskie;1954-02-24;M;szosowy;;10:27:00;MINI M6s;M6;;MINI 90km;90
+10560;507;Grzegorz;Ziobrowski;Gorzów Wlkp.;LECH PIASECKI TEAM;1974-10-09;M;szosowy;;10:15:00;MINI M4s;M4;;MINI 90km;90
+10568;335;PIOTR;Chmielewski;Stargard;KP PSP Stargard;1976-06-27;M;szosowy;;09:39:00;MINI M4s;M4;;MINI 90km;90
+10602;583;Bronisław;Sikora;Leszno;;1954-03-17;M;szosowy;;10:30:00;MINI M6s;M6;;MINI 90km;90
+10608;289;Zygmunt;Matejczuk;Świnoujscie;KS Uznam  Świnioujscie;1941-01-25;M;szosowy;;09:30:00;MINI M7s;M7;;MINI 90km;90
+10613;629;Patryk;Okonek;Poznań;;1989-06-15;M;szosowy;;10:39:00;MINI M2s;M2;;MINI 90km;90
+10620;495;Tadeusz;Habaj;Zabrze;;1947-01-28;M;szosowy;;10:12:00;MINI M6s;M6;;MINI 90km;90
+10632;203;Piotr;Szpajer;Luboń;CocoJumbo Team;1989-06-06;M;inny;;09:12:00;MINI M2i;M2;;MINI 90km;90
+10642;438;EDWARD;RADKE;WŁOSZAKOWICE;SOKÓŁ WŁOSZAKOWICE;1945-07-11;M;szosowy;;10:00:00;MINI M7s;M7;;MINI 90km;90
+10699;687;Ewelina;Włóka;Rudniki;SCT BIKE ON WAX;1985-03-04;K;szosowy;;10:51:00;MINI K3s;K3;;MINI 90km;90
+10719;666;Tomasz;Skrzypek;Trzebnica;KKS Trzebnica;1971-05-28;M;szosowy;;10:45:00;MINI M4s;M4;;MINI 90km;90
+10802;486;Andrzej;KARŁOWICZ;Złotów;;1957-11-22;M;szosowy;;10:09:00;MINI M5s;M5;;MINI 90km;90
+10843;477;Tomasz;Szulc;Palędzie;;1980-03-05;M;szosowy;;10:09:00;MINI M3s;M3;;MINI 90km;90
+10850;506;JAN;ANDRZEJEWSKI;Oborniki;OTC  OBORNIKI;1981-08-03;M;szosowy;;10:15:00;MINI M3s;M3;;MINI 90km;90
+10862;205;Małgorzata;Nowak;Międzywodzie;;1966-12-22;K;inny;;09:12:00;MINI K5i;K5;;MINI 90km;90
+10893;426;Tomasz;Sołtysiak;Krosno;;1982-12-05;M;szosowy;;09:57:00;MINI M3s;M3;;MINI 90km;90
+10925;25;Rafał;Kowalczyk;Wrocław;PROFANA breslau;1978-01-26;M;szosowy;;08:36:00;MEGA M3s;M3;;MEGA 180km;180
+10940;491;Bartosz;Grobelny;Klonówiec;Ciesiółka Team;1979-04-12;M;szosowy;;10:12:00;MINI M3s;M3;;MINI 90km;90
+10953;62;Tomasz;Maciaś;Opole;MR K2Win Eska TEAM;1970-11-14;M;szosowy;;08:42:00;MEGA M4s;M4;;MEGA 180km;180
+10966;64;Piotr;Górniak;Częstochowa;MR K2Win Eska TEAM;1974-05-03;M;szosowy;;08:42:00;MEGA M4s;M4;;MEGA 180km;180
+10976;212;ZENON;JANIAK;TRZEBNICA;SZERSZENIE TRZEBNICA;1957-09-07;M;inny;;09:15:00;MINI M5i;M5;;MINI 90km;90
+10984;392;Tomek;Materna;Poznan;Smochy Team;1973-08-26;M;szosowy;;09:51:00;MINI M4s;M4;;MINI 90km;90
+11002;118;Łukasz;Wróblewski;Poznań;RYBCZYŃSKI-BIKES Remmers TP-Link Team;1966-12-20;M;szosowy;;08:54:00;MEGA M5s;M5;;MEGA 180km;180
+11056;223;Jan;Kozak;Nysa;Nysa-GTC Gracze;1952-03-24;M;inny;;09:18:00;MINI M6i;M6;;MINI 90km;90
+11065;484;Grzegorz;Geisler;Koziegłowy;Swarzędzki Peleton;1992-09-21;M;szosowy;;10:09:00;MINI M2s;M2;;MINI 90km;90
+11083;113;Dawid;Bielewicz;Poznań;Zgrupka Team;1985-04-28;M;szosowy;;08:51:00;MEGA M3s;M3;;MEGA 180km;180
+11116;631;Mariusz;Michalak;Prądocin;;1969-05-19;M;szosowy;;10:39:00;MINI M4s;M4;;MINI 90km;90
+11152;473;Wiesław;Jasieniecki;Torun;Carbon Team Toruń;1961-11-03;M;szosowy;;10:06:00;MINI M5s;M5;;MINI 90km;90
+11161;693;Jan;Dawicki;Buczek;Jastrzębie Łaskie;1954-01-10;M;szosowy;;10:51:00;MINI M6s;M6;;MINI 90km;90
+10526;38;Bartosz +15min;Wolny +15min;Poznań;Zadyszka.org;1977-08-02;M;szosowy;;08:21:00;MINI M3s;M3;;MINI 90km;90
+10533;17;Piotr;Machowicz;Poznań;CRAZY TEAM;1979-12-27;M;inny;;08:33:00;MEGA M3i;M3;;MEGA 180km;180
+10545;503;Maciej;Simm;Wałbrzych;Prom Riders Team;1990-08-18;M;szosowy;;10:12:00;MINI M2s;M2;;MINI 90km;90
+10552;554;Gracjan;Kaźmierczak;Konin;KTK IMAGE CYCLING TEAM;1988-01-11;M;szosowy;;10:24:00;MINI M2s;M2;;MINI 90km;90
+10566;83;Paweł;Pesz;Wrocław;InsERT Team;1974-06-02;M;szosowy;;08:45:00;MEGA M4s;M4;;MEGA 180km;180
+10577;596;Robert;Kmieciak;Plewiska;;1988-01-26;M;szosowy;;10:33:00;MINI M2s;M2;;MINI 90km;90
+10589;471;Dariusz;Ryszewski;Poznań;;1991-02-04;M;szosowy;;10:06:00;MINI M2s;M2;;MINI 90km;90
+10601;365;Emil;Galor;Adamów;KTK IMAGE CYCLING TEAM;1972-03-04;M;szosowy;;9:45:00;MINI M4s;M4;;MINI 90km;90
+10606;547;Tomasz;Kuźmicz;Dołuje;Szczeciński Klub Rowerowy GRYFUS;1979-08-18;M;szosowy;;10:21:00;MINI M3s;M3;;MINI 90km;90
+10619;23;Zbigniew;Bauta;Kaszczor;Cień Szułany;1975-02-16;M;inny;;08:33:00;MEGA M4i;M4;;MEGA 180km;180
+10631;696;Marcin;Matuszkiewicz;Gostyń;GKR;1996-12-12;M;szosowy;;10:51:00;MINI M2s;M2;;MINI 90km;90
+10641;281;Piotr;Pluta;Dolice;Amator;1974-12-08;M;szosowy;;09:30:00;MINI M4s;M4;;MINI 90km;90
+10659;461;Tomasz;Łusiak;Ludwina;;1975-06-12;M;szosowy;;10:06:00;MINI M4s;M4;;MINI 90km;90
+10668;668;Tomasz;Matuszczak;Śrem;;1981-08-30;M;szosowy;;10:45:00;MINI M3s;M3;;MINI 90km;90
+10716;569;Henryk;Torbus;Kalisz;Tama Polska;1946-10-07;M;szosowy;;10:27:00;MINI M7s;M7;;MINI 90km;90
+10777;647;Mariusz;Mazurkiewicz;KĄKOLEWO;SMIGŁO  OSIECZNA;1964-09-15;M;szosowy;;10:42:00;MINI M5s;M5;;MINI 90km;90
+10842;505;Edward;Hołowvzak;Barlinek;Barlinecka Grupa Kolarska;1965-10-11;M;szosowy;;10:15:00;MINI M5s;M5;;MINI 90km;90
+10849;200;Eugeniusz;Tymczuk;Choszczno;KTR VOYAGER CHOSZCZNO;1956-09-12;M;inny;;09:12:00;MINI M6i;M6;;MINI 90km;90
+10860;210;Sławomir;Lipiński;Nowogard;;1969-10-04;M;inny;;09:15:00;MINI M4i;M4;;MINI 90km;90
+10875;87;Bogdan DNF;Kaczmarczyk DNF;Murowana Goślina;Klub Pływacki Koziegłowy;1980-06-23;M;szosowy;;20:48:00;MEGA M3s;M3;;MEGA 180km;180
+10892;594;Miłosz;Regulski;Luboń;;1981-03-13;M;szosowy;;10:30:00;MINI M3s;M3;;MINI 90km;90
+10916;121;PIOTR;JAKUBOWSKI;GORZÓW WLKP;KOLARZE GORZÓW;1949-12-08;M;szosowy;;08:54:00;MEGA M6s;M6;;MEGA 180km;180
+10952;634;Zbigniew;KUBICKI;Sianów;;1974-02-02;M;szosowy;;10:39:00;MINI M4s;M4;;MINI 90km;90
+10964;31;Andrzej;Biel;Police;Góral Police;1959-08-07;M;szosowy;;08:36:00;MEGA M5s;M5;;MEGA 180km;180
+10974;54;Arek;Lenkiewicz;Warzymice;Fast-Agrotrans;1971-07-10;M;szosowy;;08:39:00;MEGA M4s;M4;;MEGA 180km;180
+10983;140;Artur;Kozal;Mosina;FTI Racing Team;1982-10-15;M;szosowy;;08:57:00;MEGA M3s;M3;;MEGA 180km;180
+11039;126;PAULINA;BZYMEK-IWANOWICZ;ZŁOTNIKI;;1987-02-22;K;szosowy;;08:54:00;MEGA K2s;K2;;MEGA 180km;180
+11050;695;Stanisław;Szczepaniak;Poznań;;1977-06-18;M;szosowy;;10:51:00;MINI M3s;M3;;MINI 90km;90
+11064;433;Piotr;Kałmucki;Rokietnica;Rybczyński MTB Team;1974-12-09;M;szosowy;;10:00:00;MINI M4s;M4;;MINI 90km;90
+11082;256;Bartłomiej;Szalbierz;Września;Peleton Wrze;1983-09-30;M;szosowy;;09:24:00;MINI M3s;M3;;MINI 90km;90
+11107;597;Rafał;Kulik;Kiączyn;;1983-12-08;M;szosowy;;10:33:00;MINI M3s;M3;;MINI 90km;90
+11113;40;Maksym;Rupieta;Poznań;WUEF Tri Team;1978-01-06;M;szosowy;;08:39:00;MEGA M3s;M3;;MEGA 180km;180
+11129;52;Marek;Szymański;Nowogard;LKK Nowogard;1950-12-09;M;szosowy;;08:39:00;MEGA M6s;M6;;MEGA 180km;180
+11148;419;Tomasz;Romański;Gniezno;GKKG Gniezno;1990-04-21;M;szosowy;;09:57:00;MINI M2s;M2;;MINI 90km;90
+11160;264;Przemysław;Dachtera;Poznań;Badbike.pl;1971-04-27;M;szosowy;;09:24:00;MINI M4s;M4;;MINI 90km;90
+11175;709;Jacek;Gnyś;Kórnik;;1971-02-03;M;szosowy;;10:57:00;MINI M4s;M4;;MINI 90km;90
+11184;372;Grzegorz;Kostecki;Konin;KTK IMAGE CYCLING TEAM;1972-11-05;M;szosowy;;09:48:00;MINI M4s;M4;;MINI 90km;90
+11197;185;Tomasz;Miksa;Łask;Jastrzębie Łaskie;1976-10-23;M;inny;;09:09:00;MINI M4i;M4;;MINI 90km;90
+11206;519;Ryszard;Kołacki;Wągrowiec;Merx Team Wągrowiec;1953-01-15;M;szosowy;;10:15:00;MINI M6s;M6;;MINI 90km;90
+11213;71;Artur;Spławski;Oborniki;Merx Team Wągrowiec;1960-02-16;M;szosowy;;08:45:00;MEGA M5s;M5;;MEGA 180km;180
+11235;449;Piotr;Klamecki;Pniewy;Odjechani-Team.PL;1984-06-29;M;szosowy;;10:03:00;MINI M3s;M3;;MINI 90km;90
+10447;134;KRZYSZTOF;KUBIK;KROTOSZYN;OTR INTERKOL;1991-12-14;M;szosowy;;08:57:00;MEGA M2s;M2;;MEGA 180km;180
+10458;68;Mariusz;Lisiecki;Krobia;;1977-04-18;M;szosowy;;08:42:00;MEGA M3s;M3;;MEGA 180km;180
+10468;215;Agnieszka;Jażdżewska;Oborniki;;1982-06-17;K;inny;;09:15:00;MINI K3i;K3;;MINI 90km;90
+10481;248;Arkadiusz;Peters;Zalasewo;Swarzędzki Peleton;1972-11-26;M;szosowy;;09:21:00;MINI M4s;M4;;MINI 90km;90
+10488;713;Artur DSQ;Mazurek DSQ;Konin;KTK IMAGE CYCLING TEAM;1974-08-22;M;szosowy;;20:57:00;MINI M4s;M4;;MINI 90km;90
+10516;532;Łukasz;Urbaniak;Wrocław;PROM RIDERS TEAM;1982-08-21;M;szosowy;;10:18:00;MINI M3s;M3;;MINI 90km;90
+10524;241;Andrzej;Żurawik;Golina;KTK IMAGE CYCLING TEAM;1964-03-23;M;szosowy;;09:21:00;MINI M5s;M5;;MINI 90km;90
+10532;108;Miłosz;Kwiliński;Buślary;;1998-04-08;M;szosowy;;08:51:00;MEGA M2s;M2;;MEGA 180km;180
+10537;196;Paweł;Kamiński;Mosina;;1975-06-27;M;inny;;09:12:00;MINI M4i;M4;;MINI 90km;90
+10551;450;Dominik DSQ;Kaźmierczak DSQ;Konin;KTK IMAGE CYCLING TEAM;1992-07-31;M;szosowy;;20:03:00;MINI M2s;M2;;MINI 90km;90
+10556;344;Szymon;Wachulec;Pabianice;PTC Pabianice;1996-06-06;M;szosowy;;09:42:00;MINI M2s;M2;;MINI 90km;90
+10564;455;Mariusz;Kisły;Myślibórz;;1977-07-20;M;szosowy;;10:03:00;MINI M3s;M3;;MINI 90km;90
+10587;575;Maciej;Jabłoński;Poznań;;1990-03-03;M;szosowy;;10:27:00;MINI M2s;M2;;MINI 90km;90
+10600;283;Waldemar;Tyloch;Złotów;Masters Złotów;1974-08-07;M;szosowy;;09:30:00;MINI M4s;M4;;MINI 90km;90
+10605;549;MIECZYSŁAW;FRANKOWSKI;ŁÓDŹ;KS Mocne Koło;1930-01-03;M;szosowy;;10:21:00;MINI M7s;M7;;MINI 90km;90
+10611;446;Artur;Gonera;Szczecin;;1973-07-23;M;szosowy;;10:03:00;MINI M4s;M4;;MINI 90km;90
+10618;443;Krzysztof;Kreczetowski;Wschowa;Strefasportu;1978-05-29;M;szosowy;;10:00:00;MINI M3s;M3;;MINI 90km;90
+10625;405;Hieronim;Grzymisławski;Murowana Goślina;LOOKSFERA/M-TRONIC;1962-01-23;M;szosowy;;09:54:00;MINI M5s;M5;;MINI 90km;90
+10658;678;Halina;Romanowska;Toruń;Carbon team;1955-09-04;K;szosowy;;10:48:00;MINI K6s;K6;;MINI 90km;90
+10665;670;Borys;Chwiłkowski;Luboń;PKO Bank Polski SA;1979-05-21;M;szosowy;;10:48:00;MINI M3s;M3;;MINI 90km;90
+10696;35;Krzysztof;Lipiński;Szczecin;CISOWIANKA TEAM;1959-03-12;M;szosowy;;08:36:00;MEGA M5s;M5;;MEGA 180km;180
+10733;19;Darek;Noga;Łagów Lubuski;InsERT Team;1983-07-08;M;inny;;08:33:00;MEGA M3i;M3;;MEGA 180km;180
+10770;396;Mirosław;Raburski;Leszno;AMBIT Racing Team;1964-01-24;M;szosowy;;09:51:00;MINI M5s;M5;;MINI 90km;90
+10787;218;Piotr;Proszowski;Poraj;PTTK Myszków;1971-07-18;M;inny;;09:15:00;MINI M4i;M4;;MINI 90km;90
+10813;410;Daniel;Preuss;Bydgoszcz;;1974-05-07;M;szosowy;;09:54:00;MINI M4s;M4;;MINI 90km;90
+10828;265;Maria;Wolff-Stefaniak;Poznań;BE3 CityZen;1988-05-02;K;szosowy;;09:27:00;MINI K2s;K2;;MINI 90km;90
+10841;199;MAŁGORZATA;MAŚKIEWICZ;OBORNIKI ŚLĄSKIE;OŚ Racing Team;1986-04-19;K;inny;;09:12:00;MINI K3i;K3;;MINI 90km;90
+10848;387;Tomasz;Mikołajczyk;Grabowno Małe;;1977-04-05;M;szosowy;;09:51:00;MINI M3s;M3;;MINI 90km;90
+10465;22;Wojciech;Łuszcz;Legionowo;;1959-03-07;M;inny;;08:33:00;MEGA M5i;M5;;MEGA 180km;180
+10479;213;JUSTYNA;FIEDLER;JERZYKOWO;CREAZY TEAM;1983-01-13;K;inny;;09:15:00;MINI K3i;K3;;MINI 90km;90
+10492;328;Maciej;Zagórski;Kaźmierz;Trek Racing team;1978-01-25;M;szosowy;;09:39:00;MINI M3s;M3;;MINI 90km;90
+10501;381;Roman;Wasiak;Konin;KTK IMAGE CYCLING TEAM;1968-07-23;M;szosowy;;09:48:00;MINI M4s;M4;;MINI 90km;90
+10511;114;Jarek;Krasiński;Trzebnica;KKS Trzebnica;1982-02-25;M;szosowy;;08:51:00;MEGA M3s;M3;;MEGA 180km;180
+10529;174;Dominik;Dubarek;Wrocław;0;1980-07-29;M;inny;;09:06:00;MINI M3i;M3;;MINI 90km;90
+10535;190;Jakub;Mikołajczak;Poznań;MTB Zeelandia Team;1978-06-22;M;inny;;09:09:00;MINI M3i;M3;;MINI 90km;90
+10542;494;Rafal;Przybyl;Gostyń;GKR;1981-11-08;M;szosowy;;10:12:00;MINI M3s;M3;;MINI 90km;90
+10549;512;Damian;Burtowski;Wrocław;PROM Riders Team;1998-07-25;M;szosowy;;10:15:00;MINI M2s;M2;;MINI 90km;90
+10554;683;Grzegorz;Stolarek;Łask;Jastrzębie Łaskie;1968-09-03;M;szosowy;;10:48:00;MINI M4s;M4;;MINI 90km;90
+10561;221;Robert;Łodyga;Czerwonak;;1975-01-11;M;inny;;09:15:00;MINI M4i;M4;;MINI 90km;90
+10582;641;Przemysław;Małecki;Pobiedziska;FTI Racing Team;1990-08-16;M;szosowy;;10:42:00;MINI M2s;M2;;MINI 90km;90
+10595;278;Adam;Przybylski;Poznań;;1985-05-14;M;szosowy;;09:27:00;MINI M3s;M3;;MINI 90km;90
+10603;293;Dawid;Lewandowski;Poznań;;1988-10-03;M;szosowy;;09:30:00;MINI M2s;M2;;MINI 90km;90
+10609;336;Jakub;Jabłoński;Poznań;My TRI Team;1981-05-02;M;szosowy;;09:39:00;MINI M3s;M3;;MINI 90km;90
+10616;36;Sebastian;Gołębiewski;Szczecin;TRICARBON.PL;1977-03-21;M;szosowy;;08:36:00;MEGA M3s;M3;;MEGA 180km;180
+10621;91;Tytus;Czartoryski;Morzecin Maly;Szerszenie;1945-03-30;M;szosowy;;08:48:00;MEGA M7s;M7;;MEGA 180km;180
+10636;362;Zbigniew;Rogala;Wrocław;;1990-07-05;M;szosowy;;09:45:00;MINI M2s;M2;;MINI 90km;90
+10683;136;Jan;Wesołowski;Świnoujście;KS Uznam;1948-01-31;M;szosowy;;08:57:00;MEGA M6s;M6;;MEGA 180km;180
+10701;316;Eryk;Goroński;Oborniki;;1998-05-08;M;szosowy;;09:36:00;MINI M2s;M2;;MINI 90km;90
+10760;65;Zbigniew;Heleniarz;Police;Góral Police;1980-01-28;M;szosowy;;08:42:00;MEGA M3s;M3;;MEGA 180km;180
+10805;9;MICHAŁ;BANDROWSKI;DRZONKÓW;;1981-01-16;M;inny;;08:30:00;MEGA M3i;M3;;MEGA 180km;180
+10824;504;Mirosław;Szraucner;Lubliniec;WKB META LUBLINIEC GRUPETTO;1969-04-27;M;szosowy;;10:12:00;MINI M4s;M4;;MINI 90km;90
+10836;292;Piotr;Chojecki;Łask;KLUB ROWEROWY JASTRZĘBIE ŁASKIE;1963-06-02;M;szosowy;;09:30:00;MINI M5s;M5;;MINI 90km;90
+10844;181;KATARZYNA;KOCZWARA;OBORNIKI ŚLĄSKIE;OŚ Racing Team;1987-08-28;K;inny;;09:09:00;MINI K2i;K2;;MINI 90km;90
+10851;517;Krzysztof;Krówczyński;Leszno;Metabo Tora Bike;1988-12-27;M;szosowy;;10:15:00;MINI M2s;M2;;MINI 90km;90
+10863;171;Edward;Nowak;Międzywodzie;;1965-10-10;M;inny;;09:06:00;MINI M5i;M5;;MINI 90km;90
+10897;523;Krzysztof;Mazurkiewicz;Pasikurowice;TS Ravex Energy Saving Team Wrocław;1990-05-06;M;szosowy;;10:18:00;MINI M2s;M2;;MINI 90km;90
+10930;145;Andrzej;Staszak;Września;;1949-08-02;M;szosowy;;09:00:00;MEGA M6s;M6;;MEGA 180km;180
+10955;510;SŁAWOMIR;SZOŁUCHA;WYSOKA;STOWARZYSZENIE EKOLOGICZNE NATURA;1980-08-07;M;szosowy;;10:15:00;MINI M3s;M3;;MINI 90km;90
+10978;308;Artur;Wencel;Oborniki;OTC  OBORNIKI;1976-10-02;M;szosowy;;09:33:00;MINI M4s;M4;;MINI 90km;90
+10986;89;Dariusz;Głowski;Poznań;Active Malbork;1983-05-23;M;szosowy;;08:48:00;MEGA M3s;M3;;MEGA 180km;180
+11008;235;Karolina;Stefaniak;Skoki;Team Skoki;1977-03-17;K;szosowy;;09:21:00;MINI K3s;K3;;MINI 90km;90
+11028;96;Damian;Michalski;Ostrów Wielkopolski;OTR Interkol;1998-09-22;M;szosowy;;08:48:00;MEGA M2s;M2;;MEGA 180km;180
+11044;551;Marcin;Pstragowski;Koszalin;Dziki Koszalin;1982-08-16;M;szosowy;;10:24:00;MINI M3s;M3;;MINI 90km;90
+11059;497;JAKUB;BARTŁOMIEJCZAK;ZAGÓRÓW;SGR Racing Team;1985-06-14;M;szosowy;;10:12:00;MINI M3s;M3;;MINI 90km;90
+11309;338;Adam;Skowroński;Oborniki;OTC  OBORNIKI;1951-12-15;M;szosowy;;09:39:00;MINI M6s;M6;;MINI 90km;90
+11164;659;Marcin;Jędrzejczak;Suchy Las;Fabryka triathlonu;1991-01-12;M;szosowy;;10:45:00;MINI M2s;M2;;MINI 90km;90
+11029;138;Jakub  +15min;Latajka  +15min;Ostrów Wlkp.;OTR INTERKOL;1977-12-13;M;szosowy;;08:42:00;MINI M3s;M3;;MINI 90km;90
+11218;192;Józef;Jurczak;Środa Śląska;Rycerze Rolanda Maciejewski Team.;1953-11-29;M;inny;;09:12:00;MINI M6i;M6;;MINI 90km;90
+11477;69;Mariusz;Staszak;Srem;;1965-07-19;M;szosowy;;08:42:00;MEGA M5s;M5;;MEGA 180km;180
+10873;457;Krzysztof;Bladoszewski;Szczecin;;1967-06-11;M;szosowy;;10:03:00;MINI M4s;M4;;MINI 90km;90
+10937;584;Piotr;Lisiecki;Poznań;FTI RACING TEAM;1980-05-31;M;szosowy;;10:30:00;MINI M3s;M3;;MINI 90km;90
+11643;239;Barbara;Hildebrand;Poznań;;1983-08-27;K;szosowy;;09:21:00;MINI K3s;K3;;MINI 90km;90
+11670;263;Gerard;Skalski;Trzebnica;;1966-11-15;M;szosowy;;09:24:00;MINI M5s;M5;;MINI 90km;90
+11275;534;Paweł;Skornowicz;Kaźmierz;WUEF Tri Team;1971-08-24;M;szosowy;;10:18:00;MINI M4s;M4;;MINI 90km;90
+10969;268;Darek;Strabel;Poznań;Duolife.eu;1979-08-02;M;szosowy;;09:27:00;MINI M3s;M3;;MINI 90km;90
+11688;553;Bogusław;Zieliński;Trzebnica;KKS Trzebnica;1953-12-06;M;szosowy;;10:24:00;MINI M6s;M6;;MINI 90km;90
+11060;206;Jan;Ambroziak;Słubice;;1942-04-23;M;inny;;09:12:00;MINI M7i;M7;;MINI 90km;90
+11024;346;Dominika;Konowałów;Jerzykowo;Swarzędzki peleton;1978-11-02;K;szosowy;;09:42:00;MINI K3s;K3;;MINI 90km;90
+11038;130;Adrian;Iwanowicz;Złotniki;;1987-11-19;M;szosowy;;08:57:00;MEGA M2s;M2;;MEGA 180km;180
+11352;711;Grzegorz;Mieczkowski;Luboń;;1976-12-01;M;szosowy;;10:57:00;MINI M4s;M4;;MINI 90km;90
+11593;79;Zbigniew;Kupc;Gdynia;FTI Racing Team;1974-09-10;M;szosowy;;08:45:00;MEGA M4s;M4;;MEGA 180km;180
+11598;93;Daniel;Majkowski;Gdynia;FTI Racing Team;1996-01-13;M;szosowy;;08:48:00;MEGA M2s;M2;;MEGA 180km;180
+11861;516;Paweł;Sawicki;Wągrowiec;Krokodyl Team;1976-06-18;M;szosowy;;10:15:00;MINI M4s;M4;;MINI 90km;90
+11156;439;Marcin;Sterczała;Kicin;Rowerem do Władywostoku;1993-04-27;M;szosowy;;10:00:00;MINI M2s;M2;;MINI 90km;90
+11210;161;Piotr;Siebert;Poznań;Merx Team Wągrowiec;1965-03-17;M;szosowy;;09:03:00;MEGA M5s;M5;;MEGA 180km;180
+11219;45;Marcin;Sieroński;Gdynia;WWW.GAMMAFINANSE.PL;1987-07-14;M;szosowy;;08:39:00;MEGA M2s;M2;;MEGA 180km;180
+11062;380;Krzysztof;Jóźwiak;Zagórów;SGR Racing Team;1975-08-31;M;szosowy;;09:48:00;MINI M4s;M4;;MINI 90km;90
+11111;97;Jan;Kowalewski;Świnoujście;ks.Uznam;1945-05-11;M;szosowy;;08:48:00;MEGA M7s;M7;;MEGA 180km;180
+11232;664;Sylwester;Szulc;Pabianice;PTC Pabianice;1981-09-07;M;szosowy;;10:45:00;MINI M3s;M3;;MINI 90km;90
+11405;373;Daniel;Sidor;Wrocław;Ciclismo;1977-08-16;M;szosowy;;09:48:00;MINI M3s;M3;;MINI 90km;90
+11205;627;Bogumił;Musielak;Wolsztyn;KKFP;1965-05-30;M;szosowy;;10:39:00;MINI M5s;M5;;MINI 90km;90
+11212;458;Sławomir;Matuszewski;Chwalimierz;;1972-12-13;M;szosowy;;10:03:00;MINI M4s;M4;;MINI 90km;90
+11261;650;Kazimierz;Piechowiak;Oborniki;niezrzeszony;1963-01-27;M;szosowy;;10:42:00;MINI M5s;M5;;MINI 90km;90
+11480;37;Slawomir;Chwirot;Opalenica;;1966-05-22;M;szosowy;;08:36:00;MEGA M5s;M5;;MEGA 180km;180
+11544;570;Marian;Karpiel;Gryfice;MASTERS Gryfice;1958-04-01;M;szosowy;;10:27:00;MINI M5s;M5;;MINI 90km;90
+11280;204;Dariusz;Maciejewski;Środa Śląska;Rycerze Rolanda Maciejewski Cykling Team;1968-06-25;M;inny;;09:12:00;MINI M4i;M4;;MINI 90km;90
+11597;341;Mateusz;Malinowski;Poznań;FTI Racing Team;1988-12-15;M;szosowy;;09:42:00;MINI M2s;M2;;MINI 90km;90
+11464;526;Arkadiusz;Bukowski;Oborniki;FTI Tri Reacing Team Oborniki;1976-03-20;M;szosowy;;10:18:00;MINI M4s;M4;;MINI 90km;90
+11701;120;Bartek;Jaczun;Komorniki;ZGRUPKA Team;1974-09-20;M;szosowy;;08:54:00;MEGA M4s;M4;;MEGA 180km;180
+11594;391;Karol;Piekarski;Poznań;FTI Racing Team;1996-08-18;M;szosowy;;09:51:00;MINI M2s;M2;;MINI 90km;90
+11654;148;Paweł;Szlęk;Oborniki Śląskie;PM RIDER TEAM;1991-01-29;M;szosowy;;09:00:00;MEGA M2s;M2;;MEGA 180km;180
+11686;712;Irena;Łańcucka;Wrocław;KKS Trzebnica;1957-01-01;K;szosowy;;10:57:00;MINI K5s;K5;;MINI 90km;90
+11556;288;Marcin;Antonik;Poznań;wielkopolskanaczas.pl;1988-02-07;M;szosowy;;09:30:00;MINI M2s;M2;;MINI 90km;90
+11575;231;Ireneusz;Kwaśniewski;Zielona Góra;;1986-06-07;M;inny;;09:18:00;MINI M3i;M3;;MINI 90km;90
+11623;8;Paweł;Brodziński;Węgorzyn;Szczeciński Klub Rowerowy GRYFUS;1980-02-08;M;inny;;08:30:00;MEGA M3i;M3;;MEGA 180km;180
+11687;240;Marcin;Łysoń;Trzebnica;KKS Trzebnica;1975-11-23;M;szosowy;;09:21:00;MINI M4s;M4;;MINI 90km;90
+11706;291;Tomasz;Łabuziński;Oborniki;;1979-04-08;M;szosowy;;09:30:00;MINI M3s;M3;;MINI 90km;90
+10754;112;Andrzej;Nojman;Gostyń;;1966-06-24;M;szosowy;;08:51:00;MEGA M5s;M5;;MEGA 180km;180
+11188;165;Przemysław;Lampa;Kołobrzeg;;1997-02-05;M;inny;;09:06:00;MINI M2i;M2;;MINI 90km;90
+11591;178;Ireneusz;Piasecki;Czempiń;;1941-08-15;M;inny;;09:09:00;MINI M7i;M7;;MINI 90km;90
+11073;53;Bartosz;Herman;Skórzewo;;1998-12-04;M;szosowy;;08:39:00;MEGA M2s;M2;;MEGA 180km;180
+9996;703;Dawid;Łaźniowski;Kudowa zdrój;Kkzk;1987-03-31;M;szosowy;;10:54:00;MINI M2s;M2;;MINI 90km;90
+10009;290;Paweł;Tylki;Poznań;;1982-06-29;M;szosowy;;09:30:00;MINI M3s;M3;;MINI 90km;90
+10121;581;Krzysztof;Słowiński;Słupca;SGR Racing Team;1961-06-01;M;szosowy;;10:30:00;MINI M5s;M5;;MINI 90km;90
+10000;299;Krzysztof;Jankowski;Szczecinek;;1986-05-14;M;szosowy;;09:33:00;MINI M3s;M3;;MINI 90km;90
+10010;353;Grzegorz;Pietrzak;Kłodawa;Zamkowi Cykliści Przedecz;1959-05-18;M;szosowy;;09:42:00;MINI M5s;M5;;MINI 90km;90
+10715;110;Ireneusz  +15min;Lula +15min;Gdynia;;1958-01-14;M;szosowy;;08:36:00;MINI M5s;M5;;MINI 90km;90
+10183;104;Henryk;Bętlewski;Słupsk;;1966-12-17;M;szosowy;;08:51:00;MEGA M5s;M5;;MEGA 180km;180
+10275;131;Karolina;Ruta;Swarzędz;MOTIV HOME TEAM;1982-11-05;K;szosowy;;08:57:00;MEGA K3s;K3;;MEGA 180km;180
+11220;66;Wioleta;Górska-Sierońska;Gdynia;WWW.GAMMAFINANSE.PL;1985-09-09;K;szosowy;;08:42:00;MEGA K3s;K3;;MEGA 180km;180
+10381;132;Paweł;Cichy;Łask;Jastrzębie Łaskie;1955-05-19;M;szosowy;;08:57:00;MEGA M6s;M6;;MEGA 180km;180
+10134;162;Rafał;Witek;Dąbrówka Leśna;OTC  OBORNIKI;1985-09-19;M;inny;;09:06:00;MINI M3i;M3;;MINI 90km;90
+10162;20;Roman DNF;Szaliński DNF;Kudowa Zdrój;KKZK;1960-01-09;M;inny;;20:33:00;MEGA M5i;M5;;MEGA 180km;180
+10170;423;Radosław;Rutkowski;Radzyny;;1970-03-21;M;szosowy;;09:57:00;MINI M4s;M4;;MINI 90km;90
+10200;119;Piotr;Szudra;Śmigiel;Ambit Racing Team;1987-05-13;M;szosowy;;08:54:00;MEGA M2s;M2;;MEGA 180km;180
+10213;2;Józef +15min;Drozdowski +15min;Głogów;brak;1952-03-18;M;inny;;08:15:00;MINI M6i;M6;;MINI 90km;90
+10242;662;Grzegorz;Brząkała;Nysa;;1979-07-09;M;szosowy;;10:45:00;MINI M3s;M3;;MINI 90km;90
+10252;347;GRZEGORZ;BACHTA;GORZÓW WLKP.;LECH PIASECKI TEAM;1979-01-21;M;szosowy;;09:42:00;MINI M3s;M3;;MINI 90km;90
+10288;150;Karol +15min;Zarosa +15min;Grafice;PTMK/ccc;1969-10-16;M;szosowy;;08:45:00;MINI M4s;M4;;MINI 90km;90
+9984;511;Mateusz;Matuszewski;Kalisz;KTNSZ;1981-04-13;M;szosowy;;10:15:00;MINI M3s;M3;;MINI 90km;90
+10016;334;Tomasz;Wroński;Rataje;SGR Racing Team;1997-10-05;M;szosowy;;09:39:00;MINI M2s;M2;;MINI 90km;90
+10323;86;Marian;Kołodziejski;Dzierzoniow;KS Sleza;1960-02-05;M;szosowy;;08:48:00;MEGA M5s;M5;;MEGA 180km;180
+10117;166;Jarosław;Dura;Szamotuły;Drużyna Szpiku;1972-04-23;M;inny;;09:06:00;MINI M4i;M4;;MINI 90km;90
+10149;7;RYSZARD;MAZIARZ;TRZCIANKA;K.R.GRYFLAND GRYFICE;1956-09-10;M;inny;;08:30:00;MEGA M6i;M6;;MEGA 180km;180
+10187;593;DANUTA;DĄBKOWSKA;WŁOSZAKOWICE;35 PLUS;1972-08-15;K;szosowy;;10:30:00;MINI K4s;K4;;MINI 90km;90
+10226;542;LESZEK;KRZYWICKI;TRZEBNICA;ELMAR TEAM;1960-05-30;M;szosowy;;10:21:00;MINI M5s;M5;;MINI 90km;90
+10268;478;Marek;Taciak;Piła;Kameleonteam;1960-12-01;M;szosowy;;10:09:00;MINI M5s;M5;;MINI 90km;90
+10331;565;Daniel;Michałowski;Sady;;1985-10-29;M;szosowy;;10:27:00;MINI M3s;M3;;MINI 90km;90
+10371;202;Anna;Stocka;Bogdanowo;Roweromania Oborniki;1987-10-23;K;inny;;09:12:00;MINI K2i;K2;;MINI 90km;90
+10407;568;Robert;Kopczyński;Strzałkowo;SGR Racing Team;1990-10-24;M;szosowy;;10:27:00;MINI M2s;M2;;MINI 90km;90
+10427;706;Sławomir;Frąckowiak;Komorniki;;1970-02-08;M;szosowy;;10:54:00;MINI M4s;M4;;MINI 90km;90
+10434;607;Paweł;Balcerzak;SŁUPCA;SGR RACING TEAM;1973-08-10;M;szosowy;;10:33:00;MINI M4s;M4;;MINI 90km;90
+9992;33;Mateusz;Tomaszewski;Leszno;KLIMA LESZNO TEAM;1978-04-13;M;szosowy;;08:36:00;MEGA M3s;M3;;MEGA 180km;180
+10022;609;Michał;Białek;Poznań;Śfagry i spółka;1981-07-03;M;szosowy;;10:33:00;MINI M3s;M3;;MINI 90km;90
+10095;277;MARTYNIAN;OSTROWSKI;OBORNIKI;OTC  OBORNIKI;1988-08-09;M;szosowy;;09:27:00;MINI M2s;M2;;MINI 90km;90
+10122;445;Romek;Pietrzak;Rakownia;GREEN TEAM RAKOWNIA;1963-05-31;M;szosowy;;10:03:00;MINI M5s;M5;;MINI 90km;90
+10194;197;Kazimierz;Janiak;Słupca;Pttk Witkowo;1954-02-26;M;inny;;09:12:00;MINI M6i;M6;;MINI 90km;90
+10315;82;Bartosz;Paprzycki;Oborniki Śląskie;;1979-06-11;M;szosowy;;08:45:00;MEGA M3s;M3;;MEGA 180km;180
+10446;442;Aneta;Kisły;Myślibórz;;1975-08-07;K;szosowy;;10:00:00;MINI K4s;K4;;MINI 90km;90
+10354;128;Robert;Sikora;Moczkowo;;1962-04-26;M;szosowy;;08:54:00;MEGA M5s;M5;;MEGA 180km;180
+10419;78;Zbigniew;Kurzawiński;Lubin;Niezrzeszony;1957-03-10;M;szosowy;;08:45:00;MEGA M5s;M5;;MEGA 180km;180
+10456;220;Bartosz;Rychlewski;Kołobrzeg;Zdrojowa Hotels Kołobrzeg;1978-03-22;M;inny;;09:15:00;MINI M3i;M3;;MINI 90km;90
+10466;261;Michał;Olejnik;Pabianice;PTC Pabianice;1984-10-01;M;szosowy;;09:24:00;MINI M3s;M3;;MINI 90km;90
+9979;435;Dawid;Rutkowski;Swarzędz;FTI RACING TEAM;1983-01-15;M;szosowy;;10:00:00;MINI M3s;M3;;MINI 90km;90
+10045;688;Wojciech;Kubacki;Wilczyn;SGR Racing Team;1985-12-29;M;szosowy;;10:51:00;MINI M3s;M3;;MINI 90km;90
+10084;198;Elżbieta;Stempińska;Szczecin;Atos Team;1964-08-09;K;inny;;09:12:00;MINI K5i;K5;;MINI 90km;90
+10111;332;Przemysław;Blach;Gdańsk;;1978-06-27;M;szosowy;;09:39:00;MINI M3s;M3;;MINI 90km;90
+9935;377;Przemysław;Walaszczyk;Kórnik;;1990-07-19;M;szosowy;;09:48:00;MINI M2s;M2;;MINI 90km;90
+10144;49;Mariusz;Pietraszek;Będkowice;POLBUS-PKS WROCŁAW;1974-05-02;M;szosowy;;08:39:00;MEGA M4s;M4;;MEGA 180km;180
+10262;191;Katarzyna;Gosk;Nowa Sól;---;1971-08-16;K;inny;;09:09:00;MINI K4i;K4;;MINI 90km;90
+10297;149;Robert;Szczeszek;Poznań;POZNAN I LOVE YOU TEAM;1989-04-01;M;szosowy;;09:00:00;MEGA M2s;M2;;MEGA 180km;180
+10397;301;Maciej;Bocheński;Zielona Góra;endoholics;1980-11-01;M;szosowy;;09:33:00;MINI M3s;M3;;MINI 90km;90
+10440;469;Krzysztof;Stachowiak;Poznań;;1987-09-22;M;szosowy;;10:06:00;MINI M2s;M2;;MINI 90km;90
+9982;163;Paweł;Majchrzak;Karlino;SundayBikers Karlino Team;1975-05-30;M;inny;;09:06:00;MINI M4i;M4;;MINI 90km;90
+9990;416;Michał;Walkowiak;Swarzędz;;1982-05-20;M;szosowy;;09:57:00;MINI M3s;M3;;MINI 90km;90
+10003;187;JACEK;HOFFMAN;JASTROWIE;PRECON POLSKA;1967-12-26;M;inny;;09:09:00;MINI M4i;M4;;MINI 90km;90
+10008;343;Tomasz;Słowiński;Słupca;SGR Racing Team;1989-11-02;M;szosowy;;09:42:00;MINI M2s;M2;;MINI 90km;90
+10014;151;Maciek;Włodarczyk;Poznań;enduhub;1981-02-09;M;szosowy;;09:00:00;MEGA M3s;M3;;MEGA 180km;180
+10020;85;Paweł;Koralewski;POZNAŃ;gRUNwald team Poznań;1983-09-06;M;szosowy;;08:48:00;MEGA M3s;M3;;MEGA 180km;180
+10025;11;Waldemar;Frąckowiak;REWAL;K.R.GRYFLAND GRYFICE;1962-02-06;M;inny;;08:30:00;MEGA M5i;M5;;MEGA 180km;180
+10031;448;Sebastian;Ratajczak;Buk;Grupa Kolarska Buk;1979-10-04;M;szosowy;;10:03:00;MINI M3s;M3;;MINI 90km;90
+10039;691;Piotr;Tyrakowski;Krotoszyn;;1963-05-24;M;szosowy;;10:51:00;MINI M5s;M5;;MINI 90km;90
+10051;70;Grzegorz;Przybyłek;72-399;Służba Więzienna/ Świat Kółek;1985-04-26;M;szosowy;;08:45:00;MEGA M3s;M3;;MEGA 180km;180
+10059;74;Krzysztof;Lech;Sulistrowice;Leśmian;1972-01-24;M;szosowy;;08:45:00;MEGA M4s;M4;;MEGA 180km;180
+10067;682;Agnieszka;Dudziak;Wolsztyn;Seven Perceptus Team;1981-12-12;K;szosowy;;10:48:00;MINI K3s;K3;;MINI 90km;90
+10081;366;Janusz;Węcławiak;Poznań;Poznań;1954-04-15;M;szosowy;;09:45:00;MINI M6s;M6;;MINI 90km;90
+10087;10;Dorota;Grzelak;Kudowa Zdrój;Klub Kolarski Ziemi Kłodzkiej;1974-12-02;K;inny;;08:30:00;MEGA K4i;K4;;MEGA 180km;180
+10093;300;Rafał;Jakubczyk;Luboń;triboys;1981-11-30;M;szosowy;;09:33:00;MINI M3s;M3;;MINI 90km;90
+10098;34;Artur;Paterek;Krotoszyn;OTR Interkol;1972-12-23;M;szosowy;;08:36:00;MEGA M4s;M4;;MEGA 180km;180
+10109;236;Michał;Dybek;Połajewo;;1979-12-11;M;szosowy;;09:21:00;MINI M3s;M3;;MINI 90km;90
+10120;177;Michał;Kwiatkowski;Poznań;OTC  OBORNIKI;1978-09-27;M;inny;;09:09:00;MINI M3i;M3;;MINI 90km;90
+10125;608;Maciej;Adamczyk;Oborniki;FTI TRI RACING TEAM OBORNIKI;1981-06-07;M;szosowy;;10:33:00;MINI M3s;M3;;MINI 90km;90
+10141;367;RENATA;KOZANECKA;POZNAŃ;CITYZEN_;1975-03-26;K;szosowy;;09:45:00;MINI K4s;K4;;MINI 90km;90
+10147;13;MAREK +15min;ZADWORNY +15min;GRYFICE;K.R.GRYFLAND GRYFICE;1961-11-13;M;inny;;08:18:00;MINI M5i;M5;;MINI 90km;90
+10153;182;BOGUMIŁA;MUCHA;NIECHORZE;K.R.GRYFLAND GRYFICE;1972-03-02;K;inny;;09:09:00;MINI K4i;K4;;MINI 90km;90
+10168;107;Marcin;Wójcik;Wronki;;1986-04-26;M;szosowy;;08:51:00;MEGA M3s;M3;;MEGA 180km;180
+10176;592;Andrzej;Słociński;Nowy Tomyśl;;1985-03-29;M;szosowy;;10:30:00;MINI M3s;M3;;MINI 90km;90
+10185;195;Rafał;Rogoziński;Nysa;;1975-04-17;M;inny;;09:12:00;MINI M4i;M4;;MINI 90km;90
+10198;28;Miron;Toboła;Leszno;AMBIT Racing Team;1973-07-17;M;szosowy;;08:36:00;MEGA M4s;M4;;MEGA 180km;180
+10204;232;Natalia;Pindera;Szczecin;Szczeciński Klub Rowerowy Gryfus;1981-06-23;K;inny;;09:18:00;MINI K3i;K3;;MINI 90km;90
+10216;354;ANDRZEJ;NAWROCKI;LESZNO;35 PLUS;1974-06-24;M;szosowy;;09:42:00;MINI M4s;M4;;MINI 90km;90
+10224;639;Marta;Szałacińska;WROCŁAW;Triathlon Academy;1981-07-08;K;szosowy;;10:39:00;MINI K3s;K3;;MINI 90km;90
+10231;513;Mikołaj;Chwaliński;Plewiska;Solid Logistics Bike Team;1979-12-18;M;szosowy;;10:15:00;MINI M3s;M3;;MINI 90km;90
+10238;374;Andrzej;Smereka;Milicz;;1954-10-26;M;szosowy;;09:48:00;MINI M6s;M6;;MINI 90km;90
+10249;63;Łukasz;Wysocki;Miastko;;1979-05-03;M;szosowy;;08:42:00;MEGA M3s;M3;;MEGA 180km;180
+10257;253;Marcin;Gosk;Swarzędz;---;1976-10-28;M;szosowy;;09:24:00;MINI M4s;M4;;MINI 90km;90
+10266;680;Krzysztof;Andrzejczak;Śrem;;1986-12-30;M;szosowy;;10:48:00;MINI M3s;M3;;MINI 90km;90
+10286;46;Marcin;Michałowski;Szczecin;Szczeciński klub rowerowy GRYFUS;1980-06-06;M;szosowy;;08:39:00;MEGA M3s;M3;;MEGA 180km;180
+10295;533;Krzysztof;Grześkowiak;Poznań;;1987-08-27;M;szosowy;;10:18:00;MINI M2s;M2;;MINI 90km;90
+10302;561;Roman;Bartos;Kazmierz;Millano Group Team;1969-01-19;M;szosowy;;10:24:00;MINI M4s;M4;;MINI 90km;90
+10311;417;KRZYSZTOF;SZAREK;Bojanowo;PIZZERIA VERONA BOJANOWO;1990-03-04;M;szosowy;;09:57:00;MINI M2s;M2;;MINI 90km;90
+10320;544;Krzysztof;Torbicki;Lulinek;;1972-06-12;M;szosowy;;10:21:00;MINI M4s;M4;;MINI 90km;90
+10329;227;Piotr;Grela;Wągrowiec;;1989-07-29;M;inny;;09:18:00;MINI M2i;M2;;MINI 90km;90
+10342;436;Marcin;Nowakowski;Poznań;Wiata Rowerowa;1976-02-17;M;szosowy;;10:00:00;MINI M4s;M4;;MINI 90km;90
+10350;588;Jarosław;Jasiński;Mosina;AF Mosina Team;1964-08-13;M;szosowy;;10:30:00;MINI M5s;M5;;MINI 90km;90
+10364;493;Piotr;Strojny;Poznań;;1958-09-26;M;szosowy;;10:12:00;MINI M5s;M5;;MINI 90km;90
+10395;319;Maciej;Siodła;Czerwonak;;1975-08-28;M;szosowy;;09:36:00;MINI M4s;M4;;MINI 90km;90
+10404;103;Witold;Biernacki;Gostyń;;1977-10-06;M;szosowy;;08:51:00;MEGA M3s;M3;;MEGA 180km;180
+10414;676;Sandra;Rydzyńska;szczecin;;1979-06-23;K;szosowy;;10:48:00;MINI K2s;K2;;MINI 90km;90
+10425;559;Jacek;Ptaszyński;Turew;DelloSport;1963-09-12;M;szosowy;;10:24:00;MINI M5s;M5;;MINI 90km;90
+10432;88;Arkadiusz;Cieśla;Byków;;1976-02-18;M;szosowy;;08:48:00;MEGA M4s;M4;;MEGA 180km;180
+10437;350;BARBARA;NADOLSKA;MUROWANA GOŚLINA;FTI TRI  RACING TEAM OBORNIKI;1985-08-01;K;szosowy;;09:42:00;MINI K3s;K3;;MINI 90km;90
+10443;175;Łukasz;Dudkowiak;Rogoźno;TRIATHLON ROGOŹNO;1977-03-03;M;inny;;09:06:00;MINI M4i;M4;;MINI 90km;90
+10453;142;Artur;Józefowski;Kamionki;;1982-08-31;M;szosowy;;09:00:00;MEGA M3s;M3;;MEGA 180km;180
+10460;463;Leszek;Lisiecki;GOSTYŃ;GKR GOSTYŃ;1960-06-03;M;szosowy;;10:06:00;MINI M5s;M5;;MINI 90km;90
+9913;296;Waldemar;Baranowski;Kryniczno;Kryniczno;1954-09-21;M;szosowy;;09:33:00;MINI M6s;M6;;MINI 90km;90
+9936;189;Marek;Budyła;Oborniki;OTC  OBORNIKI;1964-03-23;M;inny;;09:09:00;MINI M5i;M5;;MINI 90km;90
+9983;27;Krystian;Bałamącek;Nowe Skalmierzyce;OTR INTERKOL;1972-01-10;M;szosowy;;08:36:00;MEGA M4s;M4;;MEGA 180km;180
+9991;648;Andrzej;ŁAWNICZAK;Śrem;;1977-11-20;M;szosowy;;10:42:00;MINI M3s;M3;;MINI 90km;90
+9997;389;Roman;Krupa;Przybiernówko;;1950-04-25;M;szosowy;;09:51:00;MINI M6s;M6;;MINI 90km;90
+10004;92;Łukasz;Szczeszek;Poznań;;1980-10-06;M;szosowy;;08:48:00;MEGA M3s;M3;;MEGA 180km;180
+10021;59;Artur;Baturo;Potasze;FTI Racing Team;1968-08-05;M;szosowy;;08:42:00;MEGA M4s;M4;;MEGA 180km;180
+10026;116;Paweł;Kubiak;Gorzów Wielkopolski;1976;1976-07-07;M;szosowy;;08:54:00;MEGA M4s;M4;;MEGA 180km;180
+10034;176;Tomasz;Kotwicki;Świnoujście;Szczeciński Klub Rowerowy GRYFUS;1982-09-25;M;inny;;09:06:00;MINI M3i;M3;;MINI 90km;90
+10042;600;MAREK;MACIASZCZYK;ROGOŹNO;ROGOŹNO;1965-09-02;M;szosowy;;10:33:00;MINI M5s;M5;;MINI 90km;90
+10053;690;Michał;Jankowski;Poznań;;1983-05-21;M;szosowy;;10:51:00;MINI M3s;M3;;MINI 90km;90
+10060;117;Małgorzata;Kubicka;Nowogard;LKK Nowogard;1966-12-03;K;szosowy;;08:54:00;MEGA K5s;K5;;MEGA 180km;180
+10069;21;LESZEK;Jóźwiak;MUROWANA-GOŚLINA;OTC  OBORNIKI;1961-03-01;M;inny;;08:33:00;MEGA M5i;M5;;MEGA 180km;180
+10082;226;Szymon;Rakowski;Ryczywół;;1977-04-04;M;inny;;09:18:00;MINI M3i;M3;;MINI 90km;90
+10088;211;Paweł;Stempiński;Szczecin;Atos Team;1989-04-27;M;inny;;09:15:00;MINI M2i;M2;;MINI 90km;90
+10094;465;Patryk;Kosmowski;Gorzow Wlkp;GLS Racing;1980-05-31;M;szosowy;;10:06:00;MINI M3s;M3;;MINI 90km;90
+10099;617;Leszek;SADOWSKI;PIŁA;FTI Racing Team;1954-01-04;M;szosowy;;10:36:00;MINI M6s;M6;;MINI 90km;90
+10105;275;Robert;Omielczenko;Poznań;TBT;1968-08-31;M;szosowy;;09:27:00;MINI M4s;M4;;MINI 90km;90
+10127;251;Dariusz;Wawrzyniak;Popówko;;1980-02-27;M;szosowy;;09:24:00;MINI M3s;M3;;MINI 90km;90
+10133;214;Adam;Krawczuk;Świnoujście;KS Uznam;1966-10-12;M;inny;;09:15:00;MINI M5i;M5;;MINI 90km;90
+10143;304;Rafał;Rybak;Dziećmierowo;Kórnickie Bractwo Rowerowe;1976-04-23;M;szosowy;;09:33:00;MINI M4s;M4;;MINI 90km;90
+10154;707;Sebastian;Ryś;Tulce;;1975-09-07;M;szosowy;;10:54:00;MINI M4s;M4;;MINI 90km;90
+10161;222;Józef;Mika;Poznań;Brylant Kórnik;1960-03-01;M;inny;;09:18:00;MINI M5i;M5;;MINI 90km;90
+10169;431;ADRIAN;JUSZCZAK;GODZIESZE MAŁE;;1989-12-18;M;szosowy;;10:00:00;MINI M2s;M2;;MINI 90km;90
+10178;546;Arkadiusz;Pytel;Choszczno;Choszczno;1971-04-18;M;szosowy;;10:21:00;MINI M4s;M4;;MINI 90km;90
+10186;654;KRZYSZTOF;DĄBKOWSKI;WŁOSZAKOWICE;35 PLUS;1975-04-06;M;szosowy;;10:42:00;MINI M4s;M4;;MINI 90km;90
+10193;228;Michał;Topolski;Kudowa- Zdrój;KKZK;1991-02-27;M;inny;;09:18:00;MINI M2i;M2;;MINI 90km;90
+10211;324;Paweł;Kosmowski;OBORNIKI;OTC  OBORNIKI;1968-03-19;M;szosowy;;09:36:00;MINI M4s;M4;;MINI 90km;90
+10217;26;Jacek;Bieniecki;Gąsawy;Biniols Team;1965-06-11;M;szosowy;;08:36:00;MEGA M5s;M5;;MEGA 180km;180
+10225;403;FRANCISZEK;Gustowski;SOBOTKA;KKS SLEZA MAT SOBOTKAM;1942-05-29;M;szosowy;;09:54:00;MINI M7s;M7;;MINI 90km;90
+10240;125;Artur;Grędziński;Szczecin;Kolarze z Górki Ciśnij Team;1978-01-03;M;szosowy;;08:54:00;MEGA M3s;M3;;MEGA 180km;180
+10250;84;Przemek;Zawada;Wrocław;Questsport Racing Team;1977-03-18;M;szosowy;;08:45:00;MEGA M3s;M3;;MEGA 180km;180
+10267;323;Andrzej;Soliwoda;Poznań;;1976-06-26;M;szosowy;;09:36:00;MINI M4s;M4;;MINI 90km;90
+10272;61;Michał;Żmijewski;Tanowo;Szczeciński Klub Rowerowy Gryfus;1987-11-12;M;szosowy;;08:42:00;MEGA M2s;M2;;MEGA 180km;180
+10287;155;Jerzy;Lizak;Sobótka;;1963-03-02;M;szosowy;;09:03:00;MEGA M5s;M5;;MEGA 180km;180
+10296;462;Grzegorz;Rychel;Luboń;Zgrupka Team;1980-04-07;M;szosowy;;10:06:00;MINI M3s;M3;;MINI 90km;90
+10321;411;Jakub;Przybylski;Poznań;KU AZS Politechnika Poznańska;1995-11-25;M;szosowy;;09:54:00;MINI M2s;M2;;MINI 90km;90
+10336;72;Grzegorz;Ruciński;Wągrowiec;;1972-06-22;M;szosowy;;08:45:00;MEGA M4s;M4;;MEGA 180km;180
+10344;99;Wiesław;Marchlewski;Gdańsk;Bike U Up;1976-09-30;M;szosowy;;08:48:00;MEGA M4s;M4;;MEGA 180km;180
+10353;485;Adam;Pilarczyk;Luboń;;1983-11-05;M;szosowy;;10:09:00;MINI M3s;M3;;MINI 90km;90
+10396;94;Paweł;Dobrzyński;Stęszew;;1989-12-31;M;szosowy;;08:48:00;MEGA M2s;M2;;MEGA 180km;180
+10418;154;Tomasz;Karbowniczyn;Wrocław;;1985-07-19;M;szosowy;;09:03:00;MEGA M3s;M3;;MEGA 180km;180
+10426;390;Sylwia;Gajdka;Pabianice;PTC Pabianice;1994-01-10;K;szosowy;;09:51:00;MINI K2s;K2;;MINI 90km;90
+10433;359;Miron;Kłosiński;Poznań;FTI Racing Team;1986-01-04;M;szosowy;;09:45:00;MINI M3s;M3;;MINI 90km;90
+9928;383;Maciej;Szmit;Oborniki;OTC  OBORNIKI;1982-09-18;M;szosowy;;09:48:00;MINI M3s;M3;;MINI 90km;90
+9976;158;Sławomir;Urbański;Wągrowiec;FTI RACING TEAM;1975-04-09;M;szosowy;;09:03:00;MEGA M4s;M4;;MEGA 180km;180
+9988;563;Robert;Wysokiński;Szczecin;Szczeciński Klub Rowerowy Gryfus;1975-10-14;M;szosowy;;10:24:00;MINI M4s;M4;;MINI 90km;90
+9994;244;Dariusz;Liebthal;Poznań;;1971-10-27;M;szosowy;;09:21:00;MINI M4s;M4;;MINI 90km;90
+10002;152;Wacław;Żurakowski;Świebodzin;;1946-01-08;M;szosowy;;09:03:00;MEGA M7s;M7;;MEGA 180km;180
+10007;55;Agnieszka;Mielcarek;Poznań;;1987-09-23;K;szosowy;;08:42:00;MEGA K2s;K2;;MEGA 180km;180
+10013;646;Bartłomiej;Karolewski;Krotoszyn;;1980-10-26;M;szosowy;;10:42:00;MINI M3s;M3;;MINI 90km;90
+10024;201;Dagmara;Frydrychowicz;Słupca;;1975-11-28;K;inny;;09:12:00;MINI K4i;K4;;MINI 90km;90
+10030;282;Roman;Przeworski;Buk;Grupa Kolarska Buk;1968-02-18;M;szosowy;;09:30:00;MINI M4s;M4;;MINI 90km;90
+10038;408;Rafał;Chęciński;Tarnowo Podgórne;Parlé;1985-06-19;M;szosowy;;09:54:00;MINI M3s;M3;;MINI 90km;90
+10056;123;Lukasz;Andrzejewski;Poznan;FTI;1975-01-24;M;szosowy;;08:54:00;MEGA M4s;M4;;MEGA 180km;180
+10066;39;Sylwia;Przybylska;Goleniów;Sigma Goleniów;1979-02-21;K;szosowy;;08:36:00;MEGA K3s;K3;;MEGA 180km;180
+10073;75;Zbigniew;Kaczmarek;Trzebnica;KKS TRZEBNICA;1972-01-07;M;szosowy;;08:45:00;MEGA M4s;M4;;MEGA 180km;180
+10079;111;Krzysztof;Naskręt;Czapury;;1980-12-26;M;szosowy;;08:51:00;MEGA M3s;M3;;MEGA 180km;180
+10086;453;Tomasz;Mosiński;Krotoszyn;OTR Interkol;1973-11-11;M;szosowy;;10:03:00;MINI M4s;M4;;MINI 90km;90
+10092;388;Artur;Błaszak;Poznań;TBT;1970-11-24;M;szosowy;;09:51:00;MINI M4s;M4;;MINI 90km;90
+10097;6;Zbigniew;Lubiński;Świnoujście;KS Uznam   Świnoujście;1956-01-22;M;inny;;08:30:00;MEGA M6i;M6;;MEGA 180km;180
+10103;124;Jacek;ILMER;Poznań;RYBCZYŃSKI-BIKES Remmers TP-Link Team;1987-10-01;M;szosowy;;08:54:00;MEGA M2s;M2;;MEGA 180km;180
+10124;441;Paweł;Skrzypkowiak;Poznań;;1970-06-15;M;szosowy;;10:00:00;MINI M4s;M4;;MINI 90km;90
+10131;48;Piotr;Chrzan;Szczecin;Kolarze z Górki Ciśnij TEAM;1973-07-24;M;szosowy;;08:39:00;MEGA M4s;M4;;MEGA 180km;180
+10140;29;Paulina;Kusajda;Płoty;Szczeciński Klub Rowerowy Gryfus;1986-02-28;K;szosowy;;08:36:00;MEGA K3s;K3;;MEGA 180km;180
+10146;43;PIOTR;SIUPKA;GRYFICE;K.R.GRYFLAND GRYFICE;1962-10-30;M;szosowy;;08:39:00;MEGA M5s;M5;;MEGA 180km;180
+10152;658;ŻANETA;WAGA;ŚWIERZNO;K.R.GRYFLAND GRYFICE;1975-01-23;K;szosowy;;10:45:00;MINI K4s;K4;;MINI 90km;90
+10158;76;Krzysztof;Wagner;Iława;Jeziorak Iława;1969-03-29;M;szosowy;;08:45:00;MEGA M4s;M4;;MEGA 180km;180
+10173;147;Andrzej;Kot;Murowana Goślina;OTC  OBORNIKI;1948-09-17;M;szosowy;;09:00:00;MEGA M6s;M6;;MEGA 180km;180
+10184;273;Kinga;Lorenz-Dziubich;Kórnik;Kórnickie Bractwo Rowerowe;1985-01-28;K;szosowy;;09:27:00;MINI K3s;K3;;MINI 90km;90
+10190;499;Konrad;Konkol;Miastko;35Plus;1982-12-14;M;szosowy;;10:12:00;MINI M3s;M3;;MINI 90km;90
+10197;349;Wojciech;Skokowski;Międzychód;Cienka gumka;1972-08-09;M;szosowy;;09:42:00;MINI M4s;M4;;MINI 90km;90
+10203;115;Kamila;Żabkiewicz;SZCZECIN;KIJANKA;1982-07-01;K;szosowy;;08:54:00;MEGA K3s;K3;;MEGA 180km;180
+10215;160;Paweł;Jóźwiak;Rokietnica;DHL TEAM;1981-10-09;M;szosowy;;09:03:00;MEGA M3s;M3;;MEGA 180km;180
+10230;234;Zenon;Tarnawski;Świnoujście;KS Uznam;1951-12-15;M;inny;;09:18:00;MINI M6i;M6;;MINI 90km;90
+10245;689;Grzegorz;Kaczmarek;Poznań;;1988-04-08;M;szosowy;;10:51:00;MINI M2s;M2;;MINI 90km;90
+10264;385;Paweł;Żarczyński;Witaszyce;;1977-12-05;M;szosowy;;09:51:00;MINI M3s;M3;;MINI 90km;90
+10270;173;Grzegorz;Michalak;Zalasewo;looksfera / Mtronic;1959-02-09;M;inny;;09:06:00;MINI M5i;M5;;MINI 90km;90
+10279;628;Aneta;Gwiazdowska;poznań;;1976-11-09;K;szosowy;;10:39:00;MINI K4s;K4;;MINI 90km;90
+10285;540;Ryszard;Borysiewicz;Koszalin;;1952-10-11;M;szosowy;;10:21:00;MINI M6s;M6;;MINI 90km;90
+10294;135;Stanisław;Dołmat;Gorzów Wlkp.;;1957-07-03;M;szosowy;;08:57:00;MEGA M5s;M5;;MEGA 180km;180
+10301;699;Włodzimierz;Gomoński;Oborniki;OTC  OBORNIKI;1972-10-13;M;szosowy;;10:51:00;MINI M4s;M4;;MINI 90km;90
+10310;644;KAMIL;KASPROWIAK;bojanowo;PIZZERIA VERONA BOJANOWO;1983-07-27;M;szosowy;;10:42:00;MINI M3s;M3;;MINI 90km;90
+10328;498;Łukasz;Szymborski;Piła;KameleonTeam.pl Piła;1987-06-29;M;szosowy;;10:12:00;MINI M2s;M2;;MINI 90km;90
+10334;415;Marek;Karczmitowicz;Kostrzyn nad Odrą;;1980-09-03;M;szosowy;;09:57:00;MINI M3s;M3;;MINI 90km;90
+10341;170;Tomasz;Godawa;Wolsztyn;;1980-01-28;M;inny;;09:06:00;MINI M3i;M3;;MINI 90km;90
+10348;272;Sławomir;Andrzejewski;Poznań;BIKE SATISFACTION TEAM;1971-02-09;M;szosowy;;09:27:00;MINI M4s;M4;;MINI 90km;90
+10378;18;Tadeusz +15min;Porzucek +15min;Gostyń;GKR Gostyń;1950-01-01;M;inny;;08:18:00;MINI M6i;M6;;MINI 90km;90
+10393;708;Marcin;Jezierski;Wełna;;1986-12-13;M;szosowy;;10:54:00;MINI M3s;M3;;MINI 90km;90
+10402;394;Wiesław;Fidurski;Złotów;LKS Drogowiec Złotów;1958-06-23;M;szosowy;;09:51:00;MINI M5s;M5;;MINI 90km;90
+10413;665;Robert;Fekner;Luboń;millano group;1972-05-18;M;szosowy;;10:45:00;MINI M4s;M4;;MINI 90km;90
+10422;459;Bartosz;Domalewski;Poznań;;1985-10-13;M;szosowy;;10:03:00;MINI M3s;M3;;MINI 90km;90
+10436;623;Radosław;Orszewski;Wrocław;;1980-09-05;M;szosowy;;10:36:00;MINI M3s;M3;;MINI 90km;90
+10476;322;Jan;Kostrzewski;Nekla;;1957-12-25;M;szosowy;;09:36:00;MINI M5s;M5;;MINI 90km;90
+10489;606;Piotr;Dębowski;Konin;KTK IMAGE CYCLING TEAM;1976-08-11;M;szosowy;;10:33:00;MINI M4s;M4;;MINI 90km;90
+10497;398;Mariusz;Dumitrescu;Sławoszowice;Baryczanie Milicz;1977-01-14;M;szosowy;;09:51:00;MINI M3s;M3;;MINI 90km;90
+10505;616;Piotr;Rosiński;Osieczna;Śmigło Osieczna;1957-06-19;M;szosowy;;10:36:00;MINI M5s;M5;;MINI 90km;90
+10517;434;Jan;Domagała;Sieradz;;1955-07-17;M;szosowy;;10:00:00;MINI M6s;M6;;MINI 90km;90
+9927;257;PRZEMYSŁAW;JANUSZAK;OBORNIKI;OTC  OBORNIKI;1974-09-02;M;szosowy;;09:24:00;MINI M4s;M4;;MINI 90km;90
+9974;379;Adam;Jarzynski;Wągrowiec;;1985-11-20;M;szosowy;;09:48:00;MINI M3s;M3;;MINI 90km;90
+9980;356;Michał;Mikuła;Poznań;;1983-08-28;M;szosowy;;09:45:00;MINI M3s;M3;;MINI 90km;90
+9987;58;Paweł;Walerczyk;Kórnik;Kórnickie Bractwo Rowerowe;1966-09-28;M;szosowy;;08:42:00;MEGA M5s;M5;;MEGA 180km;180
+9993;490;Mikołaj;Cieśliński;Koziegłowy;Tempus Team;1991-09-23;M;szosowy;;10:12:00;MINI M2s;M2;;MINI 90km;90
+10006;98;Henryk;Huzar;Pniewy;;1950-03-03;M;szosowy;;08:48:00;MEGA M6s;M6;;MEGA 180km;180
+10012;488;Leszek;Kąkol;Oborniki;;1980-06-06;M;szosowy;;10:09:00;MINI M3s;M3;;MINI 90km;90
+10017;51;Arkadiusz;Robak;Pniewy;Odjechani-Team.PL;1980-02-01;M;szosowy;;08:39:00;MEGA M3s;M3;;MEGA 180km;180
+10023;558;Radosław;Gmerek;Bydgoszcz;;1971-06-18;M;szosowy;;10:24:00;MINI K4s;K4;;MINI 90km;90
+10049;172;Anna;Kucharska;Pogorzelica;K.R.Gryfland;1970-01-01;K;inny;;09:06:00;MINI K4i;K4;;MINI 90km;90
+10055;420;Marcin;Bachtiak;Białogard;BTC Orzeł Białogard;1976-11-07;M;szosowy;;09:57:00;MINI M4s;M4;;MINI 90km;90
+10078;312;Bartłomiej;Marczewski;Leszno;Metabo TORA Bike;1985-08-19;M;szosowy;;09:36:00;MINI M3s;M3;;MINI 90km;90
+10085;67;Stephen;Dersley;Poznan;;1970-11-25;M;szosowy;;08:42:00;MEGA M4s;M4;;MEGA 180km;180
+10090;15;Karol;Pazera;Kudowa Zdrój;Klub Kolarski Ziemi Kłodzkiej;1972-11-04;M;inny;;08:33:00;MEGA M4i;M4;;MEGA 180km;180
+10096;375;Tomasz;Szygenda;Słupca;SGR RACING TEAM;1977-06-10;M;szosowy;;09:48:00;MINI M3s;M3;;MINI 90km;90
+10101;571;Piotr;Kamiński;Pobiedziska;Pobiedziska Racing Team;1985-03-20;M;szosowy;;10:27:00;MINI M3s;M3;;MINI 90km;90
+10107;276;Włodzimierz;Krawczyk;Śrem;Ciacho Team triathlon;1964-04-10;M;szosowy;;09:27:00;MINI M5s;M5;;MINI 90km;90
+10112;451;Krzysztof;Pomorski;Słupca;SGR RACING TEAM;1981-05-11;M;szosowy;;10:03:00;MINI M3s;M3;;MINI 90km;90
+10118;193;Robert;Grymiński;Szczecin;Szczeciński klub rowerowy Gryfus;1979-02-28;M;inny;;09:12:00;MINI M3i;M3;;MINI 90km;90
+10123;233;Arkadiusz;Stefański;Oborniki;OTC  OBORNIKI;1998-06-04;M;inny;;09:18:00;MINI M2i;M2;;MINI 90km;90
+10129;407;Wigosław;Jakubowicz;Poznań;Drużyna Szpiku;1954-02-03;M;szosowy;;09:54:00;MINI M6s;M6;;MINI 90km;90
+10138;262;Leszek;Kołacki;Śrem;Kolacki TEAM;1964-10-13;M;szosowy;;09:24:00;MINI M5s;M5;;MINI 90km;90
+10150;183;KRZYSZTOF;MAKSIMCZYK;GRYFICE;K.R.GRYFLAND GRYFICE;1973-09-17;M;inny;;09:09:00;MINI M4i;M4;;MINI 90km;90
+10157;153;Bartosz;Kurczewski;Gruszczyn;CITYZEN;1977-10-30;M;szosowy;;09:03:00;MEGA M3s;M3;;MEGA 180km;180
+10163;652;Tadeusz;Zagdanski;Stargard;STC Stargard;1942-08-19;M;szosowy;;10:42:00;MINI M7s;M7;;MINI 90km;90
+10195;3;Robert;Kampa;Gliwice;niezrzeszony;1974-10-17;M;inny;;08:30:00;MEGA M4i;M4;;MEGA 180km;180
+10201;100;Mirosław +15min;Żabkiewicz +15min;Goleniów;KIJANKA;1955-08-04;M;szosowy;;08:46:00;MINI M6s;M6;;MINI 90km;90
+10229;259;Bogdan;Jankowski;Garzyn;Leszczyński Klub Kolarski Drużyna Szpiku;1960-03-11;M;szosowy;;09:24:00;MINI M5s;M5;;MINI 90km;90
+10235;254;Arkadiusz;Lotek;POZNAŃ;amator;1971-03-04;M;szosowy;;09:24:00;MINI M4s;M4;;MINI 90km;90
+10263;470;SŁAWOMIR;TURONEK;KŁECKO;KŁECKO;1985-10-29;M;szosowy;;10:06:00;MINI M3s;M3;;MINI 90km;90
+10269;260;Michał;Iwankiewicz;Swarzędz;Zgrupka Luboń;1978-09-21;M;szosowy;;09:24:00;MINI M3s;M3;;MINI 90km;90
+10277;663;Grzegorz;Skiba;Wrocław;;1981-03-07;M;szosowy;;10:45:00;MINI M3s;M3;;MINI 90km;90
+10293;572;Łukasz;Kozica;Poznań;GoodFoodTeam;1980-03-26;M;szosowy;;10:27:00;MINI M3s;M3;;MINI 90km;90
+10308;624;Filip;Polak;Poznań;Kwiatowe Cycling Team;1974-06-04;M;szosowy;;10:36:00;MINI M4s;M4;;MINI 90km;90
+10318;430;Piotr;Kołacki;Śrem;Kolacki TEAM;1998-07-20;M;szosowy;;10:00:00;MINI M2s;M2;;MINI 90km;90
+10324;81;Krystyna;Roszak;Police;Szczeciński Klub Rowerowy GRYFUS;1964-10-08;K;szosowy;;08:45:00;MEGA K5s;K5;;MEGA 180km;180
+10332;645;Tomasz;Ludek;Przeźmierowo;ludex;1984-02-22;M;szosowy;;10:42:00;MINI M3s;M3;;MINI 90km;90
+10339;472;Karol;Sobczyk;Gostyń;;1983-04-09;M;szosowy;;10:06:00;MINI M3s;M3;;MINI 90km;90
+10347;41;Marcin;Sobczak;brześć kujawski;LUMAC WTR;1984-09-05;M;szosowy;;08:39:00;MEGA M3s;M3;;MEGA 180km;180
+10374;313;Marcin;Sroczyński;Poznań;tiramisu.net.pl;1971-07-17;M;szosowy;;09:36:00;MINI M4s;M4;;MINI 90km;90
+10390;625;Iwona;Białous;Myślibórz;fol-tech team pl;1973-06-29;K;szosowy;;10:39:00;MINI K4s;K4;;MINI 90km;90
+10400;16;Waldemar;Mackiewicz;Miédzyrzecz;Team Miédzyrzecz;1961-02-14;M;inny;;08:33:00;MEGA M5i;M5;;MEGA 180km;180
+10409;279;Alojzy;Pawlaczek;Pudliszki;Szerszenie Trzebnica;1946-04-03;M;szosowy;;09:27:00;MINI M7s;M7;;MINI 90km;90
+10421;307;Dariusz;Czerwiński;Bolechowo Osiedle;TECHPO PRO CYCLING;1968-08-16;M;szosowy;;09:33:00;MINI M4s;M4;;MINI 90km;90
+10430;531;Bogdan;Konieczny;Środa Śląska;50 upat;1953-08-15;M;szosowy;;10:18:00;MINI M6s;M6;;MINI 90km;90
+10435;414;Jacek;Krzciuk;Dębno;AVOCADO FITNESS CLUB;1964-09-19;M;szosowy;;09:54:00;MINI M5s;M5;;MINI 90km;90
+10441;425;TOMASZ;PYSSA;ROGOŹNO;OTC OBORNIKI;1970-03-22;M;szosowy;;09:57:00;MINI M4s;M4;;MINI 90km;90
+10520;14;Krzysztof;Knaś;Wrocław;;1968-05-03;M;inny;;08:33:00;MEGA M4i;M4;;MEGA 180km;180
+10536;224;MIROSŁAW;JANUSEK;MIĘDZYRZECZ;TEAM MIĘDZYRZECZ;1974-08-22;M;inny;;09:18:00;MINI M4i;M4;;MINI 90km;90
+10543;460;Piotr;Szyszyński;Stare Miasto;KS TEAM Stare Miaro;1980-10-15;M;szosowy;;10:06:00;MINI M3s;M3;;MINI 90km;90
+10550;310;Waldemar;Gebel;Śrem;Kolarze Śrem;1974-03-20;M;szosowy;;09:36:00;MINI M4s;M4;;MINI 90km;90
+10555;90;Mikołaj +15min;Kuropatwa +15min;Pabianice;PTC Pabianice;1993-06-03;M;szosowy;;08:33:00;MINI M2s;M2;;MINI 90km;90
+10562;57;Mateusz;Pokrywka;Poznań;Libra developer;1989-02-24;M;szosowy;;08:42:00;MEGA M2s;M2;;MEGA 180km;180
+10574;376;Marcin;Korbik;Koziegłowy;;1987-07-16;M;szosowy;;09:48:00;MINI M2s;M2;;MINI 90km;90
+10604;444;Bartosz;Zając;Poznań;LOOKSFERA/M-TRONIC;1989-05-20;M;szosowy;;10:00:00;MINI M2s;M2;;MINI 90km;90
+10624;339;Marcin;Chmielewski;Poznań;Protym Reacing Team;1978-06-09;M;szosowy;;09:39:00;MINI M3s;M3;;MINI 90km;90
+10637;697;Tomasz;Rogala;Wrocław;;1963-06-10;M;szosowy;;10:51:00;MINI M5s;M5;;MINI 90km;90
+10664;137;Jarosław;Piekarz;Katowice;;1983-11-11;M;szosowy;;08:57:00;MEGA M3s;M3;;MEGA 180km;180
+10690;578;Arkadiusz;Kaczmarek;Strzyżewice;KONWA BIKE LESZNO;1976-11-27;M;szosowy;;10:27:00;MINI M4s;M4;;MINI 90km;90
+10702;618;DARIUSZ;Goroński;Oborniki;;1974-02-04;M;szosowy;;10:36:00;MINI M4s;M4;;MINI 90km;90
+11300;269;Jakub;Górecki;Poznań;;1981-12-24;M;szosowy;;09:27:00;MINI M3s;M3;;MINI 90km;90
+11155;267;Krzysztof;Karolak;Mauryca;Jastrzębie łaskie;1974-07-31;M;szosowy;;09:27:00;MINI M4s;M4;;MINI 90km;90
+11009;475;Paweł;Ścigalski;Dobroń;KS Mocne Koło;1950-12-22;M;szosowy;;10:09:00;MINI M6s;M6;;MINI 90km;90
+11334;30;Mateusz`;Malinowski;Mysłowice;;1981-11-30;M;szosowy;;08:36:00;MEGA M3s;M3;;MEGA 180km;180
+11400;704;Mateusz;Trybuła;Prudnik;;1983-10-30;M;szosowy;;10:54:00;MINI M3s;M3;;MINI 90km;90
+11045;167;Maciej;Andrzejczak;Szczecin;Niezrzeszony;1963-03-30;M;inny;;09:06:00;MINI M5i;M5;;MINI 90km;90
+11203;591;Michał;Juskowiak;Poznań;;1950-09-15;M;szosowy;;10:30:00;MINI M6s;M6;;MINI 90km;90
+11209;502;Remigiusz;Łączka;Wągrowiec;Merx Team Wągrowiec;1976-09-12;M;szosowy;;10:12:00;MINI M4s;M4;;MINI 90km;90
+11543;669;Marian;Janecki;Gryfice;MASTERS Gryfice;1959-03-18;M;szosowy;;10:45:00;MINI M5s;M5;;MINI 90km;90
+11548;209;Kamil;Misikonis;Gryfice;MASTERS Gryfice;1985-06-10;M;inny;;09:15:00;MINI M3i;M3;;MINI 90km;90
+11559;42;Jan;Pęczek;Łódż;;1950-06-12;M;szosowy;;08:39:00;MEGA M6s;M6;;MEGA 180km;180
+11227;456;Arkadiusz;Czerkas;Nowogard;;1970-04-20;M;szosowy;;10:03:00;MINI M4s;M4;;MINI 90km;90
+11244;258;Daniel;Leśniczak;Poznań;Euro Logistic;1970-04-14;M;szosowy;;09:24:00;MINI M4s;M4;;MINI 90km;90
+11260;489;Zbigniew;Dragan;Wrocław;;1969-04-05;M;szosowy;;10:09:00;MINI M4s;M4;;MINI 90km;90
+11596;467;Tomasz;Duda;Krajenka;FTI Racing Team;1976-02-24;M;szosowy;;10:06:00;MINI M4s;M4;;MINI 90km;90
+10948;677;Michał;Rabiak;Oborniki;OTC  OBORNIKI;1972-02-09;M;szosowy;;10:48:00;MINI M4s;M4;;MINI 90km;90
+11721;535;Piotr;Kutschenreiter;Puszczykowo;;1996-05-28;M;szosowy;;10:21:00;MINI M2s;M2;;MINI 90km;90
+11304;580;Katarzyna;Sokołowska;Swarzędz;;1996-07-10;K;szosowy;;10:30:00;MINI K2s;K2;;MINI 90km;90
+11329;5;Witold;Buczyński;Szczecin;SznupaTeam;1952-04-01;M;inny;;08:30:00;MEGA M6i;M6;;MEGA 180km;180
+11067;164;Iwona;Pietruszewska;NOWOGARD;LKK Nowogard;1953-11-03;K;inny;;09:06:00;MINI K6i;K6;;MINI 90km;90
+11187;144;Tomasz;Szulc;Rybnik;;1980-01-31;M;szosowy;;09:00:00;MEGA M3s;M3;;MEGA 180km;180
+11046;333;Maciej;Kasprzak;Poznań;;1983-03-15;M;szosowy;;09:39:00;MINI M3s;M3;;MINI 90km;90
+11463;188;Marcin;Marcinkowski;Oborniki;DT4YOU MTB TEAM;1979-04-15;M;inny;;09:09:00;MINI M3i;M3;;MINI 90km;90
+11540;127;Sebastian;Świętocki;Poznań;;1994-06-29;M;szosowy;;08:54:00;MEGA M2s;M2;;MEGA 180km;180
+11554;4;Damian;Dabrowski;Bydgoszcz;Region Wsparcia Teleinformatycznego - BIKE TEAM;1988-10-31;M;inny;;08:30:00;MEGA M2i;M2;;MEGA 180km;180
+11679;598;Dariusz;Lewandowski;Wagrowiec;Merx Team Wągrowiec;1975-12-17;M;szosowy;;10:33:00;MINI M4s;M4;;MINI 90km;90
+11703;109;Robert;Żmudzin;Wolsztyn;FTI Racing Team;1988-06-08;M;szosowy;;08:51:00;MEGA M2s;M2;;MEGA 180km;180
+11202;529;Edyta;Jasak-Juskowiak;Poznań;;1970-07-12;K;szosowy;;10:18:00;MINI K4s;K4;;MINI 90km;90
+11222;56;Edward;Kuczmarz;Wrocław;Szerszenie Trzebnica;1952-03-10;M;szosowy;;08:42:00;MEGA M6s;M6;;MEGA 180km;180
+11285;611;Daniel;Lindner;Opatówek;;1967-08-06;M;szosowy;;10:36:00;MINI M4s;M4;;MINI 90km;90
+11301;303;Mariusz;Tomaszewski;Przeźmierowo;Axpol Team;1984-09-23;M;szosowy;;09:33:00;MINI M3s;M3;;MINI 90km;90
+11119;159;Adrian;Jurek;Ostrów Wielkopolski;;1979-10-13;M;szosowy;;09:03:00;MEGA M3s;M3;;MEGA 180km;180
+11138;454;Marcin;Andrzejewski;Września;Dziki Koszalin;1990-12-07;M;szosowy;;10:03:00;MINI M2s;M2;;MINI 90km;90
+11171;382;Włodzimierz;Czyżniewski;Toruń;Toruńskie Towarzystwo Cyklistów;1953-03-02;M;szosowy;;09:48:00;MINI M6s;M6;;MINI 90km;90
+11181;521;Krzysztof;Nowak;Poznań;TRICERATOPS - gpd triathlon team;1988-09-13;M;szosowy;;10:18:00;MINI M2s;M2;;MINI 90km;90
+11068;314;Paweł;Stachowiak;Kąkolewo;CIESIÓŁKA TEAM;1974-08-07;M;szosowy;;09:36:00;MINI M4s;M4;;MINI 90km;90
+11105;468;Mariusz;Kryś;Buk;;1975-10-22;M;szosowy;;10:06:00;MINI M4s;M4;;MINI 90km;90
+11128;80;Beata;Tulimowska;Włocławek;LUMAC WTR Włocławek;1965-08-11;K;szosowy;;10:57:00;MINI K5s;K5;;MINI 90km;90
+11159;133;Marcin;Walotek;Wrocław;;1985-07-25;M;szosowy;;08:57:00;MEGA M3s;M3;;MEGA 180km;180
+11172;587;MAREK;MURMYŁO;POZNAŃ;FLY2LIVE;1958-06-12;M;szosowy;;10:30:00;MINI M5s;M5;;MINI 90km;90
+11183;266;Robert;Stefaniak;Lubrza;;1974-10-29;M;szosowy;;09:27:00;MINI M4s;M4;;MINI 90km;90
+11321;73;Robert;Pasternak;Włocławek;LUMAC WTR Włocławek;1980-04-18;M;szosowy;;08:45:00;MEGA M3s;M3;;MEGA 180km;180
+11192;481;Jarosław;Jaskuła;Skórzewo;;1982-06-22;M;szosowy;;10:09:00;MINI M3s;M3;;MINI 90km;90
+11279;208;Józef;Misiak;Miekinia;Rycerze Rolanda Maciejewski Cykling Team;1939-07-01;M;inny;;09:15:00;MINI M7i;M7;;MINI 90km;90
+11549;518;Krzysztof;Krzeczkowski;Gryfice;MASTERS Gryfice;1960-01-18;M;szosowy;;10:15:00;MINI M5s;M5;;MINI 90km;90
+11233;603;Bogumił;Soiński;Łask;Klub Rowerowy Jastrzębie Łaskie;1974-01-13;M;szosowy;;10:33:00;MINI M4s;M4;;MINI 90km;90
+11252;635;Kazimierz;Rojek;Brzeg;MR K2 win Eska Team;1955-01-26;M;szosowy;;10:39:00;MINI M6s;M6;;MINI 90km;90
+11305;406;Łukasz;Pikosz;Mosina;FTI RACING TEAM;1979-08-21;M;szosowy;;09:54:00;MINI M3s;M3;;MINI 90km;90
+11592;452;Violetta;Dura - Kolasińska;Poznań;;1963-03-29;K;szosowy;;10:03:00;MINI K5s;K5;;MINI 90km;90
+11332;139;Wojtek;Szeliga;Imielin;;1969-06-20;M;szosowy;;08:57:00;MEGA M4s;M4;;MEGA 180km;180
+11647;464;Robert;Mencfeldowski;Dobroszyce;KROSS Euro - Rower;1971-12-18;M;szosowy;;10:06:00;MINI M4s;M4;;MINI 90km;90
+11353;358;Paweł;Karwat;Wrocław;recyklisci.pl;1987-08-30;M;szosowy;;09:45:00;MINI M2s;M2;;MINI 90km;90
+11299;528;Maciej;Koliński;Poznań;Axpol Team;1958-01-03;M;szosowy;;10:18:00;MINI M5s;M5;;MINI 90km;90
+11541;684;Jacek;Białek;Gryfice;MASTERS Gryfice;1976-01-13;M;szosowy;;10:48:00;MINI M4s;M4;;MINI 90km;90
+11748;77;Krzysztof;Wolanin;Mysłowice;Szczeciński Klub Rowerowy GRYFUS;1991-02-09;M;szosowy;;08:45:00;MEGA M2s;M2;;MEGA 180km;180
+11546;418;Henryk;Modliński;Gryfice;MASTERS Gryfice;1948-06-02;M;szosowy;;09:57:00;MINI M6s;M6;;MINI 90km;90
+11333;636;Roman;Skiba;Nakło nad Notecią;JARE TEAM;1968-01-15;M;szosowy;;10:39:00;MINI M4s;M4;;MINI 90km;90
+11372;44;KRZYSZTOF;Łańcucki;Wrocław;;1949-01-01;M;szosowy;;08:39:00;MEGA M5s;M5;;MEGA 180km;180
+11476;479;Krzysztof;Kozanecki;Poznań;;1956-07-08;M;szosowy;;10:09:00;MINI M6s;M6;;MINI 90km;90
+11574;179;Aleksandra;Kwaśniewska;Zielona Góra;;1987-12-02;K;inny;;09:09:00;MINI K2i;K2;;MINI 90km;90
+11547;184;Andrzej;Misikonis;Gryfice;MASTERS Gryfice;1976-10-14;M;inny;;09:09:00;MINI M4i;M4;;MINI 90km;90
+11705;483;Tomasz;Morawski;Poznań;FTI Racing Team;1990-03-30;M;szosowy;;10:09:00;MINI M2s;M2;;MINI 90km;90
+11595;245;Artur;Adamczak;Poznań;FTI Racing Team;1992-10-24;M;szosowy;;09:21:00;MINI M2s;M2;;MINI 90km;90
+11863;95;Marek;Strogulski;Rosnówko;Zgrupka Team;1972-04-07;M;szosowy;;08:48:00;MEGA M4s;M4;;MEGA 180km;180
+11669;582;Kazimierz;Wardęga;Ryczywół;;1959-03-04;M;szosowy;;10:30:00;MINI M5s;M5;;MINI 90km;90
+10598;714;Michał;Dowczyński;Piła;;1977-11-14;M;szosowy;;10:57:00;MINI M3s;M3;;MINI 90km;90
+10778;32;Tadeusz;Matuszek;Rybnik;;1958-04-13;M;szosowy;;08:36:00;MEGA M5s;M5;;MEGA 180km;180
+11130;317;Maciej;Bernat;Poznań;;1967-08-05;M;szosowy;;09:36:00;MINI M4s;M4;;MINI 90km;90
+11653;345;Sebastian;Rosik;Szczecin;;1980-02-11;M;szosowy;;09:42:00;MINI M3s;M3;;MINI 90km;90
+11074;143;Marek;Matya;Kłodzko;;1977-03-10;M;szosowy;;09:00:00;MEGA M3s;M3;;MEGA 180km;180
+11671;12;Marian +15min;Przybylski +15min;Trzebnica;;1957-10-12;M;inny;;08:15:00;MINI M5i;M5;;MINI 90km;90
+10192;230;Andrzej;Kasprzyk;Słupca;PTTK Witkowo;1953-02-14;M;inny;;09:18:00;MINI M6i;M6;;MINI 90km;90
+11572;247;Jacek;Matuszkiewicz;Września;;1990-06-13;M;szosowy;;09:21:00;MINI M2s;M2;;MINI 90km;90
+10591;237;Zbigniew;Jagiełło;Łódź;MOCNE KOŁO - ŁÓDŹ;1954-10-08;M;szosowy;;09:21:00;MINI M6s;M6;;MINI 90km;90
+10160;246;DARIUSZ;ŁABIAK;RAWICZ;STREFASPORTU.PL;1975-11-16;M;szosowy;;09:21:00;MINI M4s;M4;;MINI 90km;90
+11297;249;Piotr;Rorot;Poznań;Zgrupka Luboń;1985-02-19;M;szosowy;;09:21:00;MINI M3s;M3;;MINI 90km;90
+10578;271;Marcin;Basiński;Paczkowo;KĘSY TEAM;1974-07-05;M;szosowy;;09:27:00;MINI M4s;M4;;MINI 90km;90
+10444;306;Kamil;Kisły;Myślibórz;;1982-07-07;M;szosowy;;09:33:00;MINI M3s;M3;;MINI 90km;90
+10880;274;Anetta;Klause;Szczytniki;;1969-01-05;K;szosowy;;09:27:00;MINI K4s;K4;;MINI 90km;90
+10866;280;Dariusz;Jamielucha;Poznań;Zgrupka Team;1976-04-22;M;szosowy;;09:30:00;MINI M4s;M4;;MINI 90km;90
+10406;309;waldemar;stempin;wolsztyn;KKFP;1972-02-26;M;szosowy;;09:33:00;MINI M4s;M4;;MINI 90km;90
+11108;305;Wojciech;Stróżycki;Poznań;;1961-04-08;M;szosowy;;09:33:00;MINI M5s;M5;;MINI 90km;90
+10482;302;Maciej;Michalski;Gostyń;GKR Gostyń;1978-07-01;M;szosowy;;09:33:00;MINI M3s;M3;;MINI 90km;90
+10244;321;RADOSŁAW;KACZMAREK;POZNAŃ;;1976-06-24;M;szosowy;;09:36:00;MINI M4s;M4;;MINI 90km;90
+10188;318;Wiesław;Białous;Myślibórz;fol-tech team pl;1972-12-09;M;szosowy;;09:36:00;MINI M4s;M4;;MINI 90km;90
+10074;320;Mirosław;Pawlewski;Poznań;;1982-09-09;M;szosowy;;09:36:00;MINI M3s;M3;;MINI 90km;90
+10967;326;Dariusz;Grzybczyński;Gorzów Wlkp;Lech Piasecki Team;1970-09-25;M;szosowy;;09:39:00;MINI M4s;M4;;MINI 90km;90
+10513;342;PIOTR;MAŁECKI;wszewilki;PKK BARYCZANIE MILICZ;1968-06-08;M;szosowy;;09:42:00;MINI M4s;M4;;MINI 90km;90
+10271;352;Paweł;Similak;Sieradz;;1986-08-06;M;szosowy;;09:42:00;MINI M3s;M3;;MINI 90km;90
+10387;363;Tomasz;Olejnik;Wiry;Hauraton Komorniki;1975-07-30;M;szosowy;;09:45:00;MINI M4s;M4;;MINI 90km;90
+10319;368;MARIUSZ;SZKARADEK;Wroclaw;PROM RIDERS TEAM;1981-03-09;M;szosowy;;09:45:00;MINI M3s;M3;;MINI 90km;90
+11265;371;Piotr;Kośmider;Poznań;FLY2LIVE;1982-01-21;M;szosowy;;09:48:00;MINI M3s;M3;;MINI 90km;90
+10518;355;Marcin;Tokłowicz;Bielawy;KTK IMAGE CYCLING TEAM;1975-02-27;M;szosowy;;09:45:00;MINI M4s;M4;;MINI 90km;90
+11351;360;Zdzisław;Mika;Kwieciszewo;;1954-11-06;M;szosowy;;09:45:00;MINI M6s;M6;;MINI 90km;90
+10113;393;Krystian;Kowalski;Wronki;;1979-03-28;M;szosowy;;09:51:00;MINI M3s;M3;;MINI 90km;90
+10019;397;Zbigniew;Głuszczak;Kalisz;KTNS;1981-08-26;M;szosowy;;09:51:00;MINI M3s;M3;;MINI 90km;90
+11242;370;Bartosz;Czerkas;Nowogard;;1998-05-11;M;szosowy;;09:48:00;MINI M2s;M2;;MINI 90km;90
+11215;395;Paweł;Rychlicki;Poznań;Merx Team Wągrowiec;1971-06-02;M;szosowy;;09:51:00;MINI M4s;M4;;MINI 90km;90
+11204;401;Grzegorz;Zdrojewski;Czerniejewo;czerniejewobiega;1972-04-12;M;szosowy;;09:54:00;MINI M4s;M4;;MINI 90km;90
+10519;402;Tomasz;Łagoda;Głogów;;1985-08-29;M;szosowy;;09:54:00;MINI M3s;M3;;MINI 90km;90
+9981;421;Piotr;Kaczor;Maszewo;UKS Ratusz Maszewo;1977-10-26;M;szosowy;;09:57:00;MINI M3s;M3;;MINI 90km;90
+10199;384;sebastian;wojtysiak;biadki;OTR INTERKOL;1972-10-04;M;szosowy;;09:48:00;MINI M4s;M4;;MINI 90km;90
+10459;432;Jan;Lisiecki;Krobia;;1951-08-28;M;szosowy;;10:00:00;MINI M6s;M6;;MINI 90km;90
+10282;437;Damian;Maćkowiak;Pobiedziska;;1981-12-06;M;szosowy;;10:00:00;MINI M3s;M3;;MINI 90km;90
+10303;466;SZYMON;SADKOWSKI;BABIMOST;;1961-09-03;M;szosowy;;10:06:00;MINI M5s;M5;;MINI 90km;90
+10495;476;Piotr;Tytus;Gorzów Wlkp.;P.A.K.T.;1985-02-06;M;szosowy;;10:09:00;MINI M3s;M3;;MINI 90km;90
+10015;480;Bogdan;Proszak;Poznań;Zgrupka Luboń;1956-07-10;M;szosowy;;10:09:00;MINI M6s;M6;;MINI 90km;90
+10214;482;Sławomir;Lewandowski;Brześć Kuj.;WTR Lumac Włocławek;1969-12-10;M;szosowy;;10:09:00;MINI M4s;M4;;MINI 90km;90
+11070;496;KRZYSZTOF;SOBOK;POZNAŃ;SZLIF TEAM;1978-02-12;M;szosowy;;10:12:00;MINI M3s;M3;;MINI 90km;90
+10233;520;Czarek;Kwiatkowski;Włocławek;LUMAC WTR WŁOCŁAWEK;1963-07-17;M;szosowy;;10:18:00;MINI M5s;M5;;MINI 90km;90
+10538;515;Józef;Gad;Rakoszyce;WOGAZ;1959-01-31;M;szosowy;;10:15:00;MINI M5s;M5;;MINI 90km;90
+10939;524;Tomasz;Wiśniewski;Oborniki;DT4YOU;1964-12-13;M;szosowy;;10:18:00;MINI M5s;M5;;MINI 90km;90
+10115;550;Krzysztof;Ignaszewski;Jabłonka;SGR Racing Team Słupca;1968-03-26;M;szosowy;;10:24:00;MINI M4s;M4;;MINI 90km;90
+10493;557;Mariusz;Wiśniewski;Murowana Goślina;;1972-12-26;M;szosowy;;10:24:00;MINI M4s;M4;;MINI 90km;90
+10485;541;Sławomir;Kucal;Konin;KTK IMAGE CYCLING TEAM;1972-07-27;M;szosowy;;10:21:00;MINI M4s;M4;;MINI 90km;90
+10335;545;Robert;Millert;Skórzewo;;1966-11-07;M;szosowy;;10:21:00;MINI M5s;M5;;MINI 90km;90
+11177;566;Marta;Gogolewska;Wągrowiec;Merx Team Wągrowiec;1986-07-04;K;szosowy;;10:27:00;MINI K3s;K3;;MINI 90km;90
+10558;555;Chris;Lasota;torun;TTC;1954-01-21;M;szosowy;;10:24:00;MINI M6s;M6;;MINI 90km;90
+10487;589;Joanna;Kucal;Konin;KTK IMAGE CYCLING TEAM;1973-09-22;K;szosowy;;10:30:00;MINI K4s;K4;;MINI 90km;90
+11041;577;Przemysław;Krzanowski;Poznań;;1976-09-11;M;szosowy;;10:27:00;MINI M4s;M4;;MINI 90km;90
+10662;586;Łukasz;Parus;Zagórów;SGR Racing Team;1979-09-26;M;szosowy;;10:30:00;MINI M3s;M3;;MINI 90km;90
+10575;595;Slawomir;Dykas;Poznan;Millano group team;1971-03-01;M;szosowy;;10:33:00;MINI M4s;M4;;MINI 90km;90
+10065;622;Jerzy;Rachwał;Puszczykowo;Zgrupka Team;1964-04-05;M;szosowy;;10:36:00;MINI M5s;M5;;MINI 90km;90
+10676;610;Maciej;Zembik;Plewiska;Bnińska Pracownia Rowerów;1988-03-21;M;szosowy;;10:36:00;MINI M2s;M2;;MINI 90km;90
+10818;612;Andrzej;Gierusz;50-226;T&J;1963-12-29;M;szosowy;;10:36:00;MINI M5s;M5;;MINI 90km;90
+10820;619;Hubert;Klebowski;Stadtsteinach;UKS Ratusz Maszewo;1979-05-15;M;szosowy;;10:36:00;MINI M3s;M3;;MINI 90km;90
+10730;615;Jakub;Dyczkowski;Ocieszyn;;1973-11-06;M;szosowy;;10:36:00;MINI M4s;M4;;MINI 90km;90
+10858;613;Marek;Nocuń;Mur. Goślina;Supersportowy TEAM;1973-09-04;M;szosowy;;10:36:00;MINI M4s;M4;;MINI 90km;90
+10697;626;Marek;Kuhn;Rogoźno;;1960-07-24;M;szosowy;;10:39:00;MINI M5s;M5;;MINI 90km;90
+10110;630;Agnieszka;GOŁEMBIEWSKA;Śrem;Brzechwa Team;1979-04-28;K;szosowy;;10:39:00;MINI K3s;K3;;MINI 90km;90
+10439;638;Michał;Chorążyczewski;Oborniki;PROMETPLAST Oborniki;1981-07-05;M;szosowy;;10:39:00;MINI M3s;M3;;MINI 90km;90
+11291;643;Mariusz;Szyc;Kslisz;KTNSZ HELLENA;1966-12-22;M;szosowy;;10:42:00;MINI M5s;M5;;MINI 90km;90
+9978;642;Piotr;Siemiński;Żyrardów;jankes-garage.eu;1968-04-30;M;szosowy;;10:42:00;MINI M4s;M4;;MINI 90km;90
+10116;667;Dominik;Warszewski;Przeźmierowo;;1990-03-30;M;szosowy;;10:45:00;MINI M2s;M2;;MINI 90km;90
+10232;660;Tomasz;sobczak;Brześć Kujawski;LUMAC WTR WŁOCŁAWEK;1972-09-02;M;szosowy;;10:45:00;MINI M4s;M4;;MINI 90km;90
+10992;661;Grezegorz;Przetakowski;konin;KTK IMAGE CYCLING TEAM;1967-10-28;M;szosowy;;10:45:00;MINI M4s;M4;;MINI 90km;90
+10281;673;ANDRZEJ;SKORUPSKI;KĄKOLEWO;BRZECHWA  TEAM;1958-11-01;M;szosowy;;10:48:00;MINI M5s;M5;;MINI 90km;90
+10061;672;Tomasz;Ścigacz;Biedrusko;;1986-06-04;M;szosowy;;10:48:00;MINI M3s;M3;;MINI 90km;90
+10449;671;Jakub;Juszko;Pabianice;PTC Pabianice;1992-04-24;M;szosowy;;10:48:00;MINI M2s;M2;;MINI 90km;90
+10503;700;Zbigniew;Kurowski;Łódź;KS Mocne Koło;1949-07-08;M;szosowy;;10:54:00;MINI M6s;M6;;MINI 90km;90
+11258;692;Rafał;Wieczorek;Poznań;PKO Bank Polski;1982-02-14;M;szosowy;;10:51:00;MINI M3s;M3;;MINI 90km;90
+10784;701;JÓZEF;SZEIBE;LESZNO;STREFASPORTU.PL;1957-01-12;M;szosowy;;10:54:00;MINI M5s;M5;;MINI 90km;90
+10979;674;Mateusz;Wolniewicz;Murowana Goślina;Supersportowy TEAM;1987-12-13;M;szosowy;;10:48:00;MINI M2s;M2;;MINI 90km;90
+10968;702;Mateusz;Wojtkowiak;Zielona Góra;;1982-09-05;M;szosowy;;10:54:00;MINI M3s;M3;;MINI 90km;90
+10284;243;Łukasz;Gwiazdowski;Poznań;;1976-09-11;M;szosowy;;09:21:00;MINI M4s;M4;;MINI 90km;90
+10346;710;Maciej;Maciejewski;Imielno;Pobiedziska Racing Team;1978-11-04;M;szosowy;;10:57:00;MINI M3s;M3;;MINI 90km;90
+10610;715;Tomasz;Doleżal;Poznań;;1989-06-12;M;szosowy;;10:57:00;MINI M2s;M2;;MINI 90km;90
+10072;716;Martyna;Śliwińska;Gniezno;;1992-09-10;K;szosowy;;10:57:00;MINI K2s;K2;;MINI 90km;90
+10337;698;Jakub;Olech;Police;0;1980-02-17;M;szosowy;;10:51:00;MINI M3s;M3;;MINI 90km;90
+10119;325;Marek;Kasseja;Wągrowiec;;1964-08-02;M;szosowy;;09:39:00;MINI M5s;M5;;MINI 90km;90
+10132;105;Graham;Crawford;Poznań;Lewa Wolna;1965-05-24;M;szosowy;;08:51:00;MEGA M5s;M5;;MEGA 180km;180
+10314;285;Krzysztof;Bartkowiak;Sepno;;1993-01-21;M;szosowy;;09:30:00;MINI M2s;M2;;MINI 90km;90
+10788;287;Mieczysław;Adamowicz;Kluczbork;UKS Stobrawa Kluczbork;1943-01-03;M;szosowy;;09:30:00;MINI M7s;M7;;MINI 90km;90
+10028;238;Robert;Mila;Kłodawa;Roger;1969-06-14;M;szosowy;;09:21:00;MINI M4s;M4;;MINI 90km;90
+11071;295;Błażej;Grochowalski;POZNAŃ;Zgrupka Team;1980-06-09;M;szosowy;;09:33:00;MINI M3s;M3;;MINI 90km;90
+10583;340;Piotr;Lepczyński;Krotoszyn;;1966-01-31;M;szosowy;;09:42:00;MINI M5s;M5;;MINI 90km;90
+10612;250;Przemysław;Wegner;Poznań;FTI;1971-09-22;M;szosowy;;09:24:00;MINI M4s;M4;;MINI 90km;90
+10544;255;Tomasz;Imielski;Wrocław;Prom Riders Team;1978-07-11;M;szosowy;;09:24:00;MINI M3s;M3;;MINI 90km;90
+10639;102;Jakub +15min;Król +15min;Poznań;inpulse.pl UKS Cityzen_/BE3;1986-01-30;M;szosowy;;09:12:00;MINI M3s;M3;;MINI 90km;90
+10050;331;Mateusz;Frydrych;Wągrowiec;;1992-02-12;M;szosowy;;09:39:00;MINI M2s;M2;;MINI 90km;90
+10145;315;Piotr;Markiewicz;Szamotuły;;1966-04-02;M;szosowy;;09:36:00;MINI M5s;M5;;MINI 90km;90
+10222;386;Piotr;Miałkas;Buk;GK BUK;1971-01-28;M;szosowy;;09:51:00;MINI M4s;M4;;MINI 90km;90
+10891;509;Maciej;Cichoń;Poznań;;1980-02-19;M;szosowy;;10:15:00;MINI M3s;M3;;MINI 90km;90
+10442;327;Paweł;Kurczak;Trzebnica;Szerszenie Trzebnica;1967-01-14;M;szosowy;;09:39:00;MINI M4s;M4;;MINI 90km;90
+10887;330;Marcin;Pidek;Oborniki;FTI TRI RACING TEAM OBORNIKI;1978-12-25;M;szosowy;;09:39:00;MINI M3s;M3;;MINI 90km;90
+10054;286;Mateusz;Szewczyk;Chobienice;LO Świebodzin Team;1990-01-07;M;szosowy;;09:30:00;MINI M2s;M2;;MINI 90km;90
+11109;294;Krzysztof;Wiszowaty;Ostrołęka;Tama Polska;1980-05-26;M;szosowy;;09:30:00;MINI M3s;M3;;MINI 90km;90
+10617;412;Zdzisław;Apiecionek;Karpicko;;1963-08-06;M;szosowy;;09:54:00;MINI M5s;M5;;MINI 90km;90
+10723;400;Remigiusz;Urbaniak;Oborniki;;1981-01-05;M;szosowy;;09:54:00;MINI M3s;M3;;MINI 90km;90
+10155;404;Przemysław;Momot;Goleniów;Ratusz Maszewo;1989-08-07;M;szosowy;;09:54:00;MINI M2s;M2;;MINI 90km;90
+10504;351;Piotr;Ruciński;Łódź;KS Mocne Koło;1953-09-22;M;szosowy;;09:42:00;MINI M6s;M6;;MINI 90km;90
+10480;573;Tomasz;Hofman;Lusówko;Zgrupka Team;1976-07-07;M;szosowy;;10:27:00;MINI M4s;M4;;MINI 90km;90
+11542;378;Tomasz;Jędzura;Gryfice;MASTERS Gryfice;1974-11-05;M;szosowy;;09:48:00;MINI M4s;M4;;MINI 90km;90
+11286;428;Sławomir;Wągrowski;Godziesze;;1974-10-26;M;szosowy;;09:57:00;MINI M4s;M4;;MINI 90km;90
+11001;474;Jakub;Chmielewski;Oborniki;;1995-02-07;M;szosowy;;10:06:00;MINI M2s;M2;;MINI 90km;90
+10829;369;Robert;Wolny;Poznań;;1979-10-12;M;szosowy;;09:45:00;MINI M3s;M3;;MINI 90km;90
+11295;357;jarosław;Rokosiewicz;Dobramyśl;Brzechwa Team;1963-04-21;M;szosowy;;09:45:00;MINI M5s;M5;;MINI 90km;90
+10298;364;Zygmunt Łój;Łój;Sosnowiec;;1952-04-01;M;szosowy;;09:45:00;MINI M6s;M6;;MINI 90km;90
+11100;399;Robert;Kierzek;Raszków;OTR Interkol;1971-12-05;M;szosowy;;09:51:00;MINI M4s;M4;;MINI 90km;90
+10104;413;Paweł;Nowak;Kcynia;Kepnet;1965-06-27;M;szosowy;;09:54:00;MINI M5s;M5;;MINI 90km;90
+10036;409;Adam;Gulbinowicz;Goleniów;LEGIONY ULICY;1967-06-10;M;szosowy;;09:54:00;MINI M4s;M4;;MINI 90km;90
+10330;429;Mariusz;Sadło;Swarzędz;;1971-11-13;M;szosowy;;09:57:00;MINI M4s;M4;;MINI 90km;90
+10256;548;Arkadiusz;Turonek;KŁECKO;KŁECKO;1985-12-12;M;szosowy;;10:21:00;MINI M3s;M3;;MINI 90km;90
+10180;539;Maciej;Pytlak;Kostrzyn;Tempus Team;1990-06-24;M;szosowy;;10:21:00;MINI M2s;M2;;MINI 90km;90
+11221;649;Ryszard;Michta;Środa Śląśka;50upAT;1951-01-06;M;szosowy;;10:42:00;MINI M6s;M6;;MINI 90km;90
+10959;560;Łukasz;Sawicki;Wrocław;PROM RIDERS TEAM;1981-05-17;M;szosowy;;10:24:00;MINI M3s;M3;;MINI 90km;90
+10108;564;Marcin;Nowak;Poznań;;1985-07-16;M;szosowy;;10:24:00;MINI M3s;M3;;MINI 90km;90
+10737;427;Paweł;Szyktanc;Pabianice;PTC Pabianice;1988-03-25;M;szosowy;;09:57:00;MINI M2s;M2;;MINI 90km;90
+10363;424;Maciej;Baranowski;Rogoźno;;1986-01-30;M;szosowy;;09:57:00;MINI M3s;M3;;MINI 90km;90
+11561;422;Henryk;Rek;Łódź;K.S. Mocne Koło;1952-07-15;M;szosowy;;09:57:00;MINI M6s;M6;;MINI 90km;90
+10306;440;Krzysztof;Kowalski;Poznań;Colex Racing Team;1970-06-30;M;szosowy;;10:00:00;MINI M4s;M4;;MINI 90km;90
+10220;574;Bożena;Śmiałko;Mrozów;PROM RIDERS TEAM;1971-05-04;K;szosowy;;10:27:00;MINI K4s;K4;;MINI 90km;90
+10165;501;Przemysław;Górak;Wrocław;PM Rider Team;1980-08-22;M;szosowy;;10:12:00;MINI M3s;M3;;MINI 90km;90
+11248;500;Stanisław;Michalski;Poznań;FTI Racing Team;1985-10-31;M;szosowy;;10:12:00;MINI M3s;M3;;MINI 90km;90
+10280;685;Jarosław;Skorupinski;Wolsztyn;;1966-05-02;M;szosowy;;10:51:00;MINI M5s;M5;;MINI 90km;90
+10223;590;Paweł;Semczuk;Tarnowo Podgórne;;1978-10-16;M;szosowy;;10:30:00;MINI M3s;M3;;MINI 90km;90
+10369;522;Tomasz;Kruszakin;Kostrzyn nad Odrą;;1976-08-29;M;szosowy;;10:18:00;MINI M4s;M4;;MINI 90km;90
+10385;525;Maciej;Śliwczyński;Września;SGR Racing Team;1976-06-18;M;szosowy;;10:18:00;MINI M4s;M4;;MINI 90km;90
+10358;637;ŁUKASZ;GRONEK;KOWANÓWKO;;1969-07-06;M;szosowy;;10:39:00;MINI M4s;M4;;MINI 90km;90
+11025;530;Lech;Przybylski;Tuczno;Swarzędzki peleton;1957-02-08;M;szosowy;;10:18:00;MINI M5s;M5;;MINI 90km;90
+10089;621;Krzysztof;Wendeker;Poznań;;1994-12-31;M;szosowy;;10:36:00;MINI M2s;M2;;MINI 90km;90
+10100;527;Sławomir;Bogusz;Dobroszyce;;1974-10-28;M;szosowy;;10:18:00;MINI M4s;M4;;MINI 90km;90
+10148;537;PIOTR;MUCHA;NIECHORZE;K.R.GRYFLAND GRYFICE;1971-10-24;M;szosowy;;10:21:00;MINI M4s;M4;;MINI 90km;90
+10237;538;Sławomir;Dębczyński;Dębogóra;Enduhub.com;1974-04-23;M;szosowy;;10:21:00;MINI M4s;M4;;MINI 90km;90
+11179;536;Tomasz;Jarosz;Poznań;TRICERATOPS - gpd triathlon team;1970-03-09;M;szosowy;;10:21:00;MINI M4s;M4;;MINI 90km;90
+9999;567;Adrian;Markiewicz;Kotlin;;1988-08-03;M;szosowy;;10:27:00;MINI M2s;M2;;MINI 90km;90
+11545;585;Andrzej;Świątek;Gryfice;MASTERS Gryfice;1949-01-02;M;szosowy;;10:30:00;MINI M6s;M6;;MINI 90km;90
+10455;653;Paweł;Wasiak;Poznań;Millano Group Team;1966-08-14;M;szosowy;;10:42:00;MINI M5s;M5;;MINI 90km;90
+10260;599;MICHAŁ;SERBIN;KŁECKO;KŁECKO;1985-09-21;M;szosowy;;10:33:00;MINI M3s;M3;;MINI 90km;90
+10655;657;Daniel;Parus;Poznań;SGR Racing Team;1982-09-03;M;szosowy;;10:45:00;MINI M3s;M3;;MINI 90km;90
+10834;579;Adrian;Ćwirko;Trzebnica;;1989-02-06;M;szosowy;;10:27:00;MINI M2s;M2;;MINI 90km;90
+11296;681;Piotr;Tałajczyk;Poznań;;1965-07-26;M;szosowy;;10:48:00;MINI M5s;M5;;MINI 90km;90
+11288;679;ROBERT;BRUKWICKI;Kostrzyn;;1981-08-24;M;szosowy;;10:48:00;MINI M3s;M3;;MINI 90km;90
+10431;640;Michał;Ryszewski;Poznań;;1985-01-20;M;szosowy;;10:42:00;MINI M3s;M3;;MINI 90km;90
+11069;602;Bartosz;Gałęza;Czarże;;1991-07-05;M;szosowy;;10:33:00;MINI M2s;M2;;MINI 90km;90
+10075;620;Zbigniew;Derda;Tarnowo Podgórne;KK TARNOVIA;1957-04-13;M;szosowy;;10:36:00;MINI M5s;M5;;MINI 90km;90
+10531;656;Jakub;Gasztkowski;Konin;KONIN;1985-12-31;M;szosowy;;10:45:00;MINI M3s;M3;;MINI 90km;90
+11026;633;Marcin;Bartoszewski;Poznań;;1976-03-23;M;szosowy;;10:39:00;MINI M4s;M4;;MINI 90km;90
+10942;675;Tomasz;Wojtkowiak;Mosina;29 Rebel Kaliska Grupa Kolarska;1986-05-21;M;szosowy;;10:48:00;MINI M3s;M3;;MINI 90km;90
+10569;632;Marek;Panowicz;Potasze;TTC Toruń;1963-11-06;M;szosowy;;10:39:00;MINI M5s;M5;;MINI 90km;90
+10128;651;PIOTR;TABAT;Rogoźno;TRIATHLON ROGOŹNO;1980-02-28;M;szosowy;;10:42:00;MINI M3s;M3;;MINI 90km;90
+11110;655;Paweł;Maćkowiak;Ujście;Friends of Glass;1961-06-13;M;szosowy;;10:45:00;MINI M5s;M5;;MINI 90km;90
+10171;717;Anna;Mądra-Bielewicz;Poznań;Zgrupka Team;1986-08-26;K;szosowy;;10:57:00;MINI K3s;K3;;MINI 90km;90
+10254;705;Arkadiusz;Czarnecki;Wagrowiec;Wagrowiec;1975-07-03;M;szosowy;;10:54:00;MINI M4s;M4;;MINI 90km;90
+10648;614;WŁODZIMIERZ;WRÓBEL;GOLINA;BIAŁE TYGRYSY JAROCIN;1982-01-11;M;szosowy;;10:36:00;MINI M3s;M3;;MINI 90km;90
+10663;284;Klaudiusz;Henschel;Oborniki;FTI Racing Team Oborniki;1975-01-05;M;szosowy;;09:30:00;MINI M4s;M4;;MINI 90km;90
+9977;492;Marcin;Błaszkiewicz;Gruszczyn;;1987-08-26;M;szosowy;;10:12:00;MINI M2s;M2;;MINI 90km;90
+9925;311;Maciej;Grzegorzek;Białężyn;OTC  OBORNIKI;1972-10-29;M;szosowy;;09:36:00;MINI M4s;M4;;MINI 90km;90
+10027;217;Marcin;Gaj;Szczecin;Szczeciński Klub Rowerowy GRYFUS;1978-01-17;M;inny;;09:15:00;MINI M3i;M3;;MINI 90km;90
+10070;694;Sławomir;Lehmann;Dominowo;SUF-SYSTEM;1968-10-03;M;szosowy;;10:51:00;MINI M4s;M4;;MINI 90km;90
+9942;207;Dawid;Kozłowski;Łukowo;OTC  OBORNIKI;1984-07-20;M;inny;;09:15:00;MINI M3i;M3;;MINI 90km;90
+10005;60;Rafał;Wiatrak;Milicz;Milicz;1977-02-16;M;szosowy;;08:42:00;MEGA M3s;M3;;MEGA 180km;180
+10035;601;Marcin;Jarek;Leszno;DGR Racing Team;1980-05-22;M;szosowy;;10:33:00;MINI M3s;M3;;MINI 90km;90
+10077;216;Ireneusz;Dąbek;Strzałkowo;SGB SOKÓŁ Strzałkowo;1962-01-15;M;inny;;09:15:00;MINI M5i;M5;;MINI 90km;90
+10106;508;Andrzej;Warszewski;Przeźmierowo;;1989-04-29;M;szosowy;;10:15:00;MINI M2s;M2;;MINI 90km;90
+10903;543;Tomasz;Najs;Oborniki;OTC  OBORNIKI;1985-12-05;M;szosowy;;10:21:00;MINI M3s;M3;;MINI 90km;90
+11207;562;Piotr;Olszak;Wągrowiec;Merx Team Wągrowiec;1976-01-16;M;szosowy;;10:24:00;MINI M4s;M4;;MINI 90km;90
+11146;270;Edward;Konieczny;choszczno;vojadzer choszczno;1946-02-26;M;szosowy;;09:27:00;MINI M7s;M7;;MINI 90km;90
+11307;129;Marcin +15min;Kuźniar  +15min;Łódź;;1963-08-07;M;szosowy;;08:39:00;MINI M5s;M5;;MINI 90km;90
+11555;186;Kamil;Szerszeń;Bydgoszcz;Region Wsparcia Teleinformatycznego - BIKE TEAM;1978-10-06;M;inny;;09:09:00;MINI M3i;M3;;MINI 90km;90
+11599;50;Piotr;Przybysz;Rumia;FTI Racing Team;1982-01-20;M;szosowy;;08:39:00;MEGA M3s;M3;;MEGA 180km;180

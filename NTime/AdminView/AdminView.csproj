@@ -67,6 +67,10 @@
     <Compile Include="CompetitionChoice\CompetitionChoiceView.xaml.cs">
       <DependentUpon>CompetitionChoiceView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CompetitionManager\CompetitionManagerView.xaml.cs">
+      <DependentUpon>CompetitionManagerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CompetitionManager\CompetitionManagerViewModel.cs" />
     <Compile Include="IViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -142,6 +146,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CompetitionChoice\CompetitionChoiceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CompetitionManager\CompetitionManagerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

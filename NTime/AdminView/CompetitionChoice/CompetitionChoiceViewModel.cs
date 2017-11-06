@@ -12,6 +12,17 @@ namespace AdminView.CompetitionChoice
         {
             DisplayAddCompetitionViewCmd = new RelayCommand(OnDisplayAddCompetitionView, CanDisplayAddCompetition);
             AddCompetitionViewRequested += NavToAddCompetitionView;
+            GoToCompetitionCmd = new RelayCommand(OnGoToCompetition, CanGoToCompetition);
+        }
+
+        private void OnGoToCompetition()
+        {
+            CompetitionManagerRequested();
+        }
+
+        private bool CanGoToCompetition()
+        {
+            return true;
         }
 
         private void NavToAddCompetitionView()
@@ -41,14 +52,20 @@ namespace AdminView.CompetitionChoice
             Delegate[] clientList = AddCompetitionViewRequested.GetInvocationList();
             foreach (var deleg in clientList)
                 AddCompetitionViewRequested -= (deleg as Action);
-            clientList = PlayersViewRequested.GetInvocationList();
+            clientList = CompetitonViewRequested.GetInvocationList();
             foreach (var deleg in clientList)
-                PlayersViewRequested -= (deleg as Action);
+                CompetitonViewRequested -= (deleg as Action);
+            clientList = CompetitionManagerRequested.GetInvocationList();
+            foreach (var deleg in clientList)
+                CompetitionManagerRequested -= (deleg as Action);
         }
 
         public event Action AddCompetitionViewRequested = delegate { };
-        public event Action PlayersViewRequested = delegate { };
+        public event Action CompetitonViewRequested = delegate { };
+        public event Action CompetitionManagerRequested = delegate { };
 
         public RelayCommand DisplayAddCompetitionViewCmd { get; private set; }
+        public RelayCommand GoToCompetitionCmd { get; private set; }
+
     }
 }

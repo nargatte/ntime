@@ -11,6 +11,7 @@
         xmlns:settings="clr-namespace:AdminView.Settings"
         xmlns:converters="clr-namespace:StartupWPF.XamlConverters"
         xmlns:addCompetition="clr-namespace:AdminView.AddCompetition"
+        xmlns:competitionManager="clr-namespace:AdminView.CompetitionManager"
         mc:Ignorable="d"
         Background="AliceBlue"
         WindowState="Maximized"
@@ -30,6 +31,9 @@
         </DataTemplate>
         <DataTemplate DataType="{x:Type scores:ScoresViewModel}">
             <scores:ScoresView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type competitionManager:CompetitionManagerViewModel}">
+            <competitionManager:CompetitionManagerView/>
         </DataTemplate>
         <converters:DateToStringConverterClass x:Key="DateToStringConverter"/>
         <!--#region TabItems Styles-->
@@ -229,29 +233,16 @@
             </Setter>
         </Style>
         <!--#endregion-->
-        <ResourceDictionary x:Key="tabControl" Source="/Styles/TabControl.xaml"></ResourceDictionary>
+        
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Image />
-        <!--<ContentControl Content="{Binding CurrentViewModel}" Width="Auto" Height="Auto" Grid.Column="1"/>-->
-        <TabControl Margin="5" Style="{DynamicResource ResourceKey=styleTabControl}">
-            <TabItem Header="General" Style="{DynamicResource ResourceKey=styleTabItemLeft}">
-                <TextBlock>The content for General tab.</TextBlock>
-            </TabItem>
-            <TabItem Header="Actions" Style="{DynamicResource ResourceKey=styleTabItemDefault}">
-                <TextBlock>The content for Action tab.</TextBlock>
-            </TabItem>
-            <TabItem Header="Options" Style="{DynamicResource ResourceKey=styleTabItemDefault}">
-                <TextBlock>The content for Options tab.</TextBlock>
-            </TabItem>
-            <TabItem Header="Tools" Style="{DynamicResource ResourceKey=styleTabItemRight}">
-                <TextBlock>The content for Tools tab.</TextBlock>
-            </TabItem>
-        </TabControl>
+        <ContentControl Content="{Binding CurrentViewModel}" Width="Auto" Height="Auto" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
     </Grid>
 </Window>

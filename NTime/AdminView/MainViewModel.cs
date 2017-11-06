@@ -7,6 +7,7 @@ using AdminView.CompetitionChoice;
 using AdminView.Players;
 using AdminView.Scores;
 using AdminView.Settings;
+using AdminView.CompetitionManager;
 
 namespace AdminView
 {
@@ -14,9 +15,9 @@ namespace AdminView
     {
         private IViewModel _currentViewModel;
         private CompetitionChoiceViewModel _competitionChoiceViewModel;
-        private PlayersViewModel _playersViewModel;
-        private SettingsViewModel _settingsViewModel;
-        private ScoresViewModel _scoresViewModel;
+        private CompetitionManagerViewModel _competitionManagerViewModel;
+        //private SettingsViewModel _settingsViewModel;
+        //private ScoresViewModel _scoresViewModel;
 
 
         public MainViewModel()
@@ -28,15 +29,15 @@ namespace AdminView
         {
             CurrentViewModel?.DetachAllEvents();
             _competitionChoiceViewModel = new CompetitionChoiceViewModel();
-            _competitionChoiceViewModel.PlayersViewRequested += NavToPlayersView;
+            _competitionChoiceViewModel.CompetitionManagerRequested += NavToCompetitionManager;
             CurrentViewModel = _competitionChoiceViewModel;
         }
 
-        private void NavToPlayersView()
+        private void NavToCompetitionManager()
         {
             CurrentViewModel?.DetachAllEvents();
-            _playersViewModel = new PlayersViewModel();
-            CurrentViewModel = _playersViewModel;
+            _competitionManagerViewModel = new CompetitionManagerViewModel();
+            CurrentViewModel = _competitionManagerViewModel;
         }
 
         public void DetachAllEvents()
