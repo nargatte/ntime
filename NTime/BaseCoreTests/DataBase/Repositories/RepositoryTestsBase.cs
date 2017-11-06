@@ -18,6 +18,5 @@ namespace BaseCoreTests.DataBase
         {
             Scope.Dispose();
         }
-
     }
 }

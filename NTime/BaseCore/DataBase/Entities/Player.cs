@@ -16,7 +16,7 @@ namespace BaseCore.DataBase
         public string FirstName { get; set; }
 
         [StringLength(256), Required]
-        public string SecondName { get; set; }
+        public string LastName { get; set; }
 
         [Required]
         public DateTime BirthDate { get; set; }

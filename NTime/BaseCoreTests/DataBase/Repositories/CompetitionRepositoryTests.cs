@@ -14,10 +14,10 @@ namespace BaseCoreTests.DataBase
 
         private readonly List<Competition> _competitions = new List<Competition>()
         {
-            new Competition("Zawody 1", new DateTime(2017, 11, 6), null, null, null, null, CompetitionTypeEnum.Fastest ),
-            new Competition("Zawody 2", new DateTime(2017, 11, 6), null, null, null, null, CompetitionTypeEnum.MostLaps ),
-            new Competition("Zawody 3", new DateTime(2017, 11, 6), "Opis zawodów 3", null, null, null, CompetitionTypeEnum.Fastest ),
-            new Competition("Zawody 4", new DateTime(2017, 12, 1), null, null, null, null, CompetitionTypeEnum.Fastest )
+            new Competition("Zawody 1", new DateTime(2017, 11, 6), null, null, null, "Poznań", CompetitionTypeEnum.Fastest ),
+            new Competition("Zawody 2", new DateTime(2017, 11, 6), null, null, null, "Łódź", CompetitionTypeEnum.MostLaps ),
+            new Competition("Zawody 3", new DateTime(2017, 11, 6), "Opis zawodów 3", null, null, "Warszawa", CompetitionTypeEnum.Fastest ),
+            new Competition("Zawody 4", new DateTime(2017, 12, 1), null, null, null, "Gdynia", CompetitionTypeEnum.Fastest )
         };
 
         [SetUp]
