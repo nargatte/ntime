@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BaseCore.DataBase
 {
-    public class ExtraPlayerInfo
+    [Table("ExtraPlayerInfo")]
+    public class ExtraPlayerInfo : IEntityId
     {
         public ExtraPlayerInfo()
         {

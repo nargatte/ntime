@@ -7,7 +7,8 @@ using System.Linq;
 
 namespace BaseCore.DataBase
 {
-    public abstract class EnumTable<T> where T : struct, IConvertible
+    public abstract class EnumTable<T> : IEntityId
+        where T : struct, IConvertible
     {
         protected EnumTable()
         {

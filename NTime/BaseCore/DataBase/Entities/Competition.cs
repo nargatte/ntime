@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 
 namespace BaseCore.DataBase
 {
-    public class Competition
+    public class Competition : IEntityId
     {
         public Competition()
         {
         }
 
-        public Competition(string name, DateTime eventDate, string description, string link, string organiser, string city, int competitionTypeId)
+        public Competition(string name, DateTime eventDate, string description, string link, string organiser, string city, CompetitionTypeEnum competitionTypeEnum)
         {
             Name = name;
             EventDate = eventDate;
@@ -19,7 +20,7 @@ namespace BaseCore.DataBase
             Link = link;
             Organiser = organiser;
             City = city;
-            CompetitionTypeId = competitionTypeId;
+            CompetitionTypeId = (int)competitionTypeEnum;
         }
 
         public int Id { get; set; }
@@ -43,6 +44,9 @@ namespace BaseCore.DataBase
 
         public int CompetitionTypeId { get; set; }
         public virtual CompetitionType CompetitionType { get; set; }
+
+        [NotMapped]
+        public CompetitionTypeEnum CompetitionTypeEnum => (CompetitionTypeEnum) CompetitionTypeId;
 
         public virtual ICollection<Player> Players { get; set; }
 

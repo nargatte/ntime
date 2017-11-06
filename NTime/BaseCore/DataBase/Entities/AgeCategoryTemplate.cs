@@ -10,7 +10,7 @@
         {
         }
 
-        public int AgeCategoryTemplateCollectionId { get; set; }
-        public virtual AgeCategoryTemplateCollection AgeCategoryTemplateCollection { get; set; }
+        public int AgeCategoryCollectionId { get; set; }
+        public virtual AgeCategoryCollection AgeCategoryCollection { get; set; }
     }
 }

@@ -45,6 +45,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,8 +54,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataBase\DataBaseSetUp.cs" />
+    <Compile Include="DataBase\Repositories\CompetitionRepositoryTests.cs" />
+    <Compile Include="DataBase\Repositories\RepositoryTestsBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SimpleTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

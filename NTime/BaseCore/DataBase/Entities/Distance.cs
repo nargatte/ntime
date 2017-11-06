@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BaseCore.DataBase
 {
-    public class Distance
+    public class Distance : IEntityId
     {
         public Distance()
         {

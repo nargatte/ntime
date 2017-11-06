@@ -50,18 +50,30 @@
     <Compile Include="DataBase\Entities\AgeCategory.cs" />
     <Compile Include="DataBase\Entities\AgeCategoryBase.cs" />
     <Compile Include="DataBase\Entities\AgeCategoryTemplate.cs" />
-    <Compile Include="DataBase\Entities\AgeCategoryTemplateCollection.cs" />
+    <Compile Include="DataBase\Entities\AgeCategoryCollection.cs" />
     <Compile Include="DataBase\Entities\Competition.cs" />
     <Compile Include="DataBase\Entities\CompetitionType.cs" />
     <Compile Include="DataBase\Entities\Distance.cs" />
     <Compile Include="DataBase\Entities\EnumTable.cs" />
     <Compile Include="DataBase\Entities\ExtraPlayerInfo.cs" />
+    <Compile Include="DataBase\Entities\IEntityId.cs" />
     <Compile Include="DataBase\Entities\Player.cs" />
     <Compile Include="DataBase\Entities\ReaderOrder.cs" />
     <Compile Include="DataBase\Entities\TimeRead.cs" />
     <Compile Include="DataBase\Enums\CompetitionTypeEnum.cs" />
     <Compile Include="DataBase\NTimeDBContext.cs" />
     <Compile Include="DataBase\NTimeDBInitializer.cs" />
+    <Compile Include="DataBase\Repositories\AgeCategoryRepository.cs" />
+    <Compile Include="DataBase\Repositories\AgeCategoryCollectionRepository.cs" />
+    <Compile Include="DataBase\Repositories\AgeCategoryTemplateRepository.cs" />
+    <Compile Include="DataBase\Repositories\CompetitionRepository.cs" />
+    <Compile Include="DataBase\Repositories\DistanceRepository.cs" />
+    <Compile Include="DataBase\Repositories\ExtraPlayerInfoRepository.cs" />
+    <Compile Include="DataBase\Repositories\IRepository.cs" />
+    <Compile Include="DataBase\Repositories\PlayerRepository.cs" />
+    <Compile Include="DataBase\Repositories\ReaderOrderRepository.cs" />
+    <Compile Include="DataBase\Repositories\Repository.cs" />
+    <Compile Include="DataBase\Repositories\TimeReadRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
