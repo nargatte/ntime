@@ -5,7 +5,6 @@ using NUnit.Framework;
 
 namespace BaseCoreTests.DataBase
 {
-    [TestFixture]
     public class AgeCategoryCollectionRepositoryTests : RepositoryTests<AgeCategoryCollection>
     {
         protected override AgeCategoryCollection[] InitialItems { get; set; } =
@@ -25,6 +24,6 @@ namespace BaseCoreTests.DataBase
         }
 
         protected override bool SortTester(AgeCategoryCollection before, AgeCategoryCollection after) => 
-            String.CompareOrdinal(before.Name, after.Name) > 0;
+            String.CompareOrdinal(before.Name, after.Name) <= 0;
     }
 }

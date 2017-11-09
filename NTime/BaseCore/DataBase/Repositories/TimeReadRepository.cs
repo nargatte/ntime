@@ -24,7 +24,10 @@ namespace BaseCore.DataBase
                 throw new ArgumentException("Wrong PlayerId");
         }
 
-        protected override void PrepareToAdd(TimeRead item) =>
+        protected override void PrepareToAdd(TimeRead item)
+        {
             item.PlayerId = Player.Id;
+            item.Player = null;
+        }
     }
 }

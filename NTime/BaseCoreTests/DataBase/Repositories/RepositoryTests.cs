@@ -24,6 +24,8 @@ namespace BaseCoreTests.DataBase
 
         protected virtual Task AfterDataTearDown(NTimeDBContext context) => Task.Factory.StartNew(() => { });
 
+        protected virtual void Reset(T item) { }
+
         protected bool TheSameDataAndId(T entity1, T entity2)
         {
             if (entity1.Id != entity2.Id) return false;
@@ -63,7 +65,15 @@ namespace BaseCoreTests.DataBase
         {
             await NTimeDBContext.ContextDoAsync(async ctx =>
             {
+                ctx.Set<T>().RemoveRange(ctx.Set<T>());
+                await AfterDataTearDown(ctx);
+                await ctx.SaveChangesAsync();
+            });
+
+            await NTimeDBContext.ContextDoAsync(async ctx =>
+            {
                 await BeforeDataSetUp(ctx);
+                Array.ForEach(InitialItems, Reset);
                 ctx.Set<T>().AddRange(InitialItems);
                 await ctx.SaveChangesAsync();
             });
@@ -100,6 +110,9 @@ namespace BaseCoreTests.DataBase
         [Test]
         public async Task AddRangeAsyncTest()
         {
+            T[] e = await Repository.GetAllAsync();
+
+
             await Repository.AddRangeAsync(InitialItems);
 
             T[] loadedEntities = null;
@@ -132,6 +145,8 @@ namespace BaseCoreTests.DataBase
                     firstInDB = await ctx.Set<T>().FirstOrDefaultAsync(e => e.Id != firstInDB.Id);
                 });
             }
+
+            Reset(updatedItem);
 
             updatedItem.Id = firstInDB.Id;
 
@@ -188,17 +203,6 @@ namespace BaseCoreTests.DataBase
             T[] items = await Repository.GetAllAsync();
             for (int i = 1; i < items.Length; i++)
                 Assert.IsTrue(SortTester(items[i-1], items[i]));
-        }
-
-        [TearDown]
-        public virtual async Task DataTearDown()
-        {
-            await NTimeDBContext.ContextDoAsync( async ctx =>
-            {
-                ctx.Set<T>().RemoveRange(ctx.Set<T>());
-                await AfterDataTearDown(ctx);
-                await ctx.SaveChangesAsync();
-            });
         }
     }
 }

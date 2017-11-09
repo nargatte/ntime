@@ -25,7 +25,10 @@ namespace BaseCore.DataBase
                 throw new ArgumentException("Wrong AgeCategoryCollectionId");
         }
 
-        protected override void PrepareToAdd(AgeCategoryTemplate item) => 
-            item.AgeCategoryCollectionId =AgeCategoryCollection.Id;
+        protected override void PrepareToAdd(AgeCategoryTemplate item)
+        {
+            item.AgeCategoryCollectionId = AgeCategoryCollection.Id;
+            item.AgeCategoryCollection = null;
+        }
     }
 }

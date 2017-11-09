@@ -24,6 +24,10 @@ namespace BaseCore.DataBase
                 throw new ArgumentException("Wrong DistanceId");
         }
 
-        protected override void PrepareToAdd(ReaderOrder item) => item.DistanceId = Distance.Id;
+        protected override void PrepareToAdd(ReaderOrder item)
+        {
+            item.DistanceId = Distance.Id;
+            item.Distance = null;
+        }
     }
 }

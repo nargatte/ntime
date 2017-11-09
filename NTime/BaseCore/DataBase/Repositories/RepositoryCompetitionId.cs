@@ -20,6 +20,10 @@ namespace BaseCore.DataBase
             if (item.CompetitionId != Competition.Id) throw new ArgumentException("Wrong CompetitionId");
         }
 
-        protected override void PrepareToAdd(T item) => item.CompetitionId = Competition.Id;
+        protected override void PrepareToAdd(T item)
+        {
+            item.CompetitionId = Competition.Id;
+            item.Competition = null;
+        }
     }
 }

@@ -5,7 +5,6 @@ using NUnit.Framework;
 
 namespace BaseCoreTests.DataBase
 {
-    [TestFixture]
     public class AgeCategoryTemplateRepositoryTests : RepositoryTests<AgeCategoryTemplate>
     {
         protected override AgeCategoryTemplate[] InitialItems { get; set; } =
@@ -33,14 +32,20 @@ namespace BaseCoreTests.DataBase
 
         protected override async Task BeforeDataSetUp(NTimeDBContext ctx)
         {
+            InitialAgeCategoryCollection.AgeCategoryTemplates = null;
             ctx.AgeCategoryCollections.Add(InitialAgeCategoryCollection);
             await ctx.SaveChangesAsync();
-            Array.ForEach(InitialItems, i => i.AgeCategoryCollectionId = InitialAgeCategoryCollection.Id);
         }
 
         protected override Task AfterDataTearDown(NTimeDBContext ctx)
         {
             return Task.Factory.StartNew(() => ctx.AgeCategoryCollections.RemoveRange(ctx.AgeCategoryCollections));
+        }
+
+        protected override void Reset(AgeCategoryTemplate item)
+        {
+            item.AgeCategoryCollection = null;
+            item.AgeCategoryCollectionId = InitialAgeCategoryCollection.Id;
         }
     }
 }

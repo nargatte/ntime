@@ -57,7 +57,6 @@
     <Compile Include="DataBase\Repositories\DistanceRepositoryTests.cs" />
     <Compile Include="DataBase\Repositories\RepositoryTests.cs" />
     <Compile Include="DataBase\Repositories\RepositoryCompetitionIdTests.cs" />
-    <Compile Include="DataBase\ClearDataBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

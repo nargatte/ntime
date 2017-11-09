@@ -4,7 +4,6 @@ using NUnit.Framework;
 
 namespace BaseCoreTests.DataBase
 {
-    [TestFixture]
     public class DistanceRepositoryCompetitionIdTests : RepositoryCompetitionIdTests<Distance>
     {
         protected override Distance[] InitialItems { get; set; } =
@@ -26,6 +25,7 @@ namespace BaseCoreTests.DataBase
             return true;
         }
 
-        protected override bool SortTester(Distance before, Distance after) => String.CompareOrdinal(before.Name, after.Name) > 0;
+        protected override bool SortTester(Distance before, Distance after) => String.CompareOrdinal(before.Name, after.Name) <= 0;
+
     }
 }

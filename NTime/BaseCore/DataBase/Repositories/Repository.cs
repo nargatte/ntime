@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,7 +16,7 @@ namespace BaseCore.DataBase
             PrepareToAdd(item);
             await NTimeDBContext.ContextDoAsync(async ctx =>
             {
-                ctx.Entry(item).State = EntityState.Added;
+                ctx.Set<T>().Add(item);
                 await ctx.SaveChangesAsync();
             });
             return item;

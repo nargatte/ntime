@@ -1,11 +1,9 @@
 ﻿using System;
 using BaseCore.DataBase;
-using NUnit.Framework;
 
 namespace BaseCoreTests.DataBase
 {
-    [TestFixture]
-    public class AgeCategoryRepositoryCompetitionIdTests : RepositoryCompetitionIdTests<AgeCategory>
+    public class AgeCategoryRepositoryTests : RepositoryCompetitionIdTests<AgeCategory>
     {
         protected override AgeCategory[] InitialItems { get; set; } =
         {
@@ -25,7 +23,7 @@ namespace BaseCoreTests.DataBase
             return true;
         }
 
-        protected override bool SortTester(AgeCategory before, AgeCategory after) => 
-            String.CompareOrdinal(before.Name, after.Name) > 0;
+        protected override bool SortTester(AgeCategory before, AgeCategory after) =>
+            before.YearFrom < after.YearFrom;
     }
 }

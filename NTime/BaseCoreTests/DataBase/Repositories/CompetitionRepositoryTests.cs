@@ -6,7 +6,6 @@ using NUnit.Framework;
 
 namespace BaseCoreTests.DataBase
 {
-    [TestFixture]
     public class CompetitionRepositoryTests : RepositoryTests<Competition>
     {
 
