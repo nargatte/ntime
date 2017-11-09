@@ -4,18 +4,17 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BaseCore.DataBase
 {
-    public class Distance : IEntityId
+    public class Distance : IEntityId, ICompetitionId
     {
         public Distance()
         {
         }
 
-        public Distance(string name, decimal length, DateTime startTime, int competitionId)
+        public Distance(string name, decimal length, DateTime startTime)
         {
             Name = name;
             Length = length;
             StartTime = startTime;
-            CompetitionId = competitionId;
         }
 
         public int Id { get; set; }
