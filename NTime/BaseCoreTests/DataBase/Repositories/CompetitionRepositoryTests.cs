@@ -12,10 +12,10 @@ namespace BaseCoreTests.DataBase
 
         protected override Competition[] InitialItems { get; set; } =
         {
-            new Competition("Zawody 1", new DateTime(1999, 11, 6), "Opis zawodów 1", "Zawody1.pl", "Organizator1", "Poznań", CompetitionTypeEnum.Fastest ),
-            new Competition("Zawody 2", new DateTime(2017, 11, 6), null, null, null, "Łódź", CompetitionTypeEnum.MostLaps ),
-            new Competition("Zawody 3", new DateTime(2017, 11, 7), "Opis zawodów 3", null, null, "Warszawa", CompetitionTypeEnum.Fastest ),
-            new Competition("Zawody 4", new DateTime(2017, 12, 1), null, null, null, "Gdynia", CompetitionTypeEnum.Fastest )
+            new Competition("Zawody 1", new DateTime(1999, 11, 6), "Opis zawodów 1", "Zawody1.pl", "Organizator1", "Poznań", CompetitionTypeEnum.DeterminedDistance ),
+            new Competition("Zawody 2", new DateTime(2017, 11, 6), null, null, null, "Łódź", CompetitionTypeEnum.LimitedTime ),
+            new Competition("Zawody 3", new DateTime(2017, 11, 7), "Opis zawodów 3", null, null, "Warszawa", CompetitionTypeEnum.DeterminedDistance ),
+            new Competition("Zawody 4", new DateTime(2017, 12, 1), null, null, null, "Gdynia", CompetitionTypeEnum.DeterminedDistance )
         };
 
         protected override Repository<Competition> Repository => new CompetitionRepository();

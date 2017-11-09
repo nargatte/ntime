@@ -29,10 +29,10 @@ namespace AdminView.CompetitionChoice
         {
             List<Competition> _competitions = new List<Competition>()
             {
-            new Competition("Zawody 1", new DateTime(2017, 11, 6), null, null, null, "Poznań", CompetitionTypeEnum.Fastest ),
-            new Competition("Zawody 2", new DateTime(2017, 11, 6), null, null, null, "Łódź", CompetitionTypeEnum.MostLaps ),
-            new Competition("Zawody 3", new DateTime(2017, 11, 6), "Opis zawodów 3", null, null, "Warszawa", CompetitionTypeEnum.Fastest ),
-            new Competition("Zawody 4", new DateTime(2017, 12, 1), null, null, null, "Gdynia", CompetitionTypeEnum.Fastest )
+            new Competition("Zawody 1", new DateTime(2017, 11, 6), null, null, null, "Poznań", CompetitionTypeEnum.DeterminedDistance ),
+            new Competition("Zawody 2", new DateTime(2017, 11, 6), null, null, null, "Łódź", CompetitionTypeEnum.LimitedTime ),
+            new Competition("Zawody 3", new DateTime(2017, 11, 6), "Opis zawodów 3", null, null, "Warszawa", CompetitionTypeEnum.DeterminedDistance ),
+            new Competition("Zawody 4", new DateTime(2017, 12, 1), null, null, null, "Gdynia", CompetitionTypeEnum.DeterminedDistance )
             };
             await repository.AddRangeAsync(_competitions);
         }

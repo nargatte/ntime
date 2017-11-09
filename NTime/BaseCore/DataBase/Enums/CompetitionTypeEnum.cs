@@ -2,7 +2,7 @@
 {
     public enum CompetitionTypeEnum
     {
-        Fastest,
-        MostLaps
+        DeterminedDistance,
+        LimitedTime
     }
 }
