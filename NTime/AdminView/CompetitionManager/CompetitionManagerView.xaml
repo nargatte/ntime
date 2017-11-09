@@ -18,7 +18,7 @@
         <ResourceDictionary Source="/Styles/TabControl.xaml"></ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <TabControl Margin="5" Style="{DynamicResource ResourceKey=styleTabControl}" 
+        <TabControl Margin="0" Style="{DynamicResource ResourceKey=styleTabControl}" 
                     ItemsSource="{Binding TabItems}">
             <TabControl.ItemTemplate>
                 <DataTemplate>

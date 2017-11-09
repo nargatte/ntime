@@ -38,7 +38,7 @@
         <converters:DateToStringConverterClass x:Key="DateToStringConverter"/>
     </Window.Resources>
     <Grid>
-        <ContentControl Content="{Binding CurrentViewModel}" Width="Auto" Height="Auto" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <ContentControl Content="{Binding CurrentViewModel}" Width="Auto" Height="Auto" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
     </Grid>
         <!--<Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
