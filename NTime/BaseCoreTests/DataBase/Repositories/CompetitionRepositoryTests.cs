@@ -7,18 +7,18 @@ using NUnit.Framework;
 namespace BaseCoreTests.DataBase
 {
     [TestFixture]
-    public class CompetitionRepositoryTests : RepositoryTestsBase<Competition>
+    public class CompetitionRepositoryTests : RepositoryTests<Competition>
     {
 
-        protected override Competition[] InitialItems => new[]
+        protected override Competition[] InitialItems { get; set; } =
         {
-            new Competition("Zawody 1", new DateTime(2017, 11, 6), "Opis zawodów 1", "Zawody1.pl", "Organizator1", "Poznań", CompetitionTypeEnum.Fastest ),
+            new Competition("Zawody 1", new DateTime(1999, 11, 6), "Opis zawodów 1", "Zawody1.pl", "Organizator1", "Poznań", CompetitionTypeEnum.Fastest ),
             new Competition("Zawody 2", new DateTime(2017, 11, 6), null, null, null, "Łódź", CompetitionTypeEnum.MostLaps ),
-            new Competition("Zawody 3", new DateTime(2017, 11, 6), "Opis zawodów 3", null, null, "Warszawa", CompetitionTypeEnum.Fastest ),
+            new Competition("Zawody 3", new DateTime(2017, 11, 7), "Opis zawodów 3", null, null, "Warszawa", CompetitionTypeEnum.Fastest ),
             new Competition("Zawody 4", new DateTime(2017, 12, 1), null, null, null, "Gdynia", CompetitionTypeEnum.Fastest )
         };
 
-        protected override IRepository<Competition> Repository => new CompetitionRepository();
+        protected override Repository<Competition> Repository => new CompetitionRepository();
         private CompetitionRepository CompetitionRepository => (CompetitionRepository)Repository;
 
         protected override bool TheSameData(Competition entity1, Competition entity2)
@@ -33,11 +33,6 @@ namespace BaseCoreTests.DataBase
             return true;
         }
 
-        [Test]
-        public async Task GetAllTest()
-        {
-            Competition[] competitions = await CompetitionRepository.GetAllAsync();
-            Assert.IsTrue(TheSameDataArrays(competitions, InitialItems, TheSameData));
-        }
+        protected override bool SortTester(Competition before, Competition after) => before.EventDate > after.EventDate;
     }
 }

@@ -50,9 +50,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataBase\Repositories\AgeCategoryTemplateRepositoryTests.cs" />
+    <Compile Include="DataBase\Repositories\AgeCategoryCollectionRepositoryTests.cs" />
     <Compile Include="DataBase\Repositories\AgeCategoryRepositoryTests.cs" />
     <Compile Include="DataBase\Repositories\CompetitionRepositoryTests.cs" />
-    <Compile Include="DataBase\Repositories\RepositoryTestsBase.cs" />
+    <Compile Include="DataBase\Repositories\DistanceRepositoryTests.cs" />
+    <Compile Include="DataBase\Repositories\RepositoryTests.cs" />
+    <Compile Include="DataBase\Repositories\RepositoryCompetitionIdTests.cs" />
+    <Compile Include="DataBase\ClearDataBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

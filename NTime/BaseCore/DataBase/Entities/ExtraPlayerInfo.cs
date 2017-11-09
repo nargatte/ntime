@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace BaseCore.DataBase
 {
     [Table("ExtraPlayerInfo")]
-    public class ExtraPlayerInfo : IEntityId
+    public class ExtraPlayerInfo : IEntityId, ICompetitionId
     {
         public ExtraPlayerInfo()
         {

@@ -4,10 +4,21 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BaseCore.DataBase
 {
-    public class Player : IEntityId
+    public class Player : IEntityId, ICompetitionId
     {
         public Player()
         {
+        }
+
+        public Player(string firstName, string lastName, DateTime birthDate, bool isMale, string team, int startNumber, DateTime startTime)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            BirthDate = birthDate;
+            IsMale = isMale;
+            Team = team;
+            StartNumber = startNumber;
+            StartTime = startTime;
         }
 
         public int Id { get; set; }
@@ -27,6 +38,10 @@ namespace BaseCore.DataBase
         public string Team { get; set; }
 
         public int StartNumber { get; set; }
+
+        public DateTime StartTime { get; set; }
+
+        public bool IsStartTimeFromReader { get; set; }
 
         [StringLength(255)]
         public string FullCategory { get; set; }
