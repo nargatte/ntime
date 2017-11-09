@@ -31,6 +31,9 @@ namespace BaseCore.DataBase
         [StringLength(255)]
         public string FullCategory { get; set; }
 
+        [Phone]
+        public string PhoneNumber { get; set; }
+
         public int CompetitionId { get; set; }
         public virtual Competition Competition { get; set; }
 
