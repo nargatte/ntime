@@ -5,12 +5,11 @@ namespace BaseCore.DataBase
 {
     public class TimeReadRepository : Repository<TimeRead>
     {
-        public TimeReadRepository(Player player)
+        public TimeReadRepository(IContextProvider contextProvider) : base(contextProvider)
         {
-            Player = player;
         }
 
-        protected Player Player { get; }
+        public Player Player { get; set; }
 
         protected override IQueryable<TimeRead> GetAllQuery(IQueryable<TimeRead> items) =>
             items.Where(i => i.PlayerId == Player.Id);

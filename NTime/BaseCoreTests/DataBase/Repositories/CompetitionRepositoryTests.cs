@@ -17,7 +17,14 @@ namespace BaseCoreTests.DataBase
             new Competition("Zawody 4", new DateTime(2017, 12, 1), null, null, null, "Gdynia", CompetitionTypeEnum.DeterminedDistance )
         };
 
-        protected override Repository<Competition> Repository => new CompetitionRepository();
+        protected override Repository<Competition> Repository { get; set; }
+
+        protected override Task BeforeDataSetUp(NTimeDBContext context)
+        {
+            Repository = new CompetitionRepository(ContextProvider);
+            return base.BeforeDataSetUp(context);
+        }
+
         private CompetitionRepository CompetitionRepository => (CompetitionRepository)Repository;
 
         protected override bool TheSameData(Competition entity1, Competition entity2)

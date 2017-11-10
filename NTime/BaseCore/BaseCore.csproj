@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataBase\Contexts\ContextProvider.cs" />
+    <Compile Include="DataBase\Contexts\IContextProvider.cs" />
     <Compile Include="DataBase\Entities\AgeCategory.cs" />
     <Compile Include="DataBase\Entities\AgeCategoryBase.cs" />
     <Compile Include="DataBase\Entities\AgeCategoryTemplate.cs" />

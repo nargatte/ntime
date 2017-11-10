@@ -6,7 +6,7 @@ namespace BaseCore.DataBase
 {
     public class DistanceRepository : RepositoryCompetitionId<Distance>
     {
-        public DistanceRepository(Competition competition) : base(competition)
+        public DistanceRepository(IContextProvider contextProvider) : base(contextProvider)
         {
         }
 

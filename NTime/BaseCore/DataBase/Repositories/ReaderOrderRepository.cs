@@ -5,12 +5,11 @@ namespace BaseCore.DataBase
 {
     public class ReaderOrderRepository : Repository<ReaderOrder>
     {
-        public ReaderOrderRepository(Distance distance)
+        public ReaderOrderRepository(IContextProvider contextProvider) : base(contextProvider)
         {
-            Distance = distance;
         }
 
-        protected Distance Distance { get; }
+        protected Distance Distance { get; set; }
 
         protected override IQueryable<ReaderOrder> GetAllQuery(IQueryable<ReaderOrder> items) =>
             items.Where(i => i.DistanceId == Distance.Id);

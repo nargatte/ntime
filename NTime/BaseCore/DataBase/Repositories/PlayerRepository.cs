@@ -8,7 +8,9 @@ namespace BaseCore.DataBase
 {
     public class PlayerRepository : RepositoryCompetitionId<Player>
     {
-        public PlayerRepository(Competition competition) : base(competition) { }
+        public PlayerRepository(IContextProvider contextProvider) : base(contextProvider)
+        {
+        }
 
         protected override IQueryable<Player> GetSortQuery(IQueryable<Player> items) =>
             items.OrderBy(i => i.LastName);
@@ -16,7 +18,7 @@ namespace BaseCore.DataBase
         public async Task SetSelectedStartTime(Player[] players, DateTime startTime)
         {
             Parallel.ForEach(players, p => p.StartTime = startTime);
-            await NTimeDBContext.ContextDoAsync(async ctx =>
+            await ContextProvider.DoAsync(async ctx =>
             {
                 Array.ForEach(players, p => ctx.Entry(p).State = EntityState.Modified);
                 await ctx.SaveChangesAsync();
@@ -27,7 +29,7 @@ namespace BaseCore.DataBase
         {
             Player[] players = null;
             int totalItemsNumber = 0;
-            await NTimeDBContext.ContextDoAsync(async ctx =>
+            await ContextProvider.DoAsync(async ctx =>
             {
                 players = await GetFilteredQuery(ctx.Players.Where(i => i.CompetitionId == Competition.Id),
                     filterOptions).Skip(pageNumber * numberItemsOnPage).Take(numberItemsOnPage).ToArrayAsync();
@@ -150,7 +152,7 @@ namespace BaseCore.DataBase
             await UpdateAsync(await PreparePlayer(player, distance, extraPlayerInfo));
 
         public async Task UpdateFullCategoryForAll() =>
-            await NTimeDBContext.ContextDoAsync(async ctx =>
+            await ContextProvider.DoAsync(async ctx =>
             {
                 await ctx.Players.Where(i => i.CompetitionId == Competition.Id).ForEachAsync(i => i.FullCategory =
                     GetFullCategory(i.Distance, i.ExtraPlayerInfo, i.AgeCategory, i.IsMale));
@@ -165,7 +167,7 @@ namespace BaseCore.DataBase
             player.ExtraPlayerInfoId = extraPlayerInfo?.Id;
             player.ExtraPlayerInfo = null;
 
-            AgeCategory ageCategory = await (new AgeCategoryRepository(Competition)).GetFitting(player);
+            AgeCategory ageCategory = await (new AgeCategoryRepository(ContextProvider)).GetFitting(player);
             player.AgeCategoryId = ageCategory?.Id;
             player.AgeCategory = null;
 

@@ -16,7 +16,10 @@ namespace BaseCoreTests.DataBase
 
         private AgeCategoryCollection InitialAgeCategoryCollection { get; set; } = new AgeCategoryCollection("Collection");
 
-        protected override Repository<AgeCategoryTemplate> Repository => new AgeCategoryTemplateRepository(InitialAgeCategoryCollection);
+        protected override Repository<AgeCategoryTemplate> Repository { get; set; }
+
+        private AgeCategoryTemplateRepository AgeCategoryTemplateRepository =>
+            (AgeCategoryTemplateRepository) Repository;
 
         protected override bool TheSameData(AgeCategoryTemplate entity1, AgeCategoryTemplate entity2)
         {
@@ -32,6 +35,8 @@ namespace BaseCoreTests.DataBase
 
         protected override async Task BeforeDataSetUp(NTimeDBContext ctx)
         {
+            Repository = new AgeCategoryTemplateRepository(ContextProvider);
+            AgeCategoryTemplateRepository.AgeCategoryCollection = InitialAgeCategoryCollection;
             InitialAgeCategoryCollection.AgeCategoryTemplates = null;
             ctx.AgeCategoryCollections.Add(InitialAgeCategoryCollection);
             await ctx.SaveChangesAsync();

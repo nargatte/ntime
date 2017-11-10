@@ -9,12 +9,19 @@ namespace BaseCore.DataBase
 {
     public abstract class Repository<T>
         where T : class, IEntityId
-    { 
+    {
+        protected IContextProvider ContextProvider;
+
+        protected Repository(IContextProvider contextProvider)
+        {
+            ContextProvider = contextProvider;
+        }
+
         public async Task<T> AddAsync(T item)
         {
             CheckNull(item);
             PrepareToAdd(item);
-            await NTimeDBContext.ContextDoAsync(async ctx =>
+            await ContextProvider.DoAsync(async ctx =>
             {
                 ctx.Set<T>().Add(item);
                 await ctx.SaveChangesAsync();
@@ -30,7 +37,7 @@ namespace BaseCore.DataBase
                 PrepareToAdd(item);
             }
 
-            await NTimeDBContext.ContextDoAsync(async ctx =>
+            await ContextProvider.DoAsync(async ctx =>
             {
                 foreach (T item in items)
                     ctx.Entry(item).State = EntityState.Added;
@@ -42,7 +49,7 @@ namespace BaseCore.DataBase
         {
             CheckNull(item);
             CheckItem(item);
-            await NTimeDBContext.ContextDoAsync(async ctx =>
+            await ContextProvider.DoAsync(async ctx =>
             {
                 ctx.Entry(item).State = EntityState.Modified;
                 await ctx.SaveChangesAsync();
@@ -53,7 +60,7 @@ namespace BaseCore.DataBase
         {
             CheckNull(item);
             CheckItem(item);
-            await NTimeDBContext.ContextDoAsync(async ctx =>
+            await ContextProvider.DoAsync(async ctx =>
             {
                 ctx.Entry(item).State = EntityState.Deleted;
                 await ctx.SaveChangesAsync();
@@ -62,7 +69,7 @@ namespace BaseCore.DataBase
 
         public async Task RemoveAllAsync()
         {
-            await NTimeDBContext.ContextDoAsync(async ctx =>
+            await ContextProvider.DoAsync(async ctx =>
             {
                 ctx.Set<T>().RemoveRange(GetAllQuery(ctx.Set<T>()));
                 await ctx.SaveChangesAsync();
@@ -72,7 +79,7 @@ namespace BaseCore.DataBase
         public async Task<T[]> GetAllAsync()
         {
             T[] items = null;
-            await NTimeDBContext.ContextDoAsync(async ctx =>
+            await ContextProvider.DoAsync(async ctx =>
             {
                 items = await GetSortQuery(GetAllQuery(ctx.Set<T>())).ToArrayAsync();
             });

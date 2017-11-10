@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using BaseCore.DataBase;
 
 namespace BaseCoreTests.DataBase
@@ -12,7 +13,15 @@ namespace BaseCoreTests.DataBase
             new AgeCategory("Starszaki", 1985, 1990)
         };
 
-        protected override Repository<AgeCategory> Repository => new AgeCategoryRepository(InitialCompetition);
+        protected override Repository<AgeCategory> Repository { get; set; }
+
+        protected override Task BeforeDataSetUp(NTimeDBContext ctx)
+        {
+            AgeCategoryRepository ageCategoryRepository = new AgeCategoryRepository(ContextProvider);
+            ageCategoryRepository.Competition = InitialCompetition;
+            Repository = ageCategoryRepository;
+            return base.BeforeDataSetUp(ctx);
+        }
 
         protected override bool TheSameData(AgeCategory entity1, AgeCategory entity2)
         {

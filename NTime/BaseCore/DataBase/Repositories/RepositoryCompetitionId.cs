@@ -8,9 +8,11 @@ namespace BaseCore.DataBase
     public abstract class RepositoryCompetitionId<T> : Repository<T>
         where T: class, IEntityId, ICompetitionId
     {
-        public Competition Competition { get; }
+        public Competition Competition { get; set; }
 
-        protected RepositoryCompetitionId(Competition competition) => Competition = competition;
+        protected RepositoryCompetitionId(IContextProvider contextProvider) : base(contextProvider)
+        {
+        }
 
         protected override IQueryable<T> GetAllQuery(IQueryable<T> items) => 
             items.Where(e => e.CompetitionId == Competition.Id);

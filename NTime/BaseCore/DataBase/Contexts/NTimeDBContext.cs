@@ -31,41 +31,5 @@ namespace BaseCore.DataBase
         public DbSet<ReaderOrder> ReaderOrders { get; set; }
 
         public DbSet<TimeRead> TimeReads { get; set; }
-
-        public static void ContextDo(Action<NTimeDBContext> action, string nameOrConnectionString = null)
-        {
-            if (nameOrConnectionString == null)
-            {
-                using (var context = new NTimeDBContext())
-                {
-                    action(context);
-                }
-            }
-            else
-            {
-                using (var context = new NTimeDBContext(nameOrConnectionString))
-                {
-                    action(context);
-                }
-            }
-        }
-
-        public static async Task ContextDoAsync(Func<NTimeDBContext, Task> action, string nameOrConnectionString = null)
-        {
-            if (nameOrConnectionString == null)
-            {
-                using (var context = new NTimeDBContext())
-                {
-                    await action(context);
-                }
-            }
-            else
-            {
-                using (var context = new NTimeDBContext(nameOrConnectionString))
-                {
-                    await action(context);
-                }
-            }
-        }
     }
 }

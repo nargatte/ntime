@@ -9,9 +9,11 @@ namespace BaseCore.DataBase
 {
     public class AgeCategoryTemplateRepository : Repository<AgeCategoryTemplate>
     {
-        public AgeCategoryTemplateRepository(AgeCategoryCollection ageCategoryCollection) => AgeCategoryCollection = ageCategoryCollection;
+        public AgeCategoryTemplateRepository(IContextProvider contextProvider) : base(contextProvider)
+        {
+        }
 
-        protected AgeCategoryCollection AgeCategoryCollection { get; }
+        public AgeCategoryCollection AgeCategoryCollection { get; set; }
 
         protected override IQueryable<AgeCategoryTemplate> GetAllQuery(IQueryable<AgeCategoryTemplate> items) =>
             items.Where(i => i.AgeCategoryCollectionId == AgeCategoryCollection.Id);

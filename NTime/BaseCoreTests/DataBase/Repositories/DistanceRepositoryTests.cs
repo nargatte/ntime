@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using BaseCore.DataBase;
 using NUnit.Framework;
 
@@ -14,7 +15,15 @@ namespace BaseCoreTests.DataBase
             new Distance("Maraton", 40, new DateTime(2000, 1, 1, 9, 50, 0))
         };
 
-        protected override Repository<Distance> Repository => new DistanceRepository(InitialCompetition);
+        protected override Repository<Distance> Repository { get; set; }
+
+        protected override Task BeforeDataSetUp(NTimeDBContext ctx)
+        {
+            DistanceRepository dr = new DistanceRepository(ContextProvider);
+            dr.Competition = InitialCompetition;
+            Repository = dr;
+            return base.BeforeDataSetUp(ctx);
+        }
 
         protected override bool TheSameData(Distance entity1, Distance entity2)
         {

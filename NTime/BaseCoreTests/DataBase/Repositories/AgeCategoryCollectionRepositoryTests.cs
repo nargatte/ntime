@@ -15,7 +15,13 @@ namespace BaseCoreTests.DataBase
             new AgeCategoryCollection("Rowerowe Wrocławskie") 
         };
 
-        protected override Repository<AgeCategoryCollection> Repository => new AgeCategoryCollectionRepository();
+        protected override Repository<AgeCategoryCollection> Repository { get; set; }
+
+        protected override Task BeforeDataSetUp(NTimeDBContext context)
+        {
+            Repository = new AgeCategoryCollectionRepository(ContextProvider);
+            return base.BeforeDataSetUp(context);
+        }
 
         protected override bool TheSameData(AgeCategoryCollection entity1, AgeCategoryCollection entity2)
         {
