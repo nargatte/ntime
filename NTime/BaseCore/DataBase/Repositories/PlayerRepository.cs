@@ -63,6 +63,10 @@ namespace BaseCore.DataBase
             if (filterOptions.WithoutStartTime != null)
                 items = items.Where(i => i.IsStartTimeFromReader || i.StartTime == null);
 
+            if (filterOptions.Invalid != null)
+                items = items.Where(i => i.AgeCategoryId == null || i.DistanceId == null ||
+                                         i.ExtraPlayerInfoId == null);
+
             return items;
         }
 
@@ -89,25 +93,19 @@ namespace BaseCore.DataBase
 
         private IQueryable<Player> GetSortQuery(IQueryable<Player> items, PlayerFilterOptions filterOptions)
         {
-            if (filterOptions == null)
-                return items.OrderBy( p => p.LastName);
-
             if (filterOptions.PlayerSort == PlayerSort.ByStartNumber)
-                return GetDirectedSortQuery(items, p => p.StartNumber, filterOptions.DescendingSort)
-                    .ThenBy(p => p.LastName);
+                return GetDirectedSortQuery(items, p => p.StartNumber, filterOptions.DescendingSort);
 
             if (filterOptions.PlayerSort == PlayerSort.ByBirthDate ||
                 filterOptions.PlayerSort == PlayerSort.ByStartTime)
-                return GetDirectedSortQuery(items, FuncDateTimeFilterSort(filterOptions), filterOptions.DescendingSort)
-                    .ThenBy(p => p.LastName);
+                return GetDirectedSortQuery(items, FuncDateTimeFilterSort(filterOptions), filterOptions.DescendingSort);
 
-            return GetDirectedSortQuery(items, FuncStringFilterSort(filterOptions), filterOptions.DescendingSort)
-                .ThenBy(p => p.LastName);
+            return GetDirectedSortQuery(items, FuncStringFilterSort(filterOptions), filterOptions.DescendingSort);
         }
 
         private IOrderedQueryable<Player> GetDirectedSortQuery<T>(IQueryable<Player> items, Expression<Func<Player, T>> func,
             bool descending) =>
-            descending ? items.OrderByDescending(func) : items.OrderBy(func);
+            descending ? items.OrderByDescending(func).ThenBy(p => p.LastName) : items.OrderBy(func).ThenBy(p => p.LastName);
 
         private Expression<Func<Player, string>> FuncStringFilterSort(PlayerFilterOptions filterOptions)
         {

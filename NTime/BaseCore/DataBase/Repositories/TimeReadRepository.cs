@@ -5,11 +5,22 @@ namespace BaseCore.DataBase
 {
     public class TimeReadRepository : Repository<TimeRead>
     {
+        private Player _player;
+
         public TimeReadRepository(IContextProvider contextProvider) : base(contextProvider)
         {
         }
 
-        public Player Player { get; set; }
+        public Player Player
+        {
+            get
+            {
+                if (_player == null)
+                    throw new NullReferenceException("Player is unset");
+                return _player;
+            }
+            set => _player = value;
+        }
 
         protected override IQueryable<TimeRead> GetAllQuery(IQueryable<TimeRead> items) =>
             items.Where(i => i.PlayerId == Player.Id);

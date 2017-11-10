@@ -5,12 +5,16 @@ namespace BaseCore.DataBase
 {
     public class ContextProvider : IContextProvider
     {
+        public ContextProvider()
+        {
+        }
+
         public ContextProvider(string nameOrConnectionString)
         {
             NameOrConnectionString = nameOrConnectionString;
         }
 
-        protected string NameOrConnectionString;
+        protected string NameOrConnectionString = "NTime";
 
         public async Task DoAsync(Func<NTimeDBContext, Task> action)
         {

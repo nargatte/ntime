@@ -5,11 +5,22 @@ namespace BaseCore.DataBase
 {
     public class ReaderOrderRepository : Repository<ReaderOrder>
     {
+        private Distance _distance;
+
         public ReaderOrderRepository(IContextProvider contextProvider) : base(contextProvider)
         {
         }
 
-        protected Distance Distance { get; set; }
+        protected Distance Distance
+        {
+            get
+            {
+                if (_distance == null)
+                    throw new NullReferenceException("Distance is unset");
+                return _distance;
+            }
+            set => _distance = value;
+        }
 
         protected override IQueryable<ReaderOrder> GetAllQuery(IQueryable<ReaderOrder> items) =>
             items.Where(i => i.DistanceId == Distance.Id);

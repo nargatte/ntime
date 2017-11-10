@@ -9,11 +9,22 @@ namespace BaseCore.DataBase
 {
     public class AgeCategoryTemplateRepository : Repository<AgeCategoryTemplate>
     {
+        private AgeCategoryCollection _ageCategoryCollection;
+
         public AgeCategoryTemplateRepository(IContextProvider contextProvider) : base(contextProvider)
         {
         }
 
-        public AgeCategoryCollection AgeCategoryCollection { get; set; }
+        public AgeCategoryCollection AgeCategoryCollection
+        {
+            get
+            {
+                if (_ageCategoryCollection == null)
+                    throw new NullReferenceException("AgeCategoryCollection is unset");
+                return _ageCategoryCollection;
+            }
+            set => _ageCategoryCollection = value;
+        }
 
         protected override IQueryable<AgeCategoryTemplate> GetAllQuery(IQueryable<AgeCategoryTemplate> items) =>
             items.Where(i => i.AgeCategoryCollectionId == AgeCategoryCollection.Id);
