@@ -71,7 +71,7 @@
     <Compile Include="DataBase\Repositories\CompetitionRepository.cs" />
     <Compile Include="DataBase\Repositories\DistanceRepository.cs" />
     <Compile Include="DataBase\Repositories\ExtraPlayerInfoRepository.cs" />
-    <Compile Include="DataBase\Repositories\PlayerFiltersOptions.cs" />
+    <Compile Include="DataBase\Repositories\PlayerFilterOptions.cs" />
     <Compile Include="DataBase\Repositories\PlayerRepository.cs" />
     <Compile Include="DataBase\Repositories\ReaderOrderRepository.cs" />
     <Compile Include="DataBase\Repositories\Repository.cs" />

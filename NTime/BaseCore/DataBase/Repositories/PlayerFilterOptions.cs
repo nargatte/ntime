@@ -1,8 +1,8 @@
 ﻿namespace BaseCore.DataBase
 {
-    public class PlayerFiltersOptions
+    public class PlayerFilterOptions
     {
-        public PlayerFiltersOptions(PlayerSort playerSort = PlayerSort.BySurname, bool descendingSort = false, string query = null, bool? men = null, bool? withoutStartTime = null, Distance distance = null, AgeCategory ageCategory = null, ExtraPlayerInfo extraPlayerInfo = null)
+        public PlayerFilterOptions(PlayerSort playerSort = PlayerSort.ByLastName, bool descendingSort = false, string query = null, bool? men = null, bool? withoutStartTime = null, Distance distance = null, AgeCategory ageCategory = null, ExtraPlayerInfo extraPlayerInfo = null)
         {
             PlayerSort = playerSort;
             DescendingSort = descendingSort;

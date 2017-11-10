@@ -110,9 +110,6 @@ namespace BaseCoreTests.DataBase
         [Test]
         public async Task AddRangeAsyncTest()
         {
-            T[] e = await Repository.GetAllAsync();
-
-
             await Repository.AddRangeAsync(InitialItems);
 
             T[] loadedEntities = null;
@@ -131,6 +128,7 @@ namespace BaseCoreTests.DataBase
         public async Task UpdateAsyncTest()
         {
             T firstInDB = null;
+
             await NTimeDBContext.ContextDoAsync( async ctx =>
             {
                 firstInDB = await ctx.Set<T>().FirstOrDefaultAsync();

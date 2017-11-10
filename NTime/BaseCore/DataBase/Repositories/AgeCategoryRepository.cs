@@ -12,5 +12,15 @@ namespace BaseCore.DataBase
 
         protected override IQueryable<AgeCategory> GetSortQuery(IQueryable<AgeCategory> items) =>
             items.OrderBy(e => e.YearFrom);
+
+        public async Task<AgeCategory> GetFitting(Player player)
+        {
+            AgeCategory ret = null;
+            await NTimeDBContext.ContextDoAsync(async ctx =>
+            {
+                ret = await ctx.AgeCategories.FirstOrDefaultAsync(i => i.YearFrom <= player.BirthDate.Year && player.BirthDate.Year <= i.YearTo);
+            });
+            return ret;
+        }
     }
 }
