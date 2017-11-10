@@ -3,13 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-            xmlns:sample="clr-namespace:StartupWPF.Sample"
             xmlns:players="clr-namespace:AdminView.Players"
-            xmlns:competitionChoice="clr-namespace:AdminView.CompetitionChoice"
             xmlns:scores="clr-namespace:AdminView.Scores"
             xmlns:settings="clr-namespace:AdminView.Settings"
+             xmlns:categories="clr-namespace:AdminView.Categories"
+             xmlns:distances="clr-namespace:AdminView.Distances"
             xmlns:converters="clr-namespace:AdminView.XamlConverters"
-            xmlns:addCompetition="clr-namespace:AdminView.AddCompetition"
             xmlns:competitionManager="clr-namespace:AdminView.CompetitionManager"
             xmlns:local="clr-namespace:AdminView.CompetitionManager"
              mc:Ignorable="d" 
@@ -96,6 +95,12 @@
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type scores:ScoresViewModel}">
                     <scores:ScoresView/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type categories:CategoriesViewModel}">
+                    <categories:CategoriesView/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type distances:DistancesViewModel}">
+                    <distances:DistancesView/>
                 </DataTemplate>
             </TabControl.Resources>
             <!--<TabItem Header="Ustawienia" Style="{DynamicResource ResourceKey=styleTabItemLeft}">

@@ -70,6 +70,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Categories\CategoriesView.xaml.cs">
+      <DependentUpon>CategoriesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Categories\CategoriesViewModel.cs" />
     <Compile Include="CompetitionChoice\CompetitionChoiceViewModel.cs" />
     <Compile Include="CompetitionChoice\CompetitionChoiceView.xaml.cs">
       <DependentUpon>CompetitionChoiceView.xaml</DependentUpon>
@@ -78,6 +82,10 @@
       <DependentUpon>CompetitionManagerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="CompetitionManager\CompetitionManagerViewModel.cs" />
+    <Compile Include="Distances\DistancesView.xaml.cs">
+      <DependentUpon>DistancesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Distances\DistancesViewModel.cs" />
     <Compile Include="IViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -99,7 +107,10 @@
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Settings\SettingsViewModel.cs" />
+    <Compile Include="TabItemViewModel.cs" />
     <Compile Include="ValidatableBindableBase.cs" />
+    <Compile Include="Validation\IsNotEmpty.cs" />
+    <Compile Include="Validation\IsNumber20Rule.cs" />
     <Compile Include="XamlConverters\BoolToSexConverterClass.cs" />
     <Compile Include="XamlConverters\CompetitionToStringConverterClass.cs" />
     <Compile Include="XamlConverters\DateToStringConverterClass.cs" />
@@ -148,10 +159,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Priniting\" />
-    <Folder Include="Validation\" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="AddCompetition\AddCompetitionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Categories\CategoriesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -160,6 +174,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CompetitionManager\CompetitionManagerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Distances\DistancesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

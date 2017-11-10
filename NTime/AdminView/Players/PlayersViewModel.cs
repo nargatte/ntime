@@ -8,7 +8,7 @@ using BaseCore.DataBase;
 
 namespace AdminView.Players
 {
-    class PlayersViewModel : BindableBase, IViewModel
+    class PlayersViewModel : TabItemViewModel, IViewModel
     {
         public PlayersViewModel()
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AdminView.Scores
 {
-    class ScoresViewModel : BindableBase, IViewModel
+    class ScoresViewModel : TabItemViewModel, IViewModel
     {
         public ScoresViewModel()
         {
@@ -16,13 +16,6 @@ namespace AdminView.Scores
         public void DetachAllEvents()
         {
             throw new NotImplementedException();
-        }
-
-        private string _tabTitle;
-        public string TabTitle
-        {
-            get { return _tabTitle; }
-            set { SetProperty(ref _tabTitle, value); }
         }
     }
 }

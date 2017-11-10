@@ -8,6 +8,8 @@ using AdminView;
 using AdminView.Settings;
 using AdminView.Players;
 using AdminView.Scores;
+using AdminView.Distances;
+using AdminView.Categories;
 
 namespace AdminView.CompetitionManager
 {
@@ -18,7 +20,7 @@ namespace AdminView.CompetitionManager
             GoToCompetitionCmd = new RelayCommand(OnGoToCompetition, CanGoToCompetition);
             TabItems = new ObservableCollection<BindableBase>()
             {
-                new PlayersViewModel(), new SettingsViewModel(), new ScoresViewModel()
+                new SettingsViewModel(), new PlayersViewModel(), new DistancesViewModel(), new CategoriesViewModel(), new ScoresViewModel()
             };
         }
 

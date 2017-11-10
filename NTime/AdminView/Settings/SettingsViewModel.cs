@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AdminView.Settings
 {
-    class SettingsViewModel : BindableBase, IViewModel
+    class SettingsViewModel : TabItemViewModel, IViewModel
     {
         public SettingsViewModel()
         {
@@ -15,14 +15,6 @@ namespace AdminView.Settings
         public void DetachAllEvents()
         {
             throw new NotImplementedException();
-        }
-
-
-        private string _tabTitle;
-        public string TabTitle
-        {
-            get { return _tabTitle; }
-            set { SetProperty(ref _tabTitle, value); }
         }
     }
 }
