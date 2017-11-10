@@ -22,7 +22,7 @@ namespace BaseCore.DataBase
         }
 
         public int Id { get; set; }
-        
+
         [StringLength(255), Required]
         public string FirstName { get; set; }
 

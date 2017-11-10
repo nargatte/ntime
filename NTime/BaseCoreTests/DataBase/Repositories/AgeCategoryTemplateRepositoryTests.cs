@@ -35,8 +35,7 @@ namespace BaseCoreTests.DataBase
 
         protected override async Task BeforeDataSetUp(NTimeDBContext ctx)
         {
-            Repository = new AgeCategoryTemplateRepository(ContextProvider);
-            AgeCategoryTemplateRepository.AgeCategoryCollection = InitialAgeCategoryCollection;
+            Repository = new AgeCategoryTemplateRepository(ContextProvider, InitialAgeCategoryCollection);
             InitialAgeCategoryCollection.AgeCategoryTemplates = null;
             ctx.AgeCategoryCollections.Add(InitialAgeCategoryCollection);
             await ctx.SaveChangesAsync();

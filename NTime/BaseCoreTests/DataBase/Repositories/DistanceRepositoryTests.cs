@@ -19,8 +19,7 @@ namespace BaseCoreTests.DataBase
 
         protected override Task BeforeDataSetUp(NTimeDBContext ctx)
         {
-            DistanceRepository dr = new DistanceRepository(ContextProvider);
-            dr.Competition = InitialCompetition;
+            DistanceRepository dr = new DistanceRepository(ContextProvider, InitialCompetition);
             Repository = dr;
             return base.BeforeDataSetUp(ctx);
         }

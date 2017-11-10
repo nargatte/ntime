@@ -6,7 +6,7 @@ namespace BaseCore.DataBase
 {
     public class ExtraPlayerInfoRepository : RepositoryCompetitionId<ExtraPlayerInfo>
     {
-        public ExtraPlayerInfoRepository(IContextProvider contextProvider) : base(contextProvider)
+        public ExtraPlayerInfoRepository(IContextProvider contextProvider, Competition competition) : base(contextProvider, competition)
         {
         }
 

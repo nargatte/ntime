@@ -6,7 +6,7 @@ namespace BaseCore.DataBase
 {
     public class AgeCategoryRepository : RepositoryCompetitionId<AgeCategory>
     {
-        public AgeCategoryRepository(IContextProvider contextProvider) : base(contextProvider)
+        public AgeCategoryRepository(IContextProvider contextProvider, Competition competition) : base(contextProvider, competition)
         {
         }
 

@@ -8,22 +8,12 @@ namespace BaseCore.DataBase
     public abstract class RepositoryCompetitionId<T> : Repository<T>
         where T: class, IEntityId, ICompetitionId
     {
-        private Competition _competition;
 
-        public Competition Competition
-        {
-            get
-            {
-                if (_competition == null)
-                    throw new NullReferenceException("Competition is unset");
-                return _competition;
-            }
-            set => _competition = value;
-        }
+        protected Competition Competition { get; }
 
-        protected RepositoryCompetitionId(IContextProvider contextProvider) : base(contextProvider)
-        {
-        }
+        protected RepositoryCompetitionId(IContextProvider contextProvider, Competition competition) :
+            base(contextProvider) =>
+            Competition = competition;
 
         protected override IQueryable<T> GetAllQuery(IQueryable<T> items) => 
             items.Where(e => e.CompetitionId == Competition.Id);

@@ -17,8 +17,7 @@ namespace BaseCoreTests.DataBase
 
         protected override Task BeforeDataSetUp(NTimeDBContext ctx)
         {
-            AgeCategoryRepository ageCategoryRepository = new AgeCategoryRepository(ContextProvider);
-            ageCategoryRepository.Competition = InitialCompetition;
+            AgeCategoryRepository ageCategoryRepository = new AgeCategoryRepository(ContextProvider, InitialCompetition);
             Repository = ageCategoryRepository;
             return base.BeforeDataSetUp(ctx);
         }

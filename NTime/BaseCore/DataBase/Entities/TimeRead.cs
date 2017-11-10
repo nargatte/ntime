@@ -1,4 +1,6 @@
-﻿using System.Diagnostics.Eventing.Reader;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.Eventing.Reader;
 
 namespace BaseCore.DataBase
 {
@@ -8,11 +10,10 @@ namespace BaseCore.DataBase
         {
         }
 
-        public TimeRead(decimal time, int reader, int playerId)
+        public TimeRead(decimal time, int reader)
         {
             Time = time;
             Reader = reader;
-            PlayerId = playerId;
         }
 
         public int Id { get; set; }
@@ -25,7 +26,11 @@ namespace BaseCore.DataBase
 
         public bool IsSkipped { get; set; }
 
-        public int PlayerId { get; set; }
+        [NotMapped]
+        public int StartNumber { get; set; }
+
+        [Required]
+        public int? PlayerId { get; set; }
         public virtual Player Player { get; set; }
     }
 }

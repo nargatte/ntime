@@ -50,6 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Csv\TimeReadImporter.cs" />
+    <Compile Include="Csv\TimeReadRecord.cs" />
     <Compile Include="DataBase\Contexts\ContextProvider.cs" />
     <Compile Include="DataBase\Contexts\IContextProvider.cs" />
     <Compile Include="DataBase\Entities\AgeCategory.cs" />

@@ -1,27 +1,14 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BaseCore.DataBase
 {
     public class TimeReadRepository : Repository<TimeRead>
     {
-        private Player _player;
+        public TimeReadRepository(IContextProvider contextProvider, Player player) : base(contextProvider) => Player = player;
 
-        public TimeReadRepository(IContextProvider contextProvider) : base(contextProvider)
-        {
-        }
-
-        public Player Player
-        {
-            get
-            {
-                if (_player == null)
-                    throw new NullReferenceException("Player is unset");
-                return _player;
-            }
-            set => _player = value;
-        }
-
+        private Player Player { get; }
         protected override IQueryable<TimeRead> GetAllQuery(IQueryable<TimeRead> items) =>
             items.Where(i => i.PlayerId == Player.Id);
 

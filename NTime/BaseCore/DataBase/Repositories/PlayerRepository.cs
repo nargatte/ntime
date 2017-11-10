@@ -1,14 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using BaseCore.Csv;
+using CsvHelper;
 
 namespace BaseCore.DataBase
 {
     public class PlayerRepository : RepositoryCompetitionId<Player>
     {
-        public PlayerRepository(IContextProvider contextProvider) : base(contextProvider)
+        public PlayerRepository(IContextProvider contextProvider, Competition competition) : base(contextProvider, competition)
         {
         }
 
@@ -165,7 +169,7 @@ namespace BaseCore.DataBase
             player.ExtraPlayerInfoId = extraPlayerInfo?.Id;
             player.ExtraPlayerInfo = null;
 
-            AgeCategory ageCategory = await (new AgeCategoryRepository(ContextProvider)).GetFitting(player);
+            AgeCategory ageCategory = await (new AgeCategoryRepository(ContextProvider, Competition)).GetFitting(player);
             player.AgeCategoryId = ageCategory?.Id;
             player.AgeCategory = null;
 
@@ -177,5 +181,44 @@ namespace BaseCore.DataBase
             bool male) => 
             (distance == null || extraPlayerInfo == null || ageCategory == null) ? null :
             distance.Name.Substring(0, 4) + " " + (male ? "M" : "K") + ageCategory.Name + extraPlayerInfo.ShortName;
+
+        public async Task<Tuple<int, int>> ImportTimeReadsAsync(string fileName, int readerNumber)
+        {
+            TimeReadImporter importer = new TimeReadImporter(fileName, readerNumber);
+
+            TimeRead[] timeReads = await importer.GetAllAsync();
+
+            HashSet<int> expectedStartNumbers = new HashSet<int>();
+            foreach (TimeRead read in timeReads)
+                expectedStartNumbers.Add(read.StartNumber);
+
+            Player[] players = null;
+
+            await ContextProvider.DoAsync(async ctx =>
+            {
+                players = await ctx.Players.Join(expectedStartNumbers, p => p.StartNumber, esn => esn, (p, esn) => p)
+                    .ToArrayAsync();
+            });
+
+            Dictionary<int, Player> dictionaryPlayers = new Dictionary<int, Player>();
+
+            foreach (Player player in players)
+                dictionaryPlayers.Add(player.StartNumber, player);
+
+            foreach (TimeRead read in timeReads)
+            {
+                Player p;
+                if(dictionaryPlayers.TryGetValue(read.StartNumber, out p))
+                    read.PlayerId = p.Id;
+            }
+
+            await ContextProvider.DoAsync(async ctx =>
+            {
+                ctx.TimeReads.AddRange(timeReads.Where(r => r.PlayerId != null));
+                await ctx.SaveChangesAsync();
+            });
+
+            return new Tuple<int, int>(timeReads.Length, timeReads.Count(r => r.PlayerId != null));
+        }
     }
 } 
