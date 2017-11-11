@@ -34,12 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -86,7 +80,9 @@
       <DependentUpon>DistancesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Distances\DistancesViewModel.cs" />
+    <Compile Include="ILogsInfo.cs" />
     <Compile Include="IViewModel.cs" />
+    <Compile Include="LogsCounts.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -110,6 +106,7 @@
     <Compile Include="TabItemViewModel.cs" />
     <Compile Include="ValidatableBindableBase.cs" />
     <Compile Include="Validation\IsNotEmpty.cs" />
+    <Compile Include="Validation\IsNumber30Rule.cs" />
     <Compile Include="Validation\IsNumber20Rule.cs" />
     <Compile Include="XamlConverters\BoolToSexConverterClass.cs" />
     <Compile Include="XamlConverters\CompetitionToStringConverterClass.cs" />
@@ -135,7 +132,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="packages.config" />
     <None Include="Properties\DataSources\BaseCore.DataBase.AgeCategory.datasource" />
     <None Include="Properties\DataSources\BaseCore.DataBase.AgeCategoryBase.datasource" />
     <None Include="Properties\DataSources\BaseCore.DataBase.AgeCategoryTemplate.datasource" />

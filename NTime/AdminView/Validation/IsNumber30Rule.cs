@@ -8,11 +8,11 @@ using System.Windows.Controls;
 
 namespace AdminView.Validation
 {
-    public class IsNumber20Rule : ValidationRule
+    public class IsNumber30Rule : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            int minNumber = 1, maxNumber = 20; 
+            int minNumber = 1, maxNumber = 30; 
             if (value == null || !int.TryParse(value.ToString(), out int number) || number < minNumber || number > maxNumber)
             {
                 return new ValidationResult(false, $"Tylko liczby z zakresu {minNumber}-{maxNumber}");

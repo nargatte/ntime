@@ -10,7 +10,7 @@ namespace BaseCoreTests.DataBase
 {
     [TestFixture]
     public abstract class RepositoryTests<T>
-        where T: class, IEntityId
+        where T : class, IEntityId
     {
         protected abstract T[] InitialItems { get; set; }
 
@@ -92,7 +92,7 @@ namespace BaseCoreTests.DataBase
                 loadedEntities = await ctx.Set<T>().ToArrayAsync();
             });
 
-            T[] expectedEntities = InitialItems.Concat(new List<T> {InitialItems[0]}).ToArray();
+            T[] expectedEntities = InitialItems.Concat(new List<T> { InitialItems[0] }).ToArray();
 
             Assert.IsTrue(TheSameDataArrays(expectedEntities, loadedEntities, TheSameData));
         }
@@ -118,7 +118,7 @@ namespace BaseCoreTests.DataBase
         public async Task UpdateAsyncTest()
         {
             T firstInDB = null;
-            await NTimeDBContext.ContextDoAsync( async ctx =>
+            await NTimeDBContext.ContextDoAsync(async ctx =>
             {
                 firstInDB = await ctx.Set<T>().FirstOrDefaultAsync();
             });
@@ -187,13 +187,13 @@ namespace BaseCoreTests.DataBase
         {
             T[] items = await Repository.GetAllAsync();
             for (int i = 1; i < items.Length; i++)
-                Assert.IsTrue(SortTester(items[i-1], items[i]));
+                Assert.IsTrue(SortTester(items[i - 1], items[i]));
         }
 
         [TearDown]
         public virtual async Task DataTearDown()
         {
-            await NTimeDBContext.ContextDoAsync( async ctx =>
+            await NTimeDBContext.ContextDoAsync(async ctx =>
             {
                 ctx.Set<T>().RemoveRange(ctx.Set<T>());
                 await AfterDataTearDown(ctx);

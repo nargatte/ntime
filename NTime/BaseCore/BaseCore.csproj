@@ -56,7 +56,7 @@
     <Compile Include="DataBase\Entities\Distance.cs" />
     <Compile Include="DataBase\Entities\EnumTable.cs" />
     <Compile Include="DataBase\Entities\ExtraPlayerInfo.cs" />
-    <Compile Include="DataBase\Entities\IComptetitionId.cs" />
+    <Compile Include="DataBase\Entities\ICompetitionId.cs" />
     <Compile Include="DataBase\Entities\IEntityId.cs" />
     <Compile Include="DataBase\Entities\Player.cs" />
     <Compile Include="DataBase\Entities\ReaderOrder.cs" />

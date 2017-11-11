@@ -13,7 +13,7 @@
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
             <TextBlock HorizontalAlignment="Center" Text="Rodzaj zawodów"/>
-            <Grid>
+            <Grid Name="ChoosingCompetitionType">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
@@ -28,7 +28,7 @@
                 </StackPanel>
             </Grid>
             <TextBlock Text="Dodaj punkty pomiarowe" Margin="0, 20" HorizontalAlignment="Center"/>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel Name="AddingMeasurementPoint" Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBlock Text="Numer punktu"/>
                 <TextBox Name="newMeasurementPointNumberTB" Width="20" Margin="10, 0, 20, 0">
                     <Binding Path="NewMeasurementPointNumber" UpdateSourceTrigger="PropertyChanged">
@@ -45,7 +45,7 @@
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox>
-                <Button Command="{Binding AddMeasurementPointCmd}" Content="Dodaj">
+                <Button Command="{Binding AddMeasurementPointCmd}" Content="Dodaj punkt">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="IsEnabled" Value="False"/>
@@ -70,18 +70,53 @@
                             <StatusBarItem HorizontalAlignment="Left" Content="{Binding PointNumber}"/>
                             <StatusBarItem HorizontalAlignment="Left" Content="{Binding PointName}"/>
                             <StatusBarItem HorizontalAlignment="Right">
-                                <ListView ItemsSource="{Binding AssignedLogs}">
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate>
-                                            <StatusBar HorizontalAlignment="Stretch" Height="Auto">
-                                                <StatusBarItem HorizontalAlignment="Left" Content="{Binding LogNumber}"/>
-                                                <StatusBarItem HorizontalAlignment="Left" Content="{Binding DirectoryName}"/>
-                                                <Button Command="{Binding SelectPathCmd}"> Wybierz ścieżkę </Button>
-                                            </StatusBar>
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
-                                </ListView>
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Numer logu"/>
+                                        <TextBox Name="NewLogNumberButton" Width="30">
+                                            <Binding Path="NewLogNumber" UpdateSourceTrigger="PropertyChanged">
+                                                <Binding.ValidationRules>
+                                                    <validation:IsNumber20Rule ValidatesOnTargetUpdated="True"/>
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox>
+                                        <TextBlock Text="Ścieżka"/>
+                                        <TextBlock Text="{Binding NewLogDirectoryName}" Width="100"/>
+                                        <Button Command="{Binding AddLogCmd}">
+                                            Wybierz plik
+                                            <Button.Style>
+                                                <Style TargetType="{x:Type Button}">
+                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                    <Style.Triggers>
+                                                        <MultiDataTrigger>
+                                                            <MultiDataTrigger.Conditions>
+                                                                <Condition Binding="{Binding ElementName=NewLogNumberButton, Path=(Validation.HasError)}" Value="false" />
+                                                            </MultiDataTrigger.Conditions>
+                                                            <Setter Property="IsEnabled" Value="True"/>
+                                                        </MultiDataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                    </StackPanel>       
+                                    <ListView Name="AddedLogs" ItemsSource="{Binding AssignedLogs}">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <StatusBar HorizontalAlignment="Stretch" Height="Auto">
+                                                    <StatusBarItem HorizontalAlignment="Left">
+                                                        <TextBlock Text="{Binding LogNumber}" Width="30"> </TextBlock>
+                                                    </StatusBarItem>
+                                                    <StatusBarItem HorizontalAlignment="Left">
+                                                        <TextBox Text="{Binding DirectoryName}" IsReadOnly="True" Width="100"/>
+                                                    </StatusBarItem>
+                                                    <Button Command="{Binding DeleteLogCmd}">Usuń</Button>
+                                                </StatusBar>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </StackPanel>
                             </StatusBarItem>
+                            <Button Command="{Binding DeleteMeasurementPointCmd}"> Usuń </Button>
                         </StatusBar>
                     </DataTemplate>
                 </ListView.ItemTemplate>
