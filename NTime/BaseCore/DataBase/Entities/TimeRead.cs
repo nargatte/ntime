@@ -26,11 +26,7 @@ namespace BaseCore.DataBase
 
         public bool IsSkipped { get; set; }
 
-        [NotMapped]
-        public int StartNumber { get; set; }
-
-        [Required]
-        public int? PlayerId { get; set; }
+        public int PlayerId { get; set; }
         public virtual Player Player { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace BaseCoreTests.DataBase
     public abstract class RepositoryCompetitionIdTests<T> : RepositoryTests<T>
         where T: class, IEntityId, ICompetitionId
     {
-        protected virtual Competition InitialCompetition { get; set; } = new Competition("Competition", DateTime.Now, null, null, null, null, CompetitionTypeEnum.DeterminedDistance);
+        protected virtual Competition InitialCompetition { get; set; } = new Competition("Competition", DateTime.Now, null, null, null, null);
 
         protected override async Task BeforeDataSetUp(NTimeDBContext ctx)
         {

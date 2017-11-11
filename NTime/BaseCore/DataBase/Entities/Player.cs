@@ -10,7 +10,7 @@ namespace BaseCore.DataBase
         {
         }
 
-        public Player(string firstName, string lastName, DateTime birthDate, bool isMale, string team, int startNumber, DateTime startTime)
+        public Player(string firstName, string lastName, DateTime birthDate, bool isMale, string team, int startNumber)
         {
             FirstName = firstName;
             LastName = lastName;
@@ -18,7 +18,6 @@ namespace BaseCore.DataBase
             IsMale = isMale;
             Team = team;
             StartNumber = startNumber;
-            StartTime = startTime;
         }
 
         public int Id { get; set; }

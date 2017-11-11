@@ -21,7 +21,7 @@ namespace AdminView.AddCompetition
                 City = "Poznań",
                 Description = "W poznaniu",
                 EventDate = new DateTime(2017, 12, 3),
-                CompetitionTypeId = (int)CompetitionTypeEnum.DeterminedDistance
+                CompetitionTypeId = (int)DistanceTypeEnum.DeterminedDistance
             });
             AddCompetitionCmd = new RelayCommand(OnAddCompetition, CanAddCompetition);
             CancelAddingCmd = new RelayCommand(OnCancelAdding);

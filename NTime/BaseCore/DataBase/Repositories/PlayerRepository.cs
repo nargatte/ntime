@@ -1,12 +1,11 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using BaseCore.Csv;
-using CsvHelper;
 
 namespace BaseCore.DataBase
 {
@@ -19,7 +18,7 @@ namespace BaseCore.DataBase
         protected override IQueryable<Player> GetSortQuery(IQueryable<Player> items) =>
             items.OrderBy(i => i.LastName);
 
-        public async Task SetSelectedStartTime(Player[] players, DateTime startTime)
+        public async Task SetSelectedStartTimeAsync(Player[] players, DateTime startTime)
         {
             Parallel.ForEach(players, p => p.StartTime = startTime);
             await ContextProvider.DoAsync(async ctx =>
@@ -29,7 +28,7 @@ namespace BaseCore.DataBase
             });
         }
 
-        public async Task<Tuple<Player[], int>> GetAllByFiltersAsync(PlayerFilterOptions filterOptions, int pageNumber, int numberItemsOnPage)
+        public async Task<Tuple<Player[], int>> GetAllByFilterAsync(PlayerFilterOptions filterOptions, int pageNumber, int numberItemsOnPage)
         {
             Player[] players = null;
             int totalItemsNumber = 0;
@@ -42,9 +41,7 @@ namespace BaseCore.DataBase
                     filterOptions).CountAsync();
             });
 
-            var totalPageNumber = (int) Math.Ceiling((double) totalItemsNumber / numberItemsOnPage);
-
-            return new Tuple<Player[], int>(players, totalPageNumber);
+            return new Tuple<Player[], int>(players, totalItemsNumber);
         }
 
         private IQueryable<Player> GetFilteredQuery(IQueryable<Player> items, PlayerFilterOptions filterOptions) =>
@@ -184,12 +181,12 @@ namespace BaseCore.DataBase
 
         public async Task<Tuple<int, int>> ImportTimeReadsAsync(string fileName, int readerNumber)
         {
-            TimeReadImporter importer = new TimeReadImporter(fileName, readerNumber);
+            CsvImporter<TimeReadRecord, TimeReadRecordMap> csvImporter = new CsvImporter<TimeReadRecord, TimeReadRecordMap>(fileName);
 
-            TimeRead[] timeReads = await importer.GetAllAsync();
+            TimeReadRecord[] timeReads = await csvImporter.GetAllRecordsAsync();
 
             HashSet<int> expectedStartNumbers = new HashSet<int>();
-            foreach (TimeRead read in timeReads)
+            foreach (TimeReadRecord read in timeReads)
                 expectedStartNumbers.Add(read.StartNumber);
 
             Player[] players = null;
@@ -205,20 +202,89 @@ namespace BaseCore.DataBase
             foreach (Player player in players)
                 dictionaryPlayers.Add(player.StartNumber, player);
 
-            foreach (TimeRead read in timeReads)
+            List<TimeRead> timeReadsList = new List<TimeRead>();
+
+            foreach (TimeReadRecord read in timeReads)
             {
                 Player p;
                 if(dictionaryPlayers.TryGetValue(read.StartNumber, out p))
-                    read.PlayerId = p.Id;
+                    timeReadsList.Add(new TimeRead(read.Time, readerNumber) {PlayerId = p.Id});
             }
 
             await ContextProvider.DoAsync(async ctx =>
             {
-                ctx.TimeReads.AddRange(timeReads.Where(r => r.PlayerId != null));
+                ctx.TimeReads.AddRange(timeReadsList);
                 await ctx.SaveChangesAsync();
             });
 
-            return new Tuple<int, int>(timeReads.Length, timeReads.Count(r => r.PlayerId != null));
+            return new Tuple<int, int>(timeReads.Length, timeReadsList.Count);
+        }
+
+        public async Task<Tuple<int, int>> ImportPlayersAsync(string fileName)
+        {
+            CsvImporter<PlayerRecord, PlayerRecordMap> csvImporter = new CsvImporter<PlayerRecord, PlayerRecordMap>(fileName);
+
+            PlayerRecord[] playerRecords = await csvImporter.GetAllRecordsAsync();
+
+            HashSet<string> distanceSet = new HashSet<string>();
+            HashSet<string> aditionalInfoSet = new HashSet<string>();
+
+            foreach (PlayerRecord record in playerRecords)
+            {
+                distanceSet.Add(record.StringDistance);
+                aditionalInfoSet.Add(record.StringAditionalInfo);
+            }
+
+            Distance[] distances = null;
+            ExtraPlayerInfo[] extraPlayerInfos = null;
+
+            await ContextProvider.DoAsync(async ctx =>
+            {
+                distances = await ctx.Distances.Join(distanceSet, d => d.Name, esn => esn, (d, esn) => d)
+                    .ToArrayAsync();
+
+                extraPlayerInfos = await ctx.ExtraPlayerInfo.Join(aditionalInfoSet, i => i.Name, e => e, (i, e) => i)
+                    .ToArrayAsync();
+            });
+
+            Dictionary<string, Distance> distancesDictionary = new Dictionary<string, Distance>();
+            Dictionary<string, ExtraPlayerInfo> extraPlayerInfosDictionary = new Dictionary<string, ExtraPlayerInfo>();
+
+            foreach (Distance distance in distances)
+            {
+                distancesDictionary.Add(distance.Name, distance);
+            }
+
+            foreach (ExtraPlayerInfo extraPlayerInfo in extraPlayerInfos)
+            {
+                extraPlayerInfosDictionary.Add(extraPlayerInfo.Name, extraPlayerInfo);
+            }
+
+            List<Player> players = new List<Player>();
+
+            foreach (PlayerRecord record in playerRecords)
+            {
+                Player p = new Player(record.FirstName, record.LastName, record.DateBirth, record.IsMale, record.Team,
+                    record.StartNumber) {StartTime = record.StartTime};
+
+                Distance distance;
+                distancesDictionary.TryGetValue(record.StringDistance, out distance);
+
+                ExtraPlayerInfo extraPlayerInfo;
+                extraPlayerInfosDictionary.TryGetValue(record.StringAditionalInfo, out extraPlayerInfo);
+
+                p = await PreparePlayer(p, distance, extraPlayerInfo);
+
+                players.Add(p);
+            }
+
+            await ContextProvider.DoAsync(async ctx =>
+            {
+                ctx.Players.AddRange(players);
+                await ctx.SaveChangesAsync();
+            });
+
+            return new Tuple<int, int>(players.Count, playerRecords.Length);
         }
     }
 } 

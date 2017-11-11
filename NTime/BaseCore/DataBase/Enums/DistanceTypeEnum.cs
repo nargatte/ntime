@@ -1,8 +1,9 @@
 ﻿namespace BaseCore.DataBase
 {
-    public enum CompetitionTypeEnum
+    public enum DistanceTypeEnum
     {
         DeterminedDistance,
+        DeterminedCircuits,
         LimitedTime
     }
 }

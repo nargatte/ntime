@@ -10,7 +10,7 @@ namespace BaseCore.DataBase
     {
         protected override void Seed(NTimeDBContext context)
         {
-            SeedEnumValues<CompetitionType, CompetitionTypeEnum>(context.CompetitionTypes, @enum => @enum);
+            SeedEnumValues<CompetitionType, DistanceTypeEnum>(context.CompetitionTypes, @enum => @enum);
             context.SaveChanges();
             base.Seed(context);
         }

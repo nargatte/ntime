@@ -13,7 +13,7 @@ namespace BaseCore.DataBase
         {
         }
 
-        public Competition(string name, DateTime eventDate, string description, string link, string organiser, string city, CompetitionTypeEnum competitionTypeEnum)
+        public Competition(string name, DateTime eventDate, string description, string link, string organiser, string city)
         {
             Name = name;
             EventDate = eventDate;
@@ -21,7 +21,6 @@ namespace BaseCore.DataBase
             Link = link;
             Organiser = organiser;
             City = city;
-            CompetitionTypeId = (int)competitionTypeEnum;
         }
 
         public int Id { get; set; }
@@ -42,16 +41,6 @@ namespace BaseCore.DataBase
 
         [StringLength(255)]
         public string City { get; set; }
-
-        public int CompetitionTypeId { get; set; }
-        public virtual CompetitionType CompetitionType { get; set; }
-
-        [NotMapped]
-        public CompetitionTypeEnum CompetitionTypeEnum
-        {
-            get => (CompetitionTypeEnum) CompetitionTypeId;
-            set => CompetitionTypeId = (int) value;
-        }
 
         public virtual ICollection<Player> Players { get; set; }
 

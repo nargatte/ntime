@@ -2,19 +2,19 @@
 
 namespace BaseCore.DataBase
 {
-    public class CompetitionType : EnumTable<CompetitionTypeEnum>
+    public class CompetitionType : EnumTable<DistanceTypeEnum>
     {
         public CompetitionType()
         {
         }
 
-        public CompetitionType(CompetitionTypeEnum @enum) : base(@enum)
+        public CompetitionType(DistanceTypeEnum @enum) : base(@enum)
         {
         }
 
-        public static implicit operator CompetitionTypeEnum(CompetitionType competitionType) => (CompetitionTypeEnum)competitionType.Id;
+        public static implicit operator DistanceTypeEnum(CompetitionType competitionType) => (DistanceTypeEnum)competitionType.Id;
 
-        public static implicit operator CompetitionType(CompetitionTypeEnum @enum) => new CompetitionType(@enum);
+        public static implicit operator CompetitionType(DistanceTypeEnum @enum) => new CompetitionType(@enum);
 
         public virtual ICollection<Competition> Competitions { get; set; }
     }
