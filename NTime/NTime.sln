@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2005
+VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminView", "AdminView\AdminView.csproj", "{56BFED8C-878A-4E94-93A3-B46DBEF958B8}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminViewCore", "AdminViewCore\AdminViewCore.csproj", "{6DFE680C-04CA-4744-8180-96C4E13ABFB4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseCore", "BaseCore\BaseCore.csproj", "{BECBCDB2-14BB-45BC-ACEF-2B00F7FD70E2}"
 EndProject
@@ -21,10 +19,6 @@ Global
 		{56BFED8C-878A-4E94-93A3-B46DBEF958B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56BFED8C-878A-4E94-93A3-B46DBEF958B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56BFED8C-878A-4E94-93A3-B46DBEF958B8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6DFE680C-04CA-4744-8180-96C4E13ABFB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6DFE680C-04CA-4744-8180-96C4E13ABFB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6DFE680C-04CA-4744-8180-96C4E13ABFB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6DFE680C-04CA-4744-8180-96C4E13ABFB4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BECBCDB2-14BB-45BC-ACEF-2B00F7FD70E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BECBCDB2-14BB-45BC-ACEF-2B00F7FD70E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BECBCDB2-14BB-45BC-ACEF-2B00F7FD70E2}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -20,7 +20,7 @@ namespace BaseCore.DataBase
             {
                 ret = await ctx.AgeCategories.FirstOrDefaultAsync(i => i.YearFrom <= player.BirthDate.Year && player.BirthDate.Year <= i.YearTo);
             });
-            return ret.Name == null ? null : ret;
+            return ret;
         }
     }
 }

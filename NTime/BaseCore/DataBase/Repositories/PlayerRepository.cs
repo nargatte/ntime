@@ -160,6 +160,8 @@ namespace BaseCore.DataBase
 
         private async Task<Player> PreparePlayer(Player player, Distance distance, ExtraPlayerInfo extraPlayerInfo)
         {
+            PrepareToAdd(player);
+
             player.DistanceId = distance?.Id;
             player.Distance = null;
 
@@ -193,7 +195,7 @@ namespace BaseCore.DataBase
 
             await ContextProvider.DoAsync(async ctx =>
             {
-                players = await ctx.Players.Join(expectedStartNumbers, p => p.StartNumber, esn => esn, (p, esn) => p)
+                players = await ctx.Players.Where(p => p.CompetitionId == Competition.Id).Join(expectedStartNumbers, p => p.StartNumber, esn => esn, (p, esn) => p)
                     .ToArrayAsync();
             });
 
@@ -240,10 +242,10 @@ namespace BaseCore.DataBase
 
             await ContextProvider.DoAsync(async ctx =>
             {
-                distances = await ctx.Distances.Join(distanceSet, d => d.Name, esn => esn, (d, esn) => d)
+                distances = await ctx.Distances.Where(d => d.CompetitionId == Competition.Id).Join(distanceSet, d => d.Name, esn => esn, (d, esn) => d)
                     .ToArrayAsync();
 
-                extraPlayerInfos = await ctx.ExtraPlayerInfo.Join(aditionalInfoSet, i => i.Name, e => e, (i, e) => i)
+                extraPlayerInfos = await ctx.ExtraPlayerInfo.Where(e => e.CompetitionId == Competition.Id).Join(aditionalInfoSet, i => i.Name, e => e, (i, e) => i)
                     .ToArrayAsync();
             });
 

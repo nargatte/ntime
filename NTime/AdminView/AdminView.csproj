@@ -194,10 +194,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AdminViewCore\AdminViewCore.csproj">
-      <Project>{6dfe680c-04ca-4744-8180-96c4e13abfb4}</Project>
-      <Name>AdminViewCore</Name>
-    </ProjectReference>
     <ProjectReference Include="..\BaseCore\BaseCore.csproj">
       <Project>{becbcdb2-14bb-45bc-acef-2b00f7fd70e2}</Project>
       <Name>BaseCore</Name>

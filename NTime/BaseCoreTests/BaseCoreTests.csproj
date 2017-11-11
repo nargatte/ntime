@@ -61,6 +61,7 @@
     <Compile Include="DataBase\Repositories\DistanceRepositoryTests.cs" />
     <Compile Include="DataBase\Repositories\RepositoryTests.cs" />
     <Compile Include="DataBase\Repositories\RepositoryCompetitionIdTests.cs" />
+    <Compile Include="IntegrationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
