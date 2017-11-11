@@ -4,30 +4,53 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:validation="clr-namespace:AdminView.Validation"
+             xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
              xmlns:local="clr-namespace:AdminView.Distances"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="600">
+             d:DesignHeight="800" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ObjectDataProvider x:Key="CompetitionEnum" MethodName="GetValues"
+                            ObjectType="{x:Type System:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="local:CompetitionTypeEnumerator"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="*"/>
+            <!--<ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="*"/>-->
         </Grid.ColumnDefinitions>
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-            <TextBlock HorizontalAlignment="Center" Text="Rodzaj zawodów"/>
-            <Grid Name="ChoosingCompetitionType">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-                <StackPanel Orientation="Vertical" Grid.Column="0" Margin="0, 0, 50, 0">
-                    <RadioButton HorizontalAlignment="Center" GroupName="type" Command="{Binding TypeChangedCmd}" IsChecked="{Binding Path=DeterminedDistance, Mode=OneWay}"/>
-                    <TextBlock Text="Wyścig na określonym dystansie"/>
-                </StackPanel>
-                <StackPanel Grid.Column="1">
-                    <RadioButton HorizontalAlignment="Center" GroupName="type" Command="{Binding TypeChangedCmd}" IsChecked="{Binding Path=DeterminedDistance, Mode=OneWay}"/>
-                    <TextBlock Text="Wyścig z limitem czasu"/>
-                </StackPanel>
-            </Grid>
-            <TextBlock Text="Dodaj punkty pomiarowe" Margin="0, 20" HorizontalAlignment="Center"/>
+        <Grid.Resources>
+            <Style x:Key="lineStyle" TargetType="Line">
+                <Setter Property="Stroke" Value="Black" />
+                <Setter Property="Stretch" Value="Fill" />
+                <Setter Property="Grid.ZIndex" Value="100" />
+            </Style>
+
+            <Style x:Key="horizontalLineStyle" TargetType="Line" BasedOn="{StaticResource lineStyle}">
+                <Setter Property="X2" Value="1" />
+                <Setter Property="VerticalAlignment" Value="Bottom" />
+                <Setter Property="Grid.ColumnSpan" 
+                    Value="{Binding   
+                                Path=ColumnDefinitions.Count,  
+                                RelativeSource={RelativeSource AncestorType=Grid}}"/>
+            </Style>
+
+            <Style x:Key="verticalLineStyle" TargetType="Line" BasedOn="{StaticResource lineStyle}">
+                <Setter Property="Y2" Value="1" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="Grid.RowSpan"   
+                    Value="{Binding   
+                                Path=RowDefinitions.Count,  
+                                RelativeSource={RelativeSource AncestorType=Grid}}"/>
+            </Style>
+
+        </Grid.Resources>
+        <StackPanel Name="LeftColumn" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center">
+            <TextBlock Text="Punkty pomiarowe" Margin="0, 10" HorizontalAlignment="Center"/>
             <StackPanel Name="AddingMeasurementPoint" Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBlock Text="Numer punktu"/>
                 <TextBox Name="newMeasurementPointNumberTB" Width="20" Margin="10, 0, 20, 0">
@@ -61,7 +84,7 @@
                         </Style>
                     </Button.Style>
                 </Button>
-                
+
             </StackPanel>
             <ListView Name="MeasurementPoints" ItemsSource="{Binding MeasurementPoints}" Margin="0, 10" >
                 <ListView.ItemTemplate>
@@ -98,13 +121,13 @@
                                                 </Style>
                                             </Button.Style>
                                         </Button>
-                                    </StackPanel>       
+                                    </StackPanel>
                                     <ListView Name="AddedLogs" ItemsSource="{Binding AssignedLogs}">
                                         <ListView.ItemTemplate>
                                             <DataTemplate>
                                                 <StatusBar HorizontalAlignment="Stretch" Height="Auto">
                                                     <StatusBarItem HorizontalAlignment="Left">
-                                                        <TextBlock Text="{Binding LogNumber}" Width="30"> </TextBlock>
+                                                        <TextBlock Text="{Binding LogNumber}" Width="30"></TextBlock>
                                                     </StatusBarItem>
                                                     <StatusBarItem HorizontalAlignment="Left">
                                                         <TextBox Text="{Binding DirectoryName}" IsReadOnly="True" Width="100"/>
@@ -116,11 +139,122 @@
                                     </ListView>
                                 </StackPanel>
                             </StatusBarItem>
-                            <Button Command="{Binding DeleteMeasurementPointCmd}"> Usuń </Button>
+                            <Button Command="{Binding DeleteMeasurementPointCmd}">Usuń</Button>
                         </StatusBar>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <TextBlock HorizontalAlignment="Center" > Dystanse</TextBlock>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Margin="5" > Nazwa</TextBlock>
+                <TextBox Text="{Binding NewDistanceName}" Margin="5" Width="100"/>
+                <Button Command="{Binding AddDistanceCmd}" Margin="5">Dodaj</Button>
+            </StackPanel>
+            <DataGrid x:Name="distancesDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected"
+                  ItemsSource="{Binding Distances}" EnableRowVirtualization="True" AutoGenerateColumns="False"
+                  ColumnWidth="Auto" SelectionMode="Extended" CanUserAddRows="False">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Nazwa">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Name="DistanceNameTB">
+                                    <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <validation:IsNotEmpty ValidatesOnTargetUpdated="True"/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Długość">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Name="DistanceLengthTB">
+                                    <Binding Path="Length" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <validation:IsPositiveDoubleRule ValidatesOnTargetUpdated="True"/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Typ">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ComboBox ItemsSource="{Binding Source={StaticResource CompetitionEnum}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Kolejność readerów" Binding="{Binding ReadersOrder}">
+
+                    </DataGridTextColumn>
+                    <DataGridTemplateColumn Header="Czas startu">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Name="DistanceStartTimeTB">
+                                    <Binding Path="StartTime" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <validation:TimeFormatRule ValidatesOnTargetUpdated="True"/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Limit czasu">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Name="DistanceTimeLimitTB">
+                                    <Binding Path="TimeLimit" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <validation:TimeFormatRule ValidatesOnTargetUpdated="True"/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridCheckBoxColumn Selector.IsSelected="{Binding IsValid}" IsReadOnly="True"/>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Command="{Binding SaveDistanceCmd}">Zapisz
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                            <Style.Triggers>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding ElementName=DistanceNameTB, Path=(Validation.HasError)}" Value="false" />
+                                                        <Condition Binding="{Binding ElementName=DistanceLengthTB, Path=(Validation.HasError)}" Value="false" />
+                                                        <Condition Binding="{Binding ElementName=DistanceStartTimeTB, Path=(Validation.HasError)}" Value="false" />
+                                                        <Condition Binding="{Binding ElementName=DistanceTimeLimitTB, Path=(Validation.HasError)}" Value="false" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="IsEnabled" Value="True"/>
+                                                </MultiDataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Command="{Binding DeleteDistanceCmd}" >Usuń</Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
         </StackPanel>
+        <!--<Line Grid.Column="1" Style="{StaticResource verticalLineStyle}"/>-->
+        <!--<StackPanel Name="RightColumn" Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Center">
+           
+
+        </StackPanel>-->
     </Grid>
 </UserControl>

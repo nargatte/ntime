@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BaseCore.DataBase;
 
 namespace AdminView.Distances
 {
@@ -16,12 +15,13 @@ namespace AdminView.Distances
         {
             TabTitle = "Dystanse";
             AddMeasurementPointCmd = new RelayCommand(OnAddMeasurementPoint);
-            logsInfo = new LogsCounts();
+            AddDistanceCmd = new RelayCommand(OnAddDistance);
+            logsInfo = new LogsInfo();
         }
 
         private void OnAddMeasurementPoint()
         {
-            if(CanAddMeasurementPoint())
+            if (CanAddMeasurementPoint())
             {
                 var measurementPointNumber = int.Parse(NewMeasurementPointNumber);
                 var measurementPointToAdd = new MeasurementPoint(logsInfo)
@@ -54,6 +54,7 @@ namespace AdminView.Distances
             MeasurementPoints.Remove(measurementPointToDelete);
         }
 
+
         private bool CanAddMeasurementPoint()
         {
             if (!int.TryParse(NewMeasurementPointNumber, out int number))
@@ -65,6 +66,52 @@ namespace AdminView.Distances
             return true;
         }
 
+        private void OnAddDistance()
+        {
+            if (CanAddDistance(out string errorMessage))
+            {
+                var distance = new EditableDistance(logsInfo) { Name = NewDistanceName };
+                logsInfo.DistancesNames.Add(distance.Name);
+                distance.DeleteRequested += Distance_DeleteRequested;
+                Distances.Add(distance);
+            }
+            else
+            {
+                System.Windows.MessageBox.Show(errorMessage);
+            }
+            
+        }
+
+        private void Distance_DeleteRequested(object sender, EventArgs e)
+        {
+            var distanceToDelete = sender as EditableDistance;
+            logsInfo.DistancesNames.Remove(distanceToDelete.Name);
+            Distances.Remove(distanceToDelete);
+        }
+
+        private bool CanAddDistance(out string errorMessage)
+        {
+            errorMessage = "";
+            if(string.IsNullOrWhiteSpace(NewDistanceName))
+            {
+                errorMessage = "Nazwa dystansu nie może być pusta";
+                return false;
+            }
+            if(NewDistanceName != NewDistanceName.ToUpper())
+            {
+                errorMessage = "Nazwa dystansu może zawierać tylko wielkie litery";
+                return false;
+            }
+            if (logsInfo.DistancesNames.Contains(NewDistanceName))
+            {
+                errorMessage = "Taka nazwa dystansu już istnieje";
+                return false;
+            }
+            return true;
+        }
+
+
+
         #region Properties
 
         private ObservableCollection<MeasurementPoint> _measurementPoints = new ObservableCollection<MeasurementPoint>();
@@ -75,23 +122,36 @@ namespace AdminView.Distances
         }
 
 
+        private ObservableCollection<EditableDistance> _distances = new ObservableCollection<EditableDistance>();
+        public ObservableCollection<EditableDistance> Distances
+        {
+            get { return _distances; }
+            set { SetProperty(ref _distances, value); }
+        }
+
         private string _newMeasurementPointNumber;
         public string NewMeasurementPointNumber
         {
             get { return _newMeasurementPointNumber; }
-            set {
+            set
+            {
                 SetProperty(ref _newMeasurementPointNumber, value);
             }
         }
 
 
+        private string _newDistanceName = "";
+        public string NewDistanceName
+        {
+            get { return _newDistanceName; }
+            set { SetProperty(ref _newDistanceName, value); }
+        }
+
         private string _newMeasurementPointName;
         public string NewMeasurementPointName
         {
             get { return _newMeasurementPointName; }
-            set {
-                SetProperty(ref _newMeasurementPointName, value);
-            }
+            set { SetProperty(ref _newMeasurementPointName, value); }
         }
 
 
@@ -107,6 +167,7 @@ namespace AdminView.Distances
         public event Action CompetitionManagerRequested = delegate { };
 
         public RelayCommand AddMeasurementPointCmd { get; private set; }
+        public RelayCommand AddDistanceCmd { get; private set; }
     }
 
     class MeasurementPoint : BindableBase
@@ -142,8 +203,7 @@ namespace AdminView.Distances
                     logsInfo.LogsNumbers.Add(NewLogNumber);
                     NewLogNumber++;
                     NewLogDirectoryName = "";
-
-                }   
+                }
             }
             else
             {
@@ -172,7 +232,8 @@ namespace AdminView.Distances
         public int NewLogNumber
         {
             get { return _newLogNumber; }
-            set {
+            set
+            {
                 SetProperty(ref _newLogNumber, value);
                 //AddLogCmd.RaiseCanExecuteChanged();
             }
@@ -183,7 +244,8 @@ namespace AdminView.Distances
         public string NewLogDirectoryName
         {
             get { return _newLogDirectoryName; }
-            set {
+            set
+            {
                 SetProperty(ref _newLogDirectoryName, value);
             }
         }

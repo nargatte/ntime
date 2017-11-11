@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BaseCore.DataBase;
 
 namespace AdminView.CompetitionChoice
 {
@@ -25,34 +24,38 @@ namespace AdminView.CompetitionChoice
             //DownloadCompetitions(repository);
         }
 
-        private async void AddCompetitions(CompetitionRepository repository)
+        private async void AddCompetitions(BaseCore.DataBase.CompetitionRepository repository)
         {
-            List<Competition> _competitions = new List<Competition>()
+            List<BaseCore.DataBase.Competition> _competitions = new List<BaseCore.DataBase.Competition>()
             {
-            new Competition("Zawody 1", new DateTime(2017, 11, 6), null, null, null, "Poznań", CompetitionTypeEnum.Fastest ),
-            new Competition("Zawody 2", new DateTime(2017, 11, 6), null, null, null, "Łódź", CompetitionTypeEnum.MostLaps ),
-            new Competition("Zawody 3", new DateTime(2017, 11, 6), "Opis zawodów 3", null, null, "Warszawa", CompetitionTypeEnum.Fastest ),
-            new Competition("Zawody 4", new DateTime(2017, 12, 1), null, null, null, "Gdynia", CompetitionTypeEnum.Fastest )
+            new BaseCore.DataBase.Competition(
+                "Zawody 1", new DateTime(2017, 11, 6), null, null, null, "Poznań", BaseCore.DataBase.CompetitionTypeEnum.Fastest ),
+            new BaseCore.DataBase.Competition(
+                "Zawody 2", new DateTime(2017, 11, 6), null, null, null, "Łódź", BaseCore.DataBase.CompetitionTypeEnum.MostLaps ),
+            new BaseCore.DataBase.Competition(
+                "Zawody 3", new DateTime(2017, 11, 6), "Opis zawodów 3", null, null, "Warszawa", BaseCore.DataBase.CompetitionTypeEnum.Fastest ),
+            new BaseCore.DataBase.Competition(
+                "Zawody 4", new DateTime(2017, 12, 1), null, null, null, "Gdynia", BaseCore.DataBase.CompetitionTypeEnum.Fastest )
             };
             await repository.AddRangeAsync(_competitions);
         }
 
-        private async void DownloadCompetitions(CompetitionRepository repository)
+        private async void DownloadCompetitions(BaseCore.DataBase.CompetitionRepository repository)
         {
-            Competitions = new ObservableCollection<Competition>(await repository.GetAllAsync());
+            Competitions = new ObservableCollection<BaseCore.DataBase.Competition>(await repository.GetAllAsync());
         }
 
         #region Properties
 
-        private ObservableCollection<Competition> _competitions;
-        public ObservableCollection<Competition> Competitions
+        private ObservableCollection<BaseCore.DataBase.Competition> _competitions;
+        public ObservableCollection<BaseCore.DataBase.Competition> Competitions
         {
             get { return _competitions; }
             set { SetProperty(ref _competitions, value); }
         }
 
-        private Competition _selectedCompetition;
-        public Competition SelectedCompetition
+        private BaseCore.DataBase.Competition _selectedCompetition;
+        public BaseCore.DataBase.Competition SelectedCompetition
         {
             get { return _selectedCompetition; }
             set { SetProperty(ref _selectedCompetition, value); }

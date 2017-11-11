@@ -22,7 +22,8 @@ namespace AdminView
 
         public MainViewModel()
         {
-            NavToCompetitionChoiceView();
+            //NavToCompetitionChoiceView();
+            NavToCompetitionManager();
         }
 
         private void NavToCompetitionChoiceView()

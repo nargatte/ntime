@@ -12,6 +12,7 @@ namespace AdminView
     {
         HashSet<int> LogsNumbers { get; set; }
         HashSet<int> MeasurementPointsNumbers { get; set; }
+        HashSet<string> DistancesNames { get; set; }
         //ObservableCollection<MeasurementPoint> TimeReadsLogs { get; set; }
     }
 }
