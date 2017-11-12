@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace BaseCore.DataBase
 {

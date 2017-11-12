@@ -18,7 +18,7 @@ namespace BaseCore.DataBase
             AgeCategory ret = null;
             await ContextProvider.DoAsync(async ctx =>
             {
-                ret = await ctx.AgeCategories.FirstOrDefaultAsync(i => i.YearFrom <= player.BirthDate.Year && player.BirthDate.Year <= i.YearTo);
+                ret = await ctx.AgeCategories.AsNoTracking().FirstOrDefaultAsync(i => i.YearFrom <= player.BirthDate.Year && player.BirthDate.Year <= i.YearTo);
             });
             return ret;
         }

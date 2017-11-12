@@ -1,11 +1,11 @@
 ﻿using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using BaseCore.Csv;
+using BaseCore.PlayerFilter;
 
 namespace BaseCore.DataBase
 {
@@ -35,7 +35,7 @@ namespace BaseCore.DataBase
             await ContextProvider.DoAsync(async ctx =>
             {
                 players = await GetFilteredQuery(ctx.Players.Where(i => i.CompetitionId == Competition.Id),
-                    filterOptions).Skip(pageNumber * numberItemsOnPage).Take(numberItemsOnPage).ToArrayAsync();
+                    filterOptions).Skip(pageNumber * numberItemsOnPage).Take(numberItemsOnPage).AsNoTracking().ToArrayAsync();
 
                 totalItemsNumber = await GetFilteredQuery(ctx.Players.Where(i => i.CompetitionId == Competition.Id),
                     filterOptions).CountAsync();
@@ -76,13 +76,34 @@ namespace BaseCore.DataBase
             int oneNumenr;
             int twoNumber;
 
-            if (Int32.TryParse(filterOptions.Query, out oneNumenr))
-                return items.Where(i => i.StartNumber == oneNumenr);
+            if (filterOptions.Query == null)
+                return items;
 
             string[] numberStrings = filterOptions.Query.Split('-');
             if (numberStrings.Length == 2 && Int32.TryParse(numberStrings[0], out oneNumenr) &&
-                Int32.TryParse(numberStrings[2], out twoNumber))
-                return items.Where(i => (oneNumenr <= i.StartNumber && i.StartNumber <= twoNumber) || (oneNumenr >= i.StartNumber && i.StartNumber >= twoNumber));
+                Int32.TryParse(numberStrings[1], out twoNumber))
+            {
+                if (twoNumber < oneNumenr)
+                {
+                    int tem = twoNumber;
+                    twoNumber = oneNumenr;
+                    oneNumenr = tem;
+                }
+                return items.Where(i => oneNumenr <= i.StartNumber && i.StartNumber <= twoNumber);
+            }
+
+            numberStrings = filterOptions.Query.Split(',');
+            int[] numers = new int[numberStrings.Length];
+            int it = 0;
+            while (it < numberStrings.Length)
+            {
+                if(!Int32.TryParse(numberStrings[it], out numers[it]))
+                    break;
+
+                it++;
+            }
+            if (it == numberStrings.Length)
+                return items.Where(i => numers.Contains(i.StartNumber));
 
             string[] strings = filterOptions.Query.Split(' ');
             foreach (string s in strings)
@@ -96,6 +117,11 @@ namespace BaseCore.DataBase
         {
             if (filterOptions.PlayerSort == PlayerSort.ByStartNumber)
                 return GetDirectedSortQuery(items, p => p.StartNumber, filterOptions.DescendingSort);
+
+            if (filterOptions.PlayerSort == PlayerSort.ByStartTime)
+                return GetDirectedSortQuery(items,
+                    p => (p.StartTime ?? DateTime.MaxValue).Hour * 60 * 60 +
+                         (p.StartTime ?? DateTime.MaxValue).Minute * 60 + (p.StartTime ?? DateTime.MaxValue).Second, filterOptions.DescendingSort);
 
             if (filterOptions.PlayerSort == PlayerSort.ByBirthDate ||
                 filterOptions.PlayerSort == PlayerSort.ByStartTime)
@@ -135,9 +161,6 @@ namespace BaseCore.DataBase
             {
                 case PlayerSort.ByBirthDate:
                     return p => p.BirthDate;
-
-                case PlayerSort.ByStartTime:
-                    return p => p.StartTime;
 
                 default:
                     throw new ArgumentException("invalid filterOptions");
@@ -196,7 +219,7 @@ namespace BaseCore.DataBase
             await ContextProvider.DoAsync(async ctx =>
             {
                 players = await ctx.Players.Where(p => p.CompetitionId == Competition.Id).Join(expectedStartNumbers, p => p.StartNumber, esn => esn, (p, esn) => p)
-                    .ToArrayAsync();
+                    .AsNoTracking().ToArrayAsync();
             });
 
             Dictionary<int, Player> dictionaryPlayers = new Dictionary<int, Player>();
@@ -243,10 +266,10 @@ namespace BaseCore.DataBase
             await ContextProvider.DoAsync(async ctx =>
             {
                 distances = await ctx.Distances.Where(d => d.CompetitionId == Competition.Id).Join(distanceSet, d => d.Name, esn => esn, (d, esn) => d)
-                    .ToArrayAsync();
+                .AsNoTracking().ToArrayAsync();
 
                 extraPlayerInfos = await ctx.ExtraPlayerInfo.Where(e => e.CompetitionId == Competition.Id).Join(aditionalInfoSet, i => i.Name, e => e, (i, e) => i)
-                    .ToArrayAsync();
+                    .AsNoTracking().ToArrayAsync();
             });
 
             Dictionary<string, Distance> distancesDictionary = new Dictionary<string, Distance>();

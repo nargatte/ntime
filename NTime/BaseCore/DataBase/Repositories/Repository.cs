@@ -76,14 +76,39 @@ namespace BaseCore.DataBase
             });
         }
 
+        public async Task RemoveRangeAsync(IEnumerable<T> items)
+        {
+            foreach (T item in items)
+            {
+                CheckNull(item);
+                CheckItem(item);
+            }
+
+            await ContextProvider.DoAsync(async ctx =>
+            {
+                ctx.Set<T>().RemoveRange(items);
+                await ctx.SaveChangesAsync();
+            });
+        }
+
         public async Task<T[]> GetAllAsync()
         {
             T[] items = null;
             await ContextProvider.DoAsync(async ctx =>
             {
-                items = await GetSortQuery(GetAllQuery(ctx.Set<T>())).ToArrayAsync();
+                items = await GetSortQuery(GetAllQuery(ctx.Set<T>())).AsNoTracking<T>().ToArrayAsync();
             });
             return items;
+        }
+
+        public async Task<T> GetById(int? id)
+        {
+            T item = null;
+            await ContextProvider.DoAsync(async ctx =>
+            {
+                item = await GetAllQuery(ctx.Set<T>()).AsNoTracking<T>().FirstOrDefaultAsync(i => i.Id == id);
+            });
+            return item;
         }
 
         private void CheckNull(T item)

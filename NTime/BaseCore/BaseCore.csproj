@@ -62,7 +62,7 @@
     <Compile Include="DataBase\Entities\AgeCategoryTemplate.cs" />
     <Compile Include="DataBase\Entities\AgeCategoryCollection.cs" />
     <Compile Include="DataBase\Entities\Competition.cs" />
-    <Compile Include="DataBase\Entities\CompetitionType.cs" />
+    <Compile Include="DataBase\Entities\DistanceType.cs" />
     <Compile Include="DataBase\Entities\Distance.cs" />
     <Compile Include="DataBase\Entities\EnumTable.cs" />
     <Compile Include="DataBase\Entities\ExtraPlayerInfo.cs" />
@@ -71,23 +71,30 @@
     <Compile Include="DataBase\Entities\Player.cs" />
     <Compile Include="DataBase\Entities\ReaderOrder.cs" />
     <Compile Include="DataBase\Entities\TimeRead.cs" />
+    <Compile Include="DataBase\Entities\TimeReadType.cs" />
     <Compile Include="DataBase\Enums\DistanceTypeEnum.cs" />
-    <Compile Include="DataBase\Enums\PlayerSort.cs" />
+    <Compile Include="PlayerFilter\PlayerSort.cs" />
     <Compile Include="DataBase\Contexts\NTimeDBContext.cs" />
     <Compile Include="DataBase\Contexts\NTimeDBInitializer.cs" />
+    <Compile Include="DataBase\Enums\TimeReadTypeEnum.cs" />
     <Compile Include="DataBase\Repositories\AgeCategoryRepository.cs" />
     <Compile Include="DataBase\Repositories\AgeCategoryCollectionRepository.cs" />
     <Compile Include="DataBase\Repositories\AgeCategoryTemplateRepository.cs" />
     <Compile Include="DataBase\Repositories\CompetitionRepository.cs" />
     <Compile Include="DataBase\Repositories\DistanceRepository.cs" />
     <Compile Include="DataBase\Repositories\ExtraPlayerInfoRepository.cs" />
-    <Compile Include="DataBase\Repositories\PlayerFilterOptions.cs" />
+    <Compile Include="PlayerFilter\PlayerFilterOptions.cs" />
     <Compile Include="DataBase\Repositories\PlayerRepository.cs" />
     <Compile Include="DataBase\Repositories\ReaderOrderRepository.cs" />
     <Compile Include="DataBase\Repositories\Repository.cs" />
     <Compile Include="DataBase\Repositories\RepositoryCompetitionId.cs" />
     <Compile Include="DataBase\Repositories\TimeReadRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TimesProcess\TimeHelper.cs" />
+    <Compile Include="TimesProcess\TimeProcessForCircuits.cs" />
+    <Compile Include="TimesProcess\TimeProcess.cs" />
+    <Compile Include="TimesProcess\TimeProcessForDistance.cs" />
+    <Compile Include="TimesProcess\TimeProcessForTime.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

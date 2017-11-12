@@ -1,4 +1,4 @@
-﻿namespace BaseCore.DataBase
+﻿namespace BaseCore.PlayerFilter
 {
     public enum PlayerSort
     {

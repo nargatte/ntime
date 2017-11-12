@@ -1,4 +1,6 @@
-﻿namespace BaseCore.DataBase
+﻿using BaseCore.DataBase;
+
+namespace BaseCore.PlayerFilter
 {
     public class PlayerFilterOptions
     {

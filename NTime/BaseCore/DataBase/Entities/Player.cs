@@ -38,9 +38,13 @@ namespace BaseCore.DataBase
 
         public int StartNumber { get; set; }
 
-        public DateTime StartTime { get; set; }
+        public DateTime? StartTime { get; set; }
 
         public bool IsStartTimeFromReader { get; set; }
+
+        public int Circuits { get; set; }
+
+        public decimal Time { get; set; }
 
         [StringLength(255)]
         public string FullCategory { get; set; }

@@ -28,15 +28,19 @@ namespace BaseCore.DataBase
 
         public DateTime StartTime { get; set; }
 
-        public int CompetitionTypeId { get; set; }
-        public virtual CompetitionType CompetitionType { get; set; }
+        public int DistanceTypeId { get; set; }
+        public virtual DistanceType DistanceType { get; set; }
 
         [NotMapped]
         public DistanceTypeEnum DistanceTypeEnum
         {
-            get => (DistanceTypeEnum)CompetitionTypeId;
-            set => CompetitionTypeId = (int)value;
+            get => (DistanceTypeEnum)DistanceTypeId;
+            set => DistanceTypeId = (int)value;
         }
+
+        public int NumberOfCircuits;
+
+        public decimal TimeLimit;
 
         public int CompetitionId { get; set; }
         public virtual Competition Competition { get; set; }

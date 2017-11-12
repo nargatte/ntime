@@ -14,7 +14,7 @@ namespace BaseCore.DataBase
 
         public DbSet<Competition> Competitions { get; set; }
 
-        public DbSet<CompetitionType> CompetitionTypes { get; set; }
+        public DbSet<DistanceType> DistanceTypes { get; set; }
 
         public DbSet<AgeCategory> AgeCategories { get; set; }
 
@@ -31,5 +31,7 @@ namespace BaseCore.DataBase
         public DbSet<ReaderOrder> ReaderOrders { get; set; }
 
         public DbSet<TimeRead> TimeReads { get; set; }
+
+        public DbSet<TimeReadType> TimeReadTypes { get; set; }
     }
 }
