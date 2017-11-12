@@ -127,6 +127,12 @@ namespace BaseCore.DataBase
                 filterOptions.PlayerSort == PlayerSort.ByStartTime)
                 return GetDirectedSortQuery(items, FuncDateTimeFilterSort(filterOptions), filterOptions.DescendingSort);
 
+            if(filterOptions.PlayerSort == PlayerSort.ByRank)
+                if (filterOptions.DescendingSort)
+                    return items.Where(p => p.TimeReads.All(t => t.TimeReadTypeId != (int)TimeReadTypeEnum.Void)).OrderByDescending(p => p.Circuits).ThenByDescending(p => p.Time);
+                else
+                    return items.Where(p => p.TimeReads.All(t => t.TimeReadTypeId != (int)TimeReadTypeEnum.Void)).OrderBy(p => p.Circuits).ThenBy(p => p.Time);
+
             return GetDirectedSortQuery(items, FuncStringFilterSort(filterOptions), filterOptions.DescendingSort);
         }
 
