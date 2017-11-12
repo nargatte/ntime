@@ -131,8 +131,8 @@ namespace BaseCore.TimesProcess
             if(timeRead.TimeReadTypeEnum == TimeReadTypeEnum.Void) return;
             if(IsNonsignificantBefore(timeRead)) timeRead.TimeReadTypeEnum = TimeReadTypeEnum.NonsignificantBefore;
             else if(IsNonsignificantAfter(timeRead)) timeRead.TimeReadTypeEnum = TimeReadTypeEnum.NonsignificantAfter;
-            else if(IsRepeted(timeRead)) timeRead.TimeReadTypeEnum = TimeReadTypeEnum.Repeted;
-            else if(IsSkiped(timeRead)) timeRead.TimeReadTypeEnum = TimeReadTypeEnum.Skiped;
+            else if(IsRepeted(timeRead)) timeRead.TimeReadTypeEnum = TimeReadTypeEnum.Repeated;
+            else if(IsSkiped(timeRead)) timeRead.TimeReadTypeEnum = TimeReadTypeEnum.Skipped;
             else if (IsSignificant(timeRead))
             {
                 timeRead.TimeReadTypeEnum = TimeReadTypeEnum.Significant;

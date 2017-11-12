@@ -6,8 +6,8 @@
         Significant,
         NonsignificantBefore,
         NonsignificantAfter,
-        Repeted,
-        Skiped,
+        Repeated,
+        Skipped,
         Void
     }
 }
