@@ -11,7 +11,7 @@
              Width="300" Height="350"
              d:DesignHeight="350" d:DesignWidth="300">
     <Window.Resources>
-        <CollectionViewSource x:Key="competitionViewSource" Source="{Binding Path=Competition}"/>
+        <!--<CollectionViewSource x:Key="competitionViewSource" Source="{Binding Path=Competition}"/>-->
         <!--<CollectionViewSource x:Key="competitionViewSource" d:DesignSource="{d:DesignInstance {x:Type DataBase:Competition}, CreateList=True}"/>-->
     </Window.Resources>
     <Grid>
@@ -21,7 +21,9 @@
             <RowDefinition Height="1.5*"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Text="Nowe zawody" HorizontalAlignment="Center" TextBlock.FontSize="20" TextBlock.FontWeight="Bold" Margin="10"/>
-        <Grid x:Name="grid1" Grid.Row="1" VerticalAlignment="Top"  HorizontalAlignment="Center" DataContext="{StaticResource competitionViewSource}">
+        <Grid x:Name="grid1" Grid.Row="1" VerticalAlignment="Top"  HorizontalAlignment="Center"
+            >
+              <!--DataContext="{StaticResource competitionViewSource}-->
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
