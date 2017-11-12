@@ -12,19 +12,16 @@ namespace AdminView.AddCompetition
         AddCompetitionView view;
         public AddCompetitionViewModel()
         {
-            _competition = new ObservableCollection<BaseCore.DataBase.Competition>();
-            Competition.Add(new BaseCore.DataBase.Competition
-            {
-                Id = 78,
-                Name = "Comp",
-                City = "Poznań",
-                Description = "W poznaniu",
-                EventDate = new DateTime(2017, 12, 3),
-            });
             AddCompetitionCmd = new RelayCommand(OnAddCompetition, CanAddCompetition);
             CancelAddingCmd = new RelayCommand(OnCancelAdding);
         }
 
+        private Entities.EditableCompetition _newCompetition;
+        public Entities.EditableCompetition NewCompetition
+        {
+            get { return _newCompetition; }
+            set { SetProperty(ref _newCompetition, value); }
+        }
 
         public void ShowWindow()
         {

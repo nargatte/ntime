@@ -103,7 +103,10 @@
       <DependentUpon>DistancesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Distances\DistancesViewModel.cs" />
-    <Compile Include="Distances\EditableDistance.cs" />
+    <Compile Include="Entities\EditableCategory.cs" />
+    <Compile Include="Entities\EditableDistance.cs" />
+    <Compile Include="Entities\EditablePlayer.cs" />
+    <Compile Include="Entities\EditableScore.cs" />
     <Compile Include="ILogsInfo.cs" />
     <Compile Include="IViewModel.cs" />
     <Compile Include="LogsInfo.cs" />
@@ -123,6 +126,7 @@
       <DependentUpon>ScoresView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Scores\ScoresViewModel.cs" />
+    <Compile Include="Entities\EditableCompetition.cs" />
     <Compile Include="Settings\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>

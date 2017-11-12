@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace AdminView.Distances
+namespace AdminView.Entities
 {
     public enum CompetitionTypeEnumerator
     {

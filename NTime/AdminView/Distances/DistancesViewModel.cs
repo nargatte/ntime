@@ -70,7 +70,7 @@ namespace AdminView.Distances
         {
             if (CanAddDistance(out string errorMessage))
             {
-                var distance = new EditableDistance(logsInfo) { Name = NewDistanceName };
+                var distance = new Entities.EditableDistance(logsInfo) { Name = NewDistanceName };
                 logsInfo.DistancesNames.Add(distance.Name);
                 distance.DeleteRequested += Distance_DeleteRequested;
                 Distances.Add(distance);
@@ -84,7 +84,7 @@ namespace AdminView.Distances
 
         private void Distance_DeleteRequested(object sender, EventArgs e)
         {
-            var distanceToDelete = sender as EditableDistance;
+            var distanceToDelete = sender as Entities.EditableDistance;
             logsInfo.DistancesNames.Remove(distanceToDelete.Name);
             Distances.Remove(distanceToDelete);
         }
@@ -122,8 +122,8 @@ namespace AdminView.Distances
         }
 
 
-        private ObservableCollection<EditableDistance> _distances = new ObservableCollection<EditableDistance>();
-        public ObservableCollection<EditableDistance> Distances
+        private ObservableCollection<Entities.EditableDistance> _distances = new ObservableCollection<Entities.EditableDistance>();
+        public ObservableCollection<Entities.EditableDistance> Distances
         {
             get { return _distances; }
             set { SetProperty(ref _distances, value); }

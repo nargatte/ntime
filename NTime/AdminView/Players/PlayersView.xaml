@@ -7,89 +7,78 @@
              xmlns:local="clr-namespace:AdminView.Players"
              xmlns:DataBase="clr-namespace:BaseCore.DataBase;assembly=BaseCore" x:Class="AdminView.Players.PlayersView"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="800">
     <UserControl.Resources>
-        <CollectionViewSource x:Key="playerViewSource" Source="{Binding Path=Players}"/>
         <converters:BoolToSexConverterClass x:Key="BoolToSexConverter"/>
     </UserControl.Resources>
-    <Grid DataContext="{StaticResource playerViewSource}">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="75"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Center">
-            <StackPanel Orientation="Vertical">
-                <TextBlock Text="Numer"
-                           VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
-                <TextBox Width="35" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>
+        <StackPanel Orientation="Horizontal">
+            <StackPanel DataContext="{Binding NewPlayer}" Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Center">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Numer"
+                               VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
+                    <TextBox Text="{Binding StartNumber}" Width="35" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Imię"
+                               VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
+                    <TextBox Text="{Binding FirstName}" Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Nazwisko"
+                               VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
+                    <TextBox Text="{Binding LastName}" Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Dystans"
+                               VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
+                    <TextBox Text="{Binding DistanceName}" Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Data urodzenia"
+                               VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
+                    <DatePicker SelectedDate="{Binding BirthDate}" Width="100" Height="30"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Margin="5"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Czas startu"
+                               VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
+                    <TextBox Text="{Binding StartTime}" Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Klub"
+                               VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
+                    <TextBox Text="{Binding Team}" Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Dodatkowe inf."
+                               VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
+                    <TextBox Text="{Binding ExtraPlayerInfo}" Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Telefon"
+                               VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
+                    <TextBox Text="{Binding PhoneNumber}" Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>
+                </StackPanel>
             </StackPanel>
-            <StackPanel Orientation="Vertical">
-                <TextBlock Text="Imię"
-                           VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
-                <TextBox Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>
-            </StackPanel>
-            <StackPanel Orientation="Vertical">
-                <TextBlock Text="Nazwisko"
-                           VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
-                <TextBox Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>
-            </StackPanel>
-            <StackPanel Orientation="Vertical">
-                <TextBlock Text="Dystans"
-                           VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
-                <TextBox Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>
-            </StackPanel>
-            <StackPanel Orientation="Vertical">
-                <TextBlock Text="Data urodzenia"
-                           VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
-                <DatePicker Width="100" Height="30"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Margin="5"/>
-            </StackPanel>
-            <StackPanel Orientation="Vertical">
-                <TextBlock Text="Czas startu"
-                           VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
-                <TextBox Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>
-            </StackPanel>
-            <StackPanel Orientation="Vertical">
-                <TextBlock Text="Klub"
-                           VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
-                <TextBox Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>
-            </StackPanel>
-            <StackPanel Orientation="Vertical">
-                <TextBlock Text="Dodatkowe inf."
-                           VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
-                <TextBox Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>
-            </StackPanel>
-            <StackPanel Orientation="Vertical">
-                <TextBlock Text="Telefon"
-                           VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
-                <TextBox Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>
-            </StackPanel>
-            <StackPanel Orientation="Vertical">
-                <TextBlock Text=""
-                           VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
-                <Button Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
-                        Content="Dodaj" FontSize="15" Margin="30, 5, 5, 5"/>
-            </StackPanel>
-            <!--<TextBlock Text="Imię" VerticalAlignment="Center" FontSize="15" Margin="5"/>
-            <TextBox Width="35" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>
-            <TextBlock Text="Nazwisko" VerticalAlignment="Center" FontSize="15" Margin="5"/>
-            <TextBox Width="35" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>
-            <TextBlock Text="Czas startu" VerticalAlignment="Center" FontSize="15" Margin="5"/>
-            <TextBox Width="35" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>
-            <TextBlock Text="Numer" VerticalAlignment="Center" FontSize="15" Margin="5"/>
-            <TextBox Width="35" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>
-            <TextBlock Text="Numer" VerticalAlignment="Center" FontSize="15" Margin="5"/>
-            <TextBox Width="35" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>
-            <TextBlock Text="Numer" VerticalAlignment="Center" FontSize="15" Margin="5"/>
-            <TextBox Width="35" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>-->
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text=""
+                               VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
+                    <Button Command="{Binding AddPlayerCmd}" Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                            Content="Dodaj"   FontSize="15" Margin="30, 5, 5, 5"/>
+                </StackPanel>
         </StackPanel>
         <DataGrid x:Name="playerDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Grid.Row="1"
-                  ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False"
+                  ItemsSource="{Binding Players}" EnableRowVirtualization="True" AutoGenerateColumns="False"
                   ColumnWidth="*" SelectionMode="Extended" CanUserAddRows="False" >
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="startNumberColumn" Width="SizeToHeader" Header="Numer" Binding="{Binding StartNumber}"/>
                 <DataGridTextColumn x:Name="firstNameColumn"  Header="Imię" Binding="{Binding FirstName}"/>
                 <DataGridTextColumn x:Name="lastNameColumn" Header="Nazwisko" Binding="{Binding LastName}"/>
-                <DataGridTextColumn x:Name="extraPlayerInfoIdColumn"  Header="Dodatkowe info" Binding="{Binding ExtraPlayerInfoId}"/>
+                <DataGridTextColumn x:Name="extraPlayerInfoIdColumn"  Header="Dodatkowe info" Binding="{Binding ExtraPlayerInfo}"/>
                 <DataGridTextColumn x:Name="teamColumn"  Header="Klub" Binding="{Binding Team}"/>
                 <DataGridTemplateColumn x:Name="birthDateColumn"  Header="Data urodzenia">
                     <DataGridTemplateColumn.CellTemplate>

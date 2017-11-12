@@ -21,8 +21,7 @@
             <RowDefinition Height="1.5*"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Text="Nowe zawody" HorizontalAlignment="Center" TextBlock.FontSize="20" TextBlock.FontWeight="Bold" Margin="10"/>
-        <Grid x:Name="grid1" Grid.Row="1" VerticalAlignment="Top"  HorizontalAlignment="Center"
-            >
+        <Grid x:Name="grid1" Grid.Row="1" VerticalAlignment="Top"  HorizontalAlignment="Center" DataContext="{Binding NewCompetition}">
               <!--DataContext="{StaticResource competitionViewSource}-->
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>

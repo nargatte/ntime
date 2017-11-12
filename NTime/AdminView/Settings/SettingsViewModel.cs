@@ -15,57 +15,19 @@ namespace AdminView.Settings
         }
 
 
-        private string _name = String.Empty;
-        public string Name
+        private Entities.EditableCompetition _currentCompetition = new Entities.EditableCompetition();
+        public Entities.EditableCompetition CurrentCompetition
         {
-            get { return _name; }
-            set { SetProperty(ref _name, value); }
+            get { return _currentCompetition; }
+            set { SetProperty(ref _currentCompetition, value);
+                OnPropertyChanged("Name");
+                OnPropertyChanged("CurrentCompetition.Name");
+            }
         }
-
-
-        private string _city = String.Empty;
-        public string City
-        {
-            get { return _city; }
-            set { SetProperty(ref _city, value); }
-        }
-
-
-        private DateTime _eventDate = new DateTime();
-        public DateTime EventDate
-        {
-            get { return _eventDate; }
-            set { SetProperty(ref _eventDate, value); }
-        }
-
-
-        private string _organiser = String.Empty;
-        public string Organiser
-        {
-            get { return _organiser; }
-            set { SetProperty(ref _organiser, value); }
-        }
-
-
-        private string _description = String.Empty;
-        public string Description
-        {
-            get { return _description; }
-            set { SetProperty(ref _description, value); }
-        }
-
-
-        private string _link = String.Empty;
-        public string Link
-        {
-            get { return _link; }
-            set { SetProperty(ref _link, value); }
-        }
-
 
         private void OnSaveChanges()
         {
-            throw new NotImplementedException();
+            CurrentCompetition.Name += "New ";
         }
 
         public void DetachAllEvents()
