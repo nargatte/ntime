@@ -14,7 +14,7 @@ namespace BaseCoreTests.DataBase
     {
         protected abstract T[] InitialItems { get; set; }
 
-        protected abstract Repository<T> Repository { get; }
+        protected abstract Repository<T> Repository { get; set; }
 
         protected abstract bool TheSameData(T entity1, T entity2);
 
@@ -23,6 +23,10 @@ namespace BaseCoreTests.DataBase
         protected virtual Task BeforeDataSetUp(NTimeDBContext context) => Task.Factory.StartNew(() => { });
 
         protected virtual Task AfterDataTearDown(NTimeDBContext context) => Task.Factory.StartNew(() => { });
+
+        protected virtual void Reset(T item) { }
+
+        protected IContextProvider ContextProvider = new ContextProvider("NTimeTests");
 
         protected bool TheSameDataAndId(T entity1, T entity2)
         {
@@ -61,9 +65,17 @@ namespace BaseCoreTests.DataBase
         [SetUp]
         public virtual async Task DataSetUp()
         {
-            await NTimeDBContext.ContextDoAsync(async ctx =>
+            await ContextProvider.DoAsync(async ctx =>
+            {
+                ctx.Set<T>().RemoveRange(ctx.Set<T>());
+                await AfterDataTearDown(ctx);
+                await ctx.SaveChangesAsync();
+            });
+
+            await ContextProvider.DoAsync(async ctx =>
             {
                 await BeforeDataSetUp(ctx);
+                Array.ForEach(InitialItems, Reset);
                 ctx.Set<T>().AddRange(InitialItems);
                 await ctx.SaveChangesAsync();
             });
@@ -73,7 +85,7 @@ namespace BaseCoreTests.DataBase
         public async Task SetUpTest()
         {
             T[] loadedEntities = null;
-            await NTimeDBContext.ContextDoAsync(async ctx =>
+            await ContextProvider.DoAsync(async ctx =>
             {
                 loadedEntities = await ctx.Set<T>().ToArrayAsync();
             });
@@ -87,7 +99,7 @@ namespace BaseCoreTests.DataBase
 
             T[] loadedEntities = null;
 
-            await NTimeDBContext.ContextDoAsync(async ctx =>
+            await ContextProvider.DoAsync(async ctx =>
             {
                 loadedEntities = await ctx.Set<T>().ToArrayAsync();
             });
@@ -104,7 +116,7 @@ namespace BaseCoreTests.DataBase
 
             T[] loadedEntities = null;
 
-            await NTimeDBContext.ContextDoAsync(async ctx =>
+            await ContextProvider.DoAsync(async ctx =>
             {
                 loadedEntities = await ctx.Set<T>().ToArrayAsync();
             });
@@ -118,7 +130,7 @@ namespace BaseCoreTests.DataBase
         public async Task UpdateAsyncTest()
         {
             T firstInDB = null;
-            await NTimeDBContext.ContextDoAsync(async ctx =>
+            await ContextProvider.DoAsync( async ctx =>
             {
                 firstInDB = await ctx.Set<T>().FirstOrDefaultAsync();
             });
@@ -127,11 +139,13 @@ namespace BaseCoreTests.DataBase
 
             if (TheSameData(updatedItem, firstInDB))
             {
-                await NTimeDBContext.ContextDoAsync(async ctx =>
+                await ContextProvider.DoAsync(async ctx =>
                 {
                     firstInDB = await ctx.Set<T>().FirstOrDefaultAsync(e => e.Id != firstInDB.Id);
                 });
             }
+
+            Reset(updatedItem);
 
             updatedItem.Id = firstInDB.Id;
 
@@ -139,7 +153,7 @@ namespace BaseCoreTests.DataBase
 
             T loadedEntiti = null;
 
-            await NTimeDBContext.ContextDoAsync(async ctx =>
+            await ContextProvider.DoAsync(async ctx =>
             {
                 loadedEntiti = await ctx.Set<T>().FirstOrDefaultAsync(e => e.Id == updatedItem.Id);
             });
@@ -151,14 +165,14 @@ namespace BaseCoreTests.DataBase
         public async Task RemoveAsyncTest()
         {
             T firstInDB = null;
-            await NTimeDBContext.ContextDoAsync(async ctx =>
+            await ContextProvider.DoAsync(async ctx =>
             {
                 firstInDB = await ctx.Set<T>().FirstOrDefaultAsync();
             });
 
             await Repository.RemoveAsync(firstInDB);
 
-            await NTimeDBContext.ContextDoAsync(async ctx =>
+            await ContextProvider.DoAsync(async ctx =>
             {
                 Assert.AreEqual(await ctx.Set<T>().FirstOrDefaultAsync(e => e.Id == firstInDB.Id), default(T));
             });
@@ -168,7 +182,7 @@ namespace BaseCoreTests.DataBase
         public async Task RemoveAllAsyncTest()
         {
             await Repository.RemoveAllAsync();
-            await NTimeDBContext.ContextDoAsync(async ctx =>
+            await ContextProvider.DoAsync(async ctx =>
             {
                 Assert.Zero(await ctx.Set<T>().CountAsync());
             });
@@ -188,17 +202,6 @@ namespace BaseCoreTests.DataBase
             T[] items = await Repository.GetAllAsync();
             for (int i = 1; i < items.Length; i++)
                 Assert.IsTrue(SortTester(items[i - 1], items[i]));
-        }
-
-        [TearDown]
-        public virtual async Task DataTearDown()
-        {
-            await NTimeDBContext.ContextDoAsync(async ctx =>
-            {
-                ctx.Set<T>().RemoveRange(ctx.Set<T>());
-                await AfterDataTearDown(ctx);
-                await ctx.SaveChangesAsync();
-            });
         }
     }
 }

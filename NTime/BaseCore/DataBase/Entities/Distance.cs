@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BaseCore.DataBase
 {
@@ -10,11 +11,12 @@ namespace BaseCore.DataBase
         {
         }
 
-        public Distance(string name, decimal length, DateTime startTime)
+        public Distance(string name, decimal length, DateTime startTime, DistanceTypeEnum distanceTypeEnum)
         {
             Name = name;
             Length = length;
             StartTime = startTime;
+            DistanceTypeEnum = distanceTypeEnum;
         }
 
         public int Id { get; set; }
@@ -25,6 +27,20 @@ namespace BaseCore.DataBase
         public decimal Length { get; set; }
 
         public DateTime StartTime { get; set; }
+
+        public int DistanceTypeId { get; set; }
+        public virtual DistanceType DistanceType { get; set; }
+
+        [NotMapped]
+        public DistanceTypeEnum DistanceTypeEnum
+        {
+            get => (DistanceTypeEnum)DistanceTypeId;
+            set => DistanceTypeId = (int)value;
+        }
+
+        public int NumberOfCircuits;
+
+        public decimal TimeLimit;
 
         public int CompetitionId { get; set; }
         public virtual Competition Competition { get; set; }

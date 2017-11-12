@@ -8,9 +8,12 @@ namespace BaseCore.DataBase
     public abstract class RepositoryCompetitionId<T> : Repository<T>
         where T: class, IEntityId, ICompetitionId
     {
-        public Competition Competition { get; }
 
-        protected RepositoryCompetitionId(Competition competition) => Competition = competition;
+        protected Competition Competition { get; }
+
+        protected RepositoryCompetitionId(IContextProvider contextProvider, Competition competition) :
+            base(contextProvider) =>
+            Competition = competition;
 
         protected override IQueryable<T> GetAllQuery(IQueryable<T> items) => 
             items.Where(e => e.CompetitionId == Competition.Id);
@@ -20,6 +23,10 @@ namespace BaseCore.DataBase
             if (item.CompetitionId != Competition.Id) throw new ArgumentException("Wrong CompetitionId");
         }
 
-        protected override void PrepareToAdd(T item) => item.CompetitionId = Competition.Id;
+        protected override void PrepareToAdd(T item)
+        {
+            item.CompetitionId = Competition.Id;
+            item.Competition = null;
+        }
     }
 }

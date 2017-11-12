@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Threading.Tasks;
 
 namespace BaseCore.DataBase
@@ -13,7 +14,7 @@ namespace BaseCore.DataBase
 
         public DbSet<Competition> Competitions { get; set; }
 
-        public DbSet<CompetitionType> CompetitionTypes { get; set; }
+        public DbSet<DistanceType> DistanceTypes { get; set; }
 
         public DbSet<AgeCategory> AgeCategories { get; set; }
 
@@ -31,40 +32,6 @@ namespace BaseCore.DataBase
 
         public DbSet<TimeRead> TimeReads { get; set; }
 
-        public static void ContextDo(Action<NTimeDBContext> action, string nameOrConnectionString = null)
-        {
-            if (nameOrConnectionString == null)
-            {
-                using (var context = new NTimeDBContext())
-                {
-                    action(context);
-                }
-            }
-            else
-            {
-                using (var context = new NTimeDBContext(nameOrConnectionString))
-                {
-                    action(context);
-                }
-            }
-        }
-
-        public static async Task ContextDoAsync(Func<NTimeDBContext, Task> action, string nameOrConnectionString = null)
-        {
-            if (nameOrConnectionString == null)
-            {
-                using (var context = new NTimeDBContext())
-                {
-                    await action(context);
-                }
-            }
-            else
-            {
-                using (var context = new NTimeDBContext(nameOrConnectionString))
-                {
-                    await action(context);
-                }
-            }
-        }
+        public DbSet<TimeReadType> TimeReadTypes { get; set; }
     }
 }

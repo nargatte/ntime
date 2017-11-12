@@ -5,10 +5,7 @@ namespace BaseCore.DataBase
 {
     public class ReaderOrderRepository : Repository<ReaderOrder>
     {
-        public ReaderOrderRepository(Distance distance)
-        {
-            Distance = distance;
-        }
+        public ReaderOrderRepository(IContextProvider contextProvider, Distance distance) : base(contextProvider) => Distance = distance;
 
         protected Distance Distance { get; }
 
@@ -24,6 +21,10 @@ namespace BaseCore.DataBase
                 throw new ArgumentException("Wrong DistanceId");
         }
 
-        protected override void PrepareToAdd(ReaderOrder item) => item.DistanceId = Distance.Id;
+        protected override void PrepareToAdd(ReaderOrder item)
+        {
+            item.DistanceId = Distance.Id;
+            item.Distance = null;
+        }
     }
 }

@@ -7,12 +7,16 @@ namespace BaseCore.DataBase
 {
     public class CompetitionRepository : Repository<Competition>
     {
+        public CompetitionRepository(IContextProvider contextProvider) : base(contextProvider)
+        {
+        }
+
         protected override IQueryable<Competition> GetSortQuery(IQueryable<Competition> items) =>
             items.OrderByDescending(e => e.EventDate);
 
         public async Task<Competition> AddWithAgeCategoryCollection(Competition competition, AgeCategoryCollection ageCategoryCollection )
         {
-            await NTimeDBContext.ContextDoAsync(async ctx =>
+            await ContextProvider.DoAsync(async ctx =>
             {
                 using (DbContextTransaction contextTransaction = ctx.Database.BeginTransaction())
                 {

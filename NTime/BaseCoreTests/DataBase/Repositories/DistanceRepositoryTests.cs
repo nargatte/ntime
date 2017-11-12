@@ -1,21 +1,28 @@
 ﻿using System;
+using System.Threading.Tasks;
 using BaseCore.DataBase;
 using NUnit.Framework;
 
 namespace BaseCoreTests.DataBase
 {
-    [TestFixture]
     public class DistanceRepositoryCompetitionIdTests : RepositoryCompetitionIdTests<Distance>
     {
         protected override Distance[] InitialItems { get; set; } =
         {
-            new Distance("Krótki", 10, new DateTime(2000, 1, 1, 16, 30, 0)),
-            new Distance("Średni", 20, new DateTime(2000, 1, 1, 13, 45, 0)),
-            new Distance("Długi", 30, new DateTime(2000, 1, 1, 8, 5, 0)),
-            new Distance("Maraton", 40, new DateTime(2000, 1, 1, 9, 50, 0))
+            new Distance("Krótki", 10, new DateTime(2000, 1, 1, 16, 30, 0), DistanceTypeEnum.DeterminedCircuits),
+            new Distance("Średni", 20, new DateTime(2000, 1, 1, 13, 45, 0), DistanceTypeEnum.DeterminedCircuits),
+            new Distance("Długi", 30, new DateTime(2000, 1, 1, 8, 5, 0), DistanceTypeEnum.DeterminedCircuits),
+            new Distance("Maraton", 40, new DateTime(2000, 1, 1, 9, 50, 0), DistanceTypeEnum.DeterminedCircuits)
         };
 
-        protected override Repository<Distance> Repository => new DistanceRepository(InitialCompetition);
+        protected override Repository<Distance> Repository { get; set; }
+
+        protected override Task BeforeDataSetUp(NTimeDBContext ctx)
+        {
+            DistanceRepository dr = new DistanceRepository(ContextProvider, InitialCompetition);
+            Repository = dr;
+            return base.BeforeDataSetUp(ctx);
+        }
 
         protected override bool TheSameData(Distance entity1, Distance entity2)
         {
@@ -26,6 +33,7 @@ namespace BaseCoreTests.DataBase
             return true;
         }
 
-        protected override bool SortTester(Distance before, Distance after) => String.CompareOrdinal(before.Name, after.Name) > 0;
+        protected override bool SortTester(Distance before, Distance after) => String.CompareOrdinal(before.Name, after.Name) <= 0;
+
     }
 }

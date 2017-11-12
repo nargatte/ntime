@@ -10,7 +10,7 @@ namespace BaseCore.DataBase
         {
         }
 
-        public Player(string firstName, string lastName, DateTime birthDate, bool isMale, string team, int startNumber, DateTime startTime)
+        public Player(string firstName, string lastName, DateTime birthDate, bool isMale, string team, int startNumber)
         {
             FirstName = firstName;
             LastName = lastName;
@@ -18,11 +18,10 @@ namespace BaseCore.DataBase
             IsMale = isMale;
             Team = team;
             StartNumber = startNumber;
-            StartTime = startTime;
         }
 
         public int Id { get; set; }
-        
+
         [StringLength(255), Required]
         public string FirstName { get; set; }
 
@@ -39,9 +38,13 @@ namespace BaseCore.DataBase
 
         public int StartNumber { get; set; }
 
-        public DateTime StartTime { get; set; }
+        public DateTime? StartTime { get; set; }
 
         public bool IsStartTimeFromReader { get; set; }
+
+        public int Circuits { get; set; }
+
+        public decimal Time { get; set; }
 
         [StringLength(255)]
         public string FullCategory { get; set; }

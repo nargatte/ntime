@@ -11,6 +11,12 @@ namespace BaseCore.DataBase
         {
         }
 
+        public ExtraPlayerInfo(string name, string shortName)
+        {
+            Name = name;
+            ShortName = shortName;
+        }
+
         public int Id { get; set; }
 
         [StringLength(255), Required]

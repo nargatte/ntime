@@ -1,11 +1,10 @@
 ﻿using System;
+using System.Threading.Tasks;
 using BaseCore.DataBase;
-using NUnit.Framework;
 
 namespace BaseCoreTests.DataBase
 {
-    [TestFixture]
-    public class AgeCategoryRepositoryCompetitionIdTests : RepositoryCompetitionIdTests<AgeCategory>
+    public class AgeCategoryRepositoryTests : RepositoryCompetitionIdTests<AgeCategory>
     {
         protected override AgeCategory[] InitialItems { get; set; } =
         {
@@ -14,7 +13,14 @@ namespace BaseCoreTests.DataBase
             new AgeCategory("Starszaki", 1985, 1990)
         };
 
-        protected override Repository<AgeCategory> Repository => new AgeCategoryRepository(InitialCompetition);
+        protected override Repository<AgeCategory> Repository { get; set; }
+
+        protected override Task BeforeDataSetUp(NTimeDBContext ctx)
+        {
+            AgeCategoryRepository ageCategoryRepository = new AgeCategoryRepository(ContextProvider, InitialCompetition);
+            Repository = ageCategoryRepository;
+            return base.BeforeDataSetUp(ctx);
+        }
 
         protected override bool TheSameData(AgeCategory entity1, AgeCategory entity2)
         {
@@ -25,7 +31,7 @@ namespace BaseCoreTests.DataBase
             return true;
         }
 
-        protected override bool SortTester(AgeCategory before, AgeCategory after) => 
-            String.CompareOrdinal(before.Name, after.Name) > 0;
+        protected override bool SortTester(AgeCategory before, AgeCategory after) =>
+            before.YearFrom < after.YearFrom;
     }
 }

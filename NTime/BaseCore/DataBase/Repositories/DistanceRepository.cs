@@ -1,12 +1,10 @@
-﻿using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 
 namespace BaseCore.DataBase
 {
     public class DistanceRepository : RepositoryCompetitionId<Distance>
     {
-        public DistanceRepository(Competition competition) : base(competition)
+        public DistanceRepository(IContextProvider contextProvider, Competition competition) : base(contextProvider, competition)
         {
         }
 

@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace BaseCore.DataBase
 {
     public class AgeCategoryTemplateRepository : Repository<AgeCategoryTemplate>
     {
-        public AgeCategoryTemplateRepository(AgeCategoryCollection ageCategoryCollection) => AgeCategoryCollection = ageCategoryCollection;
+        public AgeCategoryTemplateRepository(IContextProvider contextProvider, AgeCategoryCollection ageCategoryCollection) : base(contextProvider) => AgeCategoryCollection = ageCategoryCollection;
 
-        protected AgeCategoryCollection AgeCategoryCollection { get; }
+        public AgeCategoryCollection AgeCategoryCollection { get; set; }
 
         protected override IQueryable<AgeCategoryTemplate> GetAllQuery(IQueryable<AgeCategoryTemplate> items) =>
             items.Where(i => i.AgeCategoryCollectionId == AgeCategoryCollection.Id);
@@ -25,7 +21,10 @@ namespace BaseCore.DataBase
                 throw new ArgumentException("Wrong AgeCategoryCollectionId");
         }
 
-        protected override void PrepareToAdd(AgeCategoryTemplate item) => 
-            item.AgeCategoryCollectionId =AgeCategoryCollection.Id;
+        protected override void PrepareToAdd(AgeCategoryTemplate item)
+        {
+            item.AgeCategoryCollectionId = AgeCategoryCollection.Id;
+            item.AgeCategoryCollection = null;
+        }
     }
 }

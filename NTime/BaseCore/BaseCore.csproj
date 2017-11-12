@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CsvHelper, Version=6.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsvHelper.6.0.0\lib\net45\CsvHelper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -47,12 +50,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Csv\CsvImporter.cs" />
+    <Compile Include="Csv\Records\PlayerRecord.cs" />
+    <Compile Include="Csv\Map\PlayerRecordMap.cs" />
+    <Compile Include="Csv\Records\TimeReadRecord.cs" />
+    <Compile Include="Csv\Map\TimeReadRecordMap.cs" />
+    <Compile Include="DataBase\Contexts\ContextProvider.cs" />
+    <Compile Include="DataBase\Contexts\IContextProvider.cs" />
     <Compile Include="DataBase\Entities\AgeCategory.cs" />
     <Compile Include="DataBase\Entities\AgeCategoryBase.cs" />
     <Compile Include="DataBase\Entities\AgeCategoryTemplate.cs" />
     <Compile Include="DataBase\Entities\AgeCategoryCollection.cs" />
     <Compile Include="DataBase\Entities\Competition.cs" />
-    <Compile Include="DataBase\Entities\CompetitionType.cs" />
+    <Compile Include="DataBase\Entities\DistanceType.cs" />
     <Compile Include="DataBase\Entities\Distance.cs" />
     <Compile Include="DataBase\Entities\EnumTable.cs" />
     <Compile Include="DataBase\Entities\ExtraPlayerInfo.cs" />
@@ -61,23 +71,30 @@
     <Compile Include="DataBase\Entities\Player.cs" />
     <Compile Include="DataBase\Entities\ReaderOrder.cs" />
     <Compile Include="DataBase\Entities\TimeRead.cs" />
-    <Compile Include="DataBase\Enums\CompetitionTypeEnum.cs" />
-    <Compile Include="DataBase\Enums\PlayerSort.cs" />
+    <Compile Include="DataBase\Entities\TimeReadType.cs" />
+    <Compile Include="DataBase\Enums\DistanceTypeEnum.cs" />
+    <Compile Include="PlayerFilter\PlayerSort.cs" />
     <Compile Include="DataBase\Contexts\NTimeDBContext.cs" />
     <Compile Include="DataBase\Contexts\NTimeDBInitializer.cs" />
+    <Compile Include="DataBase\Enums\TimeReadTypeEnum.cs" />
     <Compile Include="DataBase\Repositories\AgeCategoryRepository.cs" />
     <Compile Include="DataBase\Repositories\AgeCategoryCollectionRepository.cs" />
     <Compile Include="DataBase\Repositories\AgeCategoryTemplateRepository.cs" />
     <Compile Include="DataBase\Repositories\CompetitionRepository.cs" />
     <Compile Include="DataBase\Repositories\DistanceRepository.cs" />
     <Compile Include="DataBase\Repositories\ExtraPlayerInfoRepository.cs" />
-    <Compile Include="DataBase\Repositories\PlayerFiltersOptions.cs" />
+    <Compile Include="PlayerFilter\PlayerFilterOptions.cs" />
     <Compile Include="DataBase\Repositories\PlayerRepository.cs" />
     <Compile Include="DataBase\Repositories\ReaderOrderRepository.cs" />
     <Compile Include="DataBase\Repositories\Repository.cs" />
     <Compile Include="DataBase\Repositories\RepositoryCompetitionId.cs" />
     <Compile Include="DataBase\Repositories\TimeReadRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TimesProcess\TimeHelper.cs" />
+    <Compile Include="TimesProcess\TimeProcessForCircuits.cs" />
+    <Compile Include="TimesProcess\TimeProcess.cs" />
+    <Compile Include="TimesProcess\TimeProcessForDistance.cs" />
+    <Compile Include="TimesProcess\TimeProcessForTime.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

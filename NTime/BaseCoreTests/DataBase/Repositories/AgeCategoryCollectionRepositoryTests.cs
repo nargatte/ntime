@@ -5,7 +5,6 @@ using NUnit.Framework;
 
 namespace BaseCoreTests.DataBase
 {
-    [TestFixture]
     public class AgeCategoryCollectionRepositoryTests : RepositoryTests<AgeCategoryCollection>
     {
         protected override AgeCategoryCollection[] InitialItems { get; set; } =
@@ -16,7 +15,13 @@ namespace BaseCoreTests.DataBase
             new AgeCategoryCollection("Rowerowe Wrocławskie") 
         };
 
-        protected override Repository<AgeCategoryCollection> Repository => new AgeCategoryCollectionRepository();
+        protected override Repository<AgeCategoryCollection> Repository { get; set; }
+
+        protected override Task BeforeDataSetUp(NTimeDBContext context)
+        {
+            Repository = new AgeCategoryCollectionRepository(ContextProvider);
+            return base.BeforeDataSetUp(context);
+        }
 
         protected override bool TheSameData(AgeCategoryCollection entity1, AgeCategoryCollection entity2)
         {
@@ -25,6 +30,6 @@ namespace BaseCoreTests.DataBase
         }
 
         protected override bool SortTester(AgeCategoryCollection before, AgeCategoryCollection after) => 
-            String.CompareOrdinal(before.Name, after.Name) > 0;
+            String.CompareOrdinal(before.Name, after.Name) <= 0;
     }
 }

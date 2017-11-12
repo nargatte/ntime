@@ -1,9 +1,9 @@
-﻿namespace BaseCore.DataBase
+﻿namespace BaseCore.PlayerFilter
 {
     public enum PlayerSort
     {
-        ByName,
-        BySurname,
+        ByFirstName,
+        ByLastName,
         ByTeam, 
         ByStartNumber,
         ByStartTime,

@@ -5,13 +5,9 @@ namespace BaseCore.DataBase
 {
     public class TimeReadRepository : Repository<TimeRead>
     {
-        public TimeReadRepository(Player player)
-        {
-            Player = player;
-        }
+        public TimeReadRepository(IContextProvider contextProvider, Player player) : base(contextProvider) => Player = player;
 
-        protected Player Player { get; }
-
+        private Player Player { get; }
         protected override IQueryable<TimeRead> GetAllQuery(IQueryable<TimeRead> items) =>
             items.Where(i => i.PlayerId == Player.Id);
 
@@ -24,7 +20,10 @@ namespace BaseCore.DataBase
                 throw new ArgumentException("Wrong PlayerId");
         }
 
-        protected override void PrepareToAdd(TimeRead item) =>
+        protected override void PrepareToAdd(TimeRead item)
+        {
             item.PlayerId = Player.Id;
+            item.Player = null;
+        }
     }
 }

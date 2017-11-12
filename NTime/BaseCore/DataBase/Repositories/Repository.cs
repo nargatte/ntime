@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,14 +9,21 @@ namespace BaseCore.DataBase
 {
     public abstract class Repository<T>
         where T : class, IEntityId
-    { 
+    {
+        protected IContextProvider ContextProvider;
+
+        protected Repository(IContextProvider contextProvider)
+        {
+            ContextProvider = contextProvider;
+        }
+
         public async Task<T> AddAsync(T item)
         {
             CheckNull(item);
             PrepareToAdd(item);
-            await NTimeDBContext.ContextDoAsync(async ctx =>
+            await ContextProvider.DoAsync(async ctx =>
             {
-                ctx.Entry(item).State = EntityState.Added;
+                ctx.Set<T>().Add(item);
                 await ctx.SaveChangesAsync();
             });
             return item;
@@ -29,7 +37,7 @@ namespace BaseCore.DataBase
                 PrepareToAdd(item);
             }
 
-            await NTimeDBContext.ContextDoAsync(async ctx =>
+            await ContextProvider.DoAsync(async ctx =>
             {
                 foreach (T item in items)
                     ctx.Entry(item).State = EntityState.Added;
@@ -41,7 +49,7 @@ namespace BaseCore.DataBase
         {
             CheckNull(item);
             CheckItem(item);
-            await NTimeDBContext.ContextDoAsync(async ctx =>
+            await ContextProvider.DoAsync(async ctx =>
             {
                 ctx.Entry(item).State = EntityState.Modified;
                 await ctx.SaveChangesAsync();
@@ -52,7 +60,7 @@ namespace BaseCore.DataBase
         {
             CheckNull(item);
             CheckItem(item);
-            await NTimeDBContext.ContextDoAsync(async ctx =>
+            await ContextProvider.DoAsync(async ctx =>
             {
                 ctx.Entry(item).State = EntityState.Deleted;
                 await ctx.SaveChangesAsync();
@@ -61,9 +69,24 @@ namespace BaseCore.DataBase
 
         public async Task RemoveAllAsync()
         {
-            await NTimeDBContext.ContextDoAsync(async ctx =>
+            await ContextProvider.DoAsync(async ctx =>
             {
                 ctx.Set<T>().RemoveRange(GetAllQuery(ctx.Set<T>()));
+                await ctx.SaveChangesAsync();
+            });
+        }
+
+        public async Task RemoveRangeAsync(IEnumerable<T> items)
+        {
+            foreach (T item in items)
+            {
+                CheckNull(item);
+                CheckItem(item);
+            }
+
+            await ContextProvider.DoAsync(async ctx =>
+            {
+                ctx.Set<T>().RemoveRange(items);
                 await ctx.SaveChangesAsync();
             });
         }
@@ -71,11 +94,21 @@ namespace BaseCore.DataBase
         public async Task<T[]> GetAllAsync()
         {
             T[] items = null;
-            await NTimeDBContext.ContextDoAsync(async ctx =>
+            await ContextProvider.DoAsync(async ctx =>
             {
-                items = await GetSortQuery(GetAllQuery(ctx.Set<T>())).ToArrayAsync();
+                items = await GetSortQuery(GetAllQuery(ctx.Set<T>())).AsNoTracking<T>().ToArrayAsync();
             });
             return items;
+        }
+
+        public async Task<T> GetById(int? id)
+        {
+            T item = null;
+            await ContextProvider.DoAsync(async ctx =>
+            {
+                item = await GetAllQuery(ctx.Set<T>()).AsNoTracking<T>().FirstOrDefaultAsync(i => i.Id == id);
+            });
+            return item;
         }
 
         private void CheckNull(T item)
