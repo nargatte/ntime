@@ -31,7 +31,7 @@ namespace BaseCoreTests
                 new Distance("+RODZINNY", 0, DateTime.Now, DistanceTypeEnum.DeterminedCircuits),
                 new Distance("MEGA", 0, DateTime.Now, DistanceTypeEnum.DeterminedCircuits),
                 new Distance("RODZINNY", 0, DateTime.Now, DistanceTypeEnum.DeterminedCircuits),
-                new Distance("GIGA", 0, DateTime.Now, DistanceTypeEnum.DeterminedCircuits),
+                new Distance("GIGA", 0, DateTime.Now, DistanceTypeEnum.DeterminedCircuits)
             });
 
             await akr.AddRangeAsync(new[]

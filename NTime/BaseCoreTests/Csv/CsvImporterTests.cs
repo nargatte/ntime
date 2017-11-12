@@ -22,7 +22,7 @@ namespace BaseCoreTests.Csv
                 CsvImporter<T, TM> importer = new CsvImporter<T, TM>("");
                 items = importer.GetAllRecordsFromStream(reader);
             }
-            Assert.Equals(items.Length, NumberOfExpectedItems);
+            Assert.AreEqual(items.Length, NumberOfExpectedItems);
         }
 
         protected abstract int NumberOfExpectedItems { get; }
