@@ -16,7 +16,7 @@ namespace AdminView
         private IViewModel _currentViewModel;
         private CompetitionChoiceViewModel _competitionChoiceViewModel;
         private CompetitionManagerViewModel _competitionManagerViewModel;
-
+        private Entities.EditableCompetition _currentCompetition;
 
 
         public MainViewModel()
@@ -36,8 +36,9 @@ namespace AdminView
 
         private void NavToCompetitionManager()
         {
+            _currentCompetition = _competitionChoiceViewModel.SelectedCompetition;
             CurrentViewModel?.DetachAllEvents();
-            _competitionManagerViewModel = new CompetitionManagerViewModel();
+            _competitionManagerViewModel = new CompetitionManagerViewModel(_currentCompetition);
             CurrentViewModel = _competitionManagerViewModel;
         }
 

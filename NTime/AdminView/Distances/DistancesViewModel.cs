@@ -11,7 +11,7 @@ namespace AdminView.Distances
     class DistancesViewModel : TabItemViewModel
     {
         ILogsInfo logsInfo;
-        public DistancesViewModel()
+        public DistancesViewModel(Entities.EditableCompetition currentCompetition) : base(currentCompetition)
         {
             TabTitle = "Dystanse";
             AddMeasurementPointCmd = new RelayCommand(OnAddMeasurementPoint);

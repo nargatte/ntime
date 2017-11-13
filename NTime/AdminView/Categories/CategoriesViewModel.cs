@@ -9,7 +9,7 @@ namespace AdminView.Categories
 {
     class CategoriesViewModel : TabItemViewModel
     {
-        public CategoriesViewModel()
+        public CategoriesViewModel(Entities.EditableCompetition currentCompetition) : base(currentCompetition)
         {
             TabTitle = "Kategorie";
             AddCategoryCmd = new RelayCommand(OnAddCategory);

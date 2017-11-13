@@ -9,7 +9,7 @@ namespace AdminView.Players
 {
     class PlayersViewModel : TabItemViewModel, IViewModel
     {
-        public PlayersViewModel()
+        public PlayersViewModel(Entities.EditableCompetition currentCompetition) : base(currentCompetition)
         {
             AddPlayerCmd = new RelayCommand(OnAddPlayer);
             FillPlayersCollection();

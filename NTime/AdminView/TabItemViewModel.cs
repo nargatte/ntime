@@ -8,6 +8,11 @@ namespace AdminView
 {
     class TabItemViewModel : BindableBase
     {
+        protected Entities.EditableCompetition _currentCompetition;
+        public TabItemViewModel(Entities.EditableCompetition currentCompetition)
+        {
+            _currentCompetition = currentCompetition;
+        }
         private string _tabTitle;
         public string TabTitle
         {

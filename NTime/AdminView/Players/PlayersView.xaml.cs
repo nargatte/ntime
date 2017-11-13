@@ -23,7 +23,7 @@ namespace AdminView.Players
         public PlayersView()
         {
             InitializeComponent();
-            DataContext = new PlayersViewModel();
+            //DataContext = new PlayersViewModel();
         }
     }
 }

@@ -15,12 +15,16 @@ namespace AdminView.CompetitionManager
 {
     class CompetitionManagerViewModel : BindableBase, IViewModel
     {
-        public CompetitionManagerViewModel()
+        private Entities.EditableCompetition _currentCompetition;
+
+        public CompetitionManagerViewModel( Entities.EditableCompetition currentCompetition)
         {
+            this._currentCompetition = currentCompetition;
             GoToCompetitionCmd = new RelayCommand(OnGoToCompetition, CanGoToCompetition);
             TabItems = new ObservableCollection<BindableBase>()
             {
-                new SettingsViewModel(), new PlayersViewModel(), new DistancesViewModel(), new CategoriesViewModel(), new ScoresViewModel()
+                new SettingsViewModel(_currentCompetition), new PlayersViewModel(_currentCompetition), new DistancesViewModel(_currentCompetition),
+                new CategoriesViewModel(_currentCompetition), new ScoresViewModel(_currentCompetition)
             };
         }
 

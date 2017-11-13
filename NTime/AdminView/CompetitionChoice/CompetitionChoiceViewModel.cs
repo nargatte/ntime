@@ -10,6 +10,18 @@ namespace AdminView.CompetitionChoice
 {
     class CompetitionChoiceViewModel : BindableBase, IViewModel
     {
+        private bool _competitionSeletec;
+
+        public bool CompetitionSelected
+        {
+            get { return _competitionSeletec; }
+            set
+            {
+                _competitionSeletec = value;
+                GoToCompetitionCmd.RaiseCanExecuteChanged();
+            }
+        }
+
         public CompetitionChoiceViewModel()
         {
             DisplayAddCompetitionViewCmd = new RelayCommand(OnDisplayAddCompetitionView, CanDisplayAddCompetition);
@@ -59,11 +71,15 @@ namespace AdminView.CompetitionChoice
             set { SetProperty(ref _competitions, value); }
         }
 
-        private BaseCore.DataBase.Competition _selectedCompetition;
-        public BaseCore.DataBase.Competition SelectedCompetition
+        private Entities.EditableCompetition _selectedCompetition = new Entities.EditableCompetition();
+        public Entities.EditableCompetition SelectedCompetition
         {
             get { return _selectedCompetition; }
-            set { SetProperty(ref _selectedCompetition, value); }
+            set
+            {
+                SetProperty(ref _selectedCompetition, value);
+                CompetitionSelected = true;
+            }
         }
 
 

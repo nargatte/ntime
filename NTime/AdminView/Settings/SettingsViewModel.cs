@@ -3,31 +3,37 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using BaseCore.DataBase;
 
 namespace AdminView.Settings
 {
     class SettingsViewModel : TabItemViewModel, IViewModel
     {
-        public SettingsViewModel()
+        CompetitionRepository repository = new CompetitionRepository(new ContextProvider());
+        public SettingsViewModel(Entities.EditableCompetition currentCompetition) : base(currentCompetition)
         {
+            this.CurrentCompetition = currentCompetition;
             TabTitle = "Ustawienia";
             SaveChangesCmd = new RelayCommand(OnSaveChanges);
         }
 
 
-        private Entities.EditableCompetition _currentCompetition = new Entities.EditableCompetition();
+        //private Entities.EditableCompetition _currentCompetition;
         public Entities.EditableCompetition CurrentCompetition
         {
             get { return _currentCompetition; }
             set { SetProperty(ref _currentCompetition, value);
-                OnPropertyChanged("Name");
-                OnPropertyChanged("CurrentCompetition.Name");
+                //OnPropertyChanged("Name");
+                //OnPropertyChanged("CurrentCompetition.Name");
             }
         }
 
         private void OnSaveChanges()
         {
-            CurrentCompetition.Name += "New ";
+            repository.UpdateAsync(CurrentCompetition.Competition).ContinueWith( t => 
+            MessageBox.Show("Zmiany zostały zapisane")
+            );
         }
 
         public void DetachAllEvents()

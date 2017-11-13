@@ -9,7 +9,7 @@ namespace AdminView.Scores
 {
     class ScoresViewModel : TabItemViewModel, IViewModel
     {
-        public ScoresViewModel()
+        public ScoresViewModel(Entities.EditableCompetition currentCompetition) : base(currentCompetition)
         {
             TabTitle = "Wyniki";
             FillScores();
