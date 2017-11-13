@@ -6,12 +6,10 @@
         {
         }
 
-        public ReaderOrder(int readerNumber, int orderNumber, decimal minTimeBetween, int distanceId)
+        public ReaderOrder(int readerNumber, decimal minTimeBetween)
         {
             ReaderNumber = readerNumber;
-            OrderNumber = orderNumber;
             MinTimeBetween = minTimeBetween;
-            DistanceId = distanceId;
         }
 
         public int Id { get; set; }

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BaseCore.DataBase
 {
@@ -25,6 +27,25 @@ namespace BaseCore.DataBase
         {
             item.DistanceId = Distance.Id;
             item.Distance = null;
+        }
+
+        public async Task ReplaceBy(IEnumerable<ReaderOrder> readersOrder)
+        {
+            int c = 0;
+            foreach (ReaderOrder item in readersOrder)
+            {
+                CheckNull(item);
+                PrepareToAdd(item);
+                item.OrderNumber = c;
+                c++;
+            }
+
+            await ContextProvider.DoAsync(async ctx =>
+            {
+                ctx.ReaderOrders.RemoveRange(GetAllQuery(ctx.ReaderOrders));
+                ctx.ReaderOrders.AddRange(readersOrder);
+                await ctx.SaveChangesAsync();
+            });
         }
     }
 }

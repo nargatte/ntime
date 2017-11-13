@@ -138,7 +138,7 @@ namespace AdminView.Entities
                     if (LapsCount <= 0)
                         return false;
                     break;
-                case BaseCore.DataBase.DistanceTypeEnum.DeterminedCircuits:
+                case BaseCore.DataBase.DistanceTypeEnum.DeterminedLaps:
                     break;
                 case BaseCore.DataBase.DistanceTypeEnum.LimitedTime:
                     if (LapsCount <= 0)

@@ -56,6 +56,21 @@ namespace BaseCore.DataBase
             });
         }
 
+        public async Task UpdateRangeAsync(IEnumerable<T> items)
+        {
+            foreach (T item in items)
+            {
+                CheckNull(item);
+                CheckItem(item);
+            }
+            await ContextProvider.DoAsync(async ctx =>
+            {
+                foreach (T item in items)
+                    ctx.Entry(item).State = EntityState.Modified;
+                await ctx.SaveChangesAsync();
+            });
+        }
+
         public async Task RemoveAsync(T item)
         {
             CheckNull(item);
@@ -111,7 +126,7 @@ namespace BaseCore.DataBase
             return item;
         }
 
-        private void CheckNull(T item)
+        protected void CheckNull(T item)
         {
             if(item == null)
                 throw new NullReferenceException(nameof(item));

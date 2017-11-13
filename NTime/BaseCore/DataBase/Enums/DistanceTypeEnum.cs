@@ -3,7 +3,7 @@
     public enum DistanceTypeEnum
     {
         DeterminedDistance,
-        DeterminedCircuits,
+        DeterminedLaps,
         LimitedTime
     }
 }

@@ -65,7 +65,7 @@ namespace BaseCore.TimesProcess
             TimeProcessForDistance timeProcess = null;
             if (distance.DistanceTypeEnum == DistanceTypeEnum.DeterminedDistance)
                 timeProcess = new TimeProcessForDistance(player, distance, readerOrder, readersNumbers, this);
-            if (distance.DistanceTypeEnum == DistanceTypeEnum.DeterminedCircuits)
+            if (distance.DistanceTypeEnum == DistanceTypeEnum.DeterminedLaps)
                 timeProcess = new TimeProcessForCircuits(player, distance, readerOrder, readersNumbers, this);
             if (distance.DistanceTypeEnum == DistanceTypeEnum.LimitedTime)
                 timeProcess = new TimeProcessForTime(player, distance, readerOrder, readersNumbers, this);

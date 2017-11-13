@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using BaseCore.TimesProcess;
 
 namespace BaseCore.DataBase
 {
@@ -50,6 +51,8 @@ namespace BaseCore.DataBase
 
         public int CategoryPlaceNumber { get; set; }
 
+        public bool CompetitionCompleted { get; set; }
+
         [StringLength(255)]
         public string FullCategory { get; set; }
 
@@ -69,5 +72,10 @@ namespace BaseCore.DataBase
         public virtual AgeCategory AgeCategory { get; set; }
 
         public virtual ICollection<TimeRead> TimeReads { get; set; }
+
+        public override string ToString()
+        {
+            return $"{nameof(FirstName)}: {FirstName}, {nameof(LastName)}: {LastName}, {nameof(IsMale)}: {IsMale}, {nameof(StartNumber)}: {StartNumber}, {nameof(StartTime)}: {StartTime}, {nameof(LapsCount)}: {LapsCount}, {nameof(Time)}: {Time.ToDateTime()}, {nameof(FullCategory)}: {FullCategory}";
+        }
     }
 }

@@ -9,10 +9,10 @@ namespace BaseCoreTests.DataBase
     {
         protected override Distance[] InitialItems { get; set; } =
         {
-            new Distance("Krótki", 10, new DateTime(2000, 1, 1, 16, 30, 0), DistanceTypeEnum.DeterminedCircuits),
-            new Distance("Średni", 20, new DateTime(2000, 1, 1, 13, 45, 0), DistanceTypeEnum.DeterminedCircuits),
-            new Distance("Długi", 30, new DateTime(2000, 1, 1, 8, 5, 0), DistanceTypeEnum.DeterminedCircuits),
-            new Distance("Maraton", 40, new DateTime(2000, 1, 1, 9, 50, 0), DistanceTypeEnum.DeterminedCircuits)
+            new Distance("Krótki", 10, new DateTime(2000, 1, 1, 16, 30, 0), DistanceTypeEnum.DeterminedLaps),
+            new Distance("Średni", 20, new DateTime(2000, 1, 1, 13, 45, 0), DistanceTypeEnum.DeterminedLaps),
+            new Distance("Długi", 30, new DateTime(2000, 1, 1, 8, 5, 0), DistanceTypeEnum.DeterminedLaps),
+            new Distance("Maraton", 40, new DateTime(2000, 1, 1, 9, 50, 0), DistanceTypeEnum.DeterminedLaps)
         };
 
         protected override Repository<Distance> Repository { get; set; }

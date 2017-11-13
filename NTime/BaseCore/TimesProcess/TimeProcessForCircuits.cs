@@ -11,13 +11,14 @@ namespace BaseCore.TimesProcess
 
         protected override IEnumerable<ReaderOrder> ReaderOrderNumers()
         {
-            for (int i = 0; i < Distance.LapsCount; i++)
+            yield return ReaderOrder[0];
+            while (Distance.LapsCount > Laps)
             {
-                foreach (ReaderOrder readerOrder in ReaderOrder)
+                for (int i = 1; i < ReaderOrder.Length; i++)
                 {
-                    yield return readerOrder;
+                    yield return ReaderOrder[i];
                 }
-                Circuits++;
+                Laps++;
             }
         }
     }

@@ -68,6 +68,13 @@ namespace BaseCore.DataBase
                 items = items.Where(i => i.AgeCategoryId == null || i.DistanceId == null ||
                                          i.ExtraPlayerInfoId == null);
 
+            if (filterOptions.CompleatedCompetition != null)
+                items = items.Where(i => i.CompetitionCompleted == filterOptions.CompleatedCompetition);
+
+            if (filterOptions.HasVoid != null)
+                items = items.Where(i => i.TimeReads.All(t => t.TimeReadTypeId != (int) TimeReadTypeEnum.Void) !=
+                                         filterOptions.HasVoid);
+
             return items;
         }
 
@@ -126,6 +133,12 @@ namespace BaseCore.DataBase
             if (filterOptions.PlayerSort == PlayerSort.ByBirthDate ||
                 filterOptions.PlayerSort == PlayerSort.ByStartTime)
                 return GetDirectedSortQuery(items, FuncDateTimeFilterSort(filterOptions), filterOptions.DescendingSort);
+
+            if(filterOptions.PlayerSort == PlayerSort.ByRank)
+                if (filterOptions.DescendingSort)
+                    return items.OrderByDescending(p => p.LapsCount).ThenByDescending(p => p.Time);
+                else
+                    return items.OrderBy(p => p.LapsCount).ThenBy(p => p.Time);
 
             return GetDirectedSortQuery(items, FuncStringFilterSort(filterOptions), filterOptions.DescendingSort);
         }

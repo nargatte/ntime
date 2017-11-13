@@ -8,6 +8,7 @@
         ByStartNumber,
         ByStartTime,
         ByFullCategory,
-        ByBirthDate
+        ByBirthDate,
+        ByRank
     }
 }
