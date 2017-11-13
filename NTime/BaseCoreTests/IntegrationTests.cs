@@ -33,10 +33,10 @@ namespace BaseCoreTests
             await dr.AddRangeAsync(new[]
             {
                 new Distance("MINI", 0, DateTime.Now, DistanceTypeEnum.DeterminedLaps) {LapsCount = 1},
-                new Distance("+RODZINNY", 0, DateTime.Now, DistanceTypeEnum.DeterminedLaps) {LapsCount = 3},
+                new Distance("+RODZINNY", 0, DateTime.Now, DistanceTypeEnum.DeterminedLaps) {LapsCount = 2},
                 new Distance("MEGA", 0, DateTime.Now, DistanceTypeEnum.DeterminedLaps) {LapsCount = 2},
-                new Distance("RODZINNY", 0, DateTime.Now, DistanceTypeEnum.DeterminedDistance) {LapsCount = 2},
-                new Distance("GIGA", 0, DateTime.Now, DistanceTypeEnum.DeterminedLaps) {LapsCount = 3}
+                new Distance("RODZINNY", 0, DateTime.Now, DistanceTypeEnum.DeterminedLaps) {LapsCount = 1},
+                new Distance("GIGA", 0, DateTime.Now, DistanceTypeEnum.DeterminedDistance) {LapsCount = 3}
             });
 
             await akr.AddRangeAsync(new[]
@@ -52,6 +52,10 @@ namespace BaseCoreTests
             var ror = new ReaderOrderRepository(cp, darr.FirstOrDefault(d => d.Name == "GIGA"));
             await ror.ReplaceBy(new[]
             {
+                new ReaderOrder(1, 1800),
+                new ReaderOrder(2, 1800),
+                new ReaderOrder(1, 1800),
+                new ReaderOrder(2, 1800),
                 new ReaderOrder(1, 1800),
                 new ReaderOrder(2, 1800),
                 new ReaderOrder(1, 1800),
@@ -100,13 +104,13 @@ namespace BaseCoreTests
 
 
             var pfo = new PlayerFilterOptions();
-            pfo.Query = "320";
+            pfo.Query = "57";
             var p = (await pr.GetAllByFilterAsync(
                 pfo, 0, 1)).Item1[0];
 
             TimeProcess timeProcess = new TimeProcess(com);
             await timeProcess.ProcessSingleAsync(p);
-           await timeProcess.ProcessAllAsync();
+            //await timeProcess.ProcessAllAsync();
 
             pfo = new PlayerFilterOptions();
             pfo.PlayerSort = PlayerSort.ByRank;

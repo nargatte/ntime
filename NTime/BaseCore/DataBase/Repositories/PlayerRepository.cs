@@ -136,9 +136,9 @@ namespace BaseCore.DataBase
 
             if(filterOptions.PlayerSort == PlayerSort.ByRank)
                 if (filterOptions.DescendingSort)
-                    return items.OrderByDescending(p => p.LapsCount).ThenByDescending(p => p.Time);
+                    return items.OrderBy(p => p.LapsCount).ThenByDescending(p => p.Time);
                 else
-                    return items.OrderBy(p => p.LapsCount).ThenBy(p => p.Time);
+                    return items.OrderByDescending(p => p.LapsCount).ThenBy(p => p.Time);
 
             return GetDirectedSortQuery(items, FuncStringFilterSort(filterOptions), filterOptions.DescendingSort);
         }
