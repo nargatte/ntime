@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BaseCore.DataBase;
 
 namespace AdminView.CompetitionChoice
 {
@@ -19,9 +20,9 @@ namespace AdminView.CompetitionChoice
 
         private void OnViewLoaded()
         {
-            //var repository = new CompetitionRepository();
-            //AddCompetitions(repository);
-            //DownloadCompetitions(repository);
+            var repository = new CompetitionRepository(new ContextProvider());
+            AddCompetitions(repository);
+            DownloadCompetitions(repository);
         }
 
         private async void AddCompetitions(BaseCore.DataBase.CompetitionRepository repository)
@@ -51,7 +52,7 @@ namespace AdminView.CompetitionChoice
 
         #region Properties
 
-        private ObservableCollection<Entities.EditableCompetition> _competitions;
+        private ObservableCollection<Entities.EditableCompetition> _competitions = new ObservableCollection<Entities.EditableCompetition>();
         public ObservableCollection<Entities.EditableCompetition> Competitions
         {
             get { return _competitions; }

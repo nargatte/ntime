@@ -22,6 +22,14 @@ namespace AdminView.Entities
             set { Competition.Name = SetProperty(Competition.Name, value); }
         }
 
+
+        private string _nam2;
+        public string Name2
+        {
+            get { return _nam2; }
+            set { SetProperty(ref _nam2, value); }
+        }
+
         //private string _name = "Old Text";
         //public string Name
         //{

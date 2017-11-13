@@ -12,7 +12,7 @@ namespace AdminView.XamlConverters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is BaseCore.DataBase.Competition competition && value != null)
+            if (value is Entities.EditableCompetition competition && value != null)
             {
 
                 string result = "Zawody \t" + competition.EventDate.ToString("dd-MM-yyyy");

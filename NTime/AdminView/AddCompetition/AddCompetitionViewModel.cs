@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace AdminView.AddCompetition
 {
@@ -12,11 +13,11 @@ namespace AdminView.AddCompetition
         AddCompetitionView view;
         public AddCompetitionViewModel()
         {
-            AddCompetitionCmd = new RelayCommand(OnAddCompetition, CanAddCompetition);
+            AddCompetitionCmd = new RelayCommand(OnAddCompetition);
             CancelAddingCmd = new RelayCommand(OnCancelAdding);
         }
 
-        private Entities.EditableCompetition _newCompetition;
+        private Entities.EditableCompetition _newCompetition = new Entities.EditableCompetition() { EventDate = DateTime.Today};
         public Entities.EditableCompetition NewCompetition
         {
             get { return _newCompetition; }
@@ -31,13 +32,13 @@ namespace AdminView.AddCompetition
 
         private void OnAddCompetition()
         {
+            if(NewCompetition.EventDate.Year <2000)
+            {
+                MessageBox.Show("Przed zatwierdzeniem zawodów należy wybrać ich datę");
+                return;
+            }
             AddCompetitionRequested(this, EventArgs.Empty);
             view.Close();
-        }
-
-        private bool CanAddCompetition()
-        {
-            return false;
         }
 
         private void OnCancelAdding()
