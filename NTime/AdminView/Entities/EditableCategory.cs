@@ -8,27 +8,44 @@ namespace AdminView.Entities
 {
     class EditableCategory : BindableBase
     {
+        public EditableCategory()
+        {
+            DeleteCategoryCmd = new RelayCommand(OnDeleteCategory);
+        }
 
-        private string _name;
+        private BaseCore.DataBase.AgeCategory _category = new BaseCore.DataBase.AgeCategory();
+        public BaseCore.DataBase.AgeCategory Category
+        {
+            get { return _category; }
+            set { _category = value; }
+        }
+
         public string Name
         {
-            get { return _name; }
-            set { SetProperty(ref _name, value); }
+            get { return Category.Name; }
+            set { Category.Name = SetProperty(Category.Name, value); }
         }
 
-        private int _yearFrom;
+
+        private void OnDeleteCategory()
+        {
+            DeleteRequested(this, EventArgs.Empty);
+        }
+
         public int YearFrom
         {
-            get { return _yearFrom; }
-            set { SetProperty(ref _yearFrom, value); }
+            get { return Category.YearFrom; }
+            set { Category.YearFrom = SetProperty(Category.YearFrom, value); }
         }
 
-
-        private int _yearTo;
         public int YearTo
         {
-            get { return _yearTo; }
-            set { SetProperty(ref _yearTo, value); }
+            get { return Category.YearTo; }
+            set { Category.YearTo = SetProperty(Category.YearTo, value); }
         }
+
+        public event EventHandler DeleteRequested = delegate { };
+        public RelayCommand DeleteCategoryCmd { get; private set; }
+
     }
 }

@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AdminView.AddCompetition"
              xmlns:DataBase="clr-namespace:BaseCore.DataBase;assembly=BaseCore" x:Class="AdminView.AddCompetition.AddCompetitionView"
+            xmlns:validation="clr-namespace:AdminView.Validation"
              mc:Ignorable="d" 
              WindowStyle="None"
              WindowStartupLocation="CenterScreen"
@@ -36,7 +37,13 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Label VerticalAlignment="Center" Grid.Row="0" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Nazwa:"/>
-            <TextBox x:Name="nameTextBox" Width="120" VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, ValidatesOnNotifyDataErrors=True}" Grid.Row="0" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
+            <TextBox x:Name="nameTextBox" Width="120" VerticalAlignment="Center" Grid.Row="0" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1">
+                <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <validation:IsNotEmpty ValidatesOnTargetUpdated="True"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
             <Label VerticalAlignment="Center" Grid.Row="1" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Opis:"/>
             <TextBox x:Name="descriptionTextBox" Width="120" VerticalAlignment="Center" Text="{Binding Description, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, ValidatesOnNotifyDataErrors=True}" Grid.Row="1" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
             <Label VerticalAlignment="Center" Grid.Row="2" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Miasto:"/>

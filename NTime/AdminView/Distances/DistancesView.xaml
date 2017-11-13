@@ -6,6 +6,7 @@
              xmlns:validation="clr-namespace:AdminView.Validation"
              xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
              xmlns:local="clr-namespace:AdminView.Distances"
+             xmlns:entities="clr-namespace:AdminView.Entities"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="800">
@@ -13,7 +14,7 @@
         <ObjectDataProvider x:Key="CompetitionEnum" MethodName="GetValues"
                             ObjectType="{x:Type System:Enum}">
             <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="local:CompetitionTypeEnumerator"/>
+                <x:Type TypeName="entities:CompetitionTypeEnumerator"/>
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
     </UserControl.Resources>
@@ -147,8 +148,29 @@
             <TextBlock HorizontalAlignment="Center" > Dystanse</TextBlock>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBlock Margin="5" > Nazwa</TextBlock>
-                <TextBox Text="{Binding NewDistanceName}" Margin="5" Width="100"/>
-                <Button Command="{Binding AddDistanceCmd}" Margin="5">Dodaj</Button>
+                <TextBox Name="newDistanceTB"  Margin="5" Width="100">
+                    <Binding Path="NewDistanceName" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validation:IsNotEmpty ValidatesOnTargetUpdated="True"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
+                <Button Command="{Binding AddDistanceCmd}" Margin="5">
+                    Dodaj
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="IsEnabled" Value="False"/>
+                            <Style.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding ElementName=newDistanceTB, Path=(Validation.HasError)}" Value="false" />
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="IsEnabled" Value="True"/>
+                                </MultiDataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
             </StackPanel>
             <DataGrid x:Name="distancesDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected"
                   ItemsSource="{Binding Distances}" EnableRowVirtualization="True" AutoGenerateColumns="False"
@@ -194,7 +216,7 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBox Name="DistanceStartTimeTB">
-                                    <Binding Path="StartTime" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding Path="StartTime" UpdateSourceTrigger="LostFocus">
                                         <Binding.ValidationRules>
                                             <validation:TimeFormatRule ValidatesOnTargetUpdated="True"/>
                                         </Binding.ValidationRules>
@@ -207,7 +229,7 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBox Name="DistanceTimeLimitTB">
-                                    <Binding Path="TimeLimit" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding Path="TimeLimit" UpdateSourceTrigger="LostFocus">
                                         <Binding.ValidationRules>
                                             <validation:TimeFormatRule ValidatesOnTargetUpdated="True"/>
                                         </Binding.ValidationRules>

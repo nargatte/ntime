@@ -11,7 +11,7 @@ namespace BaseCore.TimesProcess
 
         protected override IEnumerable<ReaderOrder> ReaderOrderNumers()
         {
-            for (int i = 0; i < Distance.NumberOfCircuits; i++)
+            for (int i = 0; i < Distance.LapsCount; i++)
             {
                 foreach (ReaderOrder readerOrder in ReaderOrder)
                 {

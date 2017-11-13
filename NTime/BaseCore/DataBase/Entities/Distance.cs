@@ -38,9 +38,9 @@ namespace BaseCore.DataBase
             set => DistanceTypeId = (int)value;
         }
 
-        public int NumberOfCircuits;
+        public int LapsCount { get; set; }
 
-        public decimal TimeLimit;
+        public decimal TimeLimit { get; set; }
 
         public int CompetitionId { get; set; }
         public virtual Competition Competition { get; set; }

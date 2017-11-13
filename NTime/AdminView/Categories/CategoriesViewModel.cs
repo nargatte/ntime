@@ -15,10 +15,19 @@ namespace AdminView.Categories
             AddCategoryCmd = new RelayCommand(OnAddCategory);
         }
 
+
         private void OnAddCategory()
         {
+            NewCategory.DeleteRequested += NewCategory_DeleteRequested;
             Categories.Add(NewCategory);
             NewCategory = new Entities.EditableCategory();
+
+        }
+
+        //Same must be done after import !!!!
+        private void NewCategory_DeleteRequested(object sender, EventArgs e)
+        {
+            Categories.Remove(sender as Entities.EditableCategory);
         }
 
         private Entities.EditableCategory _newCategory = new Entities.EditableCategory();
@@ -36,6 +45,8 @@ namespace AdminView.Categories
         }
 
         public event Action CompetitionManagerRequested = delegate { };
+        public event EventHandler DeleteRequested = delegate { };
         public RelayCommand AddCategoryCmd { get; private set; }
+        public RelayCommand DeleteCategoryCmd { get; private set; }
     }
 }

@@ -106,7 +106,6 @@
     <Compile Include="Entities\EditableCategory.cs" />
     <Compile Include="Entities\EditableDistance.cs" />
     <Compile Include="Entities\EditablePlayer.cs" />
-    <Compile Include="Entities\EditableScore.cs" />
     <Compile Include="ILogsInfo.cs" />
     <Compile Include="IViewModel.cs" />
     <Compile Include="LogsInfo.cs" />

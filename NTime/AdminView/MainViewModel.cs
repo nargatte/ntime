@@ -16,14 +16,14 @@ namespace AdminView
         private IViewModel _currentViewModel;
         private CompetitionChoiceViewModel _competitionChoiceViewModel;
         private CompetitionManagerViewModel _competitionManagerViewModel;
-        //private SettingsViewModel _settingsViewModel;
-        //private ScoresViewModel _scoresViewModel;
+
 
 
         public MainViewModel()
         {
-            //NavToCompetitionChoiceView();
-            NavToCompetitionManager();
+
+            NavToCompetitionChoiceView();
+            //NavToCompetitionManager();
         }
 
         private void NavToCompetitionChoiceView()

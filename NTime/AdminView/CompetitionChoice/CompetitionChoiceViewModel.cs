@@ -42,13 +42,17 @@ namespace AdminView.CompetitionChoice
 
         private async void DownloadCompetitions(BaseCore.DataBase.CompetitionRepository repository)
         {
-            Competitions = new ObservableCollection<BaseCore.DataBase.Competition>(await repository.GetAllAsync());
+            var tempCompetitions = new ObservableCollection<BaseCore.DataBase.Competition>(await repository.GetAllAsync());
+            foreach (var item in tempCompetitions)
+            {
+                Competitions.Add(new Entities.EditableCompetition() { Competition = item });
+            }
         }
 
         #region Properties
 
-        private ObservableCollection<BaseCore.DataBase.Competition> _competitions;
-        public ObservableCollection<BaseCore.DataBase.Competition> Competitions
+        private ObservableCollection<Entities.EditableCompetition> _competitions;
+        public ObservableCollection<Entities.EditableCompetition> Competitions
         {
             get { return _competitions; }
             set { SetProperty(ref _competitions, value); }
@@ -80,9 +84,10 @@ namespace AdminView.CompetitionChoice
             addCompetitionViewModel.ShowWindow();
         }
 
-        private void OnCompetitionAdded()
+        private void OnCompetitionAdded(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            var addCompetitionViewModel = sender as AddCompetition.AddCompetitionViewModel;
+            Competitions.Add(addCompetitionViewModel.NewCompetition);
         }
 
         private void OnDisplayAddCompetitionView()

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+//using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using BaseCore.TimesProcess;
 
 namespace AdminView.Entities
 {
@@ -14,6 +15,15 @@ namespace AdminView.Entities
 
     class EditableDistance : BindableBase
     {
+        private BaseCore.DataBase.Distance _dstance = new BaseCore.DataBase.Distance();
+
+        public BaseCore.DataBase.Distance Distance
+        {
+            get { return _dstance; }
+            set { _dstance = value; }
+        }
+
+
         private ILogsInfo logsInfo;
         public EditableDistance(ILogsInfo logsInfo)
         {
@@ -46,58 +56,58 @@ namespace AdminView.Entities
 
         #region Properties
 
-        private string _name;
+
         public string Name
         {
-            get { return _name; }
-            set { SetProperty(ref _name, value); }
+            get { return Distance.Name; }
+            set { Distance.Name = SetProperty(Distance.Name, value); }
         }
 
 
-        private decimal _lenght;
         public decimal Length
         {
-            get { return _lenght; }
-            set { SetProperty(ref _lenght, value); }
-        }
-
-        private CompetitionTypeEnumerator? competitionType;
-        public CompetitionTypeEnumerator? CompetitionType
-        {
-            get { return competitionType; }
-            set { SetProperty(ref competitionType, value); }
+            get { return Distance.Length; }
+            set { Distance.Length = SetProperty(Distance.Length, value); }
         }
 
 
-        private string _readersOrder;
-        public string ReadersOrder
+        public BaseCore.DataBase.DistanceTypeEnum DistanceType
         {
-            get { return _readersOrder; }
-            set { SetProperty(ref _readersOrder, value); }
+            get { return Distance.DistanceTypeEnum; }
+            set { Distance.DistanceTypeEnum = SetProperty(Distance.DistanceTypeEnum, value); }
         }
 
 
-        private int? _lapsCount;
-        public int? LapsCount
+        public ICollection<BaseCore.DataBase.ReaderOrder> ReadersOrder
         {
-            get { return _lapsCount; }
-            set { SetProperty(ref _lapsCount, value); }
+            get { return Distance.ReaderOrders; }
+            set { Distance.ReaderOrders = SetProperty(Distance.ReaderOrders, value); }
         }
 
 
-        private DateTime _timeLimit;
-        public DateTime TimeLimit
+        public int LapsCount
         {
-            get { return _timeLimit; }
-            set { SetProperty(ref _timeLimit, value); }
+            get { return Distance.LapsCount; }
+            set { Distance.LapsCount = SetProperty(Distance.LapsCount, value); }
         }
 
 
-        private DateTime _startTime;
-        public DateTime StartTime
+        public string TimeLimit
         {
-            get { return _startTime; }
-            set { SetProperty(ref _startTime, value); }
+            get { return Distance.TimeLimit.ToDateTime().ConvertToString(); }
+            set {
+                if (value.TryConvertToDateTime(out DateTime dateTime))
+                    Distance.TimeLimit = SetProperty(Distance.TimeLimit, dateTime.ToDecimal());}
+        }
+
+        public string StartTime
+        {
+            get { return Distance.StartTime.ConvertToString(); }
+            set
+            {
+                if (value.TryConvertToDateTime(out DateTime dateTime))
+                    Distance.StartTime = SetProperty(Distance.StartTime, dateTime);
+            }
         }
 
         private bool _isValid;
@@ -105,7 +115,6 @@ namespace AdminView.Entities
         {
             get { return _isValid; }
         }
-
 
         #endregion
         /// <summary>
@@ -119,21 +128,19 @@ namespace AdminView.Entities
 
         private bool IsDistanceValid()
         {
-            if (!CompetitionType.HasValue)
-                return false;
             if (Length <= 0)
                 return false;
             if (StartTime == null)
                 return false;
-            switch (CompetitionType)
+            switch (DistanceType)
             {
-                case CompetitionTypeEnumerator.DeterminedDistanceLaps:
+                case BaseCore.DataBase.DistanceTypeEnum.DeterminedDistance:
                     if (LapsCount <= 0)
                         return false;
                     break;
-                case CompetitionTypeEnumerator.DeterminedDistanceUnusual:
+                case BaseCore.DataBase.DistanceTypeEnum.DeterminedCircuits:
                     break;
-                case CompetitionTypeEnumerator.LimitedTime:
+                case BaseCore.DataBase.DistanceTypeEnum.LimitedTime:
                     if (LapsCount <= 0)
                         return false;
                     if (TimeLimit == null)
@@ -142,10 +149,10 @@ namespace AdminView.Entities
                 default:
                     break;
             }
-            if (ReadersOrder == null)
-                return false;
-            if (ReadersOrder.Length == 0)
-                return false;
+            //if (ReadersOrder == null)
+            //    return false;
+            //if (ReadersOrder.Length == 0)
+            //    return false;
 
 
             return true;

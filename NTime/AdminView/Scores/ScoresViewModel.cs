@@ -19,21 +19,18 @@ namespace AdminView.Scores
         {
             for (int i = 0; i < 20; i++)
             {
-                Scores.Add(new Entities.EditableScore()
+                Scores.Add(new Entities.EditablePlayer()
                 {
+                    LastName = "Kierzkowski",
+                    FirstName = "Jan",
+                    Team = "Niezniszczalni Zgierz",
+                    BirthDate = new DateTime(1994, 10, 09),
+                    IsMale = true,
+                    StartNumber = 18,
                     CategoryPlaceNumber = 3,
                     DistancePlaceNumber = 1,
                     LapsCount = 5,
                     Time = "04:20:37.255",
-                    Player = new Entities.EditablePlayer()
-                    {
-                        LastName = "Kierzkowski",
-                        FirstName = "Jan",
-                        Team = "Niezniszczalni Zgierz",
-                        BirthDate = new DateTime(1994, 10, 09),
-                        IsMale = true,
-                        StartNumber = 18
-                    }
                 });
             }
         }
@@ -43,15 +40,15 @@ namespace AdminView.Scores
             throw new NotImplementedException();
         }
 
-        private Entities.EditableScore _scoreFilter;
-        public Entities.EditableScore ScoreFilter
+        private Entities.EditablePlayer _scoreFilter;
+        public Entities.EditablePlayer ScoreFilter
         {
             get { return _scoreFilter; }
             set { SetProperty(ref _scoreFilter, value); }
         }
 
-        private ObservableCollection<Entities.EditableScore> _scores = new ObservableCollection<Entities.EditableScore>();
-        public ObservableCollection<Entities.EditableScore> Scores
+        private ObservableCollection<Entities.EditablePlayer> _scores = new ObservableCollection<Entities.EditablePlayer>();
+        public ObservableCollection<Entities.EditablePlayer> Scores
         {
             get { return _scores; }
             set { SetProperty(ref _scores, value); }

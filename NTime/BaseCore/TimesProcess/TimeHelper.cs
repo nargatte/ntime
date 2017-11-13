@@ -28,5 +28,44 @@ namespace BaseCore.TimesProcess
 
             return ret;
         }
+
+        public static bool TryConvertToDateTime(this string timeString, out DateTime dateTime)
+        {
+            dateTime = DateTime.Today;
+            if (timeString is null)
+                return false;
+            string[] dividedString = timeString.Split(':');
+            if (TryParseInt(dividedString[0], out int hours, 0, 23))
+                return false;
+            if (TryParseInt(dividedString[1], out int minutes, 0, 59))
+                return false;
+            var secondsString = dividedString[2].Split('.');
+            int seconds = 0;
+            int miliseconds = 0;
+            if (secondsString.Length == 0 || secondsString.Length > 2)
+                return false;
+            if (secondsString.Length == 2)
+            {
+                if (TryParseInt(secondsString[1], out miliseconds, 0, 999))
+                    return false;
+            }
+            if (TryParseInt(secondsString[0], out seconds, 0, 59))
+                return false;
+
+            dateTime = dateTime.AddHours(hours).AddMinutes(minutes).AddSeconds(seconds).AddMilliseconds(miliseconds);
+            return true;
+        }
+
+        private static bool TryParseInt(string s, out int result, int minValue, int maxValue)
+        {
+            return (!int.TryParse(s, out result)) || result < minValue || result > maxValue;
+        }
+
+        public static string ConvertToString(this DateTime time)
+        {
+            return $"{time.TimeOfDay.Hours.ToString("00")}:{time.TimeOfDay.Minutes.ToString("00")}:{time.TimeOfDay.Seconds.ToString("00")}.{time.TimeOfDay.Milliseconds.ToString("000")}";
+        }
+
+
     }
 }

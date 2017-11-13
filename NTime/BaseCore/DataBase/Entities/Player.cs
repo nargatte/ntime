@@ -42,9 +42,13 @@ namespace BaseCore.DataBase
 
         public bool IsStartTimeFromReader { get; set; }
 
-        public int Circuits { get; set; }
+        public int LapsCount { get; set; }
 
         public decimal Time { get; set; }
+
+        public int DistancePlaceNumber { get; set; }
+
+        public int CategoryPlaceNumber { get; set; }
 
         [StringLength(255)]
         public string FullCategory { get; set; }

@@ -19,10 +19,33 @@ namespace AdminView
             PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        protected virtual T SetProperty<T>(T member, T val,
+            [CallerMemberName] string propertyName = null)
+        {
+            if (object.Equals(member, val)) return member;
+
+            member = val;
+            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            return member;
+        }
+
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
+
+    }
+
+    public class BindableBase<T> : BindableBase
+    {
+        protected virtual void SetProperty(ref T member, T val,
+            [CallerMemberName] string propertyName = null)
+        {
+            if (object.Equals(member, val)) return;
+
+            member = val;
+            OnPropertyChanged(propertyName);
+        }
     }
 }

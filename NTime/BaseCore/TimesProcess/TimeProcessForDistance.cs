@@ -74,7 +74,7 @@ namespace BaseCore.TimesProcess
         private Task UpdatePlayer()
         {
             PlayerRepository playerRepository = new PlayerRepository(new ContextProvider(), TimeProcess.Competition);
-            Player.Circuits = Circuits;
+            Player.LapsCount = Circuits;
             Player.Time = LastSignificant.Time - StartTime;
             return playerRepository.UpdateAsync(Player);
         }

@@ -31,6 +31,7 @@ namespace AdminView.AddCompetition
 
         private void OnAddCompetition()
         {
+            AddCompetitionRequested(this, EventArgs.Empty);
             view.Close();
         }
 
@@ -48,7 +49,7 @@ namespace AdminView.AddCompetition
         {
             Delegate[] clientList = AddCompetitionRequested.GetInvocationList();
             foreach (var deleg in clientList)
-                AddCompetitionRequested -= (deleg as Action);
+                AddCompetitionRequested -= (deleg as EventHandler);
             clientList = CancelAddingRequested.GetInvocationList();
             foreach (var deleg in clientList)
                 CancelAddingRequested -= (deleg as Action);
@@ -63,7 +64,7 @@ namespace AdminView.AddCompetition
 
         public RelayCommand AddCompetitionCmd { get; private set; }
         public RelayCommand CancelAddingCmd { get; private set; }
-        public event Action AddCompetitionRequested = delegate { };
+        public event EventHandler AddCompetitionRequested = delegate { };
         public event Action CancelAddingRequested = delegate { };
     }
 }

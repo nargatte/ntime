@@ -8,53 +8,62 @@ namespace AdminView.Entities
 {
     class EditableCompetition : BindableBase
     {
-        private string _name = "Old Text";
+        private BaseCore.DataBase.Competition _competition = new BaseCore.DataBase.Competition();
+        public BaseCore.DataBase.Competition Competition
+        {
+            get { return _competition; }
+            set { _competition = value; }
+        }
+
+
         public string Name
         {
-            get { return _name; }
-            set { SetProperty(ref _name, value);
-                OnPropertyChanged("Name");
-            }
+            get { return Competition.Name; }
+            set { Competition.Name = SetProperty(Competition.Name, value); }
         }
 
+        //private string _name = "Old Text";
+        //public string Name
+        //{
+        //    get { return _name; }
+        //    set { SetProperty(ref _name, value);
+        //        OnPropertyChanged("Name");
+        //    }
+        //}
 
-        private string _city = String.Empty;
+
         public string City
         {
-            get { return _city; }
-            set { SetProperty(ref _city, value); }
+            get { return Competition.City; }
+            set { Competition.City = SetProperty(Competition.City, value); }
         }
 
 
-        private DateTime _eventDate = new DateTime();
         public DateTime EventDate
         {
-            get { return _eventDate; }
-            set { SetProperty(ref _eventDate, value); }
+            get { return Competition.EventDate; }
+            set { Competition.EventDate = SetProperty(Competition.EventDate, value); }
         }
 
 
-        private string _organiser = String.Empty;
         public string Organiser
         {
-            get { return _organiser; }
-            set { SetProperty(ref _organiser, value); }
+            get { return Competition.Organiser; }
+            set { Competition.Organiser = SetProperty(Competition.Organiser, value); }
         }
 
 
-        private string _description = String.Empty;
         public string Description
         {
-            get { return _description; }
-            set { SetProperty(ref _description, value); }
+            get { return Competition.Description; }
+            set { Competition.Description = SetProperty(Competition.Description, value); }
         }
 
 
-        private string _link = String.Empty;
         public string Link
         {
-            get { return _link; }
-            set { SetProperty(ref _link, value); }
+            get { return Competition.Link; }
+            set { Competition.Link = SetProperty(Competition.Link, value); }
         }
     }
 }
