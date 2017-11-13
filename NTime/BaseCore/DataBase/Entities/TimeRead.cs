@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using BaseCore.TimesProcess;
 
 namespace BaseCore.DataBase
 {
@@ -32,6 +33,11 @@ namespace BaseCore.DataBase
 
         public int PlayerId { get; set; }
         public virtual Player Player { get; set; }
+
+        public override string ToString()
+        {
+            return $"{nameof(Time)}: {Time.ToDateTime()}, {nameof(Reader)}: {Reader}, {nameof(TimeReadTypeEnum)}: {TimeReadTypeEnum}";
+        }
 
         protected bool Equals(TimeRead other)
         {

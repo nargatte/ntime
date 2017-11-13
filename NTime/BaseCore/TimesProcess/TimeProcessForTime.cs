@@ -13,21 +13,24 @@ namespace BaseCore.TimesProcess
 
         protected override IEnumerable<ReaderOrder> ReaderOrderNumers()
         {
+            yield return ReaderOrder[0];
             while (true)
             {
-                foreach (ReaderOrder readerOrder in ReaderOrder)
+                for (int i = 1; i < ReaderOrder.Length; i++)
                 {
-                    yield return readerOrder;
+                    yield return ReaderOrder[i];
                 }
-                Circuits++;
+                Laps++;
             }
         }
 
         protected override bool IsNonsignificantAfter(TimeRead timeRead)
         {
             if (_afterCompetition) return true;
-            _afterCompetition = timeRead.Time - StartTime < Distance.TimeLimit && ExpectedReader.Current == ReaderOrder[0];
+            _afterCompetition = timeRead.Time - StartTime >= Distance.TimeLimit && ExpectedReader.Current == ReaderOrder[1];
             return _afterCompetition;
         }
+
+        protected override bool IsRankabe() => _afterCompetition;
     }
 }

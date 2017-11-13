@@ -18,13 +18,13 @@ namespace BaseCore.TimesProcess
 
         protected TimeRead[] TimeReads;
 
-        protected HashSet<TimeRead> VoidsToAdd = new HashSet<TimeRead>();
+        protected HashSet<TimeRead> ExistVoids = new HashSet<TimeRead>();
 
         protected decimal StartTime;
 
         protected TimeProcess TimeProcess;
 
-        protected int Circuits;
+        protected int Laps;
 
         protected TimeRead LastSignificant;
 
@@ -77,8 +77,8 @@ namespace BaseCore.TimesProcess
         private Task UpdateVoids()
         {
             HashSet<TimeRead> voidsInDb = new HashSet<TimeRead>(TimeReads.Where(t => t.TimeReadTypeEnum == TimeReadTypeEnum.Void));
-            HashSet<TimeRead> voidsToRemove = new HashSet<TimeRead>(voidsInDb.Where(t => !VoidsToAdd.Contains(t)));
-            HashSet<TimeRead> voidsToAdd = new HashSet<TimeRead>(VoidsToAdd.Where(t => !voidsInDb.Contains(t)));
+            HashSet<TimeRead> voidsToRemove = new HashSet<TimeRead>(voidsInDb.Where(t => !ExistVoids.Contains(t)));
+            HashSet<TimeRead> voidsToAdd = new HashSet<TimeRead>(ExistVoids.Where(t => !voidsInDb.Contains(t)));
 
             TimeReadRepository readRepository = new TimeReadRepository(new ContextProvider(), Player);
             Task t1 = readRepository.AddRangeAsync(voidsToAdd);
@@ -90,8 +90,9 @@ namespace BaseCore.TimesProcess
         private Task UpdatePlayer()
         {
             PlayerRepository playerRepository = new PlayerRepository(new ContextProvider(), TimeProcess.Competition);
-            Player.Circuits = Circuits;
+            Player.LapsCount = Laps;
             Player.Time = LastSignificant.Time - StartTime;
+            Player.CompleatedCompetition = IsRankabe();
             return playerRepository.UpdateAsync(Player);
         }
 
@@ -126,6 +127,8 @@ namespace BaseCore.TimesProcess
 
         protected virtual bool IsNonsignificantAfter(TimeRead timeRead) => NonReadersRemain;
 
+        protected virtual bool IsRankabe() => NonReadersRemain;
+
         protected bool IsRepeted(TimeRead timeRead)
         {
             if (LastSignificant == null)
@@ -138,9 +141,7 @@ namespace BaseCore.TimesProcess
         {
             if (LastSignificant == null)
             {
-                if (Player.IsStartTimeFromReader)
-                    return false;
-                return timeRead.Time - StartTime < ExpectedReader.Current?.MinTimeBetween;
+                return false;
             }
             return timeRead.Time - LastSignificant.Time < ExpectedReader.Current?.MinTimeBetween;
         }
@@ -165,7 +166,7 @@ namespace BaseCore.TimesProcess
                 TimeRead tr = new TimeRead((LastSignificant?.Time ?? StartTime) + ExpectedReader.Current?.MinTimeBetween ?? 0,
                     ExpectedReader.Current?.ReaderNumber ?? -1);
                 tr.TimeReadTypeEnum = TimeReadTypeEnum.Void;
-                VoidsToAdd.Add(tr);
+                ExistVoids.Add(tr);
                 LastSignificant = tr;
                 NonReadersRemain = !ExpectedReader.MoveNext();
                 return false;

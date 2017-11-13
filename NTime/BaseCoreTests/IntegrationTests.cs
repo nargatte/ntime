@@ -32,11 +32,11 @@ namespace BaseCoreTests
 
             await dr.AddRangeAsync(new[]
             {
-                new Distance("MINI", 0, DateTime.Now, DistanceTypeEnum.DeterminedDistance),
-                new Distance("+RODZINNY", 0, DateTime.Now, DistanceTypeEnum.DeterminedDistance),
-                new Distance("MEGA", 0, DateTime.Now, DistanceTypeEnum.DeterminedDistance),
-                new Distance("RODZINNY", 0, DateTime.Now, DistanceTypeEnum.DeterminedDistance),
-                new Distance("GIGA", 0, DateTime.Now, DistanceTypeEnum.DeterminedDistance)
+                new Distance("MINI", 0, DateTime.Now, DistanceTypeEnum.DeterminedCircuits) {NumberOfCircuits = 1},
+                new Distance("+RODZINNY", 0, DateTime.Now, DistanceTypeEnum.DeterminedCircuits) {NumberOfCircuits = 3},
+                new Distance("MEGA", 0, DateTime.Now, DistanceTypeEnum.DeterminedCircuits) {NumberOfCircuits = 2},
+                new Distance("RODZINNY", 0, DateTime.Now, DistanceTypeEnum.DeterminedDistance) {NumberOfCircuits = 2},
+                new Distance("GIGA", 0, DateTime.Now, DistanceTypeEnum.DeterminedCircuits) {NumberOfCircuits = 3}
             });
 
             await akr.AddRangeAsync(new[]
@@ -52,85 +52,75 @@ namespace BaseCoreTests
             var ror = new ReaderOrderRepository(cp, darr.FirstOrDefault(d => d.Name == "GIGA"));
             await ror.ReplaceBy(new[]
             {
-                new ReaderOrder(1, 0),
-                new ReaderOrder(2, 0),
-                new ReaderOrder(1, 0),
-                new ReaderOrder(2, 0),
-                new ReaderOrder(1, 0),
-                new ReaderOrder(2, 0),
-                new ReaderOrder(1, 0)
+                new ReaderOrder(1, 1800),
+                new ReaderOrder(2, 1800),
+                new ReaderOrder(1, 1800),
             });
 
             ror = new ReaderOrderRepository(cp, darr.FirstOrDefault(d => d.Name == "MEGA"));
             await ror.ReplaceBy(new[]
             {
-                new ReaderOrder(1, 0),
-                new ReaderOrder(2, 0),
-                new ReaderOrder(1, 0),
-                new ReaderOrder(2, 0),
-                new ReaderOrder(1, 0)
+                new ReaderOrder(1, 1800),
+                new ReaderOrder(2, 1800),
+                new ReaderOrder(1, 1800),
             });
 
             ror = new ReaderOrderRepository(cp, darr.FirstOrDefault(d => d.Name == "MINI"));
             await ror.ReplaceBy(new[]
             {
-                new ReaderOrder(1, 0),
-                new ReaderOrder(2, 0),
-                new ReaderOrder(1, 0)
+                new ReaderOrder(1, 1800),
+                new ReaderOrder(2, 1800),
+                new ReaderOrder(1, 1800)
             });
 
             ror = new ReaderOrderRepository(cp, darr.FirstOrDefault(d => d.Name == "+RODZINNY"));
             await ror.ReplaceBy(new[]
             {
-                new ReaderOrder(1, 0),
-                new ReaderOrder(1, 0),
-                new ReaderOrder(1, 0)
+                new ReaderOrder(1, 1000),
+                new ReaderOrder(1, 1000),
             });
 
             ror = new ReaderOrderRepository(cp, darr.FirstOrDefault(d => d.Name == "RODZINNY"));
             await ror.ReplaceBy(new[]
             {
-                new ReaderOrder(1, 0),
-                new ReaderOrder(1, 0)
+                new ReaderOrder(1, 1000),
+                new ReaderOrder(1, 1000)
             });
 
             await pr.ImportPlayersAsync(
                 pathToexport + "Zawodnicy.csv");
             await pr.ImportTimeReadsAsync(
-                pathToexport + "log1.csv", 1); // 1
+                pathToexport + "log1.csv", 1); 
             await pr.ImportTimeReadsAsync(
-                pathToexport + "log2.csv", 1); //1
+                pathToexport + "log2.csv", 1);
             await pr.ImportTimeReadsAsync(
-                pathToexport + "log3.csv", 2); //2
-           // await pr.ImportTimeReadsAsync(
-             //   pathToexport + "log1 Lask.csv", 2);
+                pathToexport + "log3.csv", 2);
+            // await pr.ImportTimeReadsAsync(
+            //   pathToexport + "log1 Lask.csv", 2);
 
+
+            var pfo = new PlayerFilterOptions();
+            pfo.Query = "320";
             var p = (await pr.GetAllByFilterAsync(
-                new PlayerFilterOptions(PlayerSort.ByFirstName, false, "320", null, null, null, null, null,
-                    null), 0, 1)).Item1[0];
+                pfo, 0, 1)).Item1[0];
 
             TimeProcess timeProcess = new TimeProcess(com);
-            //await timeProcess.ProcessSingleAsync(p);
-            await timeProcess.ProcessAllAsync();
+            await timeProcess.ProcessSingleAsync(p);
+           await timeProcess.ProcessAllAsync();
 
+            pfo = new PlayerFilterOptions();
+            pfo.PlayerSort = PlayerSort.ByRank;
+            pfo.CompleatedCompetition = true;
+            //pfo.Query = "RODZ";
             var pall = await pr.GetAllByFilterAsync(
-                new PlayerFilterOptions(PlayerSort.ByRank, false, null, null, null, null, null, null, null), 0, 50);
+                pfo, 0, 5000);
 
             foreach ( Player player in pall.Item1)
             {
+                Console.WriteLine(player);
                 var trr = new TimeReadRepository(cp, player);
                 var ts = await trr.GetAllAsync();
             }
-        }
-
-        [Test]
-        public async Task Filters()
-        {
-            var cp = new ContextProvider("Integration");
-            var com = (await new CompetitionRepository(cp).GetAllAsync())[0];
-            var pr = new PlayerRepository(cp, com);
-
-            var t = await pr.GetAllByFilterAsync(new PlayerFilterOptions(PlayerSort.ByBirthDate, false, "30 - 60", null, null, null, null, null, null),0, 30);
         }
 
 
