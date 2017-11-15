@@ -8,7 +8,7 @@ using System.Windows.Controls;
 
 namespace AdminView.Validation
 {
-    class IsPositiveDoubleRule : ValidationRule
+    public class IsPositiveDoubleRule : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {

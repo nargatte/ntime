@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AdminView.AddCompetition"
              xmlns:DataBase="clr-namespace:BaseCore.DataBase;assembly=BaseCore" x:Class="AdminView.AddCompetition.AddCompetitionView"
-            xmlns:validation="clr-namespace:AdminView.Validation"
+            xmlns:validation="clr-namespace:AdminView.Validation;assembly=ViewCore"
              mc:Ignorable="d" 
              WindowStyle="None"
              WindowStartupLocation="CenterScreen"

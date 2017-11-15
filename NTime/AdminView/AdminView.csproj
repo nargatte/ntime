@@ -109,12 +109,6 @@
       <DependentUpon>DistancesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Distances\DistancesViewModel.cs" />
-    <Compile Include="Entities\EditableCategory.cs" />
-    <Compile Include="Entities\EditableDistance.cs" />
-    <Compile Include="Entities\EditablePlayer.cs" />
-    <Compile Include="ILogsInfo.cs" />
-    <Compile Include="IViewModel.cs" />
-    <Compile Include="LogsInfo.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -122,33 +116,17 @@
       <DependentUpon>PlayersView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Players\PlayersViewModel.cs" />
-    <Compile Include="RelayCommand.cs" />
-    <Compile Include="Sample\SampleView.xaml.cs">
-      <DependentUpon>SampleView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Sample\SampleViewModel.cs" />
     <Compile Include="Scores\ScoresView.xaml.cs">
       <DependentUpon>ScoresView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Scores\ScoresViewModel.cs" />
-    <Compile Include="Entities\EditableCompetition.cs" />
     <Compile Include="Settings\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Settings\SettingsViewModel.cs" />
     <Compile Include="TabItemViewModel.cs" />
-    <Compile Include="ValidatableBindableBase.cs" />
-    <Compile Include="Validation\IsNotEmpty.cs" />
-    <Compile Include="Validation\IsNumber30Rule.cs" />
-    <Compile Include="Validation\IsNumber20Rule.cs" />
-    <Compile Include="Validation\IsPositiveDoubleRule.cs" />
-    <Compile Include="Validation\TimeFormatRule.cs" />
-    <Compile Include="XamlConverters\BoolToSexConverterClass.cs" />
-    <Compile Include="XamlConverters\CompetitionToStringConverterClass.cs" />
-    <Compile Include="XamlConverters\DateToStringConverterClass.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BindableBase.cs" />
     <Compile Include="MainViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -221,10 +199,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Sample\SampleView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Scores\ScoresView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -242,6 +216,14 @@
     <ProjectReference Include="..\BaseCore\BaseCore.csproj">
       <Project>{becbcdb2-14bb-45bc-acef-2b00f7fd70e2}</Project>
       <Name>BaseCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ViewCore\ViewCore.csproj">
+      <Project>{5f8eda1d-517c-4e20-9bc7-0bced5900a2b}</Project>
+      <Name>ViewCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WpfMvvmHelper\MVVMHelper.csproj">
+      <Project>{d8e2af1d-e296-4eb4-aff0-0dfb1147ea3b}</Project>
+      <Name>MVVMHelper</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

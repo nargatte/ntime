@@ -4,22 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdminView"
-        xmlns:sample="clr-namespace:StartupWPF.Sample"
         xmlns:players="clr-namespace:AdminView.Players"
         xmlns:competitionChoice="clr-namespace:AdminView.CompetitionChoice"
         xmlns:scores="clr-namespace:AdminView.Scores"
         xmlns:settings="clr-namespace:AdminView.Settings"
-        xmlns:converters="clr-namespace:AdminView.XamlConverters"
+        xmlns:converters="clr-namespace:AdminView.XamlConverters;assembly=ViewCore"
         xmlns:addCompetition="clr-namespace:AdminView.AddCompetition"
         xmlns:competitionManager="clr-namespace:AdminView.CompetitionManager"
         mc:Ignorable="d"
         Background="AliceBlue"
         WindowState="Maximized"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="350" HorizontalAlignment="Stretch">
     <Window.Resources>
-        <DataTemplate DataType="{x:Type sample:SampleViewModel}">
-            <sample:SampleView/>
-        </DataTemplate>
         <DataTemplate DataType="{x:Type competitionChoice:CompetitionChoiceViewModel}">
             <competitionChoice:CompetitionChoiceView/>
         </DataTemplate>

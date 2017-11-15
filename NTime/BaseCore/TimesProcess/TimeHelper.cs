@@ -21,9 +21,8 @@ namespace BaseCore.TimesProcess
 
             string decimalString = seconds.ToString();
 
-            decimal ret;
 
-            if (!Decimal.TryParse(decimalString, out ret))
+            if (!Decimal.TryParse(decimalString, out decimal ret))
                 throw new ArgumentException("Decimal prase fail");
 
             return ret;

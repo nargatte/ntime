@@ -1,6 +1,6 @@
 ﻿namespace AdminView
 {
-    internal interface IViewModel
+    public interface IViewModel
     {
         void DetachAllEvents();
     }

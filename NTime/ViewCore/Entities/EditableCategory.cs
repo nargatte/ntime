@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AdminView.Entities
 {
-    class EditableCategory : BindableBase
+    public class EditableCategory : BindableBase
     {
         public EditableCategory()
         {

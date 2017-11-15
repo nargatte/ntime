@@ -8,7 +8,6 @@
             xmlns:settings="clr-namespace:AdminView.Settings"
              xmlns:categories="clr-namespace:AdminView.Categories"
              xmlns:distances="clr-namespace:AdminView.Distances"
-            xmlns:converters="clr-namespace:AdminView.XamlConverters"
             xmlns:competitionManager="clr-namespace:AdminView.CompetitionManager"
             xmlns:local="clr-namespace:AdminView.CompetitionManager"
              mc:Ignorable="d" 

@@ -10,14 +10,14 @@ namespace AdminView.CompetitionChoice
 {
     class CompetitionChoiceViewModel : BindableBase, IViewModel
     {
-        private bool _competitionSeletec;
+        private bool _competitionSelected;
 
         public bool CompetitionSelected
         {
-            get { return _competitionSeletec; }
+            get { return _competitionSelected; }
             set
             {
-                _competitionSeletec = value;
+                _competitionSelected = value;
                 GoToCompetitionCmd.RaiseCanExecuteChanged();
             }
         }
@@ -32,9 +32,9 @@ namespace AdminView.CompetitionChoice
 
         private void OnViewLoaded()
         {
-            var repository = new CompetitionRepository(new ContextProvider());
-            AddCompetitions(repository);
-            DownloadCompetitions(repository);
+            //var repository = new CompetitionRepository(new ContextProvider());
+            //AddCompetitions(repository);
+            //DownloadCompetitions(repository);
         }
 
         private async void AddCompetitions(BaseCore.DataBase.CompetitionRepository repository)

@@ -8,13 +8,18 @@ using System.Windows.Data;
 
 namespace AdminView.XamlConverters
 {
-    class DateToStringConverterClass : IValueConverter
+    public class CompetitionToStringConverterClass : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is DateTime date)
+            if (value is Entities.EditableCompetition competition && value != null)
             {
-                return date.ToString("dd-MM-yyyy");
+
+                string result = "Zawody \t" + competition.EventDate.ToString("dd-MM-yyyy");
+                if (competition.City != null)
+                    result += $" {competition.City}";
+                return result;
+                //return competition.ToString("dd-MM-yyyy");
             }
             else
             {

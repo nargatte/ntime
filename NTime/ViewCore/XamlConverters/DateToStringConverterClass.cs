@@ -8,16 +8,13 @@ using System.Windows.Data;
 
 namespace AdminView.XamlConverters
 {
-    class BoolToSexConverterClass : IValueConverter
+    public class DateToStringConverterClass : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is bool sex)
+            if (value is DateTime date)
             {
-                if (sex)
-                    return "M";
-                else
-                    return "K";
+                return date.ToString("dd-MM-yyyy");
             }
             else
             {

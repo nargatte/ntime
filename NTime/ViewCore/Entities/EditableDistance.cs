@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 //using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,13 +9,14 @@ using BaseCore.TimesProcess;
 
 namespace AdminView.Entities
 {
-    public enum CompetitionTypeEnumerator
-    {
-        DeterminedDistanceLaps, DeterminedDistanceUnusual, LimitedTime
-    }
 
-    class EditableDistance : BindableBase
+    public class EditableDistance : BindableBase
     {
+        public enum CompetitionTypeEnumerator
+        {
+            DeterminedDistanceLaps, DeterminedDistanceUnusual, LimitedTime
+        }
+
         private BaseCore.DataBase.Distance _dstance = new BaseCore.DataBase.Distance();
 
         public BaseCore.DataBase.Distance Distance
@@ -73,8 +75,8 @@ namespace AdminView.Entities
 
         public BaseCore.DataBase.DistanceTypeEnum DistanceType
         {
-            get { return Distance.DistanceTypeEnum; }
-            set { Distance.DistanceTypeEnum = SetProperty(Distance.DistanceTypeEnum, value); }
+            get { return Distance.DistanceType; }
+            set { Distance.DistanceType = SetProperty(Distance.DistanceTypeEnum, value); }
         }
 
 
@@ -123,29 +125,51 @@ namespace AdminView.Entities
         /// </summary>
         public bool ValidateDistance()
         {
-            _isValid = IsDistanceValid();
+            _isValid = IsDistanceValid(out string message);
+            if (!_isValid)
+                MessageBox.Show(message);
             return IsValid;
         }
 
-        private bool IsDistanceValid()
+        private bool IsDistanceValid(out string message)
         {
+            message = "";
             if (Length <= 0)
+            {
+                message = "Długość dystansu nie może być zerowa ani ujemna";
                 return false;
+            }
             if (StartTime == null)
+            {
+                message = "Ustaw poprawnie czas startu";
                 return false;
+            }
+
             switch (DistanceType)
             {
                 case BaseCore.DataBase.DistanceTypeEnum.DeterminedDistance:
                     if (LapsCount <= 0)
+                    {
+                        message = "Liczba okrążeń musi być większa od 0";
                         return false;
+                    }
+
                     break;
                 case BaseCore.DataBase.DistanceTypeEnum.DeterminedLaps:
                     break;
                 case BaseCore.DataBase.DistanceTypeEnum.LimitedTime:
                     if (LapsCount <= 0)
+                    {
+                        message = "Liczba okrążeń musi być większa od zera";
                         return false;
+                    }
+
                     if (TimeLimit == null)
+                    {
+                        message = "Ustaw poprawnie limit czasu";
                         return false;
+                    }
+
                     break;
                 default:
                     break;

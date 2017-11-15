@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AdminView
 {
-    class LogsInfo : ILogsInfo
+    public class LogsInfo : ILogsInfo
     {
         public HashSet<int> LogsNumbers { get; set; } = new HashSet<int>();
         public HashSet<int> MeasurementPointsNumbers { get; set; } = new HashSet<int>();

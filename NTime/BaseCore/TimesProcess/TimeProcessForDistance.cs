@@ -164,8 +164,10 @@ namespace BaseCore.TimesProcess
             else
             {
                 TimeRead tr = new TimeRead((LastSignificant?.Time ?? StartTime) + ExpectedReader.Current?.MinTimeBetween ?? 0,
-                    ExpectedReader.Current?.ReaderNumber ?? -1);
-                tr.TimeReadTypeEnum = TimeReadTypeEnum.Void;
+                    ExpectedReader.Current?.ReaderNumber ?? -1)
+                {
+                    TimeReadTypeEnum = TimeReadTypeEnum.Void
+                };
                 ExistVoids.Add(tr);
                 LastSignificant = tr;
                 NonReadersRemain = !ExpectedReader.MoveNext();

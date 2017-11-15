@@ -42,6 +42,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -73,6 +74,8 @@
     <Compile Include="DataBase\Entities\TimeRead.cs" />
     <Compile Include="DataBase\Entities\TimeReadType.cs" />
     <Compile Include="DataBase\Enums\DistanceTypeEnum.cs" />
+    <Compile Include="DataBase\Enums\EnumBindingSourceExtension.cs" />
+    <Compile Include="DataBase\Enums\EnumDescriptionTypeConverter.cs" />
     <Compile Include="PlayerFilter\PlayerSort.cs" />
     <Compile Include="DataBase\Contexts\NTimeDBContext.cs" />
     <Compile Include="DataBase\Contexts\NTimeDBInitializer.cs" />

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AdminView.Entities
 {
-    class EditableCompetition : BindableBase
+    public class EditableCompetition : BindableBase
     {
         private BaseCore.DataBase.Competition _competition = new BaseCore.DataBase.Competition();
         public BaseCore.DataBase.Competition Competition

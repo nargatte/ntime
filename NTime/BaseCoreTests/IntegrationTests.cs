@@ -16,7 +16,7 @@ namespace BaseCoreTests
         [Test]
         public async Task LoadCsvs()
         {
-            var cp =  new ContextProvider();
+            var cp = new ContextProvider();
             var cr = new CompetitionRepository(cp);
             var com = await cr.AddAsync(new Competition("Zawody", DateTime.Now, null, null, null, null));
             var pr = new PlayerRepository(cp, com);
@@ -27,7 +27,7 @@ namespace BaseCoreTests
             await eifr.AddRangeAsync(new[]
             {
                 new ExtraPlayerInfo("inny", "i"),
-                new ExtraPlayerInfo("szosowy", "s") 
+                new ExtraPlayerInfo("szosowy", "s")
             });
 
             await dr.AddRangeAsync(new[]
@@ -94,7 +94,7 @@ namespace BaseCoreTests
             await pr.ImportPlayersAsync(
                 pathToexport + "Zawodnicy.csv");
             await pr.ImportTimeReadsAsync(
-                pathToexport + "log1.csv", 1); 
+                pathToexport + "log1.csv", 1);
             await pr.ImportTimeReadsAsync(
                 pathToexport + "log2.csv", 1);
             await pr.ImportTimeReadsAsync(
@@ -103,8 +103,7 @@ namespace BaseCoreTests
             //   pathToexport + "log1 Lask.csv", 2);
 
 
-            var pfo = new PlayerFilterOptions();
-            pfo.Query = "57";
+            var pfo = new PlayerFilterOptions { Query = "57" };
             var p = (await pr.GetAllByFilterAsync(
                 pfo, 0, 1)).Item1[0];
 
@@ -112,14 +111,16 @@ namespace BaseCoreTests
             await timeProcess.ProcessSingleAsync(p);
             //await timeProcess.ProcessAllAsync();
 
-            pfo = new PlayerFilterOptions();
-            pfo.PlayerSort = PlayerSort.ByRank;
-            pfo.CompleatedCompetition = true;
+            pfo = new PlayerFilterOptions
+            {
+                PlayerSort = PlayerSort.ByRank,
+                CompleatedCompetition = true
+            };
             //pfo.Query = "RODZ";
             var pall = await pr.GetAllByFilterAsync(
                 pfo, 0, 5000);
 
-            foreach ( Player player in pall.Item1)
+            foreach (Player player in pall.Item1)
             {
                 Console.WriteLine(player);
                 var trr = new TimeReadRepository(cp, player);

@@ -5,18 +5,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
-using BaseCore.TimesProcess;
 
 namespace AdminView.Validation
 {
-    class TimeFormatRule : ValidationRule
+    public class IsNotEmpty : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            var timeString = value as string;
-            if (!timeString.TryConvertToDateTime(out DateTime dateTime))
-                return new ValidationResult(false, "Zmienna tekstowa jest nieprawidłowa");
-            return ValidationResult.ValidResult;
+            if (String.IsNullOrWhiteSpace(value as string))
+            {
+                return new ValidationResult(false, "To pole nie może być muste");
+            }
+            else
+                return ValidationResult.ValidResult;
         }
     }
 }

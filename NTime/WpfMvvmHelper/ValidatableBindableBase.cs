@@ -37,8 +37,7 @@ namespace AdminView
         private void ValidateProperty<T>(string propertyName, T value)
         {
             var results = new List<ValidationResult>();
-            ValidationContext context = new ValidationContext(this);
-            context.MemberName = propertyName;
+            ValidationContext context = new ValidationContext(this) { MemberName = propertyName };
             Validator.TryValidateProperty(value, context, results);
 
             if (results.Any())

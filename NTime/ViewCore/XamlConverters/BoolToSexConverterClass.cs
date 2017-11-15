@@ -8,18 +8,16 @@ using System.Windows.Data;
 
 namespace AdminView.XamlConverters
 {
-    class CompetitionToStringConverterClass : IValueConverter
+    public class BoolToSexConverterClass : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is Entities.EditableCompetition competition && value != null)
+            if (value is bool sex)
             {
-
-                string result = "Zawody \t" + competition.EventDate.ToString("dd-MM-yyyy");
-                if (competition.City != null)
-                    result += $" {competition.City}";
-                return result;
-                //return competition.ToString("dd-MM-yyyy");
+                if (sex)
+                    return "M";
+                else
+                    return "K";
             }
             else
             {

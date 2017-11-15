@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,7 +8,7 @@ using BaseCore.TimesProcess;
 
 namespace AdminView.Entities
 {
-    class EditablePlayer : BindableBase
+    public class EditablePlayer : BindableBase
     {
         private BaseCore.DataBase.Player player = new BaseCore.DataBase.Player();
         public BaseCore.DataBase.Player Player
@@ -116,5 +117,7 @@ namespace AdminView.Entities
                     Player.Time = SetProperty(Player.Time, dateTime.ToDecimal());
             }
         }
+
+
     }
 }
