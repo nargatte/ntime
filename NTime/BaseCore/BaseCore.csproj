@@ -70,7 +70,7 @@
     <Compile Include="DataBase\Entities\ICompetitionId.cs" />
     <Compile Include="DataBase\Entities\IEntityId.cs" />
     <Compile Include="DataBase\Entities\Player.cs" />
-    <Compile Include="DataBase\Entities\ReaderOrder.cs" />
+    <Compile Include="DataBase\Entities\GatesOrder.cs" />
     <Compile Include="DataBase\Entities\TimeRead.cs" />
     <Compile Include="DataBase\Entities\TimeReadType.cs" />
     <Compile Include="DataBase\Enums\DistanceTypeEnum.cs" />
@@ -88,7 +88,7 @@
     <Compile Include="DataBase\Repositories\ExtraPlayerInfoRepository.cs" />
     <Compile Include="PlayerFilter\PlayerFilterOptions.cs" />
     <Compile Include="DataBase\Repositories\PlayerRepository.cs" />
-    <Compile Include="DataBase\Repositories\ReaderOrderRepository.cs" />
+    <Compile Include="DataBase\Repositories\GatesOrderRepository.cs" />
     <Compile Include="DataBase\Repositories\Repository.cs" />
     <Compile Include="DataBase\Repositories\RepositoryCompetitionId.cs" />
     <Compile Include="DataBase\Repositories\TimeReadRepository.cs" />

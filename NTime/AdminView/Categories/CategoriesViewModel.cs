@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using MvvmHelper;
+using ViewCore;
 
 namespace AdminView.Categories
 {
     class CategoriesViewModel : TabItemViewModel
     {
-        public CategoriesViewModel(Entities.EditableCompetition currentCompetition) : base(currentCompetition)
+        public CategoriesViewModel(ViewCore.Entities.EditableCompetition currentCompetition) : base(currentCompetition)
         {
             TabTitle = "Kategorie";
             AddCategoryCmd = new RelayCommand(OnAddCategory);
@@ -20,25 +22,25 @@ namespace AdminView.Categories
         {
             NewCategory.DeleteRequested += NewCategory_DeleteRequested;
             Categories.Add(NewCategory);
-            NewCategory = new Entities.EditableCategory();
+            NewCategory = new ViewCore.Entities.EditableCategory();
 
         }
 
         //Same must be done after import !!!!
         private void NewCategory_DeleteRequested(object sender, EventArgs e)
         {
-            Categories.Remove(sender as Entities.EditableCategory);
+            Categories.Remove(sender as ViewCore.Entities.EditableCategory);
         }
 
-        private Entities.EditableCategory _newCategory = new Entities.EditableCategory();
-        public Entities.EditableCategory NewCategory
+        private ViewCore.Entities.EditableCategory _newCategory = new ViewCore.Entities.EditableCategory();
+        public ViewCore.Entities.EditableCategory NewCategory
         {
             get { return _newCategory; }
             set { SetProperty(ref _newCategory, value); }
         }
 
-        private ObservableCollection<Entities.EditableCategory> _categories = new ObservableCollection<Entities.EditableCategory>();
-        public ObservableCollection<Entities.EditableCategory> Categories
+        private ObservableCollection<ViewCore.Entities.EditableCategory> _categories = new ObservableCollection<ViewCore.Entities.EditableCategory>();
+        public ObservableCollection<ViewCore.Entities.EditableCategory> Categories
         {
             get { return _categories; }
             set { SetProperty(ref _categories, value); }

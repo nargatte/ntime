@@ -5,20 +5,20 @@ namespace BaseCore.TimesProcess
 {
     internal class TimeProcessForTime : TimeProcessForDistance
     {
-        public TimeProcessForTime(Player player, Distance distance, ReaderOrder[] readerOrder, HashSet<int> readersNumbers, TimeProcess timeProcess) : base(player, distance, readerOrder, readersNumbers, timeProcess)
+        public TimeProcessForTime(Player player, Distance distance, GatesOrder[] gatesOrder, HashSet<int> readersNumbers, TimeProcess timeProcess) : base(player, distance, gatesOrder, readersNumbers, timeProcess)
         {
         }
 
         private bool _afterCompetition;
 
-        protected override IEnumerable<ReaderOrder> ReaderOrderNumers()
+        protected override IEnumerable<GatesOrder> GatesOrderNumers()
         {
-            yield return ReaderOrder[0];
+            yield return GatesOrder[0];
             while (true)
             {
-                for (int i = 1; i < ReaderOrder.Length; i++)
+                for (int i = 1; i < GatesOrder.Length; i++)
                 {
-                    yield return ReaderOrder[i];
+                    yield return GatesOrder[i];
                 }
                 Laps++;
             }
@@ -27,7 +27,7 @@ namespace BaseCore.TimesProcess
         protected override bool IsNonsignificantAfter(TimeRead timeRead)
         {
             if (_afterCompetition) return true;
-            _afterCompetition = timeRead.Time - StartTime >= Distance.TimeLimit && ExpectedReader.Current == ReaderOrder[1];
+            _afterCompetition = timeRead.Time - StartTime >= Distance.TimeLimit && ExpectedReader.Current == GatesOrder[1];
             return _afterCompetition;
         }
 

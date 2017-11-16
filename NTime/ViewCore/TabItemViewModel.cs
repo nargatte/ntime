@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MvvmHelper;
 
-namespace AdminView
+namespace ViewCore
 {
-    class TabItemViewModel : BindableBase
+    public class TabItemViewModel : BindableBase
     {
         protected Entities.EditableCompetition _currentCompetition;
         public TabItemViewModel(Entities.EditableCompetition currentCompetition)

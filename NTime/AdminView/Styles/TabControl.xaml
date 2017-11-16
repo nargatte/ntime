@@ -1,6 +1,5 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:AdminView.Styles">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <!--#region TabItems Brushes-->
     <LinearGradientBrush x:Key="gradientBrushTabControlHeader" StartPoint="0,0.5" EndPoint="1,0.5">
         <GradientStop Color="#002E8A" Offset="0" />

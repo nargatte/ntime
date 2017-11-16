@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-//using System.Linq;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using BaseCore.TimesProcess;
+using MvvmHelper;
 
-namespace AdminView.Entities
+namespace ViewCore.Entities
 {
 
     public class EditableDistance : BindableBase
@@ -18,7 +19,6 @@ namespace AdminView.Entities
         }
 
         private BaseCore.DataBase.Distance _dstance = new BaseCore.DataBase.Distance();
-
         public BaseCore.DataBase.Distance Distance
         {
             get { return _dstance; }
@@ -33,7 +33,7 @@ namespace AdminView.Entities
             SaveDistanceCmd = new RelayCommand(OnSaveDistance);
             DeleteDistanceCmd = new RelayCommand(OnDeleteDistance);
         }
-
+        #region Commands and events
         private void OnSaveDistance()
         {
             bool result = ValidateDistance();
@@ -55,6 +55,14 @@ namespace AdminView.Entities
         {
             DeleteRequested(this, EventArgs.Empty);
         }
+
+        public RelayCommand DeleteDistanceCmd { get; }
+        public RelayCommand SaveDistanceCmd { get; }
+
+
+        public event EventHandler DeleteRequested = delegate { };
+
+        #endregion
 
         #region Properties
 
@@ -80,12 +88,60 @@ namespace AdminView.Entities
         }
 
 
-        public ICollection<BaseCore.DataBase.ReaderOrder> ReadersOrder
+        private int _gatesCount;
+        public int GatesCount
         {
-            get { return Distance.ReaderOrders; }
-            set { Distance.ReaderOrders = SetProperty(Distance.ReaderOrders, value); }
+            get { return _gatesCount; }
+            set
+            {
+                SetProperty(ref _gatesCount, value);
+                UpdateGatesOrderCount();
+            }
         }
 
+        private void UpdateGatesOrderCount()
+        {
+
+            int currentGatesCount = GatesOrder.Count;
+            int updatedGatesCount = GatesCount;
+            int diff = updatedGatesCount - currentGatesCount;
+            if (diff == 0)
+                return;
+            MessageBoxResult result = MessageBox.Show(
+                $"Obecna liczba bramek {currentGatesCount}" +
+                $"Nowa liczba ramek pomiarowych {updatedGatesCount}",
+                $"Czy na pewno chcesz zmienić liczbę bramek pomiarowych?",
+                 MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                if (diff > 0)
+                {
+                    for (int i = 0; i < diff; i++)
+                    {
+                        GatesOrder.Add(new EditableGatesOrder());
+                    }
+                    return;
+                }
+                if (diff < 0)
+                {
+                    for (int i = 0; i < Math.Abs(diff); i++)
+                    {
+                        GatesOrder.Remove(GatesOrder.Last());
+                    }
+                }
+            }
+            else
+            {
+                GatesCount = currentGatesCount;
+            }
+        }
+
+        private ObservableCollection<ViewCore.Entities.EditableGatesOrder> _gatesOrder = new ObservableCollection<EditableGatesOrder>();
+        public ObservableCollection<ViewCore.Entities.EditableGatesOrder> GatesOrder
+        {
+            get { return _gatesOrder; }
+            set { SetProperty(ref _gatesOrder, value); }
+        }
 
         public int LapsCount
         {
@@ -98,9 +154,11 @@ namespace AdminView.Entities
         public string TimeLimit
         {
             get { return Distance.TimeLimit.ToDateTime().ConvertToString(); }
-            set {
+            set
+            {
                 if (value.TryConvertToDateTime(out DateTime dateTime))
-                    Distance.TimeLimit = SetProperty(Distance.TimeLimit, dateTime.ToDecimal());}
+                    Distance.TimeLimit = SetProperty(Distance.TimeLimit, dateTime.ToDecimal());
+            }
         }
 
         public string StartTime
@@ -118,6 +176,13 @@ namespace AdminView.Entities
         {
             get { return _isValid; }
         }
+
+        //private string _details = "This is an amazingly long string";
+        //public string Details
+        //{
+        //    get { return _details; }
+        //    set { SetProperty(ref _details, value); }
+        //}
 
         #endregion
         /// <summary>
@@ -174,46 +239,38 @@ namespace AdminView.Entities
                 default:
                     break;
             }
-            //if (ReadersOrder == null)
-            //    return false;
-            //if (ReadersOrder.Length == 0)
-            //    return false;
 
 
             return true;
         }
 
-        public RelayCommand DeleteDistanceCmd { get; }
-        public RelayCommand SaveDistanceCmd { get; }
-
-        public event EventHandler DeleteRequested = delegate { };
     }
 
-    public static class ReaderConverter
+    public static class GateConverter
     {
         /// <summary>
-        /// Converts a string with reader numbers seperated with comas, dots or semi-colons to an array of int
+        /// Converts a string with gates' numbers seperated with comas, dots or semi-colons to an array of int
         /// </summary>
-        /// <param name="readersOrderInput"></param>
-        /// <param name="readersOrderOutput"></param>
+        /// <param name="gatesOrderInput"></param>
+        /// <param name="gatesOrderOutput"></param>
         /// <returns> Returns true if conversion was successful, if there were any expection returns false </returns>
-        public static bool ConvertToReadersOrder(this string readersOrderInput, out int[] readersOrderOutput)
+        public static bool ConvertToGatesOrder(this string gatesOrderInput, out int[] gatesOrderOutput)
         {
-            List<int> readersOrderList = new List<int>();
+            List<int> gatesOrderList = new List<int>();
             try
             {
-                string[] measurementPoints = readersOrderInput.Split(new char[] { ',', '.', ';' });
-                foreach (var reader in measurementPoints)
+                string[] measurementPoints = gatesOrderInput.Split(new char[] { ',', '.', ';' });
+                foreach (var gate in measurementPoints)
                 {
-                    readersOrderList.Add(int.Parse(reader));
+                    gatesOrderList.Add(int.Parse(gate));
                 }
             }
             catch (FormatException)
             {
-                readersOrderOutput = new int[0];
+                gatesOrderOutput = new int[0];
                 return false;
             }
-            readersOrderOutput = readersOrderList.ToArray();
+            gatesOrderOutput = gatesOrderList.ToArray();
             return true;
         }
     }

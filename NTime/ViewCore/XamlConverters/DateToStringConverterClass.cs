@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace AdminView.XamlConverters
+namespace ViewCore.XamlConverters
 {
     public class DateToStringConverterClass : IValueConverter
     {

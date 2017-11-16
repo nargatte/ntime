@@ -5,34 +5,34 @@ using System.Threading.Tasks;
 
 namespace BaseCore.DataBase
 {
-    public class ReaderOrderRepository : Repository<ReaderOrder>
+    public class GatesOrderRepository : Repository<GatesOrder>
     {
-        public ReaderOrderRepository(IContextProvider contextProvider, Distance distance) : base(contextProvider) => Distance = distance;
+        public GatesOrderRepository(IContextProvider contextProvider, Distance distance) : base(contextProvider) => Distance = distance;
 
         protected Distance Distance { get; }
 
-        protected override IQueryable<ReaderOrder> GetAllQuery(IQueryable<ReaderOrder> items) =>
+        protected override IQueryable<GatesOrder> GetAllQuery(IQueryable<GatesOrder> items) =>
             items.Where(i => i.DistanceId == Distance.Id);
 
-        protected override IQueryable<ReaderOrder> GetSortQuery(IQueryable<ReaderOrder> items) =>
+        protected override IQueryable<GatesOrder> GetSortQuery(IQueryable<GatesOrder> items) =>
             items.OrderBy(i => i.OrderNumber);
 
-        protected override void CheckItem(ReaderOrder item)
+        protected override void CheckItem(GatesOrder item)
         {
             if(item.DistanceId != Distance.Id) 
                 throw new ArgumentException("Wrong DistanceId");
         }
 
-        protected override void PrepareToAdd(ReaderOrder item)
+        protected override void PrepareToAdd(GatesOrder item)
         {
             item.DistanceId = Distance.Id;
             item.Distance = null;
         }
 
-        public async Task ReplaceBy(IEnumerable<ReaderOrder> readersOrder)
+        public async Task ReplaceBy(IEnumerable<GatesOrder> gatesOrder)
         {
             int c = 0;
-            foreach (ReaderOrder item in readersOrder)
+            foreach (GatesOrder item in gatesOrder)
             {
                 CheckNull(item);
                 PrepareToAdd(item);
@@ -42,8 +42,8 @@ namespace BaseCore.DataBase
 
             await ContextProvider.DoAsync(async ctx =>
             {
-                ctx.ReaderOrders.RemoveRange(GetAllQuery(ctx.ReaderOrders));
-                ctx.ReaderOrders.AddRange(readersOrder);
+                ctx.GatesOrders.RemoveRange(GetAllQuery(ctx.GatesOrders));
+                ctx.GatesOrders.AddRange(gatesOrder);
                 await ctx.SaveChangesAsync();
             });
         }

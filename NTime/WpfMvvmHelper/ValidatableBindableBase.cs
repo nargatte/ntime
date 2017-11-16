@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdminView
+namespace MvvmHelper
 {
     public class ValidatableBindableBase : BindableBase, INotifyDataErrorInfo
     {

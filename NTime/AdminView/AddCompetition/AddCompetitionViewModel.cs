@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using MvvmHelper;
 
 namespace AdminView.AddCompetition
 {
@@ -17,8 +18,8 @@ namespace AdminView.AddCompetition
             CancelAddingCmd = new RelayCommand(OnCancelAdding);
         }
 
-        private Entities.EditableCompetition _newCompetition = new Entities.EditableCompetition() { EventDate = DateTime.Today};
-        public Entities.EditableCompetition NewCompetition
+        private ViewCore.Entities.EditableCompetition _newCompetition = new ViewCore.Entities.EditableCompetition() { EventDate = DateTime.Today};
+        public ViewCore.Entities.EditableCompetition NewCompetition
         {
             get { return _newCompetition; }
             set { SetProperty(ref _newCompetition, value); }

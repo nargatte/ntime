@@ -4,12 +4,14 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MvvmHelper;
+using ViewCore;
 
 namespace AdminView.Players
 {
     class PlayersViewModel : TabItemViewModel, IViewModel
     {
-        public PlayersViewModel(Entities.EditableCompetition currentCompetition) : base(currentCompetition)
+        public PlayersViewModel(ViewCore.Entities.EditableCompetition currentCompetition) : base(currentCompetition)
         {
             AddPlayerCmd = new RelayCommand(OnAddPlayer);
             FillPlayersCollection();
@@ -19,11 +21,11 @@ namespace AdminView.Players
         private void OnAddPlayer()
         {
             Players.Add(NewPlayer);
-            NewPlayer = new Entities.EditablePlayer();
+            NewPlayer = new ViewCore.Entities.EditablePlayer();
         }
 
-        private Entities.EditablePlayer _newPlayer = new Entities.EditablePlayer();
-        public Entities.EditablePlayer NewPlayer
+        private ViewCore.Entities.EditablePlayer _newPlayer = new ViewCore.Entities.EditablePlayer();
+        public ViewCore.Entities.EditablePlayer NewPlayer
         {
             get { return _newPlayer; }
             set { SetProperty(ref _newPlayer, value); }
@@ -33,7 +35,7 @@ namespace AdminView.Players
         {
             for (int i = 0; i < 200; i++)
             {
-                Players.Add(new Entities.EditablePlayer()
+                Players.Add(new ViewCore.Entities.EditablePlayer()
                 {
                     LastName = "Kierzkowski",
                     FirstName = "Jan",
@@ -50,8 +52,8 @@ namespace AdminView.Players
             throw new NotImplementedException();
         }
 
-        private ObservableCollection<Entities.EditablePlayer> _players = new ObservableCollection<Entities.EditablePlayer>();
-        public ObservableCollection<Entities.EditablePlayer> Players
+        private ObservableCollection<ViewCore.Entities.EditablePlayer> _players = new ObservableCollection<ViewCore.Entities.EditablePlayer>();
+        public ObservableCollection<ViewCore.Entities.EditablePlayer> Players
         {
             get { return _players; }
             set { SetProperty(ref _players, value); }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BaseCore.DataBase;
+using MvvmHelper;
 
 namespace AdminView.CompetitionChoice
 {
@@ -58,21 +59,21 @@ namespace AdminView.CompetitionChoice
             var tempCompetitions = new ObservableCollection<BaseCore.DataBase.Competition>(await repository.GetAllAsync());
             foreach (var item in tempCompetitions)
             {
-                Competitions.Add(new Entities.EditableCompetition() { Competition = item });
+                Competitions.Add(new ViewCore.Entities.EditableCompetition() { Competition = item });
             }
         }
 
         #region Properties
 
-        private ObservableCollection<Entities.EditableCompetition> _competitions = new ObservableCollection<Entities.EditableCompetition>();
-        public ObservableCollection<Entities.EditableCompetition> Competitions
+        private ObservableCollection<ViewCore.Entities.EditableCompetition> _competitions = new ObservableCollection<ViewCore.Entities.EditableCompetition>();
+        public ObservableCollection<ViewCore.Entities.EditableCompetition> Competitions
         {
             get { return _competitions; }
             set { SetProperty(ref _competitions, value); }
         }
 
-        private Entities.EditableCompetition _selectedCompetition = new Entities.EditableCompetition();
-        public Entities.EditableCompetition SelectedCompetition
+        private ViewCore.Entities.EditableCompetition _selectedCompetition = new ViewCore.Entities.EditableCompetition();
+        public ViewCore.Entities.EditableCompetition SelectedCompetition
         {
             get { return _selectedCompetition; }
             set

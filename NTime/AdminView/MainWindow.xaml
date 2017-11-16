@@ -8,7 +8,7 @@
         xmlns:competitionChoice="clr-namespace:AdminView.CompetitionChoice"
         xmlns:scores="clr-namespace:AdminView.Scores"
         xmlns:settings="clr-namespace:AdminView.Settings"
-        xmlns:converters="clr-namespace:AdminView.XamlConverters;assembly=ViewCore"
+        xmlns:converters="clr-namespace:ViewCore.XamlConverters;assembly=ViewCore"
         xmlns:addCompetition="clr-namespace:AdminView.AddCompetition"
         xmlns:competitionManager="clr-namespace:AdminView.CompetitionManager"
         mc:Ignorable="d"

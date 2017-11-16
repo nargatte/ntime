@@ -5,8 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BaseCore.TimesProcess;
+using MvvmHelper;
 
-namespace AdminView.Entities
+namespace ViewCore.Entities
 {
     public class EditablePlayer : BindableBase
     {

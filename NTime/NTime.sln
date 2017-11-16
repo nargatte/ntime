@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseCore", "BaseCore\BaseCo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseCoreTests", "BaseCoreTests\BaseCoreTests.csproj", "{31CED056-BB5A-4E22-91E6-A322188E9020}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVMHelper", "WpfMvvmHelper\MVVMHelper.csproj", "{D8E2AF1D-E296-4EB4-AFF0-0DFB1147EA3B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmHelper", "WpfMvvmHelper\MvvmHelper.csproj", "{D8E2AF1D-E296-4EB4-AFF0-0DFB1147EA3B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewCore", "ViewCore\ViewCore.csproj", "{5F8EDA1D-517C-4E20-9BC7-0BCED5900A2B}"
 EndProject

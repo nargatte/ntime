@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using MvvmHelper;
+using ViewCore;
 
 namespace AdminView.Scores
 {
     class ScoresViewModel : TabItemViewModel, IViewModel
     {
-        public ScoresViewModel(Entities.EditableCompetition currentCompetition) : base(currentCompetition)
+        public ScoresViewModel(ViewCore.Entities.EditableCompetition currentCompetition) : base(currentCompetition)
         {
             TabTitle = "Wyniki";
             FillScores();
@@ -19,7 +21,7 @@ namespace AdminView.Scores
         {
             for (int i = 0; i < 20; i++)
             {
-                Scores.Add(new Entities.EditablePlayer()
+                Scores.Add(new ViewCore.Entities.EditablePlayer()
                 {
                     LastName = "Kierzkowski",
                     FirstName = "Jan",
@@ -40,15 +42,15 @@ namespace AdminView.Scores
             throw new NotImplementedException();
         }
 
-        private Entities.EditablePlayer _scoreFilter;
-        public Entities.EditablePlayer ScoreFilter
+        private ViewCore.Entities.EditablePlayer _scoreFilter;
+        public ViewCore.Entities.EditablePlayer ScoreFilter
         {
             get { return _scoreFilter; }
             set { SetProperty(ref _scoreFilter, value); }
         }
 
-        private ObservableCollection<Entities.EditablePlayer> _scores = new ObservableCollection<Entities.EditablePlayer>();
-        public ObservableCollection<Entities.EditablePlayer> Scores
+        private ObservableCollection<ViewCore.Entities.EditablePlayer> _scores = new ObservableCollection<ViewCore.Entities.EditablePlayer>();
+        public ObservableCollection<ViewCore.Entities.EditablePlayer> Scores
         {
             get { return _scores; }
             set { SetProperty(ref _scores, value); }

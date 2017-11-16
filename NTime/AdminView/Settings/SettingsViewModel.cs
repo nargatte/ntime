@@ -5,13 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using BaseCore.DataBase;
+using MvvmHelper;
+using ViewCore;
 
 namespace AdminView.Settings
 {
     class SettingsViewModel : TabItemViewModel, IViewModel
     {
         CompetitionRepository repository = new CompetitionRepository(new ContextProvider());
-        public SettingsViewModel(Entities.EditableCompetition currentCompetition) : base(currentCompetition)
+        public SettingsViewModel(ViewCore.Entities.EditableCompetition currentCompetition) : base(currentCompetition)
         {
             this.CurrentCompetition = currentCompetition;
             TabTitle = "Ustawienia";
@@ -20,7 +22,7 @@ namespace AdminView.Settings
 
 
         //private Entities.EditableCompetition _currentCompetition;
-        public Entities.EditableCompetition CurrentCompetition
+        public ViewCore.Entities.EditableCompetition CurrentCompetition
         {
             get { return _currentCompetition; }
             set { SetProperty(ref _currentCompetition, value);

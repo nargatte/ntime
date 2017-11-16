@@ -4,14 +4,17 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using MvvmHelper;
+using ViewCore;
 
 namespace AdminView.Distances
 {
     class DistancesViewModel : TabItemViewModel
     {
         ILogsInfo logsInfo;
-        public DistancesViewModel(Entities.EditableCompetition currentCompetition) : base(currentCompetition)
+        public DistancesViewModel(ViewCore.Entities.EditableCompetition currentCompetition) : base(currentCompetition)
         {
             TabTitle = "Dystanse";
             AddMeasurementPointCmd = new RelayCommand(OnAddMeasurementPoint);
@@ -70,7 +73,7 @@ namespace AdminView.Distances
         {
             if (CanAddDistance(out string errorMessage))
             {
-                var distance = new Entities.EditableDistance(logsInfo) { Name = NewDistanceName };
+                var distance = new ViewCore.Entities.EditableDistance(logsInfo) { Name = NewDistanceName };
                 logsInfo.DistancesNames.Add(distance.Name);
                 distance.DeleteRequested += Distance_DeleteRequested;
                 Distances.Add(distance);
@@ -84,7 +87,7 @@ namespace AdminView.Distances
 
         private void Distance_DeleteRequested(object sender, EventArgs e)
         {
-            var distanceToDelete = sender as Entities.EditableDistance;
+            var distanceToDelete = sender as ViewCore.Entities.EditableDistance;
             logsInfo.DistancesNames.Remove(distanceToDelete.Name);
             Distances.Remove(distanceToDelete);
         }
@@ -122,8 +125,8 @@ namespace AdminView.Distances
         }
 
 
-        private ObservableCollection<Entities.EditableDistance> _distances = new ObservableCollection<Entities.EditableDistance>();
-        public ObservableCollection<Entities.EditableDistance> Distances
+        private ObservableCollection<ViewCore.Entities.EditableDistance> _distances = new ObservableCollection<ViewCore.Entities.EditableDistance>();
+        public ObservableCollection<ViewCore.Entities.EditableDistance> Distances
         {
             get { return _distances; }
             set { SetProperty(ref _distances, value); }

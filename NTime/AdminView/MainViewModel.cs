@@ -8,6 +8,8 @@ using AdminView.Players;
 using AdminView.Scores;
 using AdminView.Settings;
 using AdminView.CompetitionManager;
+using ViewCore;
+using MvvmHelper;
 
 namespace AdminView
 {
@@ -16,7 +18,7 @@ namespace AdminView
         private IViewModel _currentViewModel;
         private CompetitionChoiceViewModel _competitionChoiceViewModel;
         private CompetitionManagerViewModel _competitionManagerViewModel;
-        private Entities.EditableCompetition _currentCompetition;
+        private ViewCore.Entities.EditableCompetition _currentCompetition;
 
 
         public MainViewModel()

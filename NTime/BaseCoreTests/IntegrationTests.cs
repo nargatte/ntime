@@ -49,46 +49,46 @@ namespace BaseCoreTests
 
             var darr = await dr.GetAllAsync();
 
-            var ror = new ReaderOrderRepository(cp, darr.FirstOrDefault(d => d.Name == "GIGA"));
+            var ror = new GatesOrderRepository(cp, darr.FirstOrDefault(d => d.Name == "GIGA"));
             await ror.ReplaceBy(new[]
             {
-                new ReaderOrder(1, 1800),
-                new ReaderOrder(2, 1800),
-                new ReaderOrder(1, 1800),
-                new ReaderOrder(2, 1800),
-                new ReaderOrder(1, 1800),
-                new ReaderOrder(2, 1800),
-                new ReaderOrder(1, 1800),
+                new GatesOrder(1, 1800),
+                new GatesOrder(2,1800),
+                new GatesOrder(1,1800),
+                new GatesOrder(2,1800),
+                new GatesOrder(1,1800),
+                new GatesOrder(2,1800),
+                new GatesOrder(1,1800),
             });
 
-            ror = new ReaderOrderRepository(cp, darr.FirstOrDefault(d => d.Name == "MEGA"));
+            ror = new GatesOrderRepository(cp, darr.FirstOrDefault(d => d.Name == "MEGA"));
             await ror.ReplaceBy(new[]
             {
-                new ReaderOrder(1, 1800),
-                new ReaderOrder(2, 1800),
-                new ReaderOrder(1, 1800),
+                new GatesOrder(1, 1800),
+                new GatesOrder(2,1800),
+                new GatesOrder(1,1800),
             });
 
-            ror = new ReaderOrderRepository(cp, darr.FirstOrDefault(d => d.Name == "MINI"));
+            ror = new GatesOrderRepository(cp, darr.FirstOrDefault(d => d.Name == "MINI"));
             await ror.ReplaceBy(new[]
             {
-                new ReaderOrder(1, 1800),
-                new ReaderOrder(2, 1800),
-                new ReaderOrder(1, 1800)
+                new GatesOrder(1,1800),
+                new GatesOrder(2,1800),
+                new GatesOrder(1,1800)
             });
 
-            ror = new ReaderOrderRepository(cp, darr.FirstOrDefault(d => d.Name == "+RODZINNY"));
+            ror = new GatesOrderRepository(cp, darr.FirstOrDefault(d => d.Name == "+RODZINNY"));
             await ror.ReplaceBy(new[]
             {
-                new ReaderOrder(1, 1000),
-                new ReaderOrder(1, 1000),
+                new GatesOrder(1,1000),
+                new GatesOrder(1,1000),
             });
 
-            ror = new ReaderOrderRepository(cp, darr.FirstOrDefault(d => d.Name == "RODZINNY"));
+            ror = new GatesOrderRepository(cp, darr.FirstOrDefault(d => d.Name == "RODZINNY"));
             await ror.ReplaceBy(new[]
             {
-                new ReaderOrder(1, 1000),
-                new ReaderOrder(1, 1000)
+                new GatesOrder(1,1000),
+                new GatesOrder(1,1000)
             });
 
             await pr.ImportPlayersAsync(

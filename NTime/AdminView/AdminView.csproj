@@ -124,7 +124,6 @@
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Settings\SettingsViewModel.cs" />
-    <Compile Include="TabItemViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainViewModel.cs" />
@@ -144,6 +143,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\BaseCore.DataBase.AgeCategory.datasource" />
@@ -207,6 +207,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Styles\Line.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\TabControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -221,9 +225,9 @@
       <Project>{5f8eda1d-517c-4e20-9bc7-0bced5900a2b}</Project>
       <Name>ViewCore</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WpfMvvmHelper\MVVMHelper.csproj">
+    <ProjectReference Include="..\WpfMvvmHelper\MvvmHelper.csproj">
       <Project>{d8e2af1d-e296-4eb4-aff0-0dfb1147ea3b}</Project>
-      <Name>MVVMHelper</Name>
+      <Name>MvvmHelper</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

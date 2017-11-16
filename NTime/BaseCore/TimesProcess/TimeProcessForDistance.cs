@@ -12,7 +12,7 @@ namespace BaseCore.TimesProcess
 
         protected Distance Distance;
 
-        protected ReaderOrder[] ReaderOrder;
+        protected GatesOrder[] GatesOrder;
 
         protected HashSet<int> ReadersNumbers;
 
@@ -28,15 +28,15 @@ namespace BaseCore.TimesProcess
 
         protected TimeRead LastSignificant;
 
-        protected IEnumerator<ReaderOrder> ExpectedReader;
+        protected IEnumerator<GatesOrder> ExpectedReader;
 
         protected bool NonReadersRemain;
 
-        protected internal TimeProcessForDistance(Player player, Distance distance, ReaderOrder[] readerOrder, HashSet<int> readersNumbers,  TimeProcess timeProcess)
+        protected internal TimeProcessForDistance(Player player, Distance distance, GatesOrder[] readerOrder, HashSet<int> readersNumbers,  TimeProcess timeProcess)
         {
             Player = player;
             Distance = distance;
-            ReaderOrder = readerOrder;
+            GatesOrder = readerOrder;
             TimeProcess = timeProcess;
             ReadersNumbers = readersNumbers;
         }
@@ -49,7 +49,7 @@ namespace BaseCore.TimesProcess
             if (!Array.TrueForAll(TimeReads, t => ReaderNumberExist(t.Reader)))
                 return;
 
-            ExpectedReader = ReaderOrderNumers().GetEnumerator();
+            ExpectedReader = GatesOrderNumers().GetEnumerator();
             NonReadersRemain = !ExpectedReader.MoveNext();
 
             int timeReadsIterator = 0;
@@ -118,10 +118,10 @@ namespace BaseCore.TimesProcess
 
         private TimeRead FirstValidTimeRead()
         {
-            return TimeReads.FirstOrDefault(i => i.Reader == ReaderOrder[0].ReaderNumber);
+            return TimeReads.FirstOrDefault(i => i.Reader == GatesOrder[0].GateNumber);
         }
 
-        protected virtual IEnumerable<ReaderOrder> ReaderOrderNumers() => ReaderOrder;
+        protected virtual IEnumerable<GatesOrder> GatesOrderNumers() => GatesOrder;
 
         protected bool IsNonsignificantBefore(TimeRead timeRead) => timeRead.Time < StartTime;
 
@@ -143,10 +143,10 @@ namespace BaseCore.TimesProcess
             {
                 return false;
             }
-            return timeRead.Time - LastSignificant.Time < ExpectedReader.Current?.MinTimeBetween;
+            return timeRead.Time - LastSignificant.Time < ExpectedReader.Current?.MinTimeBefore;
         }
 
-        protected bool IsSignificant(TimeRead timeRead) => timeRead.Reader == ExpectedReader.Current?.ReaderNumber;
+        protected bool IsSignificant(TimeRead timeRead) => timeRead.Reader == ExpectedReader.Current?.GateNumber;
 
         private bool LoopBody(TimeRead timeRead)
         {
@@ -163,8 +163,8 @@ namespace BaseCore.TimesProcess
             }
             else
             {
-                TimeRead tr = new TimeRead((LastSignificant?.Time ?? StartTime) + ExpectedReader.Current?.MinTimeBetween ?? 0,
-                    ExpectedReader.Current?.ReaderNumber ?? -1)
+                TimeRead tr = new TimeRead((LastSignificant?.Time ?? StartTime) + ExpectedReader.Current?.MinTimeBefore ?? 0,
+                    ExpectedReader.Current?.GateNumber ?? -1)
                 {
                     TimeReadTypeEnum = TimeReadTypeEnum.Void
                 };

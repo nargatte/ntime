@@ -6,13 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace AdminView.XamlConverters
+namespace ViewCore.XamlConverters
 {
     public class CompetitionToStringConverterClass : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is Entities.EditableCompetition competition && value != null)
+            if (value is ViewCore.Entities.EditableCompetition competition && value != null)
             {
 
                 string result = "Zawody \t" + competition.EventDate.ToString("dd-MM-yyyy");

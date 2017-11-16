@@ -4,32 +4,20 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:validation="clr-namespace:AdminView.Validation;assembly=ViewCore"
+             xmlns:converters="clr-namespace:ViewCore.XamlConverters;assembly=ViewCore"
              xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
              xmlns:local="clr-namespace:AdminView.Distances"
-             xmlns:entities="clr-namespace:AdminView.Entities"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:db="clr-namespace:BaseCore.DataBase;assembly=BaseCore"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="800">
     <UserControl.Resources>
-        <DataGridTemplateColumn Header="Nazwa" x:Key="DistanceNameColumn">
-            <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate>
-                    <TextBox Name="DistanceNameTB">
-                        <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules>
-                                <validation:IsNotEmpty ValidatesOnTargetUpdated="True"/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox>
-                </DataTemplate>
-            </DataGridTemplateColumn.CellTemplate>
-        </DataGridTemplateColumn>
+        <converters:BoolToCollapsedConverterClass x:Key="boolToCollapsedConverter"/>
         <Style x:Key="MyHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
             <Setter Property="Background" Value="BurlyWood"/>
         </Style>
 
-        <GridViewColumnCollection x:Key="gvcc">
+        <!--<GridViewColumnCollection x:Key="gvcc">
             <GridViewColumn Header="Year" 
                       DisplayMemberBinding="{Binding Year}" 
                       Width="80"/>
@@ -37,7 +25,7 @@
                       DisplayMemberBinding="{Binding DayOfWeek}" 
                       Width="80" />
 
-        </GridViewColumnCollection>
+        </GridViewColumnCollection>-->
     </UserControl.Resources>
     <ScrollViewer HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
         <Grid HorizontalAlignment="Stretch" >
@@ -47,29 +35,7 @@
             <ColumnDefinition Width="*"/>-->
             </Grid.ColumnDefinitions>
             <Grid.Resources>
-                <Style x:Key="lineStyle" TargetType="Line">
-                    <Setter Property="Stroke" Value="Black" />
-                    <Setter Property="Stretch" Value="Fill" />
-                    <Setter Property="Grid.ZIndex" Value="100" />
-                </Style>
 
-                <Style x:Key="horizontalLineStyle" TargetType="Line" BasedOn="{StaticResource lineStyle}">
-                    <Setter Property="X2" Value="1" />
-                    <Setter Property="VerticalAlignment" Value="Bottom" />
-                    <Setter Property="Grid.ColumnSpan" 
-                    Value="{Binding   
-                                Path=ColumnDefinitions.Count,  
-                                RelativeSource={RelativeSource AncestorType=Grid}}"/>
-                </Style>
-
-                <Style x:Key="verticalLineStyle" TargetType="Line" BasedOn="{StaticResource lineStyle}">
-                    <Setter Property="Y2" Value="1" />
-                    <Setter Property="HorizontalAlignment" Value="Center" />
-                    <Setter Property="Grid.RowSpan"   
-                    Value="{Binding   
-                                Path=RowDefinitions.Count,  
-                                RelativeSource={RelativeSource AncestorType=Grid}}"/>
-                </Style>
 
             </Grid.Resources>
             <StackPanel Name="LeftColumn" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center">
@@ -168,7 +134,7 @@
                     </ListView.ItemTemplate>
                 </ListView>
                 <TextBlock HorizontalAlignment="Center" > Dystanse</TextBlock>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <StackPanel Name="NewDistance" Orientation="Horizontal" HorizontalAlignment="Center">
                     <TextBlock Margin="5" > Nazwa</TextBlock>
                     <TextBox Name="newDistanceTB"  Margin="5" Width="100">
                         <Binding Path="NewDistanceName" UpdateSourceTrigger="PropertyChanged">
@@ -194,15 +160,23 @@
                         </Button.Style>
                     </Button>
                 </StackPanel>
-                <ListView>
-                    
-                    
-                </ListView>
                 <DataGrid x:Name="distancesDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected"
                   ItemsSource="{Binding Distances}" EnableRowVirtualization="True" AutoGenerateColumns="False"
                   ColumnWidth="*" SelectionMode="Extended" CanUserAddRows="False" Width="600">
                     <DataGrid.Columns>
-                        <StaticResource ResourceKey="DistanceNameColumn"/>
+                        <DataGridTemplateColumn Header="Nazwa">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Name="DistanceNameTB">
+                                        <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <validation:IsNotEmpty ValidatesOnTargetUpdated="True"/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                         <DataGridTemplateColumn Header="Długość">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -216,15 +190,14 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Typ">
+                        <!--<DataGridTemplateColumn Header="Typ">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <!--<ComboBox ItemsSource="{Binding Source={StaticResource CompetitionEnum}}" SelectedItem="{Binding DistanceType}"/>-->
-                                    <ComboBox ItemsSource="{Binding Source={db:EnumBindingSource {x:Type db:DistanceTypeEnum}}}"/>
+                                    <ComboBox ItemsSource="{Binding Source={db:EnumBindingSource {x:Type db:DistanceTypeEnum}}}" SelectedItem="{Binding }"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="Kolejność readerów" Binding="{Binding ReadersOrder}">
+                        </DataGridTemplateColumn>-->
+                        <DataGridTextColumn Header="Liczba bramek" Binding="{Binding GatesCount, UpdateSourceTrigger=LostFocus}"  Width="Auto">
 
                         </DataGridTextColumn>
                         <DataGridTemplateColumn Header="Czas startu">
@@ -258,14 +231,13 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button Command="{Binding SaveDistanceCmd}">Zapisz
-                                        <!--<Button.Style>
+                                        <Button.Style>
                                             <Style TargetType="{x:Type Button}">
                                                 <Setter Property="IsEnabled" Value="False"/>
                                                 <Style.Triggers>
                                                     <MultiDataTrigger>
                                                         <MultiDataTrigger.Conditions>
-                                                            --><!--<Condition Binding="{Binding ElementName=DistanceNameTB, Path=(Validation.HasError)}" Value="false" />-->
-                                                            <!--<Condition Binding="{Binding Source={StaticResource DistanceNameColumn}, Path=(Validation.HasError)}" Value="false"/>--><!--
+                                                            <Condition Binding="{Binding ElementName=DistanceNameTB, Path=(Validation.HasError)}" Value="false" />
                                                             <Condition Binding="{Binding ElementName=DistanceLengthTB, Path=(Validation.HasError)}" Value="false" />
                                                             <Condition Binding="{Binding ElementName=DistanceStartTimeTB, Path=(Validation.HasError)}" Value="false" />
                                                             <Condition Binding="{Binding ElementName=DistanceTimeLimitTB, Path=(Validation.HasError)}" Value="false" />
@@ -274,7 +246,7 @@
                                                     </MultiDataTrigger>
                                                 </Style.Triggers>
                                             </Style>
-                                        </Button.Style>-->
+                                        </Button.Style>
                                     </Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -287,8 +259,134 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
+                    <DataGrid.RowDetailsTemplate>
+                        <DataTemplate>
+                            <ItemsControl ItemsSource="{Binding GatesOrder}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <StackPanel Orientation="Vertical">
+                                                <TextBlock Text="Numer"/>
+                                                <TextBox Text="{Binding GateNumber}"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Vertical">
+                                                <TextBlock Text="Czas"/>
+                                                <TextBox Text="{Binding MinTimeBefore}"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel></WrapPanel>
+                                        <!--Width="{Binding (FrameworkElement.ActualWidth), 
+            RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+            ItemWidth="{Binding (ListView.View).ItemWidth, 
+            RelativeSource={RelativeSource AncestorType=ListView}}"
+            MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}"
+            ItemHeight="{Binding (ListView.View).ItemHeight, 
+            RelativeSource={RelativeSource AncestorType=ListView}}"-->
+
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
+                        </DataTemplate>
+                    </DataGrid.RowDetailsTemplate>
                 </DataGrid>
-                <ListView Margin="0, 20">
+
+                <!--<ListView HorizontalContentAlignment="Center" Name="DistanceListView" ItemsSource="{Binding Distances}" Margin="0,20">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical">
+                                <ListView>
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn Header="Name" Width="50" DisplayMemberBinding="{Binding Name}"/>
+                                            <GridViewColumn Header="Length" Width="50">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <Expander Header="Whatever">
+                                                            <TextBlock Text="A very long string that takes all the necessary space"/>
+                                                        </Expander>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Whatever" Width="50" DisplayMemberBinding="{Binding Length}"/>
+                                            <GridViewColumn Header="Anything" Width="50"/>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Here will be gates order"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    -->
+                <!--<ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <TextBox Name="DistanceNameTB2" Width="60" HorizontalContentAlignment="Center">
+                                        <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <validation:IsNotEmpty ValidatesOnTargetUpdated="True"/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox>
+                                    <TextBox Name="DistanceLengthTB2" Width="30" HorizontalContentAlignment="Center">
+                                        <Binding Path="Length" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <validation:IsPositiveDoubleRule ValidatesOnTargetUpdated="True"/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox>
+                                    <TextBox Name="DistanceStartTimeTB2" Width="80" HorizontalContentAlignment="Center">
+                                        <Binding Path="StartTime" UpdateSourceTrigger="LostFocus">
+                                            <Binding.ValidationRules>
+                                                <validation:TimeFormatRule ValidatesOnTargetUpdated="True"/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox>
+                                    <TextBox Name="DistanceTimeLimitTB2" Width="80" HorizontalContentAlignment="Center">
+                                        <Binding Path="TimeLimit" UpdateSourceTrigger="LostFocus">
+                                            <Binding.ValidationRules>
+                                                <validation:TimeFormatRule ValidatesOnTargetUpdated="True"/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox>
+                                    <Button Command="{Binding SaveDistanceCmd}" Width="50">Zapisz
+                                        <Button.Style>
+                                            <Style TargetType="{x:Type Button}">
+                                                <Setter Property="IsEnabled" Value="False"/>
+                                                <Style.Triggers>
+                                                    <MultiDataTrigger>
+                                                        <MultiDataTrigger.Conditions>
+                                                            <Condition Binding="{Binding ElementName=DistanceNameTB, Path=(Validation.HasError)}" Value="false" />
+                                                            <Condition Binding="{Binding ElementName=DistanceLengthTB, Path=(Validation.HasError)}" Value="false" />
+                                                            <Condition Binding="{Binding ElementName=DistanceStartTimeTB, Path=(Validation.HasError)}" Value="false" />
+                                                            <Condition Binding="{Binding ElementName=DistanceTimeLimitTB, Path=(Validation.HasError)}" Value="false" />
+                                                        </MultiDataTrigger.Conditions>
+                                                        <Setter Property="IsEnabled" Value="True"/>
+                                                    </MultiDataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                    <Button Command="{Binding DeleteDistanceCmd}" Width="50" >Usuń</Button>
+                                    <Expander Header="Kolejność punktów pomiarowych" IsExpanded="{Binding ReadersOrderVisible}"/>
+
+                                </StackPanel>
+                                <StackPanel Visibility="{Binding ReadersOrderVisible, Converter={StaticResource boolToCollapsedConverter}}" HorizontalAlignment="Center" Orientation="Horizontal">
+                                    <TextBlock Text="Here are readers"></TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>-->
+                <!--
+                </ListView>-->
+
+                <!--<ListView Margin="0, 20">
                     <StackPanel>
                         <TextBlock Text="Something Else"/>
                     </StackPanel>
@@ -316,7 +414,7 @@
                             <System:DateTime>2006/10/12</System:DateTime>
                         </GridViewRowPresenter.Content>
                     </GridViewRowPresenter>
-                </ListView>
+                </ListView>-->
             </StackPanel>
             <!--<Line Grid.Column="1" Style="{StaticResource verticalLineStyle}"/>-->
             <!--<StackPanel Name="RightColumn" Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Center">
