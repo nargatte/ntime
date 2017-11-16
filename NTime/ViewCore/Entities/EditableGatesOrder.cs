@@ -29,5 +29,13 @@ namespace ViewCore.Entities
             get { return GatesOrder.MinTimeBefore; }
             set { GatesOrder.MinTimeBefore = SetProperty(GatesOrder.MinTimeBefore, value); }
         }
+
+
+        private bool _isTimeCollapsed;
+        public bool IsTimeCollapsed
+        {
+            get { return _isTimeCollapsed; }
+            set { SetProperty(ref _isTimeCollapsed, value); }
+        }
     }
 }

@@ -108,9 +108,8 @@ namespace ViewCore.Entities
             if (diff == 0)
                 return;
             MessageBoxResult result = MessageBox.Show(
-                $"Obecna liczba bramek {currentGatesCount}" +
-                $"Nowa liczba ramek pomiarowych {updatedGatesCount}",
-                $"Czy na pewno chcesz zmienić liczbę bramek pomiarowych?",
+                $"Czy na pewno chcesz zmienić liczbę bramek pomiarowych z {currentGatesCount} na {updatedGatesCount}?",
+                "",
                  MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
@@ -120,9 +119,8 @@ namespace ViewCore.Entities
                     {
                         GatesOrder.Add(new EditableGatesOrder());
                     }
-                    return;
                 }
-                if (diff < 0)
+                else if (diff < 0)
                 {
                     for (int i = 0; i < Math.Abs(diff); i++)
                     {
@@ -134,6 +132,8 @@ namespace ViewCore.Entities
             {
                 GatesCount = currentGatesCount;
             }
+            if (GatesOrder.Count > 0)
+                GatesOrder.First().IsTimeCollapsed = true;
         }
 
         private ObservableCollection<ViewCore.Entities.EditableGatesOrder> _gatesOrder = new ObservableCollection<EditableGatesOrder>();

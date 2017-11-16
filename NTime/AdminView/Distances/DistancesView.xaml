@@ -261,19 +261,21 @@
                     </DataGrid.Columns>
                     <DataGrid.RowDetailsTemplate>
                         <DataTemplate>
-                            <ItemsControl ItemsSource="{Binding GatesOrder}">
+                            <ItemsControl ItemsSource="{Binding GatesOrder}" Background="LightGoldenrodYellow">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <StackPanel Orientation="Vertical">
-                                                <TextBlock Text="Numer"/>
-                                                <TextBox Text="{Binding GateNumber}"/>
+                                            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                                                <StackPanel Orientation="Vertical" Visibility="{Binding IsTimeCollapsed, Converter={StaticResource boolToCollapsedConverter}}" >
+                                                    <TextBlock Text="Czas"/>
+                                                    <TextBox Text="{Binding MinTimeBefore}"/>
+                                                </StackPanel>
+                                            <Expander Background="#DC0" Margin="2,0,2,0">
+                                                <StackPanel Orientation="Vertical">
+                                                    <TextBlock Text="Numer"/>
+                                                    <TextBox Text="{Binding GateNumber}"/>
+                                                </StackPanel>
+                                        </Expander>
                                             </StackPanel>
-                                            <StackPanel Orientation="Vertical">
-                                                <TextBlock Text="Czas"/>
-                                                <TextBox Text="{Binding MinTimeBefore}"/>
-                                            </StackPanel>
-                                        </StackPanel>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                                 <ItemsControl.ItemsPanel>

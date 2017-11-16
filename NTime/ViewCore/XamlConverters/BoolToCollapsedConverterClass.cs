@@ -12,9 +12,9 @@ namespace ViewCore.XamlConverters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            bool isVisble = (bool)value;
-            if (isVisble == true) return System.Windows.Visibility.Visible;
-            else return System.Windows.Visibility.Collapsed;
+            bool isCollapsed = (bool)value;
+            if (isCollapsed == true) return System.Windows.Visibility.Collapsed;
+            else return System.Windows.Visibility.Visible;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

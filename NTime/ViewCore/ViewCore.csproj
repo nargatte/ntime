@@ -45,8 +45,10 @@
     <Compile Include="Entities\EditableCategory.cs" />
     <Compile Include="Entities\EditableCompetition.cs" />
     <Compile Include="Entities\EditableDistance.cs" />
+    <Compile Include="Entities\EditableGate.cs" />
     <Compile Include="Entities\EditableGatesOrder.cs" />
     <Compile Include="Entities\EditablePlayer.cs" />
+    <Compile Include="Entities\EditableTimeReadsLog.cs" />
     <Compile Include="Interfaces\ILogsInfo.cs" />
     <Compile Include="Interfaces\IViewModel.cs" />
     <Compile Include="LogsInfo.cs" />
