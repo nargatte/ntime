@@ -13,6 +13,7 @@ namespace ViewCore.Entities
 
     public class EditableDistance : BindableBase
     {
+        ObservableCollection<IEditableGate> _definedGates;
         public enum CompetitionTypeEnumerator
         {
             DeterminedDistanceLaps, DeterminedDistanceUnusual, LimitedTime
@@ -27,8 +28,9 @@ namespace ViewCore.Entities
 
 
         private ILogsInfo logsInfo;
-        public EditableDistance(ILogsInfo logsInfo)
+        public EditableDistance(ILogsInfo logsInfo, ObservableCollection<IEditableGate> definedGates)
         {
+            _definedGates = definedGates;
             this.logsInfo = logsInfo;
             SaveDistanceCmd = new RelayCommand(OnSaveDistance);
             DeleteDistanceCmd = new RelayCommand(OnDeleteDistance);
@@ -80,11 +82,10 @@ namespace ViewCore.Entities
             set { Distance.Length = SetProperty(Distance.Length, value); }
         }
 
-
         public BaseCore.DataBase.DistanceTypeEnum DistanceType
         {
-            get { return Distance.DistanceType; }
-            set { Distance.DistanceType = SetProperty(Distance.DistanceTypeEnum, value); }
+            get { return Distance.DistanceTypeEnum; }
+            set { Distance.DistanceTypeEnum = SetProperty(Distance.DistanceTypeEnum, value); }
         }
 
 
@@ -117,7 +118,7 @@ namespace ViewCore.Entities
                 {
                     for (int i = 0; i < diff; i++)
                     {
-                        GatesOrder.Add(new EditableGatesOrder());
+                        GatesOrder.Add(new EditableGatesOrder(_definedGates));
                     }
                 }
                 else if (diff < 0)

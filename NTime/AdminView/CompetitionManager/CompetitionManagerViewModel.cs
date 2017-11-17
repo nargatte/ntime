@@ -14,7 +14,7 @@ using MvvmHelper;
 
 namespace AdminView.CompetitionManager
 {
-    class CompetitionManagerViewModel : BindableBase, IViewModel
+    class CompetitionManagerViewModel : BindableBase, ViewCore.Entities.IViewModel
     {
         private ViewCore.Entities.EditableCompetition _currentCompetition;
 

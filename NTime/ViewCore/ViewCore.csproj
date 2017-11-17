@@ -49,9 +49,10 @@
     <Compile Include="Entities\EditableGatesOrder.cs" />
     <Compile Include="Entities\EditablePlayer.cs" />
     <Compile Include="Entities\EditableTimeReadsLog.cs" />
+    <Compile Include="Interfaces\IEditableGate.cs" />
     <Compile Include="Interfaces\ILogsInfo.cs" />
     <Compile Include="Interfaces\IViewModel.cs" />
-    <Compile Include="LogsInfo.cs" />
+    <Compile Include="Entities\LogsInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TabItemViewModel.cs" />
     <Compile Include="Validation\IsNotEmpty.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="XamlConverters\BoolToHiddenConverterClass.cs" />
     <Compile Include="XamlConverters\CompetitionToStringConverterClass.cs" />
     <Compile Include="XamlConverters\DateToStringConverterClass.cs" />
+    <Compile Include="XamlConverters\GateToDisplayConverterClass.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BaseCore\BaseCore.csproj">

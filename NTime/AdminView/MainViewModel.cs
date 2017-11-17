@@ -13,9 +13,9 @@ using MvvmHelper;
 
 namespace AdminView
 {
-    class MainViewModel : BindableBase, IViewModel
+    class MainViewModel : BindableBase, ViewCore.Entities.IViewModel
     {
-        private IViewModel _currentViewModel;
+        private ViewCore.Entities.IViewModel _currentViewModel;
         private CompetitionChoiceViewModel _competitionChoiceViewModel;
         private CompetitionManagerViewModel _competitionManagerViewModel;
         private ViewCore.Entities.EditableCompetition _currentCompetition;
@@ -50,7 +50,7 @@ namespace AdminView
             throw new NotImplementedException();
         }
 
-        public IViewModel CurrentViewModel
+        public ViewCore.Entities.IViewModel CurrentViewModel
         {
             get { return _currentViewModel; }
             set { SetProperty(ref _currentViewModel, value); }

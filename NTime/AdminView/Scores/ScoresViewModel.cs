@@ -9,7 +9,7 @@ using ViewCore;
 
 namespace AdminView.Scores
 {
-    class ScoresViewModel : TabItemViewModel, IViewModel
+    class ScoresViewModel : TabItemViewModel, ViewCore.Entities.IViewModel
     {
         public ScoresViewModel(ViewCore.Entities.EditableCompetition currentCompetition) : base(currentCompetition)
         {

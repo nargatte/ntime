@@ -13,10 +13,14 @@
              d:DesignHeight="800" d:DesignWidth="800">
     <UserControl.Resources>
         <converters:BoolToCollapsedConverterClass x:Key="boolToCollapsedConverter"/>
+        <converters:GateToDisplayConverterClass x:Key="gateToDisplayConverter"/>
         <Style x:Key="MyHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
             <Setter Property="Background" Value="BurlyWood"/>
         </Style>
-
+        <Style x:Key="TextBoxYellow" TargetType="{x:Type TextBox}">
+            <Setter Property="Background" Value="LightYellow"/>
+        </Style>
+        <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource TextBoxYellow}"/>
         <!--<GridViewColumnCollection x:Key="gvcc">
             <GridViewColumn Header="Year" 
                       DisplayMemberBinding="{Binding Year}" 
@@ -29,140 +33,184 @@
     </UserControl.Resources>
     <ScrollViewer HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
         <Grid HorizontalAlignment="Stretch" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <!--<ColumnDefinition Width="50"/>
-            <ColumnDefinition Width="*"/>-->
-            </Grid.ColumnDefinitions>
-            <Grid.Resources>
-
-
-            </Grid.Resources>
-            <StackPanel Name="LeftColumn" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center">
-                <TextBlock Text="Punkty pomiarowe" Margin="0, 10" HorizontalAlignment="Center"/>
-                <StackPanel Name="AddingMeasurementPoint" Orientation="Horizontal" HorizontalAlignment="Center">
-                    <TextBlock Text="Numer punktu"/>
-                    <TextBox Name="newMeasurementPointNumberTB" Width="20" Margin="10, 0, 20, 0">
-                        <Binding Path="NewMeasurementPointNumber" UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules>
-                                <validation:IsNumber20Rule ValidatesOnTargetUpdated="True"/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox>
-                    <TextBlock Text="Nazwa punktu"/>
-                    <TextBox  Name="newMeasurementPointNameTB" Width="100" Margin="10, 0, 20, 0">
-                        <Binding Path="NewMeasurementPointName" UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules>
-                                <validation:IsNotEmpty ValidatesOnTargetUpdated="True"/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox>
-                    <Button Command="{Binding AddMeasurementPointCmd}" Content="Dodaj punkt">
-                        <Button.Style>
-                            <Style TargetType="{x:Type Button}">
-                                <Setter Property="IsEnabled" Value="False"/>
-                                <Style.Triggers>
-                                    <MultiDataTrigger>
-                                        <MultiDataTrigger.Conditions>
-                                            <Condition Binding="{Binding ElementName=newMeasurementPointNumberTB, Path=(Validation.HasError)}" Value="false" />
-                                            <Condition Binding="{Binding ElementName=newMeasurementPointNameTB, Path=(Validation.HasError)}" Value="false" />
-                                        </MultiDataTrigger.Conditions>
-                                        <Setter Property="IsEnabled" Value="True"/>
-                                    </MultiDataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                    </Button>
-
-                </StackPanel>
-                <ListView Name="MeasurementPoints" ItemsSource="{Binding MeasurementPoints}" Margin="0, 10" >
-                    <ListView.ItemTemplate>
+            <StackPanel Name="LeftColumn" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" >
+                <Expander IsExpanded="True" Margin="0, 10, 0, 20" Background="#EEA">
+                    <Expander.HeaderTemplate>
                         <DataTemplate>
-                            <StatusBar HorizontalAlignment="Stretch" Height="Auto">
-                                <StatusBarItem HorizontalAlignment="Left" Content="{Binding PointNumber}"/>
-                                <StatusBarItem HorizontalAlignment="Left" Content="{Binding PointName}"/>
-                                <StatusBarItem HorizontalAlignment="Right">
-                                    <StackPanel Orientation="Vertical">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="Numer logu"/>
-                                            <TextBox Name="NewLogNumberButton" Width="30">
-                                                <Binding Path="NewLogNumber" UpdateSourceTrigger="PropertyChanged">
-                                                    <Binding.ValidationRules>
-                                                        <validation:IsNumber20Rule ValidatesOnTargetUpdated="True"/>
-                                                    </Binding.ValidationRules>
-                                                </Binding>
-                                            </TextBox>
-                                            <TextBlock Text="Ścieżka"/>
-                                            <TextBlock Text="{Binding NewLogDirectoryName}" Width="100"/>
-                                            <Button Command="{Binding AddLogCmd}">
-                                                Wybierz plik
-                                                <Button.Style>
-                                                    <Style TargetType="{x:Type Button}">
-                                                        <Setter Property="IsEnabled" Value="False"/>
-                                                        <Style.Triggers>
-                                                            <MultiDataTrigger>
-                                                                <MultiDataTrigger.Conditions>
-                                                                    <Condition Binding="{Binding ElementName=NewLogNumberButton, Path=(Validation.HasError)}" Value="false" />
-                                                                </MultiDataTrigger.Conditions>
-                                                                <Setter Property="IsEnabled" Value="True"/>
-                                                            </MultiDataTrigger>
-                                                        </Style.Triggers>
-                                                    </Style>
-                                                </Button.Style>
-                                            </Button>
-                                        </StackPanel>
-                                        <ListView Name="AddedLogs" ItemsSource="{Binding AssignedLogs}">
-                                            <ListView.ItemTemplate>
-                                                <DataTemplate>
-                                                    <StatusBar HorizontalAlignment="Stretch" Height="Auto">
-                                                        <StatusBarItem HorizontalAlignment="Left">
-                                                            <TextBlock Text="{Binding LogNumber}" Width="30"></TextBlock>
-                                                        </StatusBarItem>
-                                                        <StatusBarItem HorizontalAlignment="Left">
-                                                            <TextBox Text="{Binding DirectoryName}" IsReadOnly="True" Width="100"/>
-                                                        </StatusBarItem>
-                                                        <Button Command="{Binding DeleteLogCmd}">Usuń</Button>
-                                                    </StatusBar>
-                                                </DataTemplate>
-                                            </ListView.ItemTemplate>
-                                        </ListView>
-                                    </StackPanel>
-                                </StatusBarItem>
-                                <Button Command="{Binding DeleteMeasurementPointCmd}">Usuń</Button>
-                            </StatusBar>
+                            <TextBlock Text="Punkty pomiarowe" HorizontalAlignment="Center"/>
                         </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-                <TextBlock HorizontalAlignment="Center" > Dystanse</TextBlock>
-                <StackPanel Name="NewDistance" Orientation="Horizontal" HorizontalAlignment="Center">
-                    <TextBlock Margin="5" > Nazwa</TextBlock>
-                    <TextBox Name="newDistanceTB"  Margin="5" Width="100">
-                        <Binding Path="NewDistanceName" UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules>
-                                <validation:IsNotEmpty ValidatesOnTargetUpdated="True"/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox>
-                    <Button Command="{Binding AddDistanceCmd}" Margin="5">
-                        Dodaj
-                        <Button.Style>
-                            <Style TargetType="{x:Type Button}">
-                                <Setter Property="IsEnabled" Value="False"/>
-                                <Style.Triggers>
-                                    <MultiDataTrigger>
-                                        <MultiDataTrigger.Conditions>
-                                            <Condition Binding="{Binding ElementName=newDistanceTB, Path=(Validation.HasError)}" Value="false" />
-                                        </MultiDataTrigger.Conditions>
-                                        <Setter Property="IsEnabled" Value="True"/>
-                                    </MultiDataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                    </Button>
-                </StackPanel>
+                    </Expander.HeaderTemplate>
+                    <StackPanel Orientation="Vertical" Margin="0, 20">
+                        <StackPanel Name="AddingMeasurementPoint" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock Text="Numer punktu"/>
+                            <TextBox Name="newMeasurementPointNumberTB" Width="20" Margin="10, 0, 20, 0">
+                                <Binding Path="NewMeasurementPointNumber" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <validation:IsNumber20Rule ValidatesOnTargetUpdated="True"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox>
+                            <TextBlock Text="Nazwa punktu"/>
+                            <TextBox  Name="newMeasurementPointNameTB" Width="100" Margin="10, 0, 20, 0">
+                                <Binding Path="NewMeasurementPointName" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <validation:IsNotEmpty ValidatesOnTargetUpdated="True"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox>
+                            <Button Command="{Binding AddMeasurementPointCmd}" Content="Dodaj punkt">
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="IsEnabled" Value="False"/>
+                                        <Style.Triggers>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding ElementName=newMeasurementPointNumberTB, Path=(Validation.HasError)}" Value="false" />
+                                                    <Condition Binding="{Binding ElementName=newMeasurementPointNameTB, Path=(Validation.HasError)}" Value="false" />
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter Property="IsEnabled" Value="True"/>
+                                            </MultiDataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+
+                        </StackPanel>
+                        <ListView Name="MeasurementPoints" ItemsSource="{Binding DefinedGates}" Margin="0, 10" >
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StatusBar HorizontalAlignment="Stretch" Height="Auto">
+                                        <StatusBarItem HorizontalAlignment="Left" Content="{Binding Number}"/>
+                                        <StatusBarItem HorizontalAlignment="Left" Content="{Binding Name}"/>
+                                        <StatusBarItem HorizontalAlignment="Right">
+                                            <StackPanel Orientation="Vertical">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="Numer logu"/>
+                                                    <TextBox Name="NewLogNumberButton" Width="30">
+                                                        <Binding Path="NewLogNumber" UpdateSourceTrigger="PropertyChanged">
+                                                            <Binding.ValidationRules>
+                                                                <validation:IsNumber20Rule ValidatesOnTargetUpdated="True"/>
+                                                            </Binding.ValidationRules>
+                                                        </Binding>
+                                                    </TextBox>
+                                                    <TextBlock Text="Ścieżka"/>
+                                                    <TextBlock Text="{Binding NewLogDirectoryName}" Width="100"/>
+                                                    <Button Command="{Binding AddLogCmd}">
+                                                        Wybierz plik
+                                                        <Button.Style>
+                                                            <Style TargetType="{x:Type Button}">
+                                                                <Setter Property="IsEnabled" Value="False"/>
+                                                                <Style.Triggers>
+                                                                    <MultiDataTrigger>
+                                                                        <MultiDataTrigger.Conditions>
+                                                                            <Condition Binding="{Binding ElementName=NewLogNumberButton, Path=(Validation.HasError)}" Value="false" />
+                                                                        </MultiDataTrigger.Conditions>
+                                                                        <Setter Property="IsEnabled" Value="True"/>
+                                                                    </MultiDataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Button.Style>
+                                                    </Button>
+                                                </StackPanel>
+                                                <ListView Name="AddedLogs" ItemsSource="{Binding AssignedLogs}">
+                                                    <ListView.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <StatusBar HorizontalAlignment="Stretch" Height="Auto">
+                                                                <StatusBarItem HorizontalAlignment="Left">
+                                                                    <TextBlock Text="{Binding LogNumber}" Width="30"></TextBlock>
+                                                                </StatusBarItem>
+                                                                <StatusBarItem HorizontalAlignment="Left">
+                                                                    <TextBox Text="{Binding DirectoryName}" IsReadOnly="True" Width="100"/>
+                                                                </StatusBarItem>
+                                                                <Button Command="{Binding DeleteLogCmd}">Usuń</Button>
+                                                            </StatusBar>
+                                                        </DataTemplate>
+                                                    </ListView.ItemTemplate>
+                                                </ListView>
+                                            </StackPanel>
+                                        </StatusBarItem>
+                                        <Button Command="{Binding DeleteMeasurementPointCmd}">Usuń</Button>
+                                    </StatusBar>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        <TextBlock HorizontalAlignment="Center" > Dystanse</TextBlock>
+                        <StackPanel Name="NewDistance" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock Margin="5" > Nazwa</TextBlock>
+                            <TextBox Name="newDistanceTB"  Margin="5" Width="100">
+                                <Binding Path="NewDistanceName" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <validation:IsNotEmpty ValidatesOnTargetUpdated="True"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox>
+                            <Button Command="{Binding AddDistanceCmd}" Margin="5">
+                                Dodaj
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="IsEnabled" Value="False"/>
+                                        <Style.Triggers>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding ElementName=newDistanceTB, Path=(Validation.HasError)}" Value="false" />
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter Property="IsEnabled" Value="True"/>
+                                            </MultiDataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
                 <DataGrid x:Name="distancesDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected"
                   ItemsSource="{Binding Distances}" EnableRowVirtualization="True" AutoGenerateColumns="False"
                   ColumnWidth="*" SelectionMode="Extended" CanUserAddRows="False" Width="600">
+                    <DataGrid.RowDetailsTemplate>
+                        <DataTemplate>
+                            <ItemsControl ItemsSource="{Binding GatesOrder}" Background="LightGoldenrodYellow">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                                            <StackPanel Orientation="Vertical" Visibility="{Binding IsTimeCollapsed, Converter={StaticResource boolToCollapsedConverter}}" >
+                                                <TextBlock Text="Czas"/>
+                                                <TextBox Text="{Binding MinTimeBefore}"/>
+                                            </StackPanel>
+                                            <Expander Background="#DC0" Margin="2,0,2,0" Header="WHat">
+                                                <Expander.HeaderTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding Gate}"/>
+                                                    </DataTemplate>
+                                                </Expander.HeaderTemplate>
+                                                <StackPanel Orientation="Vertical">
+                                                    <TextBlock Text="Numer"/>
+                                                    <ComboBox  ItemsSource="{Binding DefinedGates, Converter={StaticResource gateToDisplayConverter}}" SelectedItem="{Binding Gate}">
+                                                        <ComboBox.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <TextBlock>
+                                                                    <TextBlock.Text>
+                                                                        <MultiBinding StringFormat="{}{0}: {1}">
+                                                                            <Binding Path="Number" />
+                                                                            <Binding Path="Name" />
+                                                                        </MultiBinding>
+                                                                    </TextBlock.Text>
+                                                                </TextBlock>
+                                                            </DataTemplate>
+                                                        </ComboBox.ItemTemplate>
+                                                    </ComboBox>
+                                                </StackPanel>
+                                            </Expander>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel></WrapPanel>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
+                        </DataTemplate>
+                    </DataGrid.RowDetailsTemplate>
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Header="Nazwa">
                             <DataGridTemplateColumn.CellTemplate>
@@ -259,170 +307,8 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
-                    <DataGrid.RowDetailsTemplate>
-                        <DataTemplate>
-                            <ItemsControl ItemsSource="{Binding GatesOrder}" Background="LightGoldenrodYellow">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
-                                                <StackPanel Orientation="Vertical" Visibility="{Binding IsTimeCollapsed, Converter={StaticResource boolToCollapsedConverter}}" >
-                                                    <TextBlock Text="Czas"/>
-                                                    <TextBox Text="{Binding MinTimeBefore}"/>
-                                                </StackPanel>
-                                            <Expander Background="#DC0" Margin="2,0,2,0">
-                                                <StackPanel Orientation="Vertical">
-                                                    <TextBlock Text="Numer"/>
-                                                    <TextBox Text="{Binding GateNumber}"/>
-                                                </StackPanel>
-                                        </Expander>
-                                            </StackPanel>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <WrapPanel></WrapPanel>
-                                        <!--Width="{Binding (FrameworkElement.ActualWidth), 
-            RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
-            ItemWidth="{Binding (ListView.View).ItemWidth, 
-            RelativeSource={RelativeSource AncestorType=ListView}}"
-            MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}"
-            ItemHeight="{Binding (ListView.View).ItemHeight, 
-            RelativeSource={RelativeSource AncestorType=ListView}}"-->
-
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                            </ItemsControl>
-                        </DataTemplate>
-                    </DataGrid.RowDetailsTemplate>
                 </DataGrid>
-
-                <!--<ListView HorizontalContentAlignment="Center" Name="DistanceListView" ItemsSource="{Binding Distances}" Margin="0,20">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Vertical">
-                                <ListView>
-                                    <ListView.View>
-                                        <GridView>
-                                            <GridViewColumn Header="Name" Width="50" DisplayMemberBinding="{Binding Name}"/>
-                                            <GridViewColumn Header="Length" Width="50">
-                                                <GridViewColumn.CellTemplate>
-                                                    <DataTemplate>
-                                                        <Expander Header="Whatever">
-                                                            <TextBlock Text="A very long string that takes all the necessary space"/>
-                                                        </Expander>
-                                                    </DataTemplate>
-                                                </GridViewColumn.CellTemplate>
-                                            </GridViewColumn>
-                                            <GridViewColumn Header="Whatever" Width="50" DisplayMemberBinding="{Binding Length}"/>
-                                            <GridViewColumn Header="Anything" Width="50"/>
-                                        </GridView>
-                                    </ListView.View>
-                                </ListView>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Here will be gates order"/>
-                                </StackPanel>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                    -->
-                <!--<ListView.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Vertical">
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <TextBox Name="DistanceNameTB2" Width="60" HorizontalContentAlignment="Center">
-                                        <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <validation:IsNotEmpty ValidatesOnTargetUpdated="True"/>
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox>
-                                    <TextBox Name="DistanceLengthTB2" Width="30" HorizontalContentAlignment="Center">
-                                        <Binding Path="Length" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <validation:IsPositiveDoubleRule ValidatesOnTargetUpdated="True"/>
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox>
-                                    <TextBox Name="DistanceStartTimeTB2" Width="80" HorizontalContentAlignment="Center">
-                                        <Binding Path="StartTime" UpdateSourceTrigger="LostFocus">
-                                            <Binding.ValidationRules>
-                                                <validation:TimeFormatRule ValidatesOnTargetUpdated="True"/>
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox>
-                                    <TextBox Name="DistanceTimeLimitTB2" Width="80" HorizontalContentAlignment="Center">
-                                        <Binding Path="TimeLimit" UpdateSourceTrigger="LostFocus">
-                                            <Binding.ValidationRules>
-                                                <validation:TimeFormatRule ValidatesOnTargetUpdated="True"/>
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox>
-                                    <Button Command="{Binding SaveDistanceCmd}" Width="50">Zapisz
-                                        <Button.Style>
-                                            <Style TargetType="{x:Type Button}">
-                                                <Setter Property="IsEnabled" Value="False"/>
-                                                <Style.Triggers>
-                                                    <MultiDataTrigger>
-                                                        <MultiDataTrigger.Conditions>
-                                                            <Condition Binding="{Binding ElementName=DistanceNameTB, Path=(Validation.HasError)}" Value="false" />
-                                                            <Condition Binding="{Binding ElementName=DistanceLengthTB, Path=(Validation.HasError)}" Value="false" />
-                                                            <Condition Binding="{Binding ElementName=DistanceStartTimeTB, Path=(Validation.HasError)}" Value="false" />
-                                                            <Condition Binding="{Binding ElementName=DistanceTimeLimitTB, Path=(Validation.HasError)}" Value="false" />
-                                                        </MultiDataTrigger.Conditions>
-                                                        <Setter Property="IsEnabled" Value="True"/>
-                                                    </MultiDataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Button.Style>
-                                    </Button>
-                                    <Button Command="{Binding DeleteDistanceCmd}" Width="50" >Usuń</Button>
-                                    <Expander Header="Kolejność punktów pomiarowych" IsExpanded="{Binding ReadersOrderVisible}"/>
-
-                                </StackPanel>
-                                <StackPanel Visibility="{Binding ReadersOrderVisible, Converter={StaticResource boolToCollapsedConverter}}" HorizontalAlignment="Center" Orientation="Horizontal">
-                                    <TextBlock Text="Here are readers"></TextBlock>
-                                </StackPanel>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>-->
-                <!--
-                </ListView>-->
-
-                <!--<ListView Margin="0, 20">
-                    <StackPanel>
-                        <TextBlock Text="Something Else"/>
-                    </StackPanel>
-                    <GridViewHeaderRowPresenter Name="hrp" Columns="{StaticResource gvcc}"  
-                                ColumnHeaderContainerStyle=
-                                 "{StaticResource MyHeaderStyle}" />
-
-                    <GridViewRowPresenter Columns="{StaticResource gvcc}" >
-                        <GridViewRowPresenter.Content>
-                            <System:DateTime>2005/2/1</System:DateTime>
-                        </GridViewRowPresenter.Content>
-                    </GridViewRowPresenter>
-                    <GridViewRowPresenter Columns="{StaticResource gvcc}" >
-                        <GridViewRowPresenter.Content>
-                            <System:DateTime>2006/10/12</System:DateTime>
-                        </GridViewRowPresenter.Content>
-                    </GridViewRowPresenter>
-                    <GridViewRowPresenter Columns="{StaticResource gvcc}" >
-                        <GridViewRowPresenter.Content>
-                            <System:DateTime>2005/2/1</System:DateTime>
-                        </GridViewRowPresenter.Content>
-                    </GridViewRowPresenter>
-                    <GridViewRowPresenter Columns="{StaticResource gvcc}" >
-                        <GridViewRowPresenter.Content>
-                            <System:DateTime>2006/10/12</System:DateTime>
-                        </GridViewRowPresenter.Content>
-                    </GridViewRowPresenter>
-                </ListView>-->
             </StackPanel>
-            <!--<Line Grid.Column="1" Style="{StaticResource verticalLineStyle}"/>-->
-            <!--<StackPanel Name="RightColumn" Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Center">
-           
-
-        </StackPanel>-->
         </Grid>
     </ScrollViewer>
 </UserControl>

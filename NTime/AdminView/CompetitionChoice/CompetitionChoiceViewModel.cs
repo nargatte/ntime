@@ -9,7 +9,7 @@ using MvvmHelper;
 
 namespace AdminView.CompetitionChoice
 {
-    class CompetitionChoiceViewModel : BindableBase, IViewModel
+    class CompetitionChoiceViewModel : BindableBase, ViewCore.Entities.IViewModel
     {
         private bool _competitionSelected;
 

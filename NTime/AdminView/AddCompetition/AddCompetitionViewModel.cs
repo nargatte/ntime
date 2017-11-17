@@ -9,7 +9,7 @@ using MvvmHelper;
 
 namespace AdminView.AddCompetition
 {
-    class AddCompetitionViewModel : BindableBase, IViewModel
+    class AddCompetitionViewModel : BindableBase, ViewCore.Entities.IViewModel
     {
         AddCompetitionView view;
         public AddCompetitionViewModel()

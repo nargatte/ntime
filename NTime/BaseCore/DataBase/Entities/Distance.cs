@@ -29,7 +29,7 @@ namespace BaseCore.DataBase
         public DateTime StartTime { get; set; }
 
         public int DistanceTypeId { get; set; }
-        public DistanceType DistanceType { get; set; }
+        public virtual DistanceType DistanceType { get; set; }
 
         [NotMapped]
         public DistanceTypeEnum DistanceTypeEnum

@@ -12,13 +12,13 @@ namespace AdminView.Distances
 {
     class DistancesViewModel : TabItemViewModel
     {
-        ILogsInfo logsInfo;
+        ViewCore.Entities.ILogsInfo logsInfo;
         public DistancesViewModel(ViewCore.Entities.EditableCompetition currentCompetition) : base(currentCompetition)
         {
             TabTitle = "Dystanse";
             AddMeasurementPointCmd = new RelayCommand(OnAddMeasurementPoint);
             AddDistanceCmd = new RelayCommand(OnAddDistance);
-            logsInfo = new LogsInfo();
+            logsInfo = new ViewCore.Entities.LogsInfo();
         }
 
         private void OnAddMeasurementPoint()
@@ -28,12 +28,12 @@ namespace AdminView.Distances
                 var measurementPointNumber = int.Parse(NewMeasurementPointNumber);
                 var measurementPointToAdd = new ViewCore.Entities.EditableGate(logsInfo)
                 {
-                    PointNumber = measurementPointNumber,
-                    PointName = NewMeasurementPointName,
+                    Number = measurementPointNumber,
+                    Name = NewMeasurementPointName,
                     AssignedLogs = new ObservableCollection<ViewCore.Entities.EditableTimeReadsLog>()
                 };
                 measurementPointToAdd.DeleteRequested += MeasurementPointToAdd_DeleteRequested;
-                MeasurementPoints.Add(measurementPointToAdd);
+                DefinedGates.Add(measurementPointToAdd);
                 logsInfo.MeasurementPointsNumbers.Add(measurementPointNumber);
                 NewMeasurementPointNumber = (measurementPointNumber + 1).ToString();
                 NewMeasurementPointName = "";
@@ -52,8 +52,8 @@ namespace AdminView.Distances
             {
                 logsInfo.LogsNumbers.Remove(log.LogNumber);
             }
-            logsInfo.MeasurementPointsNumbers.Remove(measurementPointToDelete.PointNumber);
-            MeasurementPoints.Remove(measurementPointToDelete);
+            logsInfo.MeasurementPointsNumbers.Remove(measurementPointToDelete.Number);
+            DefinedGates.Remove(measurementPointToDelete);
         }
 
 
@@ -72,7 +72,7 @@ namespace AdminView.Distances
         {
             if (CanAddDistance(out string errorMessage))
             {
-                var distance = new ViewCore.Entities.EditableDistance(logsInfo) { Name = NewDistanceName };
+                var distance = new ViewCore.Entities.EditableDistance(logsInfo, _definedGates) { Name = NewDistanceName };
                 logsInfo.DistancesNames.Add(distance.Name);
                 distance.DeleteRequested += Distance_DeleteRequested;
                 Distances.Add(distance);
@@ -114,11 +114,11 @@ namespace AdminView.Distances
 
         #region Properties
 
-        private ObservableCollection<ViewCore.Entities.EditableGate> _measurementPoints = new ObservableCollection<ViewCore.Entities.EditableGate>();
-        public ObservableCollection<ViewCore.Entities.EditableGate> MeasurementPoints
+        private ObservableCollection<ViewCore.Entities.IEditableGate> _definedGates = new ObservableCollection<ViewCore.Entities.IEditableGate>();
+        public ObservableCollection<ViewCore.Entities.IEditableGate> DefinedGates
         {
-            get { return _measurementPoints; }
-            set { SetProperty(ref _measurementPoints, value); }
+            get { return _definedGates; }
+            set { SetProperty(ref _definedGates, value); }
         }
 
 

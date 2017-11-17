@@ -1,4 +1,4 @@
-﻿namespace AdminView
+﻿namespace ViewCore.Entities
 {
     public interface IViewModel
     {

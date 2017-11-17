@@ -6,7 +6,7 @@ using ViewCore;
 
 namespace ViewCore.Entities
 {
-    public class EditableGate : BindableBase
+    public class EditableGate : BindableBase, IEditableGate
     {
         ILogsInfo logsInfo;
         public EditableGate(ILogsInfo logsInfo)
@@ -16,6 +16,7 @@ namespace ViewCore.Entities
             this.logsInfo = logsInfo;
         }
 
+        #region Methods
         private void OnDeleteGate()
         {
             DeleteRequested(this, EventArgs.Empty);
@@ -62,8 +63,9 @@ namespace ViewCore.Entities
                 return false;
             return true;
         }
+        #endregion
 
-
+        #region UI input properties
         private int _newLogNumber;
         public int NewLogNumber
         {
@@ -75,7 +77,6 @@ namespace ViewCore.Entities
             }
         }
 
-
         private string _newLogDirectoryName;
         public string NewLogDirectoryName
         {
@@ -85,19 +86,20 @@ namespace ViewCore.Entities
                 SetProperty(ref _newLogDirectoryName, value);
             }
         }
+        #endregion
 
-        private int _pointNumber;
-        public int PointNumber
+        private int _number;
+        public int Number
         {
-            get { return _pointNumber; }
-            set { SetProperty(ref _pointNumber, value); }
+            get { return _number; }
+            set { SetProperty(ref _number, value); }
         }
 
-        private string _pointName;
-        public string PointName
+        private string _name;
+        public string Name
         {
-            get { return _pointName; }
-            set { SetProperty(ref _pointName, value); }
+            get { return _name; }
+            set { SetProperty(ref _name, value); }
         }
 
         private ObservableCollection<EditableTimeReadsLog> _assignedLogs = new ObservableCollection<EditableTimeReadsLog>();

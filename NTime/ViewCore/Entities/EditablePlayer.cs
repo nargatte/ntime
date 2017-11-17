@@ -37,7 +37,7 @@ namespace ViewCore.Entities
             set { Player.LastName = SetProperty(Player.LastName, value); }
         }
 
-        //TODO
+        //TODO Grzesiek
         public string DistanceName
         {
             get { return Player.Distance.Name; }
