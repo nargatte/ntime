@@ -111,7 +111,7 @@ namespace BaseCore.DataBase
             T[] items = null;
             await ContextProvider.DoAsync(async ctx =>
             {
-                items = await GetSortQuery(GetAllQuery(ctx.Set<T>())).AsNoTracking<T>().ToArrayAsync();
+                items = await GetIncludeQuery(GetSortQuery(GetAllQuery(ctx.Set<T>()))).AsNoTracking<T>().ToArrayAsync();
             });
             return items;
         }
@@ -121,7 +121,7 @@ namespace BaseCore.DataBase
             T item = null;
             await ContextProvider.DoAsync(async ctx =>
             {
-                item = await GetAllQuery(ctx.Set<T>()).AsNoTracking<T>().FirstOrDefaultAsync(i => i.Id == id);
+                item = await GetIncludeQuery(GetAllQuery(ctx.Set<T>())).AsNoTracking<T>().FirstOrDefaultAsync(i => i.Id == id);
             });
             return item;
         }
@@ -135,6 +135,8 @@ namespace BaseCore.DataBase
         protected virtual IQueryable<T> GetAllQuery(IQueryable<T> items) => items;
 
         protected virtual IQueryable<T> GetSortQuery(IQueryable<T> items) => items;
+
+        protected virtual IQueryable<T> GetIncludeQuery(IQueryable<T> items) => items;
 
         protected virtual void CheckItem(T item) { }
 

@@ -28,10 +28,14 @@ namespace BaseCore.DataBase
 
         public DbSet<Player> Players { get; set; }
 
-        public DbSet<GatesOrder> GatesOrders { get; set; }
+        public DbSet<GateOrderItem> GatesOrder { get; set; }
 
         public DbSet<TimeRead> TimeReads { get; set; }
 
         public DbSet<TimeReadType> TimeReadTypes { get; set; }
+
+        public DbSet<Gate> Gates { get; set; }
+
+        public DbSet<LogsSource> LogsSources { get; set; }
     }
 }

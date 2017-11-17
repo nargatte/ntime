@@ -67,15 +67,19 @@
     <Compile Include="DataBase\Entities\Distance.cs" />
     <Compile Include="DataBase\Entities\EnumTable.cs" />
     <Compile Include="DataBase\Entities\ExtraPlayerInfo.cs" />
+    <Compile Include="DataBase\Entities\Gate.cs" />
     <Compile Include="DataBase\Entities\ICompetitionId.cs" />
     <Compile Include="DataBase\Entities\IEntityId.cs" />
+    <Compile Include="DataBase\Entities\LogsSource.cs" />
     <Compile Include="DataBase\Entities\Player.cs" />
-    <Compile Include="DataBase\Entities\GatesOrder.cs" />
+    <Compile Include="DataBase\Entities\GateOrderItem.cs" />
     <Compile Include="DataBase\Entities\TimeRead.cs" />
     <Compile Include="DataBase\Entities\TimeReadType.cs" />
     <Compile Include="DataBase\Enums\DistanceTypeEnum.cs" />
     <Compile Include="DataBase\Enums\EnumBindingSourceExtension.cs" />
     <Compile Include="DataBase\Enums\EnumDescriptionTypeConverter.cs" />
+    <Compile Include="DataBase\Repositories\GateRepository.cs" />
+    <Compile Include="DataBase\Repositories\LogsSourceRepository.cs" />
     <Compile Include="PlayerFilter\PlayerSort.cs" />
     <Compile Include="DataBase\Contexts\NTimeDBContext.cs" />
     <Compile Include="DataBase\Contexts\NTimeDBInitializer.cs" />
@@ -88,7 +92,7 @@
     <Compile Include="DataBase\Repositories\ExtraPlayerInfoRepository.cs" />
     <Compile Include="PlayerFilter\PlayerFilterOptions.cs" />
     <Compile Include="DataBase\Repositories\PlayerRepository.cs" />
-    <Compile Include="DataBase\Repositories\GatesOrderRepository.cs" />
+    <Compile Include="DataBase\Repositories\GateOrderItemRepository.cs" />
     <Compile Include="DataBase\Repositories\Repository.cs" />
     <Compile Include="DataBase\Repositories\RepositoryCompetitionId.cs" />
     <Compile Include="DataBase\Repositories\TimeReadRepository.cs" />
@@ -103,6 +107,8 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="PlayersProcess\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

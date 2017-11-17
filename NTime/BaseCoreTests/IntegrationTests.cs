@@ -49,47 +49,47 @@ namespace BaseCoreTests
 
             var darr = await dr.GetAllAsync();
 
-            var ror = new GatesOrderRepository(cp, darr.FirstOrDefault(d => d.Name == "GIGA"));
-            await ror.ReplaceBy(new[]
-            {
-                new GatesOrder(1, 1800),
-                new GatesOrder(2,1800),
-                new GatesOrder(1,1800),
-                new GatesOrder(2,1800),
-                new GatesOrder(1,1800),
-                new GatesOrder(2,1800),
-                new GatesOrder(1,1800),
-            });
+            //var ror = new GateOrderItemRepository(cp, darr.FirstOrDefault(d => d.Name == "GIGA"));
+            //await ror.ReplaceBy(new[]
+            //{
+            //    new GateOrderItem(1, 1800),
+            //    new GateOrderItem(2,1800),
+            //    new GateOrderItem(1,1800),
+            //    new GateOrderItem(2,1800),
+            //    new GateOrderItem(1,1800),
+            //    new GateOrderItem(2,1800),
+            //    new GateOrderItem(1,1800),
+            //});
 
-            ror = new GatesOrderRepository(cp, darr.FirstOrDefault(d => d.Name == "MEGA"));
-            await ror.ReplaceBy(new[]
-            {
-                new GatesOrder(1, 1800),
-                new GatesOrder(2,1800),
-                new GatesOrder(1,1800),
-            });
+            //ror = new GateOrderItemRepository(cp, darr.FirstOrDefault(d => d.Name == "MEGA"));
+            //await ror.ReplaceBy(new[]
+            //{
+            //    new GateOrderItem(1, 1800),
+            //    new GateOrderItem(2,1800),
+            //    new GateOrderItem(1,1800),
+            //});
 
-            ror = new GatesOrderRepository(cp, darr.FirstOrDefault(d => d.Name == "MINI"));
-            await ror.ReplaceBy(new[]
-            {
-                new GatesOrder(1,1800),
-                new GatesOrder(2,1800),
-                new GatesOrder(1,1800)
-            });
+            //ror = new GateOrderItemRepository(cp, darr.FirstOrDefault(d => d.Name == "MINI"));
+            //await ror.ReplaceBy(new[]
+            //{
+            //    new GateOrderItem(1,1800),
+            //    new GateOrderItem(2,1800),
+            //    new GateOrderItem(1,1800)
+            //});
 
-            ror = new GatesOrderRepository(cp, darr.FirstOrDefault(d => d.Name == "+RODZINNY"));
-            await ror.ReplaceBy(new[]
-            {
-                new GatesOrder(1,1000),
-                new GatesOrder(1,1000),
-            });
+            //ror = new GateOrderItemRepository(cp, darr.FirstOrDefault(d => d.Name == "+RODZINNY"));
+            //await ror.ReplaceBy(new[]
+            //{
+            //    new GateOrderItem(1,1000),
+            //    new GateOrderItem(1,1000),
+            //});
 
-            ror = new GatesOrderRepository(cp, darr.FirstOrDefault(d => d.Name == "RODZINNY"));
-            await ror.ReplaceBy(new[]
-            {
-                new GatesOrder(1,1000),
-                new GatesOrder(1,1000)
-            });
+            //ror = new GateOrderItemRepository(cp, darr.FirstOrDefault(d => d.Name == "RODZINNY"));
+            //await ror.ReplaceBy(new[]
+            //{
+            //    new GateOrderItem(1,1000),
+            //    new GateOrderItem(1,1000)
+            //});
 
             await pr.ImportPlayersAsync(
                 pathToexport + "Zawodnicy.csv");

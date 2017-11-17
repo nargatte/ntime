@@ -12,7 +12,7 @@ namespace BaseCore.TimesProcess
 
         protected Distance Distance;
 
-        protected GatesOrder[] GatesOrder;
+        protected GateOrderItem[] GateOrderItem;
 
         protected HashSet<int> ReadersNumbers;
 
@@ -28,15 +28,15 @@ namespace BaseCore.TimesProcess
 
         protected TimeRead LastSignificant;
 
-        protected IEnumerator<GatesOrder> ExpectedReader;
+        protected IEnumerator<GateOrderItem> ExpectedReader;
 
         protected bool NonReadersRemain;
 
-        protected internal TimeProcessForDistance(Player player, Distance distance, GatesOrder[] readerOrder, HashSet<int> readersNumbers,  TimeProcess timeProcess)
+        protected internal TimeProcessForDistance(Player player, Distance distance, GateOrderItem[] readerOrderItem, HashSet<int> readersNumbers,  TimeProcess timeProcess)
         {
             Player = player;
             Distance = distance;
-            GatesOrder = readerOrder;
+            GateOrderItem = readerOrderItem;
             TimeProcess = timeProcess;
             ReadersNumbers = readersNumbers;
         }
@@ -118,10 +118,10 @@ namespace BaseCore.TimesProcess
 
         private TimeRead FirstValidTimeRead()
         {
-            return TimeReads.FirstOrDefault(i => i.Reader == GatesOrder[0].GateNumber);
+            return TimeReads.FirstOrDefault(i => i.Reader == GateOrderItem[0].Gate.Number);
         }
 
-        protected virtual IEnumerable<GatesOrder> GatesOrderNumers() => GatesOrder;
+        protected virtual IEnumerable<GateOrderItem> GatesOrderNumers() => GateOrderItem;
 
         protected bool IsNonsignificantBefore(TimeRead timeRead) => timeRead.Time < StartTime;
 
@@ -146,7 +146,7 @@ namespace BaseCore.TimesProcess
             return timeRead.Time - LastSignificant.Time < ExpectedReader.Current?.MinTimeBefore;
         }
 
-        protected bool IsSignificant(TimeRead timeRead) => timeRead.Reader == ExpectedReader.Current?.GateNumber;
+        protected bool IsSignificant(TimeRead timeRead) => timeRead.Reader == ExpectedReader.Current?.Gate.Number;
 
         private bool LoopBody(TimeRead timeRead)
         {
@@ -164,7 +164,7 @@ namespace BaseCore.TimesProcess
             else
             {
                 TimeRead tr = new TimeRead((LastSignificant?.Time ?? StartTime) + ExpectedReader.Current?.MinTimeBefore ?? 0,
-                    ExpectedReader.Current?.GateNumber ?? -1)
+                    ExpectedReader.Current?.Gate.Number ?? -1)
                 {
                     TimeReadTypeEnum = TimeReadTypeEnum.Void
                 };
