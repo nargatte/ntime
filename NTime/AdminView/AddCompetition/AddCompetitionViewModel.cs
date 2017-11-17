@@ -6,10 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using MvvmHelper;
+using ViewCore;
 
 namespace AdminView.AddCompetition
 {
-    class AddCompetitionViewModel : BindableBase, ViewCore.Entities.IViewModel
+    class AddCompetitionViewModel : BindableBase, ViewCore.Entities.ISwitchableViewModel
     {
         AddCompetitionView view;
         public AddCompetitionViewModel()

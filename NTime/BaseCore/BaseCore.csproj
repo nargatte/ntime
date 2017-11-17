@@ -68,11 +68,11 @@
     <Compile Include="DataBase\Entities\EnumTable.cs" />
     <Compile Include="DataBase\Entities\ExtraPlayerInfo.cs" />
     <Compile Include="DataBase\Entities\Gate.cs" />
+    <Compile Include="DataBase\Entities\GateOrderItem.cs" />
     <Compile Include="DataBase\Entities\ICompetitionId.cs" />
     <Compile Include="DataBase\Entities\IEntityId.cs" />
     <Compile Include="DataBase\Entities\LogsSource.cs" />
     <Compile Include="DataBase\Entities\Player.cs" />
-    <Compile Include="DataBase\Entities\GateOrderItem.cs" />
     <Compile Include="DataBase\Entities\TimeRead.cs" />
     <Compile Include="DataBase\Entities\TimeReadType.cs" />
     <Compile Include="DataBase\Enums\DistanceTypeEnum.cs" />

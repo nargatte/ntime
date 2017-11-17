@@ -7,7 +7,7 @@ using MvvmHelper;
 
 namespace ViewCore.Entities
 {
-    public class EditableCompetition : BindableBase
+    public class EditableCompetition : BindableBase, IEditableCompetition
     {
         private BaseCore.DataBase.Competition _competition = new BaseCore.DataBase.Competition();
         public BaseCore.DataBase.Competition Competition
@@ -16,30 +16,11 @@ namespace ViewCore.Entities
             set { _competition = value; }
         }
 
-
         public string Name
         {
             get { return Competition.Name; }
             set { Competition.Name = SetProperty(Competition.Name, value); }
         }
-
-
-        private string _nam2;
-        public string Name2
-        {
-            get { return _nam2; }
-            set { SetProperty(ref _nam2, value); }
-        }
-
-        //private string _name = "Old Text";
-        //public string Name
-        //{
-        //    get { return _name; }
-        //    set { SetProperty(ref _name, value);
-        //        OnPropertyChanged("Name");
-        //    }
-        //}
-
 
         public string City
         {
@@ -61,13 +42,11 @@ namespace ViewCore.Entities
             set { Competition.Organiser = SetProperty(Competition.Organiser, value); }
         }
 
-
         public string Description
         {
             get { return Competition.Description; }
             set { Competition.Description = SetProperty(Competition.Description, value); }
         }
-
 
         public string Link
         {

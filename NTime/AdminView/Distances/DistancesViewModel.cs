@@ -13,7 +13,7 @@ namespace AdminView.Distances
     class DistancesViewModel : TabItemViewModel
     {
         ViewCore.Entities.ILogsInfo logsInfo;
-        public DistancesViewModel(ViewCore.Entities.EditableCompetition currentCompetition) : base(currentCompetition)
+        public DistancesViewModel(ViewCore.Entities.IEditableCompetition currentCompetition) : base(currentCompetition)
         {
             TabTitle = "Dystanse";
             AddMeasurementPointCmd = new RelayCommand(OnAddMeasurementPoint);

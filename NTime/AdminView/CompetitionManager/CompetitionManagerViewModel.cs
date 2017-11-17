@@ -11,16 +11,15 @@ using AdminView.Scores;
 using AdminView.Distances;
 using AdminView.Categories;
 using MvvmHelper;
+using ViewCore;
 
 namespace AdminView.CompetitionManager
 {
-    class CompetitionManagerViewModel : BindableBase, ViewCore.Entities.IViewModel
+    class CompetitionManagerViewModel : AdminViewModel, ViewCore.Entities.ISwitchableViewModel
     {
-        private ViewCore.Entities.EditableCompetition _currentCompetition;
 
-        public CompetitionManagerViewModel(ViewCore.Entities.EditableCompetition currentCompetition)
+        public CompetitionManagerViewModel(ViewCore.Entities.IEditableCompetition currentCompetition) : base(currentCompetition)
         {
-            this._currentCompetition = currentCompetition;
             GoToCompetitionCmd = new RelayCommand(OnGoToCompetition, CanGoToCompetition);
             TabItems = new ObservableCollection<BindableBase>()
             {

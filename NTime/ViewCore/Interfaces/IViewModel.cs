@@ -1,6 +1,6 @@
 ﻿namespace ViewCore.Entities
 {
-    public interface IViewModel
+    public interface ISwitchableViewModel
     {
         void DetachAllEvents();
     }

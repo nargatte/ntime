@@ -9,9 +9,9 @@ using ViewCore;
 
 namespace AdminView.Players
 {
-    class PlayersViewModel : TabItemViewModel, ViewCore.Entities.IViewModel
+    class PlayersViewModel : TabItemViewModel, ViewCore.Entities.ISwitchableViewModel
     {
-        public PlayersViewModel(ViewCore.Entities.EditableCompetition currentCompetition) : base(currentCompetition)
+        public PlayersViewModel(ViewCore.Entities.IEditableCompetition currentCompetition) : base(currentCompetition)
         {
             AddPlayerCmd = new RelayCommand(OnAddPlayer);
             FillPlayersCollection();

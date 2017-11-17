@@ -13,13 +13,11 @@ using MvvmHelper;
 
 namespace AdminView
 {
-    class MainWindowViewModel : BindableBase, ViewCore.Entities.IViewModel
+    class MainWindowViewModel : AdminViewModel
     {
-        private ViewCore.Entities.IViewModel _currentViewModel;
+        private ViewCore.Entities.ISwitchableViewModel _currentViewModel;
         private CompetitionChoiceViewModel _competitionChoiceViewModel;
         private CompetitionManagerViewModel _competitionManagerViewModel;
-        private ViewCore.Entities.EditableCompetition _currentCompetition;
-
 
         public MainWindowViewModel()
         {
@@ -31,7 +29,7 @@ namespace AdminView
         private void NavToCompetitionChoiceView()
         {
             CurrentViewModel?.DetachAllEvents();
-            _competitionChoiceViewModel = new CompetitionChoiceViewModel();
+            _competitionChoiceViewModel = new CompetitionChoiceViewModel(_currentCompetition);
             _competitionChoiceViewModel.CompetitionManagerRequested += NavToCompetitionManagerView;
             CurrentViewModel = _competitionChoiceViewModel;
         }
@@ -45,12 +43,7 @@ namespace AdminView
             CurrentViewModel = _competitionManagerViewModel;
         }
 
-        public void DetachAllEvents()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ViewCore.Entities.IViewModel CurrentViewModel
+        public ViewCore.Entities.ISwitchableViewModel CurrentViewModel
         {
             get { return _currentViewModel; }
             set { SetProperty(ref _currentViewModel, value); }

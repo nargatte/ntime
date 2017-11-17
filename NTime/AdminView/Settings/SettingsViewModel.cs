@@ -10,10 +10,10 @@ using ViewCore;
 
 namespace AdminView.Settings
 {
-    class SettingsViewModel : TabItemViewModel, ViewCore.Entities.IViewModel
+    class SettingsViewModel : TabItemViewModel, ViewCore.Entities.ISwitchableViewModel
     {
         CompetitionRepository repository = new CompetitionRepository(new ContextProvider());
-        public SettingsViewModel(ViewCore.Entities.EditableCompetition currentCompetition) : base(currentCompetition)
+        public SettingsViewModel(ViewCore.Entities.IEditableCompetition currentCompetition) : base(currentCompetition)
         {
             this.CurrentCompetition = currentCompetition;
             TabTitle = "Ustawienia";
@@ -22,7 +22,7 @@ namespace AdminView.Settings
 
 
         //private Entities.EditableCompetition _currentCompetition;
-        public ViewCore.Entities.EditableCompetition CurrentCompetition
+        public ViewCore.Entities.IEditableCompetition CurrentCompetition
         {
             get { return _currentCompetition; }
             set { SetProperty(ref _currentCompetition, value);

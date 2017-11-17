@@ -4,6 +4,7 @@
     {
         public GateOrderItem()
         {
+
         }
 
         public GateOrderItem(decimal minTimeBefore)

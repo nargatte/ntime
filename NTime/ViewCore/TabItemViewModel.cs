@@ -7,13 +7,9 @@ using MvvmHelper;
 
 namespace ViewCore
 {
-    public class TabItemViewModel : BindableBase
+    public class TabItemViewModel : AdminViewModel
     {
-        protected Entities.EditableCompetition _currentCompetition;
-        public TabItemViewModel(Entities.EditableCompetition currentCompetition)
-        {
-            _currentCompetition = currentCompetition;
-        }
+        public TabItemViewModel(Entities.IEditableCompetition currentCompetition) : base(currentCompetition) { }
         private string _tabTitle;
         public string TabTitle
         {

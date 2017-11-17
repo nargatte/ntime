@@ -9,9 +9,9 @@ using ViewCore;
 
 namespace AdminView.Scores
 {
-    class ScoresViewModel : TabItemViewModel, ViewCore.Entities.IViewModel
+    class ScoresViewModel : TabItemViewModel, ViewCore.Entities.ISwitchableViewModel
     {
-        public ScoresViewModel(ViewCore.Entities.EditableCompetition currentCompetition) : base(currentCompetition)
+        public ScoresViewModel(ViewCore.Entities.IEditableCompetition currentCompetition) : base(currentCompetition)
         {
             TabTitle = "Wyniki";
             FillScores();
