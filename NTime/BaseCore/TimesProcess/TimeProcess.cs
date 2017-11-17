@@ -26,15 +26,15 @@ namespace BaseCore.TimesProcess
             await Task.WhenAll(tp, td);
 
             Dictionary<int, Distance> distancesDictionary = new Dictionary<int, Distance>();
-            Dictionary<int, GatesOrder[]> readerOrdersesDictionary = new Dictionary<int, GatesOrder[]>();
+            Dictionary<int, GateOrderItem[]> readerOrdersesDictionary = new Dictionary<int, GateOrderItem[]>();
             Dictionary<int, HashSet<int>> readersNumbersDictionary = new Dictionary<int, HashSet<int>>();
 
             foreach (Distance distance in td.Result)
             {
                 distancesDictionary.Add(distance.Id, distance);
-                GatesOrder[] readerOrders = await GetReaderOrder(distance);
-                readerOrdersesDictionary.Add(distance.Id, readerOrders);
-                readersNumbersDictionary.Add(distance.Id, GetReadersNumbers(readerOrders));
+                GateOrderItem[] readerOrdersItem = await GetReaderOrder(distance);
+                readerOrdersesDictionary.Add(distance.Id, readerOrdersItem);
+                readersNumbersDictionary.Add(distance.Id, GetReadersNumbers(readerOrdersItem));
             }
 
             List<Task> tasks = new List<Task>(tp.Result.Where(p => p.DistanceId != null)
@@ -56,27 +56,27 @@ namespace BaseCore.TimesProcess
                 throw new ArgumentException("player.DistanceId == null");
             }
 
-            GatesOrder[] readerOrders = await GetReaderOrder(distance);
-            await ProcessForPlayer(player, distance, readerOrders, GetReadersNumbers(readerOrders));
+            GateOrderItem[] readerOrdersItem = await GetReaderOrder(distance);
+            await ProcessForPlayer(player, distance, readerOrdersItem, GetReadersNumbers(readerOrdersItem));
         }
 
-        public Task ProcessForPlayer(Player player, Distance distance, GatesOrder[] readerOrder, HashSet<int> readersNumbers)
+        public Task ProcessForPlayer(Player player, Distance distance, GateOrderItem[] readerOrderItem, HashSet<int> readersNumbers)
         {
             TimeProcessForDistance timeProcess = null;
             if (distance.DistanceTypeEnum == DistanceTypeEnum.DeterminedDistance)
-                timeProcess = new TimeProcessForDistance(player, distance, readerOrder, readersNumbers, this);
+                timeProcess = new TimeProcessForDistance(player, distance, readerOrderItem, readersNumbers, this);
             if (distance.DistanceTypeEnum == DistanceTypeEnum.DeterminedLaps)
-                timeProcess = new TimeProcessForCircuits(player, distance, readerOrder, readersNumbers, this);
+                timeProcess = new TimeProcessForCircuits(player, distance, readerOrderItem, readersNumbers, this);
             if (distance.DistanceTypeEnum == DistanceTypeEnum.LimitedTime)
-                timeProcess = new TimeProcessForTime(player, distance, readerOrder, readersNumbers, this);
+                timeProcess = new TimeProcessForTime(player, distance, readerOrderItem, readersNumbers, this);
 
             if (timeProcess != null)
                 return timeProcess.FullProcess();
             return Task.Run(() => { });
         }
 
-        private Task<GatesOrder[]> GetReaderOrder(Distance distance) => new GatesOrderRepository(new ContextProvider(), distance).GetAllAsync();
+        private Task<GateOrderItem[]> GetReaderOrder(Distance distance) => new GateOrderItemRepository(new ContextProvider(), distance).GetAllAsync();
 
-        private HashSet<int> GetReadersNumbers(GatesOrder[] readerOrders) => new HashSet<int>(readerOrders.Select(r => r.GateNumber));
+        private HashSet<int> GetReadersNumbers(GateOrderItem[] readerOrdersItem) => new HashSet<int>(readerOrdersItem.Select(r => r.Gate.Number));
     }
 }

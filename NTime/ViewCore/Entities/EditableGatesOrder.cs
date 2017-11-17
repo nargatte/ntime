@@ -15,18 +15,18 @@ namespace ViewCore.Entities
             _definedGates = definedGates;
         }
 
-        private BaseCore.DataBase.GatesOrder _gatesOrder = new BaseCore.DataBase.GatesOrder();
-        public BaseCore.DataBase.GatesOrder GatesOrder
+        private BaseCore.DataBase.GateOrderItem _gateOrderItem = new BaseCore.DataBase.GateOrderItem();
+        public BaseCore.DataBase.GateOrderItem GateOrderItem
         {
-            get { return _gatesOrder; }
-            set { _gatesOrder = value; }
+            get { return _gateOrderItem; }
+            set { _gateOrderItem = value; }
         }
 
 
-        //public int GateNumber
+        //public int Number
         //{
-        //    get { return GatesOrder.GateNumber; }
-        //    set { GatesOrder.GateNumber = SetProperty(GatesOrder.GateNumber, value); }
+        //    get { return GateOrderItem.Number; }
+        //    set { GateOrderItem.Number = SetProperty(GateOrderItem.Number, value); }
         //}
 
 
@@ -40,8 +40,8 @@ namespace ViewCore.Entities
 
         public decimal MinTimeBefore
         {
-            get { return GatesOrder.MinTimeBefore; }
-            set { GatesOrder.MinTimeBefore = SetProperty(GatesOrder.MinTimeBefore, value); }
+            get { return GateOrderItem.MinTimeBefore; }
+            set { GateOrderItem.MinTimeBefore = SetProperty(GateOrderItem.MinTimeBefore, value); }
         }
 
 

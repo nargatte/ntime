@@ -5,18 +5,18 @@ namespace BaseCore.TimesProcess
 {
     internal class TimeProcessForCircuits : TimeProcessForDistance
     {
-        public TimeProcessForCircuits(Player player, Distance distance, GatesOrder[] gatesOrder, HashSet<int> gatesNumbers, TimeProcess timeProcess) : base(player, distance, gatesOrder, gatesNumbers, timeProcess)
+        public TimeProcessForCircuits(Player player, Distance distance, GateOrderItem[] gateOrderItem, HashSet<int> gatesNumbers, TimeProcess timeProcess) : base(player, distance, gateOrderItem, gatesNumbers, timeProcess)
         {
         }
 
-        protected override IEnumerable<GatesOrder> GatesOrderNumers()
+        protected override IEnumerable<GateOrderItem> GatesOrderNumers()
         {
-            yield return GatesOrder[0];
+            yield return GateOrderItem[0];
             while (Distance.LapsCount > Laps)
             {
-                for (int i = 1; i < GatesOrder.Length; i++)
+                for (int i = 1; i < GateOrderItem.Length; i++)
                 {
-                    yield return GatesOrder[i];
+                    yield return GateOrderItem[i];
                 }
                 Laps++;
             }

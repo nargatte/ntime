@@ -18,6 +18,9 @@ namespace BaseCore.DataBase
         protected override IQueryable<Player> GetSortQuery(IQueryable<Player> items) =>
             items.OrderBy(i => i.LastName);
 
+        protected override IQueryable<Player> GetIncludeQuery(IQueryable<Player> items) =>
+            items.Include(p => p.Distance).Include(p => p.AgeCategory);
+
         public async Task SetSelectedStartTimeAsync(Player[] players, DateTime startTime)
         {
             Parallel.ForEach(players, p => p.StartTime = startTime);
@@ -34,8 +37,8 @@ namespace BaseCore.DataBase
             int totalItemsNumber = 0;
             await ContextProvider.DoAsync(async ctx =>
             {
-                players = await GetFilteredQuery(ctx.Players.Where(i => i.CompetitionId == Competition.Id),
-                    filterOptions).Skip(pageNumber * numberItemsOnPage).Take(numberItemsOnPage).AsNoTracking().ToArrayAsync();
+                players = await GetIncludeQuery(GetFilteredQuery(ctx.Players.Where(i => i.CompetitionId == Competition.Id),
+                    filterOptions).Skip(pageNumber * numberItemsOnPage).Take(numberItemsOnPage)).AsNoTracking().ToArrayAsync();
 
                 totalItemsNumber = await GetFilteredQuery(ctx.Players.Where(i => i.CompetitionId == Competition.Id),
                     filterOptions).CountAsync();
