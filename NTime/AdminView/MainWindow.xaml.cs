@@ -23,7 +23,7 @@ namespace AdminView
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
+            DataContext = new MainWindowViewModel();
         }
     }
 }

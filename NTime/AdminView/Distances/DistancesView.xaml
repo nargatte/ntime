@@ -176,10 +176,10 @@
                                                 <TextBlock Text="Czas"/>
                                                 <TextBox Text="{Binding MinTimeBefore}"/>
                                             </StackPanel>
-                                            <Expander Background="#DC0" Margin="2,0,2,0" Header="WHat">
+                                            <Expander Background="#DC0" Margin="2,0,2,0" Header="{Binding}">
                                                 <Expander.HeaderTemplate>
                                                     <DataTemplate>
-                                                        <TextBlock Text="{Binding Gate}"/>
+                                                        <TextBlock Text="{Binding Gate.Number}" FontWeight="Bold"/>
                                                     </DataTemplate>
                                                 </Expander.HeaderTemplate>
                                                 <StackPanel Orientation="Vertical">

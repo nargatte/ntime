@@ -13,7 +13,7 @@ using MvvmHelper;
 
 namespace AdminView
 {
-    class MainViewModel : BindableBase, ViewCore.Entities.IViewModel
+    class MainWindowViewModel : BindableBase, ViewCore.Entities.IViewModel
     {
         private ViewCore.Entities.IViewModel _currentViewModel;
         private CompetitionChoiceViewModel _competitionChoiceViewModel;
@@ -21,22 +21,22 @@ namespace AdminView
         private ViewCore.Entities.EditableCompetition _currentCompetition;
 
 
-        public MainViewModel()
+        public MainWindowViewModel()
         {
 
             //NavToCompetitionChoiceView();
-            NavToCompetitionManager();
+            NavToCompetitionManagerView();
         }
 
         private void NavToCompetitionChoiceView()
         {
             CurrentViewModel?.DetachAllEvents();
             _competitionChoiceViewModel = new CompetitionChoiceViewModel();
-            _competitionChoiceViewModel.CompetitionManagerRequested += NavToCompetitionManager;
+            _competitionChoiceViewModel.CompetitionManagerRequested += NavToCompetitionManagerView;
             CurrentViewModel = _competitionChoiceViewModel;
         }
 
-        private void NavToCompetitionManager()
+        private void NavToCompetitionManagerView()
         {
             if (_competitionChoiceViewModel != null)
                 _currentCompetition = _competitionChoiceViewModel.SelectedCompetition;
