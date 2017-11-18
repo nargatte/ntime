@@ -16,8 +16,8 @@ namespace BaseCore.DataBase
         public int CompetitionId { get; set; }
         public virtual Competition Competition { get; set; }
 
-        public virtual ICollection<GateOrderItem> GatesOrderItems { get; set; }
+        public virtual ICollection<GatesOrderItem> GatesOrderItems { get; set; }
 
-        public virtual ICollection<LogsSource> LogsSources { get; set; }
+        public virtual ICollection<TimeReadsLogInfo> TimeReadsLogInfos { get; set; }
     }
 }

@@ -46,7 +46,7 @@ namespace BaseCore.TimesProcess
             await Initialize();
             if (Player.StartTime == null)
                 return;
-            if (!Array.TrueForAll(TimeReads, t => ReaderNumberExist(t.Reader)))
+            if (!Array.TrueForAll(TimeReads, t => ReaderNumberExist(t.Gate.Number)))
                 return;
 
             ExpectedReader = GatesOrderNumers().GetEnumerator();
@@ -118,7 +118,7 @@ namespace BaseCore.TimesProcess
 
         private TimeRead FirstValidTimeRead()
         {
-            return TimeReads.FirstOrDefault(i => i.Reader == GateOrderItem[0].Gate.Number);
+            return TimeReads.FirstOrDefault(i => i.Gate.Number == GateOrderItem[0].Gate.Number);
         }
 
         protected virtual IEnumerable<GatesOrderItem> GatesOrderNumers() => GateOrderItem;
@@ -146,7 +146,7 @@ namespace BaseCore.TimesProcess
             return timeRead.Time - LastSignificant.Time < ExpectedReader.Current?.MinTimeBefore;
         }
 
-        protected bool IsSignificant(TimeRead timeRead) => timeRead.Reader == ExpectedReader.Current?.Gate.Number;
+        protected bool IsSignificant(TimeRead timeRead) => timeRead.Gate.Number == ExpectedReader.Current?.Gate.Number;
 
         private bool LoopBody(TimeRead timeRead)
         {
@@ -163,10 +163,10 @@ namespace BaseCore.TimesProcess
             }
             else
             {
-                TimeRead tr = new TimeRead((LastSignificant?.Time ?? StartTime) + ExpectedReader.Current?.MinTimeBefore ?? 0,
-                    ExpectedReader.Current?.Gate.Number ?? -1)
+                TimeRead tr = new TimeRead((LastSignificant?.Time ?? StartTime) + ExpectedReader.Current?.MinTimeBefore ?? 0)
                 {
-                    TimeReadTypeEnum = TimeReadTypeEnum.Void
+                    TimeReadTypeEnum = TimeReadTypeEnum.Void,
+                    GateId = ExpectedReader.Current?.GateId ?? -1
                 };
                 ExistVoids.Add(tr);
                 LastSignificant = tr;

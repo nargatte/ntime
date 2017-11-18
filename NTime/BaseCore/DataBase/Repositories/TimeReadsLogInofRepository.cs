@@ -1,13 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
+using BaseCore.Csv;
 
 namespace BaseCore.DataBase
 {
-    public class LogsSourceRepository : Repository<TimeReadsLogInfo>
+    public class TimeReadsLogInofRepository : Repository<TimeReadsLogInfo>
     {
         protected Gate Gate { get; }
 
-        public LogsSourceRepository(IContextProvider contextProvider, Gate gate) : base(contextProvider)
+        public TimeReadsLogInofRepository(IContextProvider contextProvider, Gate gate) : base(contextProvider)
         {
             Gate = gate;
         }
@@ -28,5 +32,6 @@ namespace BaseCore.DataBase
             item.GateId = Gate.Id;
             item.Gate = null;
         }
+
     }
 }

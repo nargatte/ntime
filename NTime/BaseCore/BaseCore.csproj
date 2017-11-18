@@ -79,7 +79,7 @@
     <Compile Include="DataBase\Enums\EnumBindingSourceExtension.cs" />
     <Compile Include="DataBase\Enums\EnumDescriptionTypeConverter.cs" />
     <Compile Include="DataBase\Repositories\GateRepository.cs" />
-    <Compile Include="DataBase\Repositories\LogsSourceRepository.cs" />
+    <Compile Include="DataBase\Repositories\TimeReadsLogInofRepository.cs" />
     <Compile Include="PlayerFilter\PlayerSort.cs" />
     <Compile Include="DataBase\Contexts\NTimeDBContext.cs" />
     <Compile Include="DataBase\Contexts\NTimeDBInitializer.cs" />

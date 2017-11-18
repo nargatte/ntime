@@ -220,7 +220,7 @@ namespace BaseCore.DataBase
             (distance == null || extraPlayerInfo == null || ageCategory == null) ? null :
             distance.Name.Substring(0, 4) + " " + (male ? "M" : "K") + ageCategory.Name + extraPlayerInfo.ShortName;
 
-        public async Task<Tuple<int, int>> ImportTimeReadsAsync(string fileName, int readerNumber)
+        public async Task<Tuple<int, int>> ImportTimeReadsAsync(string fileName, Gate gate)
         {
             CsvImporter<TimeReadRecord, TimeReadRecordMap> csvImporter = new CsvImporter<TimeReadRecord, TimeReadRecordMap>(fileName);
 
@@ -248,8 +248,8 @@ namespace BaseCore.DataBase
             foreach (TimeReadRecord read in timeReads)
             {
                 Player p;
-                if(dictionaryPlayers.TryGetValue(read.StartNumber, out p))
-                    timeReadsList.Add(new TimeRead(read.Time, readerNumber) {PlayerId = p.Id});
+                if (dictionaryPlayers.TryGetValue(read.StartNumber, out p))
+                    timeReadsList.Add(new TimeRead(read.Time) { PlayerId = p.Id, GateId = gate.Id});
             }
 
             await ContextProvider.DoAsync(async ctx =>

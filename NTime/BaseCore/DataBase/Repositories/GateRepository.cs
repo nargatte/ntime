@@ -11,6 +11,5 @@ namespace BaseCore.DataBase
 
         protected override IQueryable<Gate> GetSortQuery(IQueryable<Gate> items) =>
             items.OrderBy(i => i.Number);
-
     }
 }

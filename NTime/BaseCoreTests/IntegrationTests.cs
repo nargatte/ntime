@@ -91,14 +91,14 @@ namespace BaseCoreTests
             //    new GateOrderItem(1,1000)
             //});
 
-            await pr.ImportPlayersAsync(
-                pathToexport + "Zawodnicy.csv");
-            await pr.ImportTimeReadsAsync(
-                pathToexport + "log1.csv", 1);
-            await pr.ImportTimeReadsAsync(
-                pathToexport + "log2.csv", 1);
-            await pr.ImportTimeReadsAsync(
-                pathToexport + "log3.csv", 2);
+            //await pr.ImportPlayersAsync(
+            //    pathToexport + "Zawodnicy.csv");
+            //await pr.ImportTimeReadsAsync(
+            //    pathToexport + "log1.csv", 1);
+            //await pr.ImportTimeReadsAsync(
+            //    pathToexport + "log2.csv", 1);
+            //await pr.ImportTimeReadsAsync(
+            //    pathToexport + "log3.csv", 2);
             // await pr.ImportTimeReadsAsync(
             //   pathToexport + "log1 Lask.csv", 2);
 

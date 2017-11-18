@@ -9,17 +9,17 @@ namespace BaseCore.DataBase
         {
         }
 
-        public TimeRead(decimal time, int reader)
+        public TimeRead(decimal time)
         {
             Time = time;
-            Reader = reader;
         }
 
         public int Id { get; set; }
 
         public decimal Time { get; set; }
 
-        public int Reader { get; set; }
+        public int? GateId { get; set; }
+        public virtual Gate Gate { get; set; }
 
         public int TimeReadTypeId { get; set; }
         public virtual TimeReadType TimeReadType { get; set; }
@@ -36,12 +36,12 @@ namespace BaseCore.DataBase
 
         public override string ToString()
         {
-            return $"{nameof(Time)}: {Time.ToDateTime()}, {nameof(Reader)}: {Reader}, {nameof(TimeReadTypeEnum)}: {TimeReadTypeEnum}";
+            return $"{nameof(Time)}: {Time.ToDateTime()}, {nameof(Gate.Number)}: {Gate.Number}, {nameof(TimeReadTypeEnum)}: {TimeReadTypeEnum}";
         }
 
         protected bool Equals(TimeRead other)
         {
-            return Time == other.Time && Reader == other.Reader;
+            return Time == other.Time && Gate.Number == other.Gate.Number;
         }
 
         public override bool Equals(object obj)
@@ -56,7 +56,7 @@ namespace BaseCore.DataBase
         {
             unchecked
             {
-                return (Time.GetHashCode() * 397) ^ Reader;
+                return (Time.GetHashCode() * 397);
             }
         }
     }
