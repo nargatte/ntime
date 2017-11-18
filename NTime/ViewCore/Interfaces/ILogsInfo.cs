@@ -10,7 +10,7 @@ namespace ViewCore.Entities
     public interface ILogsInfo
     {
         HashSet<int> LogsNumbers { get; set; }
-        HashSet<int> MeasurementPointsNumbers { get; set; }
+        HashSet<int> GatesNumbers { get; set; }
         HashSet<string> DistancesNames { get; set; }
         //ObservableCollection<MeasurementPoint> TimeReadsLogs { get; set; }
     }

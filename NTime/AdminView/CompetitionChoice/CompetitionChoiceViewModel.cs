@@ -58,8 +58,8 @@ namespace AdminView.CompetitionChoice
 
         private void OnViewLoaded()
         {
-            ClearDatabase();
-            FillDatabase();
+            //ClearDatabase();
+            //FillDatabase();
             DownloadDataFromDatabase();
         }
 
@@ -83,6 +83,7 @@ namespace AdminView.CompetitionChoice
 
         private void OnGoToCompetition()
         {
+            ClearDataForCompetition();
             AddDataForCompetition();
             CompetitionManagerRequested();
         }
@@ -147,7 +148,7 @@ namespace AdminView.CompetitionChoice
             var dbCompetitions = new List<Competition>(await repository.GetAllAsync());
             foreach (var dbCompetition in dbCompetitions)
             {
-                Competitions.Add(new ViewCore.Entities.EditableCompetition() { Competition = dbCompetition });
+                Competitions.Add(new ViewCore.Entities.EditableCompetition() { DbEntity = dbCompetition });
             }
         }
 
@@ -169,13 +170,12 @@ namespace AdminView.CompetitionChoice
 
         private async void AddDataForCompetition()
         {
-            var playersRepository = new PlayerRepository(new ContextProvider(), SelectedCompetition.Competition);
+            var playersRepository = new PlayerRepository(new ContextProvider(), SelectedCompetition.DbEntity);
             var taskPlayers = playersRepository.AddRangeAsync(GetPlayersCollection());
 
-            var distanceRepository = new DistanceRepository(new ContextProvider(), SelectedCompetition.Competition);
+            var distanceRepository = new DistanceRepository(new ContextProvider(), SelectedCompetition.DbEntity);
             var taskDistances = distanceRepository.AddRangeAsync(GetDistancesCollection());
-            await taskPlayers;
-            await taskDistances;
+            await Task.WhenAll(taskPlayers, taskDistances);
         }
 
         private IEnumerable<Player> GetPlayersCollection()
@@ -204,6 +204,17 @@ namespace AdminView.CompetitionChoice
                 new Distance("GIGA", 15, DateTime.Now, DistanceTypeEnum.LimitedTime)
             };
             return distances;
+        }
+
+
+        private async void ClearDataForCompetition()
+        {
+            var playersRepository = new PlayerRepository(new ContextProvider(), SelectedCompetition.DbEntity);
+            var taskPlayers = playersRepository.RemoveAllAsync();
+
+            var distanceRepository = new DistanceRepository(new ContextProvider(), SelectedCompetition.DbEntity);
+            var taskDistances = distanceRepository.RemoveAllAsync();
+            await Task.WhenAll(taskPlayers, taskDistances);
         }
         #endregion
 

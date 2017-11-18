@@ -3,10 +3,11 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using MvvmHelper;
 using ViewCore;
+using BaseCore.DataBase;
 
 namespace ViewCore.Entities
 {
-    public class EditableGate : BindableBase, IEditableGate
+    public class EditableGate : EditableBaseClass<Gate>, IEditableGate
     {
         ILogsInfo logsInfo;
         public EditableGate(ILogsInfo logsInfo)
@@ -30,7 +31,7 @@ namespace ViewCore.Entities
                 if (dialog.ShowDialog().Value)
                 {
                     NewLogDirectoryName = dialog.FileName;
-                    var logToAdd = new EditableTimeReadsLog(logsInfo)
+                    var logToAdd = new EditableTimeReadsLogInfo(logsInfo)
                     {
                         LogNumber = NewLogNumber,
                         DirectoryName = NewLogDirectoryName
@@ -50,7 +51,7 @@ namespace ViewCore.Entities
 
         private void LogToAdd_DeleteRequested1(object sender, EventArgs e)
         {
-            var logToDelete = sender as EditableTimeReadsLog;
+            var logToDelete = sender as EditableTimeReadsLogInfo;
             logsInfo.LogsNumbers.Remove(logToDelete.LogNumber);
             AssignedLogs.Remove(logToDelete);
         }
@@ -102,8 +103,8 @@ namespace ViewCore.Entities
             set { SetProperty(ref _name, value); }
         }
 
-        private ObservableCollection<EditableTimeReadsLog> _assignedLogs = new ObservableCollection<EditableTimeReadsLog>();
-        public ObservableCollection<EditableTimeReadsLog> AssignedLogs
+        private ObservableCollection<EditableTimeReadsLogInfo> _assignedLogs = new ObservableCollection<EditableTimeReadsLogInfo>();
+        public ObservableCollection<EditableTimeReadsLogInfo> AssignedLogs
         {
             get { return _assignedLogs; }
             set { SetProperty(ref _assignedLogs, value); }

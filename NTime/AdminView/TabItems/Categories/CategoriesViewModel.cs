@@ -22,25 +22,25 @@ namespace AdminView.Categories
         {
             NewCategory.DeleteRequested += NewCategory_DeleteRequested;
             Categories.Add(NewCategory);
-            NewCategory = new ViewCore.Entities.EditableCategory();
+            NewCategory = new ViewCore.Entities.EditableAgeCategory();
 
         }
 
         //Same must be done after import !!!!
         private void NewCategory_DeleteRequested(object sender, EventArgs e)
         {
-            Categories.Remove(sender as ViewCore.Entities.EditableCategory);
+            Categories.Remove(sender as ViewCore.Entities.EditableAgeCategory);
         }
 
-        private ViewCore.Entities.EditableCategory _newCategory = new ViewCore.Entities.EditableCategory();
-        public ViewCore.Entities.EditableCategory NewCategory
+        private ViewCore.Entities.EditableAgeCategory _newCategory = new ViewCore.Entities.EditableAgeCategory();
+        public ViewCore.Entities.EditableAgeCategory NewCategory
         {
             get { return _newCategory; }
             set { SetProperty(ref _newCategory, value); }
         }
 
-        private ObservableCollection<ViewCore.Entities.EditableCategory> _categories = new ObservableCollection<ViewCore.Entities.EditableCategory>();
-        public ObservableCollection<ViewCore.Entities.EditableCategory> Categories
+        private ObservableCollection<ViewCore.Entities.EditableAgeCategory> _categories = new ObservableCollection<ViewCore.Entities.EditableAgeCategory>();
+        public ObservableCollection<ViewCore.Entities.EditableAgeCategory> Categories
         {
             get { return _categories; }
             set { SetProperty(ref _categories, value); }

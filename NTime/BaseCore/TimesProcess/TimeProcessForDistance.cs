@@ -12,7 +12,7 @@ namespace BaseCore.TimesProcess
 
         protected Distance Distance;
 
-        protected GateOrderItem[] GateOrderItem;
+        protected GatesOrderItem[] GateOrderItem;
 
         protected HashSet<int> ReadersNumbers;
 
@@ -28,11 +28,11 @@ namespace BaseCore.TimesProcess
 
         protected TimeRead LastSignificant;
 
-        protected IEnumerator<GateOrderItem> ExpectedReader;
+        protected IEnumerator<GatesOrderItem> ExpectedReader;
 
         protected bool NonReadersRemain;
 
-        protected internal TimeProcessForDistance(Player player, Distance distance, GateOrderItem[] readerOrderItem, HashSet<int> readersNumbers,  TimeProcess timeProcess)
+        protected internal TimeProcessForDistance(Player player, Distance distance, GatesOrderItem[] readerOrderItem, HashSet<int> readersNumbers,  TimeProcess timeProcess)
         {
             Player = player;
             Distance = distance;
@@ -121,7 +121,7 @@ namespace BaseCore.TimesProcess
             return TimeReads.FirstOrDefault(i => i.Reader == GateOrderItem[0].Gate.Number);
         }
 
-        protected virtual IEnumerable<GateOrderItem> GatesOrderNumers() => GateOrderItem;
+        protected virtual IEnumerable<GatesOrderItem> GatesOrderNumers() => GateOrderItem;
 
         protected bool IsNonsignificantBefore(TimeRead timeRead) => timeRead.Time < StartTime;
 

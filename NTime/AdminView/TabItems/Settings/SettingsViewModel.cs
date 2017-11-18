@@ -29,7 +29,7 @@ namespace AdminView.Settings
 
         private void OnSaveChanges()
         {
-            repository.UpdateAsync(CurrentCompetition.Competition).ContinueWith( t => 
+            repository.UpdateAsync(CurrentCompetition.DbEntity).ContinueWith( t => 
             MessageBox.Show("Zmiany zostały zapisane")
             );
         }

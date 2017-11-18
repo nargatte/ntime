@@ -4,54 +4,49 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MvvmHelper;
+using BaseCore.DataBase;
 
 namespace ViewCore.Entities
 {
-    public class EditableCompetition : BindableBase, IEditableCompetition
+    public class EditableCompetition : EditableBaseClass<Competition>, IEditableCompetition
     {
-        private BaseCore.DataBase.Competition _competition = new BaseCore.DataBase.Competition();
-        public BaseCore.DataBase.Competition Competition
-        {
-            get { return _competition; }
-            set { _competition = value; }
-        }
 
         public string Name
         {
-            get { return Competition.Name; }
-            set { Competition.Name = SetProperty(Competition.Name, value); }
+            get { return DbEntity.Name; }
+            set { DbEntity.Name = SetProperty(DbEntity.Name, value); }
         }
 
         public string City
         {
-            get { return Competition.City; }
-            set { Competition.City = SetProperty(Competition.City, value); }
+            get { return DbEntity.City; }
+            set { DbEntity.City = SetProperty(DbEntity.City, value); }
         }
 
 
         public DateTime EventDate
         {
-            get { return Competition.EventDate; }
-            set { Competition.EventDate = SetProperty(Competition.EventDate, value); }
+            get { return DbEntity.EventDate; }
+            set { DbEntity.EventDate = SetProperty(DbEntity.EventDate, value); }
         }
 
 
         public string Organiser
         {
-            get { return Competition.Organiser; }
-            set { Competition.Organiser = SetProperty(Competition.Organiser, value); }
+            get { return DbEntity.Organiser; }
+            set { DbEntity.Organiser = SetProperty(DbEntity.Organiser, value); }
         }
 
         public string Description
         {
-            get { return Competition.Description; }
-            set { Competition.Description = SetProperty(Competition.Description, value); }
+            get { return DbEntity.Description; }
+            set { DbEntity.Description = SetProperty(DbEntity.Description, value); }
         }
 
         public string Link
         {
-            get { return Competition.Link; }
-            set { Competition.Link = SetProperty(Competition.Link, value); }
+            get { return DbEntity.Link; }
+            set { DbEntity.Link = SetProperty(DbEntity.Link, value); }
         }
     }
 }

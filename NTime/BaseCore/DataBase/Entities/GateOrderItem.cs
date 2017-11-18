@@ -1,13 +1,13 @@
 ﻿namespace BaseCore.DataBase
 {
-    public class GateOrderItem : IEntityId
+    public class GatesOrderItem : IEntityId
     {
-        public GateOrderItem()
+        public GatesOrderItem()
         {
 
         }
 
-        public GateOrderItem(decimal minTimeBefore)
+        public GatesOrderItem(decimal minTimeBefore)
         {
             MinTimeBefore = minTimeBefore;
         }

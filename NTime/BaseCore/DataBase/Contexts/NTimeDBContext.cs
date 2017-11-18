@@ -28,7 +28,7 @@ namespace BaseCore.DataBase
 
         public DbSet<Player> Players { get; set; }
 
-        public DbSet<GateOrderItem> GatesOrder { get; set; }
+        public DbSet<GatesOrderItem> GatesOrder { get; set; }
 
         public DbSet<TimeRead> TimeReads { get; set; }
 
@@ -36,6 +36,6 @@ namespace BaseCore.DataBase
 
         public DbSet<Gate> Gates { get; set; }
 
-        public DbSet<LogsSource> LogsSources { get; set; }
+        public DbSet<TimeReadsLogInfo> LogsSources { get; set; }
     }
 }

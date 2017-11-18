@@ -10,6 +10,6 @@ namespace ViewCore.Entities
         string Link { get; set; }
         string Name { get; set; }
         string Organiser { get; set; }
-        BaseCore.DataBase.Competition Competition { get; set; }
+        BaseCore.DataBase.Competition DbEntity { get; set; }
     }
 }
