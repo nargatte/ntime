@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MvvmHelper;
 using ViewCore;
+using BaseCore.DataBase;
 
 namespace AdminView.Distances
 {
@@ -15,10 +16,26 @@ namespace AdminView.Distances
         ViewCore.Entities.ILogsInfo logsInfo;
         public DistancesViewModel(ViewCore.Entities.IEditableCompetition currentCompetition) : base(currentCompetition)
         {
-            TabTitle = "Dystanse";
+            ViewLoadedCmd = new RelayCommand(OnViewLoaded);
             AddMeasurementPointCmd = new RelayCommand(OnAddMeasurementPoint);
             AddDistanceCmd = new RelayCommand(OnAddDistance);
+            TabTitle = "Dystanse";
             logsInfo = new ViewCore.Entities.LogsInfo();
+        }
+
+        private void OnViewLoaded()
+        {
+            DownloadDistancesFromDatabase();
+        }
+
+        private async void DownloadDistancesFromDatabase()
+        {
+            var repository = new DistanceRepository(new ContextProvider(), _currentCompetition.Competition);
+            var dbDistances = await repository.GetAllAsync();
+            foreach (var dbDistance in dbDistances)
+            {
+                Distances.Add(new ViewCore.Entities.EditableDistance(logsInfo, _definedGates) { Distance = dbDistance });
+            }
         }
 
         private void OnAddMeasurementPoint()
@@ -168,5 +185,6 @@ namespace AdminView.Distances
 
         public RelayCommand AddMeasurementPointCmd { get; private set; }
         public RelayCommand AddDistanceCmd { get; private set; }
+        public RelayCommand ViewLoadedCmd { get; private set; }
     }
 }

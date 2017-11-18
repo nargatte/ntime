@@ -20,17 +20,6 @@ namespace AdminView.CompetitionChoice
             ViewLoadedCmd = new RelayCommand(OnViewLoaded);
         }
 
-        #region Database
-        private async void DownloadCompetitions(BaseCore.DataBase.CompetitionRepository repository)
-        {
-            var donwloadedCompetitions = new ObservableCollection<BaseCore.DataBase.Competition>(await repository.GetAllAsync());
-            foreach (var item in donwloadedCompetitions)
-            {
-                Competitions.Add(new ViewCore.Entities.EditableCompetition() { Competition = item });
-            }
-        }
-        #endregion
-
         #region Properties
         private ObservableCollection<ViewCore.Entities.EditableCompetition> _competitions = new ObservableCollection<ViewCore.Entities.EditableCompetition>();
         public ObservableCollection<ViewCore.Entities.EditableCompetition> Competitions
@@ -46,7 +35,8 @@ namespace AdminView.CompetitionChoice
             set
             {
                 SetProperty(ref _selectedCompetition, value);
-                CompetitionSelected = true;
+                if (!string.IsNullOrWhiteSpace(SelectedCompetition.Name))
+                    CompetitionSelected = true;
             }
         }
 
@@ -65,32 +55,38 @@ namespace AdminView.CompetitionChoice
         #endregion
 
         #region Methods and Events
+
         private void OnViewLoaded()
+        {
+            ClearDatabase();
+            FillDatabase();
+            DownloadDataFromDatabase();
+        }
+
+        private async void ClearDatabase()
+        {
+            var repository = new CompetitionRepository(new ContextProvider());
+            await repository.RemoveAllAsync();
+        }
+
+        private void FillDatabase()
         {
             var repository = new CompetitionRepository(new ContextProvider());
             AddCompetitions(repository);
-            DownloadCompetitions(repository);
         }
 
-        private async void AddCompetitions(BaseCore.DataBase.CompetitionRepository repository)
+        private void DownloadDataFromDatabase()
         {
-            await repository.AddRangeAsync(new List<BaseCore.DataBase.Competition>()
-            {
-            new BaseCore.DataBase.Competition(
-                "Zawody 1", new DateTime(2017, 11, 6), null, null, null, "Poznań"),
-            new BaseCore.DataBase.Competition(
-                "Zawody 2", new DateTime(2017, 11, 6), null, null, null, "Łódź"),
-            new BaseCore.DataBase.Competition(
-                "Zawody 3", new DateTime(2017, 11, 6), "Opis zawodów 3", null, null, "Warszawa"),
-            new BaseCore.DataBase.Competition(
-                "Zawody 4", new DateTime(2017, 12, 1), null, null, null, "Gdynia")
-            });
+            var repository = new CompetitionRepository(new ContextProvider());
+            DownloadCompetitions(repository);
         }
 
         private void OnGoToCompetition()
         {
+            AddDataForCompetition();
             CompetitionManagerRequested();
         }
+
 
         private bool CanGoToCompetition()
         {
@@ -141,6 +137,75 @@ namespace AdminView.CompetitionChoice
         public RelayCommand GoToCompetitionCmd { get; private set; }
         public RelayCommand ViewLoadedCmd { get; private set; }
 
+        #endregion
+
+
+
+        #region Database
+        private async void DownloadCompetitions(CompetitionRepository repository)
+        {
+            var dbCompetitions = new List<Competition>(await repository.GetAllAsync());
+            foreach (var dbCompetition in dbCompetitions)
+            {
+                Competitions.Add(new ViewCore.Entities.EditableCompetition() { Competition = dbCompetition });
+            }
+        }
+
+        private async void AddCompetitions(CompetitionRepository repository)
+        {
+            await repository.AddRangeAsync(new List<Competition>()
+            {
+            new Competition(
+                "Zawody 1", new DateTime(2017, 11, 6), null, null, null, "Poznań"),
+            new Competition(
+                "Zawody 2", new DateTime(2017, 11, 6), null, null, null, "Łódź"),
+            new Competition(
+                "Zawody 3", new DateTime(2017, 11, 6), "Opis zawodów 3", null, null, "Warszawa"),
+            new Competition(
+                "Zawody 4", new DateTime(2017, 12, 1), null, null, null, "Gdynia")
+            });
+        }
+
+
+        private async void AddDataForCompetition()
+        {
+            var playersRepository = new PlayerRepository(new ContextProvider(), SelectedCompetition.Competition);
+            var taskPlayers = playersRepository.AddRangeAsync(GetPlayersCollection());
+
+            var distanceRepository = new DistanceRepository(new ContextProvider(), SelectedCompetition.Competition);
+            var taskDistances = distanceRepository.AddRangeAsync(GetDistancesCollection());
+            await taskPlayers;
+            await taskDistances;
+        }
+
+        private IEnumerable<Player> GetPlayersCollection()
+        {
+            var players = new List<Player>();
+            for (int i = 0; i < 200; i++)
+            {
+                players.Add(new Player()
+                {
+                    LastName = "Kierzkowski",
+                    FirstName = "Jan",
+                    Team = "Niezniszczalni Zgierz",
+                    BirthDate = new DateTime(1994, 10, 09),
+                    IsMale = true,
+                    StartNumber = 18
+                });
+            }
+            return players;
+        }
+
+        private IEnumerable<Distance> GetDistancesCollection()
+        {
+            var distances = new List<Distance>()
+            {
+                new Distance("MINI", 15, DateTime.Now, DistanceTypeEnum.DeterminedDistance),
+                new Distance("GIGA", 15, DateTime.Now, DistanceTypeEnum.LimitedTime)
+            };
+            return distances;
+        }
+        #endregion
+
     }
-    #endregion
 }

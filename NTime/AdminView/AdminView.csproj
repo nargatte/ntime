@@ -93,10 +93,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Categories\CategoriesView.xaml.cs">
+    <Compile Include="TabItems\Categories\CategoriesView.xaml.cs">
       <DependentUpon>CategoriesView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Categories\CategoriesViewModel.cs" />
+    <Compile Include="TabItems\Categories\CategoriesViewModel.cs" />
     <Compile Include="CompetitionChoice\CompetitionChoiceViewModel.cs" />
     <Compile Include="CompetitionChoice\CompetitionChoiceView.xaml.cs">
       <DependentUpon>CompetitionChoiceView.xaml</DependentUpon>
@@ -105,25 +105,25 @@
       <DependentUpon>CompetitionManagerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="CompetitionManager\CompetitionManagerViewModel.cs" />
-    <Compile Include="Distances\DistancesView.xaml.cs">
+    <Compile Include="TabItems\Distances\DistancesView.xaml.cs">
       <DependentUpon>DistancesView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Distances\DistancesViewModel.cs" />
+    <Compile Include="TabItems\Distances\DistancesViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Players\PlayersView.xaml.cs">
+    <Compile Include="TabItems\Players\PlayersView.xaml.cs">
       <DependentUpon>PlayersView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Players\PlayersViewModel.cs" />
-    <Compile Include="Scores\ScoresView.xaml.cs">
+    <Compile Include="TabItems\Players\PlayersViewModel.cs" />
+    <Compile Include="TabItems\Scores\ScoresView.xaml.cs">
       <DependentUpon>ScoresView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scores\ScoresViewModel.cs" />
-    <Compile Include="Settings\SettingsView.xaml.cs">
+    <Compile Include="TabItems\Scores\ScoresViewModel.cs" />
+    <Compile Include="TabItems\Settings\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Settings\SettingsViewModel.cs" />
+    <Compile Include="TabItems\Settings\SettingsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainWindowViewModel.cs" />
@@ -168,14 +168,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Priniting\" />
+    <Folder Include="TabItems\Priniting\" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="AddCompetition\AddCompetitionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Categories\CategoriesView.xaml">
+    <Page Include="TabItems\Categories\CategoriesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -187,7 +187,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Distances\DistancesView.xaml">
+    <Page Include="TabItems\Distances\DistancesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -195,15 +195,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Players\PlayersView.xaml">
+    <Page Include="TabItems\Players\PlayersView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Scores\ScoresView.xaml">
+    <Page Include="TabItems\Scores\ScoresView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Settings\SettingsView.xaml">
+    <Page Include="TabItems\Settings\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

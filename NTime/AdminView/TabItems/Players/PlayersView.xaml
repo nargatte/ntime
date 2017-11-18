@@ -6,11 +6,17 @@
             xmlns:converters="clr-namespace:ViewCore.XamlConverters;assembly=ViewCore"
              xmlns:local="clr-namespace:AdminView.Players"
              xmlns:DataBase="clr-namespace:BaseCore.DataBase;assembly=BaseCore" x:Class="AdminView.Players.PlayersView"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="800">
     <UserControl.Resources>
         <converters:BoolToSexConverterClass x:Key="BoolToSexConverter"/>
     </UserControl.Resources>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding ViewLoadedCmd}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="75"/>
@@ -64,12 +70,12 @@
                     <TextBox Text="{Binding PhoneNumber}" Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>
                 </StackPanel>
             </StackPanel>
-                <StackPanel Orientation="Vertical">
-                    <TextBlock Text=""
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text=""
                                VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
-                    <Button Command="{Binding AddPlayerCmd}" Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                <Button Command="{Binding AddPlayerCmd}" Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
                             Content="Dodaj"   FontSize="15" Margin="30, 5, 5, 5"/>
-                </StackPanel>
+            </StackPanel>
         </StackPanel>
         <DataGrid x:Name="playerDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Grid.Row="1"
                   ItemsSource="{Binding Players}" EnableRowVirtualization="True" AutoGenerateColumns="False"

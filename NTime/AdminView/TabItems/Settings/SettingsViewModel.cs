@@ -20,14 +20,10 @@ namespace AdminView.Settings
             SaveChangesCmd = new RelayCommand(OnSaveChanges);
         }
 
-
-        //private Entities.EditableCompetition _currentCompetition;
         public ViewCore.Entities.IEditableCompetition CurrentCompetition
         {
             get { return _currentCompetition; }
             set { SetProperty(ref _currentCompetition, value);
-                //OnPropertyChanged("Name");
-                //OnPropertyChanged("CurrentCompetition.Name");
             }
         }
 

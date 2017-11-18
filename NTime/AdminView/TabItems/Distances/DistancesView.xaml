@@ -9,6 +9,7 @@
              xmlns:local="clr-namespace:AdminView.Distances"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:db="clr-namespace:BaseCore.DataBase;assembly=BaseCore"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="800">
     <UserControl.Resources>
@@ -21,16 +22,12 @@
             <Setter Property="Background" Value="LightYellow"/>
         </Style>
         <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource TextBoxYellow}"/>
-        <!--<GridViewColumnCollection x:Key="gvcc">
-            <GridViewColumn Header="Year" 
-                      DisplayMemberBinding="{Binding Year}" 
-                      Width="80"/>
-            <GridViewColumn Header="Day"  
-                      DisplayMemberBinding="{Binding DayOfWeek}" 
-                      Width="80" />
-
-        </GridViewColumnCollection>-->
     </UserControl.Resources>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding ViewLoadedCmd}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <ScrollViewer HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
         <Grid HorizontalAlignment="Stretch" >
             <StackPanel Name="LeftColumn" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" >

@@ -6,16 +6,32 @@ using System.Text;
 using System.Threading.Tasks;
 using MvvmHelper;
 using ViewCore;
+using BaseCore.DataBase;
 
 namespace AdminView.Players
 {
-    class PlayersViewModel : TabItemViewModel, ViewCore.Entities.ISwitchableViewModel
+    class PlayersViewModel : TabItemViewModel
     {
         public PlayersViewModel(ViewCore.Entities.IEditableCompetition currentCompetition) : base(currentCompetition)
         {
+            ViewLoadedCmd = new RelayCommand(OnViewLoaded);
             AddPlayerCmd = new RelayCommand(OnAddPlayer);
-            FillPlayersCollection();
             TabTitle = "Zawodnicy";
+        }
+
+        private void OnViewLoaded()
+        {
+            DownloadPlayersFromDataBase();
+        }
+
+        private async void DownloadPlayersFromDataBase()
+        {
+            var repository = new PlayerRepository(new ContextProvider(), _currentCompetition.Competition);
+            var dbPlayers = await repository.GetAllAsync();
+            foreach (var dbPlayer in dbPlayers)
+            {
+                Players.Add(new ViewCore.Entities.EditablePlayer() { Player = dbPlayer });
+            }
         }
 
         private void OnAddPlayer()
@@ -31,26 +47,6 @@ namespace AdminView.Players
             set { SetProperty(ref _newPlayer, value); }
         }
 
-        private void FillPlayersCollection()
-        {
-            for (int i = 0; i < 200; i++)
-            {
-                Players.Add(new ViewCore.Entities.EditablePlayer()
-                {
-                    LastName = "Kierzkowski",
-                    FirstName = "Jan",
-                    Team = "Niezniszczalni Zgierz",
-                    BirthDate = new DateTime(1994, 10, 09),
-                    IsMale = true,
-                    StartNumber = 18
-                });
-            }
-        }
-
-        public void DetachAllEvents()
-        {
-            throw new NotImplementedException();
-        }
 
         private ObservableCollection<ViewCore.Entities.EditablePlayer> _players = new ObservableCollection<ViewCore.Entities.EditablePlayer>();
         public ObservableCollection<ViewCore.Entities.EditablePlayer> Players
@@ -60,5 +56,6 @@ namespace AdminView.Players
         }
 
         public RelayCommand AddPlayerCmd { get; private set; }
+        public RelayCommand ViewLoadedCmd { get; private set; }
     }
 }
