@@ -19,5 +19,7 @@ namespace BaseCore.DataBase
         public virtual ICollection<GatesOrderItem> GatesOrderItems { get; set; }
 
         public virtual ICollection<TimeReadsLogInfo> TimeReadsLogInfos { get; set; }
+
+        public virtual  ICollection<TimeRead> TimeReads { get; set; }
     }
 }
