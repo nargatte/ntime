@@ -7,25 +7,18 @@ using System.Threading.Tasks;
 using System.Windows;
 using BaseCore.TimesProcess;
 using MvvmHelper;
+using BaseCore.DataBase;
 
 namespace ViewCore.Entities
 {
 
-    public class EditableDistance : BindableBase
+    public class EditableDistance : EditableBaseClass<Distance>
     {
         ObservableCollection<IEditableGate> _definedGates;
         public enum CompetitionTypeEnumerator
         {
             DeterminedDistanceLaps, DeterminedDistanceUnusual, LimitedTime
         }
-
-        private BaseCore.DataBase.Distance _dstance = new BaseCore.DataBase.Distance();
-        public BaseCore.DataBase.Distance Distance
-        {
-            get { return _dstance; }
-            set { _dstance = value; }
-        }
-
 
         private ILogsInfo logsInfo;
         public EditableDistance(ILogsInfo logsInfo, ObservableCollection<IEditableGate> definedGates)
@@ -35,57 +28,26 @@ namespace ViewCore.Entities
             SaveDistanceCmd = new RelayCommand(OnSaveDistance);
             DeleteDistanceCmd = new RelayCommand(OnDeleteDistance);
         }
-        #region Commands and events
-        private void OnSaveDistance()
-        {
-            bool result = ValidateDistance();
-            if (result)
-                MessageBox.Show("Dystans został poprawnie zapisany");
-        }
-
-        private void OnDeleteDistance()
-        {
-            MessageBoxResult result = MessageBox.Show("",
-                $"Czy na pewno chcesz usunąć dystans {Name} ?",
-                MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes)
-                DeleteDistance();
-            else return;
-        }
-
-        private void DeleteDistance()
-        {
-            DeleteRequested(this, EventArgs.Empty);
-        }
-
-        public RelayCommand DeleteDistanceCmd { get; }
-        public RelayCommand SaveDistanceCmd { get; }
-
-
-        public event EventHandler DeleteRequested = delegate { };
-
-        #endregion
-
         #region Properties
 
 
         public string Name
         {
-            get { return Distance.Name; }
-            set { Distance.Name = SetProperty(Distance.Name, value); }
+            get { return DbEntity.Name; }
+            set { DbEntity.Name = SetProperty(DbEntity.Name, value); }
         }
 
 
         public decimal Length
         {
-            get { return Distance.Length; }
-            set { Distance.Length = SetProperty(Distance.Length, value); }
+            get { return DbEntity.Length; }
+            set { DbEntity.Length = SetProperty(DbEntity.Length, value); }
         }
 
         public BaseCore.DataBase.DistanceTypeEnum DistanceType
         {
-            get { return Distance.DistanceTypeEnum; }
-            set { Distance.DistanceTypeEnum = SetProperty(Distance.DistanceTypeEnum, value); }
+            get { return DbEntity.DistanceTypeEnum; }
+            set { DbEntity.DistanceTypeEnum = SetProperty(DbEntity.DistanceTypeEnum, value); }
         }
 
 
@@ -118,7 +80,7 @@ namespace ViewCore.Entities
                 {
                     for (int i = 0; i < diff; i++)
                     {
-                        GatesOrder.Add(new EditableGatesOrder(_definedGates));
+                        GatesOrder.Add(new EditableGatesOrderItem(_definedGates));
                     }
                 }
                 else if (diff < 0)
@@ -137,8 +99,8 @@ namespace ViewCore.Entities
                 GatesOrder.First().IsTimeCollapsed = true;
         }
 
-        private ObservableCollection<ViewCore.Entities.EditableGatesOrder> _gatesOrder = new ObservableCollection<EditableGatesOrder>();
-        public ObservableCollection<ViewCore.Entities.EditableGatesOrder> GatesOrder
+        private ObservableCollection<ViewCore.Entities.EditableGatesOrderItem> _gatesOrder = new ObservableCollection<EditableGatesOrderItem>();
+        public ObservableCollection<ViewCore.Entities.EditableGatesOrderItem> GatesOrder
         {
             get { return _gatesOrder; }
             set { SetProperty(ref _gatesOrder, value); }
@@ -146,29 +108,29 @@ namespace ViewCore.Entities
 
         public int LapsCount
         {
-            get { return Distance.LapsCount; }
-            set { Distance.LapsCount = SetProperty(Distance.LapsCount, value); }
+            get { return DbEntity.LapsCount; }
+            set { DbEntity.LapsCount = SetProperty(DbEntity.LapsCount, value); }
         }
 
 
 
         public string TimeLimit
         {
-            get { return Distance.TimeLimit.ToDateTime().ConvertToString(); }
+            get { return DbEntity.TimeLimit.ToDateTime().ConvertToString(); }
             set
             {
                 if (value.TryConvertToDateTime(out DateTime dateTime))
-                    Distance.TimeLimit = SetProperty(Distance.TimeLimit, dateTime.ToDecimal());
+                    DbEntity.TimeLimit = SetProperty(DbEntity.TimeLimit, dateTime.ToDecimal());
             }
         }
 
         public string StartTime
         {
-            get { return Distance.StartTime.ConvertToString(); }
+            get { return DbEntity.StartTime.ConvertToString(); }
             set
             {
                 if (value.TryConvertToDateTime(out DateTime dateTime))
-                    Distance.StartTime = SetProperty(Distance.StartTime, dateTime);
+                    DbEntity.StartTime = SetProperty(DbEntity.StartTime, dateTime);
             }
         }
 
@@ -186,6 +148,38 @@ namespace ViewCore.Entities
         //}
 
         #endregion
+
+        #region Commands and events
+        private void OnSaveDistance()
+        {
+            bool result = ValidateDistance();
+            if (result)
+                MessageBox.Show("Dystans został poprawnie zapisany");
+        }
+
+        private void OnDeleteDistance()
+        {
+            MessageBoxResult result = MessageBox.Show("",
+                $"Czy na pewno chcesz usunąć dystans {Name} ?",
+                MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+                DeleteDistance();
+            else return;
+        }
+
+        private void DeleteDistance()
+        {
+            DeleteRequested(this, EventArgs.Empty);
+        }
+
+        public RelayCommand DeleteDistanceCmd { get; }
+        public RelayCommand SaveDistanceCmd { get; }
+
+
+        public event EventHandler DeleteRequested = delegate { };
+
+        #endregion
+
         /// <summary>
         /// Sets IsValid property and returns its value
         /// </summary>

@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace BaseCore.DataBase
 {
-    public class LogsSourceRepository : Repository<LogsSource>
+    public class LogsSourceRepository : Repository<TimeReadsLogInfo>
     {
         protected Gate Gate { get; }
 
@@ -12,18 +12,18 @@ namespace BaseCore.DataBase
             Gate = gate;
         }
 
-        protected override IQueryable<LogsSource> GetAllQuery(IQueryable<LogsSource> items) =>
+        protected override IQueryable<TimeReadsLogInfo> GetAllQuery(IQueryable<TimeReadsLogInfo> items) =>
             items.Where(i => i.GateId == Gate.Id);
 
-        protected override IQueryable<LogsSource> GetSortQuery(IQueryable<LogsSource> items) =>
+        protected override IQueryable<TimeReadsLogInfo> GetSortQuery(IQueryable<TimeReadsLogInfo> items) =>
             items.OrderBy(i => i.GateId);
 
-        protected override void CheckItem(LogsSource item)
+        protected override void CheckItem(TimeReadsLogInfo item)
         {
             if(item.GateId == Gate.Id) throw new ArgumentException("Wrong GateId");
         }
 
-        protected override void PrepareToAdd(LogsSource item)
+        protected override void PrepareToAdd(TimeReadsLogInfo item)
         {
             item.GateId = Gate.Id;
             item.Gate = null;

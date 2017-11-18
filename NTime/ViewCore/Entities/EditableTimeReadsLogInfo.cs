@@ -1,0 +1,49 @@
+﻿using System;
+using MvvmHelper;
+using ViewCore;
+using BaseCore.DataBase;
+
+namespace ViewCore.Entities
+{
+    public class EditableTimeReadsLogInfo : EditableBaseClass<TimeReadsLogInfo>
+    {
+        ILogsInfo logsInfo;
+        public EditableTimeReadsLogInfo(ILogsInfo logsInfo)
+        {
+            this.logsInfo = logsInfo;
+            DeleteLogCmd = new RelayCommand(OnDeleteLog);
+        }
+
+        #region Properties
+        public int LogNumber
+        {
+            get { return DbEntity.LogNumber; }
+            set { DbEntity.LogNumber = SetProperty(DbEntity.LogNumber, value); }
+        }
+
+        public string Path
+        {
+            get { return DbEntity.Path; }
+            set { DbEntity.Path = SetProperty(DbEntity.Path, value); }
+        }
+
+
+        private string _directoryName;
+        public string DirectoryName
+        {
+            get { return _directoryName; }
+            set { SetProperty(ref _directoryName, value); }
+        }
+        #endregion
+
+        private void OnDeleteLog()
+        {
+            DeleteRequested(this, EventArgs.Empty);
+        }
+
+
+        public RelayCommand DeleteLogCmd { get; }
+
+        public event EventHandler DeleteRequested = delegate { };
+    }
+}

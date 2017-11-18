@@ -71,7 +71,7 @@
     <Compile Include="DataBase\Entities\GateOrderItem.cs" />
     <Compile Include="DataBase\Entities\ICompetitionId.cs" />
     <Compile Include="DataBase\Entities\IEntityId.cs" />
-    <Compile Include="DataBase\Entities\LogsSource.cs" />
+    <Compile Include="DataBase\Entities\TimeReadsLogInfo.cs" />
     <Compile Include="DataBase\Entities\Player.cs" />
     <Compile Include="DataBase\Entities\TimeRead.cs" />
     <Compile Include="DataBase\Entities\TimeReadType.cs" />

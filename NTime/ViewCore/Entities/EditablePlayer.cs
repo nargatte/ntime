@@ -5,117 +5,112 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BaseCore.TimesProcess;
+using BaseCore.DataBase;
 using MvvmHelper;
 
 namespace ViewCore.Entities
 {
-    public class EditablePlayer : BindableBase
+    public class EditablePlayer : EditableBaseClass<Player>
     {
-        private BaseCore.DataBase.Player player = new BaseCore.DataBase.Player();
-        public BaseCore.DataBase.Player Player
-        {
-            get { return player; }
-            set { player = value; }
-        }
 
         public int StartNumber
         {
-            get { return player.StartNumber; }
-            set { player.StartNumber = SetProperty(Player.StartNumber, value); }
+            get { return DbEntity.StartNumber; }
+            set { DbEntity.StartNumber = SetProperty(DbEntity.StartNumber, value); }
         }
 
         public string FirstName
         {
-            get { return Player.FirstName; }
-            set { Player.FirstName = SetProperty(player.FirstName, value); }
+            get { return DbEntity.FirstName; }
+            set { DbEntity.FirstName = SetProperty(DbEntity.FirstName, value); }
         }
 
 
         public string LastName
         {
-            get { return Player.LastName; }
-            set { Player.LastName = SetProperty(Player.LastName, value); }
+            get { return DbEntity.LastName; }
+            set { DbEntity.LastName = SetProperty(DbEntity.LastName, value); }
         }
 
         //TODO Grzesiek
-        public string DistanceName
+        public Distance Distance
         {
-            get { return Player.Distance.Name; }
-            set { Player.Distance.Name = SetProperty(Player.Distance.Name, value); }
+            get { return DbEntity.Distance; }
+            set { DbEntity.Distance = SetProperty(DbEntity.Distance, value); }
         }
 
 
         public DateTime BirthDate
         {
-            get { return Player.BirthDate; }
-            set { Player.BirthDate = SetProperty(Player.BirthDate, value); }
+            get { return DbEntity.BirthDate; }
+            set { DbEntity.BirthDate = SetProperty(DbEntity.BirthDate, value); }
         }
 
 
         public DateTime? StartTime
         {
-            get { return Player.StartTime; }
-            set { Player.StartTime = SetProperty(Player.StartTime, value); }
+            get { return DbEntity.StartTime; }
+            set { DbEntity.StartTime = SetProperty(DbEntity.StartTime, value); }
         }
 
 
         public string Team
         {
-            get { return Player.Team; }
-            set { Player.Team = SetProperty(Player.Team, value); }
+            get { return DbEntity.Team; }
+            set { DbEntity.Team = SetProperty(DbEntity.Team, value); }
         }
 
 
-        public string ExtraPlayerInfo
+        public ExtraPlayerInfo ExtraPlayerInfo
         {
-            get { return Player.ExtraPlayerInfo.Name; }
-            set { Player.ExtraPlayerInfo.Name = SetProperty(Player.ExtraPlayerInfo.Name, value); }
+            get { return DbEntity.ExtraPlayerInfo; }
+            set { DbEntity.ExtraPlayerInfo = SetProperty(DbEntity.ExtraPlayerInfo, value); }
         }
 
         public string PhoneNumber
         {
-            get { return Player.PhoneNumber; }
-            set { Player.PhoneNumber = SetProperty(Player.PhoneNumber, value); }
+            get { return DbEntity.PhoneNumber; }
+            set { DbEntity.PhoneNumber = SetProperty(DbEntity.PhoneNumber, value); }
         }
 
         public bool IsMale
         {
-            get { return Player.IsMale; }
-            set { Player.IsMale = SetProperty(Player.IsMale, value); }
+            get { return DbEntity.IsMale; }
+            set { DbEntity.IsMale = SetProperty(DbEntity.IsMale, value); }
         }
 
         public string FullCategory
         {
-            get { return Player.FullCategory; }
-            set { Player.FullCategory = SetProperty(Player.FullCategory, value); }
+            get { return DbEntity.FullCategory; }
+            set { DbEntity.FullCategory = SetProperty(DbEntity.FullCategory, value); }
         }
 
         public int DistancePlaceNumber
         {
-            get { return Player.DistancePlaceNumber; }
-            set { Player.DistancePlaceNumber = SetProperty(Player.DistancePlaceNumber, value); }
+            get { return DbEntity.DistancePlaceNumber; }
+            set { DbEntity.DistancePlaceNumber = SetProperty(DbEntity.DistancePlaceNumber, value); }
         }
 
         public int CategoryPlaceNumber
         {
-            get { return Player.CategoryPlaceNumber; }
-            set { Player.CategoryPlaceNumber = SetProperty(Player.CategoryPlaceNumber, value); }
+            get { return DbEntity.CategoryPlaceNumber; }
+            set { DbEntity.CategoryPlaceNumber = SetProperty(DbEntity.CategoryPlaceNumber, value); }
         }
 
 
         public int LapsCount
         {
-            get { return Player.LapsCount; }
-            set { Player.LapsCount = SetProperty(Player.LapsCount, value); }
+            get { return DbEntity.LapsCount; }
+            set { DbEntity.LapsCount = SetProperty(DbEntity.LapsCount, value); }
         }
 
         public string Time
         {
-            get { return Player.Time.ToDateTime().ConvertToString(); }
+            get { return DbEntity.Time.ToDateTime().ConvertToString(); }
             set
             {
                 if (value.TryConvertToDateTime(out DateTime dateTime))
-                    Player.Time = SetProperty(Player.Time, dateTime.ToDecimal());
+                    DbEntity.Time = SetProperty(DbEntity.Time, dateTime.ToDecimal());
             }
         }
 

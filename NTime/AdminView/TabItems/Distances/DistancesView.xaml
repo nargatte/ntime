@@ -41,7 +41,7 @@
                         <StackPanel Name="AddingMeasurementPoint" Orientation="Horizontal" HorizontalAlignment="Center">
                             <TextBlock Text="Numer punktu"/>
                             <TextBox Name="newMeasurementPointNumberTB" Width="20" Margin="10, 0, 20, 0">
-                                <Binding Path="NewMeasurementPointNumber" UpdateSourceTrigger="PropertyChanged">
+                                <Binding Path="NewGateNumber" UpdateSourceTrigger="PropertyChanged">
                                     <Binding.ValidationRules>
                                         <validation:IsNumber20Rule ValidatesOnTargetUpdated="True"/>
                                     </Binding.ValidationRules>
@@ -49,7 +49,7 @@
                             </TextBox>
                             <TextBlock Text="Nazwa punktu"/>
                             <TextBox  Name="newMeasurementPointNameTB" Width="100" Margin="10, 0, 20, 0">
-                                <Binding Path="NewMeasurementPointName" UpdateSourceTrigger="PropertyChanged">
+                                <Binding Path="NewGateName" UpdateSourceTrigger="PropertyChanged">
                                     <Binding.ValidationRules>
                                         <validation:IsNotEmpty ValidatesOnTargetUpdated="True"/>
                                     </Binding.ValidationRules>
@@ -173,7 +173,7 @@
                                                 <TextBlock Text="Czas"/>
                                                 <TextBox Text="{Binding MinTimeBefore}"/>
                                             </StackPanel>
-                                            <Expander Background="#DC0" Margin="2,0,2,0" Header="{Binding}">
+                                            <Expander Header="{Binding}" Background="#DC0" Margin="2,0,2,0" >
                                                 <Expander.HeaderTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Text="{Binding Gate.Number}" FontWeight="Bold"/>
@@ -181,7 +181,7 @@
                                                 </Expander.HeaderTemplate>
                                                 <StackPanel Orientation="Vertical">
                                                     <TextBlock Text="Numer"/>
-                                                    <ComboBox  ItemsSource="{Binding DefinedGates, Converter={StaticResource gateToDisplayConverter}}" SelectedItem="{Binding Gate}">
+                                                    <ComboBox Width="40"  ItemsSource="{Binding DefinedGates, Converter={StaticResource gateToDisplayConverter}}" SelectedItem="{Binding Gate}">
                                                         <ComboBox.ItemTemplate>
                                                             <DataTemplate>
                                                                 <TextBlock>

@@ -5,13 +5,13 @@ namespace BaseCore.TimesProcess
 {
     internal class TimeProcessForTime : TimeProcessForDistance
     {
-        public TimeProcessForTime(Player player, Distance distance, GateOrderItem[] gateOrderItem, HashSet<int> readersNumbers, TimeProcess timeProcess) : base(player, distance, gateOrderItem, readersNumbers, timeProcess)
+        public TimeProcessForTime(Player player, Distance distance, GatesOrderItem[] gateOrderItem, HashSet<int> readersNumbers, TimeProcess timeProcess) : base(player, distance, gateOrderItem, readersNumbers, timeProcess)
         {
         }
 
         private bool _afterCompetition;
 
-        protected override IEnumerable<GateOrderItem> GatesOrderNumers()
+        protected override IEnumerable<GatesOrderItem> GatesOrderNumers()
         {
             yield return GateOrderItem[0];
             while (true)

@@ -30,11 +30,11 @@ namespace AdminView.Distances
 
         private async void DownloadDistancesFromDatabase()
         {
-            var repository = new DistanceRepository(new ContextProvider(), _currentCompetition.Competition);
+            var repository = new DistanceRepository(new ContextProvider(), _currentCompetition.DbEntity);
             var dbDistances = await repository.GetAllAsync();
             foreach (var dbDistance in dbDistances)
             {
-                Distances.Add(new ViewCore.Entities.EditableDistance(logsInfo, _definedGates) { Distance = dbDistance });
+                Distances.Add(new ViewCore.Entities.EditableDistance(logsInfo, _definedGates) { DbEntity = dbDistance });
             }
         }
 
@@ -42,18 +42,21 @@ namespace AdminView.Distances
         {
             if (CanAddMeasurementPoint())
             {
-                var measurementPointNumber = int.Parse(NewMeasurementPointNumber);
-                var measurementPointToAdd = new ViewCore.Entities.EditableGate(logsInfo)
+                var GateNumber = int.Parse(NewGateNumber);
+                var GateToAdd = new ViewCore.Entities.EditableGate(logsInfo)
                 {
-                    Number = measurementPointNumber,
-                    Name = NewMeasurementPointName,
-                    AssignedLogs = new ObservableCollection<ViewCore.Entities.EditableTimeReadsLog>()
+                    DbEntity = new Gate()
+                    {
+                        Number = GateNumber,
+                        Name = NewGateName,
+                        //AssignedLogs = new ObservableCollection<ViewCore.Entities.EditableTimeReadsLogInfo>();
+                    }
                 };
-                measurementPointToAdd.DeleteRequested += MeasurementPointToAdd_DeleteRequested;
-                DefinedGates.Add(measurementPointToAdd);
-                logsInfo.MeasurementPointsNumbers.Add(measurementPointNumber);
-                NewMeasurementPointNumber = (measurementPointNumber + 1).ToString();
-                NewMeasurementPointName = "";
+                GateToAdd.DeleteRequested += Gate_DeleteRequested;
+                DefinedGates.Add(GateToAdd);
+                logsInfo.GatesNumbers.Add(GateNumber);
+                NewGateNumber = (GateNumber + 1).ToString();
+                NewGateName = "";
             }
             else
             {
@@ -62,25 +65,25 @@ namespace AdminView.Distances
 
         }
 
-        private void MeasurementPointToAdd_DeleteRequested(object sender, EventArgs e)
+        private void Gate_DeleteRequested(object sender, EventArgs e)
         {
-            var measurementPointToDelete = sender as ViewCore.Entities.EditableGate;
-            foreach (var log in measurementPointToDelete.AssignedLogs)
+            var GateToDelete = sender as ViewCore.Entities.EditableGate;
+            foreach (var log in GateToDelete.AssignedLogs)
             {
                 logsInfo.LogsNumbers.Remove(log.LogNumber);
             }
-            logsInfo.MeasurementPointsNumbers.Remove(measurementPointToDelete.Number);
-            DefinedGates.Remove(measurementPointToDelete);
+            logsInfo.GatesNumbers.Remove(GateToDelete.Number);
+            DefinedGates.Remove(GateToDelete);
         }
 
 
         private bool CanAddMeasurementPoint()
         {
-            if (!int.TryParse(NewMeasurementPointNumber, out int number))
+            if (!int.TryParse(NewGateNumber, out int number))
                 return false;
-            if (string.IsNullOrWhiteSpace(NewMeasurementPointName))
+            if (string.IsNullOrWhiteSpace(NewGateName))
                 return false;
-            if (logsInfo.MeasurementPointsNumbers.Contains(number))
+            if (logsInfo.GatesNumbers.Contains(number))
                 return false;
             return true;
         }
@@ -146,29 +149,29 @@ namespace AdminView.Distances
             set { SetProperty(ref _distances, value); }
         }
 
-        private string _newMeasurementPointNumber;
-        public string NewMeasurementPointNumber
+        private string _newGateNumber;
+        public string NewGateNumber
         {
-            get { return _newMeasurementPointNumber; }
+            get { return _newGateNumber; }
             set
             {
-                SetProperty(ref _newMeasurementPointNumber, value);
+                SetProperty(ref _newGateNumber, value);
             }
         }
 
+
+        private string _newGateName;
+        public string NewGateName
+        {
+            get { return _newGateName; }
+            set { SetProperty(ref _newGateName, value); }
+        }
 
         private string _newDistanceName = "";
         public string NewDistanceName
         {
             get { return _newDistanceName; }
             set { SetProperty(ref _newDistanceName, value); }
-        }
-
-        private string _newMeasurementPointName;
-        public string NewMeasurementPointName
-        {
-            get { return _newMeasurementPointName; }
-            set { SetProperty(ref _newMeasurementPointName, value); }
         }
 
 

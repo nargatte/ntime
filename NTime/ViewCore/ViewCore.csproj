@@ -43,14 +43,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminViewModel.cs" />
-    <Compile Include="Entities\EditableCategory.cs" />
+    <Compile Include="Entities\EditableBaseClass.cs" />
+    <Compile Include="Entities\EditableAgeCategory.cs" />
     <Compile Include="Entities\EditableCompetition.cs" />
     <Compile Include="Entities\EditableDistance.cs" />
+    <Compile Include="Entities\EditableExtraPlayerInfo.cs" />
     <Compile Include="Entities\EditableGate.cs" />
-    <Compile Include="Entities\EditableGatesOrder.cs" />
+    <Compile Include="Entities\EditableGatesOrderItem.cs" />
     <Compile Include="Entities\EditablePlayer.cs" />
-    <Compile Include="Entities\EditableTimeReadsLog.cs" />
-    <Compile Include="Entities\IEditableCompetition.cs" />
+    <Compile Include="Entities\EditableTimeRead.cs" />
+    <Compile Include="Entities\EditableTimeReadsLogInfo.cs" />
+    <Compile Include="Interfaces\IEditableCompetition.cs" />
     <Compile Include="Interfaces\IEditableGate.cs" />
     <Compile Include="Interfaces\ILogsInfo.cs" />
     <Compile Include="Interfaces\IViewModel.cs" />

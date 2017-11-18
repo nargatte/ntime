@@ -2,11 +2,11 @@
 
 namespace BaseCore.DataBase
 {
-    public class LogsSource : IEntityId
+    public class TimeReadsLogInfo : IEntityId
     {
         public int Id { get; set; }
 
-        public int FileNumber { get; set; }
+        public int LogNumber { get; set; }
 
         [StringLength(255)]
         public string Path { get; set; }

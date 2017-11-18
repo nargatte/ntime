@@ -23,16 +23,19 @@ namespace AdminView.Scores
             {
                 Scores.Add(new ViewCore.Entities.EditablePlayer()
                 {
-                    LastName = "Kierzkowski",
-                    FirstName = "Jan",
-                    Team = "Niezniszczalni Zgierz",
-                    BirthDate = new DateTime(1994, 10, 09),
-                    IsMale = true,
-                    StartNumber = 18,
-                    CategoryPlaceNumber = 3,
-                    DistancePlaceNumber = 1,
-                    LapsCount = 5,
-                    Time = "04:20:37.255",
+                    DbEntity = new BaseCore.DataBase.Player()
+                    {
+                        LastName = "Kierzkowski",
+                        FirstName = "Jan",
+                        Team = "Niezniszczalni Zgierz",
+                        BirthDate = new DateTime(1994, 10, 09),
+                        IsMale = true,
+                        StartNumber = 18,
+                        CategoryPlaceNumber = 3,
+                        DistancePlaceNumber = 1,
+                        LapsCount = 5,
+                        Time = 12345,
+                    }
                 });
             }
         }

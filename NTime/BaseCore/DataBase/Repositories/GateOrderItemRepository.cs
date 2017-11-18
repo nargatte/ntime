@@ -6,37 +6,37 @@ using System.Threading.Tasks;
 
 namespace BaseCore.DataBase
 {
-    public class GateOrderItemRepository : Repository<GateOrderItem>
+    public class GateOrderItemRepository : Repository<GatesOrderItem>
     {
         public GateOrderItemRepository(IContextProvider contextProvider, Distance distance) : base(contextProvider) => Distance = distance;
 
         protected Distance Distance { get; }
 
-        protected override IQueryable<GateOrderItem> GetAllQuery(IQueryable<GateOrderItem> items) =>
+        protected override IQueryable<GatesOrderItem> GetAllQuery(IQueryable<GatesOrderItem> items) =>
             items.Where(i => i.DistanceId == Distance.Id);
 
-        protected override IQueryable<GateOrderItem> GetSortQuery(IQueryable<GateOrderItem> items) =>
+        protected override IQueryable<GatesOrderItem> GetSortQuery(IQueryable<GatesOrderItem> items) =>
             items.OrderBy(i => i.OrderNumber);
 
-        protected override IQueryable<GateOrderItem> GetIncludeQuery(IQueryable<GateOrderItem> items) =>
+        protected override IQueryable<GatesOrderItem> GetIncludeQuery(IQueryable<GatesOrderItem> items) =>
             items.Include(i => i.Gate);
 
-        protected override void CheckItem(GateOrderItem item)
+        protected override void CheckItem(GatesOrderItem item)
         {
             if(item.DistanceId != Distance.Id) 
                 throw new ArgumentException("Wrong DistanceId");
         }
 
-        protected override void PrepareToAdd(GateOrderItem item)
+        protected override void PrepareToAdd(GatesOrderItem item)
         {
             item.DistanceId = Distance.Id;
             item.Distance = null;
         }
 
-        public async Task ReplaceBy(IEnumerable<GateOrderItem> gatesOrder)
+        public async Task ReplaceBy(IEnumerable<GatesOrderItem> gatesOrder)
         {
             int c = 0;
-            foreach (GateOrderItem item in gatesOrder)
+            foreach (GatesOrderItem item in gatesOrder)
             {
                 CheckNull(item);
                 PrepareToAdd(item);

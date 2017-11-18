@@ -26,11 +26,11 @@ namespace AdminView.Players
 
         private async void DownloadPlayersFromDataBase()
         {
-            var repository = new PlayerRepository(new ContextProvider(), _currentCompetition.Competition);
+            var repository = new PlayerRepository(new ContextProvider(), _currentCompetition.DbEntity);
             var dbPlayers = await repository.GetAllAsync();
             foreach (var dbPlayer in dbPlayers)
             {
-                Players.Add(new ViewCore.Entities.EditablePlayer() { Player = dbPlayer });
+                Players.Add(new ViewCore.Entities.EditablePlayer() { DbEntity = dbPlayer });
             }
         }
 
