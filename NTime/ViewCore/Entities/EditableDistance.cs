@@ -120,7 +120,7 @@ namespace ViewCore.Entities
         {
             var gateOrderInfoItem = sender as EditableGatesOrderItem;
             var repository = new GateOrderItemRepository(new ContextProvider(), this.DbEntity);
-            await repository.UpdateAsync(gateOrderInfoItem.DbEntity);
+            await repository.UpdateAsync(gateOrderInfoItem.DbEntity, gateOrderInfoItem.DbEntity.Gate);
         }
 
         private ObservableCollection<EditableGatesOrderItem> _gatesOrderItems = new ObservableCollection<EditableGatesOrderItem>();
