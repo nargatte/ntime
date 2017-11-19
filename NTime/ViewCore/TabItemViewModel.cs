@@ -9,7 +9,7 @@ using MvvmHelper;
 
 namespace ViewCore
 {
-    public class TabItemViewModel : AdminViewModel
+    public class TabItemViewModel<T> : AdminViewModel<T>
     {
         protected AgeCategoryRepository _ageCategoryRepository { get; set; }
         protected DistanceRepository _distanceRepository { get; set; }

@@ -12,10 +12,11 @@ using AdminView.Distances;
 using AdminView.Categories;
 using MvvmHelper;
 using ViewCore;
+using BaseCore.DataBase;
 
 namespace AdminView.CompetitionManager
 {
-    class CompetitionManagerViewModel : AdminViewModel, ViewCore.Entities.ISwitchableViewModel
+    class CompetitionManagerViewModel : AdminViewModel<Competition>, ViewCore.Entities.ISwitchableViewModel
     {
 
         public CompetitionManagerViewModel(ViewCore.Entities.IEditableCompetition currentCompetition) : base(currentCompetition)

@@ -7,16 +7,17 @@ using System.Collections.ObjectModel;
 using MvvmHelper;
 using ViewCore;
 using ViewCore.Entities;
+using BaseCore.DataBase;
 
 namespace AdminView.Categories
 {
-    class CategoriesViewModel : TabItemViewModel
+    class CategoriesViewModel : TabItemViewModel<AgeCategory>
     {
         public CategoriesViewModel(IEditableCompetition currentCompetition) : base(currentCompetition)
         {
+            NewCategory = new EditableAgeCategory(currentCompetition);
             TabTitle = "Kategorie";
             AddCategoryCmd = new RelayCommand(OnAddCategoryAsync);
-            _newCategory =  new ViewCore.Entities.EditableAgeCategory(currentCompetition);
             ViewLoadedCmd = new RelayCommand(OnViewLoadedAsync);
         }
 
@@ -25,7 +26,7 @@ namespace AdminView.Categories
             var dbAgeCategories = await _ageCategoryRepository.GetAllAsync();
             foreach (var dbAgeCategory in dbAgeCategories)
             {
-                var categoryToAdd = new ViewCore.Entities.EditableAgeCategory(_currentCompetition)
+                var categoryToAdd = new EditableAgeCategory(_currentCompetition)
                 {
                     DbEntity = dbAgeCategory
                 };
@@ -41,12 +42,12 @@ namespace AdminView.Categories
 
         private async void OnAddCategoryAsync()
         {
-            AddCategoryToGUI(NewCategory);
+            var categoryToAdd = NewCategory;
+            AddCategoryToGUI(categoryToAdd);
             NewCategory = new EditableAgeCategory(_currentCompetition);
-            await _ageCategoryRepository.AddAsync(NewCategory.DbEntity);
+            await _ageCategoryRepository.AddAsync(categoryToAdd.DbEntity);
         }
 
-        //Same must be done after import !!!!
         private async void Category_DeleteRequestedAsync(object sender, EventArgs e)
         {
             var categoryToDelete = sender as EditableAgeCategory;
@@ -58,7 +59,13 @@ namespace AdminView.Categories
         public EditableAgeCategory NewCategory
         {
             get { return _newCategory; }
-            set { SetProperty(ref _newCategory, value); }
+            set
+            {
+                SetProperty(ref _newCategory, value);
+                _newCategory.DbEntity.Name = _newCategory.Name;
+                _newCategory.DbEntity.YearFrom = _newCategory.YearFrom;
+                _newCategory.DbEntity.YearTo = _newCategory.YearTo;
+            }
         }
 
         private ObservableCollection<EditableAgeCategory> _categories = new ObservableCollection<EditableAgeCategory>();

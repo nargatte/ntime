@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 using MvvmHelper;
 using ViewCore;
 using BaseCore.DataBase;
+using BaseCore.PlayerFilter;
 
 namespace AdminView.Players
 {
-    class PlayersViewModel : TabItemViewModel
+    class PlayersViewModel : TabItemViewModel<Player>
     {
         public PlayersViewModel(ViewCore.Entities.IEditableCompetition currentCompetition) : base(currentCompetition)
         {
@@ -22,13 +23,18 @@ namespace AdminView.Players
 
         private void OnViewLoaded()
         {
-            DownloadPlayersFromDataBase();
+            DownloadAllPlayers();
         }
 
-        private async void DownloadPlayersFromDataBase()
+        private void DownloadAllPlayers()
         {
-            var repository = new PlayerRepository(new ContextProvider(), _currentCompetition.DbEntity);
-            var dbPlayers = await repository.GetAllAsync();
+            DownloadPlayersFromDataBase(new PlayerFilterOptions(), 1, 2000);
+        }
+
+        private async void DownloadPlayersFromDataBase(PlayerFilterOptions playerFilter, int pageNumber, int numberOfItemsOnPage)
+        {
+            var dbPlayersTuple = await _playerRepository.GetAllByFilterAsync(playerFilter,pageNumber, numberOfItemsOnPage);
+            var dbPlayers = dbPlayersTuple.Item1;
             foreach (var dbPlayer in dbPlayers)
             {
                 Players.Add(new ViewCore.Entities.EditablePlayer(_currentCompetition) { DbEntity = dbPlayer });

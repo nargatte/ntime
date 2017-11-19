@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using MvvmHelper;
 using ViewCore;
+using BaseCore.DataBase;
 
 namespace AdminView.Scores
 {
-    class ScoresViewModel : TabItemViewModel, ViewCore.Entities.ISwitchableViewModel
+    class ScoresViewModel : TabItemViewModel<Competition>, ViewCore.Entities.ISwitchableViewModel
     {
         public ScoresViewModel(ViewCore.Entities.IEditableCompetition currentCompetition) : base(currentCompetition)
         {

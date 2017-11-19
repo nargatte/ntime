@@ -13,7 +13,7 @@ using System.Linq;
 
 namespace AdminView.Distances
 {
-    class DistancesViewModel : TabItemViewModel
+    class DistancesViewModel : TabItemViewModel<Distance>
     {
         ILogsInfo _logsInfo;
         public DistancesViewModel(IEditableCompetition currentCompetition) : base(currentCompetition)

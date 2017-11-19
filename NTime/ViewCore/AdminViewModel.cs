@@ -9,7 +9,7 @@ using ViewCore.Entities;
 
 namespace ViewCore
 {
-    public class AdminViewModel : EditableBaseClass<Competition>
+    public class AdminViewModel<T> : EditableBaseClass<T>
     {
         protected CompetitionRepository _competitionRepository { get; set; }
         //protected GateOrderItemRepository _gateOrderItemRepository { get; set; }
@@ -21,9 +21,5 @@ namespace ViewCore
             ContextProvider contextProvider = new ContextProvider();
             _competitionRepository = new CompetitionRepository(contextProvider);
         }
-
-
-
-        
     }
 }
