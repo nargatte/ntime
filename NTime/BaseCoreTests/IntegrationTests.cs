@@ -50,7 +50,7 @@ namespace BaseCoreTests
             var darr = await dr.GetAllAsync();
 
             //var ror = new GateOrderItemRepository(cp, darr.FirstOrDefault(d => d.Name == "GIGA"));
-            //await ror.ReplaceBy(new[]
+            //await ror.ReplaceByAsync(new[]
             //{
             //    new GateOrderItem(1, 1800),
             //    new GateOrderItem(2,1800),
@@ -62,7 +62,7 @@ namespace BaseCoreTests
             //});
 
             //ror = new GateOrderItemRepository(cp, darr.FirstOrDefault(d => d.Name == "MEGA"));
-            //await ror.ReplaceBy(new[]
+            //await ror.ReplaceByAsync(new[]
             //{
             //    new GateOrderItem(1, 1800),
             //    new GateOrderItem(2,1800),
@@ -70,7 +70,7 @@ namespace BaseCoreTests
             //});
 
             //ror = new GateOrderItemRepository(cp, darr.FirstOrDefault(d => d.Name == "MINI"));
-            //await ror.ReplaceBy(new[]
+            //await ror.ReplaceByAsync(new[]
             //{
             //    new GateOrderItem(1,1800),
             //    new GateOrderItem(2,1800),
@@ -78,14 +78,14 @@ namespace BaseCoreTests
             //});
 
             //ror = new GateOrderItemRepository(cp, darr.FirstOrDefault(d => d.Name == "+RODZINNY"));
-            //await ror.ReplaceBy(new[]
+            //await ror.ReplaceByAsync(new[]
             //{
             //    new GateOrderItem(1,1000),
             //    new GateOrderItem(1,1000),
             //});
 
             //ror = new GateOrderItemRepository(cp, darr.FirstOrDefault(d => d.Name == "RODZINNY"));
-            //await ror.ReplaceBy(new[]
+            //await ror.ReplaceByAsync(new[]
             //{
             //    new GateOrderItem(1,1000),
             //    new GateOrderItem(1,1000)
