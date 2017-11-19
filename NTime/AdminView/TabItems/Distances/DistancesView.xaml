@@ -14,7 +14,6 @@
              d:DesignHeight="800" d:DesignWidth="800">
     <UserControl.Resources>
         <converters:BoolToCollapsedConverterClass x:Key="boolToCollapsedConverter"/>
-        <converters:GateToDisplayConverterClass x:Key="gateToDisplayConverter"/>
         <converters:GateToNumberConverterClass x:Key="gateToNumberConverter"/>
         <Style x:Key="MyHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
             <Setter Property="Background" Value="BurlyWood"/>
@@ -182,7 +181,7 @@
                                                 </Expander.HeaderTemplate>
                                                 <StackPanel Orientation="Vertical">
                                                     <TextBlock Text="Numer"/>
-                                                    <ComboBox Width="40"  ItemsSource="{Binding DefinedGates, Converter={StaticResource gateToDisplayConverter}}" SelectedItem="{Binding Gate}">
+                                                    <ComboBox Width="40"  ItemsSource="{Binding DefinedGates}" SelectedItem="{Binding Gate}">
                                                         <ComboBox.ItemTemplate>
                                                             <DataTemplate>
                                                                 <TextBlock>

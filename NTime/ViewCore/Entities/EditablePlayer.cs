@@ -12,7 +12,15 @@ namespace ViewCore.Entities
 {
     public class EditablePlayer : EditableBaseClass<Player>
     {
-        public EditablePlayer(IEditableCompetition currentComptetition): base(currentComptetition) { }
+
+        public EditablePlayer(IEditableCompetition currentComptetition) : base(currentComptetition) { }
+
+        public EditablePlayer(IEditableCompetition currentComptetition, ICollection<EditableDistance> distances, ICollection<EditableExtraPlayerInfo> extraPlayerInfos) : base(currentComptetition)
+        {
+            DefinedDistances = new ObservableCollection<EditableDistance>(distances);
+            DefinedExtraPlayerInfo = new ObservableCollection<EditableExtraPlayerInfo>(extraPlayerInfos);
+            StartTime = DateTime.Today;
+        }
         public int StartNumber
         {
             get { return DbEntity.StartNumber; }
@@ -32,13 +40,26 @@ namespace ViewCore.Entities
             set { DbEntity.LastName = SetProperty(DbEntity.LastName, value); }
         }
 
-        //TODO Grzesiek
-        public Distance Distance
+        //Some notifiers might be necessary
+        public EditableDistance Distance
         {
-            get { return DbEntity.Distance; }
-            set { DbEntity.Distance = SetProperty(DbEntity.Distance, value); }
+            get
+            {
+                var temp = DefinedDistances.FirstOrDefault(dist => dist.DbEntity == DbEntity.Distance);
+                return temp;
+            }
+            set { DbEntity.Distance = SetProperty(DbEntity.Distance, value.DbEntity); }
         }
 
+        public EditableExtraPlayerInfo ExtraPlayerInfo
+        {
+            get
+            {
+                var temp = DefinedExtraPlayerInfo.FirstOrDefault(info => info.DbEntity == DbEntity.ExtraPlayerInfo);
+                return temp;
+            }
+            set { DbEntity.ExtraPlayerInfo = SetProperty(DbEntity.ExtraPlayerInfo, value.DbEntity); }
+        }
 
         public DateTime BirthDate
         {
@@ -61,11 +82,6 @@ namespace ViewCore.Entities
         }
 
 
-        public ExtraPlayerInfo ExtraPlayerInfo
-        {
-            get { return DbEntity.ExtraPlayerInfo; }
-            set { DbEntity.ExtraPlayerInfo = SetProperty(DbEntity.ExtraPlayerInfo, value); }
-        }
 
         public string PhoneNumber
         {
@@ -114,6 +130,20 @@ namespace ViewCore.Entities
             }
         }
 
+        private ObservableCollection<EditableDistance> _definedDistances;
+        public ObservableCollection<EditableDistance> DefinedDistances
+        {
+            get { return _definedDistances; }
+            set { SetProperty(ref _definedDistances, value); }
+        }
+
+
+        private ObservableCollection<EditableExtraPlayerInfo> _definedExtraPlayerInfo;
+        public ObservableCollection<EditableExtraPlayerInfo> DefinedExtraPlayerInfo
+        {
+            get { return _definedExtraPlayerInfo; }
+            set { SetProperty(ref _definedExtraPlayerInfo, value); }
+        }
 
     }
 }

@@ -8,7 +8,7 @@
              xmlns:DataBase="clr-namespace:BaseCore.DataBase;assembly=BaseCore" x:Class="AdminView.Players.PlayersView"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="800">
+             d:DesignHeight="300" d:DesignWidth="1000">
     <UserControl.Resources>
         <converters:BoolToSexConverterClass x:Key="BoolToSexConverter"/>
     </UserControl.Resources>
@@ -42,12 +42,8 @@
                 <StackPanel Orientation="Vertical">
                     <TextBlock Text="Dystans"
                                VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
-                    <TextBox Text="{Binding DistanceName}" Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>
-                </StackPanel>
-                <StackPanel Orientation="Vertical">
-                    <TextBlock Text="Data urodzenia"
-                               VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
-                    <DatePicker SelectedDate="{Binding BirthDate}" Width="100" Height="30"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Margin="5"/>
+                    <ComboBox ItemsSource="{Binding DefinedDistances}" SelectedItem="{Binding Distance}" Margin="0,5" Height="30"/>
+                    <!--<TextBox Text="{Binding Distance}" Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>-->
                 </StackPanel>
                 <StackPanel Orientation="Vertical">
                     <TextBlock Text="Czas startu"
@@ -55,14 +51,19 @@
                     <TextBox Text="{Binding StartTime}" Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>
                 </StackPanel>
                 <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Dodatkowe inf."
+                               VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
+                    <ComboBox ItemsSource="{Binding DefinedExtraPlayerInfo}" SelectedItem="{Binding ExtraPlayerInfo}" Margin="0,5" Height="30"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
                     <TextBlock Text="Klub"
                                VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
                     <TextBox Text="{Binding Team}" Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>
                 </StackPanel>
                 <StackPanel Orientation="Vertical">
-                    <TextBlock Text="Dodatkowe inf."
+                    <TextBlock Text="Data urodzenia"
                                VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
-                    <TextBox Text="{Binding ExtraPlayerInfo}" Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>
+                    <DatePicker SelectedDate="{Binding BirthDate}" Width="100" Height="30"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Margin="5"/>
                 </StackPanel>
                 <StackPanel Orientation="Vertical">
                     <TextBlock Text="Telefon"
@@ -84,7 +85,29 @@
                 <DataGridTextColumn x:Name="startNumberColumn" Width="SizeToHeader" Header="Numer" Binding="{Binding StartNumber}"/>
                 <DataGridTextColumn x:Name="firstNameColumn"  Header="Imię" Binding="{Binding FirstName}"/>
                 <DataGridTextColumn x:Name="lastNameColumn" Header="Nazwisko" Binding="{Binding LastName}"/>
-                <DataGridTextColumn x:Name="extraPlayerInfoIdColumn"  Header="Dodatkowe info" Binding="{Binding ExtraPlayerInfo}"/>
+                <DataGridTemplateColumn x:Name="distanceColumn"  Header="Dystans">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox ItemsSource="{Binding DefinedDistances}" SelectedItem="{Binding Distance}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}">
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn x:Name="startTimeColumn" Header="Czas startu" Binding="{Binding StartTime}"/>
+                <DataGridTemplateColumn x:Name="extraPlayerInfoIdColumn"  Header="Dodatkowe info">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox ItemsSource="{Binding DefinedExtraPlayerInfo}" SelectedItem="{Binding ExtraPlayerInfo}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn x:Name="fullCategoryColumn" Header="kategoria" Binding="{Binding FullCategory}"/>
                 <DataGridTextColumn x:Name="teamColumn"  Header="Klub" Binding="{Binding Team}"/>
                 <DataGridTemplateColumn x:Name="birthDateColumn"  Header="Data urodzenia">
                     <DataGridTemplateColumn.CellTemplate>
@@ -93,7 +116,6 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn x:Name="fullCategoryColumn" Header="kategoria" Binding="{Binding FullCategory}"/>
                 <DataGridTextColumn x:Name="isMaleColumn" Width="SizeToHeader" Header="Płeć" Binding="{Binding IsMale, Converter={StaticResource BoolToSexConverter}}"/>
             </DataGrid.Columns>
         </DataGrid>

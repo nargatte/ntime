@@ -22,16 +22,19 @@ namespace ViewCore.Entities
             DeterminedDistanceLaps, DeterminedDistanceUnusual, LimitedTime
         }
 
-        private ILogsInfo logsInfo;
-        public EditableDistance(ILogsInfo logsInfo, ObservableCollection<IEditableGate> definedGates, IEditableCompetition currentCompetition) : base(currentCompetition)
+        public EditableDistance(IEditableCompetition currentCompetition) : base(currentCompetition)
         {
-            _definedGates = definedGates;
-            this.logsInfo = logsInfo;
             SaveDistanceCmd = new RelayCommand(OnSaveDistanceAsync);
             DeleteDistanceCmd = new RelayCommand(OnDeleteDistance);
             ContextProvider contextProvider = new ContextProvider();
-            _gateOrderItemRepository = new GateOrderItemRepository(contextProvider, this.DbEntity);
             _distanceRepository = new DistanceRepository(contextProvider, _currentCompetition.DbEntity);
+        }
+
+        private ILogsInfo logsInfo;
+        public EditableDistance(ILogsInfo logsInfo, ObservableCollection<IEditableGate> definedGates, IEditableCompetition currentCompetition) : this(currentCompetition)
+        {
+            _definedGates = definedGates;
+            this.logsInfo = logsInfo;
         }
         #region Properties
 
@@ -69,7 +72,7 @@ namespace ViewCore.Entities
 
         private async void UpdateGatesOrderCountAsync()
         {
-
+            _gateOrderItemRepository = new GateOrderItemRepository(new ContextProvider(), this.DbEntity);
             int currentGatesCount = GatesOrderItems.Count;
             int updatedGatesCount = GatesCount;
             int diff = updatedGatesCount - currentGatesCount;
