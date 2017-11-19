@@ -10,7 +10,7 @@ namespace ViewCore.Entities
 {
     public class EditableCompetition : EditableBaseClass<Competition>, IEditableCompetition
     {
-
+        public EditableCompetition(IEditableCompetition currentComptetition): base(currentComptetition) { }
         public string Name
         {
             get { return DbEntity.Name; }

@@ -10,7 +10,7 @@ namespace ViewCore.Entities
     public class EditableGate : EditableBaseClass<Gate>, IEditableGate
     {
         ILogsInfo logsInfo;
-        public EditableGate(ILogsInfo logsInfo) : base()
+        public EditableGate(ILogsInfo logsInfo, IEditableCompetition currentCompetition) : base(currentCompetition)
         {
             AddLogCmd = new RelayCommand(OnAddLog);
             DeleteMeasurementPointCmd = new RelayCommand(OnDeleteGate);
@@ -33,7 +33,7 @@ namespace ViewCore.Entities
                 if (dialog.ShowDialog().Value)
                 {
                     NewLogDirectoryName = dialog.FileName;
-                    var logToAdd = new EditableTimeReadsLogInfo(logsInfo)
+                    var logToAdd = new EditableTimeReadsLogInfo(logsInfo, _currentCompetition)
                     {
                         DbEntity = new TimeReadsLogInfo()
                         {
@@ -54,7 +54,7 @@ namespace ViewCore.Entities
 
         public void AddLogToGUI(EditableTimeReadsLogInfo logToAdd)
         {
-            logToAdd.DeleteRequested += LogToAdd_DeleteRequested1;
+            logToAdd.DeleteRequested += LogToAdd_DeleteRequested1Async;
             AssignedLogs.Add(logToAdd);
             logsInfo.LogsNumbers.Add(logToAdd.LogNumber);
             UpdateNewLogNumber();
@@ -69,11 +69,13 @@ namespace ViewCore.Entities
                 NewLogNumber = 0;
         }
 
-        private void LogToAdd_DeleteRequested1(object sender, EventArgs e)
+        private async void LogToAdd_DeleteRequested1Async(object sender, EventArgs e)
         {
             var logToDelete = sender as EditableTimeReadsLogInfo;
             logsInfo.LogsNumbers.Remove(logToDelete.LogNumber);
             AssignedLogs.Remove(logToDelete);
+            var repository = new TimeReadsLogInfoRepository(new ContextProvider(), this.DbEntity);
+            await repository.RemoveAsync(logToDelete.DbEntity);
         }
 
         private bool CanAddLog()

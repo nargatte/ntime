@@ -44,7 +44,7 @@ namespace AdminView.Distances
             var dbGates = await _gateRepository.GetAllAsync();
             foreach (var dbGate in dbGates)
             {
-                var gateToAdd = new EditableGate(_logsInfo)
+                var gateToAdd = new EditableGate(_logsInfo, _currentCompetition)
                 {
                     DbEntity = dbGate,
                     AssignedLogs = new ObservableCollection<EditableTimeReadsLogInfo>()
@@ -54,7 +54,7 @@ namespace AdminView.Distances
                 AddGateToGUI(gateToAdd);
                 foreach (var log in logs)
                 {
-                    var logToAdd = new EditableTimeReadsLogInfo(_logsInfo)
+                    var logToAdd = new EditableTimeReadsLogInfo(_logsInfo, _currentCompetition)
                     {
                         DbEntity = log
                     };
@@ -69,21 +69,21 @@ namespace AdminView.Distances
             var dbDistances = await _distanceRepository.GetAllAsync();
             foreach (var dbDistance in dbDistances)
             {
-                EditableDistance distanceToAdd = new EditableDistance(_logsInfo, _definedGates)
+                EditableDistance distanceToAdd = new EditableDistance(_logsInfo, _definedGates, _currentCompetition)
                 {
                     DbEntity = dbDistance,
                     GatesOrderItems = new ObservableCollection<EditableGatesOrderItem>()
                 };
                 var gateOrderRepository = new GateOrderItemRepository(contextProvider, dbDistance);
                 var dbGateOrderItems = await gateOrderRepository.GetAllAsync();
+                AddDistanceToGUI(distanceToAdd);
                 foreach (var dbGateOrderItem in dbGateOrderItems)
                 {
-                    distanceToAdd.GatesOrderItems.Add(new EditableGatesOrderItem(_definedGates)
+                    distanceToAdd.GatesOrderItems.Add(new EditableGatesOrderItem(_definedGates, _currentCompetition)
                     {
                         DbEntity = dbGateOrderItem
                     });
                 }
-                AddDistanceToGUI(distanceToAdd);
             }
         }
 
@@ -93,7 +93,7 @@ namespace AdminView.Distances
             if (CanAddGate())
             {
                 var gateNumber = int.Parse(NewGateNumber);
-                var gateToAdd = new EditableGate(_logsInfo)
+                var gateToAdd = new EditableGate(_logsInfo, _currentCompetition)
                 {
                     DbEntity = new Gate()
                     {
@@ -149,10 +149,13 @@ namespace AdminView.Distances
         {
             if (CanAddDistance(out string errorMessage))
             {
-                var distanceToAdd = new EditableDistance(_logsInfo, _definedGates)
+                var distanceToAdd = new EditableDistance(_logsInfo, _definedGates, _currentCompetition)
                 {
-                    Name = NewDistanceName,
                     DbEntity = new Distance()
+                    {
+                        Name = NewDistanceName,
+                        StartTime = DateTime.Today
+                    }
                 };
                 AddDistanceToGUI(distanceToAdd);
                 await _distanceRepository.AddAsync(distanceToAdd.DbEntity);

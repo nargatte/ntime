@@ -10,7 +10,7 @@ namespace ViewCore.Entities
 {
     public class EditableAgeCategory : EditableBaseClass<AgeCategory>
     {
-        public EditableAgeCategory()
+        public EditableAgeCategory(IEditableCompetition currentComptetition) : base(currentComptetition)
         {
             DeleteCategoryCmd = new RelayCommand(OnDeleteCategory);
         }

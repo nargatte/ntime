@@ -9,6 +9,7 @@ namespace ViewCore.Entities
 {
     public class EditableExtraPlayerInfo : EditableBaseClass<ExtraPlayerInfo>
     {
+        public EditableExtraPlayerInfo(IEditableCompetition currentComptetition): base(currentComptetition) { }
         public string Name
         {
             get { return DbEntity.Name; }

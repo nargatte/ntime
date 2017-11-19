@@ -11,7 +11,7 @@ namespace ViewCore.Entities
 {
     public class EditableGatesOrderItem : EditableBaseClass<GatesOrderItem>
     {
-        public EditableGatesOrderItem(ObservableCollection<IEditableGate> definedGates)
+        public EditableGatesOrderItem(ObservableCollection<IEditableGate> definedGates, IEditableCompetition currentCompetition) : base(currentCompetition)
         {
             //This has been changed
             DefinedGates = definedGates;

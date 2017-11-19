@@ -21,7 +21,7 @@ namespace AdminView.Scores
         {
             for (int i = 0; i < 20; i++)
             {
-                Scores.Add(new ViewCore.Entities.EditablePlayer()
+                Scores.Add(new ViewCore.Entities.EditablePlayer(_currentCompetition)
                 {
                     DbEntity = new BaseCore.DataBase.Player()
                     {

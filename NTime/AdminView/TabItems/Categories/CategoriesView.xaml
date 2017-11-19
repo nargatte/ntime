@@ -5,8 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AdminView.Categories"
              xmlns:DataBase="clr-namespace:BaseCore.DataBase;assembly=BaseCore" x:Class="AdminView.Categories.CategoriesView"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="600" Loaded="UserControl_Loaded">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding ViewLoadedCmd}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <StackPanel Orientation="Vertical">
             <TextBlock HorizontalAlignment="Center" Margin="0,20,0,0"> Kategorie </TextBlock>

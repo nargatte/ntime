@@ -8,7 +8,7 @@ namespace ViewCore.Entities
     public class EditableTimeReadsLogInfo : EditableBaseClass<TimeReadsLogInfo>
     {
         ILogsInfo logsInfo;
-        public EditableTimeReadsLogInfo(ILogsInfo logsInfo)
+        public EditableTimeReadsLogInfo(ILogsInfo logsInfo, IEditableCompetition currentCompetition) : base(currentCompetition)
         {
             this.logsInfo = logsInfo;
             DeleteLogCmd = new RelayCommand(OnDeleteLog);

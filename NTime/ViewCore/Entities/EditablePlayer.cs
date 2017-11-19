@@ -12,7 +12,7 @@ namespace ViewCore.Entities
 {
     public class EditablePlayer : EditableBaseClass<Player>
     {
-
+        public EditablePlayer(IEditableCompetition currentComptetition): base(currentComptetition) { }
         public int StartNumber
         {
             get { return DbEntity.StartNumber; }

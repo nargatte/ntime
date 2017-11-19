@@ -19,6 +19,7 @@ namespace AdminView.CompetitionChoice
             AddCompetitionViewRequested += NavToAddCompetitionView;
             GoToCompetitionCmd = new RelayCommand(OnGoToCompetition, CanGoToCompetition);
             ViewLoadedCmd = new RelayCommand(OnViewLoaded);
+            _selectedCompetition = new EditableCompetition(currentCompteition);
         }
 
         #region Properties
@@ -29,8 +30,8 @@ namespace AdminView.CompetitionChoice
             set { SetProperty(ref _competitions, value); }
         }
 
-        private ViewCore.Entities.EditableCompetition _selectedCompetition = new ViewCore.Entities.EditableCompetition();
-        public ViewCore.Entities.EditableCompetition SelectedCompetition
+        private EditableCompetition _selectedCompetition;
+        public EditableCompetition SelectedCompetition
         {
             get { return _selectedCompetition; }
             set
@@ -151,7 +152,7 @@ namespace AdminView.CompetitionChoice
             var dbCompetitions = new List<Competition>(await repository.GetAllAsync());
             foreach (var dbCompetition in dbCompetitions)
             {
-                Competitions.Add(new ViewCore.Entities.EditableCompetition() { DbEntity = dbCompetition });
+                Competitions.Add(new EditableCompetition(_currentCompetition) { DbEntity = dbCompetition });
             }
         }
 

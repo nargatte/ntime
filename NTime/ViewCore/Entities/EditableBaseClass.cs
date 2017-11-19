@@ -13,9 +13,13 @@ namespace ViewCore
     {
 
         protected IEditableCompetition _currentCompetition;
-        public EditableBaseClass()
+        private EditableBaseClass()
         {
             DbEntity = Activator.CreateInstance<T>();
+        }
+        public EditableBaseClass(IEditableCompetition currentComptetition) : this()
+        {
+            _currentCompetition = currentComptetition;
         }
         private T _dbEntity;
         public T DbEntity

@@ -17,6 +17,7 @@ namespace AdminView.Players
             ViewLoadedCmd = new RelayCommand(OnViewLoaded);
             AddPlayerCmd = new RelayCommand(OnAddPlayer);
             TabTitle = "Zawodnicy";
+            _newPlayer = new ViewCore.Entities.EditablePlayer(currentCompetition);
         }
 
         private void OnViewLoaded()
@@ -30,17 +31,17 @@ namespace AdminView.Players
             var dbPlayers = await repository.GetAllAsync();
             foreach (var dbPlayer in dbPlayers)
             {
-                Players.Add(new ViewCore.Entities.EditablePlayer() { DbEntity = dbPlayer });
+                Players.Add(new ViewCore.Entities.EditablePlayer(_currentCompetition) { DbEntity = dbPlayer });
             }
         }
 
         private void OnAddPlayer()
         {
             Players.Add(NewPlayer);
-            NewPlayer = new ViewCore.Entities.EditablePlayer();
+            NewPlayer = new ViewCore.Entities.EditablePlayer(_currentCompetition);
         }
 
-        private ViewCore.Entities.EditablePlayer _newPlayer = new ViewCore.Entities.EditablePlayer();
+        private ViewCore.Entities.EditablePlayer _newPlayer;
         public ViewCore.Entities.EditablePlayer NewPlayer
         {
             get { return _newPlayer; }

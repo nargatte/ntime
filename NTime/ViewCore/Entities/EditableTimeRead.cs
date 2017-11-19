@@ -9,7 +9,7 @@ namespace ViewCore.Entities
 {
     public class EditableTimeRead : EditableBaseClass<TimeRead>
     {
-
+        public EditableTimeRead(IEditableCompetition currentCompetition) : base(currentCompetition) { }
         public decimal Time
         {
             get { return DbEntity.Time; }

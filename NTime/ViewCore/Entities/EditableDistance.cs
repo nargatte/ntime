@@ -23,7 +23,7 @@ namespace ViewCore.Entities
         }
 
         private ILogsInfo logsInfo;
-        public EditableDistance(ILogsInfo logsInfo, ObservableCollection<IEditableGate> definedGates)
+        public EditableDistance(ILogsInfo logsInfo, ObservableCollection<IEditableGate> definedGates, IEditableCompetition currentCompetition) : base(currentCompetition)
         {
             _definedGates = definedGates;
             this.logsInfo = logsInfo;
@@ -49,7 +49,7 @@ namespace ViewCore.Entities
             set { DbEntity.Length = SetProperty(DbEntity.Length, value); }
         }
 
-        public BaseCore.DataBase.DistanceTypeEnum DistanceType
+        public DistanceTypeEnum DistanceType
         {
             get { return DbEntity.DistanceTypeEnum; }
             set { DbEntity.DistanceTypeEnum = SetProperty(DbEntity.DistanceTypeEnum, value); }
@@ -85,7 +85,7 @@ namespace ViewCore.Entities
                 {
                     for (int i = 0; i < diff; i++)
                     {
-                        var gateOrderItem = new EditableGatesOrderItem(_definedGates)
+                        var gateOrderItem = new EditableGatesOrderItem(_definedGates, _currentCompetition)
                         {
                             DbEntity = new GatesOrderItem(),
                         };

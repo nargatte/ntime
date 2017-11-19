@@ -17,7 +17,7 @@ namespace AdminView.AddCompetition
         {
             AddCompetitionCmd = new RelayCommand(OnAddCompetition);
             CancelAddingCmd = new RelayCommand(OnCancelAdding);
-            NewCompetition = new ViewCore.Entities.EditableCompetition()
+            NewCompetition = new ViewCore.Entities.EditableCompetition(NewCompetition)
             {
                 DbEntity = new BaseCore.DataBase.Competition(),
                 EventDate = DateTime.Today,

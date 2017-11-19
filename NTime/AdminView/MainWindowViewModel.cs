@@ -10,14 +10,16 @@ using AdminView.Settings;
 using AdminView.CompetitionManager;
 using ViewCore;
 using MvvmHelper;
+using ViewCore.Entities;
 
 namespace AdminView
 {
-    class MainWindowViewModel : AdminViewModel
+    class MainWindowViewModel : BindableBase
     {
         private ViewCore.Entities.ISwitchableViewModel _currentViewModel;
         private CompetitionChoiceViewModel _competitionChoiceViewModel;
         private CompetitionManagerViewModel _competitionManagerViewModel;
+        private IEditableCompetition _currentCompetition;
 
         public MainWindowViewModel()
         {

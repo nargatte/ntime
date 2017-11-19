@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BaseCore.DataBase;
 using MvvmHelper;
+using ViewCore.Entities;
 
 namespace ViewCore
 {
@@ -15,15 +16,14 @@ namespace ViewCore
         //protected TimeReadRepository _timeReadRepository { get; set; }
         //protected TimeReadsLogInofRepository _timeReadsLogInofRepository { get; set; }
 
-        protected AdminViewModel(ViewCore.Entities.IEditableCompetition currentComptetition)
-        {
-            _currentCompetition = currentComptetition;
+        public AdminViewModel(IEditableCompetition currentComptetition) : base(currentComptetition)
+        { 
             ContextProvider contextProvider = new ContextProvider();
             _competitionRepository = new CompetitionRepository(contextProvider);
         }
 
 
 
-        protected AdminViewModel() { }
+        
     }
 }
