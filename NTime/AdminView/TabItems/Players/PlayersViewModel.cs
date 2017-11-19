@@ -27,6 +27,30 @@ namespace AdminView.Players
         #region Properties
 
 
+        private PlayerSort? _sortCriteria;
+        public PlayerSort? SortCriteria
+        {
+            get { return _sortCriteria; }
+            set
+            {
+                SetProperty(ref _sortCriteria, value);
+                FilterValueChangedAsync();
+            }
+        }
+
+
+        private SortOrderEnum? _sortOrder;
+        public SortOrderEnum? SortOrder
+        {
+            get { return _sortOrder; }
+            set
+            {
+                SetProperty(ref _sortOrder, value);
+                FilterValueChangedAsync();
+            }
+        }
+
+
         private string _filterGeneral;
         public string FilterGeneral
         {
@@ -149,10 +173,14 @@ namespace AdminView.Players
 
         private async void FilterValueChangedAsync()
         {
-            var filter = new PlayerFilterOptions()
-            {
-                Query = FilterGeneral
-            };
+            var filter = new PlayerFilterOptions();
+            if (!String.IsNullOrWhiteSpace(FilterGeneral))
+                filter.Query = FilterGeneral;
+            if (SortOrder.HasValue && SortOrder.Value == SortOrderEnum.Descending)
+                filter.DescendingSort = true;
+            if (SortCriteria.HasValue)
+                filter.PlayerSort = SortCriteria.Value;
+
             await AddPlayersFromDatabaseAndDisplay(filter, 0, 50, true);
         }
         #endregion

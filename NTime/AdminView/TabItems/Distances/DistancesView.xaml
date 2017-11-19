@@ -235,13 +235,13 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <!--<DataGridTemplateColumn Header="Typ">
+                        <DataGridTemplateColumn Header="Typ">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <ComboBox ItemsSource="{Binding Source={db:EnumBindingSource {x:Type db:DistanceTypeEnum}}}" SelectedItem="{Binding }"/>
+                                    <ComboBox ItemsSource="{Binding Source={db:EnumBindingSource {x:Type db:DistanceTypeEnum}}}" SelectedItem="{Binding DistanceType}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>-->
+                        </DataGridTemplateColumn>
                         <DataGridTextColumn Header="Liczba bramek" Binding="{Binding GatesCount, UpdateSourceTrigger=LostFocus}"  Width="Auto">
 
                         </DataGridTextColumn>

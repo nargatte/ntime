@@ -7,7 +7,6 @@ using System.Windows.Markup;
 
 namespace BaseCore.DataBase
 {
-
     public class EnumBindingSourceExtension : MarkupExtension
     {
         private Type _enumType;
