@@ -6,6 +6,16 @@ namespace BaseCore.DataBase
 {
     public class Gate : IEntityId, ICompetitionId
     {
+        public Gate()
+        {
+        }
+
+        public Gate(string name, int number)
+        {
+            Name = name;
+            Number = number;
+        }
+
         public int Id { get; set; }
 
         [StringLength(255)]

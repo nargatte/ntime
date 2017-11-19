@@ -19,12 +19,16 @@ namespace BaseCore.DataBase
         {
             if(item.PlayerId != Player.Id) 
                 throw new ArgumentException("Wrong PlayerId");
+
+            item.Gate = null;
         }
 
         protected override void PrepareToAdd(TimeRead item)
         {
             item.PlayerId = Player.Id;
             item.Player = null;
+
+            item.Gate = null;
         }
 
         protected override IQueryable<TimeRead> GetIncludeQuery(IQueryable<TimeRead> items) =>

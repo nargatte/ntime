@@ -9,7 +9,7 @@ namespace BaseCore.Csv
         public string LastName { get; set; }
         public string City { get; set; }
         public string Team { get; set; }
-        public DateTime DateBirth { get; set; }
+        public DateTime BirthDate { get; set; }
         public bool IsMale { get; set; }
         public string StringAditionalInfo { get; set; }
         public DateTime StartTime { get; set; }
