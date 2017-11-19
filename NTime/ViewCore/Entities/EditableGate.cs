@@ -10,11 +10,12 @@ namespace ViewCore.Entities
     public class EditableGate : EditableBaseClass<Gate>, IEditableGate
     {
         ILogsInfo logsInfo;
-        public EditableGate(ILogsInfo logsInfo)
+        public EditableGate(ILogsInfo logsInfo) : base()
         {
             AddLogCmd = new RelayCommand(OnAddLog);
             DeleteMeasurementPointCmd = new RelayCommand(OnDeleteGate);
             this.logsInfo = logsInfo;
+            UpdateNewLogNumber();
         }
 
         #region Methods
@@ -23,30 +24,49 @@ namespace ViewCore.Entities
             DeleteRequested(this, EventArgs.Empty);
         }
 
-        private void OnAddLog()
+        private async void OnAddLog()
         {
             if (CanAddLog())
             {
                 Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
+                dialog.Filter = "CSV files (*.csv)|*.csv";
                 if (dialog.ShowDialog().Value)
                 {
                     NewLogDirectoryName = dialog.FileName;
                     var logToAdd = new EditableTimeReadsLogInfo(logsInfo)
                     {
-                        LogNumber = NewLogNumber,
-                        DirectoryName = NewLogDirectoryName
+                        DbEntity = new TimeReadsLogInfo()
+                        {
+                            LogNumber = NewLogNumber,
+                            Path = NewLogDirectoryName
+                        }
                     };
-                    logToAdd.DeleteRequested += LogToAdd_DeleteRequested1;
-                    AssignedLogs.Add(logToAdd);
-                    logsInfo.LogsNumbers.Add(NewLogNumber);
-                    NewLogNumber++;
-                    NewLogDirectoryName = "";
+                    var repository = new TimeReadsLogInfoRepository(new ContextProvider(), this.DbEntity);
+                    await repository.AddAsync(logToAdd.DbEntity);
+                    AddLogToGUI(logToAdd);
                 }
             }
             else
             {
                 System.Windows.MessageBox.Show("Log o takim numerze już istnieje. Wybierz inny numer");
             }
+        }
+
+        public void AddLogToGUI(EditableTimeReadsLogInfo logToAdd)
+        {
+            logToAdd.DeleteRequested += LogToAdd_DeleteRequested1;
+            AssignedLogs.Add(logToAdd);
+            logsInfo.LogsNumbers.Add(logToAdd.LogNumber);
+            UpdateNewLogNumber();
+            NewLogDirectoryName = "";
+        }
+
+        private void UpdateNewLogNumber()
+        {
+            if (logsInfo.LogsNumbers.Count > 0)
+                NewLogNumber = logsInfo.LogsNumbers.Max() + 1;
+            else
+                NewLogNumber = 0;
         }
 
         private void LogToAdd_DeleteRequested1(object sender, EventArgs e)
@@ -89,18 +109,19 @@ namespace ViewCore.Entities
         }
         #endregion
 
-        private int _number;
+
+
         public int Number
         {
-            get { return _number; }
-            set { SetProperty(ref _number, value); }
+            get { return DbEntity.Number; }
+            set { DbEntity.Number = SetProperty(DbEntity.Number, value); }
         }
 
-        private string _name;
+
         public string Name
         {
-            get { return _name; }
-            set { SetProperty(ref _name, value); }
+            get { return DbEntity.Name; }
+            set { DbEntity.Name = SetProperty(DbEntity.Name, value); }
         }
 
         private ObservableCollection<EditableTimeReadsLogInfo> _assignedLogs = new ObservableCollection<EditableTimeReadsLogInfo>();

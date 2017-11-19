@@ -17,9 +17,14 @@ namespace AdminView.AddCompetition
         {
             AddCompetitionCmd = new RelayCommand(OnAddCompetition);
             CancelAddingCmd = new RelayCommand(OnCancelAdding);
+            NewCompetition = new ViewCore.Entities.EditableCompetition()
+            {
+                DbEntity = new BaseCore.DataBase.Competition(),
+                EventDate = DateTime.Today,
+            };
         }
 
-        private ViewCore.Entities.EditableCompetition _newCompetition = new ViewCore.Entities.EditableCompetition() { EventDate = DateTime.Today};
+        private ViewCore.Entities.EditableCompetition _newCompetition;
         public ViewCore.Entities.EditableCompetition NewCompetition
         {
             get { return _newCompetition; }
@@ -34,7 +39,7 @@ namespace AdminView.AddCompetition
 
         private void OnAddCompetition()
         {
-            if(NewCompetition.EventDate.Year <2000)
+            if (NewCompetition.EventDate.Year < 2000)
             {
                 MessageBox.Show("Przed zatwierdzeniem zawodów należy wybrać ich datę");
                 return;

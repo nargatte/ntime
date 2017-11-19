@@ -27,13 +27,6 @@ namespace ViewCore.Entities
             set { DbEntity.Path = SetProperty(DbEntity.Path, value); }
         }
 
-
-        private string _directoryName;
-        public string DirectoryName
-        {
-            get { return _directoryName; }
-            set { SetProperty(ref _directoryName, value); }
-        }
         #endregion
 
         private void OnDeleteLog()

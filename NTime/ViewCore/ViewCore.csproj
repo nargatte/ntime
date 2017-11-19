@@ -71,6 +71,7 @@
     <Compile Include="XamlConverters\CompetitionToStringConverterClass.cs" />
     <Compile Include="XamlConverters\DateToStringConverterClass.cs" />
     <Compile Include="XamlConverters\GateToDisplayConverterClass.cs" />
+    <Compile Include="XamlConverters\GateToNumberConverterClass.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BaseCore\BaseCore.csproj">

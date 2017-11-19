@@ -15,6 +15,7 @@
     <UserControl.Resources>
         <converters:BoolToCollapsedConverterClass x:Key="boolToCollapsedConverter"/>
         <converters:GateToDisplayConverterClass x:Key="gateToDisplayConverter"/>
+        <converters:GateToNumberConverterClass x:Key="gateToNumberConverter"/>
         <Style x:Key="MyHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
             <Setter Property="Background" Value="BurlyWood"/>
         </Style>
@@ -117,7 +118,7 @@
                                                                     <TextBlock Text="{Binding LogNumber}" Width="30"></TextBlock>
                                                                 </StatusBarItem>
                                                                 <StatusBarItem HorizontalAlignment="Left">
-                                                                    <TextBox Text="{Binding DirectoryName}" IsReadOnly="True" Width="100"/>
+                                                                    <TextBox Text="{Binding Path}" IsReadOnly="True" Width="100"/>
                                                                 </StatusBarItem>
                                                                 <Button Command="{Binding DeleteLogCmd}">Usuń</Button>
                                                             </StatusBar>
@@ -165,7 +166,7 @@
                   ColumnWidth="*" SelectionMode="Extended" CanUserAddRows="False" Width="600">
                     <DataGrid.RowDetailsTemplate>
                         <DataTemplate>
-                            <ItemsControl ItemsSource="{Binding GatesOrder}" Background="LightGoldenrodYellow">
+                            <ItemsControl ItemsSource="{Binding GatesOrderItems}" Background="LightGoldenrodYellow">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
@@ -176,7 +177,7 @@
                                             <Expander Header="{Binding}" Background="#DC0" Margin="2,0,2,0" >
                                                 <Expander.HeaderTemplate>
                                                     <DataTemplate>
-                                                        <TextBlock Text="{Binding Gate.Number}" FontWeight="Bold"/>
+                                                        <TextBlock Text="{Binding Gate, Converter={StaticResource gateToNumberConverter}}" FontWeight="Bold"/>
                                                     </DataTemplate>
                                                 </Expander.HeaderTemplate>
                                                 <StackPanel Orientation="Vertical">
@@ -276,7 +277,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button Command="{Binding SaveDistanceCmd}">Zapisz
-                                        <Button.Style>
+                                        <!--<Button.Style>
                                             <Style TargetType="{x:Type Button}">
                                                 <Setter Property="IsEnabled" Value="False"/>
                                                 <Style.Triggers>
@@ -291,7 +292,7 @@
                                                     </MultiDataTrigger>
                                                 </Style.Triggers>
                                             </Style>
-                                        </Button.Style>
+                                        </Button.Style>-->
                                     </Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

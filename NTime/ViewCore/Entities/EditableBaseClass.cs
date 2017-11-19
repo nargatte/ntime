@@ -5,11 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using MvvmHelper;
 using BaseCore.DataBase;
+using ViewCore.Entities;
 
 namespace ViewCore
 {
     public abstract class EditableBaseClass<T> : BindableBase
     {
+
+        protected IEditableCompetition _currentCompetition;
         public EditableBaseClass()
         {
             DbEntity = Activator.CreateInstance<T>();
@@ -22,9 +25,9 @@ namespace ViewCore
         }
 
         //TODO thinks if that is necessary and possiple
-        public async Task  UpdateAsync()
-        {
-            throw new NotImplementedException();
-        }
+        //public async Task  UpdateAsync()
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Linq;
 
 namespace BaseCore.DataBase
@@ -25,5 +26,8 @@ namespace BaseCore.DataBase
             item.PlayerId = Player.Id;
             item.Player = null;
         }
+
+        protected override IQueryable<TimeRead> GetIncludeQuery(IQueryable<TimeRead> items) =>
+        items.Include(i => i.Gate);
     }
 }

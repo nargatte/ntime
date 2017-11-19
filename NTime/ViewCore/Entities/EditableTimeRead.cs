@@ -18,8 +18,8 @@ namespace ViewCore.Entities
 
         public int Reader
         {
-            get { return DbEntity.Reader; }
-            set { DbEntity.Reader = SetProperty(DbEntity.Reader, value); }
+            get { return DbEntity.Gate.Number; }
+            set { DbEntity.Gate.Number = SetProperty(DbEntity.Gate.Number, value); }
         }
 
     }

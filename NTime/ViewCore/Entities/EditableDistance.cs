@@ -14,7 +14,9 @@ namespace ViewCore.Entities
 
     public class EditableDistance : EditableBaseClass<Distance>
     {
+        GateOrderItemRepository _gateOrderItemRepository;
         ObservableCollection<IEditableGate> _definedGates;
+        DistanceRepository _distanceRepository;
         public enum CompetitionTypeEnumerator
         {
             DeterminedDistanceLaps, DeterminedDistanceUnusual, LimitedTime
@@ -25,8 +27,11 @@ namespace ViewCore.Entities
         {
             _definedGates = definedGates;
             this.logsInfo = logsInfo;
-            SaveDistanceCmd = new RelayCommand(OnSaveDistance);
+            SaveDistanceCmd = new RelayCommand(OnSaveDistanceAsync);
             DeleteDistanceCmd = new RelayCommand(OnDeleteDistance);
+            ContextProvider contextProvider = new ContextProvider();
+            _gateOrderItemRepository = new GateOrderItemRepository(contextProvider, this.DbEntity);
+            _distanceRepository = new DistanceRepository(contextProvider, _currentCompetition.DbEntity);
         }
         #region Properties
 
@@ -58,14 +63,14 @@ namespace ViewCore.Entities
             set
             {
                 SetProperty(ref _gatesCount, value);
-                UpdateGatesOrderCount();
+                UpdateGatesOrderCountAsync();
             }
         }
 
-        private void UpdateGatesOrderCount()
+        private async void UpdateGatesOrderCountAsync()
         {
 
-            int currentGatesCount = GatesOrder.Count;
+            int currentGatesCount = GatesOrderItems.Count;
             int updatedGatesCount = GatesCount;
             int diff = updatedGatesCount - currentGatesCount;
             if (diff == 0)
@@ -80,14 +85,22 @@ namespace ViewCore.Entities
                 {
                     for (int i = 0; i < diff; i++)
                     {
-                        GatesOrder.Add(new EditableGatesOrderItem(_definedGates));
+                        var gateOrderItem = new EditableGatesOrderItem(_definedGates)
+                        {
+                            DbEntity = new GatesOrderItem(),
+                        };
+                        gateOrderItem.UpdateGatesOrderItemRequested += GateOrderItem_UpdateGatesOrderItemRequestedAsync;
+                        GatesOrderItems.Add(gateOrderItem);
+                        await _gateOrderItemRepository.AddAsync(gateOrderItem.DbEntity);
                     }
                 }
                 else if (diff < 0)
                 {
                     for (int i = 0; i < Math.Abs(diff); i++)
                     {
-                        GatesOrder.Remove(GatesOrder.Last());
+                        var gateOrderItem = GatesOrderItems.Last();
+                        GatesOrderItems.Remove(gateOrderItem);
+                        await _gateOrderItemRepository.RemoveAsync(gateOrderItem.DbEntity);
                     }
                 }
             }
@@ -95,15 +108,22 @@ namespace ViewCore.Entities
             {
                 GatesCount = currentGatesCount;
             }
-            if (GatesOrder.Count > 0)
-                GatesOrder.First().IsTimeCollapsed = true;
+            if (GatesOrderItems.Count > 0)
+                GatesOrderItems.First().IsTimeCollapsed = true;
         }
 
-        private ObservableCollection<ViewCore.Entities.EditableGatesOrderItem> _gatesOrder = new ObservableCollection<EditableGatesOrderItem>();
-        public ObservableCollection<ViewCore.Entities.EditableGatesOrderItem> GatesOrder
+        private async void GateOrderItem_UpdateGatesOrderItemRequestedAsync(object sender, EventArgs e)
         {
-            get { return _gatesOrder; }
-            set { SetProperty(ref _gatesOrder, value); }
+            var gateOrderInfoItem = sender as EditableGatesOrderItem;
+            var repository = new GateOrderItemRepository(new ContextProvider(), this.DbEntity);
+            await repository.UpdateAsync(gateOrderInfoItem.DbEntity);
+        }
+
+        private ObservableCollection<EditableGatesOrderItem> _gatesOrderItems = new ObservableCollection<EditableGatesOrderItem>();
+        public ObservableCollection<EditableGatesOrderItem> GatesOrderItems
+        {
+            get { return _gatesOrderItems; }
+            set { SetProperty(ref _gatesOrderItems, value); }
         }
 
         public int LapsCount
@@ -140,21 +160,17 @@ namespace ViewCore.Entities
             get { return _isValid; }
         }
 
-        //private string _details = "This is an amazingly long string";
-        //public string Details
-        //{
-        //    get { return _details; }
-        //    set { SetProperty(ref _details, value); }
-        //}
-
         #endregion
 
         #region Commands and events
-        private void OnSaveDistance()
+        private async void OnSaveDistanceAsync()
         {
             bool result = ValidateDistance();
             if (result)
+            {
+                await _distanceRepository.UpdateAsync(this.DbEntity);
                 MessageBox.Show("Dystans został poprawnie zapisany");
+            }
         }
 
         private void OnDeleteDistance()

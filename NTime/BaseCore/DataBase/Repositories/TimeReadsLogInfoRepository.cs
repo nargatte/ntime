@@ -7,11 +7,11 @@ using BaseCore.Csv;
 
 namespace BaseCore.DataBase
 {
-    public class TimeReadsLogInofRepository : Repository<TimeReadsLogInfo>
+    public class TimeReadsLogInfoRepository : Repository<TimeReadsLogInfo>
     {
         protected Gate Gate { get; }
 
-        public TimeReadsLogInofRepository(IContextProvider contextProvider, Gate gate) : base(contextProvider)
+        public TimeReadsLogInfoRepository(IContextProvider contextProvider, Gate gate) : base(contextProvider)
         {
             Gate = gate;
         }
@@ -24,7 +24,7 @@ namespace BaseCore.DataBase
 
         protected override void CheckItem(TimeReadsLogInfo item)
         {
-            if(item.GateId == Gate.Id) throw new ArgumentException("Wrong GateId");
+            if (item.GateId == Gate.Id) throw new ArgumentException("Wrong GateId");
         }
 
         protected override void PrepareToAdd(TimeReadsLogInfo item)

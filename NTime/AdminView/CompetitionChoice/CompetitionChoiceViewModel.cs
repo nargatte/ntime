@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using BaseCore.DataBase;
 using MvvmHelper;
 using ViewCore;
+using ViewCore.Entities;
 
 namespace AdminView.CompetitionChoice
 {
@@ -97,14 +98,16 @@ namespace AdminView.CompetitionChoice
         private void NavToAddCompetitionView()
         {
             AddCompetition.AddCompetitionViewModel addCompetitionViewModel = new AddCompetition.AddCompetitionViewModel();
-            addCompetitionViewModel.AddCompetitionRequested += OnCompetitionAdded;
+            addCompetitionViewModel.AddCompetitionRequested += OnCompetitionAddedAsync;
             addCompetitionViewModel.ShowWindow();
         }
 
-        private void OnCompetitionAdded(object sender, EventArgs e)
+        private async void OnCompetitionAddedAsync(object sender, EventArgs e)
         {
             var addCompetitionViewModel = sender as AddCompetition.AddCompetitionViewModel;
-            Competitions.Add(addCompetitionViewModel.NewCompetition);
+            EditableCompetition competitionToAdd = addCompetitionViewModel.NewCompetition;
+            Competitions.Add(competitionToAdd);
+            await _competitionRepository.AddAsync(competitionToAdd.DbEntity);
         }
 
         private void OnDisplayAddCompetitionView()

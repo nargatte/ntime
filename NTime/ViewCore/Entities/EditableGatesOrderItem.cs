@@ -17,32 +17,25 @@ namespace ViewCore.Entities
             DefinedGates = definedGates;
         }
 
-
-        //public int Number
-        //{
-        //    get { return GateOrderItem.Number; }
-        //    set { GateOrderItem.Number = SetProperty(GateOrderItem.Number, value); }
-        //}
-
-        //public EditableGate Gate
-        //{
-        //    get { return DbEntity.Gate; }
-        //    set { DbEntity.Gate = SetProperty(DbEntity.Gate, value); }
-        //}
-
-
         public IEditableGate Gate
         {
-            get { return DefinedGates.FirstOrDefault(g => g.DbEntity == DbEntity.Gate); }
-            set { DbEntity.Gate = SetProperty(DbEntity.Gate, value.DbEntity); }
+            get
+            {
+                var temp = DefinedGates.FirstOrDefault(g => g.DbEntity == DbEntity.Gate);
+                return temp;
+            }
+            set
+            {
+                DbEntity.Gate = SetProperty(DbEntity.Gate, value.DbEntity);
+                DbEntity.Gate.Number = SetProperty(DbEntity.Gate.Number, value.DbEntity.Number, "Number");
+                UpdateGatesOrderItem();
+            }
         }
-        //private EditableGate _gate = new EditableGate(new LogsInfo());
-        //public EditableGate Gate
-        //{
-        //    get { return _gate; }
-        //    set { SetProperty(ref _gate, value); }
-        //}
 
+        private void UpdateGatesOrderItem()
+        {
+            UpdateGatesOrderItemRequested(this, EventArgs.Empty);
+        }
 
         public decimal MinTimeBefore
         {
@@ -61,7 +54,7 @@ namespace ViewCore.Entities
         public ObservableCollection<IEditableGate> DefinedGates
         {
             get { return _definedGates; }
-            set { SetProperty(ref _definedGates, value);}
+            set { SetProperty(ref _definedGates, value); }
         }
 
         private bool _isTimeCollapsed;
@@ -70,5 +63,7 @@ namespace ViewCore.Entities
             get { return _isTimeCollapsed; }
             set { SetProperty(ref _isTimeCollapsed, value); }
         }
+
+        public event EventHandler UpdateGatesOrderItemRequested = delegate { };
     }
 }

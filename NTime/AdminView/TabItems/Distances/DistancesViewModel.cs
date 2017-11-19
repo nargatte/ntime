@@ -8,55 +8,103 @@ using System.Threading.Tasks;
 using MvvmHelper;
 using ViewCore;
 using BaseCore.DataBase;
+using ViewCore.Entities;
+using System.Linq;
 
 namespace AdminView.Distances
 {
     class DistancesViewModel : TabItemViewModel
     {
-        ViewCore.Entities.ILogsInfo logsInfo;
-        public DistancesViewModel(ViewCore.Entities.IEditableCompetition currentCompetition) : base(currentCompetition)
+        ILogsInfo _logsInfo;
+        public DistancesViewModel(IEditableCompetition currentCompetition) : base(currentCompetition)
         {
             ViewLoadedCmd = new RelayCommand(OnViewLoaded);
-            AddMeasurementPointCmd = new RelayCommand(OnAddMeasurementPoint);
+            AddMeasurementPointCmd = new RelayCommand(OnAddGateAsync);
             AddDistanceCmd = new RelayCommand(OnAddDistance);
             TabTitle = "Dystanse";
-            logsInfo = new ViewCore.Entities.LogsInfo();
+            _logsInfo = new LogsInfo();
         }
 
         private void OnViewLoaded()
         {
+            InitializeCollections();
+            DownloadGatesInfoFromDatabaseAsync();
             DownloadDistancesFromDatabase();
+        }
+
+        private void InitializeCollections()
+        {
+            DefinedGates = new ObservableCollection<IEditableGate>();
+            Distances = new ObservableCollection<EditableDistance>();
+        }
+
+        private async void DownloadGatesInfoFromDatabaseAsync()
+        {
+            ContextProvider contextProvider = new ContextProvider();
+            var dbGates = await _gateRepository.GetAllAsync();
+            foreach (var dbGate in dbGates)
+            {
+                var gateToAdd = new EditableGate(_logsInfo)
+                {
+                    DbEntity = dbGate,
+                    AssignedLogs = new ObservableCollection<EditableTimeReadsLogInfo>()
+                };
+                var logRepository = new TimeReadsLogInfoRepository(contextProvider, dbGate);
+                var logs = await logRepository.GetAllAsync();
+                AddGateToGUI(gateToAdd);
+                foreach (var log in logs)
+                {
+                    var logToAdd = new EditableTimeReadsLogInfo(_logsInfo)
+                    {
+                        DbEntity = log
+                    };
+                    gateToAdd.AddLogToGUI(logToAdd);
+                }
+            }
         }
 
         private async void DownloadDistancesFromDatabase()
         {
-            var repository = new DistanceRepository(new ContextProvider(), _currentCompetition.DbEntity);
-            var dbDistances = await repository.GetAllAsync();
+            ContextProvider contextProvider = new ContextProvider();
+            var dbDistances = await _distanceRepository.GetAllAsync();
             foreach (var dbDistance in dbDistances)
             {
-                Distances.Add(new ViewCore.Entities.EditableDistance(logsInfo, _definedGates) { DbEntity = dbDistance });
+                EditableDistance distanceToAdd = new EditableDistance(_logsInfo, _definedGates)
+                {
+                    DbEntity = dbDistance,
+                    GatesOrderItems = new ObservableCollection<EditableGatesOrderItem>()
+                };
+                var gateOrderRepository = new GateOrderItemRepository(contextProvider, dbDistance);
+                var dbGateOrderItems = await gateOrderRepository.GetAllAsync();
+                foreach (var dbGateOrderItem in dbGateOrderItems)
+                {
+                    distanceToAdd.GatesOrderItems.Add(new EditableGatesOrderItem(_definedGates)
+                    {
+                        DbEntity = dbGateOrderItem
+                    });
+                }
+                AddDistanceToGUI(distanceToAdd);
             }
         }
 
-        private void OnAddMeasurementPoint()
+
+        private async void OnAddGateAsync()
         {
-            if (CanAddMeasurementPoint())
+            if (CanAddGate())
             {
-                var GateNumber = int.Parse(NewGateNumber);
-                var GateToAdd = new ViewCore.Entities.EditableGate(logsInfo)
+                var gateNumber = int.Parse(NewGateNumber);
+                var gateToAdd = new EditableGate(_logsInfo)
                 {
                     DbEntity = new Gate()
                     {
-                        Number = GateNumber,
+                        Number = gateNumber,
                         Name = NewGateName,
-                        //AssignedLogs = new ObservableCollection<ViewCore.Entities.EditableTimeReadsLogInfo>();
-                    }
+                    },
+                    AssignedLogs = new ObservableCollection<EditableTimeReadsLogInfo>()
                 };
-                GateToAdd.DeleteRequested += Gate_DeleteRequested;
-                DefinedGates.Add(GateToAdd);
-                logsInfo.GatesNumbers.Add(GateNumber);
-                NewGateNumber = (GateNumber + 1).ToString();
-                NewGateName = "";
+                AddGateToGUI(gateToAdd);
+                await _gateRepository.AddAsync(gateToAdd.DbEntity);
+
             }
             else
             {
@@ -65,66 +113,86 @@ namespace AdminView.Distances
 
         }
 
-        private void Gate_DeleteRequested(object sender, EventArgs e)
+        private void AddGateToGUI(EditableGate gateToAdd)
         {
-            var GateToDelete = sender as ViewCore.Entities.EditableGate;
-            foreach (var log in GateToDelete.AssignedLogs)
-            {
-                logsInfo.LogsNumbers.Remove(log.LogNumber);
-            }
-            logsInfo.GatesNumbers.Remove(GateToDelete.Number);
-            DefinedGates.Remove(GateToDelete);
+            gateToAdd.DeleteRequested += Gate_DeleteRequestedAsync;
+            DefinedGates.Add(gateToAdd);
+            _logsInfo.GatesNumbers.Add(gateToAdd.Number);
+            NewGateNumber = (gateToAdd.Number + 1).ToString();
+            NewGateName = "";
         }
 
+        private async void Gate_DeleteRequestedAsync(object sender, EventArgs e)
+        {
+            var gateToDelete = sender as EditableGate;
+            foreach (var log in gateToDelete.AssignedLogs)
+            {
+                _logsInfo.LogsNumbers.Remove(log.LogNumber);
+            }
+            _logsInfo.GatesNumbers.Remove(gateToDelete.Number);
+            DefinedGates.Remove(gateToDelete);
+            await _gateRepository.RemoveAsync(gateToDelete.DbEntity);
+        }
 
-        private bool CanAddMeasurementPoint()
+        private bool CanAddGate()
         {
             if (!int.TryParse(NewGateNumber, out int number))
                 return false;
             if (string.IsNullOrWhiteSpace(NewGateName))
                 return false;
-            if (logsInfo.GatesNumbers.Contains(number))
+            if (_logsInfo.GatesNumbers.Contains(number))
                 return false;
             return true;
         }
 
-        private void OnAddDistance()
+        private async void OnAddDistance()
         {
             if (CanAddDistance(out string errorMessage))
             {
-                var distance = new ViewCore.Entities.EditableDistance(logsInfo, _definedGates) { Name = NewDistanceName };
-                logsInfo.DistancesNames.Add(distance.Name);
-                distance.DeleteRequested += Distance_DeleteRequested;
-                Distances.Add(distance);
+                var distanceToAdd = new EditableDistance(_logsInfo, _definedGates)
+                {
+                    Name = NewDistanceName,
+                    DbEntity = new Distance()
+                };
+                AddDistanceToGUI(distanceToAdd);
+                await _distanceRepository.AddAsync(distanceToAdd.DbEntity);
             }
             else
             {
                 System.Windows.MessageBox.Show(errorMessage);
             }
-            
+
         }
 
-        private void Distance_DeleteRequested(object sender, EventArgs e)
+        private void AddDistanceToGUI(EditableDistance distanceToAdd)
         {
-            var distanceToDelete = sender as ViewCore.Entities.EditableDistance;
-            logsInfo.DistancesNames.Remove(distanceToDelete.Name);
+            _logsInfo.DistancesNames.Add(distanceToAdd.Name);
+            distanceToAdd.DeleteRequested += Distance_DeleteRequested;
+            Distances.Add(distanceToAdd);
+        }
+
+        private async void Distance_DeleteRequested(object sender, EventArgs e)
+        {
+            var distanceToDelete = sender as EditableDistance;
+            _logsInfo.DistancesNames.Remove(distanceToDelete.Name);
+            await _distanceRepository.RemoveAsync(distanceToDelete.DbEntity);
             Distances.Remove(distanceToDelete);
         }
 
         private bool CanAddDistance(out string errorMessage)
         {
             errorMessage = "";
-            if(string.IsNullOrWhiteSpace(NewDistanceName))
+            if (string.IsNullOrWhiteSpace(NewDistanceName))
             {
                 errorMessage = "Nazwa dystansu nie może być pusta";
                 return false;
             }
-            if(NewDistanceName != NewDistanceName.ToUpper())
+            if (NewDistanceName != NewDistanceName.ToUpper())
             {
                 errorMessage = "Nazwa dystansu może zawierać tylko wielkie litery";
                 return false;
             }
-            if (logsInfo.DistancesNames.Contains(NewDistanceName))
+            if (_logsInfo.DistancesNames.Contains(NewDistanceName))
             {
                 errorMessage = "Taka nazwa dystansu już istnieje";
                 return false;
@@ -134,16 +202,16 @@ namespace AdminView.Distances
 
         #region Properties
 
-        private ObservableCollection<ViewCore.Entities.IEditableGate> _definedGates = new ObservableCollection<ViewCore.Entities.IEditableGate>();
-        public ObservableCollection<ViewCore.Entities.IEditableGate> DefinedGates
+        private ObservableCollection<IEditableGate> _definedGates;
+        public ObservableCollection<IEditableGate> DefinedGates
         {
             get { return _definedGates; }
             set { SetProperty(ref _definedGates, value); }
         }
 
 
-        private ObservableCollection<ViewCore.Entities.EditableDistance> _distances = new ObservableCollection<ViewCore.Entities.EditableDistance>();
-        public ObservableCollection<ViewCore.Entities.EditableDistance> Distances
+        private ObservableCollection<EditableDistance> _distances;
+        public ObservableCollection<EditableDistance> Distances
         {
             get { return _distances; }
             set { SetProperty(ref _distances, value); }

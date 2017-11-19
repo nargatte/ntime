@@ -71,15 +71,15 @@
     <Compile Include="DataBase\Entities\GateOrderItem.cs" />
     <Compile Include="DataBase\Entities\ICompetitionId.cs" />
     <Compile Include="DataBase\Entities\IEntityId.cs" />
-    <Compile Include="DataBase\Entities\TimeReadsLogInfo.cs" />
     <Compile Include="DataBase\Entities\Player.cs" />
     <Compile Include="DataBase\Entities\TimeRead.cs" />
+    <Compile Include="DataBase\Entities\TimeReadsLogInfo.cs" />
     <Compile Include="DataBase\Entities\TimeReadType.cs" />
     <Compile Include="DataBase\Enums\DistanceTypeEnum.cs" />
     <Compile Include="DataBase\Enums\EnumBindingSourceExtension.cs" />
     <Compile Include="DataBase\Enums\EnumDescriptionTypeConverter.cs" />
     <Compile Include="DataBase\Repositories\GateRepository.cs" />
-    <Compile Include="DataBase\Repositories\TimeReadsLogInofRepository.cs" />
+    <Compile Include="DataBase\Repositories\TimeReadsLogInfoRepository.cs" />
     <Compile Include="PlayerFilter\PlayerSort.cs" />
     <Compile Include="DataBase\Contexts\NTimeDBContext.cs" />
     <Compile Include="DataBase\Contexts\NTimeDBInitializer.cs" />
