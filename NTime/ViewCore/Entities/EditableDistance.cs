@@ -91,7 +91,7 @@ namespace ViewCore.Entities
                         };
                         gateOrderItem.UpdateGatesOrderItemRequested += GateOrderItem_UpdateGatesOrderItemRequestedAsync;
                         GatesOrderItems.Add(gateOrderItem);
-                        await _gateOrderItemRepository.AddAsync(gateOrderItem.DbEntity);
+                        //await _gateOrderItemRepository.AddAsync(gateOrderItem.DbEntity);
                     }
                 }
                 else if (diff < 0)
@@ -100,9 +100,10 @@ namespace ViewCore.Entities
                     {
                         var gateOrderItem = GatesOrderItems.Last();
                         GatesOrderItems.Remove(gateOrderItem);
-                        await _gateOrderItemRepository.RemoveAsync(gateOrderItem.DbEntity);
+                        //await _gateOrderItemRepository.RemoveAsync(gateOrderItem.DbEntity);
                     }
                 }
+                await _gateOrderItemRepository.ReplaceByAsync(GatesOrderItems.Select(goi => new Tuple<GatesOrderItem, Gate>(goi.DbEntity, goi.Gate?.DbEntity)));
             }
             else
             {

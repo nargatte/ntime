@@ -33,21 +33,41 @@ namespace BaseCore.DataBase
             item.Distance = null;
         }
 
-        public async Task ReplaceBy(IEnumerable<GatesOrderItem> gatesOrder)
+        public Task<GatesOrderItem> AddAsync(GatesOrderItem gatesOrderItem, Gate gate)
+        {
+            gatesOrderItem.GateId = gate.Id;
+            gatesOrderItem.Gate = null;
+
+            return AddAsync(gatesOrderItem);
+        }
+
+        public Task UpdateAsync(GatesOrderItem gatesOrderItem, Gate gate)
+        {
+            gatesOrderItem.GateId = gate.Id;
+            gatesOrderItem.Gate = null;
+
+            return UpdateAsync(gatesOrderItem);
+        }
+
+        public async Task ReplaceByAsync(IEnumerable<Tuple<GatesOrderItem, Gate>> gatesOrder)
         {
             int c = 0;
-            foreach (GatesOrderItem item in gatesOrder)
+            foreach (Tuple<GatesOrderItem, Gate> item in gatesOrder)
             {
-                CheckNull(item);
-                PrepareToAdd(item);
-                item.OrderNumber = c;
+                CheckNull(item.Item1);
+                PrepareToAdd(item.Item1);
+
+                item.Item1.GateId = item.Item2?.Id;
+                item.Item1.Gate = null;
+
+                item.Item1.OrderNumber = c;
                 c++;
             }
 
             await ContextProvider.DoAsync(async ctx =>
             {
                 ctx.GatesOrder.RemoveRange(GetAllQuery(ctx.GatesOrder));
-                ctx.GatesOrder.AddRange(gatesOrder);
+                ctx.GatesOrder.AddRange(gatesOrder.Select(so => so.Item1));
                 await ctx.SaveChangesAsync();
             });
         }
