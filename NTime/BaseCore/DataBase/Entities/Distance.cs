@@ -13,7 +13,7 @@ namespace BaseCore.DataBase
 
         protected bool Equals(Distance other)
         {
-            return Id == other.Id;
+            return Id == other.Id && string.Equals(Name, other.Name) && Length == other.Length && StartTime.Equals(other.StartTime) && DistanceTypeId == other.DistanceTypeId && LapsCount == other.LapsCount && TimeLimit == other.TimeLimit;
         }
 
         public override bool Equals(object obj)
@@ -26,7 +26,17 @@ namespace BaseCore.DataBase
 
         public override int GetHashCode()
         {
-            return Id;
+            unchecked
+            {
+                var hashCode = Id;
+                hashCode = (hashCode * 397) ^ (Name != null ? Name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ Length.GetHashCode();
+                hashCode = (hashCode * 397) ^ StartTime.GetHashCode();
+                hashCode = (hashCode * 397) ^ DistanceTypeId;
+                hashCode = (hashCode * 397) ^ LapsCount;
+                hashCode = (hashCode * 397) ^ TimeLimit.GetHashCode();
+                return hashCode;
+            }
         }
 
         public Distance(string name, decimal length, DateTime startTime, DistanceTypeEnum distanceTypeEnum)

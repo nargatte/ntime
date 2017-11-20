@@ -138,7 +138,7 @@ namespace AdminView.Players
         private void Player_UpdateRequested(object sender, EventArgs e)
         {
             var playerToUpdate = sender as EditablePlayer;
-            _playerRepository.UpdateAsync(playerToUpdate.DbEntity);
+            Task.WaitAll(_playerRepository.UpdateAsync(playerToUpdate.DbEntity, playerToUpdate.DbEntity.Distance, playerToUpdate.DbEntity.ExtraPlayerInfo));
         }
 
         private async void OnAddPlayerAsync()

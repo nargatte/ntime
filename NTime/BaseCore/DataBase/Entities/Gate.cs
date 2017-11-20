@@ -12,7 +12,7 @@ namespace BaseCore.DataBase
 
         protected bool Equals(Gate other)
         {
-            return Id == other.Id;
+            return Id == other.Id && string.Equals(Name, other.Name) && Number == other.Number;
         }
 
         public override bool Equals(object obj)
@@ -25,7 +25,13 @@ namespace BaseCore.DataBase
 
         public override int GetHashCode()
         {
-            return Id;
+            unchecked
+            {
+                var hashCode = Id;
+                hashCode = (hashCode * 397) ^ (Name != null ? Name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ Number;
+                return hashCode;
+            }
         }
 
         public Gate(string name, int number)

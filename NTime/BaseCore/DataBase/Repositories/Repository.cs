@@ -54,6 +54,7 @@ namespace BaseCore.DataBase
                 ctx.Entry(item).State = EntityState.Modified;
                 await ctx.SaveChangesAsync();
             });
+            
         }
 
         public virtual Task UpdateRangeAsync(IEnumerable<T> items)
@@ -122,6 +123,16 @@ namespace BaseCore.DataBase
             await ContextProvider.DoAsync(async ctx =>
             {
                 item = await GetIncludeQuery(GetAllQuery(ctx.Set<T>())).AsNoTracking<T>().FirstOrDefaultAsync(i => i.Id == id);
+            });
+            return item;
+        }
+
+        public async Task<T> GetByEntity(T e)
+        {
+            T item = null;
+            await ContextProvider.DoAsync(async ctx =>
+            {
+                item = await GetIncludeQuery(GetAllQuery(ctx.Set<T>())).AsNoTracking<T>().FirstOrDefaultAsync(i => i.Id == e.Id);
             });
             return item;
         }
