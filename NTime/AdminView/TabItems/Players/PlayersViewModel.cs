@@ -18,10 +18,18 @@ namespace AdminView.Players
         public PlayersViewModel(IEditableCompetition currentCompetition) : base(currentCompetition)
         {
             ViewLoadedCmd = new RelayCommand(OnViewLoadedAsync);
-            AddPlayerCmd = new RelayCommand(OnAddPlayer);
+            AddPlayerCmd = new RelayCommand(OnAddPlayerAsync);
             DeleteAllPlayersCmd = new RelayCommand(OnDeleteAllPlayersRequestedAsync);
             ReadPlayersFromCsvCmd = new RelayCommand(OnReadPlayersFromCsvAsync);
             TabTitle = "Zawodnicy";
+            //NewPlayer = new EditablePlayer(_currentCompetition)
+            //{
+            //    DbEntity = new Player()
+            //    {
+            //        Distance = new Distance(),
+            //        ExtraPlayerInfo = new ExtraPlayerInfo()
+            //    }
+            //};
         }
 
         #region Properties
@@ -115,11 +123,44 @@ namespace AdminView.Players
             }
         }
 
-        //TODO
-        private void OnAddPlayer()
+        private async void OnAddPlayerAsync()
         {
-            Players.Add(NewPlayer);
-            NewPlayer = new EditablePlayer(_currentCompetition);
+            if (CanAddPlayer(NewPlayer, out string message))
+            {
+                //NewPlayer = new EditablePlayer(_currentCompetition, DefinedDistances, DefinedExtraPlayerInfo)
+                //{
+                //    DbEntity = new Player()
+                //};
+                await _playerRepository.AddAsync(NewPlayer.DbEntity, NewPlayer.DbEntity.Distance, NewPlayer.DbEntity.ExtraPlayerInfo);
+                Players.Add(NewPlayer);
+            }
+            else
+            {
+                MessageBox.Show(message);
+            }
+
+        }
+
+        private bool CanAddPlayer(EditablePlayer newPlayer, out string message)
+        {
+            message = "";
+            if (String.IsNullOrWhiteSpace(newPlayer.LastName))
+            {
+                message = "Nazwisko nie może być puste";
+                return false;
+            }
+            if (newPlayer.StartTime < new DateTime(2000, 1, 1))
+            {
+                message = "Nieprawidłowy czas startu zawodnika";
+                return false;
+            }
+            //if(newPlayer.Distance == null)
+            //{
+            //    message = "Nie przypisano żadnego dystansu";
+            //    return false;
+            //}
+
+            return true;
         }
 
         private async void OnReadPlayersFromCsvAsync()
@@ -167,7 +208,18 @@ namespace AdminView.Players
             await DownloadExtraPlayerInfoAsync();
             //await DownloadAllPlayers();
             await AddPlayersFromDatabaseAndDisplay(new PlayerFilterOptions(), 0, 50, true);
-            _newPlayer = new EditablePlayer(_currentCompetition, DefinedDistances, DefinedExtraPlayerInfo);
+            NewPlayer = new EditablePlayer(_currentCompetition, DefinedDistances, DefinedExtraPlayerInfo)
+            {
+                //Distance = new EditableDistance(_currentCompetition),
+                //ExtraPlayerInfo = new EditableExtraPlayerInfo(_currentCompetition)
+                DbEntity = new Player()
+                {
+                    Distance = new Distance(),
+                    ExtraPlayerInfo = new ExtraPlayerInfo(),
+                    StartTime = DateTime.Today,
+                    BirthDate= DateTime.Today
+                }
+            };
         }
 
 

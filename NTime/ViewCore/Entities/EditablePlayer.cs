@@ -13,9 +13,16 @@ namespace ViewCore.Entities
     public class EditablePlayer : EditableBaseClass<Player>
     {
 
-        public EditablePlayer(IEditableCompetition currentComptetition) : base(currentComptetition) { }
+        public EditablePlayer(IEditableCompetition currentComptetition) : base(currentComptetition)
+        {
+            if (StartTime == null || StartTime < new DateTime(2000, 1, 1))
+                StartTime = DateTime.Today;
+            if (BirthDate == null || BirthDate < new DateTime(2000, 1, 1))
+                BirthDate = DateTime.Today;
+        }
 
-        public EditablePlayer(IEditableCompetition currentComptetition, ICollection<EditableDistance> distances, ICollection<EditableExtraPlayerInfo> extraPlayerInfos) : base(currentComptetition)
+        public EditablePlayer(IEditableCompetition currentComptetition, ICollection<EditableDistance> distances,
+            ICollection<EditableExtraPlayerInfo> extraPlayerInfos) : this(currentComptetition)
         {
             DefinedDistances = new ObservableCollection<EditableDistance>(distances);
             DefinedExtraPlayerInfo = new ObservableCollection<EditableExtraPlayerInfo>(extraPlayerInfos);
