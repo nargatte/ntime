@@ -91,12 +91,17 @@ namespace BaseCoreTests
                 new Tuple<GatesOrderItem, Gate>(new GatesOrderItem(1800), g1)
             });
 
+            TimeProcess timeProcess = new TimeProcess(com);
+
             await pr.ImportPlayersAsync(
                 pathToexport + "Zawodnicy.csv");
+            await timeProcess.ProcessAllAsync();
             await pr.ImportTimeReadsAsync(
                 pathToexport + "log1.csv", g1);
+            await timeProcess.ProcessAllAsync();
             await pr.ImportTimeReadsAsync(
                 pathToexport + "log2.csv", g1);
+            await timeProcess.ProcessAllAsync();
             await pr.ImportTimeReadsAsync(
                 pathToexport + "log3.csv", g2);
             //await pr.ImportTimeReadsAsync(
@@ -107,7 +112,6 @@ namespace BaseCoreTests
             var p = (await pr.GetAllByFilterAsync(
                 pfo, 0, 1)).Item1[0];
 
-            TimeProcess timeProcess = new TimeProcess(com);
             //await timeProcess.ProcessSingleAsync(p);
             await timeProcess.ProcessAllAsync();
 
@@ -119,7 +123,6 @@ namespace BaseCoreTests
                 PlayerSort = PlayerSort.ByRank,
                 CompleatedCompetition = true,
                 HasVoid = false,
-                Invalid = false,
                 WithoutStartTime = false,
                 
             };

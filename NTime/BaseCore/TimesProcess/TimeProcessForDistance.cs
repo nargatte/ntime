@@ -76,15 +76,9 @@ namespace BaseCore.TimesProcess
 
         private Task UpdateVoids()
         {
-            HashSet<TimeRead> voidsInDb = new HashSet<TimeRead>(TimeReads.Where(t => t.TimeReadTypeEnum == TimeReadTypeEnum.Void));
-            HashSet<TimeRead> voidsToRemove = new HashSet<TimeRead>(voidsInDb.Where(t => !ExistVoids.Contains(t)));
-            HashSet<TimeRead> voidsToAdd = new HashSet<TimeRead>(ExistVoids.Where(t => !voidsInDb.Contains(t)));
-
             TimeReadRepository readRepository = new TimeReadRepository(new ContextProvider(), Player);
-            Task t1 = readRepository.AddRangeAsync(voidsToAdd);
-            Task t2 = readRepository.RemoveRangeAsync(voidsToRemove);
+            return readRepository.AddRangeAsync(ExistVoids);
 
-            return Task.WhenAll(t1, t2);
         }
 
         private Task UpdatePlayer()
@@ -178,8 +172,14 @@ namespace BaseCore.TimesProcess
 
         private async Task Initialize()
         {
+            await RemoveVoids();
             await LoadTimeReads();
             LoadStartTime();
+        }
+
+        private Task RemoveVoids()
+        {
+            return new TimeReadRepository(new ContextProvider(), Player).RemoveVoidsAsync();
         }
     }
 }

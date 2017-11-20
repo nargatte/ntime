@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BaseCore.DataBase
 {
@@ -33,5 +34,15 @@ namespace BaseCore.DataBase
 
         protected override IQueryable<TimeRead> GetIncludeQuery(IQueryable<TimeRead> items) =>
         items.Include(i => i.Gate);
+
+        public Task RemoveVoidsAsync() =>
+            ContextProvider.DoAsync(async ctx =>
+            {
+                ctx.TimeReads.RemoveRange(
+                    ctx.TimeReads.Where(t => t.PlayerId == Player.Id &&
+                                             t.TimeReadTypeId == (int) TimeReadTypeEnum.Void));
+                await ctx.SaveChangesAsync();
+            });
+
     }
 }
