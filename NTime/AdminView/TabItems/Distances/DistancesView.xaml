@@ -173,7 +173,8 @@
                                                 <TextBlock Text="Czas"/>
                                                 <TextBox Text="{Binding MinTimeBefore}"/>
                                             </StackPanel>
-                                            <Expander Header="{Binding}" Background="#DC0" Margin="2,0,2,0" >
+                                            <!--<Expander Header="{Binding}" Background="#DC0" Margin="2,0,2,0" >-->
+                                            <Expander Background="#DC0" Margin="2,0,2,0" >
                                                 <Expander.HeaderTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Text="{Binding Gate, Converter={StaticResource gateToNumberConverter}}" FontWeight="Bold"/>
@@ -251,9 +252,10 @@
                                                 ItemsSource="{Binding Source={db:EnumBindingSource {x:Type db:DistanceTypeEnum}}}">
                             
                         </DataGridComboBoxColumn>-->
-                        <DataGridTextColumn Header="Liczba bramek" Binding="{Binding GatesCount, UpdateSourceTrigger=LostFocus}"  Width="Auto">
+                        <DataGridTextColumn x:Name="gatesCountColumn" Header="Liczba bramek" Binding="{Binding GatesCount, UpdateSourceTrigger=LostFocus}"  Width="Auto"/>
+                        <DataGridTextColumn x:Name="lapsCountColumn" Header="Liczba okrążeń" Binding="{Binding LapsCount, UpdateSourceTrigger=LostFocus, Mode=OneWay}"
+                                            Visibility="{Binding IsLapsCountCollapsed, Converter={StaticResource boolToCollapsedConverter}, Mode=OneWay}"  Width="Auto"/>
 
-                        </DataGridTextColumn>
                         <DataGridTemplateColumn Header="Czas startu">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -280,7 +282,6 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridCheckBoxColumn Selector.IsSelected="{Binding IsValid}" IsReadOnly="True"/>
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
