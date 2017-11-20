@@ -32,20 +32,32 @@ namespace ViewCore.Entities
         public int StartNumber
         {
             get { return DbEntity.StartNumber; }
-            set { DbEntity.StartNumber = SetProperty(DbEntity.StartNumber, value); }
+            set
+            {
+                DbEntity.StartNumber = SetProperty(DbEntity.StartNumber, value);
+                OnUpdateRequested();
+            }
         }
 
         public string FirstName
         {
             get { return DbEntity.FirstName; }
-            set { DbEntity.FirstName = SetProperty(DbEntity.FirstName, value); }
+            set
+            {
+                DbEntity.FirstName = SetProperty(DbEntity.FirstName, value);
+                OnUpdateRequested();
+            }
         }
 
 
         public string LastName
         {
             get { return DbEntity.LastName; }
-            set { DbEntity.LastName = SetProperty(DbEntity.LastName, value); }
+            set
+            {
+                DbEntity.LastName = SetProperty(DbEntity.LastName, value);
+                OnUpdateRequested();
+            }
         }
 
         //Some notifiers might be necessary
@@ -53,40 +65,60 @@ namespace ViewCore.Entities
         {
             get
             {
-                var temp = DefinedDistances.FirstOrDefault(dist => dist.DbEntity == DbEntity.Distance);
+                var temp = DefinedDistances.FirstOrDefault(dist => dist.DbEntity.Id == DbEntity.Distance.Id);
                 return temp;
             }
-            set { DbEntity.Distance = SetProperty(DbEntity.Distance, value.DbEntity); }
+            set
+            {
+                DbEntity.Distance = SetProperty(DbEntity.Distance, value.DbEntity);
+                OnUpdateRequested();
+            }
         }
 
         public EditableExtraPlayerInfo ExtraPlayerInfo
         {
             get
             {
-                var temp = DefinedExtraPlayerInfo.FirstOrDefault(info => info.DbEntity == DbEntity.ExtraPlayerInfo);
+                var temp = DefinedExtraPlayerInfo.FirstOrDefault(info => info.DbEntity.Id == DbEntity.ExtraPlayerInfo.Id);
                 return temp;
             }
-            set { DbEntity.ExtraPlayerInfo = SetProperty(DbEntity.ExtraPlayerInfo, value.DbEntity); }
+            set
+            {
+                DbEntity.ExtraPlayerInfo = SetProperty(DbEntity.ExtraPlayerInfo, value.DbEntity);
+                OnUpdateRequested();
+            }
         }
 
         public DateTime BirthDate
         {
             get { return DbEntity.BirthDate; }
-            set { DbEntity.BirthDate = SetProperty(DbEntity.BirthDate, value); }
+            set
+            {
+                DbEntity.BirthDate = SetProperty(DbEntity.BirthDate, value);
+                OnUpdateRequested();
+            }
         }
 
 
         public DateTime? StartTime
         {
             get { return DbEntity.StartTime; }
-            set { DbEntity.StartTime = SetProperty(DbEntity.StartTime, value); }
+            set
+            {
+                DbEntity.StartTime = SetProperty(DbEntity.StartTime, value);
+                OnUpdateRequested();
+            }
         }
 
 
         public string Team
         {
             get { return DbEntity.Team; }
-            set { DbEntity.Team = SetProperty(DbEntity.Team, value); }
+            set
+            {
+                DbEntity.Team = SetProperty(DbEntity.Team, value);
+                OnUpdateRequested();
+            }
         }
 
 
@@ -94,13 +126,21 @@ namespace ViewCore.Entities
         public string PhoneNumber
         {
             get { return DbEntity.PhoneNumber; }
-            set { DbEntity.PhoneNumber = SetProperty(DbEntity.PhoneNumber, value); }
+            set
+            {
+                DbEntity.PhoneNumber = SetProperty(DbEntity.PhoneNumber, value);
+                OnUpdateRequested();
+            }
         }
 
         public bool IsMale
         {
             get { return DbEntity.IsMale; }
-            set { DbEntity.IsMale = SetProperty(DbEntity.IsMale, value); }
+            set
+            {
+                DbEntity.IsMale = SetProperty(DbEntity.IsMale, value);
+                OnUpdateRequested();
+            }
         }
 
         public string FullCategory
@@ -157,5 +197,12 @@ namespace ViewCore.Entities
         {
             return this.MemberwiseClone();
         }
+
+        protected void OnUpdateRequested()
+        {
+            UpdateRequested?.Invoke(this, EventArgs.Empty);
+        }
+
+        public event EventHandler UpdateRequested = delegate { };
     }
 }

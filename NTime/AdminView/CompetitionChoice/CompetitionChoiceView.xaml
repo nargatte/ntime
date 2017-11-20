@@ -38,7 +38,7 @@
                 <TextBlock Text="Stwórz nowe zawody" TextWrapping="Wrap" TextAlignment="Center" FontWeight="Bold"/>
             </Button>
             <TextBlock Margin="10" Text="Wybierz istniejące zawody" HorizontalAlignment="Center" FontSize="16"/>
-            <ComboBox ItemsSource="{Binding Competitions}" SelectedItem="{Binding SelectedCompetition}">
+            <ComboBox ItemsSource="{Binding Competitions}" SelectedItem="{Binding SelectedCompetition, UpdateSourceTrigger=PropertyChanged}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Converter={StaticResource CompetitionToStringConverter}, FallbackValue={}}"/>

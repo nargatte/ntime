@@ -21,6 +21,7 @@ namespace AdminView.Players
             AddPlayerCmd = new RelayCommand(OnAddPlayerAsync);
             DeleteAllPlayersCmd = new RelayCommand(OnDeleteAllPlayersRequestedAsync);
             ReadPlayersFromCsvCmd = new RelayCommand(OnReadPlayersFromCsvAsync);
+            UpdateFullCategoriesCmd = new RelayCommand(OnUpdateFullCategoriesAsync);
             TabTitle = "Zawodnicy";
             //NewPlayer = new EditablePlayer(_currentCompetition)
             //{
@@ -109,18 +110,25 @@ namespace AdminView.Players
         public RelayCommand ViewLoadedCmd { get; private set; }
         public RelayCommand ReadPlayersFromCsvCmd { get; set; }
         public RelayCommand DeleteAllPlayersCmd { get; set; }
+        public RelayCommand UpdateFullCategoriesCmd { get; set; }
 
         private void DisplayNewPlayers(Player[] dbPlayers)
         {
             foreach (var dbPlayer in dbPlayers)
             {
-                Players.Add(new EditablePlayer(_currentCompetition, DefinedDistances, DefinedExtraPlayerInfo)
+                var playerdToAdd = new EditablePlayer(_currentCompetition, DefinedDistances, DefinedExtraPlayerInfo)
                 {
                     DbEntity = dbPlayer,
-                    Distance = new EditableDistance(_currentCompetition),
-                    ExtraPlayerInfo = new EditableExtraPlayerInfo(_currentCompetition)
-                });
+                };
+                playerdToAdd.UpdateRequested += Player_UpdateRequested;
+                Players.Add(playerdToAdd);
             }
+        }
+
+        private void Player_UpdateRequested(object sender, EventArgs e)
+        {
+            var playerToUpdate = sender as EditablePlayer;
+            _playerRepository.UpdateAsync(playerToUpdate.DbEntity);
         }
 
         private async void OnAddPlayerAsync()
@@ -134,6 +142,7 @@ namespace AdminView.Players
                 await _playerRepository.AddAsync(playerToAdd.DbEntity, playerToAdd.DbEntity.Distance, playerToAdd.DbEntity.ExtraPlayerInfo);
                 playerToAdd.DbEntity.Distance = tempDistance;
                 playerToAdd.DbEntity.ExtraPlayerInfo = tempExtraPlayerInfo;
+                playerToAdd.UpdateRequested += Player_UpdateRequested;
                 Players.Add(playerToAdd);
                 ClearNewPlayer();
             }
@@ -185,6 +194,12 @@ namespace AdminView.Players
             await AddPlayersFromCsvToDatabase();
             await AddPlayersFromDatabaseAndDisplay(new PlayerFilterOptions(),
                 pageNumber: 0, numberOfItemsOnPage: 50);
+        }
+
+
+        private async void OnUpdateFullCategoriesAsync()
+        {
+            await _playerRepository.UpdateFullCategoryAllAsync();
         }
 
         private async Task AddPlayersFromCsvToDatabase()

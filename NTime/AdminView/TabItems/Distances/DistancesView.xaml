@@ -181,7 +181,7 @@
                                                 </Expander.HeaderTemplate>
                                                 <StackPanel Orientation="Vertical">
                                                     <TextBlock Text="Numer"/>
-                                                    <ComboBox Width="40"  ItemsSource="{Binding DefinedGates}" SelectedItem="{Binding Gate}">
+                                                    <ComboBox Width="40"  ItemsSource="{Binding DefinedGates}" SelectedItem="{Binding Gate, UpdateSourceTrigger=PropertyChanged}">
                                                         <ComboBox.ItemTemplate>
                                                             <DataTemplate>
                                                                 <TextBlock>
@@ -238,12 +238,14 @@
                         <DataGridTemplateColumn Header="Typ" Width="60">
                             <DataGridTemplateColumn.CellEditingTemplate>
                                 <DataTemplate>
-                                    <ComboBox Width="60" ItemsSource="{Binding Source={db:EnumBindingSource {x:Type db:DistanceTypeEnum}}}" SelectedItem="{Binding DistanceType}"/>
+                                    <ComboBox Width="60" ItemsSource="{Binding Source={db:EnumBindingSource {x:Type db:DistanceTypeEnum}}}"
+                                              SelectedItem="{Binding DistanceType, UpdateSourceTrigger=PropertyChanged}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellEditingTemplate>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <ComboBox Width="60" ItemsSource="{Binding Source={db:EnumBindingSource {x:Type db:DistanceTypeEnum}}}" SelectedItem="{Binding DistanceType}"/>
+                                    <ComboBox Width="60" ItemsSource="{Binding Source={db:EnumBindingSource {x:Type db:DistanceTypeEnum}}}"
+                                              SelectedItem="{Binding DistanceType, UpdateSourceTrigger=PropertyChanged}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
