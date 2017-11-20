@@ -50,30 +50,32 @@
                     <TextBox Text="{Binding Player.FullCategory}" Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>
                 </StackPanel>
             </StackPanel>
-            <DataGrid x:Name="playerDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Grid.Row="1"
+            <ScrollViewer >
+                <DataGrid x:Name="playerDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Grid.Row="1"
                   ItemsSource="{Binding Scores}" EnableRowVirtualization="True" AutoGenerateColumns="False"
                   ColumnWidth="*" SelectionMode="Extended" CanUserAddRows="False" >
-                <DataGrid.Columns>
-                    <DataGridTextColumn x:Name="distancePlaceColumn" Width="SizeToHeader" Header="M-ce Open" Binding="{Binding DistancePlaceNumber}"/>
-                    <DataGridTextColumn x:Name="categoryPlaceColumn" Width="SizeToHeader" Header="M-ce Kategoria" Binding="{Binding CategoryPlaceNumber}"/>
-                    <DataGridTextColumn x:Name="startNumberColumn" Width="SizeToHeader" Header="Numer" Binding="{Binding Player.StartNumber}"/>
-                    <DataGridTextColumn x:Name="firstNameColumn"  Header="Imię" Binding="{Binding Player.FirstName}"/>
-                    <DataGridTextColumn x:Name="lastNameColumn" Header="Nazwisko" Binding="{Binding Player.LastName}"/>
-                    <DataGridTextColumn x:Name="extraPlayerInfoIdColumn"  Header="Dodatkowe info" Binding="{Binding Player.ExtraPlayerInfo}"/>
-                    <DataGridTextColumn x:Name="teamColumn"  Header="Klub" Binding="{Binding Player.Team}"/>
-                    <DataGridTemplateColumn x:Name="birthDateColumn"  Header="Data urodzenia">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <DatePicker SelectedDate="{Binding Player.BirthDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTextColumn x:Name="fullCategoryColumn" Header="kategoria" Binding="{Binding Player.FullCategory}"/>
-                    <DataGridTextColumn x:Name="isMaleColumn" Width="SizeToHeader" Header="Płeć" Binding="{Binding Player.IsMale, Converter={StaticResource BoolToSexConverter}}"/>
-                    <DataGridTextColumn x:Name="lapsCountColumn" Width="SizeToHeader" Header="Okrążenia" Binding="{Binding LapsCount}"/>
-                    <DataGridTextColumn x:Name="timeColumn"  Header="Czas" Binding="{Binding Time}"/>
-                </DataGrid.Columns>
-            </DataGrid>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="distancePlaceColumn" Width="SizeToHeader" Header="M-ce Open" Binding="{Binding DistancePlaceNumber}"/>
+                        <DataGridTextColumn x:Name="categoryPlaceColumn" Width="SizeToHeader" Header="M-ce Kategoria" Binding="{Binding CategoryPlaceNumber}"/>
+                        <DataGridTextColumn x:Name="startNumberColumn" Width="SizeToHeader" Header="Numer" Binding="{Binding Player.StartNumber}"/>
+                        <DataGridTextColumn x:Name="firstNameColumn"  Header="Imię" Binding="{Binding Player.FirstName}"/>
+                        <DataGridTextColumn x:Name="lastNameColumn" Header="Nazwisko" Binding="{Binding Player.LastName}"/>
+                        <DataGridTextColumn x:Name="extraPlayerInfoIdColumn"  Header="Dodatkowe info" Binding="{Binding Player.ExtraPlayerInfo}"/>
+                        <DataGridTextColumn x:Name="teamColumn"  Header="Klub" Binding="{Binding Player.Team}"/>
+                        <DataGridTemplateColumn x:Name="birthDateColumn"  Header="Data urodzenia">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <DatePicker SelectedDate="{Binding Player.BirthDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn x:Name="fullCategoryColumn" Header="kategoria" Binding="{Binding Player.FullCategory}"/>
+                        <DataGridTextColumn x:Name="isMaleColumn" Width="SizeToHeader" Header="Płeć" Binding="{Binding Player.IsMale, Converter={StaticResource BoolToSexConverter}}"/>
+                        <DataGridTextColumn x:Name="lapsCountColumn" Width="SizeToHeader" Header="Okrążenia" Binding="{Binding LapsCount}"/>
+                        <DataGridTextColumn x:Name="timeColumn"  Header="Czas" Binding="{Binding Time}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </ScrollViewer>
         </StackPanel>
     </Grid>
 </UserControl>

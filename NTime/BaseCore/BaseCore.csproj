@@ -76,8 +76,9 @@
     <Compile Include="DataBase\Entities\TimeReadsLogInfo.cs" />
     <Compile Include="DataBase\Entities\TimeReadType.cs" />
     <Compile Include="DataBase\Enums\DistanceTypeEnum.cs" />
-    <Compile Include="DataBase\Enums\EnumBindingSourceExtension.cs" />
-    <Compile Include="DataBase\Enums\EnumDescriptionTypeConverter.cs" />
+    <Compile Include="DataBase\EnumHelpers\EnumBindingSourceExtension.cs" />
+    <Compile Include="DataBase\EnumHelpers\EnumDescriptionTypeConverter.cs" />
+    <Compile Include="DataBase\Enums\SortOrderEnum.cs" />
     <Compile Include="DataBase\Repositories\GateRepository.cs" />
     <Compile Include="DataBase\Repositories\TimeReadsLogInfoRepository.cs" />
     <Compile Include="PlayerFilter\PlayerSort.cs" />
