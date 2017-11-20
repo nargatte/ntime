@@ -10,7 +10,7 @@ using MvvmHelper;
 
 namespace ViewCore.Entities
 {
-    public class EditablePlayer : EditableBaseClass<Player>
+    public class EditablePlayer : EditableBaseClass<Player>, ICloneable
     {
 
         public EditablePlayer(IEditableCompetition currentComptetition) : base(currentComptetition)
@@ -28,6 +28,7 @@ namespace ViewCore.Entities
             DefinedExtraPlayerInfo = new ObservableCollection<EditableExtraPlayerInfo>(extraPlayerInfos);
             StartTime = DateTime.Today;
         }
+
         public int StartNumber
         {
             get { return DbEntity.StartNumber; }
@@ -152,5 +153,9 @@ namespace ViewCore.Entities
             set { SetProperty(ref _definedExtraPlayerInfo, value); }
         }
 
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
     }
 }

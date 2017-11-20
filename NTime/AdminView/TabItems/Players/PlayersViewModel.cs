@@ -127,18 +127,30 @@ namespace AdminView.Players
         {
             if (CanAddPlayer(NewPlayer, out string message))
             {
-                //NewPlayer = new EditablePlayer(_currentCompetition, DefinedDistances, DefinedExtraPlayerInfo)
-                //{
-                //    DbEntity = new Player()
-                //};
-                await _playerRepository.AddAsync(NewPlayer.DbEntity, NewPlayer.DbEntity.Distance, NewPlayer.DbEntity.ExtraPlayerInfo);
-                Players.Add(NewPlayer);
+                NewPlayer.IsMale =  GetSexForPlayer(NewPlayer);
+                var playerToAdd = NewPlayer.Clone() as EditablePlayer;
+                var tempDistance = playerToAdd.DbEntity.Distance;
+                var tempExtraPlayerInfo = playerToAdd.DbEntity.ExtraPlayerInfo;
+                await _playerRepository.AddAsync(playerToAdd.DbEntity, playerToAdd.DbEntity.Distance, playerToAdd.DbEntity.ExtraPlayerInfo);
+                playerToAdd.DbEntity.Distance = tempDistance;
+                playerToAdd.DbEntity.ExtraPlayerInfo = tempExtraPlayerInfo;
+                Players.Add(playerToAdd);
+                ClearNewPlayer();
             }
             else
             {
                 MessageBox.Show(message);
             }
 
+        }
+
+        private bool GetSexForPlayer(EditablePlayer newPlayer)
+        {
+            char[] firstName = newPlayer.FirstName.ToCharArray();
+            if (firstName.Last() == 'a' && NewPlayer.FirstName.ToLower() != "kuba")
+                return false;
+            else
+                return true;
         }
 
         private bool CanAddPlayer(EditablePlayer newPlayer, out string message)
@@ -154,11 +166,16 @@ namespace AdminView.Players
                 message = "Nieprawidłowy czas startu zawodnika";
                 return false;
             }
-            //if(newPlayer.Distance == null)
-            //{
-            //    message = "Nie przypisano żadnego dystansu";
-            //    return false;
-            //}
+            if (newPlayer.Distance == null)
+            {
+                message = "Nie przypisano żadnego dystansu";
+                return false;
+            }
+            if (newPlayer.ExtraPlayerInfo == null)
+            {
+                message = "Nie przypisano Dodatkowych informacji";
+                return false;
+            }
 
             return true;
         }
@@ -185,7 +202,7 @@ namespace AdminView.Players
         private async void OnDeleteAllPlayersRequestedAsync()
         {
             MessageBoxResult result = MessageBox.Show(
-                $"Czy na pewno chcesz usunąć wszystkich {Players.Count} zawodników?",
+                $"Czy na pewno chcesz usunąć wszystkich zawodników?",
                 $"",
                 MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
@@ -208,6 +225,11 @@ namespace AdminView.Players
             await DownloadExtraPlayerInfoAsync();
             //await DownloadAllPlayers();
             await AddPlayersFromDatabaseAndDisplay(new PlayerFilterOptions(), 0, 50, true);
+            ClearNewPlayer();
+        }
+
+        private void ClearNewPlayer()
+        {
             NewPlayer = new EditablePlayer(_currentCompetition, DefinedDistances, DefinedExtraPlayerInfo)
             {
                 //Distance = new EditableDistance(_currentCompetition),
@@ -217,11 +239,10 @@ namespace AdminView.Players
                     Distance = new Distance(),
                     ExtraPlayerInfo = new ExtraPlayerInfo(),
                     StartTime = DateTime.Today,
-                    BirthDate= DateTime.Today
+                    BirthDate = DateTime.Today
                 }
             };
         }
-
 
         private async void FilterValueChangedAsync()
         {
