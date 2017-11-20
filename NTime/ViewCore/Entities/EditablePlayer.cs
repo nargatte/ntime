@@ -65,7 +65,7 @@ namespace ViewCore.Entities
         {
             get
             {
-                var temp = DefinedDistances.FirstOrDefault(dist => dist.DbEntity.Id == DbEntity.Distance.Id);
+                var temp = DefinedDistances.FirstOrDefault(dist => Equals(dist.DbEntity, DbEntity.Distance));
                 return temp;
             }
             set
@@ -79,7 +79,7 @@ namespace ViewCore.Entities
         {
             get
             {
-                var temp = DefinedExtraPlayerInfo.FirstOrDefault(info => info.DbEntity.Id == DbEntity.ExtraPlayerInfo.Id);
+                var temp = DefinedExtraPlayerInfo.FirstOrDefault(info => Equals(info.DbEntity, DbEntity.ExtraPlayerInfo));
                 return temp;
             }
             set

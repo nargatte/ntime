@@ -11,6 +11,24 @@ namespace BaseCore.DataBase
         {
         }
 
+        protected bool Equals(Distance other)
+        {
+            return Id == other.Id;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Distance) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return Id;
+        }
+
         public Distance(string name, decimal length, DateTime startTime, DistanceTypeEnum distanceTypeEnum)
         {
             Name = name;

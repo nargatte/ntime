@@ -10,6 +10,24 @@ namespace BaseCore.DataBase
         {
         }
 
+        protected bool Equals(Gate other)
+        {
+            return Id == other.Id;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Gate) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return Id;
+        }
+
         public Gate(string name, int number)
         {
             Name = name;

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using BaseCore.TimesProcess;
 using MvvmHelper;
 using BaseCore.DataBase;
@@ -120,7 +121,9 @@ namespace ViewCore.Entities
                         //await _gateOrderItemRepository.RemoveAsync(gateOrderItem.DbEntity);
                     }
                 }
-                await _gateOrderItemRepository.ReplaceByAsync(GatesOrderItems.Select(goi => new Tuple<GatesOrderItem, Gate>(goi.DbEntity, goi.Gate?.DbEntity)));
+                var tab = GatesOrderItems
+                    .Select(goi => new Tuple<GatesOrderItem, Gate>(goi.DbEntity, goi.Gate?.DbEntity)).ToArray();
+                await _gateOrderItemRepository.ReplaceByAsync(tab);
             }
             else
             {

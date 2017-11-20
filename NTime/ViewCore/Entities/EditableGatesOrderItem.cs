@@ -21,7 +21,7 @@ namespace ViewCore.Entities
         {
             get
             {
-                var temp = DefinedGates.FirstOrDefault(g => g.DbEntity.Id == DbEntity.Gate.Id);
+                var temp = DefinedGates.FirstOrDefault(g => Equals(g.DbEntity, DbEntity.Gate));
                 return temp;
             }
             set
