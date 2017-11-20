@@ -96,8 +96,6 @@ namespace AdminView.Players
             set { SetProperty(ref _selectedPlayersList, value); }
         }
 
-
-
         private ObservableCollection<EditableDistance> _definedDistances = new ObservableCollection<EditableDistance>();
         public ObservableCollection<EditableDistance> DefinedDistances
         {
@@ -128,12 +126,12 @@ namespace AdminView.Players
         {
             foreach (var dbPlayer in dbPlayers)
             {
-                var playerdToAdd = new EditablePlayer(_currentCompetition, DefinedDistances, DefinedExtraPlayerInfo)
+                var playerToAdd = new EditablePlayer(_currentCompetition, DefinedDistances, DefinedExtraPlayerInfo)
                 {
                     DbEntity = dbPlayer,
                 };
-                playerdToAdd.UpdateRequested += Player_UpdateRequested;
-                Players.Add(playerdToAdd);
+                playerToAdd.UpdateRequested += Player_UpdateRequested;
+                Players.Add(playerToAdd);
             }
         }
 
@@ -212,6 +210,8 @@ namespace AdminView.Players
         private async void OnUpdateFullCategoriesAsync()
         {
             await _playerRepository.UpdateFullCategoryAllAsync();
+            DownloadDataFromDatabaseAsync();
+            MessageBox.Show("Kategorie zostały przeliczone poprawnie");
         }
 
         private async Task AddPlayersFromCsvToDatabase()
@@ -271,13 +271,17 @@ namespace AdminView.Players
             else return;
         }
 
+        private void OnViewLoadedAsync()
+        {
+            DownloadDataFromDatabaseAsync(removeAllDisplayedBefore: true);
+        }
 
-        private async void OnViewLoadedAsync()
+        private async void DownloadDataFromDatabaseAsync(bool removeAllDisplayedBefore = false)
         {
             await DownloadDistancesAsync();
             await DownloadExtraPlayerInfoAsync();
             //await DownloadAllPlayers();
-            await AddPlayersFromDatabaseAndDisplay(new PlayerFilterOptions(), 0, 50, true);
+            await AddPlayersFromDatabaseAndDisplay(new PlayerFilterOptions(), 0, 50, removeAllDisplayedBefore);
             ClearNewPlayer();
         }
 
