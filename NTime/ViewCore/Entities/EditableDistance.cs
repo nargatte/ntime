@@ -45,17 +45,31 @@ namespace ViewCore.Entities
             set { DbEntity.Name = SetProperty(DbEntity.Name, value); }
         }
 
-
         public decimal Length
         {
             get { return DbEntity.Length; }
             set { DbEntity.Length = SetProperty(DbEntity.Length, value); }
         }
+        //I can also make it to steps (one enum for db one for gui)
+        //public DistanceTypeEnum DistanceType
+        //{
+        //    get { return DbEntity.DistanceTypeEnum; }
+        //    set { DbEntity.DistanceTypeEnum = SetProperty(DbEntity.DistanceTypeEnum, value); }
+        //}
 
+
+        private string _distanceTyp;
+        public string DistanceTyp
+        {
+            get { return _distanceTyp; }
+            set { SetProperty(ref _distanceTyp, value); }
+        }
+
+        private DistanceTypeEnum _distanceType;
         public DistanceTypeEnum DistanceType
         {
-            get { return DbEntity.DistanceTypeEnum; }
-            set { DbEntity.DistanceTypeEnum = SetProperty(DbEntity.DistanceTypeEnum, value); }
+            get { return _distanceType; }
+            set { SetProperty(ref _distanceType, value); }
         }
 
 

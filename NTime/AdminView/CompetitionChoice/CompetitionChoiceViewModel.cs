@@ -18,7 +18,8 @@ namespace AdminView.CompetitionChoice
             DisplayAddCompetitionViewCmd = new RelayCommand(OnDisplayAddCompetitionView, CanDisplayAddCompetition);
             AddCompetitionViewRequested += NavToAddCompetitionView;
             GoToCompetitionCmd = new RelayCommand(OnGoToCompetition, CanGoToCompetition);
-            ViewLoadedCmd = new RelayCommand(OnViewLoaded);
+            //ViewLoadedCmd = new RelayCommand(OnViewLoaded);
+            OnViewLoaded();
             _selectedCompetition = new EditableCompetition(currentCompteition);
         }
 

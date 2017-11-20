@@ -34,7 +34,18 @@
         <converters:DateToStringConverterClass x:Key="DateToStringConverter"/>
     </Window.Resources>
     <Grid>
-        <ContentControl Content="{Binding CurrentViewModel}" Width="Auto" Height="Auto" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Button Command="{Binding ChangeCompetitionCmd}" Height="40" Width="90" Grid.Column="0" VerticalAlignment="Top" Margin="0, 20">
+            <StackPanel Orientation="Vertical">
+                <Image Source="pack://application:,,,/AdminView;component/Images/Home.png" Height="20" Width="20"/>
+                <TextBlock Text="Zmień zawody" TextWrapping="Wrap" Height="20"/>
+            </StackPanel>
+        </Button>
+        <ContentControl Content="{Binding CurrentViewModel}" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="1"/>
     </Grid>
         <!--<Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>

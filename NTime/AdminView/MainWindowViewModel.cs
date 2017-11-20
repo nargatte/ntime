@@ -24,7 +24,13 @@ namespace AdminView
         public MainWindowViewModel()
         {
             NavToCompetitionChoiceView();
+            ChangeCompetitionCmd = new RelayCommand(OnChnageCompetition);
             //NavToCompetitionManagerView();
+        }
+
+        private void OnChnageCompetition()
+        {
+            NavToCompetitionChoiceView();
         }
 
         private void NavToCompetitionChoiceView()
@@ -49,5 +55,7 @@ namespace AdminView
             get { return _currentViewModel; }
             set { SetProperty(ref _currentViewModel, value); }
         }
+
+        public RelayCommand ChangeCompetitionCmd { get; private set; }
     }
 }

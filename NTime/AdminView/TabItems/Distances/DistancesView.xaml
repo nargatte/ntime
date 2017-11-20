@@ -226,22 +226,31 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBox Name="DistanceLengthTB">
-                                        <Binding Path="Length" UpdateSourceTrigger="PropertyChanged">
+                                        <!--<Binding Path="Length" UpdateSourceTrigger="PropertyChanged">
                                             <Binding.ValidationRules>
                                                 <validation:IsPositiveDoubleRule ValidatesOnTargetUpdated="True"/>
                                             </Binding.ValidationRules>
-                                        </Binding>
+                                        </Binding>-->
                                     </TextBox>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Typ">
+                        <DataGridTemplateColumn Header="Typ" Width="60">
+                            <DataGridTemplateColumn.CellEditingTemplate>
+                                <DataTemplate>
+                                    <ComboBox Width="60" ItemsSource="{Binding Source={db:EnumBindingSource {x:Type db:DistanceTypeEnum}}}" SelectedItem="{Binding DistanceType}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellEditingTemplate>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <ComboBox ItemsSource="{Binding Source={db:EnumBindingSource {x:Type db:DistanceTypeEnum}}}" SelectedItem="{Binding DistanceType}"/>
+                                    <ComboBox Width="60" ItemsSource="{Binding Source={db:EnumBindingSource {x:Type db:DistanceTypeEnum}}}" SelectedItem="{Binding DistanceType}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
+                        <!--<DataGridComboBoxColumn Header="Typ" SelectedValueBinding="{Binding DistanceType}"
+                                                ItemsSource="{Binding Source={db:EnumBindingSource {x:Type db:DistanceTypeEnum}}}">
+                            
+                        </DataGridComboBoxColumn>-->
                         <DataGridTextColumn Header="Liczba bramek" Binding="{Binding GatesCount, UpdateSourceTrigger=LostFocus}"  Width="Auto">
 
                         </DataGridTextColumn>
