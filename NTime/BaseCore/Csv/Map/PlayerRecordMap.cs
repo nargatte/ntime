@@ -14,7 +14,7 @@ namespace BaseCore.Csv
             Map(m => m.LastName).Name("nazwisko");
             Map(m => m.City).Name("miejscowosc");
             Map(m => m.Team).Name("klub");
-            Map(m => m.DateBirth).ConvertUsing(DateBirthConverter);
+            Map(m => m.BirthDate).ConvertUsing(DateBirthConverter);
             Map(m => m.IsMale).ConvertUsing(IsMaleConverter);
             Map(m => m.StringAditionalInfo).Name("rower");
             Map(m => m.StartTime).Name("czas_startu");
@@ -40,7 +40,7 @@ namespace BaseCore.Csv
             if(Int32.TryParse(s, out year))
                 return new DateTime(year, 1, 1);
 
-            throw new Exception("Wrong DateBirth format");
+            throw new Exception("Wrong BirthDate format");
         }
 
         private int StartNumberConverter(IReaderRow row)

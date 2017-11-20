@@ -28,5 +28,30 @@ namespace BaseCore.DataBase
             item.CompetitionId = Competition.Id;
             item.Competition = null;
         }
+
+        public override Task UpdateAsync(T item)
+        {
+            return base.UpdateAsync(item);
+        }
+
+        public override Task UpdateRangeAsync(IEnumerable<T> items)
+        {
+            return base.UpdateRangeAsync(items);
+        }
+
+        public override Task RemoveAsync(T item)
+        {
+            return base.RemoveAsync(item);
+        }
+
+        public override Task RemoveAllAsync()
+        {
+            return base.RemoveAllAsync();
+        }
+
+        public override Task RemoveRangeAsync(IEnumerable<T> items)
+        {
+            return base.RemoveRangeAsync(items);
+        }
     }
 }

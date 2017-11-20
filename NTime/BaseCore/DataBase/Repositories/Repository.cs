@@ -17,7 +17,7 @@ namespace BaseCore.DataBase
             ContextProvider = contextProvider;
         }
 
-        public async Task<T> AddAsync(T item)
+        public  async Task<T> AddAsync(T item)
         {
             CheckNull(item);
             PrepareToAdd(item);
@@ -29,7 +29,7 @@ namespace BaseCore.DataBase
             return item;
         }
 
-        public async Task AddRangeAsync(IEnumerable<T> items)
+        public Task AddRangeAsync(IEnumerable<T> items)
         {
             foreach (T item in items)
             {
@@ -37,7 +37,7 @@ namespace BaseCore.DataBase
                 PrepareToAdd(item);
             }
 
-            await ContextProvider.DoAsync(async ctx =>
+            return ContextProvider.DoAsync(async ctx =>
             {
                 foreach (T item in items)
                     ctx.Entry(item).State = EntityState.Added;
@@ -45,25 +45,25 @@ namespace BaseCore.DataBase
             });
         }
 
-        public async Task UpdateAsync(T item)
+        public virtual Task UpdateAsync(T item)
         {
             CheckNull(item);
             CheckItem(item);
-            await ContextProvider.DoAsync(async ctx =>
+            return ContextProvider.DoAsync(async ctx =>
             {
                 ctx.Entry(item).State = EntityState.Modified;
                 await ctx.SaveChangesAsync();
             });
         }
 
-        public async Task UpdateRangeAsync(IEnumerable<T> items)
+        public virtual Task UpdateRangeAsync(IEnumerable<T> items)
         {
             foreach (T item in items)
             {
                 CheckNull(item);
                 CheckItem(item);
             }
-            await ContextProvider.DoAsync(async ctx =>
+            return ContextProvider.DoAsync(async ctx =>
             {
                 foreach (T item in items)
                     ctx.Entry(item).State = EntityState.Modified;
@@ -71,27 +71,27 @@ namespace BaseCore.DataBase
             });
         }
 
-        public async Task RemoveAsync(T item)
+        public virtual Task RemoveAsync(T item)
         {
             CheckNull(item);
             CheckItem(item);
-            await ContextProvider.DoAsync(async ctx =>
+            return ContextProvider.DoAsync(async ctx =>
             {
                 ctx.Entry(item).State = EntityState.Deleted;
                 await ctx.SaveChangesAsync();
             });
         }
 
-        public async Task RemoveAllAsync()
+        public virtual Task RemoveAllAsync()
         {
-            await ContextProvider.DoAsync(async ctx =>
+            return ContextProvider.DoAsync(async ctx =>
             {
                 ctx.Set<T>().RemoveRange(GetAllQuery(ctx.Set<T>()));
                 await ctx.SaveChangesAsync();
             });
         }
 
-        public async Task RemoveRangeAsync(IEnumerable<T> items)
+        public virtual Task RemoveRangeAsync(IEnumerable<T> items)
         {
             foreach (T item in items)
             {
@@ -99,7 +99,7 @@ namespace BaseCore.DataBase
                 CheckItem(item);
             }
 
-            await ContextProvider.DoAsync(async ctx =>
+            return ContextProvider.DoAsync(async ctx =>
             {
                 ctx.Set<T>().RemoveRange(items);
                 await ctx.SaveChangesAsync();

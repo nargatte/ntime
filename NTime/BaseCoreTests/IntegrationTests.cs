@@ -23,6 +23,7 @@ namespace BaseCoreTests
             var eifr = new ExtraPlayerInfoRepository(cp, com);
             var dr = new DistanceRepository(cp, com);
             var akr = new AgeCategoryRepository(cp, com);
+            var gr = new GateRepository(cp, com);
 
             await eifr.AddRangeAsync(new[]
             {
@@ -47,74 +48,80 @@ namespace BaseCoreTests
                 new AgeCategory("inny", 1900, 1985)
             });
 
+            var g1 = await gr.AddAsync(new Gate("Pierwszy", 1));
+            var g2 = await gr.AddAsync(new Gate("Drugi", 2));
+
             var darr = await dr.GetAllAsync();
 
-            //var ror = new GateOrderItemRepository(cp, darr.FirstOrDefault(d => d.Name == "GIGA"));
-            //await ror.ReplaceByAsync(new[]
-            //{
-            //    new GateOrderItem(1, 1800),
-            //    new GateOrderItem(2,1800),
-            //    new GateOrderItem(1,1800),
-            //    new GateOrderItem(2,1800),
-            //    new GateOrderItem(1,1800),
-            //    new GateOrderItem(2,1800),
-            //    new GateOrderItem(1,1800),
-            //});
+            var ror = new GateOrderItemRepository(cp, darr.FirstOrDefault(d => d.Name == "GIGA"));
+            await ror.ReplaceByAsync(new[]
+            {
+                new Tuple<GatesOrderItem, Gate>(new GatesOrderItem(1800), g1),
+                new Tuple<GatesOrderItem, Gate>(new GatesOrderItem(1800), g2),
+                new Tuple<GatesOrderItem, Gate>(new GatesOrderItem(1800), g1)
+            });
 
-            //ror = new GateOrderItemRepository(cp, darr.FirstOrDefault(d => d.Name == "MEGA"));
-            //await ror.ReplaceByAsync(new[]
-            //{
-            //    new GateOrderItem(1, 1800),
-            //    new GateOrderItem(2,1800),
-            //    new GateOrderItem(1,1800),
-            //});
+            ror = new GateOrderItemRepository(cp, darr.FirstOrDefault(d => d.Name == "MEGA"));
+            await ror.ReplaceByAsync(new[]
+            {
+                new Tuple<GatesOrderItem, Gate>(new GatesOrderItem(1800), g1),
+                new Tuple<GatesOrderItem, Gate>(new GatesOrderItem(1800), g2),
+                new Tuple<GatesOrderItem, Gate>(new GatesOrderItem(1800), g1)
+            });
 
-            //ror = new GateOrderItemRepository(cp, darr.FirstOrDefault(d => d.Name == "MINI"));
-            //await ror.ReplaceByAsync(new[]
-            //{
-            //    new GateOrderItem(1,1800),
-            //    new GateOrderItem(2,1800),
-            //    new GateOrderItem(1,1800)
-            //});
+            ror = new GateOrderItemRepository(cp, darr.FirstOrDefault(d => d.Name == "MINI"));
+            await ror.ReplaceByAsync(new[]
+            {
+                new Tuple<GatesOrderItem, Gate>(new GatesOrderItem(1800), g1),
+                new Tuple<GatesOrderItem, Gate>(new GatesOrderItem(1800), g2),
+                new Tuple<GatesOrderItem, Gate>(new GatesOrderItem(1800), g1)
+            });
 
-            //ror = new GateOrderItemRepository(cp, darr.FirstOrDefault(d => d.Name == "+RODZINNY"));
-            //await ror.ReplaceByAsync(new[]
-            //{
-            //    new GateOrderItem(1,1000),
-            //    new GateOrderItem(1,1000),
-            //});
+            ror = new GateOrderItemRepository(cp, darr.FirstOrDefault(d => d.Name == "+RODZINNY"));
+            await ror.ReplaceByAsync(new[]
+            {
+                new Tuple<GatesOrderItem, Gate>(new GatesOrderItem(1800), g1),
+                new Tuple<GatesOrderItem, Gate>(new GatesOrderItem(1800), g1)
+            });
 
-            //ror = new GateOrderItemRepository(cp, darr.FirstOrDefault(d => d.Name == "RODZINNY"));
-            //await ror.ReplaceByAsync(new[]
-            //{
-            //    new GateOrderItem(1,1000),
-            //    new GateOrderItem(1,1000)
-            //});
+            ror = new GateOrderItemRepository(cp, darr.FirstOrDefault(d => d.Name == "RODZINNY"));
+            await ror.ReplaceByAsync(new[]
+            {
+                new Tuple<GatesOrderItem, Gate>(new GatesOrderItem(1800), g1),
+                new Tuple<GatesOrderItem, Gate>(new GatesOrderItem(1800), g1)
+            });
 
-            //await pr.ImportPlayersAsync(
-            //    pathToexport + "Zawodnicy.csv");
+            await pr.ImportPlayersAsync(
+                pathToexport + "Zawodnicy.csv");
+            await pr.ImportTimeReadsAsync(
+                pathToexport + "log1.csv", g1);
+            await pr.ImportTimeReadsAsync(
+                pathToexport + "log2.csv", g1);
+            await pr.ImportTimeReadsAsync(
+                pathToexport + "log3.csv", g2);
             //await pr.ImportTimeReadsAsync(
-            //    pathToexport + "log1.csv", 1);
-            //await pr.ImportTimeReadsAsync(
-            //    pathToexport + "log2.csv", 1);
-            //await pr.ImportTimeReadsAsync(
-            //    pathToexport + "log3.csv", 2);
-            // await pr.ImportTimeReadsAsync(
-            //   pathToexport + "log1 Lask.csv", 2);
+            //  pathToexport + "log1 Lask.csv", g2);
 
 
-            var pfo = new PlayerFilterOptions { Query = "57" };
+            var pfo = new PlayerFilterOptions { Query = "500" };
             var p = (await pr.GetAllByFilterAsync(
                 pfo, 0, 1)).Item1[0];
 
             TimeProcess timeProcess = new TimeProcess(com);
-            await timeProcess.ProcessSingleAsync(p);
-            //await timeProcess.ProcessAllAsync();
+            //await timeProcess.ProcessSingleAsync(p);
+            await timeProcess.ProcessAllAsync();
+
+            await pr.UpdateFullCategoryAllAsync();
+            await pr.UpdateRankingAllAsync();
 
             pfo = new PlayerFilterOptions
             {
                 PlayerSort = PlayerSort.ByRank,
-                CompleatedCompetition = true
+                CompleatedCompetition = true,
+                HasVoid = false,
+                Invalid = false,
+                WithoutStartTime = false,
+                
             };
             //pfo.Query = "RODZ";
             var pall = await pr.GetAllByFilterAsync(
