@@ -10,6 +10,7 @@ using BaseCore.DataBase;
 using BaseCore.PlayerFilter;
 using ViewCore.Entities;
 using System.Windows;
+using System.Collections;
 
 namespace AdminView.Players
 {
@@ -22,6 +23,7 @@ namespace AdminView.Players
             DeleteAllPlayersCmd = new RelayCommand(OnDeleteAllPlayersRequestedAsync);
             ReadPlayersFromCsvCmd = new RelayCommand(OnReadPlayersFromCsvAsync);
             UpdateFullCategoriesCmd = new RelayCommand(OnUpdateFullCategoriesAsync);
+            DeleteSelectedPlayersCmd = new RelayCommand(OnDeleteSelectedPlayersRequestedAsync);
             TabTitle = "Zawodnicy";
             //NewPlayer = new EditablePlayer(_currentCompetition)
             //{
@@ -32,6 +34,7 @@ namespace AdminView.Players
             //    }
             //};
         }
+
 
         #region Properties
 
@@ -86,6 +89,14 @@ namespace AdminView.Players
         }
 
 
+        private IList _selectedPlayersList = new ArrayList();
+        public IList SelectedPlayersList
+        {
+            get { return _selectedPlayersList; }
+            set { SetProperty(ref _selectedPlayersList, value); }
+        }
+
+
 
         private ObservableCollection<EditableDistance> _definedDistances = new ObservableCollection<EditableDistance>();
         public ObservableCollection<EditableDistance> DefinedDistances
@@ -111,6 +122,7 @@ namespace AdminView.Players
         public RelayCommand ReadPlayersFromCsvCmd { get; set; }
         public RelayCommand DeleteAllPlayersCmd { get; set; }
         public RelayCommand UpdateFullCategoriesCmd { get; set; }
+        public RelayCommand DeleteSelectedPlayersCmd { get; set; }
 
         private void DisplayNewPlayers(Player[] dbPlayers)
         {
@@ -234,6 +246,32 @@ namespace AdminView.Players
             Players.Clear();
         }
 
+
+        private void DeleteSelectedPlayersFromGUI(ICollection<EditablePlayer> selectedPlayersList)
+        {
+            foreach (var player in selectedPlayersList)
+            {
+                Players.Remove(player);
+            }
+        }
+
+        private async void OnDeleteSelectedPlayersRequestedAsync()
+        {
+            MessageBoxResult result = MessageBox.Show(
+             $"Czy na pewno chcesz usunąć {SelectedPlayersList.Count} zawodników?",
+                $"",
+                MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                var selectedPlayersArray = SelectedPlayersList.Cast<EditablePlayer>().ToArray();
+                await DeleteSelectedPlayersFromDatabaseAsync(selectedPlayersArray);
+                DeleteSelectedPlayersFromGUI(selectedPlayersArray);
+                MessageBox.Show("Wybrani zawodnicy zostali usunięci");
+            }
+            else return;
+        }
+
+
         private async void OnViewLoadedAsync()
         {
             await DownloadDistancesAsync();
@@ -293,6 +331,17 @@ namespace AdminView.Players
         private async Task DeleteAllPlayersFromDatabaseAsync()
         {
             await _playerRepository.RemoveAllAsync();
+        }
+
+
+        private async Task DeleteSelectedPlayersFromDatabaseAsync(ICollection<EditablePlayer> selectedPlayersList)
+        {
+            List<Task> tasks = new List<Task>();
+            foreach (var player in selectedPlayersList)
+            {
+                tasks.Add( _playerRepository.RemoveAsync(player.DbEntity));
+            }
+            await Task.WhenAll(tasks);
         }
 
         private async Task DownloadDistancesAsync()
