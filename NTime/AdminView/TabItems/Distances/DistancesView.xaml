@@ -226,11 +226,9 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBox Name="DistanceLengthTB">
-                                        <!--<Binding Path="Length" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <validation:IsPositiveDoubleRule ValidatesOnTargetUpdated="True"/>
-                                            </Binding.ValidationRules>
-                                        </Binding>-->
+                                        <Binding Path="Length" UpdateSourceTrigger="PropertyChanged">
+
+                                        </Binding>
                                     </TextBox>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

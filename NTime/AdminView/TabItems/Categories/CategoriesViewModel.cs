@@ -32,8 +32,10 @@ namespace AdminView.Categories
 
 
         #region Categories
-        private async Task DownloadCategoriesFromDatabase()
+        private async Task DownloadCategoriesFromDatabase(bool clearDisplayedCategoriesBefore = true)
         {
+            if (clearDisplayedCategoriesBefore)
+                Categories.Clear();
             var dbAgeCategories = await _ageCategoryRepository.GetAllAsync();
             foreach (var dbAgeCategory in dbAgeCategories)
             {
@@ -70,8 +72,10 @@ namespace AdminView.Categories
 
         #region ExtraPlayerInfo
 
-        private async Task DownloadExtraPlayerInfosFromDatabase()
+        private async Task DownloadExtraPlayerInfosFromDatabase(bool clearDisplayedCExtraPlayerInfosBefore = true)
         {
+            if (clearDisplayedCExtraPlayerInfosBefore)
+                ExtraPlayerInfos.Clear();
             var dbExtraPlayerInfos = await _extraPlayerInfoRepository.GetAllAsync();
             foreach (var dbExtraPlayerInfo in dbExtraPlayerInfos)
             {
