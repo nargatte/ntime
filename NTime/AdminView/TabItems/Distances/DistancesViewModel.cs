@@ -149,14 +149,14 @@ namespace AdminView.Distances
         {
             if (CanAddDistance(out string errorMessage))
             {
-                var distanceToAdd = new EditableDistance(_logsInfo, _definedGates, _currentCompetition)
+                var distanceToAdd = new EditableDistance(_logsInfo, _definedGates, _currentCompetition);
+
+                distanceToAdd.DbEntity = new Distance()
                 {
-                    DbEntity = new Distance()
-                    {
-                        Name = NewDistanceName,
-                        StartTime = DateTime.Today
-                    }
+                    Name = NewDistanceName,
+                    StartTime = DateTime.Today
                 };
+
                 AddDistanceToGUI(distanceToAdd);
                 await _distanceRepository.AddAsync(distanceToAdd.DbEntity);
             }

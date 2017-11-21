@@ -11,7 +11,7 @@ namespace BaseCoreTests
     [TestFixture]
     public class IntegrationTests
     {
-        private string pathToexport = "E:\\Downloads\\Export\\";
+        private string pathToexport = "C:\\Users\\Grzegorz Krzysiak\\Downloads\\Export\\";
 
         [Test]
         public async Task LoadCsvs()
@@ -109,8 +109,8 @@ namespace BaseCoreTests
 
 
             var pfo = new PlayerFilterOptions { Query = "500" };
-            var p = (await pr.GetAllByFilterAsync(
-                pfo, 0, 1)).Item1[0];
+            //var p = (await pr.GetAllByFilterAsync(
+              //  pfo, 0, 1)).Item1[0];
 
             //await timeProcess.ProcessSingleAsync(p);
             await timeProcess.ProcessAllAsync();

@@ -7,38 +7,126 @@ using System.Collections.ObjectModel;
 using MvvmHelper;
 using ViewCore;
 using BaseCore.DataBase;
+using ViewCore.Entities;
+using BaseCore.PlayerFilter;
+using System.Windows;
 
 namespace AdminView.Scores
 {
-    class ScoresViewModel : TabItemViewModel<Competition>, ViewCore.Entities.ISwitchableViewModel
+    class ScoresViewModel : TabItemViewModel<Competition>, ISwitchableViewModel
     {
-        public ScoresViewModel(ViewCore.Entities.IEditableCompetition currentCompetition) : base(currentCompetition)
+        public ScoresViewModel(IEditableCompetition currentCompetition) : base(currentCompetition)
         {
             TabTitle = "Wyniki";
-            FillScores();
+            ViewLoadedCmd = new RelayCommand(OnViewLoadedAsync);
+            UpdateFullCategoriesCmd = new RelayCommand(OnUpdateFullCategoriesAsync);
+            UpdateRankingAllCmd = new RelayCommand(OnUpdateRankingAllAsync);
         }
 
-        private void FillScores()
+        #region Properties
+
+
+
+        private PlayerSort? _sortCriteria;
+        public PlayerSort? SortCriteria
         {
-            for (int i = 0; i < 20; i++)
+            get { return _sortCriteria; }
+            set
             {
-                Scores.Add(new ViewCore.Entities.EditablePlayer(_currentCompetition)
-                {
-                    DbEntity = new BaseCore.DataBase.Player()
-                    {
-                        LastName = "Kierzkowski",
-                        FirstName = "Jan",
-                        Team = "Niezniszczalni Zgierz",
-                        BirthDate = new DateTime(1994, 10, 09),
-                        IsMale = true,
-                        StartNumber = 18,
-                        CategoryPlaceNumber = 3,
-                        DistancePlaceNumber = 1,
-                        LapsCount = 5,
-                        Time = 12345,
-                    }
-                });
+                SetProperty(ref _sortCriteria, value);
+                FilterValueChangedAsync();
             }
+        }
+
+        private SortOrderEnum? _sortOrder;
+        public SortOrderEnum? SortOrder
+        {
+            get { return _sortOrder; }
+            set
+            {
+                SetProperty(ref _sortOrder, value);
+                FilterValueChangedAsync();
+            }
+        }
+
+
+        private string _filterGeneral;
+        public string FilterGeneral
+        {
+            get { return _filterGeneral; }
+            set
+            {
+                SetProperty(ref _filterGeneral, value);
+                FilterValueChangedAsync();
+            }
+        }
+
+        private ObservableCollection<EditablePlayer> _scores = new ObservableCollection<EditablePlayer>();
+        public ObservableCollection<EditablePlayer> PlayersWithScore
+        {
+            get { return _scores; }
+            set { SetProperty(ref _scores, value); }
+        }
+
+        private ObservableCollection<EditableDistance> _definedDistances = new ObservableCollection<EditableDistance>();
+        public ObservableCollection<EditableDistance> DefinedDistances
+        {
+            get { return _definedDistances; }
+            set { SetProperty(ref _definedDistances, value); }
+        }
+
+
+        private ObservableCollection<EditableExtraPlayerInfo> _definedExtraPlayerInfo = new ObservableCollection<EditableExtraPlayerInfo>();
+        public ObservableCollection<EditableExtraPlayerInfo> DefinedExtraPlayerInfo
+        {
+            get { return _definedExtraPlayerInfo; }
+            set { SetProperty(ref _definedExtraPlayerInfo, value); }
+        }
+
+        #endregion
+
+        #region Events and commands
+
+        public RelayCommand ViewLoadedCmd { get; set; }
+        public RelayCommand UpdateFullCategoriesCmd { get; set; }
+        public RelayCommand UpdateRankingAllCmd { get; set; }
+
+        private async void FilterValueChangedAsync()
+        {
+            var filter = new PlayerFilterOptions();
+            if (!String.IsNullOrWhiteSpace(FilterGeneral))
+                filter.Query = FilterGeneral;
+            if (SortOrder.HasValue && SortOrder.Value == SortOrderEnum.Descending)
+                filter.DescendingSort = true;
+            if (SortCriteria.HasValue)
+                filter.PlayerSort = SortCriteria.Value;
+
+            await AddPlayersFromDatabaseAndDisplay(filter, 0, 50, true);
+        }
+
+        private async void OnUpdateFullCategoriesAsync()
+        {
+            await _playerRepository.UpdateFullCategoryAllAsync();
+            DownloadDataFromDatabaseAsync(removeAllDisplayedBefore: true);
+            MessageBox.Show("Kategorie zostały przeliczone poprawnie");
+        }
+
+        private async void OnUpdateRankingAllAsync()
+        {
+            await _playerRepository.UpdateRankingAllAsync();
+            DownloadDataFromDatabaseAsync(true);
+            MessageBox.Show("Wyniki zostały przeliczone poprawnie");
+        }
+
+        private void OnViewLoadedAsync()
+        {
+            DownloadDataFromDatabaseAsync(removeAllDisplayedBefore:true);
+        }
+        private async void DownloadDataFromDatabaseAsync(bool removeAllDisplayedBefore = false)
+        {
+            await DownloadDistancesAsync();
+            await DownloadExtraPlayerInfoAsync();
+            await AddPlayersFromDatabaseAndDisplay(new PlayerFilterOptions(), 0, 50, removeAllDisplayedBefore);
         }
 
         public void DetachAllEvents()
@@ -46,18 +134,78 @@ namespace AdminView.Scores
             throw new NotImplementedException();
         }
 
-        private ViewCore.Entities.EditablePlayer _scoreFilter;
-        public ViewCore.Entities.EditablePlayer ScoreFilter
+
+        private void DisplayNewPlayers(Player[] dbPlayers)
         {
-            get { return _scoreFilter; }
-            set { SetProperty(ref _scoreFilter, value); }
+            foreach (var dbPlayer in dbPlayers)
+            {
+                var playerToAdd = new EditablePlayer(_currentCompetition, DefinedDistances, DefinedExtraPlayerInfo)
+                {
+                    DbEntity = dbPlayer,
+                };
+                PlayersWithScore.Add(playerToAdd);
+            }
         }
 
-        private ObservableCollection<ViewCore.Entities.EditablePlayer> _scores = new ObservableCollection<ViewCore.Entities.EditablePlayer>();
-        public ObservableCollection<ViewCore.Entities.EditablePlayer> Scores
+        #endregion
+
+        #region Database
+
+        private async Task AddPlayersFromDatabaseAndDisplay(PlayerFilterOptions playerFilter,
+            int pageNumber, int numberOfItemsOnPage, bool removeAllDisplayedBefore = false)
         {
-            get { return _scores; }
-            set { SetProperty(ref _scores, value); }
+            var dbPlayers = await DownloadPlayersFromDataBase(playerFilter, pageNumber, numberOfItemsOnPage);
+            if (removeAllDisplayedBefore)
+                PlayersWithScore = new ObservableCollection<EditablePlayer>();
+            DisplayNewPlayers(dbPlayers);
         }
+
+        private async Task<Player[]> DownloadPlayersFromDataBase(PlayerFilterOptions playerFilter, int pageNumber, int numberOfItemsOnPage)
+        {
+            var dbPlayersTuple = await _playerRepository.GetAllByFilterAsync(playerFilter, pageNumber, numberOfItemsOnPage);
+            return dbPlayersTuple.Item1;
+        }
+
+        private async Task DeleteAllPlayersFromDatabaseAsync()
+        {
+            await _playerRepository.RemoveAllAsync();
+        }
+
+
+        private async Task DeleteSelectedPlayersFromDatabaseAsync(ICollection<EditablePlayer> selectedPlayersList)
+        {
+            List<Task> tasks = new List<Task>();
+            foreach (var player in selectedPlayersList)
+            {
+                tasks.Add(_playerRepository.RemoveAsync(player.DbEntity));
+            }
+            await Task.WhenAll(tasks);
+        }
+
+        private async Task DownloadDistancesAsync()
+        {
+            var dbDistances = await _distanceRepository.GetAllAsync();
+            if (dbDistances.Length > 0)
+                foreach (var dbDistance in dbDistances)
+                {
+                    DefinedDistances.Add(new EditableDistance(_currentCompetition)
+                    {
+                        DbEntity = dbDistance
+                    });
+                }
+        }
+
+        private async Task DownloadExtraPlayerInfoAsync()
+        {
+            var dbExtraPlayerInfos = await _extraPlayerInfoRepository.GetAllAsync();
+            foreach (var item in dbExtraPlayerInfos)
+            {
+                DefinedExtraPlayerInfo.Add(new EditableExtraPlayerInfo(_currentCompetition)
+                {
+                    DbEntity = item
+                });
+            }
+        }
+        #endregion
     }
 }

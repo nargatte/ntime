@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
             xmlns:converters="clr-namespace:ViewCore.XamlConverters;assembly=ViewCore"
+            xmlns:adminVew="clr-namespace:AdminView"
              xmlns:local="clr-namespace:AdminView.Players"
              xmlns:db="clr-namespace:BaseCore.DataBase;assembly=BaseCore"
             xmlns:filter="clr-namespace:BaseCore.PlayerFilter;assembly=BaseCore"
@@ -26,12 +27,12 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="225"/>
             </Grid.ColumnDefinitions>
 
             <StackPanel Name="PlayerAdding" Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
@@ -54,14 +55,7 @@
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="Dystans"
                                VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
-                        <ComboBox ItemsSource="{Binding DefinedDistances}" SelectedItem="{Binding Distance}" Margin="0,5" Height="30" Width="100">
-                            <ComboBox.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Name}">
-                                    </TextBlock>
-                                </DataTemplate>
-                            </ComboBox.ItemTemplate>
-                        </ComboBox>
+                        <ComboBox ItemsSource="{Binding DefinedDistances}" SelectedItem="{Binding Distance, UpdateSourceTrigger=PropertyChanged}" Margin="0,5" Height="30" Width="100" DisplayMemberPath="Name"></ComboBox>
                         <!--<TextBox Text="{Binding Distance}" Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>-->
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
@@ -72,7 +66,10 @@
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="Dodatkowe inf."
                                VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
-                        <ComboBox ItemsSource="{Binding DefinedExtraPlayerInfo, UpdateSourceTrigger=PropertyChanged}" Width="100" SelectedItem="{Binding ExtraPlayerInfo}" Margin="0,5" Height="30"/>
+                        <ComboBox ItemsSource="{Binding DefinedExtraPlayerInfo, UpdateSourceTrigger=PropertyChanged}" Width="100" Margin="0,5" Height="30"
+                                  SelectedItem="{Binding ExtraPlayerInfo, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name">
+                        </ComboBox>
+                            
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="Klub"
@@ -97,7 +94,7 @@
                             Content="Dodaj"   FontSize="15" Margin="30, 5, 5, 5"/>
                 </StackPanel>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" >
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" >
                 <StackPanel Name="Filtering" Orientation="Vertical" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0">
                     <TextBlock Text="Filtrowanie" HorizontalAlignment="Center" FontSize="18"/>
                     <StackPanel Orientation="Horizontal">
@@ -112,43 +109,54 @@
                     <StackPanel Orientation="Horizontal">
                         <StackPanel Orientation="Vertical" Margin="5">
                             <TextBlock Text="Kryterium" HorizontalAlignment="Center"/>
-                            <ComboBox ItemsSource="{Binding Source={db:EnumBindingSource {x:Type filter:PlayerSort}}}" SelectedItem="{Binding SortCriteria}"/>
+                            <ComboBox ItemsSource="{Binding Source={db:EnumBindingSource {x:Type filter:PlayerSort}}}" SelectedItem="{Binding SortCriteria, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                         <StackPanel Orientation="Vertical" Margin="5">
                             <TextBlock Text="Kolejność" HorizontalAlignment="Center"/>
-                            <ComboBox ItemsSource="{Binding Source={db:EnumBindingSource {x:Type db:SortOrderEnum}}}"  SelectedItem="{Binding SortOrder}"/>
+                            <ComboBox ItemsSource="{Binding Source={db:EnumBindingSource {x:Type db:SortOrderEnum}}}"  SelectedItem="{Binding SortOrder, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
-            <StackPanel Name="SettingsButtons" Orientation="Vertical" Grid.Column="1" Grid.RowSpan="1" Grid.Row="1">
-                <Button Content="Wczytaj z CSV" Command="{Binding ReadPlayersFromCsvCmd}" Margin="0,3, 10, 3" Height="30" Width="100" FontSize="13"/>
-                <Button Command="{Binding DeleteAllPlayersCmd}" Margin="0,5, 10, 5" Height="40" Width="100">
-                    <TextBlock TextWrapping="Wrap" FontSize="13" TextAlignment="Center">
-                        Usuń wszystkich zawodników
-                    </TextBlock>
-                </Button>
+            <StackPanel Name="SettingsButtons" Orientation="Horizontal" Grid.Column="1" Grid.RowSpan="1" Grid.Row="1">
+                <StackPanel  Orientation="Vertical" >
+
+                    <Button Command="{Binding UpdateFullCategoriesCmd}" Margin="0,0, 10, 5" Height="37" Width="100">
+                        <TextBlock TextWrapping="Wrap" FontSize="13" TextAlignment="Center" VerticalAlignment="Center">
+                            Przelicz kategorie
+                        </TextBlock>
+                    </Button>
+                    <Button Content="Wczytaj z CSV" Command="{Binding ReadPlayersFromCsvCmd}" Margin="0,3, 10, 3" Height="37" Width="100" FontSize="13"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" >
+                    <Button Command="{Binding DeleteAllPlayersCmd}" Margin="0,0, 10, 5" Height="37" Width="100" >
+                        <TextBlock TextWrapping="Wrap" FontSize="13" TextAlignment="Center" VerticalAlignment="Center">
+                            Usuń wszystkich zawodników
+                        </TextBlock>
+                    </Button>
+                    <Button Command="{Binding DeleteSelectedPlayersCmd}" Margin="0,3, 10, 3" Height="37" Width="100" >
+                        <TextBlock TextWrapping="Wrap" FontSize="13" TextAlignment="Center" VerticalAlignment="Center">
+                            Usuń wybranych zawodników
+                        </TextBlock>
+                    </Button>
+                </StackPanel>
             </StackPanel>
         </Grid>
 
-        <DataGrid x:Name="playerDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Grid.Row="1"
-                  ItemsSource="{Binding Players}" EnableRowVirtualization="True" AutoGenerateColumns="False"
-                  ColumnWidth="*" SelectionMode="Extended" CanUserAddRows="False" >
-            <DataGrid.Columns>
+        <!--<DataGrid x:Name="playerDataGrid" RowDetailsVisibilityMode="Visible" Grid.Row="1"
+                  ItemsSource="{Binding Players}" EnableRowVirtualization="False" AutoGenerateColumns="False"
+                  ColumnWidth="*" SelectionMode="Single" CanUserAddRows="False" >-->
+            <adminVew:MultipleChoiceDataGrid x:Name="playerDataGrid" Grid.Row="1"
+                  ItemsSource="{Binding Players}"  AutoGenerateColumns="False" ColumnWidth="*" SelectionMode="Extended"
+                    SelectedItemsList="{Binding SelectedPlayersList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <DataGrid.Columns>
                 <DataGridTextColumn x:Name="startNumberColumn" Width="SizeToHeader" Header="Numer" Binding="{Binding StartNumber}"/>
                 <DataGridTextColumn x:Name="firstNameColumn"  Header="Imię" Binding="{Binding FirstName}"/>
                 <DataGridTextColumn x:Name="lastNameColumn" Header="Nazwisko" Binding="{Binding LastName}"/>
                 <DataGridTemplateColumn x:Name="distanceColumn"  Header="Dystans">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ComboBox ItemsSource="{Binding DefinedDistances}" SelectedItem="{Binding Distance}">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Name}">
-                                        </TextBlock>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
+                            <ComboBox ItemsSource="{Binding DefinedDistances}" SelectedItem="{Binding Distance, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name"></ComboBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -156,7 +164,7 @@
                 <DataGridTemplateColumn x:Name="extraPlayerInfoIdColumn"  Header="Dodatkowe info">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ComboBox ItemsSource="{Binding DefinedExtraPlayerInfo}" SelectedItem="{Binding ExtraPlayerInfo}"/>
+                            <ComboBox ItemsSource="{Binding DefinedExtraPlayerInfo}" SelectedItem="{Binding ExtraPlayerInfo, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name"></ComboBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -172,7 +180,7 @@
                 <DataGridTextColumn x:Name="isMaleColumn" Width="SizeToHeader" Header="Płeć" Binding="{Binding IsMale, Converter={StaticResource BoolToSexConverter}}"/>
                 <DataGridTextColumn Width="Auto" Header="Telefon" Binding="{Binding PhoneNumber}"/>
             </DataGrid.Columns>
-        </DataGrid>
+        </adminVew:MultipleChoiceDataGrid>
 
     </Grid>
 </UserControl>

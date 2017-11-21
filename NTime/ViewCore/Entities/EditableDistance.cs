@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using BaseCore.TimesProcess;
 using MvvmHelper;
 using BaseCore.DataBase;
@@ -50,27 +51,24 @@ namespace ViewCore.Entities
             get { return DbEntity.Length; }
             set { DbEntity.Length = SetProperty(DbEntity.Length, value); }
         }
-        //I can also make it to steps (one enum for db one for gui)
-        //public DistanceTypeEnum DistanceType
-        //{
-        //    get { return DbEntity.DistanceTypeEnum; }
-        //    set { DbEntity.DistanceTypeEnum = SetProperty(DbEntity.DistanceTypeEnum, value); }
-        //}
 
 
-        private string _distanceTyp;
-        public string DistanceTyp
-        {
-            get { return _distanceTyp; }
-            set { SetProperty(ref _distanceTyp, value); }
-        }
-
-        private DistanceTypeEnum _distanceType;
         public DistanceTypeEnum DistanceType
         {
-            get { return _distanceType; }
-            set { SetProperty(ref _distanceType, value); }
+            get { return DbEntity.DistanceTypeEnum; }
+            set
+            {
+                DbEntity.DistanceTypeEnum = SetProperty(DbEntity.DistanceTypeEnum, value);
+                ResolveLapsCountCollapsed();
+            }
         }
+
+        //private DistanceTypeEnum _distanceType;
+        //public DistanceTypeEnum DistanceType
+        //{
+        //    get { return _distanceType; }
+        //    set { SetProperty(ref _distanceType, value); }
+        //}
 
 
         private int _gatesCount;
@@ -84,58 +82,14 @@ namespace ViewCore.Entities
             }
         }
 
-        private async void UpdateGatesOrderCountAsync()
+
+        private bool _isLapsCountCollapsed;
+        public bool IsLapsCountCollapsed
         {
-            _gateOrderItemRepository = new GateOrderItemRepository(new ContextProvider(), this.DbEntity);
-            int currentGatesCount = GatesOrderItems.Count;
-            int updatedGatesCount = GatesCount;
-            int diff = updatedGatesCount - currentGatesCount;
-            if (diff == 0)
-                return;
-            MessageBoxResult result = MessageBox.Show(
-                $"Czy na pewno chcesz zmienić liczbę bramek pomiarowych z {currentGatesCount} na {updatedGatesCount}?",
-                "",
-                 MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes)
-            {
-                if (diff > 0)
-                {
-                    for (int i = 0; i < diff; i++)
-                    {
-                        var gateOrderItem = new EditableGatesOrderItem(_definedGates, _currentCompetition)
-                        {
-                            DbEntity = new GatesOrderItem(),
-                        };
-                        gateOrderItem.UpdateGatesOrderItemRequested += GateOrderItem_UpdateGatesOrderItemRequestedAsync;
-                        GatesOrderItems.Add(gateOrderItem);
-                        //await _gateOrderItemRepository.AddAsync(gateOrderItem.DbEntity);
-                    }
-                }
-                else if (diff < 0)
-                {
-                    for (int i = 0; i < Math.Abs(diff); i++)
-                    {
-                        var gateOrderItem = GatesOrderItems.Last();
-                        GatesOrderItems.Remove(gateOrderItem);
-                        //await _gateOrderItemRepository.RemoveAsync(gateOrderItem.DbEntity);
-                    }
-                }
-                await _gateOrderItemRepository.ReplaceByAsync(GatesOrderItems.Select(goi => new Tuple<GatesOrderItem, Gate>(goi.DbEntity, goi.Gate?.DbEntity)));
-            }
-            else
-            {
-                GatesCount = currentGatesCount;
-            }
-            if (GatesOrderItems.Count > 0)
-                GatesOrderItems.First().IsTimeCollapsed = true;
+            get { return _isLapsCountCollapsed; }
+            set { SetProperty(ref _isLapsCountCollapsed, value); }
         }
 
-        private async void GateOrderItem_UpdateGatesOrderItemRequestedAsync(object sender, EventArgs e)
-        {
-            var gateOrderInfoItem = sender as EditableGatesOrderItem;
-            var repository = new GateOrderItemRepository(new ContextProvider(), this.DbEntity);
-            await repository.UpdateAsync(gateOrderInfoItem.DbEntity, gateOrderInfoItem.DbEntity.Gate);
-        }
 
         private ObservableCollection<EditableGatesOrderItem> _gatesOrderItems = new ObservableCollection<EditableGatesOrderItem>();
         public ObservableCollection<EditableGatesOrderItem> GatesOrderItems
@@ -180,13 +134,29 @@ namespace ViewCore.Entities
 
         #endregion
 
-        #region Commands and events
+        #region Methods and events
+
+        public RelayCommand DeleteDistanceCmd { get; }
+        public RelayCommand SaveDistanceCmd { get; }
+
+        public event EventHandler DeleteRequested = delegate { };
+
         private async void OnSaveDistanceAsync()
         {
             bool result = ValidateDistance();
             if (result)
             {
                 await _distanceRepository.UpdateAsync(this.DbEntity);
+                _gateOrderItemRepository = new GateOrderItemRepository(new ContextProvider(), this.DbEntity);
+                List<Task> tasks = new List<Task>();
+                var tab = GatesOrderItems
+                    .Select(goi => new Tuple<GatesOrderItem, Gate>(goi.DbEntity, goi.Gate?.DbEntity)).ToArray();
+                await _gateOrderItemRepository.ReplaceByAsync(tab);
+                //foreach (var gateOrderItem in GatesOrderItems)
+                //{
+                //    tasks.Add(_gateOrderItemRepository.ReplaceByAsync(Gat));
+                //}
+                //await Task.WhenAll(tasks);
                 MessageBox.Show("Dystans został poprawnie zapisany");
             }
         }
@@ -206,17 +176,79 @@ namespace ViewCore.Entities
             DeleteRequested(this, EventArgs.Empty);
         }
 
-        public RelayCommand DeleteDistanceCmd { get; }
-        public RelayCommand SaveDistanceCmd { get; }
 
+        private void ResolveLapsCountCollapsed()
+        {
+            switch (DistanceType)
+            {
+                case DistanceTypeEnum.DeterminedDistance:
+                    IsLapsCountCollapsed = true;
+                    break;
+                case DistanceTypeEnum.DeterminedLaps:
+                    IsLapsCountCollapsed = false;
+                    break;
+                case DistanceTypeEnum.LimitedTime:
+                    IsLapsCountCollapsed = false;
+                    break;
+                default:
+                    break;
+            }
+        }
 
-        public event EventHandler DeleteRequested = delegate { };
+        private void UpdateGatesOrderCountAsync()
+        {
+            _gateOrderItemRepository = new GateOrderItemRepository(new ContextProvider(), this.DbEntity);
+            int currentGatesCount = GatesOrderItems.Count;
+            int updatedGatesCount = GatesCount;
+            int diff = updatedGatesCount - currentGatesCount;
+            if (diff == 0)
+                return;
+            MessageBoxResult result = MessageBox.Show(
+                $"Czy na pewno chcesz zmienić liczbę bramek pomiarowych z {currentGatesCount} na {updatedGatesCount}?",
+                "",
+                 MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                if (diff > 0)
+                {
+                    for (int i = 0; i < diff; i++)
+                    {
+                        var gateOrderItem = new EditableGatesOrderItem(_definedGates, _currentCompetition)
+                        {
+                            DbEntity = new GatesOrderItem(),
+                        };
+                        gateOrderItem.UpdateGatesOrderItemRequested += GateOrderItem_UpdateGatesOrderItemRequestedAsync;
+                        GatesOrderItems.Add(gateOrderItem);
+                        //await _gateOrderItemRepository.AddAsync(gateOrderItem.DbEntity);
+                    }
+                }
+                else if (diff < 0)
+                {
+                    for (int i = 0; i < Math.Abs(diff); i++)
+                    {
+                        var gateOrderItem = GatesOrderItems.Last();
+                        GatesOrderItems.Remove(gateOrderItem);
+                        //await _gateOrderItemRepository.RemoveAsync(gateOrderItem.DbEntity);
+                    }
+                }
+                //var tab = GatesOrderItems
+                //    .Select(goi => new Tuple<GatesOrderItem, Gate>(goi.DbEntity, goi.Gate?.DbEntity)).ToArray();
+                //await _gateOrderItemRepository.ReplaceByAsync(tab);
+            }
+            else
+            {
+                GatesCount = currentGatesCount;
+            }
+            if (GatesOrderItems.Count > 0)
+                GatesOrderItems.First().IsTimeCollapsed = true;
+        }
 
-        #endregion
-
-        /// <summary>
-        /// Sets IsValid property and returns its value
-        /// </summary>
+        private async void GateOrderItem_UpdateGatesOrderItemRequestedAsync(object sender, EventArgs e)
+        {
+            var gateOrderInfoItem = sender as EditableGatesOrderItem;
+            var repository = new GateOrderItemRepository(new ContextProvider(), this.DbEntity);
+            await repository.UpdateAsync(gateOrderInfoItem.DbEntity, gateOrderInfoItem.DbEntity.Gate);
+        }
         public bool ValidateDistance()
         {
             _isValid = IsDistanceValid(out string message);
@@ -239,22 +271,43 @@ namespace ViewCore.Entities
                 return false;
             }
 
+            if( GatesOrderItems == null ||  GatesOrderItems.Count == 0)
+            {
+                message = "Liczba bramek pomiarowych musi być większa od 0";
+                return false;
+            }
+
             switch (DistanceType)
             {
-                case BaseCore.DataBase.DistanceTypeEnum.DeterminedDistance:
-                    if (LapsCount <= 0)
+                case DistanceTypeEnum.DeterminedDistance:
+                    if (LapsCount != 0)
                     {
-                        message = "Liczba okrążeń musi być większa od 0";
+                        message = "Liczba okrążeń musi być równa 0";
                         return false;
                     }
 
                     break;
-                case BaseCore.DataBase.DistanceTypeEnum.DeterminedLaps:
-                    break;
-                case BaseCore.DataBase.DistanceTypeEnum.LimitedTime:
+                case DistanceTypeEnum.DeterminedLaps:
                     if (LapsCount <= 0)
                     {
                         message = "Liczba okrążeń musi być większa od zera";
+                        return false;
+                    }
+                    if(!IsLapCorrect())
+                    {
+                        message = "Dla wyścigu z okrążeniami pierwsza i ostatnia bramka muszą być takie same";
+                        return false;
+                    }
+                    break;
+                case DistanceTypeEnum.LimitedTime:
+                    if (LapsCount <= 0)
+                    {
+                        message = "Liczba okrążeń musi być większa od zera";
+                        return false;
+                    }
+                    if (!IsLapCorrect())
+                    {
+                        message = "Dla wyścigu z okrążeniami pierwsza i ostatnia bramka muszą być takie same";
                         return false;
                     }
 
@@ -272,6 +325,12 @@ namespace ViewCore.Entities
 
             return true;
         }
+
+        private bool IsLapCorrect()
+        {
+            return GatesOrderItems.First().Gate.Number == GatesOrderItems.Last().Gate.Number;
+        }
+        #endregion
 
     }
 

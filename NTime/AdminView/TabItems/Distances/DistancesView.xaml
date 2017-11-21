@@ -173,7 +173,8 @@
                                                 <TextBlock Text="Czas"/>
                                                 <TextBox Text="{Binding MinTimeBefore}"/>
                                             </StackPanel>
-                                            <Expander Header="{Binding}" Background="#DC0" Margin="2,0,2,0" >
+                                            <!--<Expander Header="{Binding}" Background="#DC0" Margin="2,0,2,0" >-->
+                                            <Expander Background="#DC0" Margin="2,0,2,0" >
                                                 <Expander.HeaderTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Text="{Binding Gate, Converter={StaticResource gateToNumberConverter}}" FontWeight="Bold"/>
@@ -181,7 +182,7 @@
                                                 </Expander.HeaderTemplate>
                                                 <StackPanel Orientation="Vertical">
                                                     <TextBlock Text="Numer"/>
-                                                    <ComboBox Width="40"  ItemsSource="{Binding DefinedGates}" SelectedItem="{Binding Gate}">
+                                                    <ComboBox Width="40"  ItemsSource="{Binding DefinedGates}" SelectedItem="{Binding Gate, UpdateSourceTrigger=PropertyChanged}">
                                                         <ComboBox.ItemTemplate>
                                                             <DataTemplate>
                                                                 <TextBlock>
@@ -226,11 +227,9 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBox Name="DistanceLengthTB">
-                                        <!--<Binding Path="Length" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <validation:IsPositiveDoubleRule ValidatesOnTargetUpdated="True"/>
-                                            </Binding.ValidationRules>
-                                        </Binding>-->
+                                        <Binding Path="Length" UpdateSourceTrigger="PropertyChanged">
+
+                                        </Binding>
                                     </TextBox>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -238,12 +237,14 @@
                         <DataGridTemplateColumn Header="Typ" Width="60">
                             <DataGridTemplateColumn.CellEditingTemplate>
                                 <DataTemplate>
-                                    <ComboBox Width="60" ItemsSource="{Binding Source={db:EnumBindingSource {x:Type db:DistanceTypeEnum}}}" SelectedItem="{Binding DistanceType}"/>
+                                    <ComboBox Width="60" ItemsSource="{Binding Source={db:EnumBindingSource {x:Type db:DistanceTypeEnum}}}"
+                                              SelectedItem="{Binding DistanceType, UpdateSourceTrigger=PropertyChanged}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellEditingTemplate>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <ComboBox Width="60" ItemsSource="{Binding Source={db:EnumBindingSource {x:Type db:DistanceTypeEnum}}}" SelectedItem="{Binding DistanceType}"/>
+                                    <ComboBox Width="60" ItemsSource="{Binding Source={db:EnumBindingSource {x:Type db:DistanceTypeEnum}}}"
+                                              SelectedItem="{Binding DistanceType, UpdateSourceTrigger=PropertyChanged}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -251,9 +252,10 @@
                                                 ItemsSource="{Binding Source={db:EnumBindingSource {x:Type db:DistanceTypeEnum}}}">
                             
                         </DataGridComboBoxColumn>-->
-                        <DataGridTextColumn Header="Liczba bramek" Binding="{Binding GatesCount, UpdateSourceTrigger=LostFocus}"  Width="Auto">
+                        <DataGridTextColumn x:Name="gatesCountColumn" Header="Liczba bramek" Binding="{Binding GatesCount, UpdateSourceTrigger=LostFocus}"  Width="Auto"/>
+                        <DataGridTextColumn x:Name="lapsCountColumn" Header="Liczba okrążeń" Binding="{Binding LapsCount, UpdateSourceTrigger=LostFocus, Mode=OneWay}"
+                                            Visibility="{Binding IsLapsCountCollapsed, Converter={StaticResource boolToCollapsedConverter}, Mode=OneWay}"  Width="Auto"/>
 
-                        </DataGridTextColumn>
                         <DataGridTemplateColumn Header="Czas startu">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -280,7 +282,6 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridCheckBoxColumn Selector.IsSelected="{Binding IsValid}" IsReadOnly="True"/>
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>

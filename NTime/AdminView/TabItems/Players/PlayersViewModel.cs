@@ -10,6 +10,7 @@ using BaseCore.DataBase;
 using BaseCore.PlayerFilter;
 using ViewCore.Entities;
 using System.Windows;
+using System.Collections;
 
 namespace AdminView.Players
 {
@@ -21,6 +22,8 @@ namespace AdminView.Players
             AddPlayerCmd = new RelayCommand(OnAddPlayerAsync);
             DeleteAllPlayersCmd = new RelayCommand(OnDeleteAllPlayersRequestedAsync);
             ReadPlayersFromCsvCmd = new RelayCommand(OnReadPlayersFromCsvAsync);
+            UpdateFullCategoriesCmd = new RelayCommand(OnUpdateFullCategoriesAsync);
+            DeleteSelectedPlayersCmd = new RelayCommand(OnDeleteSelectedPlayersRequestedAsync);
             TabTitle = "Zawodnicy";
             //NewPlayer = new EditablePlayer(_currentCompetition)
             //{
@@ -31,6 +34,7 @@ namespace AdminView.Players
             //    }
             //};
         }
+
 
         #region Properties
 
@@ -85,6 +89,12 @@ namespace AdminView.Players
         }
 
 
+        private IList _selectedPlayersList = new ArrayList();
+        public IList SelectedPlayersList
+        {
+            get { return _selectedPlayersList; }
+            set { SetProperty(ref _selectedPlayersList, value); }
+        }
 
         private ObservableCollection<EditableDistance> _definedDistances = new ObservableCollection<EditableDistance>();
         public ObservableCollection<EditableDistance> DefinedDistances
@@ -109,36 +119,58 @@ namespace AdminView.Players
         public RelayCommand ViewLoadedCmd { get; private set; }
         public RelayCommand ReadPlayersFromCsvCmd { get; set; }
         public RelayCommand DeleteAllPlayersCmd { get; set; }
+        public RelayCommand UpdateFullCategoriesCmd { get; set; }
+        public RelayCommand DeleteSelectedPlayersCmd { get; set; }
 
         private void DisplayNewPlayers(Player[] dbPlayers)
         {
             foreach (var dbPlayer in dbPlayers)
             {
-                Players.Add(new EditablePlayer(_currentCompetition, DefinedDistances, DefinedExtraPlayerInfo)
+                var playerToAdd = new EditablePlayer(_currentCompetition, DefinedDistances, DefinedExtraPlayerInfo)
                 {
                     DbEntity = dbPlayer,
-                    Distance = new EditableDistance(_currentCompetition),
-                    ExtraPlayerInfo = new EditableExtraPlayerInfo(_currentCompetition)
-                });
+                };
+                playerToAdd.UpdateRequested += Player_UpdateRequested;
+                Players.Add(playerToAdd);
             }
+        }
+
+        private void Player_UpdateRequested(object sender, EventArgs e)
+        {
+            var playerToUpdate = sender as EditablePlayer;
+            _playerRepository.UpdateAsync(playerToUpdate.DbEntity, playerToUpdate.DbEntity.Distance,
+                playerToUpdate.DbEntity.ExtraPlayerInfo);
         }
 
         private async void OnAddPlayerAsync()
         {
             if (CanAddPlayer(NewPlayer, out string message))
             {
-                //NewPlayer = new EditablePlayer(_currentCompetition, DefinedDistances, DefinedExtraPlayerInfo)
-                //{
-                //    DbEntity = new Player()
-                //};
-                await _playerRepository.AddAsync(NewPlayer.DbEntity, NewPlayer.DbEntity.Distance, NewPlayer.DbEntity.ExtraPlayerInfo);
-                Players.Add(NewPlayer);
+                NewPlayer.IsMale =  GetSexForPlayer(NewPlayer);
+                var playerToAdd = NewPlayer.Clone() as EditablePlayer;
+                var tempDistance = playerToAdd.DbEntity.Distance;
+                var tempExtraPlayerInfo = playerToAdd.DbEntity.ExtraPlayerInfo;
+                await _playerRepository.AddAsync(playerToAdd.DbEntity, playerToAdd.DbEntity.Distance, playerToAdd.DbEntity.ExtraPlayerInfo);
+                playerToAdd.DbEntity.Distance = tempDistance;
+                playerToAdd.DbEntity.ExtraPlayerInfo = tempExtraPlayerInfo;
+                playerToAdd.UpdateRequested += Player_UpdateRequested;
+                Players.Add(playerToAdd);
+                ClearNewPlayer();
             }
             else
             {
                 MessageBox.Show(message);
             }
 
+        }
+
+        private bool GetSexForPlayer(EditablePlayer newPlayer)
+        {
+            char[] firstName = newPlayer.FirstName.ToCharArray();
+            if (firstName.Last() == 'a' && NewPlayer.FirstName.ToLower() != "kuba")
+                return false;
+            else
+                return true;
         }
 
         private bool CanAddPlayer(EditablePlayer newPlayer, out string message)
@@ -154,11 +186,16 @@ namespace AdminView.Players
                 message = "Nieprawidłowy czas startu zawodnika";
                 return false;
             }
-            //if(newPlayer.Distance == null)
-            //{
-            //    message = "Nie przypisano żadnego dystansu";
-            //    return false;
-            //}
+            if (newPlayer.Distance == null)
+            {
+                message = "Nie przypisano żadnego dystansu";
+                return false;
+            }
+            if (newPlayer.ExtraPlayerInfo == null)
+            {
+                message = "Nie przypisano Dodatkowych informacji";
+                return false;
+            }
 
             return true;
         }
@@ -168,6 +205,14 @@ namespace AdminView.Players
             await AddPlayersFromCsvToDatabase();
             await AddPlayersFromDatabaseAndDisplay(new PlayerFilterOptions(),
                 pageNumber: 0, numberOfItemsOnPage: 50);
+        }
+
+
+        private async void OnUpdateFullCategoriesAsync()
+        {
+            await _playerRepository.UpdateFullCategoryAllAsync();
+            DownloadDataFromDatabaseAsync();
+            MessageBox.Show("Kategorie zostały przeliczone poprawnie");
         }
 
         private async Task AddPlayersFromCsvToDatabase()
@@ -185,7 +230,7 @@ namespace AdminView.Players
         private async void OnDeleteAllPlayersRequestedAsync()
         {
             MessageBoxResult result = MessageBox.Show(
-                $"Czy na pewno chcesz usunąć wszystkich {Players.Count} zawodników?",
+                $"Czy na pewno chcesz usunąć wszystkich zawodników?",
                 $"",
                 MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
@@ -202,12 +247,47 @@ namespace AdminView.Players
             Players.Clear();
         }
 
-        private async void OnViewLoadedAsync()
+
+        private void DeleteSelectedPlayersFromGUI(ICollection<EditablePlayer> selectedPlayersList)
+        {
+            foreach (var player in selectedPlayersList)
+            {
+                Players.Remove(player);
+            }
+        }
+
+        private async void OnDeleteSelectedPlayersRequestedAsync()
+        {
+            MessageBoxResult result = MessageBox.Show(
+             $"Czy na pewno chcesz usunąć {SelectedPlayersList.Count} zawodników?",
+                $"",
+                MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                var selectedPlayersArray = SelectedPlayersList.Cast<EditablePlayer>().ToArray();
+                await DeleteSelectedPlayersFromDatabaseAsync(selectedPlayersArray);
+                DeleteSelectedPlayersFromGUI(selectedPlayersArray);
+                MessageBox.Show("Wybrani zawodnicy zostali usunięci");
+            }
+            else return;
+        }
+
+        private void OnViewLoadedAsync()
+        {
+            DownloadDataFromDatabaseAsync(removeAllDisplayedBefore: true);
+        }
+
+        private async void DownloadDataFromDatabaseAsync(bool removeAllDisplayedBefore = false)
         {
             await DownloadDistancesAsync();
             await DownloadExtraPlayerInfoAsync();
             //await DownloadAllPlayers();
-            await AddPlayersFromDatabaseAndDisplay(new PlayerFilterOptions(), 0, 50, true);
+            await AddPlayersFromDatabaseAndDisplay(new PlayerFilterOptions(), 0, 50, removeAllDisplayedBefore);
+            ClearNewPlayer();
+        }
+
+        private void ClearNewPlayer()
+        {
             NewPlayer = new EditablePlayer(_currentCompetition, DefinedDistances, DefinedExtraPlayerInfo)
             {
                 //Distance = new EditableDistance(_currentCompetition),
@@ -217,11 +297,10 @@ namespace AdminView.Players
                     Distance = new Distance(),
                     ExtraPlayerInfo = new ExtraPlayerInfo(),
                     StartTime = DateTime.Today,
-                    BirthDate= DateTime.Today
+                    BirthDate = DateTime.Today
                 }
             };
         }
-
 
         private async void FilterValueChangedAsync()
         {
@@ -257,6 +336,17 @@ namespace AdminView.Players
         private async Task DeleteAllPlayersFromDatabaseAsync()
         {
             await _playerRepository.RemoveAllAsync();
+        }
+
+
+        private async Task DeleteSelectedPlayersFromDatabaseAsync(ICollection<EditablePlayer> selectedPlayersList)
+        {
+            List<Task> tasks = new List<Task>();
+            foreach (var player in selectedPlayersList)
+            {
+                tasks.Add( _playerRepository.RemoveAsync(player.DbEntity));
+            }
+            await Task.WhenAll(tasks);
         }
 
         private async Task DownloadDistancesAsync()
