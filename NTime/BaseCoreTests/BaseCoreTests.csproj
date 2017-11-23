@@ -74,6 +74,10 @@
     <None Include="Csv\TestFiles\Times.csv" />
     <None Include="Csv\TestFiles\Players.csv" />
     <None Include="packages.config" />
+    <None Include="Resources\log1.csv" />
+    <None Include="Resources\log2.csv" />
+    <None Include="Resources\log3.csv" />
+    <None Include="Resources\Zawodnicy.csv" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BaseCore\BaseCore.csproj">

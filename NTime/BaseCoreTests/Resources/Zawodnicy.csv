@@ -1,0 +1,603 @@
+id_z;nr_startowy;imie;nazwisko;miejscowosc;klub;data_urodzenia;plec;rower;distanceId;czas_startu;kategoria;kat_wiek;nr_grupy;nazwa_dystansu;dlugosc
+0;214;Jacek;Lipowski;Pabianice;;1965-07-01;M;inny;;10:58:00;MINI M5i;M5;;MINI;73
+0;523;LENA;ŚNIEG;ŁASK;;1966-05-22;K;inny;;11:46:00;+ROD K5i;K5;;+RODZINNY;36
+0;450;Krzysztof;Czuba;Śliwniki;;1971-04-14;M;szosowy;;11:42:00;MINI M4s;M4;;MINI;73
+0;519;LESZEK;ROJEWSKI;ŁASK;;1967-06-23;M;inny;;11:46:00;+ROD M4i;M4;;+RODZINNY;36
+0;531;Michał;Paluch;Łask;Amator;2000-11-11;M;inny;;11:48:00;+ROD M1i;M1;;+RODZINNY;36
+0;68;Tadeusz;Kuczera;Jankowice;;1953-10-04;M;inny;;10:32:00;MEGA M6i;M6;;MEGA;146
+0;168;BARTOSZ;LANDOS;SIERADZ;;1984-07-29;M;inny;;10:50:00;MINI M3i;M3;;MINI;73
+0;268;Paweł;Similak;Sieradz;;1986-08-06;M;szosowy;;11:08:00;MINI M3s;M3;;MINI;73
+0;293;Konrad;Kołodziejski;Kraków;;1988-07-20;M;szosowy;;11:14:00;MINI M2s;M2;;MINI;73
+0;343;LUDWIK;STANOSSEK;KLUCZBORK;;1958-08-25;M;szosowy;;11:22:00;MINI M5s;M5;;MINI;73
+0;45;Mariusz;Staszak;Śrem;;1965-07-19;M;szosowy;;08:09:00;GIGA M5s;M5;;GIGA;219
+0;165;Mariusz;Kuźniak;Łask;;1972-10-20;M;inny;;10:50:00;MINI M4i;M4;;MINI;73
+0;235;Sławomir;Lisiecki;Ozorków;;1980-02-21;M;szosowy;;11:06:00;MINI M3s;M3;;MINI;73
+0;300;Andrzej;Wawrzyniak;ŁÓDŻ;;1945-11-14;M;szosowy;;11:14:00;MINI M7s;M7;;MINI;73
+0;44;Zbigniew;Kreft;Śrem;Ciacho Team;1964-10-09;M;szosowy;;08:09:00;GIGA M5s;M5;;GIGA;219
+0;94;Sławomir;Wągrowski;Wolica;;1974-10-26;M;szosowy;;10:36:00;MEGA M4s;M4;;MEGA;146
+0;433;Aleksandra;Krause;Szczecin;Szczeciński Klub Rowerowy Gryfus;1991-08-03;K;szosowy;;11:38:00;MINI K2s;K2;;MINI;73
+0;530;Łucja;Tomczak;Głowno;Tomczak Team;2009-04-19;K;inny;;11:48:00;+ROD K1i;K1;;+RODZINNY;36
+0;560;Adrian;Gapiński;Szczecin;Szczecin na rowerach;2003-10-07;M;inny;;11:52:00;+ROD M1i;M1;;+RODZINNY;36
+0;600;Roksana;Zienowicz;Łódź;Spedimex Bike Team;2000-11-30;K;inny;;12:00:00;RODZ K1i;K1;;RODZINNY;18
+0;615;Aleksandra;Sar;Piotrków Tryb.;Spedimex Bike Team;2011-04-26;K;inny;;12:02:00;RODZ K1i;K1;;RODZINNY;18
+0;417;Bogumił;Soiński;Łask;Jastrzębie Łaskie;1974-01-13;M;szosowy;;11:36:00;MINI M4s;M4;;MINI;73
+0;447;Łukasz;Skwarczyński;Miechów;Omega Miechów;1985-09-17;M;szosowy;;11:42:00;MINI M3s;M3;;MINI;73
+0;131;Przemysław;Olejniczak;Bełchatów;LSKK Lityński;1977-01-10;M;szosowy;;10:44:00;MEGA M3s;M3;;MEGA;146
+0;171;MIROSŁAW;JANUSEK;MIĘDZYRZECZ;TEAM MIĘDZYRZECZ;1974-08-22;M;inny;;10:52:00;MINI M4i;M4;;MINI;73
+0;574;Agnieszka;Sudra-Biernacka;Pabianice;Sudra Team;1971-09-02;K;szosowy;;11:54:00;RODZ M4s;M4;;RODZINNY;18
+0;619;Zuzanna;Adamiak;Łódź;Spedimex Bike Team;2001-01-24;K;inny;;12:04:00;RODZ K1i;K1;;RODZINNY;18
+0;419;Józef;Misiak;Miękinia;Maciejewski Cyckling Team;1939-07-01;M;szosowy;;11:36:00;MINI M7s;M7;;MINI;73
+0;111;Bernadeta;Tomaszek;Kraków;AZS AWF KRAKÓW MASTERS;1976-09-18;K;szosowy;;10:40:00;MEGA K4s;K4;;MEGA;146
+0;449;Tomasz;Szygenda;Slupca;SGR Racing Team;1977-06-10;M;szosowy;;11:42:00;MINI M3s;M3;;MINI;73
+0;448;Sebastian;Wojtysiak;Biadki;OTR INTERKOL;1972-10-04;M;szosowy;;11:42:00;MINI M4s;M4;;MINI;73
+0;556;Tomasz;Podlaszewski;Grotniki;Kwiczoły Grotnickie;2006-08-04;M;inny;;11:52:00;+ROD M1i;M1;;+RODZINNY;36
+0;586;Justyna;Kulczycka-Krysiak;Dobroń;;1979-07-27;K;szosowy;;11:58:00;RODZ K3s;K3;;RODZINNY;18
+0;156;Tomasz;Miksa;Łask;Jastrzębie Łaskie;1976-10-23;M;inny;;10:48:00;MINI M4i;M4;;MINI;73
+0;66;Karol;Pazera;Kudowa-Zdrój;Klub Kolarski Ziemi Kłodzkiej-wwwklasykklodzki.com;1972-11-04;M;inny;;10:32:00;MEGA M4i;M4;;MEGA;146
+0;611;Wiktor;Olejnk;Piotrków Tryb.;Spedimex Bike Team;1975-11-18;M;inny;;12:02:00;RODZ M4i;M4;;RODZINNY;18
+0;296;Krzysztof;Misztela;Wielun;Wielun;1974-11-15;M;szosowy;;11:14:00;MINI M4s;M4;;MINI;73
+0;625;Franciszek;WASILEWSKI;Szczerców;1981;2013-10-01;M;inny;;12:04:00;RODZ M1i;M1;;RODZINNY;18
+0;36;Tytus;Czartoryski;Morzecin Maly;Szerszenie Trzebnica;1945-03-30;M;szosowy;;08:07:00;GIGA M7s;M7;;GIGA;219
+0;81;Paweł;Michalak;Bełchatów;LSKK Lityński Bełchatów;1972-03-05;M;szosowy;;10:34:00;MEGA M4s;M4;;MEGA;146
+0;121;Andrzej;Kot;Murowana Goślina;OTC Oborniki;1948-09-17;M;szosowy;;10:42:00;MEGA M6s;M6;;MEGA;146
+0;161;Wojciech;Okołotowicz;Łódź;Asseco Active Team;1984-02-26;M;inny;;10:50:00;MINI M3i;M3;;MINI;73
+0;181;Jarek;Zintek;Warszawa;Klub Wysokogórski Warszawa;1966-12-18;M;inny;;10:52:00;MINI M5i;M5;;MINI;73
+0;27;STANISŁAW;DOŁMAT;GORZÓW WLKP.;.;1957-07-03;M;szosowy;;08:04:00;GIGA M5s;M5;;GIGA;219
+0;465;Franciszek;Harbacewicz;Goleniów;NTS NEXELO JF DUET;1960;M;szosowy;;11:42:00;MINI M5s;M5;;MINI;73
+0;461;Sławomir;Chrzanowski;Rychwałt;NTS NEXELO JF DUET;1969;M;szosowy;;11:40:00;MINI M4s;M4;;MINI;73
+0;460;Wojciech;Ziółkowski;Stargard;NTS NEXELO JF DUET;1984;M;szosowy;;11:16:00;MINI M3s;M3;;MINI;73
+0;620;Ewa;Orłowska;Łódź;Omega Miechów;1976-02-28;K;inny;;12:04:00;RODZ K4i;K4;;RODZINNY;18
+0;621;Szymon;Orłowski;Łódź;Omega Miechów;2010-01-25;M;inny;;12:04:00;RODZ M1i;M1;;RODZINNY;18
+0;564;Stanisław;Waga;Łódź;;2009-07-24;M;inny;;11:54:00;+ROD M1i;M1;;+RODZINNY;36
+0;599;Alicja;Belka;warszawa;;2014-01-01;K;szosowy;;12:00:00;RODZ K1s;K1;;RODZINNY;18
+0;516;JOLANTA;MADEJ;ŁASK;;1972-06-18;K;inny;;11:46:00;+ROD K4i;K4;;+RODZINNY;36
+0;622;Piotr;Sokół;Łódź;ŁKW;1977-06-21;M;inny;;12:04:00;RODZ M3i;M3;;RODZINNY;18
+0;536;BARTEK;KOT;ŁASK;;2000-09-18;M;szosowy;;11:50:00;+ROD M1s;M1;;+RODZINNY;36
+0;551;Alicja;Dyśko;Łódź;;2003-01-09;K;inny;;11:52:00;+ROD K1i;K1;;+RODZINNY;36
+0;561;paweł;jagdzinski;łódź;;1977-02-28;M;szosowy;;11:54:00;+ROD M3s;M3;;+RODZINNY;36
+0;591;Anna;Konikowska;Łódź;;1984-05-31;K;inny;;11:58:00;RODZ K3i;K3;;RODZINNY;18
+0;590;Karol;Konikowski;Łódź;;1980-05-23;M;inny;;11:58:00;RODZ M3i;M3;;RODZINNY;18
+0;458;Andrzej;Tarka;Wygiezłów;;1977;M;szosowy;;11:12:00;MINI M3s;M3;;MINI;73
+0;127;Tomasz;Justyński;Raszyn;;1985-01-23;M;szosowy;;10:42:00;MEGA M3s;M3;;MEGA;146
+0;252;Jolanta;Zywert;Zagórów;SGR Racing Team;1986-01-07;K;szosowy;;11:06:00;MINI K3s;K3;;MINI;73
+0;302;Arkadiusz;Sacewicz;Pabianice;;1977-03-16;M;szosowy;;11:14:00;MINI M3s;M3;;MINI;73
+0;48;Agnieszka;Mielcarek;Poznań;;1987-09-23;K;szosowy;;07:54:00;MEGA K2s;K2;;MEGA;146
+0;148;Chris;lasota;Toruń;;1954-01-21;M;szosowy;;10:46:00;MEGA M6s;M6;;MEGA;146
+0;273;Artur;Biernacki;Pabianice;;1996-11-03;M;szosowy;;11:10:00;MINI M2s;M2;;MINI;73
+0;298;Jerzy;Rózga;Pabianice;PAFANA;1952-01-27;M;szosowy;;11:14:00;MINI M6s;M6;;MINI;73
+0;323;Waldemar;Baranowski;Kryniczno;;1954-09-21;M;szosowy;;11:18:00;MINI M6s;M6;;MINI;73
+0;373;Henryk;TORBUS;KALISZ;TAMA TEAM;1946-10-07;M;szosowy;;11:28:00;MINI M7s;M7;;MINI;73
+0;398;Jacek;Papiorek;Godów;SKŚ;1963-03-11;M;szosowy;;11:32:00;MINI M5s;M5;;MINI;73
+0;190;Łukasz;Warzocha;Łask;;1986-01-20;M;inny;;10:54:00;MINI M3i;M3;;MINI;73
+0;25;Ireneusz;Lula;Gdynia;;1958-01-14;M;szosowy;;08:04:00;GIGA M5s;M5;;GIGA;219
+0;49;Tadeusz;Matuszek;Rybnik;;1958-04-13;M;szosowy;;07:54:00;MEGA M5s;M5;;MEGA;146
+0;184;Agnieszka;Pawlaczek;Prusice;;1978-01-21;K;inny;;10:54:00;MINI K3i;K3;;MINI;73
+0;240;Robert;Ślipek;Sieradz;;1969-10-30;M;szosowy;;11:04:00;MINI M4s;M4;;MINI;73
+0;310;Rafał;Burdyszek;Bytom;;1972-02-20;M;szosowy;;11:16:00;MINI M4s;M4;;MINI;73
+0;104;BOGUSŁAW;KARDAS;PABIANICE;;1956-06-16;M;szosowy;;10:38:00;MEGA M6s;M6;;MEGA;146
+0;264;Marcin;Gryszkalis;Łódź;;1977-06-16;M;szosowy;;11:08:00;MINI M3s;M3;;MINI;73
+0;344;MARIUSZ;LIMIERA;PABIANICE;Li!;1972-03-26;M;szosowy;;11:24:00;MINI M4s;M4;;MINI;73
+0;351;Jan;Kwiatkowski;Łódź;;1953-06-24;M;szosowy;;11:24:00;MINI M6s;M6;;MINI;73
+0;503;Michał;Przybylski;Teodory;;2005-06-30;M;inny;;11:44:00;+ROD M1i;M1;;+RODZINNY;36
+0;533;Paulina;świegocka;łask;;1985-06-20;K;szosowy;;11:48:00;+ROD K3s;K3;;+RODZINNY;36
+0;568;Kinga;Kamińska;Częstochowa;;2005-11-11;K;inny;;11:54:00;+ROD K1i;K1;;+RODZINNY;36
+0;618;Amelia;Zalasa;Łódź;Spedimex;2005-12-30;K;inny;;12:04:00;RODZ K1i;K1;;RODZINNY;18
+0;330;igor;zbrzeźniak;raszyn;;1995-11-17;M;szosowy;;11:20:00;MINI M2s;M2;;MINI;73
+0;400;Krzysztof;KASZUBA;Poddębice;;1976-05-22;M;szosowy;;11:32:00;MINI M4s;M4;;MINI;73
+0;512;Bożena;Grudzińska;Zabrze;;1953-03-22;K;inny;;11:46:00;+ROD K6i;K6;;+RODZINNY;36
+0;542;ANETA;SADZIŃSKA;ŁASK;;1979-06-17;K;szosowy;;11:50:00;+ROD K3s;K3;;+RODZINNY;36
+0;587;Weronika;Krysiak;Dobroń;;1979-05-31;K;szosowy;;11:58:00;RODZ K3s;K3;;RODZINNY;18
+0;382;Michał;Tomczak;Zgierz;;1981-08-27;M;szosowy;;11:30:00;MINI M3s;M3;;MINI;73
+0;457;Adrian;Ćwirko;Trzebnica;;1989-02-06;M;szosowy;;11:42:00;MINI M2s;M2;;MINI;73
+0;534;Filip;Świegocki;łask;;2006-05-19;M;szosowy;;11:48:00;+ROD M1s;M1;;+RODZINNY;36
+0;617;Dorota;Zalasa;Łódź;Spedimex;1968-09-25;K;inny;;12:04:00;RODZ K4i;K4;;RODZINNY;18
+0;428;Dominik;Kmiecik;Piątkowisko;;1983-02-16;M;szosowy;;11:38:00;MINI M3s;M3;;MINI;73
+0;453;Mateusz;Wolski;Zelów;;2014-05-10;M;szosowy;;11:42:00;MINI M1s;M1;;MINI;73
+0;525;Maciej;Kozubek;Łódź;;1975-02-23;M;inny;;11:48:00;+ROD M4i;M4;;+RODZINNY;36
+0;550;Piotr;Dyśko;Łódź;;1972-06-06;M;inny;;11:52:00;+ROD M4i;M4;;+RODZINNY;36
+0;570;Oskar;Kamiński;Częstochowa;;2007-09-09;M;inny;;11:54:00;+ROD M1i;M1;;+RODZINNY;36
+0;595;Alicja;Stolarek;Łask;;1957-04-16;K;inny;;11:58:00;RODZ K5i;K5;;RODZINNY;18
+0;471;Mariusz DNS;Depczyński DNS;Łódź;;1985;M;inny;;20:56:00;MINI M3i;M3;;MINI;73
+0;132;Mariusz;Kaźmierczak;Tuszyn;;1973-04-21;M;szosowy;;10:44:00;MEGA M4s;M4;;MEGA;146
+0;157;Bogumił;Żmijewski;Bydgoszcz;;1955-10-26;M;inny;;10:48:00;MINI M6i;M6;;MINI;73
+0;207;WANDA;SMARZEK;WIEWIÓRCZYN;;1952-06-15;K;inny;;10:58:00;MINI K6i;K6;;MINI;73
+0;232;Piotr Janiak;Janiak;Sieradz;-0;1983-01-05;M;szosowy;;11:02:00;MINI M3s;M3;;MINI;73
+0;3;Jarosław;Kubiak;Bydgoszcz;;1978-01-21;M;inny;;08:00:00;GIGA M3i;M3;;GIGA;219
+0;203;Anna;Lipowska;Pabianice;;1994-09-16;K;inny;;10:56:00;MINI K2i;K2;;MINI;73
+0;228;Marek;Kocięcki;Zgierz;;1982-08-07;M;szosowy;;11:02:00;MINI M3s;M3;;MINI;73
+0;278;Mirosław;Antczak;Słowik;;1963-01-17;M;szosowy;;11:10:00;MINI M5s;M5;;MINI;73
+0;303;Piotr;Skwarnecki;TUSZYN;;1974-08-24;M;szosowy;;11:24:00;MINI M4s;M4;;MINI;73
+0;328;MICHAŁ;MATUSIAK;CHOJNE;;1983-07-10;M;szosowy;;11:24:00;MINI M3s;M3;;MINI;73
+0;353;Katarzyna;Jocher;Radłów;;1978-12-08;K;szosowy;;11:24:00;MINI K3s;K3;;MINI;73
+0;378;Piotr;RESZKA;Łódź;2014;1960-12-12;M;szosowy;;11:28:00;MINI M5s;M5;;MINI;73
+0;210;Magdalena;Lipowska;Pabianice;;1966-07-02;K;inny;;10:58:00;MINI K5i;K5;;MINI;73
+0;4;Zbigniew;Bauta;Kaszczor;Cień Szułany;1975-02-16;M;inny;;08:00:00;GIGA M4i;M4;;GIGA;219
+0;189;Ewa;Stachowiak;Zabrze;;1988-10-12;K;inny;;10:54:00;MINI K2i;K2;;MINI;73
+0;114;Paweł;Burski;Łódź;;1969-05-20;M;szosowy;;10:40:00;MEGA M4s;M4;;MEGA;146
+0;234;Marek;Kattenbach;Kępno;brak;1965-03-31;M;szosowy;;11:02:00;MINI M5s;M5;;MINI;73
+0;274;Jan;Domagała;Sieradz;;1955-07-18;M;szosowy;;11:10:00;MINI M6s;M6;;MINI;73
+0;359;Paweł;Franz;Wolsztyn;KKFP;1981-03-20;M;szosowy;;11:26:00;MINI M3s;M3;;MINI;73
+0;356;Andrzej;Pankowski;Pruszowice;;1959-03-04;M;szosowy;;11:24:00;MINI M5s;M5;;MINI;73
+0;513;Jakub;Grudziński;Zabrze;;1981-06-03;M;inny;;11:46:00;+ROD M3i;M3;;+RODZINNY;36
+0;578;Agata;Balcerska;Zgierz;;2003-02-24;K;inny;;11:56:00;RODZ K1i;K1;;RODZINNY;18
+0;623;HANNA;SOKÓŁ;Łódź;;2011-11-24;K;inny;;12:04:00;RODZ K1i;K1;;RODZINNY;18
+0;345;Roland;Listner;Berlin;;1945-02-08;M;szosowy;;11:22:00;MINI M7s;M7;;MINI;73
+0;405;Marek;Gos;Bełchatów;;1958-07-11;M;szosowy;;11:34:00;MINI M5s;M5;;MINI;73
+0;517;MAŁGORZATA;NOWAK;ŁASK;;1972-03-08;K;inny;;11:46:00;+ROD K4i;K4;;+RODZINNY;36
+0;592;Antoni;Konikowski;Łódź;;2009-11-24;M;inny;;11:58:00;RODZ M1i;M1;;RODZINNY;18
+0;392;Jarosław;Wolski;Zelów;;1972-06-02;M;szosowy;;11:32:00;MINI M4s;M4;;MINI;73
+0;504;Sławomir;Szmajda;Łódź;;1981-07-20;M;szosowy;;11:44:00;+ROD M3s;M3;;+RODZINNY;36
+0;409;Sebastian;Rosik;Szczecin;;1980-02-11;M;szosowy;;11:34:00;MINI M3s;M3;;MINI;73
+0;438;Adam;Graczyk;Pabianice;PAFANA;1968-03-20;M;szosowy;;11:40:00;MINI M4s;M4;;MINI;73
+0;627;Beata;Hańce;Łódź;;1991-05-20;K;szosowy;;12:04:00;RODZ K2s;K2;;RODZINNY;18
+0;535;WŁODEK;KOT;ŁASK;;1967-04-10;M;szosowy;;11:50:00;+ROD M4s;M4;;+RODZINNY;36
+0;576;Aleksandra;Balcerska;Zgierz;;1981-06-18;K;inny;;11:56:00;RODZ K3i;K3;;RODZINNY;18
+0;596;Iwona;Stolarek-Molenda;Łask;;1980-12-28;K;inny;;11:58:00;RODZ K3i;K3;;RODZINNY;18
+0;470;Dagmara;Depczyńska;Łódź;;1988;K;inny;;10:58:00;MINI K2i;K2;;MINI;73
+0;187;SERAFIN;SMARZEK;WIEWIÓRCZYN;;2001-03-09;M;inny;;10:54:00;MINI M1i;M1;;MINI;73
+0;8;Ferdynand;Malak;Leszno;;1948-04-28;M;szosowy;;07:47:00;MEGA M6s;M6;;MEGA;146
+0;158;BENITA;SMARZEK;WIEWIÓRCZYN;;1970-03-22;K;inny;;10:48:00;MINI K4i;K4;;MINI;73
+0;258;ARKADIUSZ;LOTEK;POZNAŃ;AMATOR;1971-03-04;M;szosowy;;11:06:00;MINI M4s;M4;;MINI;73
+0;283;Sławomir;Sadura;Pabianice;;1982-11-05;M;szosowy;;11:12:00;MINI M3s;M3;;MINI;73
+0;10;Edward;Dąbrowski;Bojadła;;1942-09-14;M;szosowy;;08:02:00;GIGA M7s;M7;;GIGA;219
+0;56;Andrzej;Wewiorski;Wrocław;;1948-07-27;M;inny;;10:30:00;MEGA M6i;M6;;MEGA;146
+0;96;Gerard;Skalski;Trzebnica;Movistar;1966-11-15;M;szosowy;;10:38:00;MEGA M5s;M5;;MEGA;146
+0;141;Maciej;Kałużyński;Łódź;;1981-12-04;M;szosowy;;10:46:00;MEGA M3s;M3;;MEGA;146
+0;216;Piotr;Wasilewski;Szczerców;;1981-06-17;M;szosowy;;11:00:00;MINI M3s;M3;;MINI;73
+0;276;Tomasz;Biedrawa;Bytom;;1983-10-26;M;szosowy;;11:10:00;MINI M3s;M3;;MINI;73
+0;316;Michał;Wasilewski;Łódź;;2014-05-29;M;szosowy;;11:18:00;MINI M1s;M1;;MINI;73
+0;52;Sławomir;Chwirot;Opalenica;Brak;1966-05-22;M;szosowy;;08:09:00;GIGA M5s;M5;;GIGA;219
+0;21;Arkadiusz;Cieśla;Byków;;1976-02-18;M;szosowy;;08:04:00;GIGA M4s;M4;;GIGA;219
+0;41;Andrzej;Staszak;Września;;1949-08-02;M;szosowy;;07:44:00;MEGA M6s;M6;;MEGA;146
+0;186;Tomasz;Kubicki;Czestków A;;1988-11-05;M;inny;;10:54:00;MINI M2i;M2;;MINI;73
+0;221;Tomasz;Drężek;Sulejówek;-0;1986-06-17;M;szosowy;;11:00:00;MINI M3s;M3;;MINI;73
+0;281;Marek;Błoch;Huta Dłutowska;;1972-04-01;M;szosowy;;11:10:00;MINI M4s;M4;;MINI;73
+0;2;krzysztof knaś;knaś;wrocław;;1968-05-03;M;inny;;07:45:00;MEGA M4i;M4;;MEGA;146
+0;11;Paweł;Pesz;Wrocław;InsERT Team;1974-06-02;M;szosowy;;08:02:00;GIGA M4s;M4;;GIGA;219
+0;46;Piotr;Krysztofczyk;Łódź;;1978-11-06;M;szosowy;;08:09:00;GIGA M3s;M3;;GIGA;219
+0;86;Marek;Hojak;Kalisz;29Rebel;1973-02-27;M;szosowy;;10:36:00;MEGA M4s;M4;;MEGA;146
+0;71;PIOTR;STACHOWIAK;POZNAŃ;CRAZY TEAM;1973-11-10;M;inny;;10:32:00;MEGA M4i;M4;;MEGA;146
+0;116;Rafał;Skowroński;Wrocław;;1982-05-29;M;szosowy;;10:40:00;MEGA M3s;M3;;MEGA;146
+0;176;Jan;Kozak;Nysa;Nysa-GTC Gracze;1952-03-24;M;inny;;10:52:00;MINI M6i;M6;;MINI;73
+0;251;Adam Antoni;Janczura;Łódź;;1977-06-13;M;szosowy;;11:06:00;MINI M3s;M3;;MINI;73
+0;306;Mateusz;Łopuszyński;Łódź;;1985-07-11;M;szosowy;;11:16:00;MINI M3s;M3;;MINI;73
+0;32;STANISLAW;szczesny;krzepice;;1960-10-05;M;szosowy;;08:07:00;GIGA M5s;M5;;GIGA;219
+0;101;Piotr;Kraska;Łódź;;1971-06-29;M;szosowy;;10:23:00;MINI M4s;M4;;MINI;73
+0;236;Andrzej;Gierusz;Wrocław;T&J;1963-12-29;M;szosowy;;11:02:00;MINI M5s;M5;;MINI;73
+0;22;Ryszard;Głowacki;Brudnice;;1956-04-21;M;szosowy;;08:04:00;GIGA M6s;M6;;GIGA;219
+0;246;Wiesław;Galas;Wrocław;;1965-12-12;M;szosowy;;11:04:00;MINI M5s;M5;;MINI;73
+0;301;Ireneusz;Biskupski;Końskie;;1949-09-15;M;szosowy;;11:14:00;MINI M6s;M6;;MINI;73
+0;92;Robert;Mila;Kłodawa;roger;1969-06-14;M;szosowy;;10:36:00;MEGA M4s;M4;;MEGA;146
+0;462;Sandra;Rydzyńska;Szczecin;NTS NEXELO JF DUET;1997;K;szosowy;;11:12:00;MINI K2s;K2;;MINI;73
+0;463;Andrzej;Zachacz;WĘGORZYNO;STC STARGARD;1975;M;szosowy;;11:02:00;MINI M4s;M4;;MINI;73
+0;629;Jolanta;Przepiórka;Łódź;;1979;K;inny;;12:04:00;RODZ K3i;K3;;RODZINNY;18
+0;469;Tomasz;Filipiak;Sobótka;Szybki Rolnik;1973;M;szosowy;;10:44:00;MEGA M4s;M4;;MEGA;146
+0;468;Piotr;Jaszczur;Warszawa;Jasczurka Team;1974;M;szosowy;;11:28:00;MINI M4s;M4;;MINI;73
+0;404;Wojciech;Kubacki;Wilczyn;;1985-12-29;M;szosowy;;11:34:00;MINI M3s;M3;;MINI;73
+0;320;Patryk;Banach;Wolsztyn;KKFP;1995-04-04;M;szosowy;;11:18:00;MINI M2s;M2;;MINI;73
+0;342;Marcin;Kucharek;Wieluń;;1973-12-09;M;szosowy;;11:22:00;MINI M4s;M4;;MINI;73
+0;454;Zenon;Michalczuk;SANOK;;1957-01-01;M;szosowy;;11:42:00;MINI M5s;M5;;MINI;73
+0;565;Joanna;Waga;Łódź;;1978-11-08;K;inny;;11:54:00;+ROD K3i;K3;;+RODZINNY;36
+0;215;Czesław;Jesionowski;Ozorkow;;1962-02-10;M;inny;;10:58:00;MINI M5i;M5;;MINI;73
+0;518;JAGODA;ROJEWSKA;ŁASK;;2003-04-22;K;inny;;11:46:00;+ROD K1i;K1;;+RODZINNY;36
+0;425;Tomasz;Gumulak;Bytom;;1983-01-16;M;szosowy;;11:38:00;MINI M3s;M3;;MINI;73
+0;514;Bogdan;Grudziński;Zabrze;;1950-10-11;M;inny;;11:46:00;+ROD M6i;M6;;+RODZINNY;36
+0;526;Juliusz;Kraska;Łódź;;2004-07-14;M;inny;;11:48:00;+ROD M1i;M1;;+RODZINNY;36
+0;626;Angela;Salata;Komorówko;;1992-09-19;K;szosowy;;12:04:00;RODZ K2s;K2;;RODZINNY;18
+0;63;Piotr;Machowicz;Poznań;CRAZY TEAM;1979-12-27;M;inny;;10:32:00;MEGA M3i;M3;;MEGA;146
+0;29;Tadeusz;Habaj;Zabrze;;1947-01-28;M;szosowy;;08:04:00;GIGA M6s;M6;;GIGA;219
+0;324;Tadeusz;Cudo;Marklowice;S.K.Ś;1962-03-08;M;szosowy;;11:18:00;MINI M5s;M5;;MINI;73
+0;594;Ryszard;Stolarek;Łask;;1957-10-27;M;inny;;11:58:00;RODZ M5i;M5;;RODZINNY;18
+0;545;LAURA;SZCZEPAŃSKA;ŁASK;;1980-06-03;K;szosowy;;11:50:00;+ROD K3s;K3;;+RODZINNY;36
+0;122;Daniel;Lindner;Opatówek;;1967-08-06;M;szosowy;;10:42:00;MEGA M4s;M4;;MEGA;146
+0;297;Marcin;Kuźniar;Łódź;;1963-08-07;M;szosowy;;11:14:00;MINI M5s;M5;;MINI;73
+0;384;Jan;Kostrzewski;Nekla;;1957-12-25;M;szosowy;;11:30:00;MINI M5s;M5;;MINI;73
+0;315;Piotr;Skubiś;Lućmierz;;1966-05-19;M;szosowy;;11:18:00;MINI M5s;M5;;MINI;73
+0;597;Martyna;Molenda;Łask;;2013-10-31;K;inny;;11:58:00;RODZ K1i;K1;;RODZINNY;18
+0;429;Zbigniew;Faryś;Czestków B;;1966-03-03;M;szosowy;;11:38:00;MINI M5s;M5;;MINI;73
+0;138;andrzej;bogdański;będkowice;;1969-09-03;M;szosowy;;10:29:00;MINI M4s;M4;;MINI;73
+0;263;Sławomir;Zach;Łask;;1974-05-24;M;szosowy;;11:08:00;MINI M4s;M4;;MINI;73
+0;220;Grzegorz;Lutek;Łódź;Spedimex;1965-12-09;M;szosowy;;11:00:00;MINI M5s;M5;;MINI;73
+0;224;Marek;Hys;Świętochłowice;;1969-05-03;M;szosowy;;11:00:00;MINI M4s;M4;;MINI;73
+0;528;Natalia;Kraska;Łódź;;1999-01-31;K;szosowy;;11:48:00;+ROD K1s;K1;;+RODZINNY;36
+0;367;Paweł;Bartosik;Łask;ŁBTSW;1971-04-16;M;szosowy;;11:26:00;MINI M4s;M4;;MINI;73
+0;452;Piotr;Kupis;Sieradz;;1980-07-02;M;szosowy;;11:42:00;MINI M3s;M3;;MINI;73
+0;360;Piotr;Pietrzak;Parzęczew;;1956-08-22;M;szosowy;;11:26:00;MINI M6s;M6;;MINI;73
+0;407;Zbigniew;Toboła;Sieradz;;1940-06-12;M;szosowy;;11:34:00;MINI M7s;M7;;MINI;73
+0;443;Marek;Rosiak;Ksawerów;;1954-05-23;M;szosowy;;11:40:00;MINI M6s;M6;;MINI;73
+0;589;Zofia;Krysiak;Dobroń;;2014-10-09;K;szosowy;;11:58:00;RODZ M1s;M1;;RODZINNY;18
+0;129;Bartłomiej;Ochman;Gliwice;;1976-08-13;M;szosowy;;10:44:00;MEGA M4s;M4;;MEGA;146
+0;520;ZBIGNIEW;SZCZEPANIAK;ŁASK;;1972-08-20;M;inny;;11:46:00;+ROD M4i;M4;;+RODZINNY;36
+0;546;ADAM;SZCZEPAŃSKI;ŁASK;;1979-07-29;M;szosowy;;11:50:00;+ROD M3s;M3;;+RODZINNY;36
+0;40;Szymon;Koziatek;Zawiercie;;1970-04-18;M;szosowy;;08:07:00;GIGA M4s;M4;;GIGA;219
+0;467;Anna;Tyfa;Łódź;;1975;K;szosowy;;11:28:00;MINI K4s;K4;;MINI;73
+0;365;MAREK;GŁĄBSKI;ŁÓDŹ;nocne marki;1965-12-22;M;szosowy;;11:26:00;MINI M5s;M5;;MINI;73
+0;580;BARBARA;BACZYŃSKA;MOSZCZENICA;;1978-11-08;K;inny;;11:56:00;RODZ K3i;K3;;RODZINNY;18
+0;91;Irena;Łańcucka;Wrocław;KKS Trzebnica;1957-10-19;K;szosowy;;11:36:00;MINI K5s;K5;;MINI;73
+0;167;Agata;Zintek;Warszawa;Klub Wysokogórski Warszawa;1971-10-11;K;inny;;10:50:00;MINI K4i;K4;;MINI;73
+0;292;Leszek;Kołacki;Śrem;Kolacki TEAM;1964-10-13;M;szosowy;;11:12:00;MINI M5s;M5;;MINI;73
+0;206;Paweł;Stempiński;Szczecin;Atos Team Szczecin;1989-04-27;M;inny;;10:58:00;MINI M2i;M2;;MINI;73
+0;256;Krzysztof;Jakubczyk;Moszczenica;Piotrkowskie Kolarstwo;1990-04-30;M;szosowy;;11:06:00;MINI M2s;M2;;MINI;73
+0;199;Iwona;Limiera;Pabianice;Drużna Li!;1963-03-06;K;inny;;10:56:00;MINI K5i;K5;;MINI;73
+0;97;Waldemar;Małczak;Bełchatów;LSKK Lityński Bełchatów;1969-05-25;M;szosowy;;10:23:00;MINI M4s;M4;;MINI;73
+0;286;Grzegorz;Stolarek;Łask;Jastrzębie Łaskie;1968-09-03;M;szosowy;;11:12:00;MINI M4s;M4;;MINI;73
+0;142;Andrzej;Majewski;Miastko;MTS HAMER MIASTKO;1970-11-04;M;szosowy;;10:46:00;MEGA M4s;M4;;MEGA;146
+0;267;Ryszard;Śmiglewicz;NYSA;NYSA CYCLING TEAM;1957-05-15;M;szosowy;;11:08:00;MINI M5s;M5;;MINI;73
+0;188;Tadeusz;Porzucek;Gostyń;GKR Gostyń;1950-01-01;M;inny;;10:54:00;MINI M6i;M6;;MINI;73
+0;313;Dariusz;Lewandowski;Wągrowiec;Merx Team Wągrowiec;1975-12-17;M;szosowy;;11:16:00;MINI M4s;M4;;MINI;73
+0;15;Jerzy;Pikuła;Gorzów Wlkp;Mistrzowskie Rower Lech Piasecki;1955-08-25;M;szosowy;;08:02:00;GIGA M6s;M6;;GIGA;219
+0;562;Daniel;Jagodzinski;łódź;;2005-05-20;M;szosowy;;11:54:00;+ROD M1s;M1;;+RODZINNY;36
+0;76;Maciej;Opielewicz;Koźmin Wlkp;AGK Koźmin Wlkp;1961-12-28;M;szosowy;;10:34:00;MEGA M5s;M5;;MEGA;146
+0;62;Leszek;Jóżwiak;Murowana-Goślina;OTC OBORNIKI;1961-03-01;M;inny;;10:30:00;MEGA M5i;M5;;MEGA;146
+0;172;Sławomir;Lipiński;Nowogard;Lipa Team Nowogard;1969-10-04;M;inny;;10:52:00;MINI M4i;M4;;MINI;73
+0;197;ŁUKASZ;KORCZYŃSKI;Łódź;Rearviz Polska;1981-03-08;M;inny;;10:54:00;MINI M3i;M3;;MINI;73
+0;222;Tomasz;Świerczyński;Wodzierady;Lucy In The Sky;1983-07-22;M;szosowy;;11:00:00;MINI M3s;M3;;MINI;73
+0;247;Adam;Czekaj;miechów;OMEGA MIECHÓW;1981-12-14;M;szosowy;;11:06:00;MINI M3s;M3;;MINI;73
+0;322;ROMAN;MACIEJEWSKI;PABIANICE;PAFANA;1956-10-13;M;szosowy;;11:18:00;MINI M6s;M6;;MINI;73
+0;581;Anastazja;Lasota;Gomulin-Kolonia;;1969-03-04;K;inny;;11:56:00;RODZ K4i;K4;;RODZINNY;18
+0;201;Grzegorz;Napiórkowski;Piotrków Trybunalski;;1974-03-12;M;inny;;10:56:00;MINI M4i;M4;;MINI;73
+0;87;Piotr;Górniak;Częstochowa;K2Win Magazyn Rowerowy Eska Team;1974-05-03;M;szosowy;;10:36:00;MEGA M4s;M4;;MEGA;146
+0;217;Jakub;Jasiński;Andrespol;Pasjonaci kolarstwa Andrespol;1982-04-11;M;szosowy;;11:00:00;MINI M3s;M3;;MINI;73
+0;388;Tomasz;Jacuniak;Bełchatów;Warach-Rowery;1979-05-02;M;szosowy;;11:30:00;MINI M3s;M3;;MINI;73
+0;291;Rafał;Helbik;Pabianice;PGR Pabianice;1983-10-13;M;szosowy;;11:12:00;MINI M3s;M3;;MINI;73
+0;147;TOMASZ;SOBCZAK;Brześć Kujawski;LUMAC WTR WLOCLAWEK;1972-09-02;M;szosowy;;10:31:00;MINI M4s;M4;;MINI;73
+0;272;Marcin;Dobroszek;Łódź;Raleigh GAC;1984-02-25;M;szosowy;;11:10:00;MINI M3s;M3;;MINI;73
+0;93;Jakub;Gierlik;Miejska Górka;GKR Gostyń;1992-11-10;M;szosowy;;10:36:00;MEGA M2s;M2;;MEGA;146
+0;118;Adam;Krawczuk;Świnoujście;KS Uznam Świnoujście;1966-10-12;M;szosowy;;10:27:00;MINI M5s;M5;;MINI;73
+0;143;Zbigniew;Kowalczyk;Ostrów Wlkp;OTR Interkol;1964-01-27;M;szosowy;;10:46:00;MEGA M5s;M5;;MEGA;146
+0;193;Łukasz;Kowalski;Brójce;Asseco Active Team;1981-05-09;M;inny;;10:56:00;MINI M3i;M3;;MINI;73
+0;218;Krzysztof;Jóźwiak;Zagórów;SGR RACING TEAM;1975-08-31;M;szosowy;;11:00:00;MINI M4s;M4;;MINI;73
+0;243;Paweł;Kurczak;Trzebnica;Szerszenie Trzebnica;1967-01-14;M;szosowy;;11:04:00;MINI M4s;M4;;MINI;73
+0;368;Maciej;Pytlak;Kostrzyn;Tempus Team;1990-06-24;M;szosowy;;11:26:00;MINI M2s;M2;;MINI;73
+0;393;Mikołaj;Lipowski;Łask;Fujitsu Łódź Team;1988-09-25;M;szosowy;;11:32:00;MINI M2s;M2;;MINI;73
+0;418;Tomek;Siemiński;Łódź;Manufaktura Mocy;1984-06-26;M;szosowy;;11:36:00;MINI M3s;M3;;MINI;73
+0;20;Paweł;Sojecki;Jaworzno;Jas-Kółka;1975-02-13;M;szosowy;;08:04:00;GIGA M4s;M4;;GIGA;219
+0;75;Stanisław;Gembalczyk;Wodzisław Śl;SKŚ;1967-02-23;M;szosowy;;10:34:00;MEGA M4s;M4;;MEGA;146
+0;100;PIOTR;JAKUBOWSKI;GORZÓW WLKP;MISTRZOWSKIE ROWERY LECH PIASECKI;1949-12-08;M;szosowy;;10:38:00;MEGA M6s;M6;;MEGA;146
+0;130;Kamil Biskupski;Biskupski;Warszawa;Wieliszew Heron Team;1976-07-01;M;szosowy;;10:44:00;MEGA M4s;M4;;MEGA;146
+0;155;Daniel;Kaczmarczyk;Łódź;Spedimex Bike Team;1978-12-24;M;inny;;10:48:00;MINI M3i;M3;;MINI;73
+0;185;Małgorzata;Maśkiewicz;Oborniki Śląskie;Oś Racing Team;1986-04-19;K;inny;;10:54:00;MINI K3i;K3;;MINI;73
+0;230;MARIUSZ;KRYŚ;BUK;BUKOWSKI KLUB BIEGACZA;1975-10-22;M;szosowy;;11:02:00;MINI M4s;M4;;MINI;73
+0;270;BOGUSŁAW;ZIELIŃSKI;BROCHOCIN;KKS TRZEBNICA;1953-12-06;M;szosowy;;11:08:00;MINI M6s;M6;;MINI;73
+0;14;Łukasz;Staszko;Łódź;Maxxbike Team;1986-01-26;M;szosowy;;08:02:00;GIGA M3s;M3;;GIGA;219
+0;54;Michał;Topolski;Kudowa- Zdrój;Klub Kolarski Ziemi Kłodzkiej;1991-02-27;M;inny;;10:30:00;MEGA M2i;M2;;MEGA;146
+0;99;Stanisław;Lachowski;Piotrków Trybunalski;Piotrkowskie Kolarstwo Szosowe;1958-12-28;M;szosowy;;10:38:00;MEGA M5s;M5;;MEGA;146
+0;259;Grzegorz;Szymczak;Lubień Kujawski;;1987-10-11;M;szosowy;;11:06:00;MINI M2s;M2;;MINI;73
+0;341;Krzysztof;Jankowski;Włocławek;;1970-11-25;M;szosowy;;11:22:00;MINI M4s;M4;;MINI;73
+0;325;Tomasz;Wroński;Rataje;SGR Racing Team;1997-10-05;M;szosowy;;11:18:00;MINI M2s;M2;;MINI;73
+0;166;Tomasz;Osieja;Pabianice;Pabianicka Grupa Rowerowa - PGR;1967-12-24;M;inny;;10:50:00;MINI M4i;M4;;MINI;73
+0;191;Ewa;Kowalczyk;Ostrów Wlkp;OTR Interkol;1964-09-10;K;inny;;10:54:00;MINI K5i;K5;;MINI;73
+0;211;Elżbieta;Buraczyńska;Oleśnica;Bike Team Oleśnica;1956-10-22;K;inny;;10:58:00;MINI K6i;K6;;MINI;73
+0;261;Mariusz;Michalski;Ostrowiec Świętokrzyski;;1974-04-29;M;szosowy;;11:08:00;MINI M4s;M4;;MINI;73
+0;311;Zygmunt;Matejczuk;Świnoujscie;KS Uznam  Świnioujscie;1941-01-25;M;szosowy;;11:16:00;MINI M7s;M7;;MINI;73
+0;67;Damian;Dąbrowski;Bydgoszcz;Region Wsparcia Teleinformatycznego - BIKE TEAM;1988-10-31;M;inny;;10:54:00;MEGA M2i;M2;;MEGA;146
+0;102;Łukasz;Goliński;Łódź;VitaDiet Sport Team;1983-06-01;M;szosowy;;10:38:00;MEGA M3s;M3;;MEGA;146
+0;152;Katarzyna;Koczwara;Oborniki Śląskie;Oś Racing Team;1987-08-28;K;inny;;10:48:00;MINI K2i;K2;;MINI;73
+0;177;Małgorzata;Szalewicz;Szczecin;SZYBCIEJ NIE MOGĘ;1966-02-22;K;inny;;10:52:00;MINI K5i;K5;;MINI;73
+0;202;Katarzyna Adamowicz;Adamowicz;Kluczbork;Katarzyna Adamowicz;1970-08-17;M;inny;;10:56:00;MINI K4i;K4;;MINI;73
+0;227;MARCIN;CHMIELEWSKI;Poznań;PROTYM REACING TEAM;1978-06-09;M;szosowy;;11:02:00;MINI M3s;M3;;MINI;73
+0;277;ADRIAN;JUSZCZAK;GODZIESZE MAŁE;;1989-12-18;M;szosowy;;11:10:00;MINI M2s;M2;;MINI;73
+0;327;Bartosz;Orzechowski;Łódź;Raggabomba;1982-02-27;M;szosowy;;11:20:00;MINI M3s;M3;;MINI;73
+0;23;Krystyna DNS;Roszak DNS;POLICE;Szczeciński Klub Rowerowy GRYFUS;1964-10-08;K;szosowy;;22:04:00;GIGA K5s;K5;;GIGA;219
+0;73;Paweł;Jóźwiak;Rokietnica;DHL TEAM;1981-10-09;M;szosowy;;10:34:00;MEGA M3s;M3;;MEGA;146
+0;98;Maciej;Bukowy;Bełchatów;LSKK/BCTP Bełchatów;1979-02-24;M;szosowy;;10:38:00;MEGA M3s;M3;;MEGA;146
+0;123;Marcin;Orzechowski;ŁÓDŹ;RAGGABOMBA;1978-07-25;M;szosowy;;10:42:00;MEGA M3s;M3;;MEGA;146
+0;173;Paweł;Żebrowski;Łódź;Mocni w Duchu zabiegani;1977-06-23;M;inny;;10:52:00;MINI M3i;M3;;MINI;73
+0;198;MAŁGORZATA;MOLKA;SIERADZ;TAMA TEAM;1962-05-10;K;inny;;10:56:00;MINI K5i;K5;;MINI;73
+0;223;Piotr;Kołacki;Śrem;Kolacki TEAM;2000-07-20;M;szosowy;;11:00:00;MINI M1s;M1;;MINI;73
+0;248;Marzena;Ratajczyk;Zduńska Wola;brak;1975-01-22;K;szosowy;;11:04:00;MINI K4s;K4;;MINI;73
+0;348;Mieczysław Adamowicz;Adamowicz;Kluczbork;UKS Stobrawa Kluczbork;1943-01-03;M;szosowy;;11:24:00;MINI M7s;M7;;MINI;73
+0;423;Karolina;Perzanowska;Łódź;Bodyicoach.cycling.team;1992-06-11;K;szosowy;;11:36:00;MINI K2s;K2;;MINI;73
+0;50;Małgorzata;Kubicka;Nowogard;LKK Nowogard;1966-12-03;K;szosowy;;08:09:00;GIGA K5s;K5;;GIGA;219
+0;229;Andrzej;Kaczmarski;Pabianice;PAFANA;1952-10-20;M;szosowy;;11:02:00;MINI M6s;M6;;MINI;73
+0;569;Józef;Kamiński;Częstochowa;;1975-11-11;M;inny;;11:54:00;+ROD M4i;M4;;+RODZINNY;36
+0;515;Joanna;Bazan-Szymańska;ŁASK;;1974-08-05;K;inny;;11:46:00;+ROD K4i;K4;;+RODZINNY;36
+0;1;Waldemar;Frąckowiak;REWAL;K.R. GRYFLAND GRYFICE;1962-02-06;M;inny;;08:00:00;GIGA M5i;M5;;GIGA;219
+0;151;Renata;Pogorzelska-Rynio;Dziadowa Kłoda;Quest ACT;1966-04-08;K;inny;;10:48:00;MINI K5i;K5;;MINI;73
+0;226;Ryszard;Michta;Środa Śląska;50upAT;1951-01-06;M;szosowy;;11:00:00;MINI M6s;M6;;MINI;73
+0;266;Tadeusz;Hołubicki;Trzebnica;Szerszenie Trzebnica;1951-08-22;M;szosowy;;11:08:00;MINI M6s;M6;;MINI;73
+0;321;Błażej;Redko;Łódź;RAGGABOMBA;1981-08-03;M;szosowy;;11:18:00;MINI M3s;M3;;MINI;73
+0;37;Edward;Kuczmarz;Wrocław;Szerszenie Trzebnica;1952-03-10;M;szosowy;;08:07:00;GIGA M6s;M6;;GIGA;219
+0;77;Ewa;Gapińska;Szczecin;szczecin na rowerach;1964-04-07;K;szosowy;;10:34:00;MEGA K5s;K5;;MEGA;146
+0;107;Jarosław Lenart;Lenart;Łódź;;1971-03-14;M;szosowy;;10:40:00;MEGA M4s;M4;;MEGA;146
+0;182;Paweł;Dobrzański;Nowogard;Lipa Team;1980-10-05;M;inny;;10:54:00;MINI M3i;M3;;MINI;73
+0;257;Maciej;Jagusiak;Łódź;Łódź Running Team;1981-12-15;M;szosowy;;11:06:00;MINI M3s;M3;;MINI;73
+0;282;Bogumiła;Matusiak;Pabianice;Pabianicka Grupa Rowerowa (PGR);1971-01-24;K;szosowy;;11:12:00;MINI K4s;K4;;MINI;73
+0;307;LESZEK KRZYWICKI;KRZYWICKI;TRZEBNICA;ELMAR TEAM;1960-05-30;M;szosowy;;11:16:00;MINI M5s;M5;;MINI;73
+0;28;Wojtek;Michałek;RADOMSKO;DARIO TEAM RADOMSKO;1968-07-03;M;szosowy;;07:49:00;MEGA M4s;M4;;MEGA;146
+0;53;Marian;Przybylski;Trzebnica;Szerszenie Trzebnica;1957-10-12;M;inny;;10:30:00;MEGA M5i;M5;;MEGA;146
+0;78;Tomasz;Maciaś;Opole;K2WIN Magazyn Rowerowy Eska Team;1970-11-14;M;szosowy;;10:34:00;MEGA M4s;M4;;MEGA;146
+0;103;Arkadiusz;Larczyński;Bełchatów;;1974-05-15;M;szosowy;;10:38:00;MEGA M4s;M4;;MEGA;146
+0;128;Tomasz;Gapiński;Szczecin;Szczecin na rowerach;1959-09-15;M;szosowy;;10:44:00;MEGA M5s;M5;;MEGA;146
+0;153;Józef;Jurczak;Środa Śląska;Maciejewski Cycling Team;1953-11-29;M;inny;;10:48:00;MINI M6i;M6;;MINI;73
+0;178;Dariusz;Maciejewski;Środa Śląska;Maciejewski Cyckling Team;1968-06-25;M;inny;;10:52:00;MINI M4i;M4;;MINI;73
+0;253;Paweł;Balcerzak;Słupca;Słupca;1973-08-11;M;szosowy;;11:06:00;MINI M4s;M4;;MINI;73
+0;245;Piotr;Orzechowski;Łódź;Raggabomba;1981-03-21;M;szosowy;;11:04:00;MINI M3s;M3;;MINI;73
+0;538;SEBASTIAN;KOWALSKI;CZESTKÓW;;1983-02-02;M;szosowy;;11:50:00;+ROD M3s;M3;;+RODZINNY;36
+0;547;KAJETAN;SZCZEPAŃSKI;ŁASK;;2005-02-10;M;szosowy;;11:50:00;+ROD M1s;M1;;+RODZINNY;36
+0;539;MAGDA;MARCISIAK;ZDUŃSKA WOLA;;1981-08-17;K;szosowy;;11:50:00;+ROD K3s;K3;;+RODZINNY;36
+0;579;Jakub;Lasota;Gomulin-Kolonia;;2000-10-04;M;szosowy;;11:56:00;+ROD M1s;M1;;+RODZINNY;36
+0;541;JAN;PAWŁOWSKI;ZDUŃSKA WOLA;;1950-09-05;M;szosowy;;11:50:00;+ROD M6s;M6;;+RODZINNY;36
+0;196;Beata;Walas;Kiełczówka;Spedimex Bike Team;1976-10-12;K;inny;;10:56:00;MINI K4i;K4;;MINI;73
+0;231;Szymon;Błasik;Łask;Jastrzębie Łaskie;1999-07-31;M;szosowy;;11:02:00;MINI M1s;M1;;MINI;73
+0;271;Sławomir;Wiosna;Łódź;Asseco Active Team;1985-03-16;M;szosowy;;11:10:00;MINI M3s;M3;;MINI;73
+0;326;Bartłomiej;Kaźmierczak;Łódź;;1986-07-06;M;szosowy;;11:20:00;MINI M3s;M3;;MINI;73
+0;82;Wojciech;Janiczek;Piotrków Trybunalski;;1961-06-10;M;szosowy;;10:34:00;MEGA M5s;M5;;MEGA;146
+0;112;Remigiusz;Szablewski;Bielsko-Biała;Beskidzkie Towarzystwo Cyklistów Bielsko-Biała;1949-05-29;M;szosowy;;10:25:00;MINI M6s;M6;;MINI;73
+0;137;Dariusz;Malinowski;Zduńska Wola;GATTA BIKE-RS;1972-06-16;M;szosowy;;10:44:00;MEGA M4s;M4;;MEGA;146
+0;162;Jerzy;Cibor;Złotoryja;OLAWS Złotoryja;1973-03-08;M;inny;;10:50:00;MINI M4i;M4;;MINI;73
+0;212;Tomasz;Radwański;Zduńska Wola;Sympatyk Jastrzębi;1971-11-09;M;inny;;10:58:00;MINI M4i;M4;;MINI;73
+0;237;Mieczysław;Frankowski;Łódź;KS Mocne Koło Łódź;1930-01-03;M;szosowy;;11:02:00;MINI M7s;M7;;MINI;73
+0;262;Piotr;Ruciński;Łódź;KS Mocne Koło;1953-09-22;M;szosowy;;11:08:00;MINI M6s;M6;;MINI;73
+0;287;Miłosz;Krupka;Łódź;mezzoFOURte.pl;1981-07-05;M;szosowy;;11:12:00;MINI M3s;M3;;MINI;73
+0;312;Łukasz;Kołodziejczyk;Konstantynów Łódzki;;1982-05-14;M;szosowy;;11:16:00;MINI M3s;M3;;MINI;73
+0;33;Artur;Paterek;Krotoszyn;OTR Interkol;1972-12-23;M;szosowy;;08:07:00;GIGA M4s;M4;;GIGA;219
+0;58;Mariusz;Gniado;Trzebnica;Szerszenie Trzebnica;1972-12-19;M;inny;;10:30:00;MEGA M4i;M4;;MEGA;146
+0;108;Krystian;Bałamącek;Nowe Skalmierzyce;OTR INTERKOL;1972-01-10;M;szosowy;;10:40:00;MEGA M4s;M4;;MEGA;146
+0;133;Maciej;Baranowski;Rogoźno;Rogoźno;1986-01-30;M;szosowy;;10:44:00;MEGA M3s;M3;;MEGA;146
+0;183;Wieslaw;Koniecki;lask;Strefa Kolorow;1956-12-28;M;inny;;10:54:00;MINI M6i;M6;;MINI;73
+0;208;AGATA;JARACZ;ZDUŃSKA WOLA;TAMA TEAM;1985-05-15;K;inny;;10:58:00;MINI K3i;K3;;MINI;73
+0;233;RAFAŁ;JAGIELA;OPOLE;Kubuś Team;1982-07-27;M;szosowy;;11:02:00;MINI M3s;M3;;MINI;73
+0;308;Jan;Czapliński;Oleśnica;Maciejewski Cyckling Team;1954-10-28;M;szosowy;;11:16:00;MINI M6s;M6;;MINI;73
+0;333;FRANCISZEK;Gustowski;Sobótka;KS DEICHMANN ABUS MAT SOBÓTKA;1942-05-29;M;szosowy;;11:20:00;MINI M7s;M7;;MINI;73
+0;358;Pawel;Szczepkowski;Wroclaw;Rawex Energy Saving;1987-06-28;M;szosowy;;11:24:00;MINI M2s;M2;;MINI;73
+0;383;Rafał;Szymczak;Łódź;Mocni w Duchu zabiegani;1981-02-17;M;szosowy;;11:30:00;MINI M3s;M3;;MINI;73
+0;70;Darek;Noga;Łagów Lubuski;InsERT Team;1983-07-08;M;inny;;10:32:00;MEGA M3i;M3;;MEGA;146
+0;95;Marek;Szymański;Nowgard;LKK Nowogard;1950-12-09;M;szosowy;;10:38:00;MEGA M6s;M6;;MEGA;146
+0;125;Mariusz Pietraszek;Pietraszek;Będkowice;POLBUS-PKS WROCŁAW;1974-05-02;M;szosowy;;10:42:00;MEGA M4s;M4;;MEGA;146
+0;150;Mateusz;Parański;Legnica;OLAWS ZŁOTORYJA;1991-04-04;M;inny;;10:48:00;MINI M2i;M2;;MINI;73
+0;180;Sławomir;Lewandowski;Dąbrowa / Poznań;Spedimex Bike Team;1978-05-12;M;inny;;10:52:00;MINI M3i;M3;;MINI;73
+0;225;Tomasz;Słowiński;Słupca;SGR Racing Team;1989-11-02;M;szosowy;;11:00:00;MINI M2s;M2;;MINI;73
+0;265;Agnieszka;Orzechowski;Łódź;RAGGABOMBA;1979-10-05;K;szosowy;;11:08:00;MINI K3s;K3;;MINI;73
+0;305;PIOTR;ŁABUDA;KRZYDLINA WIELKA;RYCERZE ROLANDA MACIEJEWSKI TEAM;1959-11-16;M;szosowy;;11:16:00;MINI M5s;M5;;MINI;73
+0;84;Tadeusz;Przybylski;Pudliszki;GKR Gostyn;1953-07-04;M;szosowy;;10:36:00;MEGA M6s;M6;;MEGA;146
+0;139;Beata;Tulimowska;Włocławek;LUMAC WTR Włocławek;1965-08-11;K;szosowy;;10:31:00;MINI K5s;K5;;MINI;73
+0;164;JADWIGA;STALEWSKA;GRYFICE;K.R.GRYFLAND GRYFICE;1978-10-15;K;inny;;10:50:00;MINI K3i;K3;;MINI;73
+0;209;Bartosz;Matusiak;sieradz;bajkszop.com;1989-12-12;M;inny;;10:58:00;MINI M2i;M2;;MINI;73
+0;279;Czesław;Kędroń;Bodzanów;KTK Ktukol Głuchołazy;1960-10-29;M;szosowy;;11:10:00;MINI M5s;M5;;MINI;73
+0;309;Krzysztof;Sell;Lubin;Cooper Miners;1982-03-11;M;szosowy;;11:16:00;MINI M3s;M3;;MINI;73
+0;349;Remigiusz;Rolski;Świdnica;Talvi Sport Szklarska Poręba;1973-05-26;M;szosowy;;11:24:00;MINI M4s;M4;;MINI;73
+0;379;Witold;Rynio;Dziadowa Kłoda;Quest ACT;1966-07-21;M;szosowy;;11:28:00;MINI M5s;M5;;MINI;73
+0;336;WACŁAW;LATOCHA;MOSZCZENICA;PIOTRKOWSKIE KOLARSTWO SZOSOWE;1943-01-12;M;szosowy;;11:20:00;MINI M7s;M7;;MINI;73
+0;381;Bogdan;Konieczny;Środa Śląska;50 upat;1953-08-15;M;szosowy;;11:30:00;MINI M6s;M6;;MINI;73
+0;411;RYSZARD;RAWSKI;Wroclaw;RAWEX Energy Saving;1950-10-05;M;szosowy;;11:34:00;MINI M6s;M6;;MINI;73
+0;441;PIOTR;MARCINIAK;MILICZ;MAIDEN MILICZ;1965-05-03;M;szosowy;;11:40:00;MINI M5s;M5;;MINI;73
+0;553;Barbara;Nowicka-Dyśko;Łódź;;1972-12-01;K;inny;;11:52:00;+ROD K4i;K4;;+RODZINNY;36
+0;144;Zbigniew Heleniarz;Heleniarz;Police;Góral Police;1980-01-28;M;szosowy;;10:46:00;MEGA M3s;M3;;MEGA;146
+0;169;Maciej;Feld;Bydgoszcz;BZ WBK Runners Team;1956-12-27;M;inny;;10:50:00;MINI M6i;M6;;MINI;73
+0;219;DARIUSZ;ŁABIAK;RAWICZ;STREFASPORTU.PL MW.INVEST;1975-11-16;M;szosowy;;11:00:00;MINI M4s;M4;;MINI;73
+0;289;Grzegorz;Wójcik;Szydłowiec;Gościniec;1965-11-04;M;szosowy;;11:12:00;MINI M5s;M5;;MINI;73
+0;314;Janusz;Kuhnel;Kłodzko;Duvenbeck Wąs Sport;1961-07-10;M;szosowy;;11:16:00;MINI M5s;M5;;MINI;73
+0;354;Artur;Pierzyński;Bełchatów;Warach-Rowery;1980-08-24;M;szosowy;;11:24:00;MINI M3s;M3;;MINI;73
+0;389;Marek;Majcher;Bukowiec;Pasjonaci kolarstwa Andrespol;1957-10-14;M;szosowy;;11:30:00;MINI M5s;M5;;MINI;73
+0;346;Maciej;Nowak;Leszno;STREFASPORTU.PL MW INWEST TEAM;1985-11-01;M;szosowy;;11:22:00;MINI M3s;M3;;MINI;73
+0;391;Dariusz;Bednarek;Szynkielew;PAFANA;1969-07-19;M;szosowy;;11:30:00;MINI M4s;M4;;MINI;73
+0;416;Robert;Kobus-Puchała;Koluszki;Mocni w Duchu Zabiegani;1971-04-21;M;szosowy;;11:36:00;MINI M4s;M4;;MINI;73
+0;446;Czesław;Seraszek;Koźmin Wlkp.;AGK Koźmin Wlkp.;1959-04-07;M;szosowy;;11:40:00;MINI M5s;M5;;MINI;73
+0;558;Piotr;Podlaszewski;Grotniki;Kwiczoły Grotnickie;1972-01-02;M;inny;;11:52:00;+ROD M4i;M4;;+RODZINNY;36
+0;613;Maja;Olejnik;Piotrków Tryb.;Spedimex Bike Team;2007-07-05;K;inny;;12:02:00;RODZ K1i;K1;;RODZINNY;18
+0;355;Konrad;Strzelecki;Kamieńsk;Tour De Ochocice;1991-11-08;M;szosowy;;11:24:00;MINI M2s;M2;;MINI;73
+0;395;Andrzej Przysiężniuk;Przysiężniuk;OPOLE;;1972-04-27;M;szosowy;;11:32:00;MINI M4s;M4;;MINI;73
+0;435;Mikołaj;Cieśliński;Koziegłowy;Tempus Team;1991-09-23;M;szosowy;;11:38:00;MINI M2s;M2;;MINI;73
+0;532;Marian Stanisław;Sobieraj;Łask;Turysta;1947-08-05;M;inny;;11:48:00;+ROD M6i;M6;;+RODZINNY;36
+0;602;Elżbieta;Osęka;Aleksandrów Łódzki;Spedimex Bike Team;2000-03-28;K;inny;;12:00:00;RODZ K1i;K1;;RODZINNY;18
+0;357;Andrzej;Kołodziejski;Inowrocław;;1962-06-12;M;szosowy;;11:24:00;MINI M5s;M5;;MINI;73
+0;397;Marek;Pieróg;Knurów;Asseco Active Team;1976-05-31;M;szosowy;;11:32:00;MINI M4s;M4;;MINI;73
+0;427;CZESŁAW;MOTYL;JELCZ LASKOWICE;RYCERZE ROLANDA MACIEJEWSKI TEAM;1950-03-01;M;szosowy;;11:38:00;MINI M6s;M6;;MINI;73
+0;529;Paweł;Tomczak;Głowno;Tomczak Team;1976-11-26;M;inny;;11:48:00;+ROD M4i;M4;;+RODZINNY;36
+0;604;Halina;Dragojewa;Piotrków Tryb;Spedimex Bike Team;1946-03-04;K;inny;;12:00:00;RODZ K7i;K7;;RODZINNY;18
+0;607;Dominik;Kowalewski;Łódź;Szakale Bałut Łódź;1975-12-30;M;inny;;12:02:00;RODZ M4i;M4;;RODZINNY;18
+0;434;Bogusław;Nowak;Wieluń -Ruda;niezrzeszony;1958-05-12;M;szosowy;;11:38:00;MINI M5s;M5;;MINI;73
+0;506;Janek;Wieteska;Łódź;Spedimex Bike Team;2000-01-16;M;szosowy;;11:44:00;+ROD M1s;M1;;+RODZINNY;36
+0;505;Sylwia;Wenc;Łódź;Spedimex Bike Team;1973-10-19;K;szosowy;;11:44:00;+ROD M4s;M4;;+RODZINNY;36
+0;555;Aleksandra;Podlaszewska;Grotniki;Kwiczoły Grotnickie;2003-01-15;K;inny;;11:52:00;+ROD K1i;K1;;+RODZINNY;36
+0;585;Maria;Błoch;Huta Dłutowska;;2004-06-16;K;szosowy;;11:56:00;RODZ K1s;K1;;RODZINNY;18
+0;403;Michał;Tomaszewicz;Lubin;Copper Miners;1982-01-24;M;szosowy;;11:34:00;MINI M3s;M3;;MINI;73
+0;5;MAREK;ZADWORNY;GRYFICE;K.R.GRYFLAND GRYFICE;1961-11-13;M;inny;;07:45:00;MEGA M5i;M5;;MEGA;146
+0;55;URSZULA;ZADWORNA;GRYFICE;K.R.GRYFLAND GRYFICE;1964-12-29;K;inny;;10:30:00;MEGA K5i;K5;;MEGA;146
+0;85;CEZARY;KWIATKOWSKI;Włocławek;LUMAC WTR WLOCLAWEK;1963-07-17;M;szosowy;;10:36:00;MEGA M5s;M5;;MEGA;146
+0;115;Krzysztof;Hermanowicz;Dobrzeń Wielki;;1980-07-31;M;szosowy;;10:40:00;MEGA M3s;M3;;MEGA;146
+0;140;Michał;Gawrysiak;Bełchatów;LSKK LITYŃSKI BEŁCHATÓW;1986-05-18;M;szosowy;;10:46:00;MEGA M3s;M3;;MEGA;146
+0;170;Piotr Proszowski;Proszowski;Poraj;PTTK Myszków;1971-07-18;M;inny;;10:50:00;MINI M4i;M4;;MINI;73
+0;200;Robert;Lewera;Pabianice;TATE & LYLE ACTIVE TEAM;1970-06-22;M;inny;;10:56:00;MINI M4i;M4;;MINI;73
+0;255;Gabriel;Kubacki;Wilczyn;SGR Racing Team;1955-09-26;M;szosowy;;11:06:00;MINI M6s;M6;;MINI;73
+0;280;Arkadiusz;Szygenda;Słupca;SGR Racing Team;2001-04-07;M;szosowy;;11:10:00;MINI M1s;M1;;MINI;73
+0;24;Paulina;Kusajda;Płoty;Szczeciński Klub Rowerowy Gryfus;1986-02-28;K;szosowy;;10:44:00;MEGA K3s;K3;;MEGA;146
+0;408;Krzysztof;Mazurkiewicz;Pasikurowice;TS RAWEX ENERGY SAVING;1990-05-06;M;szosowy;;11:34:00;MINI M2s;M2;;MINI;73
+0;35;KRZYSZTOF;KUBIK;KROTOSZYN;OTR INTERKOL;1991-12-14;M;szosowy;;08:07:00;GIGA M2s;M2;;GIGA;219
+0;65;Sławomir;Forberger;Trzebnica;SZERSZENIE TRZEBNICA;1981-12-30;M;inny;;10:32:00;MEGA M3i;M3;;MEGA;146
+0;80;Krzysztof;Lech;Sulistrowice;Leśmian;1972-03-13;M;szosowy;;10:34:00;MEGA M4s;M4;;MEGA;146
+0;110;Marian;Kołodziejski;Dzierzoniow;K.S Sobotka;1960-02-05;M;szosowy;;10:40:00;MEGA M5s;M5;;MEGA;146
+0;135;Grzegorz Maciej;Górazda;Radomsko;Dario Team Radomsko;1961-01-30;M;szosowy;;10:44:00;MEGA M5s;M5;;MEGA;146
+0;160;Grzegorz Rosinski;Rosinski;lask;Litynski BELCHATOW;1953-03-23;M;inny;;10:50:00;MINI M6i;M6;;MINI;73
+0;195;Andrzej;Sierpiński;Gorzów Wielkopolski;;1955-05-20;M;inny;;10:56:00;MINI M6i;M6;;MINI;73
+0;250;Tomasz Wybor;Wybor;Łódź;Łódź Running Team;1975-12-08;M;szosowy;;11:06:00;MINI M4s;M4;;MINI;73
+0;275;Jerzy;Markowski;Kłodawa;ZSP KŁODAWA;1966-07-23;M;szosowy;;11:10:00;MINI M5s;M5;;MINI;73
+0;64;Zbigniew;Lubiński;Świnoujście;KS Uznam   Świnoujście;1956-01-22;M;inny;;10:32:00;MEGA M6i;M6;;MEGA;146
+0;109;Adam;Borowski;Inowrocław;ACTIVEXTREME;1978-08-30;M;szosowy;;10:40:00;MEGA M3s;M3;;MEGA;146
+0;149;Eugeniusz;Brodziak;Międzyrzecz;Team Międzyrzecz;1957-01-06;M;inny;;10:30:00;MEGA M5i;M5;;MEGA;146
+0;179;MIROSŁAW;MITURSKI;Trzebnica;KSS SZERSZENIE TRZEBNICA;1952-09-18;M;inny;;10:52:00;MINI M6i;M6;;MINI;73
+0;294;Bartek;Wąsiakowski;Łódź;bez klubu;1981-03-29;M;szosowy;;11:14:00;MINI M3s;M3;;MINI;73
+0;319;JERZY;Płaczek;Bielsko-Biała;Beskidzkie Towarzystwo Cyklistów;1946-04-23;M;szosowy;;11:18:00;MINI M7s;M7;;MINI;73
+0;364;Grzegorz;Orłowski;Miechów;Omega Miechów;1981-02-25;M;szosowy;;11:26:00;MINI M3s;M3;;MINI;73
+0;394;Wiesława;Prokopczyk;Trzebnica;Szerszenie Trzebnica;1965-08-29;K;szosowy;;21:32:00;MINI K5s;K5;;MINI;73
+0;361;Józef;Kosiec;Gierałcice;KTK Ktukol Głuchołazy;1956-05-20;M;szosowy;;11:26:00;MINI M6s;M6;;MINI;73
+0;396;Marek;Górecki;Buczek;Jastrzębie Łaskie;1973-10-24;M;szosowy;;11:32:00;MINI M4s;M4;;MINI;73
+0;120;Grzegorz;Czechowicz;Błaszki;KTK Kalisz;1963-02-06;M;szosowy;;10:42:00;MEGA M5s;M5;;MEGA;146
+0;421;Mariusz;Cała;Bukowiec;Pasjonaci kolarstwa Andrespol;1974-06-06;M;szosowy;;11:36:00;MINI M4s;M4;;MINI;73
+0;145;Mateusz;Danielski;Rokietnica;Proktor Adventure Team;1980-05-10;M;szosowy;;10:46:00;MEGA M3s;M3;;MEGA;146
+0;175;Elżbieta;Stempińska;Szczecin;Atos Team Szczecin;1964-08-09;K;inny;;10:52:00;MINI K5i;K5;;MINI;73
+0;451;Grzegorz;Pietrzak;Kłodawa;KTR Zamkowi Cykliści Przedecz;1959-05-18;M;szosowy;;11:42:00;MINI M5s;M5;;MINI;73
+0;205;Piotr;Kocyła;Złotoryja;OLAWS Złotoryja;1973-01-03;M;inny;;10:58:00;MINI M4i;M4;;MINI;73
+0;573;ELŻBIETA;SUDRA;Pabianice;Sudra  Team;1946-11-12;K;inny;;11:54:00;RODZ K7i;K7;;RODZINNY;18
+0;260;Grzegorz Ciesielski;Ciesielski;DRUŻBICE;;1954-04-01;M;szosowy;;11:08:00;MINI M6s;M6;;MINI;73
+0;628;Kamil;Orłowski;Łódź;Omega Miechów;1978-07-02;M;szosowy;;12:04:00;RODZ M3s;M3;;RODZINNY;18
+0;290;Przemysław;Górak;Wrocław;PM Rider Team;1980-08-22;M;szosowy;;11:12:00;MINI M3s;M3;;MINI;73
+0;375;Maciej;Udalski;Łódź;Asseco Active Team;1975-12-15;M;szosowy;;11:28:00;MINI M4s;M4;;MINI;73
+0;410;Roman;Krzyżanowski;Wolsztyn;KKFP;1971-09-18;M;szosowy;;11:34:00;MINI M4s;M4;;MINI;73
+0;119;Piotr;Przybylski;Bełchatów;LSKK Lityński Bełchatów;1977-09-13;M;szosowy;;10:42:00;MEGA M3s;M3;;MEGA;146
+0;440;Dariusz;Czarniecki;Środa Śląska;CCC Środa Śląska;1963-10-19;M;szosowy;;11:40:00;MINI M5s;M5;;MINI;73
+0;557;Jan;Podlaszewski;Grotniki;Kwiczoły Grotnickie;2000-07-22;M;inny;;11:52:00;+ROD M1i;M1;;+RODZINNY;36
+0;332;Zbigniew;Szczęsny;Sobótka;Rawex Energie Saving;1949-01-21;M;szosowy;;11:20:00;MINI M6s;M6;;MINI;73
+0;154;Halina;Kowalczyk;Łask;Jastrzębie Łaskie;1970-02-14;K;inny;;10:48:00;MINI K4i;K4;;MINI;73
+0;194;Krzysztof;Maksimczyk;Gryfice;K.R. GRYFLAND GRYFICE;1973-09-17;M;inny;;10:56:00;MINI M4i;M4;;MINI;73
+0;254;Dominik;Warszewski;Przeźmierowo;Auto-Abs;1990-03-30;M;szosowy;;11:06:00;MINI M2s;M2;;MINI;73
+0;605;Ignacy;Walas;Kiełczówka;Spedimex Bike Team;2006-02-16;M;inny;;12:00:00;RODZ M1i;M1;;RODZINNY;18
+0;362;Andrzej;Musisz;Siekierki Wielkie;Advisor;1969-07-04;M;szosowy;;11:26:00;MINI M4s;M4;;MINI;73
+0;299;Sebastian;Pietrzak;Łask;Rajsport;2000-01-02;M;szosowy;;11:14:00;MINI M1s;M1;;MINI;73
+0;402;Magdalena;Zimniak;Leszno;Galibier Bikefun Team;1971-03-31;K;szosowy;;11:32:00;MINI K4s;K4;;MINI;73
+0;329;Sylwester;Szulc;Pabianice;PTC Alpina Pabianice;1981-09-07;M;szosowy;;11:20:00;MINI M3s;M3;;MINI;73
+0;369;Andrzej;Warszewski;Przeźmierowo;;1989-04-29;M;szosowy;;11:26:00;MINI M2s;M2;;MINI;73
+0;437;Krzysztof;Kreczetowski;Wschowa;Strefasportu Mw Inwest;1978-05-29;M;szosowy;;11:40:00;MINI M3s;M3;;MINI;73
+0;350;Konrad;Majewski;Przedecz;ZSP Kłodawa;1999-12-19;M;szosowy;;11:24:00;MINI M1s;M1;;MINI;73
+0;399;Maciej;Nałęcz;Wrocław;Rawex Energy Saving;1992-09-22;M;szosowy;;11:32:00;MINI M2s;M2;;MINI;73
+0;390;Krzysztof;Słowiński;Słupca;SGR Racing Team;1961-06-01;M;szosowy;;11:30:00;MINI M5s;M5;;MINI;73
+0;549;Jakub (nadpłata 30pln);Toczek  (nadpłata 30pln);Łódź;;1990-04-01;M;inny;;11:52:00;+ROD M2i;M2;;+RODZINNY;36
+0;371;Piotr;Sućko;Poznań;FUNCLUB Biuro Podróży;1976-06-29;M;szosowy;;11:28:00;MINI M4s;M4;;MINI;73
+0;430;Szymon;Wachulec;Pabianice;PTC PABIANICE;1996-06-06;M;szosowy;;11:38:00;MINI M2s;M2;;MINI;73
+0;609;Małgorzata;Kowalewska;Łódź;Szakale Bałut Łódź;2008-01-27;K;inny;;12:02:00;RODZ K1i;K1;;RODZINNY;18
+0;401;Przemysław;Tarzyński;wloclawek;;1969-09-06;M;szosowy;;11:32:00;MINI M4s;M4;;MINI;73
+0;507;Hubert;Iwankiewicz;Swarzędz;Zgrupka Luboń;2003-08-29;M;szosowy;;11:44:00;+ROD M1s;M1;;+RODZINNY;36
+0;582;Agnieszka;Błoch;Huta Dłutowska;BLOCHS;1974-09-19;K;szosowy;;11:56:00;RODZ K4s;K4;;RODZINNY;18
+0;612;Paulina;Olejnik;Piotrków Tryb.;Spedimex Bike Team;2003-05-09;K;inny;;12:02:00;RODZ K1i;K1;;RODZINNY;18
+0;439;Artur;Kostrzewski;Dobroń;Łódź Running Team;1977-06-08;M;szosowy;;11:40:00;MINI M3s;M3;;MINI;73
+0;426;Antoni;Gonera;Choszczno;KTR Voyager;1947-10-22;M;szosowy;;11:38:00;MINI M6s;M6;;MINI;73
+0;511;Tomasz;Kowalonek;Rakoniewice;Wolsztyn KKFP;1974-09-09;M;szosowy;;11:44:00;+ROD M4s;M4;;+RODZINNY;36
+0;79;Grzegorz;Czerwinski;Łódź;RAGGABOMBA;1980-05-09;M;szosowy;;10:19:00;MINI M3s;M3;;MINI;73
+0;510;MARTYNA;KOWALONEK;RAKONIEWICE;KKFP;2002-03-02;K;szosowy;;11:44:00;+ROD K1s;K1;;+RODZINNY;36
+0;571;TOMASZ;WYCISZKIEWICZ;PIOTRKÓW TRYBUNALSKI;;1969-10-17;M;inny;;11:54:00;+ROD M4i;M4;;+RODZINNY;36
+0;134;marek;kalita;Bełchatów;LSKK LITYŃSKI BEŁCHATÓW;1970-04-28;M;szosowy;;10:44:00;MEGA M4s;M4;;MEGA;146
+0;159;Tomasz;Raksyk;Pabianice;Pabianicka Grupa Rowerowa PGR;1981-08-26;M;inny;;10:48:00;MINI M3i;M3;;MINI;73
+0;606;Franciszek;Walas;Kiełczówka;Spedimex Bike Team;2003-09-25;M;inny;;12:00:00;RODZ M1i;M1;;RODZINNY;18
+0;204;BOGUMIŁA;MUCHA;NIECHORZE;K.R.GRYFLAND GRYFICE;1972-03-02;K;inny;;10:58:00;MINI K4i;K4;;MINI;73
+0;269;Adam;Ostojski;Pabianice;Gatta Bike-RS;1991-11-24;M;szosowy;;11:08:00;MINI M2s;M2;;MINI;73
+0;610;Julita;Olejnik;Piotrków Tryb.;Spedimex Bike Team;1976-02-06;K;inny;;12:02:00;RODZ K4i;K4;;RODZINNY;18
+0;61;ANNA;KUCHARSKA;POGORZELICA;K.R.GRYFLAND GRYFICE;1970-04-21;K;inny;;10:30:00;MEGA K4i;K4;;MEGA;146
+0;106;Sylwester;Wojciechowski;Warta;Firma;1967-10-25;M;szosowy;;10:40:00;MEGA M5s;M5;;MEGA;146
+0;352;Zbigniew;Bartosik;Pabianice;SelectStar;1986-03-28;M;szosowy;;11:24:00;MINI M3s;M3;;MINI;73
+0;304;Dominik;Stanisławski;Pabianice;onthebike.com;1979-12-19;M;szosowy;;11:16:00;MINI M3s;M3;;MINI;73
+0;456;Kazimierz;Rojek;Brzeg;K2 WIN Magazyn Rowerowy Eska Team;1955-01-26;M;szosowy;;11:42:00;MINI M6s;M6;;MINI;73
+0;583;Franciszek;Błoch;Huta Dłutowska;;2000-01-21;M;szosowy;;11:56:00;RODZ M1s;M1;;RODZINNY;18
+0;339;Alojzy;Pawlaczek;Pudliszki;Szerszenie Trzebnica;1947-04-03;M;szosowy;;11:22:00;MINI M6s;M6;;MINI;73
+0;335;Krzysztof;Ignaszewski;Kleczew;SGR Racing Team;1968-03-26;M;szosowy;;11:20:00;MINI M4s;M4;;MINI;73
+0;380;Jarosław;Ladorucki;Toruń;TTC Beretta;1970-02-25;M;szosowy;;11:28:00;MINI M4s;M4;;MINI;73
+0;374;Remigiusz;Łączka;Wągrowiec;MERX Team Wągrowiec;1976-09-12;M;szosowy;;11:28:00;MINI M4s;M4;;MINI;73
+0;415;JUSTYNA;CZERWIŃSKA;ŁÓDŹ;RAGGABOMBA;1983-09-01;K;szosowy;;11:36:00;MINI K3s;K3;;MINI;73
+0;331;Dariusz;Siewier;Bełchatów;LSKK Lityński Bełchatów;1963-11-02;M;szosowy;;11:20:00;MINI M5s;M5;;MINI;73
+0;445;Jacek;Łuczkiewicz;Wilkszyn;Rycerze Rolanda Maciejewski Team;1967-01-07;M;szosowy;;11:40:00;MINI M4s;M4;;MINI;73
+0;567;Czesław;Sudra;Pabianice;Team  Sudra;1944-07-29;M;szosowy;;11:54:00;+ROD M7s;M7;;+RODZINNY;36
+0;337;Mateusz;Winiecki;Łódź;Łódź Running Team;1989-02-27;M;szosowy;;11:22:00;MINI M2s;M2;;MINI;73
+0;387;Zbigniew;Kowalczyk;Łask;Jastrzębie Łaskie;2014-05-18;M;szosowy;;11:30:00;MINI M1s;M1;;MINI;73
+0;422;PIOTR;MUCHA;NIECHORZE;K.R.GRYFLAND GRYFICE;1971-10-24;M;szosowy;;11:36:00;MINI M4s;M4;;MINI;73
+0;509;KATARZYNA;KOWALONEK;RAKONIEWICE;KKFP;1975-10-11;K;szosowy;;11:44:00;+ROD K4s;K4;;+RODZINNY;36
+0;376;Sławomir;Woźniak;Łódź;Pasjonaci Kolarstwa Andrespol;1951-08-29;M;szosowy;;11:28:00;MINI M6s;M6;;MINI;73
+0;406;Marcin Borgieł;Borgieł;Czechowice-Dziedzice;Romski Klub Kolarski KEREK;1973-06-07;M;szosowy;;11:34:00;MINI M4s;M4;;MINI;73
+0;431;Adam;Markiewicz;Wrocław;RAWEX ENERGY SAVING;1981-02-19;M;szosowy;;11:38:00;MINI M3s;M3;;MINI;73
+0;508;Michał;Iwankiewicz;Swarzędz;Zgrupka Luboń;1978-09-21;M;szosowy;;11:44:00;+ROD M3s;M3;;+RODZINNY;36
+0;372;Wigosław;Jakubowicz;Poznań;Drużyna Szpiku;1954-02-03;M;szosowy;;11:28:00;MINI M6s;M6;;MINI;73
+0;412;Ireneusz;Patyk;Miechów;OMEGA Miechów;1970-08-31;M;szosowy;;11:34:00;MINI M4s;M4;;MINI;73
+0;584;Marcelina;Błoch;Huta Dłutowska;;2004-06-16;K;szosowy;;11:56:00;RODZ K1s;K1;;RODZINNY;18
+0;624;Agnieszka;Wasilewska;Szczerców;;1981-08-13;K;inny;;12:04:00;RODZ K3i;K3;;RODZINNY;18
+0;603;Światosław;Dragojew;Piotrków Tryb;Spedimex Bike Team;1949-09-01;M;inny;;12:00:00;RODZ M6i;M6;;RODZINNY;18
+0;442;Andrzej;Puchała;Zgierz;Mocni w Duchu zabiegani;1977-09-09;M;szosowy;;11:40:00;MINI M3s;M3;;MINI;73
+0;340;Krzysztof;Wiszowaty;Ostrołęka;TAMA TEAM;1980-05-26;M;szosowy;;11:22:00;MINI M3s;M3;;MINI;73
+0;424;Rafał;Wawrzkiewicz;Belęcin;KKFP;1997-06-16;M;szosowy;;11:36:00;MINI M2s;M2;;MINI;73
+0;554;Kinga;Podlaszewska;Grotniki;Kwiczoły Grotnickie;1973-10-08;K;inny;;11:52:00;+ROD K4i;K4;;+RODZINNY;36
+0;385;Marian;Boruń;Buczek;niezrzeszony;1948-09-08;M;szosowy;;11:30:00;MINI M6s;M6;;MINI;73
+0;501;Bogusz;Krzyżanowski;Wolsztyn;KKFP wolsztyn;2003-01-11;M;szosowy;;11:44:00;+ROD M1s;M1;;+RODZINNY;36
+0;614;Violetta;Herbich-Sar;Piotrków Tryb.;Spedimex Bike Team;1978-05-24;K;inny;;12:02:00;RODZ K3i;K3;;RODZINNY;18
+0;414;Krzysztof;Teda;Bełchatów;Warach Rowery;1962-03-16;M;szosowy;;11:36:00;MINI M5s;M5;;MINI;73
+0;500;Maciek;Adamiak;Kolonia Brużyca;Spedimex Bike Team;1968-09-23;M;inny;;11:44:00;+ROD M4i;M4;;+RODZINNY;36
+0;420;Piotr;Chojecki;Łask;Jastrzębie Łaskie;1963-06-02;M;szosowy;;11:36:00;MINI M5s;M5;;MINI;73
+0;566;Mariusz;Popenda;Łódź;Spedimex Bike Team;1973-07-25;M;szosowy;;11:54:00;+ROD M4s;M4;;+RODZINNY;36
+0;601;Łukasz;Flisiak;Żabiczki;Spedimex Bike Team;2001-06-09;M;inny;;12:00:00;RODZ M1i;M1;;RODZINNY;18
+0;616;Michał;Sar;Piotrków Tryb.;Spedimex Bike Team;1978-10-31;M;inny;;12:02:00;RODZ M3i;M3;;RODZINNY;18
+0;455;Tomasz;Hofman;Lusówko;Zgrupka Team;1976-07-07;M;szosowy;;11:42:00;MINI M4s;M4;;MINI;73
+0;572;DAWID;WYCISZKIEWICZ;PIOTRKÓW TRYBUNALSKI;;1994-07-19;M;szosowy;;11:54:00;+ROD M2s;M2;;+RODZINNY;36
+0;347;Anna;Stanisławska;Pabianice;onthebike.com;1980-03-23;K;szosowy;;11:26:00;MINI K3s;K3;;MINI;73
+0;377;Paweł;Wika;Kryniczno;KOPYTO KRYNICZNO;1981-10-15;M;szosowy;;11:28:00;MINI M3s;M3;;MINI;73
+0;444;Grażyna;Domachowska Grzybek;Wrocław;QUEST ACT;1949-05-29;K;szosowy;;11:40:00;MINI K6s;K6;;MINI;73
+0;174;Ireneusz;Piasecki;Czempiń;;1941-08-15;M;inny;;10:52:00;MINI M7i;M7;;MINI;73
+0;334;Waldemar;Stempin;Wolsztyn;KKFP;1972-02-26;M;szosowy;;11:20:00;MINI M4s;M4;;MINI;73
+0;436;Artur;Gonera;Szczecin;;1973-07-23;M;szosowy;;11:40:00;MINI M4s;M4;;MINI;73
+0;563;Andrzej;Waga;Łódź;;1977-06-01;M;inny;;11:54:00;+ROD M3i;M3;;+RODZINNY;36
+0;598;Lukasz;Belka;warszawa;;1984-02-22;M;szosowy;;12:00:00;RODZ M3s;M3;;RODZINNY;18
+0;370;Maciej;Bernat;Poznań;;1967-08-05;M;szosowy;;11:28:00;MINI M4s;M4;;MINI;73
+0;502;Robert;Markus;Józefka;;1973-07-04;M;szosowy;;11:44:00;+ROD M4s;M4;;+RODZINNY;36
+0;537;JAKUB;KOT;ŁASK;;2005-04-30;M;szosowy;;11:50:00;+ROD M1s;M1;;+RODZINNY;36
+0;577;Tymon;Balcerski;Zgierz;;2011-01-26;M;inny;;11:56:00;RODZ M1i;M1;;RODZINNY;18
+0;524;Iwona;Kozubek;Łódź;;1974-05-04;K;inny;;11:48:00;+ROD K4i;K4;;+RODZINNY;36
+0;60;Józef;Drozdowski;Głogów;brak;1952-03-18;M;inny;;10:30:00;MEGA M6i;M6;;MEGA;146
+0;124;Małgorzata;Majewska;Łódź;;1983-07-03;K;szosowy;;10:42:00;MEGA K3s;K3;;MEGA;146
+0;575;Hubert;Balcerski;Zgierz;;1980-05-31;M;inny;;11:56:00;+ROD M3i;M3;;+RODZINNY;36
+0;288;maciej;snopczyński;sieradz;;1967-02-18;M;szosowy;;11:12:00;MINI M4s;M4;;MINI;73
+0;284;Wiktor;Oleszczak;Wydrzyn;;1986-07-18;M;szosowy;;11:12:00;MINI M3s;M3;;MINI;73
+0;588;Piotr;Krysiak;Dobroń;;1979-04-11;M;szosowy;;11:58:00;RODZ M3s;M3;;RODZINNY;18
+0;552;Michał;Dyśko;Łódź;;2006-03-23;M;inny;;11:52:00;+ROD M1i;M1;;+RODZINNY;36
+0;113;Norbert;Urbański;Rzeszów;;1982-09-04;M;szosowy;;10:40:00;MEGA M3s;M3;;MEGA;146
+0;363;Patryk;Wolski;Zelów;;2014-05-10;M;szosowy;;11:26:00;MINI M1s;M1;;MINI;73
+0;295;Ernest;Adamczyk;Zduńska Wola;;1971-05-07;M;szosowy;;11:14:00;MINI M4s;M4;;MINI;73
+0;548;TOMASZ;ŻAK;ŁASK;;1975-05-01;M;szosowy;;11:50:00;+ROD M4s;M4;;+RODZINNY;36
+0;527;Dorota;Kraska;Łódź;;1969-02-06;K;inny;;11:48:00;+ROD K4i;K4;;+RODZINNY;36
+0;432;Przemysław;Gajdziński;Łask;;1984-05-06;M;szosowy;;11:38:00;MINI M3s;M3;;MINI;73
+0;521;KATARZYNA;SZCZEPANIAK;ŁASK;;1972-05-01;K;inny;;11:46:00;+ROD K4i;K4;;+RODZINNY;36
+0;285;ANDRZEJ;MATUSIAK;CHOJNE;;1960-04-12;M;szosowy;;11:12:00;MINI M5s;M5;;MINI;73
+0;239;Adam;Dywan;Okup Wielki;;1971-01-23;M;szosowy;;11:04:00;MINI M4s;M4;;MINI;73
+0;543;JULIA;SADZIŃSKA;ŁASK;;2001-04-27;K;szosowy;;11:50:00;+ROD K1s;K1;;+RODZINNY;36
+0;522;JAKUB;SZYMAŃSKI;ŁASK;;2002-08-12;M;inny;;11:46:00;+ROD M1i;M1;;+RODZINNY;36
+0;544;PRZEMEK;SADZIŃSKI;ŁASK;;1977-01-15;M;szosowy;;11:50:00;+ROD M3s;M3;;+RODZINNY;36
+0;88;Marta;Gierlik;Miejska Górka;-0;1987-07-09;K;szosowy;;10:36:00;MEGA K2s;K2;;MEGA;146
+0;213;Piotr;Modzelewski;Łódź;;1982-06-05;M;inny;;10:58:00;MINI M3i;M3;;MINI;73
+0;338;Cezary;Maj;Tuszyn;;1982-05-13;M;szosowy;;11:22:00;MINI M3s;M3;;MINI;73
+0;89;Mariusz;Ochałek;Katowice;;1994-03-22;M;szosowy;;10:36:00;MEGA M2s;M2;;MEGA;146
+0;244;Józef;Lekki;Buczkowice;Beskidzkie Towarzystwo Cyklistów;1952-07-23;M;szosowy;;11:04:00;MINI M6s;M6;;MINI;73
+0;464;Zbigniew;Szkouda;Nowogard;NTS NEXELO JF DUET;1960;M;szosowy;;11:34:00;MINI M5s;M5;;MINI;73
+0;59;Zbigniew;Nowak;Kalisz;Calisia 1974;1960-02-10;M;inny;;10:30:00;MEGA M5i;M5;;MEGA;146
+0;593;Stanisław;Konikowski;Łódź;;2013-05-17;M;inny;;11:58:00;RODZ M1i;M1;;RODZINNY;18
+0;146;Mariusz;Pawelec;Cieszków;;1964-07-30;M;szosowy;;10:46:00;MEGA M5s;M5;;MEGA;146
+0;608;Mateusz;Kowalewski;Łódź;Szakale Bałut Łódź;2005-09-05;M;inny;;12:02:00;RODZ M1i;M1;;RODZINNY;18
+0;72;JACEK;HOFFMAN;JASTROWIE;PRECON POLSKA;1967-12-26;M;inny;;10:32:00;MEGA M4i;M4;;MEGA;146
+0;17;Przemek;Zawada;Jelenia Góra;Quest Road;1977-03-18;M;szosowy;;08:02:00;GIGA M3s;M3;;GIGA;219
+0;136;Bartosz;Dzięgielewski;Łódź;;1994-06-30;M;szosowy;;10:44:00;MEGA M2s;M2;;MEGA;146
+0;13;Jakub;Kimmer;Zelów;Bieging Team Zelów;1988-08-27;M;szosowy;;08:02:00;GIGA M2s;M2;;GIGA;219
+0;26;Robert;Pasternak;Włocławek;LUMAC WTR Włocławek;1980-04-18;M;szosowy;;08:04:00;GIGA M3s;M3;;GIGA;219
+0;459;Jan;Zugaj;Nowogard;NTS NEXELO JF DUET;1969;M;szosowy;;11:24:00;MINI M4s;M4;;MINI;73
+0;31;Tomasz;Łoński;Bełchatów;Warach - Rowery;1989-11-02;M;szosowy;;08:07:00;GIGA M2s;M2;;GIGA;219
+0;12;Marek;Gawron;Bełchatów;WARACH- ROWERY;1964-04-02;M;szosowy;;08:02:00;GIGA M5s;M5;;GIGA;219
+0;34;Rafał;Owczarek;Łódź;PTC Pabianice;1980-06-20;M;szosowy;;08:07:00;GIGA M3s;M3;;GIGA;219
+0;16;Robert;Wierucki;Starachowice;Hotel EUROPA****;1977-04-06;M;szosowy;;08:02:00;GIGA M3s;M3;;GIGA;219
+0;19;Piotr;Rogaczewski;Banie;Szczeciński Klub Rowerowy Gryfus;1987-10-19;M;szosowy;;08:04:00;GIGA M2s;M2;;GIGA;219
+0;38;Krzysztof;Łańcucki;Wrocław;KKS Trzebnica;1949-05-19;M;szosowy;;08:07:00;GIGA M6s;M6;;GIGA;219
+0;39;Jacek;ILMER;Poznań;RYBCZYŃSKI-BIKES Remmers TP-link Team;1987-10-01;M;szosowy;;08:07:00;GIGA M2s;M2;;GIGA;219
+0;7;Waldemar;Mackiewicz;Międzyrzecz;Team Międzyrzecz;1961-02-14;M;inny;;08:00:00;GIGA M5i;M5;;GIGA;219
+0;318;Joanna;Bilard;ŚWINOUJŚCIE;BIKERS ŚWINOUJŚCIE;1968-06-06;K;szosowy;;11:18:00;MINI K4s;K4;;MINI;73
+0;9;Tomasz;Bobrowski;Gdynia;KW Kraków;1958-02-21;M;szosowy;;08:02:00;GIGA M5s;M5;;GIGA;219
+0;18;Piotr;Chmielecki;Warszawa;;1975-05-16;M;szosowy;;08:02:00;GIGA M4s;M4;;GIGA;219
+0;126;Tomasz;Rykała;Pabianice;;1965-02-03;M;szosowy;;10:42:00;MEGA M5s;M5;;MEGA;146
+0;466;Michał;Przepióra;Łódź;Hotel Europa;1978;M;szosowy;;08:09:00;GIGA M3s;M3;;GIGA;219
+0;6;Rafał;Walkowski;Szczecin;;1953-09-14;M;inny;;08:00:00;GIGA M6i;M6;;GIGA;219
+0;43;Daniel;Pietrzak;Łask;Rajsport Active;1974-12-08;M;szosowy;;08:09:00;GIGA M4s;M4;;GIGA;219
+0;90;Dariusz;Grzybczyński;Gorzów Wlkp;Mistrzowskie Rowery Lech Piasecki;1970-09-25;M;szosowy;;10:36:00;MEGA M4s;M4;;MEGA;146
+0;83;Tomasz;Salachna;Pyskowice;;1967-10-24;M;szosowy;;10:34:00;MEGA M4s;M4;;MEGA;146
+0;30;Jan;Wesołowski;Świnoujście;KS Uznam;1948-01-31;M;szosowy;;08:07:00;GIGA M6s;M6;;GIGA;219
+0;42;Zbigniew;Kurzawiński;Lubin;niezrzeszony;1957-03-10;M;szosowy;;08:09:00;GIGA M5s;M5;;GIGA;219
+0;69;Dorota;Grzelak;Kudowa-Zdrój;Klub Kolarski Ziemi Kłodzkiej-wwwklasykklodzki.com;1974-12-02;K;inny;;10:32:00;MEGA K4i;K4;;MEGA;146
+0;74;Anna;Koseska;Parzniew;AM Cycling;1984-02-04;K;szosowy;;10:34:00;MEGA K3s;K3;;MEGA;146
+0;57;Robert;Kampa;Gliwice;niezrzeszony;1974-10-17;M;inny;;08:00:00;GIGA M4i;M4;;GIGA;219
+0;241;Mieczysław;Sztendel;Łódź;Jastrzębie Łaskie;1954-02-24;M;szosowy;;11:04:00;MINI M6s;M6;;MINI;73
+0;117;Jan;Raszewski;Warszawa;Ścieżka Biegowa Pole Mokotowskie;1955-04-24;M;szosowy;;10:42:00;MINI M6s;M6;;MINI;73
+0;242;Daniel;Duśko;Dabrowa Górnicza;BIKEHEAD;1976-07-13;M;szosowy;;11:04:00;MINI M4s;M4;;MINI;73
+0;163;Dariusz;Limiera;Pabianice;Drużyna Li!;1964-01-30;M;inny;;10:50:00;MINI M5i;M5;;MINI;73
+0;540;JULIA;MARCISIAK;ZDUŃSKA WOLA;;2006-09-13;K;szosowy;;11:50:00;+ROD K1s;K1;;+RODZINNY;36
+0;51;Henryk;Bętlewski;Słupsk;szukam  klubu;1966-12-17;M;szosowy;;08:09:00;GIGA M5s;M5;;GIGA;219
+0;47;Iza;Włosek;dąbrowa Górnicza;Rogelli Team;1971-04-02;K;szosowy;;08:09:00;GIGA K4s;K4;;GIGA;219
+0;192;Piotr;Skibiński;Luciejów;Asseco Active Team;1977-12-02;M;inny;;10:54:00;MINI M3i;M3;;MINI;73
+0;317;WŁODZIMIERZ;WRÓBEL;GOLINA;BIAŁE TYGRYSY JAROCIN;1982-01-11;M;szosowy;;11:18:00;MINI M3s;M3;;MINI;73
+0;238;Sławomir;Bogusz;Dobroszyce;Fresenius Netcare;1974-10-28;M;szosowy;;11:04:00;MINI M4s;M4;;MINI;73
+0;413;Robert;Kierzek;Raszków;OTR Interkol;1971-12-05;M;szosowy;;11:34:00;MINI M4s;M4;;MINI;73
+0;105;Marcin;Kosoń;Kraków;Lacho Team;1967-03-30;M;szosowy;;10:38:00;MEGA M4s;M4;;MEGA;146
+0;249;MARIAN;WIEWIÓR;TRZEBNICA;ELMAR TEAM;1979-07-27;M;szosowy;;11:06:00;MINI M3s;M3;;MINI;73
+0;;Andrzej;Wróbel;Łódź;;1953;M;inny;;11:44:00;+ROD M6i;M6;;+RODZINNY;36
+0;366;Agnieszka;Jaksa;Pabianice;;1979-04-25;K;szosowy;;11:26:00;MINI K3s;K3;;MINI;73
+0;386;Arkadiusz;Szymański;Gorczyn;;1967-08-02;M;szosowy;;11:30:00;MINI M4s;M4;;MINI;73
+0;559;Elwira;Gapińska;Łódź;;1989-11-02;K;szosowy;;11:52:00;+ROD K2s;K2;;+RODZINNY;36

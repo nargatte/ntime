@@ -1,24 +1,27 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using BaseCore.DataBase;
 using BaseCore.PlayerFilter;
 using BaseCore.TimesProcess;
 using NUnit.Framework;
+using System.Text;
 
 namespace BaseCoreTests
 {
     [TestFixture]
     public class IntegrationTests
     {
-        private string pathToexport = "C:\\Users\\Grzegorz Krzysiak\\Downloads\\Export\\";
 
         [Test]
         public async Task LoadCsvs()
         {
+
             var cp = new ContextProvider();
             var cr = new CompetitionRepository(cp);
-            var com = await cr.AddAsync(new Competition("Zawody", DateTime.Now, null, null, null, null));
+            var com = await cr.AddAsync(new Competition("Zawody Integracyjne", DateTime.Now, "Integration City", null, null, null));
             var pr = new PlayerRepository(cp, com);
             var eifr = new ExtraPlayerInfoRepository(cp, com);
             var dr = new DistanceRepository(cp, com);
@@ -93,30 +96,50 @@ namespace BaseCoreTests
 
             TimeProcess timeProcess = new TimeProcess(com);
 
+            Dictionary<string, string> filesDictionary = new Dictionary<string, string>();
+            filesDictionary.Add("Zawodnicy.csv", Properties.Resources.Zawodnicy);
+            filesDictionary.Add("log1.csv", Properties.Resources.log1);
+            filesDictionary.Add("log2.csv", Properties.Resources.log2);
+            filesDictionary.Add("log3.csv", Properties.Resources.log3);
+
+            foreach (KeyValuePair<string, string> dpv in filesDictionary)
+            {
+                if (File.Exists(dpv.Key))
+                    File.Delete(dpv.Key);
+
+                using (FileStream fs = File.Create(dpv.Key))
+                {
+                    byte[] tb = new UTF8Encoding(true).GetBytes(dpv.Value);
+                    fs.Write(tb, 0, tb.Length);
+                }
+            }
+
             await pr.ImportPlayersAsync(
-                pathToexport + "Zawodnicy.csv");
-            await timeProcess.ProcessAllAsync();
+                "Zawodnicy.csv");
             await pr.ImportTimeReadsAsync(
-                pathToexport + "log1.csv", g1);
-            await timeProcess.ProcessAllAsync();
+                "log1.csv", g1);
             await pr.ImportTimeReadsAsync(
-                pathToexport + "log2.csv", g1);
-            await timeProcess.ProcessAllAsync();
+                "log2.csv", g1);
             await pr.ImportTimeReadsAsync(
-                pathToexport + "log3.csv", g2);
+                "log3.csv", g2);
             //await pr.ImportTimeReadsAsync(
             //  pathToexport + "log1 Lask.csv", g2);
 
 
             var pfo = new PlayerFilterOptions { Query = "500" };
-            //var p = (await pr.GetAllByFilterAsync(
-              //  pfo, 0, 1)).Item1[0];
+            var p = (await pr.GetAllByFilterAsync(
+                pfo, 0, 1)).Item1[0];
 
-            //await timeProcess.ProcessSingleAsync(p);
-            await timeProcess.ProcessAllAsync();
+            await timeProcess.ProcessSingleAsync(p);
+            //await timeProcess.ProcessAllAsync();
 
             await pr.UpdateFullCategoryAllAsync();
             await pr.UpdateRankingAllAsync();
+
+            p.Distance = darr.FirstOrDefault(d => d.Name == "GIGA");
+            await pr.UpdateAsync(p, p.Distance, p.ExtraPlayerInfo);
+
+            await pr.UpdateFullCategoryAllAsync();
 
             pfo = new PlayerFilterOptions
             {

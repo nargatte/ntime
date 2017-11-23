@@ -61,6 +61,72 @@ namespace BaseCoreTests.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to num;rfid;time;antenna;
+        ///630;2000FA4727F2690004EC;09:48:20.197;1
+        ///129;2000FA4727F269000101;09:48:23.687;1
+        ///129;2000FA4727F269000102;09:48:23.772;1
+        ///83;2000FA4727F2690000A6;09:48:24.577;1
+        ///13;2000FA4727F26900001A;09:48:31.557;3
+        ///13;2000FA4727F269000019;09:48:31.667;1
+        ///14;2000FA4727F26900001C;09:48:32.172;3
+        ///17;2000FA4727F269000022;09:48:32.642;1
+        ///17;2000FA4727F269000021;09:48:32.657;1
+        ///12;2000FA4727F269000017;09:48:32.832;3
+        ///12;2000FA4727F269000018;09:48:32.842;3
+        ///630;2000FA4727F2690004EC;09:49:22.117;1
+        ///630; [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string log1 {
+            get {
+                return ResourceManager.GetString("log1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to num;rfid;time;antenna;
+        ///630;2000FA4727F2690004EC;09:48:27.693;8
+        ///630;2000FA4727F2690004EB;09:48:27.803;8
+        ///630;2000FA4727F2690004EC;09:48:33.268;4
+        ///630;2000FA4727F2690004EB;09:48:33.343;4
+        ///630;2000FA4727F2690004EC;09:48:38.823;4
+        ///630;2000FA4727F2690004EB;09:48:38.908;4
+        ///630;2000FA4727F2690004EB;09:48:44.403;4
+        ///630;2000FA4727F2690004EC;09:48:44.428;8
+        ///630;2000FA4727F2690004EB;09:48:49.918;8
+        ///630;2000FA4727F2690004EC;09:48:50.008;8
+        ///630;2000FA4727F2690004EB;09:49:01.073;1
+        ///630;2000FA4727F2690004EC;09:49:32.798 [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string log2 {
+            get {
+                return ResourceManager.GetString("log2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to num;rfid;time;antenna;
+        ///null;0800EEEE;10:25:23.603;1
+        ///null;0800EEEE;10:25:29.563;4
+        ///null;0800EEEE;10:25:35.128;3
+        ///null;0800EEEE;10:25:40.663;4
+        ///55;2000FA4727F26900006D;10:26:27.573;1
+        ///51;2000FA4727F269000066;10:26:28.873;2
+        ///52;2000FA4727F269000068;10:26:29.673;3
+        ///52;2000FA4727F269000067;10:26:30.313;2
+        ///54;2000FA4727F26900006C;10:26:30.708;3
+        ///53;2000FA4727F26900006A;10:26:31.703;2
+        ///53;2000FA4727F269000069;10:26:32.673;2
+        ///55;2000FA4727F26900006D;10:26:35.013;4
+        ///55;2000FA4727F26900006E;10:26:35.573;4
+        ///54;2000F [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string log3 {
+            get {
+                return ResourceManager.GetString("log3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to id_z;nr_startowy;imie;nazwisko;miejscowosc;klub;data_urodzenia;plec;rower;distanceId;czas_startu;kategoria;kat_wiek;nr_grupy;nazwa_dystansu;dlugosc
         ///0;214;Jacek;Lipowski;Pabianice;;1965-07-01;M;inny;;10:58:00;MINI M5i;M5;;MINI;73
         ///0;523;LENA;ŚNIEG;ŁASK;;1966-05-22;K;inny;;11:46:00;+ROD K5i;K5;;+RODZINNY;36
@@ -93,6 +159,20 @@ namespace BaseCoreTests.Properties {
         internal static string Times {
             get {
                 return ResourceManager.GetString("Times", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to id_z;nr_startowy;imie;nazwisko;miejscowosc;klub;data_urodzenia;plec;rower;distanceId;czas_startu;kategoria;kat_wiek;nr_grupy;nazwa_dystansu;dlugosc
+        ///0;214;Jacek;Lipowski;Pabianice;;1965-07-01;M;inny;;10:58:00;MINI M5i;M5;;MINI;73
+        ///0;523;LENA;ŚNIEG;ŁASK;;1966-05-22;K;inny;;11:46:00;+ROD K5i;K5;;+RODZINNY;36
+        ///0;450;Krzysztof;Czuba;Śliwniki;;1971-04-14;M;szosowy;;11:42:00;MINI M4s;M4;;MINI;73
+        ///0;519;LESZEK;ROJEWSKI;ŁASK;;1967-06-23;M;inny;;11:46:00;+ROD M4i;M4;;+RODZINNY;36
+        ///0;531;Michał;Paluch;Łask;Amator;200 [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Zawodnicy {
+            get {
+                return ResourceManager.GetString("Zawodnicy", resourceCulture);
             }
         }
     }

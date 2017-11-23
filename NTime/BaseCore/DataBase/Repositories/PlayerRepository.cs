@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
@@ -186,13 +187,8 @@ namespace BaseCore.DataBase
 
         public async Task<Player> AddAsync(Player player, Distance distance, ExtraPlayerInfo extraPlayerInfo)
         {
-            player.Distance = distance;
-            player.ExtraPlayerInfo = extraPlayerInfo;
             AgeCategory ageCategory = await (new AgeCategoryRepository(ContextProvider, Competition)).GetFittingAsync(player);
-            player.AgeCategory = ageCategory;
             await AddAsync(PreparePlayer(player, distance, extraPlayerInfo, ageCategory));
-            player.Distance = distance;
-            player.ExtraPlayerInfo = extraPlayerInfo;
             player.Distance = distance;
             player.ExtraPlayerInfo = extraPlayerInfo;
             player.AgeCategory = ageCategory;
@@ -201,16 +197,22 @@ namespace BaseCore.DataBase
 
         public async Task UpdateAsync(Player player, Distance distance, ExtraPlayerInfo extraPlayerInfo)
         {
-            player.Distance = distance;
-            player.ExtraPlayerInfo = extraPlayerInfo;
             AgeCategory ageCategory = await (new AgeCategoryRepository(ContextProvider, Competition)).GetFittingAsync(player);
-            player.AgeCategory = ageCategory;
-            await UpdateAsync(PreparePlayer(player, distance, extraPlayerInfo, ageCategory));
             player.Distance = distance;
+            player.DistanceId = distance.Id;
             player.ExtraPlayerInfo = extraPlayerInfo;
-            player.Distance = distance;
-            player.ExtraPlayerInfo = extraPlayerInfo;
+            player.ExtraPlayerInfoId = extraPlayerInfo.Id;
             player.AgeCategory = ageCategory;
+            player.AgeCategoryId = ageCategory.Id;
+            player.FullCategory = GetFullCategory(distance, extraPlayerInfo, ageCategory, player.IsMale);
+            CheckNull(player);
+            CheckItem(player);
+            await ContextProvider.DoAsync(async ctx =>
+            {
+                ctx.Players.AddOrUpdate(player);
+
+                await ctx.SaveChangesAsync();
+            });
         }
 
         public async Task UpdateFullCategoryAllAsync()

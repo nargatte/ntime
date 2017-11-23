@@ -352,19 +352,20 @@ namespace AdminView.Players
         private async Task DownloadDistancesAsync()
         {
             var dbDistances = await _distanceRepository.GetAllAsync();
-            if (dbDistances.Length > 0)
-                foreach (var dbDistance in dbDistances)
+            DefinedDistances.Clear();
+            foreach (var dbDistance in dbDistances)
+            {
+                DefinedDistances.Add(new EditableDistance(_currentCompetition)
                 {
-                    DefinedDistances.Add(new EditableDistance(_currentCompetition)
-                    {
-                        DbEntity = dbDistance
-                    });
-                }
+                    DbEntity = dbDistance
+                });
+            }
         }
 
         private async Task DownloadExtraPlayerInfoAsync()
         {
             var dbExtraPlayerInfos = await _extraPlayerInfoRepository.GetAllAsync();
+            DefinedExtraPlayerInfo.Clear();
             foreach (var item in dbExtraPlayerInfos)
             {
                 DefinedExtraPlayerInfo.Add(new EditableExtraPlayerInfo(_currentCompetition)
