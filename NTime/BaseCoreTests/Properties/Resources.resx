@@ -128,10 +128,10 @@
     <value>..\Resources\log3.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
   </data>
   <data name="Players" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\csv\testfiles\players.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+    <value>..\Csv\TestFiles\Players.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="Times" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\csv\testfiles\times.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+    <value>..\Csv\TestFiles\Times.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
   </data>
   <data name="Zawodnicy" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Zawodnicy.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>

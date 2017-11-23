@@ -8,6 +8,7 @@ using MvvmHelper;
 using ViewCore;
 using ViewCore.Entities;
 using BaseCore.DataBase;
+using System.Windows;
 
 namespace AdminView.Categories
 {
@@ -55,6 +56,13 @@ namespace AdminView.Categories
 
         private async void OnAddCategoryAsync()
         {
+            if (String.IsNullOrWhiteSpace(NewCategory.Name) ||
+                String.IsNullOrWhiteSpace(NewCategory.YearFrom.ToString()) || 
+                String.IsNullOrWhiteSpace(NewCategory.YearTo.ToString()))
+            {
+                MessageBox.Show("Kategorie i lata graniczne nie mogę być puste");
+                return;
+            }
             var categoryToAdd = NewCategory;
             AddCategoryToGUI(categoryToAdd);
             NewCategory = new EditableAgeCategory(_currentCompetition);
@@ -96,10 +104,15 @@ namespace AdminView.Categories
 
         private async void OnAddExtraPlayerInfoAsync()
         {
+            if (String.IsNullOrWhiteSpace(NewExtraPlayerInfo.Name) || String.IsNullOrWhiteSpace(NewExtraPlayerInfo.ShortName))
+            {
+                MessageBox.Show("Dodatkowe informacje dla zawodnika muszą posiadać zarówno pełną nazwę jak i skróconą");
+                return;
+            }
             var extraPlayerInfoToAdd = NewExtraPlayerInfo;
             AddExtraPlayerInfoToGUI(extraPlayerInfoToAdd);
-            NewExtraPlayerInfo = new EditableExtraPlayerInfo(_currentCompetition);
             await _extraPlayerInfoRepository.AddAsync(extraPlayerInfoToAdd.DbEntity);
+            NewExtraPlayerInfo = new EditableExtraPlayerInfo(_currentCompetition);
         }
 
         private async void ExtraPlayerInfo_DeleteRequestedAsync(object sender, EventArgs e)

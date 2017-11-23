@@ -143,9 +143,6 @@
             </StackPanel>
         </Grid>
 
-        <!--<DataGrid x:Name="playerDataGrid" RowDetailsVisibilityMode="Visible" Grid.Row="1"
-                  ItemsSource="{Binding Players}" EnableRowVirtualization="False" AutoGenerateColumns="False"
-                  ColumnWidth="*" SelectionMode="Single" CanUserAddRows="False" >-->
             <adminVew:MultipleChoiceDataGrid x:Name="playerDataGrid" Grid.Row="1"
                   ItemsSource="{Binding Players}"  AutoGenerateColumns="False" ColumnWidth="*" SelectionMode="Extended"
                     SelectedItemsList="{Binding SelectedPlayersList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">

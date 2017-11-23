@@ -149,9 +149,9 @@ namespace ViewCore.Entities
                 await _distanceRepository.UpdateAsync(this.DbEntity);
                 _gateOrderItemRepository = new GateOrderItemRepository(new ContextProvider(), this.DbEntity);
                 List<Task> tasks = new List<Task>();
-                var tab = GatesOrderItems
+                var item = GatesOrderItems
                     .Select(goi => new Tuple<GatesOrderItem, Gate>(goi.DbEntity, goi.Gate?.DbEntity)).ToArray();
-                await _gateOrderItemRepository.ReplaceByAsync(tab);
+                await _gateOrderItemRepository.ReplaceByAsync(item);
                 //foreach (var gateOrderItem in GatesOrderItems)
                 //{
                 //    tasks.Add(_gateOrderItemRepository.ReplaceByAsync(Gat));
@@ -239,6 +239,11 @@ namespace ViewCore.Entities
             {
                 GatesCount = currentGatesCount;
             }
+            HideFirstMinTime();
+        }
+
+        public void HideFirstMinTime()
+        {
             if (GatesOrderItems.Count > 0)
                 GatesOrderItems.First().IsTimeCollapsed = true;
         }

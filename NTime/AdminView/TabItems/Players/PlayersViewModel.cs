@@ -211,8 +211,9 @@ namespace AdminView.Players
         private async void OnUpdateFullCategoriesAsync()
         {
             await _playerRepository.UpdateFullCategoryAllAsync();
-            DownloadDataFromDatabaseAsync();
+            var task = DownloadDataFromDatabaseAsync(true);
             MessageBox.Show("Kategorie zostały przeliczone poprawnie");
+            await task;
         }
 
         private async Task AddPlayersFromCsvToDatabase()
@@ -272,12 +273,12 @@ namespace AdminView.Players
             else return;
         }
 
-        private void OnViewLoadedAsync()
+        private async void OnViewLoadedAsync()
         {
-            DownloadDataFromDatabaseAsync(removeAllDisplayedBefore: true);
+            await DownloadDataFromDatabaseAsync(removeAllDisplayedBefore: true);
         }
 
-        private async void DownloadDataFromDatabaseAsync(bool removeAllDisplayedBefore = false)
+        private async Task DownloadDataFromDatabaseAsync(bool removeAllDisplayedBefore = false)
         {
             await DownloadDistancesAsync();
             await DownloadExtraPlayerInfoAsync();

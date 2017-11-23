@@ -28,7 +28,6 @@ namespace ViewCore.Entities
             {
                 DbEntity.Gate = SetProperty(DbEntity.Gate, value.DbEntity);
                 DbEntity.Gate.Number = SetProperty(DbEntity.Gate.Number, value.DbEntity.Number, "Number");
-                UpdateGatesOrderItem();
             }
         }
 

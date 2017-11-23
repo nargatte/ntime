@@ -84,6 +84,7 @@ namespace AdminView.Distances
                         DbEntity = dbGateOrderItem
                     });
                 }
+                distanceToAdd.HideFirstMinTime();
             }
         }
 
