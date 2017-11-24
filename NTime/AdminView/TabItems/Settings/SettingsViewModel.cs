@@ -10,7 +10,7 @@ using ViewCore;
 
 namespace AdminView.Settings
 {
-    class SettingsViewModel : TabItemViewModel<Competition>, ViewCore.Entities.ISwitchableViewModel
+    class SettingsViewModel : TabItemViewModel
     {
         CompetitionRepository repository = new CompetitionRepository(new ContextProvider());
         public SettingsViewModel(ViewCore.Entities.IEditableCompetition currentCompetition) : base(currentCompetition)
@@ -23,20 +23,14 @@ namespace AdminView.Settings
         public ViewCore.Entities.IEditableCompetition CurrentCompetition
         {
             get { return _currentCompetition; }
-            set { SetProperty(ref _currentCompetition, value);
-            }
+            set { SetProperty(ref _currentCompetition, value); }
         }
 
         private void OnSaveChanges()
         {
-            repository.UpdateAsync(_currentCompetition.DbEntity).ContinueWith( t => 
-            MessageBox.Show("Zmiany zostały zapisane")
+            repository.UpdateAsync(_currentCompetition.DbEntity).ContinueWith(t =>
+           MessageBox.Show("Zmiany zostały zapisane")
             );
-        }
-
-        public void DetachAllEvents()
-        {
-            throw new NotImplementedException();
         }
 
         public RelayCommand SaveChangesCmd { get; private set; }

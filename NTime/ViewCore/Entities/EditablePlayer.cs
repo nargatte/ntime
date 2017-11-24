@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using BaseCore.TimesProcess;
 using BaseCore.DataBase;
 using MvvmHelper;
+using System.Diagnostics;
+using System.Threading;
 
 namespace ViewCore.Entities
 {
@@ -75,7 +77,10 @@ namespace ViewCore.Entities
             set
             {
                 DbEntity.Distance = SetProperty(DbEntity.Distance, value.DbEntity);
+                Debug.Write("Distance updated");
                 OnUpdateRequested();
+                Thread.Sleep(2000);
+                OnPropertyChanged(nameof(FullCategory));
             }
         }
 

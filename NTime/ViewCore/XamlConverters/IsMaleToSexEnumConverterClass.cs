@@ -5,23 +5,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using BaseCore.DataBase;
 
 namespace ViewCore.XamlConverters
 {
-    public class GateToNumberConverterClass : IValueConverter
+    public class IsMaleToSexEnumConverterClass : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is ViewCore.Entities.EditableGate gate)
+            if (value is bool isMale)
             {
-                return gate.Number.ToString();
+                if (isMale)
+                    return SexEnum.Male;
+                else
+                    return SexEnum.Female;
             }
             else return value;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value;
+            if (value is SexEnum sex)
+            {
+                if (sex == SexEnum.Female)
+                    return false;
+                else
+                    return true;
+            }
+            else return value;
         }
     }
 }

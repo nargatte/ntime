@@ -9,17 +9,11 @@ using ViewCore.Entities;
 
 namespace ViewCore
 {
-    public abstract class EditableBaseClass<T> : BindableBase
+    public abstract class EditableBaseClass<T> : CompetitionItemBase
     {
-
-        protected IEditableCompetition _currentCompetition;
-        private EditableBaseClass()
+        public EditableBaseClass(IEditableCompetition currentComptetition) : base(currentComptetition)
         {
             DbEntity = Activator.CreateInstance<T>();
-        }
-        public EditableBaseClass(IEditableCompetition currentComptetition) : this()
-        {
-            _currentCompetition = currentComptetition;
         }
         private T _dbEntity;
         public T DbEntity
@@ -27,11 +21,5 @@ namespace ViewCore
             get { return _dbEntity; }
             set { SetProperty(ref _dbEntity, value); }
         }
-
-        //TODO thinks if that is necessary and possiple
-        //public async Task  UpdateAsync()
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }

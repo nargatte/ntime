@@ -13,7 +13,7 @@ using System.Windows;
 
 namespace AdminView.Scores
 {
-    class ScoresViewModel : TabItemViewModel<Competition>, ISwitchableViewModel
+    class ScoresViewModel : TabItemViewModel, ISwitchableViewModel
     {
         public ScoresViewModel(IEditableCompetition currentCompetition) : base(currentCompetition)
         {
@@ -151,7 +151,7 @@ namespace AdminView.Scores
         private async void OnUpdateRankingAllAsync()
         {
             await _playerRepository.UpdateRankingAllAsync();
-            DownloadDataFromDatabaseAsync(true);
+            DownloadDataFromDatabaseAsync(removeAllDisplayedBefore: true);
             MessageBox.Show("Wyniki zostały przeliczone poprawnie");
         }
 

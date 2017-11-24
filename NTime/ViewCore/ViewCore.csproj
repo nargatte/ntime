@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminViewModel.cs" />
+    <Compile Include="CompetitionItemBase.cs" />
     <Compile Include="Entities\EditableBaseClass.cs" />
     <Compile Include="Entities\EditableAgeCategory.cs" />
     <Compile Include="Entities\EditableCompetition.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="XamlConverters\CompetitionToStringConverterClass.cs" />
     <Compile Include="XamlConverters\DateToStringConverterClass.cs" />
     <Compile Include="XamlConverters\GateToNumberConverterClass.cs" />
+    <Compile Include="XamlConverters\IsMaleToSexEnumConverterClass.cs" />
     <Compile Include="XamlConverters\RecordsRangeToTextConverterClass.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -214,7 +214,10 @@ namespace BaseCore.DataBase
                 await ctx.SaveChangesAsync();
             });
         }
-
+        /// <summary>
+        /// To jest moja pojebana funkcja
+        /// </summary>
+        /// <returns></returns>
         public async Task UpdateFullCategoryAllAsync()
         {
             Player[] players = await GetAllAsync();

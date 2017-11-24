@@ -16,7 +16,7 @@ using BaseCore.TimesProcess;
 
 namespace AdminView.Players
 {
-    class PlayersViewModel : TabItemViewModel<Player>
+    class PlayersViewModel : TabItemViewModel
     {
         public PlayersViewModel(IEditableCompetition currentCompetition) : base(currentCompetition)
         {
@@ -173,14 +173,16 @@ namespace AdminView.Players
             await _playerRepository.UpdateAsync(playerToUpdate.DbEntity, playerToUpdate.DbEntity.Distance,
                 playerToUpdate.DbEntity.ExtraPlayerInfo);
             var updatedPlayer = (await _playerRepository.GetById(playerToUpdate.DbEntity.Id));
+
             var playerToEdit = Players.First(p => p.DbEntity.Id == playerToUpdate.DbEntity.Id);
-            playerToEdit = new EditablePlayer(_currentCompetition)
-            {
-                DbEntity = updatedPlayer
-            };
-            OnPropertyChanged(nameof(playerToEdit));
-            OnPropertyChanged(nameof(playerToUpdate));
-            OnPropertyChanged("Players");
+            playerToEdit.FullCategory = updatedPlayer.FullCategory;
+            //playerToEdit = new EditablePlayer(_currentCompetition)
+            //{
+            //    DbEntity = updatedPlayer
+            ////};
+            //OnPropertyChanged(nameof(playerToEdit));
+            //OnPropertyChanged(nameof(playerToUpdate));
+            //OnPropertyChanged(nameof(Players));
 
         }
 

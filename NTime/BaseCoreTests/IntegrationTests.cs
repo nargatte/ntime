@@ -96,6 +96,8 @@ namespace BaseCoreTests
 
             TimeProcess timeProcess = new TimeProcess(com);
 
+            string mainPath = Path.GetTempPath();
+
             Dictionary<string, string> filesDictionary = new Dictionary<string, string>();
             filesDictionary.Add("Zawodnicy.csv", Properties.Resources.Zawodnicy);
             filesDictionary.Add("log1.csv", Properties.Resources.log1);
@@ -104,23 +106,23 @@ namespace BaseCoreTests
 
             foreach (KeyValuePair<string, string> dpv in filesDictionary)
             {
-                if (File.Exists(dpv.Key))
-                    File.Delete(dpv.Key);
+                if (File.Exists(mainPath +  dpv.Key))
+                    File.Delete(mainPath +  dpv.Key);
 
-                using (FileStream fs = File.Create(dpv.Key))
+                using (FileStream fs = File.Create(mainPath + dpv.Key))
                 {
                     byte[] tb = new UTF8Encoding(true).GetBytes(dpv.Value);
                     fs.Write(tb, 0, tb.Length);
                 }
             }
 
-            await pr.ImportPlayersAsync(
+            await pr.ImportPlayersAsync(mainPath +
                 "Zawodnicy.csv");
-            await pr.ImportTimeReadsAsync(
+            await pr.ImportTimeReadsAsync(mainPath +
                 "log1.csv", g1);
-            await pr.ImportTimeReadsAsync(
+            await pr.ImportTimeReadsAsync(mainPath +
                 "log2.csv", g1);
-            await pr.ImportTimeReadsAsync(
+            await pr.ImportTimeReadsAsync(mainPath +
                 "log3.csv", g2);
             //await pr.ImportTimeReadsAsync(
             //  pathToexport + "log1 Lask.csv", g2);

@@ -12,7 +12,7 @@ using System.Windows;
 
 namespace AdminView.Categories
 {
-    class CategoriesViewModel : TabItemViewModel<AgeCategory>
+    class CategoriesViewModel : TabItemViewModel
     {
         public CategoriesViewModel(IEditableCompetition currentCompetition) : base(currentCompetition)
         {

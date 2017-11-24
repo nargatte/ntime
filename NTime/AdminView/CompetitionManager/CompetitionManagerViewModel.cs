@@ -16,7 +16,7 @@ using BaseCore.DataBase;
 
 namespace AdminView.CompetitionManager
 {
-    class CompetitionManagerViewModel : AdminViewModel<Competition>, ViewCore.Entities.ISwitchableViewModel
+    class CompetitionManagerViewModel : AdminViewModel, ViewCore.Entities.ISwitchableViewModel
     {
 
         public CompetitionManagerViewModel(ViewCore.Entities.IEditableCompetition currentCompetition) : base(currentCompetition)

@@ -78,6 +78,7 @@
     <Compile Include="DataBase\Enums\DistanceTypeEnum.cs" />
     <Compile Include="DataBase\EnumHelpers\EnumBindingSourceExtension.cs" />
     <Compile Include="DataBase\EnumHelpers\EnumDescriptionTypeConverter.cs" />
+    <Compile Include="DataBase\Enums\SexEnum.cs" />
     <Compile Include="DataBase\Enums\SortOrderEnum.cs" />
     <Compile Include="DataBase\Repositories\GateRepository.cs" />
     <Compile Include="DataBase\Repositories\TimeReadsLogInfoRepository.cs" />

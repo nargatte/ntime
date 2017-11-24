@@ -22,7 +22,7 @@ namespace MvvmHelper
         protected virtual T SetProperty<T>(T member, T val,
             [CallerMemberName] string propertyName = null)
         {
-            if (object.Equals(member, val)) return member;
+            //if (object.Equals(member, val)) return member;
 
             member = val;
             PropertyChanged(this, new PropertyChangedEventArgs(propertyName));

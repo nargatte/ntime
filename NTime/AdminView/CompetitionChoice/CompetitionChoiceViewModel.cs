@@ -11,7 +11,7 @@ using ViewCore.Entities;
 
 namespace AdminView.CompetitionChoice
 {
-    class CompetitionChoiceViewModel : AdminViewModel<Competition>, ViewCore.Entities.ISwitchableViewModel
+    class CompetitionChoiceViewModel : AdminViewModel, ViewCore.Entities.ISwitchableViewModel
     {
         public CompetitionChoiceViewModel(ViewCore.Entities.IEditableCompetition currentCompteition) : base(currentCompteition)
         {
