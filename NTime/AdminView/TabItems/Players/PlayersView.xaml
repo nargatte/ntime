@@ -8,6 +8,7 @@
              xmlns:local="clr-namespace:AdminView.Players"
              xmlns:db="clr-namespace:BaseCore.DataBase;assembly=BaseCore"
             xmlns:filter="clr-namespace:BaseCore.PlayerFilter;assembly=BaseCore"
+            xmlns:validation="clr-namespace:AdminView.Validation;assembly=ViewCore"
             x:Class="AdminView.Players.PlayersView"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
@@ -52,7 +53,7 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>  
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -97,18 +98,24 @@
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="Dystans"
                                VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
-                        <ComboBox ItemsSource="{Binding DefinedDistances}" SelectedItem="{Binding Distance, UpdateSourceTrigger=PropertyChanged}" Margin="0,5" Height="30" Width="100" DisplayMemberPath="Name"></ComboBox>
+                        <ComboBox ItemsSource="{Binding DefinedDistances}" SelectedItem="{Binding Distance, UpdateSourceTrigger=PropertyChanged}" Margin="5" Height="30" Width="100" DisplayMemberPath="Name"></ComboBox>
                         <!--<TextBox Text="{Binding Distance}" Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>-->
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="Czas startu"
                                VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
-                        <TextBox Text="{Binding StartTime, UpdateSourceTrigger=PropertyChanged}" Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>
+                        <TextBox Name="DistanceStartTimeTB" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="5" Width="100" Height="30">
+                            <Binding Path="StartTime" UpdateSourceTrigger="LostFocus">
+                                <Binding.ValidationRules>
+                                    <validation:TimeFormatRule ValidatesOnTargetUpdated="True"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox>
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="Dodatkowe inf."
                                VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
-                        <ComboBox ItemsSource="{Binding DefinedExtraPlayerInfo, UpdateSourceTrigger=PropertyChanged}" Width="100" Margin="0,5" Height="30"
+                        <ComboBox ItemsSource="{Binding DefinedExtraPlayerInfo, UpdateSourceTrigger=PropertyChanged}" Width="100" Margin="5" Height="30"
                                   SelectedItem="{Binding ExtraPlayerInfo, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name">
                         </ComboBox>
 
@@ -199,7 +206,19 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn x:Name="startTimeColumn" Header="Czas startu" Binding="{Binding StartTime}"/>
+                <DataGridTemplateColumn Header="Czas startu">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Name="DistanceStartTimeTB">
+                                <Binding Path="StartTime" UpdateSourceTrigger="LostFocus">
+                                    <Binding.ValidationRules>
+                                        <validation:TimeFormatRule ValidatesOnTargetUpdated="True"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTemplateColumn x:Name="extraPlayerInfoIdColumn"  Header="Dodatkowe info">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

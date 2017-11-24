@@ -15,8 +15,12 @@ namespace ViewCore.Entities
 
         public EditablePlayer(IEditableCompetition currentComptetition) : base(currentComptetition)
         {
-            if (StartTime == null || StartTime < new DateTime(2000, 1, 1))
-                StartTime = DateTime.Today;
+            StartTime.TryConvertToDateTime(out DateTime startTimeDateTime);
+            if (StartTime == null || startTimeDateTime < new DateTime(2000, 1, 1))
+            {
+                StartTime = DateTime.Today.ConvertToString();
+            }
+
             if (BirthDate == null || BirthDate < new DateTime(2000, 1, 1))
                 BirthDate = DateTime.Today;
         }
@@ -26,7 +30,7 @@ namespace ViewCore.Entities
         {
             DefinedDistances = new ObservableCollection<EditableDistance>(distances);
             DefinedExtraPlayerInfo = new ObservableCollection<EditableExtraPlayerInfo>(extraPlayerInfos);
-            StartTime = DateTime.Today;
+            StartTime = DateTime.Today.ConvertToString();
         }
 
         public int StartNumber
@@ -100,13 +104,23 @@ namespace ViewCore.Entities
         }
 
 
-        public DateTime? StartTime
+        //public DateTime? StartTime
+        //{
+        //    get { return DbEntity.StartTime; }
+        //    set
+        //    {
+        //        DbEntity.StartTime = SetProperty(DbEntity.StartTime, value);
+        //        OnUpdateRequested();
+        //    }
+        //}
+
+        public string StartTime
         {
-            get { return DbEntity.StartTime; }
+            get { return DbEntity.StartTime.GetValueOrDefault().ConvertToString(); }
             set
             {
-                DbEntity.StartTime = SetProperty(DbEntity.StartTime, value);
-                OnUpdateRequested();
+                if (value.TryConvertToDateTime(out DateTime dateTime))
+                    DbEntity.StartTime = SetProperty(DbEntity.StartTime, dateTime);
             }
         }
 

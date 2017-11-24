@@ -162,7 +162,7 @@
                 </Expander>
                 <DataGrid x:Name="distancesDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected"
                   ItemsSource="{Binding Distances}" EnableRowVirtualization="True" AutoGenerateColumns="False"
-                  ColumnWidth="*" SelectionMode="Extended" CanUserAddRows="False" Width="600">
+                  ColumnWidth="Auto" SelectionMode="Extended" CanUserAddRows="False" Width="Auto" CanUserSortColumns="True">
                     <DataGrid.RowDetailsTemplate>
                         <DataTemplate>
                             <ItemsControl ItemsSource="{Binding GatesOrderItems}" Background="LightGoldenrodYellow">
@@ -234,10 +234,10 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Typ" Width="60">
+                        <DataGridTemplateColumn Header="Typ" Width="Auto">
                             <DataGridTemplateColumn.CellEditingTemplate>
                                 <DataTemplate>
-                                    <ComboBox Width="60" ItemsSource="{Binding Source={db:EnumBindingSource {x:Type db:DistanceTypeEnum}}}"
+                                    <ComboBox Width="70" ItemsSource="{Binding Source={db:EnumBindingSource {x:Type db:DistanceTypeEnum}}}"
                                               SelectedItem="{Binding DistanceType, UpdateSourceTrigger=PropertyChanged}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellEditingTemplate>
@@ -253,7 +253,7 @@
                             
                         </DataGridComboBoxColumn>-->
                         <DataGridTextColumn x:Name="gatesCountColumn" Header="Liczba bramek" Binding="{Binding GatesCount, UpdateSourceTrigger=LostFocus}"  Width="Auto"/>
-                        <DataGridTextColumn x:Name="lapsCountColumn" Header="Liczba okrążeń" Binding="{Binding LapsCount, UpdateSourceTrigger=LostFocus, Mode=OneWay}"
+                        <DataGridTextColumn x:Name="lapsCountColumn" Header="Liczba okrążeń" Binding="{Binding LapsCount, UpdateSourceTrigger=LostFocus}"
                                             Visibility="{Binding IsLapsCountCollapsed, Converter={StaticResource boolToCollapsedConverter}, Mode=OneWay}"  Width="Auto"/>
 
                         <DataGridTemplateColumn Header="Czas startu">

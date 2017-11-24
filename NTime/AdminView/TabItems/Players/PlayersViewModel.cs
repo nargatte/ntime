@@ -12,6 +12,7 @@ using ViewCore.Entities;
 using System.Windows;
 using System.Collections;
 using System.ComponentModel;
+using BaseCore.TimesProcess;
 
 namespace AdminView.Players
 {
@@ -223,7 +224,8 @@ namespace AdminView.Players
                 message = "Nazwisko nie może być puste";
                 return false;
             }
-            if (newPlayer.StartTime < new DateTime(2000, 1, 1))
+            newPlayer.StartTime.TryConvertToDateTime(out DateTime startTimeDateTime);
+            if (startTimeDateTime < new DateTime(2000, 1, 1))
             {
                 message = "Nieprawidłowy czas startu zawodnika";
                 return false;
