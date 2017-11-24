@@ -15,7 +15,7 @@ namespace AdminView.Settings
         CompetitionRepository repository = new CompetitionRepository(new ContextProvider());
         public SettingsViewModel(ViewCore.Entities.IEditableCompetition currentCompetition) : base(currentCompetition)
         {
-            this.CurrentCompetition = currentCompetition;
+            //this.CurrentCompetition = currentCompetition;
             TabTitle = "Ustawienia";
             SaveChangesCmd = new RelayCommand(OnSaveChanges);
         }
@@ -29,7 +29,7 @@ namespace AdminView.Settings
 
         private void OnSaveChanges()
         {
-            repository.UpdateAsync(CurrentCompetition.DbEntity).ContinueWith( t => 
+            repository.UpdateAsync(_currentCompetition.DbEntity).ContinueWith( t => 
             MessageBox.Show("Zmiany zostały zapisane")
             );
         }

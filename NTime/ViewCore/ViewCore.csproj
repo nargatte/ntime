@@ -59,6 +59,7 @@
     <Compile Include="Interfaces\IViewModel.cs" />
     <Compile Include="Entities\LogsInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RangeInfo.cs" />
     <Compile Include="TabItemViewModel.cs" />
     <Compile Include="Validation\IsNotEmpty.cs" />
     <Compile Include="Validation\IsNumber20Rule.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="XamlConverters\CompetitionToStringConverterClass.cs" />
     <Compile Include="XamlConverters\DateToStringConverterClass.cs" />
     <Compile Include="XamlConverters\GateToNumberConverterClass.cs" />
+    <Compile Include="XamlConverters\RecordsRangeToTextConverterClass.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BaseCore\BaseCore.csproj">

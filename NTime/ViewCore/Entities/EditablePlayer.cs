@@ -203,8 +203,6 @@ namespace ViewCore.Entities
             UpdateRequested?.Invoke(this, EventArgs.Empty);
         }
 
-        public event EventHandler UpdateRequested = delegate
-            {
-            };
+        public event EventHandler UpdateRequested = delegate { };
     }
 }

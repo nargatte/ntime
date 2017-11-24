@@ -11,6 +11,7 @@ using BaseCore.PlayerFilter;
 using ViewCore.Entities;
 using System.Windows;
 using System.Collections;
+using System.ComponentModel;
 
 namespace AdminView.Players
 {
@@ -24,20 +25,23 @@ namespace AdminView.Players
             ReadPlayersFromCsvCmd = new RelayCommand(OnReadPlayersFromCsvAsync);
             UpdateFullCategoriesCmd = new RelayCommand(OnUpdateFullCategoriesAsync);
             DeleteSelectedPlayersCmd = new RelayCommand(OnDeleteSelectedPlayersRequestedAsync);
+            PreviousPageCmd = new RelayCommand(OnPreviousPage);
+            NextPageCmd = new RelayCommand(OnNextPage);
             TabTitle = "Zawodnicy";
-            //NewPlayer = new EditablePlayer(_currentCompetition)
-            //{
-            //    DbEntity = new Player()
-            //    {
-            //        Distance = new Distance(),
-            //        ExtraPlayerInfo = new ExtraPlayerInfo()
-            //    }
-            //};
+            RecordsRangeInfo.ChildUpdated += RecordsRangeInfo_ChildUpdated;
         }
-
 
         #region Properties
 
+        public PlayerFilterOptions PlayerFilter { get; set; } = new PlayerFilterOptions();
+
+        private RangeInfo _recordRangeInfo = new RangeInfo
+        { ItemsPerPage = 50, PageNumber = 1, TotalItemsCount = 0 };
+        public RangeInfo RecordsRangeInfo
+        {
+            get { return _recordRangeInfo; }
+            set { SetProperty(ref _recordRangeInfo, value); }
+        }
 
         private PlayerSort? _sortCriteria;
         public PlayerSort? SortCriteria
@@ -121,6 +125,33 @@ namespace AdminView.Players
         public RelayCommand DeleteAllPlayersCmd { get; set; }
         public RelayCommand UpdateFullCategoriesCmd { get; set; }
         public RelayCommand DeleteSelectedPlayersCmd { get; set; }
+        public RelayCommand PreviousPageCmd { get; set; }
+        public RelayCommand NextPageCmd { get; set; }
+
+
+        private async void OnPreviousPage()
+        {
+            if (RecordsRangeInfo.PageNumber > 1)
+            {
+                RecordsRangeInfo.PageNumber--;
+                await AddPlayersFromDatabaseAndDisplay(removeAllDisplayedBefore: true);
+            }
+        }
+
+        private async void OnNextPage()
+        {
+            if (RecordsRangeInfo.LastItem < RecordsRangeInfo.TotalItemsCount)
+            {
+                RecordsRangeInfo.PageNumber++;
+                await AddPlayersFromDatabaseAndDisplay(removeAllDisplayedBefore: true);
+            }
+        }
+
+        private void RecordsRangeInfo_ChildUpdated()
+        {
+            OnPropertyChanged(nameof(RecordsRangeInfo));
+        }
+
 
         private void DisplayNewPlayers(Player[] dbPlayers)
         {
@@ -135,18 +166,28 @@ namespace AdminView.Players
             }
         }
 
-        private void Player_UpdateRequested(object sender, EventArgs e)
+        private async void Player_UpdateRequested(object sender, EventArgs e)
         {
             var playerToUpdate = sender as EditablePlayer;
-            _playerRepository.UpdateAsync(playerToUpdate.DbEntity, playerToUpdate.DbEntity.Distance,
+            await _playerRepository.UpdateAsync(playerToUpdate.DbEntity, playerToUpdate.DbEntity.Distance,
                 playerToUpdate.DbEntity.ExtraPlayerInfo);
+            var updatedPlayer = (await _playerRepository.GetById(playerToUpdate.DbEntity.Id));
+            var playerToEdit = Players.First(p => p.DbEntity.Id == playerToUpdate.DbEntity.Id);
+            playerToEdit = new EditablePlayer(_currentCompetition)
+            {
+                DbEntity = updatedPlayer
+            };
+            OnPropertyChanged(nameof(playerToEdit));
+            OnPropertyChanged(nameof(playerToUpdate));
+            OnPropertyChanged("Players");
+
         }
 
         private async void OnAddPlayerAsync()
         {
             if (CanAddPlayer(NewPlayer, out string message))
             {
-                NewPlayer.IsMale =  GetSexForPlayer(NewPlayer);
+                NewPlayer.IsMale = GetSexForPlayer(NewPlayer);
                 var playerToAdd = NewPlayer.Clone() as EditablePlayer;
                 var tempDistance = playerToAdd.DbEntity.Distance;
                 var tempExtraPlayerInfo = playerToAdd.DbEntity.ExtraPlayerInfo;
@@ -155,6 +196,7 @@ namespace AdminView.Players
                 playerToAdd.DbEntity.ExtraPlayerInfo = tempExtraPlayerInfo;
                 playerToAdd.UpdateRequested += Player_UpdateRequested;
                 Players.Add(playerToAdd);
+                RecordsRangeInfo.TotalItemsCount++;
                 ClearNewPlayer();
             }
             else
@@ -203,8 +245,7 @@ namespace AdminView.Players
         private async void OnReadPlayersFromCsvAsync()
         {
             await AddPlayersFromCsvToDatabase();
-            await AddPlayersFromDatabaseAndDisplay(new PlayerFilterOptions(),
-                pageNumber: 0, numberOfItemsOnPage: 50);
+            await AddPlayersFromDatabaseAndDisplay(removeAllDisplayedBefore: true);
         }
 
 
@@ -246,6 +287,7 @@ namespace AdminView.Players
         private void DeleteAllPlayersFromGUI()
         {
             Players.Clear();
+            RecordsRangeInfo.TotalItemsCount = 0;
         }
 
 
@@ -255,6 +297,7 @@ namespace AdminView.Players
             {
                 Players.Remove(player);
             }
+            RecordsRangeInfo.TotalItemsCount -= selectedPlayersList.Count;
         }
 
         private async void OnDeleteSelectedPlayersRequestedAsync()
@@ -282,8 +325,7 @@ namespace AdminView.Players
         {
             await DownloadDistancesAsync();
             await DownloadExtraPlayerInfoAsync();
-            //await DownloadAllPlayers();
-            await AddPlayersFromDatabaseAndDisplay(new PlayerFilterOptions(), 0, 50, removeAllDisplayedBefore);
+            await AddPlayersFromDatabaseAndDisplay(removeAllDisplayedBefore);
             ClearNewPlayer();
         }
 
@@ -305,24 +347,22 @@ namespace AdminView.Players
 
         private async void FilterValueChangedAsync()
         {
-            var filter = new PlayerFilterOptions();
-            if (!String.IsNullOrWhiteSpace(FilterGeneral))
-                filter.Query = FilterGeneral;
+            RecordsRangeInfo.PageNumber = 1;
+            PlayerFilter.Query = FilterGeneral;
             if (SortOrder.HasValue && SortOrder.Value == SortOrderEnum.Descending)
-                filter.DescendingSort = true;
+                PlayerFilter.DescendingSort = true;
             if (SortCriteria.HasValue)
-                filter.PlayerSort = SortCriteria.Value;
+                PlayerFilter.PlayerSort = SortCriteria.Value;
 
-            await AddPlayersFromDatabaseAndDisplay(filter, 0, 50, true);
+            await AddPlayersFromDatabaseAndDisplay(true);
         }
         #endregion
 
         #region Database
 
-        private async Task AddPlayersFromDatabaseAndDisplay(PlayerFilterOptions playerFilter,
-            int pageNumber, int numberOfItemsOnPage, bool removeAllDisplayedBefore = false)
+        private async Task AddPlayersFromDatabaseAndDisplay(bool removeAllDisplayedBefore = false)
         {
-            var dbPlayers = await DownloadPlayersFromDataBase(playerFilter, pageNumber, numberOfItemsOnPage);
+            var dbPlayers = await DownloadPlayersFromDataBase(PlayerFilter, RecordsRangeInfo.PageNumber - 1, RecordsRangeInfo.ItemsPerPage);
             if (removeAllDisplayedBefore)
                 Players = new ObservableCollection<EditablePlayer>();
             DisplayNewPlayers(dbPlayers);
@@ -331,6 +371,7 @@ namespace AdminView.Players
         private async Task<Player[]> DownloadPlayersFromDataBase(PlayerFilterOptions playerFilter, int pageNumber, int numberOfItemsOnPage)
         {
             var dbPlayersTuple = await _playerRepository.GetAllByFilterAsync(playerFilter, pageNumber, numberOfItemsOnPage);
+            RecordsRangeInfo.TotalItemsCount = dbPlayersTuple.Item2;
             return dbPlayersTuple.Item1;
         }
 
@@ -345,7 +386,7 @@ namespace AdminView.Players
             List<Task> tasks = new List<Task>();
             foreach (var player in selectedPlayersList)
             {
-                tasks.Add( _playerRepository.RemoveAsync(player.DbEntity));
+                tasks.Add(_playerRepository.RemoveAsync(player.DbEntity));
             }
             await Task.WhenAll(tasks);
         }
@@ -377,4 +418,5 @@ namespace AdminView.Players
         }
         #endregion
     }
+
 }

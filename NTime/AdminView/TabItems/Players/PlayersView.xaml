@@ -14,6 +14,31 @@
              d:DesignHeight="300" d:DesignWidth="1000">
     <UserControl.Resources>
         <converters:BoolToSexConverterClass x:Key="BoolToSexConverter"/>
+        <converters:RecordsRangeToTextConverterClass x:Key="RecordsRangeToTextConverter"/>
+        <Style x:Key="KeyStopButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border TextBlock.Foreground="{TemplateBinding Foreground}"
+                                  x:Name="Border"
+                                  CornerRadius="1"
+                                  BorderThickness="1">
+                            <Border.Background>
+                                <ImageBrush ImageSource= "pack://application:,,,/AdminView;component/Images/LeftArrow.jpg"  Stretch="Uniform"/>
+                            </Border.Background>
+                            <Border.Effect>
+                                <DropShadowEffect/>
+                            </Border.Effect>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter TargetName="Border" Property="Border.Effect" Value="{x:Null}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -31,11 +56,28 @@
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="225"/>
             </Grid.ColumnDefinitions>
-
-            <StackPanel Name="PlayerAdding" Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0">
+                <Button Height="30" Command="{Binding PreviousPageCmd}">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Image Source="pack://application:,,,/AdminView;component/Images/LeftArrow.jpg"/>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <TextBlock Width="80" Text="{Binding RecordsRangeInfo, Converter={StaticResource RecordsRangeToTextConverter}}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <Button Height="30" Command="{Binding NextPageCmd}">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Image Source="pack://application:,,,/AdminView;component/Images/RightArrow.jpg"/>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
+            <StackPanel Name="PlayerAdding" Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
                 <StackPanel DataContext="{Binding NewPlayer}" Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Center">
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="Numer"
@@ -69,7 +111,7 @@
                         <ComboBox ItemsSource="{Binding DefinedExtraPlayerInfo, UpdateSourceTrigger=PropertyChanged}" Width="100" Margin="0,5" Height="30"
                                   SelectedItem="{Binding ExtraPlayerInfo, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name">
                         </ComboBox>
-                            
+
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="Klub"
@@ -94,7 +136,7 @@
                             Content="Dodaj"   FontSize="15" Margin="30, 5, 5, 5"/>
                 </StackPanel>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" >
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" >
                 <StackPanel Name="Filtering" Orientation="Vertical" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0">
                     <TextBlock Text="Filtrowanie" HorizontalAlignment="Center" FontSize="18"/>
                     <StackPanel Orientation="Horizontal">
@@ -118,7 +160,7 @@
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
-            <StackPanel Name="SettingsButtons" Orientation="Horizontal" Grid.Column="1" Grid.RowSpan="1" Grid.Row="1">
+            <StackPanel Name="SettingsButtons" Orientation="Horizontal" Grid.Column="2" Grid.RowSpan="1" Grid.Row="1">
                 <StackPanel  Orientation="Vertical" >
 
                     <Button Command="{Binding UpdateFullCategoriesCmd}" Margin="0,0, 10, 5" Height="37" Width="100">
@@ -143,10 +185,10 @@
             </StackPanel>
         </Grid>
 
-            <adminVew:MultipleChoiceDataGrid x:Name="playerDataGrid" Grid.Row="1"
+        <adminVew:MultipleChoiceDataGrid x:Name="playerDataGrid" Grid.Row="1"
                   ItemsSource="{Binding Players}"  AutoGenerateColumns="False" ColumnWidth="*" SelectionMode="Extended"
                     SelectedItemsList="{Binding SelectedPlayersList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                <DataGrid.Columns>
+            <DataGrid.Columns>
                 <DataGridTextColumn x:Name="startNumberColumn" Width="SizeToHeader" Header="Numer" Binding="{Binding StartNumber}"/>
                 <DataGridTextColumn x:Name="firstNameColumn"  Header="Imię" Binding="{Binding FirstName}"/>
                 <DataGridTextColumn x:Name="lastNameColumn" Header="Nazwisko" Binding="{Binding LastName}"/>
@@ -165,7 +207,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn x:Name="fullCategoryColumn" Header="kategoria" Binding="{Binding FullCategory}"/>
+                <DataGridTextColumn x:Name="fullCategoryColumn" Header="kategoria" Binding="{Binding FullCategory, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                 <DataGridTextColumn x:Name="teamColumn"  Header="Klub" Binding="{Binding Team}"/>
                 <DataGridTemplateColumn x:Name="birthDateColumn"  Header="Data urodzenia">
                     <DataGridTemplateColumn.CellTemplate>

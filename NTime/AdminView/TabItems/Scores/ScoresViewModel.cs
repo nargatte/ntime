@@ -21,11 +21,22 @@ namespace AdminView.Scores
             ViewLoadedCmd = new RelayCommand(OnViewLoadedAsync);
             UpdateFullCategoriesCmd = new RelayCommand(OnUpdateFullCategoriesAsync);
             UpdateRankingAllCmd = new RelayCommand(OnUpdateRankingAllAsync);
+            PreviousPageCmd = new RelayCommand(OnPreviousPage);
+            NextPageCmd = new RelayCommand(OnNextPage);
+            RecordsRangeInfo.ChildUpdated += RecordsRangeInfo_ChildUpdated;
         }
 
         #region Properties
 
+        public PlayerFilterOptions PlayerFilter { get; set; } = new PlayerFilterOptions();
 
+        private RangeInfo _recordRangeInfo = new RangeInfo
+        { ItemsPerPage = 50, PageNumber = 1, TotalItemsCount = 0 };
+        public RangeInfo RecordsRangeInfo
+        {
+            get { return _recordRangeInfo; }
+            set { SetProperty(ref _recordRangeInfo, value); }
+        }
 
         private PlayerSort? _sortCriteria;
         public PlayerSort? SortCriteria
@@ -90,18 +101,44 @@ namespace AdminView.Scores
         public RelayCommand ViewLoadedCmd { get; set; }
         public RelayCommand UpdateFullCategoriesCmd { get; set; }
         public RelayCommand UpdateRankingAllCmd { get; set; }
+        public RelayCommand PreviousPageCmd { get; set; }
+        public RelayCommand NextPageCmd { get; set; }
+
+
+        private async void OnPreviousPage()
+        {
+            if (RecordsRangeInfo.PageNumber > 1)
+            {
+                RecordsRangeInfo.PageNumber--;
+                await AddPlayersFromDatabaseAndDisplay(removeAllDisplayedBefore: true);
+            }
+        }
+
+        private async void OnNextPage()
+        {
+            if (RecordsRangeInfo.LastItem < RecordsRangeInfo.TotalItemsCount)
+            {
+                RecordsRangeInfo.PageNumber++;
+                await AddPlayersFromDatabaseAndDisplay(removeAllDisplayedBefore: true);
+            }
+        }
+
+        private void RecordsRangeInfo_ChildUpdated()
+        {
+            OnPropertyChanged(nameof(RecordsRangeInfo));
+        }
+
 
         private async void FilterValueChangedAsync()
         {
-            var filter = new PlayerFilterOptions();
-            if (!String.IsNullOrWhiteSpace(FilterGeneral))
-                filter.Query = FilterGeneral;
+            RecordsRangeInfo.PageNumber = 1;
+            PlayerFilter.Query = FilterGeneral;
             if (SortOrder.HasValue && SortOrder.Value == SortOrderEnum.Descending)
-                filter.DescendingSort = true;
+                PlayerFilter.DescendingSort = true;
             if (SortCriteria.HasValue)
-                filter.PlayerSort = SortCriteria.Value;
+                PlayerFilter.PlayerSort = SortCriteria.Value;
 
-            await AddPlayersFromDatabaseAndDisplay(filter, 0, 50, true);
+            await AddPlayersFromDatabaseAndDisplay(removeAllDisplayedBefore: true);
         }
 
         private async void OnUpdateFullCategoriesAsync()
@@ -120,13 +157,13 @@ namespace AdminView.Scores
 
         private void OnViewLoadedAsync()
         {
-            DownloadDataFromDatabaseAsync(removeAllDisplayedBefore:true);
+            DownloadDataFromDatabaseAsync(removeAllDisplayedBefore: true);
         }
         private async void DownloadDataFromDatabaseAsync(bool removeAllDisplayedBefore = false)
         {
             await DownloadDistancesAsync();
             await DownloadExtraPlayerInfoAsync();
-            await AddPlayersFromDatabaseAndDisplay(new PlayerFilterOptions(), 0, 50, removeAllDisplayedBefore);
+            await AddPlayersFromDatabaseAndDisplay(removeAllDisplayedBefore: removeAllDisplayedBefore);
         }
 
         public void DetachAllEvents()
@@ -151,10 +188,9 @@ namespace AdminView.Scores
 
         #region Database
 
-        private async Task AddPlayersFromDatabaseAndDisplay(PlayerFilterOptions playerFilter,
-            int pageNumber, int numberOfItemsOnPage, bool removeAllDisplayedBefore = false)
+        private async Task AddPlayersFromDatabaseAndDisplay(bool removeAllDisplayedBefore = false)
         {
-            var dbPlayers = await DownloadPlayersFromDataBase(playerFilter, pageNumber, numberOfItemsOnPage);
+            var dbPlayers = await DownloadPlayersFromDataBase(PlayerFilter, RecordsRangeInfo.PageNumber - 1, RecordsRangeInfo.ItemsPerPage);
             if (removeAllDisplayedBefore)
                 PlayersWithScore = new ObservableCollection<EditablePlayer>();
             DisplayNewPlayers(dbPlayers);
@@ -163,6 +199,7 @@ namespace AdminView.Scores
         private async Task<Player[]> DownloadPlayersFromDataBase(PlayerFilterOptions playerFilter, int pageNumber, int numberOfItemsOnPage)
         {
             var dbPlayersTuple = await _playerRepository.GetAllByFilterAsync(playerFilter, pageNumber, numberOfItemsOnPage);
+            RecordsRangeInfo.TotalItemsCount = dbPlayersTuple.Item2;
             return dbPlayersTuple.Item1;
         }
 
