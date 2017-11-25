@@ -8,6 +8,7 @@
             xmlns:settings="clr-namespace:AdminView.Settings"
              xmlns:categories="clr-namespace:AdminView.Categories"
              xmlns:distances="clr-namespace:AdminView.Distances"
+             xmlns:logs="clr-namespace:AdminView.Logs"
             xmlns:competitionManager="clr-namespace:AdminView.CompetitionManager"
             xmlns:local="clr-namespace:AdminView.CompetitionManager"
              mc:Ignorable="d" 
@@ -100,6 +101,9 @@
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type distances:DistancesViewModel}">
                     <distances:DistancesView/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type logs:LogsViewModel}">
+                    <logs:LogsView/>
                 </DataTemplate>
             </TabControl.Resources>
             <!--<TabItem Header="Ustawienia" Style="{DynamicResource ResourceKey=styleTabItemLeft}">

@@ -10,6 +10,7 @@ using AdminView.Players;
 using AdminView.Scores;
 using AdminView.Distances;
 using AdminView.Categories;
+using AdminView.Logs;
 using MvvmHelper;
 using ViewCore;
 using BaseCore.DataBase;
@@ -25,7 +26,7 @@ namespace AdminView.CompetitionManager
             TabItems = new ObservableCollection<BindableBase>()
             {
                 new SettingsViewModel(_currentCompetition), new PlayersViewModel(_currentCompetition), new DistancesViewModel(_currentCompetition),
-                new CategoriesViewModel(_currentCompetition), new ScoresViewModel(_currentCompetition)
+                new CategoriesViewModel(_currentCompetition), new LogsViewModel(_currentCompetition),new ScoresViewModel(_currentCompetition)
             };
         }
 

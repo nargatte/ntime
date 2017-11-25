@@ -4,23 +4,38 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BaseCore.DataBase;
+using BaseCore.TimesProcess;
 
 namespace ViewCore.Entities
 {
     public class EditableTimeRead : EditableBaseClass<TimeRead>
     {
         public EditableTimeRead(IEditableCompetition currentCompetition) : base(currentCompetition) { }
-        public decimal Time
+
+
+        public TimeReadTypeEnum TimeReadType
         {
-            get { return DbEntity.Time; }
-            set { DbEntity.Time = SetProperty(DbEntity.Time, value); }
+            get { return DbEntity.TimeReadTypeEnum; }
+            set { DbEntity.TimeReadTypeEnum = SetProperty(DbEntity.TimeReadTypeEnum, value); }
         }
 
-        public int Reader
+        public string Time
         {
-            get { return DbEntity.Gate.Number; }
-            set { DbEntity.Gate.Number = SetProperty(DbEntity.Gate.Number, value); }
+            get { return DbEntity.Time.ToDateTime().ConvertToString(); }
+            //set
+            //{
+            //    if(value.TryConvertToDateTime(out ))
+            //        else
+            //    DbEntity.Time = SetProperty(DbEntity.Time, value.conv
+            //  );
+            //}
         }
+
+        //public int Reader
+        //{
+        //    get { return DbEntity.Gate.Number; }
+        //    set { DbEntity.Gate.Number = SetProperty(DbEntity.Gate.Number, value); }
+        //}
 
     }
 }

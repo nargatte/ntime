@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace AdminView.TabItems.Logs
+namespace AdminView.Logs
 {
     /// <summary>
     /// Interaction logic for LogsView.xaml

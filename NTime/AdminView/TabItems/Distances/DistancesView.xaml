@@ -73,7 +73,7 @@
                             </Button>
 
                         </StackPanel>
-                        <ListView Name="MeasurementPoints" ItemsSource="{Binding DefinedGates}" Margin="0, 10" >
+                        <ListView Name="Gates" ItemsSource="{Binding DefinedGates}" Margin="0, 10" >
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <StatusBar HorizontalAlignment="Stretch" Height="Auto">

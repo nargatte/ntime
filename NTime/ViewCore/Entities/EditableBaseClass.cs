@@ -15,6 +15,7 @@ namespace ViewCore
         {
             DbEntity = Activator.CreateInstance<T>();
         }
+
         private T _dbEntity;
         public T DbEntity
         {
