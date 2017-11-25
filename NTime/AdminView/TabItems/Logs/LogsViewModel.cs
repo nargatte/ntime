@@ -10,6 +10,7 @@ using BaseCore.DataBase;
 using ViewCore.Entities;
 using System.Reflection;
 using System.ComponentModel;
+using ViewCore.Managers;
 
 namespace AdminView.Logs
 {
@@ -44,53 +45,14 @@ namespace AdminView.Logs
         public RelayCommand ViewLoadedCmd { get; set; }
 
 
-        private void OnViewLoaded()
+        private async void OnViewLoaded()
         {
-            FillLegendCollection();
-            DownloadTimeReadsWithPlayers();
-        }
-
-        private async void DownloadTimeReadsWithPlayers()
-        {
-            var dbPlayers = await _playerRepository.GetAllAsync();
-            foreach (var dbPlayer in dbPlayers)
-            {
-                EditablePlayerWithLogs playerToAdd = new EditablePlayerWithLogs(_currentCompetition)
-                {
-                    DbEntity = dbPlayer
-                };
-                playerToAdd.DownloadTimeReads();
-                PlayersWithLogs.Add(playerToAdd);
-            }
-        }
-
-        private void FillLegendCollection()
-        {
-            LegendItems = new ObservableCollection<TimeReadColorsLegendItem>();
-            var enumValues =  Enum.GetValues(typeof(TimeReadTypeEnum)) as TimeReadTypeEnum[];
-            for (int i = 0; i < enumValues.Length; i++)
-            {
-                LegendItems.Add(new TimeReadColorsLegendItem()
-                {
-                    Name = GetEnumDescription(enumValues[i]),
-                    TimeReadType = enumValues[i]
-                });
-            }
-        }
-        public static string GetEnumDescription(Enum value)
-        {
-            FieldInfo fi = value.GetType().GetField(value.ToString());
-
-            DescriptionAttribute[] attributes =
-                (DescriptionAttribute[])fi.GetCustomAttributes(
-                typeof(DescriptionAttribute),
-                false);
-
-            if (attributes != null &&
-                attributes.Length > 0)
-                return attributes[0].Description;
-            else
-                return value.ToString();
+            ColorLegendManager colorLegendManager = new ColorLegendManager();
+            LegendItems = colorLegendManager.GetLegendItems();
+            PlayerWithLogsManager playerWithLogsManager = new PlayerWithLogsManager(_currentCompetition, _playerRepository);
+            PlayersWithLogs = await playerWithLogsManager.GetAllPlayers();
+            foreach (var player in PlayersWithLogs)
+                player.DownloadTimeReads();
         }
         #endregion
     }
