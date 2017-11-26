@@ -45,7 +45,11 @@
     <Compile Include="AdminViewModel.cs" />
     <Compile Include="Entities\EditablePlayerWithLogs.cs" />
     <Compile Include="Managers\ColorLegendManager.cs" />
-    <Compile Include="Managers\PlayerWithLogsManager.cs" />
+    <Compile Include="Managers\DistancesManager.cs" />
+    <Compile Include="Managers\ExtraPlayerInfosManager.cs" />
+    <Compile Include="Managers\FilterValueManager.cs" />
+    <Compile Include="Managers\PlayersManager.cs" />
+    <Compile Include="Managers\PlayersWithLogsManager.cs" />
     <Compile Include="TimeReadColorsLegendItem.cs" />
     <Compile Include="CompetitionItemBase.cs" />
     <Compile Include="Entities\EditableBaseClass.cs" />

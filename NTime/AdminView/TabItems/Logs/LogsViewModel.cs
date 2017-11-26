@@ -49,7 +49,7 @@ namespace AdminView.Logs
         {
             ColorLegendManager colorLegendManager = new ColorLegendManager();
             LegendItems = colorLegendManager.GetLegendItems();
-            PlayerWithLogsManager playerWithLogsManager = new PlayerWithLogsManager(_currentCompetition, _playerRepository);
+            PlayersWithLogsManager playerWithLogsManager = new PlayersWithLogsManager(_currentCompetition, _playerRepository);
             PlayersWithLogs = await playerWithLogsManager.GetAllPlayers();
             foreach (var player in PlayersWithLogs)
                 player.DownloadTimeReads();

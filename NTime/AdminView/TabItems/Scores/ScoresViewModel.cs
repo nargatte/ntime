@@ -176,10 +176,7 @@ namespace AdminView.Scores
         {
             foreach (var dbPlayer in dbPlayers)
             {
-                var playerToAdd = new EditablePlayer(_currentCompetition, DefinedDistances, DefinedExtraPlayerInfo)
-                {
-                    DbEntity = dbPlayer,
-                };
+                var playerToAdd = new EditablePlayer(_currentCompetition, DefinedDistances, DefinedExtraPlayerInfo, dbPlayer);
                 PlayersWithScore.Add(playerToAdd);
             }
         }

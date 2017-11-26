@@ -28,8 +28,9 @@ namespace ViewCore.Entities
         }
 
         public EditablePlayer(IEditableCompetition currentComptetition, ICollection<EditableDistance> distances,
-            ICollection<EditableExtraPlayerInfo> extraPlayerInfos) : this(currentComptetition)
+            ICollection<EditableExtraPlayerInfo> extraPlayerInfos, Player dbPlayer) : this(currentComptetition)
         {
+            DbEntity = dbPlayer;
             DefinedDistances = new ObservableCollection<EditableDistance>(distances);
             DefinedExtraPlayerInfo = new ObservableCollection<EditableExtraPlayerInfo>(extraPlayerInfos);
             StartTime = DateTime.Today.ConvertToString();
