@@ -20,9 +20,20 @@ namespace ViewCore.Managers
             _playerRepository = playerRepository;
         }
 
-        public Task<ObservableCollection<EditablePlayerWithLogs>> GetAllPlayers()
+        public async Task<ObservableCollection<EditablePlayerWithLogs>> GetAllPlayers()
         {
-            throw new NotImplementedException();
+            _playersWithLogs = new ObservableCollection<EditablePlayerWithLogs>();
+            var dbPlayers = await _playerRepository.GetAllAsync();
+            foreach (var dbPlayer in dbPlayers)
+            {
+                EditablePlayerWithLogs playerToAdd = new EditablePlayerWithLogs(_currentCompetition)
+                {
+                    DbEntity = dbPlayer
+                };
+                playerToAdd.DownloadTimeReads();
+                _playersWithLogs.Add(playerToAdd);
+            }
+            return _playersWithLogs;
         }
     }
 }
