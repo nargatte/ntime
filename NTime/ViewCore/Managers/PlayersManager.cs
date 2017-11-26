@@ -167,7 +167,6 @@ namespace ViewCore.Managers
             _recordsRangeInfo.TotalItemsCount -= selectedPlayersArray.Length;
         }
 
-
         public async Task AddPlayersFromCsvToDatabase()
         {
             Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
@@ -180,7 +179,6 @@ namespace ViewCore.Managers
                 MessageBox.Show($"Odczytano {temp.Item2} zawodników, z czego {temp.Item1} zostało dodanych do bazy");
             }
         }
-
 
         public async Task AddPlayersFromDatabase(bool removeAllDisplayedBefore)
         {

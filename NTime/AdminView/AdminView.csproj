@@ -91,6 +91,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="MultipleChoiceDataGrid.cs" />
+    <Compile Include="PlayersViewModelBase.cs" />
     <Compile Include="TabItems\Categories\CategoriesView.xaml.cs">
       <DependentUpon>CategoriesView.xaml</DependentUpon>
     </Compile>
