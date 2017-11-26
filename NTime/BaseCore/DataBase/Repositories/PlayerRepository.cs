@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using BaseCore.Csv;
 using BaseCore.PlayerFilter;
+using BaseCore.TimesProcess;
 
 namespace BaseCore.DataBase
 {
@@ -199,11 +200,11 @@ namespace BaseCore.DataBase
         {
             AgeCategory ageCategory = await (new AgeCategoryRepository(ContextProvider, Competition)).GetFittingAsync(player);
             player.Distance = distance;
-            player.DistanceId = distance.Id;
+            player.DistanceId = distance?.Id;
             player.ExtraPlayerInfo = extraPlayerInfo;
-            player.ExtraPlayerInfoId = extraPlayerInfo.Id;
+            player.ExtraPlayerInfoId = extraPlayerInfo?.Id;
             player.AgeCategory = ageCategory;
-            player.AgeCategoryId = ageCategory.Id;
+            player.AgeCategoryId = ageCategory?.Id;
             player.FullCategory = GetFullCategory(distance, extraPlayerInfo, ageCategory, player.IsMale);
             CheckNull(player);
             CheckItem(player);
@@ -214,47 +215,80 @@ namespace BaseCore.DataBase
                 await ctx.SaveChangesAsync();
             });
         }
-        /// <summary>
-        /// To jest moja pojebana funkcja
-        /// </summary>
-        /// <returns></returns>
-        public async Task UpdateFullCategoryAllAsync()
+
+        public Task UpdateFullCategoryAllAsync()
         {
-            Player[] players = await GetAllAsync();
-            AgeCategory[] categories = null;
-            await ContextProvider.DoAsync(async ctx =>
-            {
-                categories = await ctx.AgeCategories.Where(a => a.CompetitionId == Competition.Id)
-                    .AsNoTracking().ToArrayAsync();
-            });
+            //Old slow version
+            //Player[] players = await GetAllAsync();
+            //AgeCategory[] categories = null;
+            //await ContextProvider.DoAsync(async ctx =>
+            //{
+            //    categories = await ctx.AgeCategories.Where(a => a.CompetitionId == Competition.Id)
+            //        .AsNoTracking().ToArrayAsync();
+            //});
 
-            Dictionary<int, AgeCategory> ageCategoriesDictionary = new Dictionary<int, AgeCategory>();
+            //Dictionary<int, AgeCategory> ageCategoriesDictionary = new Dictionary<int, AgeCategory>();
 
-            foreach (Player player in players)
+            //Parallel.ForEach(players, player =>
+            //{
+            //    if (!ageCategoriesDictionary.TryGetValue(player.BirthDate.Year, out AgeCategory ageCategory))
+            //    {
+            //        ageCategory = categories
+            //            .FirstOrDefault(a =>
+            //                a.YearFrom <= player.BirthDate.Year && player.BirthDate.Year <= a.YearTo);
+            //        if (ageCategory != null)
+            //        {
+            //            ageCategoriesDictionary.Add(player.BirthDate.Year, ageCategory);
+            //        }
+            //    }
+
+            //    player.AgeCategory = ageCategory;
+            //    player.AgeCategoryId = ageCategory?.Id;
+
+            //    player.FullCategory = GetFullCategory(player.Distance, player.ExtraPlayerInfo, player.AgeCategory,
+            //        player.IsMale);
+
+            //    player.AgeCategory = null;
+            //    player.Distance = null;
+            //    player.ExtraPlayerInfo = null;
+            //});
+
+            //await UpdateRangeAsync(players);
+            return ContextProvider.DoAsync(async ctx =>
             {
-                if (!ageCategoriesDictionary.TryGetValue(player.BirthDate.Year, out AgeCategory ageCategory))
+                Player[] players = await ctx.Players.Where(p => p.CompetitionId == Competition.Id).ToArrayAsync();
+                AgeCategory[] categories = await ctx.AgeCategories.Where(a => a.CompetitionId == Competition.Id)
+                        .ToArrayAsync();
+
+                Dictionary<int, AgeCategory> ageCategoriesDictionary = new Dictionary<int, AgeCategory>();
+
+                foreach(Player player in players)
                 {
-                    ageCategory = categories
-                        .FirstOrDefault(a =>
-                            a.YearFrom <= player.BirthDate.Year && player.BirthDate.Year <= a.YearTo);
-                    if (ageCategory != null)
+                    if (!ageCategoriesDictionary.TryGetValue(player.BirthDate.Year, out AgeCategory ageCategory))
                     {
-                        ageCategoriesDictionary.Add(player.BirthDate.Year, ageCategory);
+                        ageCategory = categories
+                            .FirstOrDefault(a =>
+                                a.YearFrom <= player.BirthDate.Year && player.BirthDate.Year <= a.YearTo);
+                        if (ageCategory != null)
+                        {
+                            ageCategoriesDictionary.Add(player.BirthDate.Year, ageCategory);
+                        }
                     }
+
+                    player.AgeCategory = ageCategory;
+                    player.AgeCategoryId = ageCategory?.Id;
+
+                    player.FullCategory = GetFullCategory(player.Distance, player.ExtraPlayerInfo, player.AgeCategory,
+                        player.IsMale);
+
+                    //player.AgeCategory = null;
+                    //player.Distance = null;
+                    //player.ExtraPlayerInfo = null;
                 }
 
-                player.AgeCategory = ageCategory;
-                player.AgeCategoryId = ageCategory?.Id;
-
-                player.FullCategory = GetFullCategory(player.Distance, player.ExtraPlayerInfo, player.AgeCategory,
-                    player.IsMale);
-
-                player.AgeCategory = null;
-                player.Distance = null;
-                player.ExtraPlayerInfo = null;
-            }
-
-            await UpdateRangeAsync(players);
+                await ctx.SaveChangesAsync();
+            });
+            
 
         }
 
@@ -463,6 +497,30 @@ namespace BaseCore.DataBase
             });
 
             return new Tuple<int, int>(players.Count, playerRecords.Length);
+        }
+
+        public Task RemoveAllTimeReads() =>
+            ContextProvider.DoAsync(async ctx =>
+            {
+                ctx.TimeReads.RemoveRange(ctx.TimeReads.Where(t => t.Gate.CompetitionId == Competition.Id));
+                await ctx.SaveChangesAsync();
+            });
+
+
+        public async Task ImportTimeReadsFromSourcesAsync()
+        {
+            await RemoveAllTimeReads();
+            Gate[] gates = await new GateRepository(ContextProvider, Competition).GetAllAsync();
+            //List<Task> tasks = new List<Task>();
+            foreach (Gate gate in gates)
+            {
+                TimeReadsLogInfo[] infos = await new TimeReadsLogInfoRepository(ContextProvider, gate).GetAllAsync();
+                foreach (TimeReadsLogInfo info in infos)
+                {
+                    await ImportTimeReadsAsync(info.Path, gate);
+                }
+            }
+            //await Task.WhenAll(tasks);
         }
     }
 }

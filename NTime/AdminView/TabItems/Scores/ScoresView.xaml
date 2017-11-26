@@ -80,7 +80,7 @@
                             Przelicz kategorie
                         </TextBlock>
                     </Button>
-                    <Button Content="Przelicz wyniki" Command="{Binding UpdateRankingAllCmd}" Margin="0,3, 10, 3" Height="37" Width="100" FontSize="13"/>
+                    <Button Content="Przelicz miejsca" Command="{Binding UpdateRankingAllCmd}" Margin="0,3, 10, 3" Height="37" Width="100" FontSize="13"/>
                 </StackPanel>
             </Grid>
         </StackPanel>

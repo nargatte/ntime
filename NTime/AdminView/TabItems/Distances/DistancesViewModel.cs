@@ -10,6 +10,7 @@ using ViewCore;
 using BaseCore.DataBase;
 using ViewCore.Entities;
 using System.Linq;
+using System.Windows;
 
 namespace AdminView.Distances
 {
@@ -21,8 +22,15 @@ namespace AdminView.Distances
             ViewLoadedCmd = new RelayCommand(OnViewLoaded);
             AddMeasurementPointCmd = new RelayCommand(OnAddGateAsync);
             AddDistanceCmd = new RelayCommand(OnAddDistance);
+            LoadLogsFromCSVsToDB = new RelayCommand(OnLoadLogsFromCSVsToDB);
             TabTitle = "Dystanse";
             _logsInfo = new LogsInfo();
+        }
+
+        private async void OnLoadLogsFromCSVsToDB()
+        {
+            await _playerRepository.ImportTimeReadsFromSourcesAsync();
+            MessageBox.Show("Wczytano pomiary z plików");
         }
 
         private void OnViewLoaded()
@@ -261,5 +269,6 @@ namespace AdminView.Distances
         public RelayCommand AddMeasurementPointCmd { get; private set; }
         public RelayCommand AddDistanceCmd { get; private set; }
         public RelayCommand ViewLoadedCmd { get; private set; }
+        public RelayCommand LoadLogsFromCSVsToDB { get; private set; }
     }
 }

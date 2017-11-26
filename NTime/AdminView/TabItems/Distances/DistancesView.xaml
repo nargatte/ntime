@@ -38,6 +38,7 @@
                         </DataTemplate>
                     </Expander.HeaderTemplate>
                     <StackPanel Orientation="Vertical" Margin="0, 20">
+                        <Button Content="Załaduj dane z plików" Margin="300, 0, 20, 20" Command="{Binding LoadLogsFromCSVsToDB}"></Button>
                         <StackPanel Name="AddingMeasurementPoint" Orientation="Horizontal" HorizontalAlignment="Center">
                             <TextBlock Text="Numer punktu"/>
                             <TextBox Name="newMeasurementPointNumberTB" Width="20" Margin="10, 0, 20, 0">
