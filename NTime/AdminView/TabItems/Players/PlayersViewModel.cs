@@ -136,6 +136,22 @@ namespace AdminView.Players
         public RelayCommand NextPageCmd { get; set; }
 
 
+        private async void OnViewLoadedAsync()
+        {
+            _distancesManager = new DistancesManager(_currentCompetition);
+            DefinedDistances = await _distancesManager.DownloadDistancesAsync();
+
+            _extraPlayerInfosManager = new ExtraPlayerInfosManager(_currentCompetition);
+            DefinedExtraPlayerInfo = await _extraPlayerInfosManager.DownloadExtraPlayerInfoAsync();
+
+            _playersManager = new PlayersManager(_currentCompetition, DefinedDistances, DefinedExtraPlayerInfo);
+            await _playersManager.AddPlayersFromDatabase(removeAllDisplayedBefore: true);
+
+            Players = _playersManager.GetPlayersToDisplay();
+            UpdateRecordsRangeInfo(_playersManager.GetRecordsRangeInfo());
+            ClearNewPlayer();
+            //await DownloadDataFromDatabaseAsync(removeAllDisplayedBefore: true);
+        }
 
         private async void OnAddPlayerAsync()
         {
@@ -143,9 +159,26 @@ namespace AdminView.Players
             ClearNewPlayer();
         }
 
-        private async void OnPreviousPageAsync() => await _playersManager.NavToPreviousPageAsync();
+        private async void OnPreviousPageAsync()
+        {
+            await _playersManager.NavToPreviousPageAsync();
+            Players = _playersManager.GetPlayersToDisplay();
+            UpdateRecordsRangeInfo(_playersManager.GetRecordsRangeInfo());
+        }
 
-        private async void OnNextPageAsync() => await _playersManager.NavToNextPageAsync();
+        private async void OnNextPageAsync()
+        {
+            await _playersManager.NavToNextPageAsync();
+            Players = _playersManager.GetPlayersToDisplay();
+            UpdateRecordsRangeInfo(_playersManager.GetRecordsRangeInfo());
+        }
+
+        private void UpdateRecordsRangeInfo(RangeInfo rangeInfo)
+        {
+            RecordsRangeInfo.TotalItemsCount = rangeInfo.TotalItemsCount;
+            RecordsRangeInfo.ItemsPerPage = rangeInfo.ItemsPerPage;
+            RecordsRangeInfo.PageNumber = rangeInfo.PageNumber;
+        }
 
         private void RecordsRangeInfo_ChildUpdated()
         {
@@ -169,6 +202,7 @@ namespace AdminView.Players
         {
             await _playersManager.AddPlayersFromCsvToDatabase();
             Players = _playersManager.GetPlayersToDisplay();
+            UpdateRecordsRangeInfo(_playersManager.GetRecordsRangeInfo());
         }
 
 
@@ -178,6 +212,7 @@ namespace AdminView.Players
             MessageBox.Show("Kategorie zostały przeliczone poprawnie");
             await task;
             Players = _playersManager.GetPlayersToDisplay();
+            UpdateRecordsRangeInfo(_playersManager.GetRecordsRangeInfo());
         }
 
 
@@ -191,17 +226,10 @@ namespace AdminView.Players
             {
                 await _playersManager.DeleteAllPlayersFromDatabaseAsync();
                 Players = _playersManager.GetPlayersToDisplay();
-                //await DeleteAllPlayersFromDatabaseAsync();
-                //DeleteAllPlayersFromGUI();
+                UpdateRecordsRangeInfo(_playersManager.GetRecordsRangeInfo());
                 MessageBox.Show("Wszyscy zawodnicy zostali usunięci");
             }
             else return;
-        }
-
-        private void DeleteAllPlayersFromGUI()
-        {
-            Players.Clear();
-            RecordsRangeInfo.TotalItemsCount = 0;
         }
 
 
@@ -211,7 +239,7 @@ namespace AdminView.Players
             {
                 Players.Remove(player);
             }
-            RecordsRangeInfo.TotalItemsCount -= selectedPlayersList.Count;
+            //RecordsRangeInfo.TotalItemsCount -= selectedPlayersList.Count;
         }
 
         private void UpdatePlayers(List<EditablePlayer> playersToUpdate)
@@ -233,33 +261,11 @@ namespace AdminView.Players
                 var selectedPlayersArray = SelectedPlayersList.Cast<EditablePlayer>().ToArray();
                 _playersManager.DeleteSelectedPlayersFromDatabaseAsync(selectedPlayersArray);
                 DeleteSelectedPlayersFromGUI(selectedPlayersArray);
+                UpdateRecordsRangeInfo(_playersManager.GetRecordsRangeInfo());
                 MessageBox.Show("Wybrani zawodnicy zostali usunięci");
             }
             else return;
         }
-
-        private async void OnViewLoadedAsync()
-        {
-            _distancesManager = new DistancesManager(_currentCompetition);
-            DefinedDistances = await _distancesManager.DownloadDistancesAsync();
-
-            _extraPlayerInfosManager = new ExtraPlayerInfosManager(_currentCompetition);
-            DefinedExtraPlayerInfo = await _extraPlayerInfosManager.DownloadExtraPlayerInfoAsync();
-
-            _playersManager = new PlayersManager(_currentCompetition, DefinedDistances, DefinedExtraPlayerInfo);
-            await _playersManager.AddPlayersFromDatabase(removeAllDisplayedBefore: true);
-
-            Players = _playersManager.GetPlayersToDisplay();
-            ClearNewPlayer();
-            //await DownloadDataFromDatabaseAsync(removeAllDisplayedBefore: true);
-        }
-
-        //private async Task DownloadDataFromDatabaseAsync(bool removeAllDisplayedBefore = false)
-        //{
-        //    await DownloadDistancesAsync();
-        //    await DownloadExtraPlayerInfoAsync();
-        //    await AddPlayersFromDatabaseAndDisplay(removeAllDisplayedBefore);
-        //}
 
         private void ClearNewPlayer()
         {
@@ -278,6 +284,7 @@ namespace AdminView.Players
         {
             await _playersManager.UpdateFilterInfo(pageNumber: 1, query: FilterGeneral, sortOrder: SortOrder, sortCriteria: SortCriteria);
             Players = _playersManager.GetPlayersToDisplay();
+            UpdateRecordsRangeInfo(_playersManager.GetRecordsRangeInfo());
         }
         #endregion
 

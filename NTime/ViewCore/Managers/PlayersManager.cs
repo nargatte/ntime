@@ -152,6 +152,11 @@ namespace ViewCore.Managers
             return true;
         }
 
+        public RangeInfo GetRecordsRangeInfo()
+        {
+            return _recordsRangeInfo;
+        }
+
         public void DeleteSelectedPlayersFromDatabaseAsync(EditablePlayer[] selectedPlayersArray)
         {
             foreach (var player in selectedPlayersArray)
@@ -159,6 +164,7 @@ namespace ViewCore.Managers
                 _playerRepository.RemoveAsync(player.DbEntity);
                 _players.Remove(player);
             }
+            _recordsRangeInfo.TotalItemsCount -= selectedPlayersArray.Length;
         }
 
 

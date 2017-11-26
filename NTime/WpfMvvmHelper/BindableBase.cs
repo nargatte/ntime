@@ -35,6 +35,8 @@ namespace MvvmHelper
         }
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
+        
+
     }
 
     public class BindableBase<T> : BindableBase
