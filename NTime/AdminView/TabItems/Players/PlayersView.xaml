@@ -165,6 +165,18 @@
                             <TextBlock Text="Kolejność" HorizontalAlignment="Center"/>
                             <ComboBox ItemsSource="{Binding Source={db:EnumBindingSource {x:Type db:SortOrderEnum}}}"  SelectedItem="{Binding SortOrder, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
+                        <StackPanel Orientation="Vertical" Margin="5">
+                            <TextBlock Text="Dystans" HorizontalAlignment="Center"/>
+                            <ComboBox ItemsSource="{Binding DefinedDistances}" DisplayMemberPath="Name" SelectedItem="{Binding DistanceSortCriteria, UpdateSourceTrigger=PropertyChanged}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Margin="5">
+                            <TextBlock Text="Dodatkowe inf." HorizontalAlignment="Center"/>
+                            <ComboBox ItemsSource="{Binding DefinedExtraPlayerInfo}" DisplayMemberPath="Name" SelectedItem="{Binding ExtraPlayerInfoSortCriteria, UpdateSourceTrigger=PropertyChanged}"/>
+                        </StackPanel>
+                        <!--<StackPanel Orientation="Vertical" Margin="5">
+                            <TextBlock Text="Kat. wiek." HorizontalAlignment="Center"/>
+                            <ComboBox ItemsSource="{Binding Source={db:EnumBindingSource {x:Type db:SortOrderEnum}}}"  SelectedItem="{Binding SortOrder, UpdateSourceTrigger=PropertyChanged}"/>
+                        </StackPanel>-->
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
@@ -210,7 +222,7 @@
                 <DataGridTemplateColumn Header="Czas startu">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBox Name="DistanceStartTimeTB">
+                            <TextBox Name="DistanceStartTimeTB" HorizontalContentAlignment="Center">
                                 <Binding Path="StartTime" UpdateSourceTrigger="LostFocus">
                                     <Binding.ValidationRules>
                                         <validation:TimeFormatRule ValidatesOnTargetUpdated="True"/>
@@ -220,14 +232,14 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn x:Name="extraPlayerInfoIdColumn"  Header="Dodatkowe info">
+                <DataGridTemplateColumn x:Name="extraPlayerInfoIdColumn"  Header="Dodatkowe info" Width="Auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <ComboBox ItemsSource="{Binding DefinedExtraPlayerInfo}" SelectedItem="{Binding ExtraPlayerInfo, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name"></ComboBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn x:Name="fullCategoryColumn" Header="kategoria" Binding="{Binding FullCategory, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                <DataGridTextColumn x:Name="fullCategoryColumn" Header="kategoria" Binding="{Binding FullCategory, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="True"/>
                 <DataGridTextColumn x:Name="teamColumn"  Header="Klub" Binding="{Binding Team}"/>
                 <DataGridTemplateColumn x:Name="birthDateColumn"  Header="Data urodzenia">
                     <DataGridTemplateColumn.CellTemplate>
@@ -245,7 +257,7 @@
                     </DataGridTemplateColumn.CellEditingTemplate>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ComboBox Width="60" ItemsSource="{Binding Source={db:EnumBindingSource {x:Type db:SexEnum}}}"
+                            <ComboBox Width="40" ItemsSource="{Binding Source={db:EnumBindingSource {x:Type db:SexEnum}}}"
                                               SelectedItem="{Binding IsMale, Converter={StaticResource IsMaleToSexEnumConverter}, UpdateSourceTrigger=PropertyChanged}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

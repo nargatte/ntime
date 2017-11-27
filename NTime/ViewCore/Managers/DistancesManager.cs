@@ -31,6 +31,10 @@ namespace ViewCore.Managers
                     DbEntity = dbDistance
                 });
             }
+            DefinedDistances.Add(new EditableDistance(_currentCompetition)
+            {
+                DbEntity = new Distance()
+            });
             return DefinedDistances;
         }
     }

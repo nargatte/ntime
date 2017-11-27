@@ -33,10 +33,19 @@ namespace ViewCore.Managers
         public ObservableCollection<EditablePlayer> GetPlayersToDisplay() => _players;
 
 
-        public async Task UpdateFilterInfo(int pageNumber, string query, SortOrderEnum? sortOrder, PlayerSort? sortCriteria)
+        public async Task UpdateFilterInfo(int pageNumber, string query, SortOrderEnum? sortOrder, PlayerSort? sortCriteria,
+            EditableDistance distanceSortCriteria, EditableExtraPlayerInfo extraPlayerInfoSortCriteria)
         {
             _recordsRangeInfo.PageNumber = pageNumber;
             _playerFilter.Query = query;
+            if (!String.IsNullOrWhiteSpace(distanceSortCriteria.DbEntity.Name))
+                _playerFilter.Distance = distanceSortCriteria.DbEntity;
+            else
+                _playerFilter.Distance = null;
+            if (!String.IsNullOrWhiteSpace(extraPlayerInfoSortCriteria.DbEntity.Name))
+                _playerFilter.ExtraPlayerInfo = extraPlayerInfoSortCriteria.DbEntity;
+            else
+                _playerFilter.ExtraPlayerInfo = null;
             if (sortOrder.HasValue && sortOrder.Value == SortOrderEnum.Descending)
                 _playerFilter.DescendingSort = true;
             else
@@ -93,10 +102,7 @@ namespace ViewCore.Managers
             var playerToUpdate = sender as EditablePlayer;
             await _playerRepository.UpdateAsync(playerToUpdate.DbEntity, playerToUpdate.DbEntity.Distance,
                 playerToUpdate.DbEntity.ExtraPlayerInfo);
-            var updatedDbPlayer = (await _playerRepository.GetById(playerToUpdate.DbEntity.Id));
-
-            var playerToEdit = _players.First(p => p.DbEntity.Id == playerToUpdate.DbEntity.Id);
-            playerToEdit.FullCategory = updatedDbPlayer.FullCategory;
+            playerToUpdate.UpdateFullCategoryDisplay();
         }
 
         private bool GetSexForPlayer(EditablePlayer newPlayer)
@@ -140,12 +146,12 @@ namespace ViewCore.Managers
                 message = "Nieprawidłowy czas startu zawodnika";
                 return false;
             }
-            if (newPlayer.Distance == null)
+            if (newPlayer.Distance == null || String.IsNullOrWhiteSpace(newPlayer.Distance.Name))
             {
                 message = "Nie przypisano żadnego dystansu";
                 return false;
             }
-            if (newPlayer.ExtraPlayerInfo == null)
+            if (newPlayer.ExtraPlayerInfo == null || String.IsNullOrWhiteSpace(newPlayer.ExtraPlayerInfo.Name))
             {
                 message = "Nie przypisano Dodatkowych informacji";
                 return false;
@@ -168,6 +174,7 @@ namespace ViewCore.Managers
             }
             _recordsRangeInfo.TotalItemsCount -= selectedPlayersArray.Length;
         }
+
 
         public async Task AddPlayersFromCsvToDatabase()
         {

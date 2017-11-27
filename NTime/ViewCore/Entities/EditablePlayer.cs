@@ -76,10 +76,12 @@ namespace ViewCore.Entities
             }
             set
             {
-                DbEntity.Distance = SetProperty(DbEntity.Distance, value.DbEntity);
-                Debug.Write("Distance updated");
-                OnUpdateRequested();
-                OnPropertyChanged(nameof(FullCategory));
+                if(!String.IsNullOrWhiteSpace(value.Name))
+                {
+                    DbEntity.Distance = SetProperty(DbEntity.Distance, value.DbEntity);
+                    OnUpdateRequested();
+                    OnPropertyChanged(nameof(FullCategory));
+                }
             }
         }
 
@@ -92,9 +94,12 @@ namespace ViewCore.Entities
             }
             set
             {
-                DbEntity.ExtraPlayerInfo = SetProperty(DbEntity.ExtraPlayerInfo, value.DbEntity);
-                OnUpdateRequested();
-                OnPropertyChanged(nameof(FullCategory));
+                if (!String.IsNullOrWhiteSpace(value.Name))
+                {
+                    DbEntity.ExtraPlayerInfo = SetProperty(DbEntity.ExtraPlayerInfo, value.DbEntity);
+                    OnUpdateRequested();
+                    OnPropertyChanged(nameof(FullCategory));
+                }
             }
         }
 
@@ -132,6 +137,10 @@ namespace ViewCore.Entities
             }
         }
 
+        internal void UpdateFullCategoryDisplay()
+        {
+            OnPropertyChanged(nameof(FullCategory));
+        }
 
         public string Team
         {

@@ -47,7 +47,6 @@
     <Compile Include="Managers\ColorLegendManager.cs" />
     <Compile Include="Managers\DistancesManager.cs" />
     <Compile Include="Managers\ExtraPlayerInfosManager.cs" />
-    <Compile Include="Managers\FilterValueManager.cs" />
     <Compile Include="Managers\PlayersManager.cs" />
     <Compile Include="Managers\PlayersWithLogsManager.cs" />
     <Compile Include="TimeReadColorsLegendItem.cs" />

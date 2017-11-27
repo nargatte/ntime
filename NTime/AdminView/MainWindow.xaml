@@ -36,7 +36,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="12*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Button Command="{Binding ChangeCompetitionCmd}" Height="40" Width="90" Grid.Column="0" VerticalAlignment="Top" Margin="0, 20">

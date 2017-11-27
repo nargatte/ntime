@@ -31,6 +31,10 @@ namespace ViewCore.Managers
                     DbEntity = item
                 });
             }
+            DefinedExtraPlayerInfo.Add(new EditableExtraPlayerInfo(_currentCompetition)
+            {
+                DbEntity = new ExtraPlayerInfo()
+            });
             return DefinedExtraPlayerInfo;
         }
     }

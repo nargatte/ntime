@@ -77,12 +77,6 @@ namespace AdminView.Categories
         {
             var categoryToEdit = sender as EditableAgeCategory;
             await _ageCategoryRepository.UpdateAsync(categoryToEdit.DbEntity);
-            //var updatedDbAgeCategory = (await _ageCategoryRepository.GetById(categoryToEdit.DbEntity.Id));
-
-            //var playerToEdit = Categories.First(p => p.DbEntity.Id == categoryToEdit.DbEntity.Id);
-            //playerToEdit.Name = updatedDbAgeCategory.Name;
-            //playerToEdit.YearFrom = updatedDbAgeCategory.YearFrom;
-            //playerToEdit.YearTo = updatedDbAgeCategory.YearTo;
         }
 
         //Might not work
@@ -137,11 +131,6 @@ namespace AdminView.Categories
         {
             var extraPlayerInfoToUpdate = sender as EditableExtraPlayerInfo;
             await _extraPlayerInfoRepository.UpdateAsync(extraPlayerInfoToUpdate.DbEntity);
-            //var updatedDbExtraPlayerInfo = (await _extraPlayerInfoRepository.GetById(extraPlayerInfoToUpdate.DbEntity.Id));
-
-            //var extraPlayerInfoToEdit = ExtraPlayerInfos.First(p => p.DbEntity.Id == extraPlayerInfoToUpdate.DbEntity.Id);
-            //extraPlayerInfoToEdit.Name = updatedDbExtraPlayerInfo.Name;
-            //extraPlayerInfoToEdit.ShortName = updatedDbExtraPlayerInfo.ShortName;
         }
 
         private async void ExtraPlayerInfo_DeleteRequestedAsync(object sender, EventArgs e)

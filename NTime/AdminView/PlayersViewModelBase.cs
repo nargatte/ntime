@@ -26,6 +26,8 @@ namespace AdminView
             PreviousPageCmd = new RelayCommand(OnPreviousPageAsync);
             NextPageCmd = new RelayCommand(OnNextPageAsync);
             RecordsRangeInfo.ChildUpdated += RecordsRangeInfo_ChildUpdated;
+            _distanceSortCriteria = new EditableDistance(_currentCompetition);
+            _extraPlayerInfoSortCriteria = new EditableExtraPlayerInfo(_currentCompetition);
         }
 
         #region Properties
@@ -59,6 +61,30 @@ namespace AdminView
             set
             {
                 SetProperty(ref _sortOrder, value);
+                FilterValueChangedAsync();
+            }
+        }
+
+
+        private EditableDistance _distanceSortCriteria;
+        public EditableDistance DistanceSortCriteria
+        {
+            get { return _distanceSortCriteria; }
+            set
+            {
+                SetProperty(ref _distanceSortCriteria, value);
+                FilterValueChangedAsync();
+            }
+        }
+
+
+        private EditableExtraPlayerInfo _extraPlayerInfoSortCriteria;
+        public EditableExtraPlayerInfo ExtraPlayerInfoSortCriteria
+        {
+            get { return _extraPlayerInfoSortCriteria; }
+            set
+            {
+                SetProperty(ref _extraPlayerInfoSortCriteria, value);
                 FilterValueChangedAsync();
             }
         }
@@ -114,6 +140,8 @@ namespace AdminView
             DefinedExtraPlayerInfo = await _extraPlayerInfosManager.DownloadExtraPlayerInfoAsync();
 
             _playersManager = new PlayersManager(_currentCompetition, DefinedDistances, DefinedExtraPlayerInfo, RecordsRangeInfo);
+            //DistanceSortCriteria = new EditableDistance(_currentCompetition);
+            //ExtraPlayerInfoSortCriteria = new EditableExtraPlayerInfo(_currentCompetition);
             await _playersManager.AddPlayersFromDatabase(removeAllDisplayedBefore: true);
 
             Players = _playersManager.GetPlayersToDisplay();
@@ -166,7 +194,8 @@ namespace AdminView
 
         protected async void FilterValueChangedAsync()
         {
-            await _playersManager.UpdateFilterInfo(pageNumber: 1, query: FilterGeneral, sortOrder: SortOrder, sortCriteria: SortCriteria);
+            await _playersManager.UpdateFilterInfo(pageNumber: 1, query: FilterGeneral, sortOrder: SortOrder, sortCriteria: SortCriteria,
+                                                    distanceSortCriteria: DistanceSortCriteria, extraPlayerInfoSortCriteria: ExtraPlayerInfoSortCriteria);
             Players = _playersManager.GetPlayersToDisplay();
             UpdateRecordsRangeInfo(_playersManager.GetRecordsRangeInfo());
         }
