@@ -38,11 +38,11 @@ namespace ViewCore.Managers
         {
             _recordsRangeInfo.PageNumber = pageNumber;
             _playerFilter.Query = query;
-            if (!String.IsNullOrWhiteSpace(distanceSortCriteria.DbEntity.Name))
+            if (!String.IsNullOrWhiteSpace(distanceSortCriteria?.DbEntity.Name))
                 _playerFilter.Distance = distanceSortCriteria.DbEntity;
             else
                 _playerFilter.Distance = null;
-            if (!String.IsNullOrWhiteSpace(extraPlayerInfoSortCriteria.DbEntity.Name))
+            if (!String.IsNullOrWhiteSpace(extraPlayerInfoSortCriteria?.DbEntity.Name))
                 _playerFilter.ExtraPlayerInfo = extraPlayerInfoSortCriteria.DbEntity;
             else
                 _playerFilter.ExtraPlayerInfo = null;

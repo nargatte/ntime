@@ -49,6 +49,12 @@ namespace ViewCore.Entities
             }
         }
 
+        public string Distance
+        {
+            get { return DbEntity?.Distance.Name; }
+            set { }
+        }
+
 
         private ObservableCollection<EditableTimeRead> _timeReads = new ObservableCollection<EditableTimeRead>();
         public ObservableCollection<EditableTimeRead> TimeReads
@@ -60,12 +66,19 @@ namespace ViewCore.Entities
 
 
 
-        public async void DownloadTimeReads()
+        public async void DownloadTimeReads(bool onlySignificant = false)
         {
             var repository = new TimeReadRepository(new ContextProvider(), DbEntity);
             var dbTimeReads = await repository.GetAllAsync();
             foreach (var dbTimeRead in dbTimeReads)
             {
+                if (onlySignificant)
+                {
+                    if(dbTimeRead.TimeReadTypeEnum == TimeReadTypeEnum.NonsignificantAfter) continue;
+                    if(dbTimeRead.TimeReadTypeEnum == TimeReadTypeEnum.NonsignificantBefore) continue;
+                    if(dbTimeRead.TimeReadTypeEnum == TimeReadTypeEnum.Repeated) continue;
+                    if(dbTimeRead.TimeReadTypeEnum == TimeReadTypeEnum.Unprocessed) continue;
+                }
                 TimeReads.Add(new EditableTimeRead(_currentCompetition)
                 {
                     DbEntity = dbTimeRead
@@ -73,5 +86,6 @@ namespace ViewCore.Entities
             }
 
         }
+
     }
 }

@@ -5,11 +5,11 @@ namespace BaseCore.DataBase
     [TypeConverter(typeof(EnumDescriptionTypeConverter))]
     public enum DistanceTypeEnum
     {
-        [Description("Wyścig na określonym dystansie")]
+        [Description("na dystans")]
         DeterminedDistance,
-        [Description("Wyścig na okrążeniach")]
+        [Description("na okrążenia")]
         DeterminedLaps,
-        [Description("Wyścig z na okrążeniach z limitem czasu")]
+        [Description("na czas w pętli")]
         LimitedTime
     }
 }

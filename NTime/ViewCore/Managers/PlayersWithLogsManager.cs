@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using BaseCore.DataBase;
 using MvvmHelper;
 using ViewCore.Entities;
@@ -20,7 +22,7 @@ namespace ViewCore.Managers
             _playerRepository = playerRepository;
         }
 
-        public async Task<ObservableCollection<EditablePlayerWithLogs>> GetAllPlayers()
+        public async Task<ObservableCollection<EditablePlayerWithLogs>> GetAllPlayers(bool onlySignificant = false)
         {
             _playersWithLogs = new ObservableCollection<EditablePlayerWithLogs>();
             var dbPlayers = await _playerRepository.GetAllAsync();
@@ -30,7 +32,7 @@ namespace ViewCore.Managers
                 {
                     DbEntity = dbPlayer
                 };
-                playerToAdd.DownloadTimeReads();
+                playerToAdd.DownloadTimeReads(onlySignificant);
                 _playersWithLogs.Add(playerToAdd);
             }
             return _playersWithLogs;

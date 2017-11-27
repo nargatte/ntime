@@ -175,15 +175,15 @@
                                                 <TextBox Text="{Binding MinTimeBefore}"/>
                                             </StackPanel>
                                             <!--<Expander Header="{Binding}" Background="#DC0" Margin="2,0,2,0" >-->
-                                            <Expander Background="#DC0" Margin="2,0,2,0" >
+                                            <!--<Expander Background="#DC0" Margin="2,0,2,0" >
                                                 <Expander.HeaderTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Text="{Binding Gate, Converter={StaticResource gateToNumberConverter}}" FontWeight="Bold"/>
                                                     </DataTemplate>
-                                                </Expander.HeaderTemplate>
+                                                </Expander.HeaderTemplate>-->
                                                 <StackPanel Orientation="Vertical">
                                                     <TextBlock Text="Numer"/>
-                                                    <ComboBox Width="40"  ItemsSource="{Binding DefinedGates}" SelectedItem="{Binding Gate, UpdateSourceTrigger=PropertyChanged}">
+                                                    <ComboBox Width="100"  ItemsSource="{Binding DefinedGates}" SelectedItem="{Binding Gate, UpdateSourceTrigger=PropertyChanged}">
                                                         <ComboBox.ItemTemplate>
                                                             <DataTemplate>
                                                                 <TextBlock>
@@ -198,7 +198,7 @@
                                                         </ComboBox.ItemTemplate>
                                                     </ComboBox>
                                                 </StackPanel>
-                                            </Expander>
+                                            <!--</Expander>-->
                                         </StackPanel>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
@@ -235,16 +235,16 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Typ" Width="Auto">
+                        <DataGridTemplateColumn Header="Typ" Width="105">
                             <DataGridTemplateColumn.CellEditingTemplate>
                                 <DataTemplate>
-                                    <ComboBox Width="70" ItemsSource="{Binding Source={db:EnumBindingSource {x:Type db:DistanceTypeEnum}}}"
+                                    <ComboBox Width="100" ItemsSource="{Binding Source={db:EnumBindingSource {x:Type db:DistanceTypeEnum}}}"
                                               SelectedItem="{Binding DistanceType, UpdateSourceTrigger=PropertyChanged}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellEditingTemplate>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <ComboBox Width="60" ItemsSource="{Binding Source={db:EnumBindingSource {x:Type db:DistanceTypeEnum}}}"
+                                    <ComboBox Width="100" ItemsSource="{Binding Source={db:EnumBindingSource {x:Type db:DistanceTypeEnum}}}"
                                               SelectedItem="{Binding DistanceType, UpdateSourceTrigger=PropertyChanged}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

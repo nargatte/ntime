@@ -10,7 +10,9 @@ namespace BaseCore.TimesProcess
             int h = (int)(@decimal / (60 * 60));
             int m = (int)((@decimal - h * 60 * 60) / 60);
             int s = (int)(@decimal - h * 60 * 60 - m * 60);
-            return new DateTime(2000, 1, 1, h, m, s);
+            int ms = (int) ((@decimal - (int) @decimal) * 1000);
+            DateTime dt = new DateTime(2000, 1, 1, h, m, s);
+            return dt.AddMilliseconds(ms);
         }
 
         public static decimal ToDecimal(this DateTime dateTime)
