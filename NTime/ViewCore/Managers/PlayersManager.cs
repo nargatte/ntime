@@ -34,7 +34,8 @@ namespace ViewCore.Managers
 
 
         public async Task UpdateFilterInfo(int pageNumber, string query, SortOrderEnum? sortOrder, PlayerSort? sortCriteria,
-            EditableDistance distanceSortCriteria, EditableExtraPlayerInfo extraPlayerInfoSortCriteria)
+            EditableDistance distanceSortCriteria, EditableExtraPlayerInfo extraPlayerInfoSortCriteria,
+            EditableAgeCategory ageCategorySortCriteria)
         {
             _recordsRangeInfo.PageNumber = pageNumber;
             _playerFilter.Query = query;
@@ -46,6 +47,10 @@ namespace ViewCore.Managers
                 _playerFilter.ExtraPlayerInfo = extraPlayerInfoSortCriteria.DbEntity;
             else
                 _playerFilter.ExtraPlayerInfo = null;
+            if (!String.IsNullOrWhiteSpace(ageCategorySortCriteria.DbEntity.Name))
+                _playerFilter.AgeCategory = ageCategorySortCriteria.DbEntity;
+            else
+                _playerFilter.AgeCategory = null;
             if (sortOrder.HasValue && sortOrder.Value == SortOrderEnum.Descending)
                 _playerFilter.DescendingSort = true;
             else

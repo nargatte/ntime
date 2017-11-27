@@ -19,6 +19,7 @@ namespace AdminView
         protected PlayersManager _playersManager;
         protected DistancesManager _distancesManager;
         protected ExtraPlayerInfosManager _extraPlayerInfosManager;
+        protected AgeCategoryManager _ageCategoryManager;
 
         protected PlayersViewModelBase(IEditableCompetition currentCompetition) : base(currentCompetition)
         {
@@ -28,6 +29,7 @@ namespace AdminView
             RecordsRangeInfo.ChildUpdated += RecordsRangeInfo_ChildUpdated;
             _distanceSortCriteria = new EditableDistance(_currentCompetition);
             _extraPlayerInfoSortCriteria = new EditableExtraPlayerInfo(_currentCompetition);
+            _ageCategorySortCriteria = new EditableAgeCategory(_currentCompetition);
         }
 
         #region Properties
@@ -77,7 +79,6 @@ namespace AdminView
             }
         }
 
-
         private EditableExtraPlayerInfo _extraPlayerInfoSortCriteria;
         public EditableExtraPlayerInfo ExtraPlayerInfoSortCriteria
         {
@@ -85,6 +86,17 @@ namespace AdminView
             set
             {
                 SetProperty(ref _extraPlayerInfoSortCriteria, value);
+                FilterValueChangedAsync();
+            }
+        }
+
+        private EditableAgeCategory _ageCategorySortCriteria;
+        public EditableAgeCategory AgeCategorySortCriteria
+        {
+            get { return _ageCategorySortCriteria; }
+            set
+            {
+                SetProperty(ref _ageCategorySortCriteria, value);
                 FilterValueChangedAsync();
             }
         }
@@ -122,6 +134,13 @@ namespace AdminView
             get { return _definedExtraPlayerInfo; }
             set { SetProperty(ref _definedExtraPlayerInfo, value); }
         }
+
+        private ObservableCollection<EditableAgeCategory> _definedAgeCategories = new ObservableCollection<EditableAgeCategory>();
+        public ObservableCollection<EditableAgeCategory> DefinedAgeCategories
+        {
+            get { return _definedAgeCategories; }
+            set { SetProperty(ref _definedAgeCategories, value); }
+        }
         #endregion
 
 
@@ -138,6 +157,9 @@ namespace AdminView
 
             _extraPlayerInfosManager = new ExtraPlayerInfosManager(_currentCompetition);
             DefinedExtraPlayerInfo = await _extraPlayerInfosManager.DownloadExtraPlayerInfoAsync();
+
+            _ageCategoryManager = new AgeCategoryManager(_currentCompetition);
+            DefinedAgeCategories = await _ageCategoryManager.DownloadAgeCategoriesAsync();
 
             _playersManager = new PlayersManager(_currentCompetition, DefinedDistances, DefinedExtraPlayerInfo, RecordsRangeInfo);
             //DistanceSortCriteria = new EditableDistance(_currentCompetition);
@@ -195,7 +217,8 @@ namespace AdminView
         protected async void FilterValueChangedAsync()
         {
             await _playersManager.UpdateFilterInfo(pageNumber: 1, query: FilterGeneral, sortOrder: SortOrder, sortCriteria: SortCriteria,
-                                                    distanceSortCriteria: DistanceSortCriteria, extraPlayerInfoSortCriteria: ExtraPlayerInfoSortCriteria);
+                                                    distanceSortCriteria: DistanceSortCriteria, extraPlayerInfoSortCriteria: ExtraPlayerInfoSortCriteria,
+                                                    ageCategorySortCriteria: AgeCategorySortCriteria);
             Players = _playersManager.GetPlayersToDisplay();
             UpdateRecordsRangeInfo(_playersManager.GetRecordsRangeInfo());
         }
