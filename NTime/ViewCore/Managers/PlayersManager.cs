@@ -47,7 +47,7 @@ namespace ViewCore.Managers
                 _playerFilter.ExtraPlayerInfo = extraPlayerInfoSortCriteria.DbEntity;
             else
                 _playerFilter.ExtraPlayerInfo = null;
-            if (!String.IsNullOrWhiteSpace(ageCategorySortCriteria.DbEntity.Name))
+            if (!String.IsNullOrWhiteSpace(ageCategorySortCriteria?.DbEntity.Name))
                 _playerFilter.AgeCategory = ageCategorySortCriteria.DbEntity;
             else
                 _playerFilter.AgeCategory = null;
