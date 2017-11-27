@@ -45,9 +45,9 @@
                       ItemsSource="{Binding Categories}" EnableRowVirtualization="True" AutoGenerateColumns="False"
                       ColumnWidth="*" SelectionMode="Extended" CanUserAddRows="False" Width="300">
                 <DataGrid.Columns>
-                    <DataGridTextColumn x:Name="nameColumn" Header="Nazwa" Width="*" Binding="{Binding Name}"/>
-                    <DataGridTextColumn x:Name="yearFromColumn" Header="Od roku" Width="*" Binding="{Binding YearFrom}"/>
-                    <DataGridTextColumn x:Name="yearToColumn" Header="Do roku" Width="*" Binding="{Binding YearTo}"/>
+                    <DataGridTextColumn x:Name="nameColumn" Header="Nazwa" Width="*" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}"/>
+                    <DataGridTextColumn x:Name="yearFromColumn" Header="Od roku" Width="*" Binding="{Binding YearFrom, UpdateSourceTrigger=LostFocus}"/>
+                    <DataGridTextColumn x:Name="yearToColumn" Header="Do roku" Width="*" Binding="{Binding YearTo, UpdateSourceTrigger=LostFocus}"/>
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -89,8 +89,8 @@
                       ItemsSource="{Binding ExtraPlayerInfos}" EnableRowVirtualization="True" AutoGenerateColumns="False"
                       ColumnWidth="*" SelectionMode="Extended" CanUserAddRows="False" Width="300">
                 <DataGrid.Columns>
-                    <DataGridTextColumn x:Name="infoNameColumn" Header="Nazwa" Width="*" Binding="{Binding Name}"/>
-                    <DataGridTextColumn x:Name="ydasearFromColumn" Header="Skrót" Width="*" Binding="{Binding ShortName}"/>
+                    <DataGridTextColumn x:Name="infoNameColumn" Header="Nazwa" Width="*" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}"/>
+                    <DataGridTextColumn x:Name="ydasearFromColumn" Header="Skrót" Width="*" Binding="{Binding ShortName, UpdateSourceTrigger=LostFocus}"/>
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

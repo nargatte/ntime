@@ -41,8 +41,8 @@ namespace ViewCore.Entities
             get { return DbEntity.StartNumber; }
             set
             {
-                DbEntity.StartNumber = SetProperty(DbEntity.StartNumber, value);
                 OnUpdateRequested();
+                DbEntity.StartNumber = SetProperty(DbEntity.StartNumber, value);
             }
         }
 
@@ -51,8 +51,8 @@ namespace ViewCore.Entities
             get { return DbEntity.FirstName; }
             set
             {
-                DbEntity.FirstName = SetProperty(DbEntity.FirstName, value);
                 OnUpdateRequested();
+                DbEntity.FirstName = SetProperty(DbEntity.FirstName, value);
             }
         }
 
@@ -62,8 +62,8 @@ namespace ViewCore.Entities
             get { return DbEntity.LastName; }
             set
             {
-                DbEntity.LastName = SetProperty(DbEntity.LastName, value);
                 OnUpdateRequested();
+                DbEntity.LastName = SetProperty(DbEntity.LastName, value);
             }
         }
 
@@ -95,6 +95,7 @@ namespace ViewCore.Entities
             {
                 DbEntity.ExtraPlayerInfo = SetProperty(DbEntity.ExtraPlayerInfo, value.DbEntity);
                 OnUpdateRequested();
+                OnPropertyChanged(nameof(FullCategory));
             }
         }
 
@@ -103,9 +104,8 @@ namespace ViewCore.Entities
             get { return DbEntity.BirthDate; }
             set
             {
-                DbEntity.BirthDate = SetProperty(DbEntity.BirthDate, value);
                 OnUpdateRequested();
-                OnPropertyChanged(nameof(FullCategory));
+                DbEntity.BirthDate = SetProperty(DbEntity.BirthDate, value);
             }
         }
 
@@ -126,7 +126,10 @@ namespace ViewCore.Entities
             set
             {
                 if (value.TryConvertToDateTime(out DateTime dateTime))
+                {
                     DbEntity.StartTime = SetProperty(DbEntity.StartTime, dateTime);
+                    OnUpdateRequested();
+                }
             }
         }
 

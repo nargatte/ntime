@@ -44,6 +44,7 @@ namespace AdminView.Categories
                 {
                     DbEntity = dbAgeCategory
                 };
+                categoryToAdd.UpdateRequested += Category_UpdateRequestedAsync;
                 AddCategoryToGUI(categoryToAdd);
             }
         }
@@ -66,9 +67,22 @@ namespace AdminView.Categories
                 return;
             }
             var categoryToAdd = NewCategory;
+            categoryToAdd.UpdateRequested += Category_UpdateRequestedAsync;
             AddCategoryToGUI(categoryToAdd);
             NewCategory = new EditableAgeCategory(_currentCompetition);
             await _ageCategoryRepository.AddAsync(categoryToAdd.DbEntity);
+        }
+
+        private async void Category_UpdateRequestedAsync(object sender, EventArgs e)
+        {
+            var categoryToEdit = sender as EditableAgeCategory;
+            await _ageCategoryRepository.UpdateAsync(categoryToEdit.DbEntity);
+            var updatedDbAgeCategory = (await _ageCategoryRepository.GetById(categoryToEdit.DbEntity.Id));
+
+            var playerToEdit = Categories.First(p => p.DbEntity.Id == categoryToEdit.DbEntity.Id);
+            playerToEdit.Name = updatedDbAgeCategory.Name;
+            playerToEdit.YearFrom = updatedDbAgeCategory.YearFrom;
+            playerToEdit.YearTo = updatedDbAgeCategory.YearTo;
         }
 
         //Might not work
@@ -93,6 +107,7 @@ namespace AdminView.Categories
                 {
                     DbEntity = dbExtraPlayerInfo
                 };
+                extraPlayerInfoToAdd.UpdateRequested += ExtraPlayerInfo_UpdateRequestedAsync;
                 AddExtraPlayerInfoToGUI(extraPlayerInfoToAdd);
             }
         }
@@ -112,9 +127,21 @@ namespace AdminView.Categories
                 return;
             }
             var extraPlayerInfoToAdd = NewExtraPlayerInfo;
+            extraPlayerInfoToAdd.UpdateRequested += ExtraPlayerInfo_UpdateRequestedAsync;
             AddExtraPlayerInfoToGUI(extraPlayerInfoToAdd);
             await _extraPlayerInfoRepository.AddAsync(extraPlayerInfoToAdd.DbEntity);
             NewExtraPlayerInfo = new EditableExtraPlayerInfo(_currentCompetition);
+        }
+
+        private async void ExtraPlayerInfo_UpdateRequestedAsync(object sender, EventArgs e)
+        {
+            var extraPlayerInfoToUpdate = sender as EditableExtraPlayerInfo;
+            await _extraPlayerInfoRepository.UpdateAsync(extraPlayerInfoToUpdate.DbEntity);
+            var updatedDbExtraPlayerInfo = (await _extraPlayerInfoRepository.GetById(extraPlayerInfoToUpdate.DbEntity.Id));
+
+            var extraPlayerInfoToEdit = ExtraPlayerInfos.First(p => p.DbEntity.Id == extraPlayerInfoToUpdate.DbEntity.Id);
+            extraPlayerInfoToEdit.Name = updatedDbExtraPlayerInfo.Name;
+            extraPlayerInfoToEdit.ShortName = updatedDbExtraPlayerInfo.ShortName;
         }
 
         private async void ExtraPlayerInfo_DeleteRequestedAsync(object sender, EventArgs e)

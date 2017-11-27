@@ -17,13 +17,21 @@ namespace ViewCore.Entities
         public string Name
         {
             get { return DbEntity.Name; }
-            set { DbEntity.Name = SetProperty(DbEntity.Name, value); }
+            set
+            {
+                DbEntity.Name = SetProperty(DbEntity.Name, value);
+                OnUpdateRequested();
+            }
         }
 
         public string ShortName
         {
             get { return DbEntity.ShortName; }
-            set { DbEntity.ShortName = SetProperty(DbEntity.ShortName, value); }
+            set
+            {
+                DbEntity.ShortName = SetProperty(DbEntity.ShortName, value);
+                OnUpdateRequested();
+            }
         }
 
         private void OnDeleteExtraPlayerInfo()
@@ -31,7 +39,14 @@ namespace ViewCore.Entities
             DeleteRequested(this, EventArgs.Empty);
         }
 
-        public event EventHandler DeleteRequested = delegate { };
         public RelayCommand DeleteExtraPlayerInfoCmd { get; private set; }
+        public event EventHandler DeleteRequested = delegate { };
+        public event EventHandler UpdateRequested = delegate { };
+
+        protected void OnUpdateRequested()
+        {
+            UpdateRequested?.Invoke(this, EventArgs.Empty);
+        }
+
     }
 }

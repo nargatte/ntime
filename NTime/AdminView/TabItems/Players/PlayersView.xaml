@@ -197,9 +197,9 @@
                   ItemsSource="{Binding Players}"  AutoGenerateColumns="False" ColumnWidth="*" SelectionMode="Extended"
                     SelectedItemsList="{Binding SelectedPlayersList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="startNumberColumn" Width="SizeToHeader" Header="Numer" Binding="{Binding StartNumber}"/>
-                <DataGridTextColumn x:Name="firstNameColumn"  Header="Imię" Binding="{Binding FirstName}"/>
-                <DataGridTextColumn x:Name="lastNameColumn" Header="Nazwisko" Binding="{Binding LastName}"/>
+                <DataGridTextColumn x:Name="startNumberColumn" Width="SizeToHeader" Header="Numer" Binding="{Binding StartNumber, UpdateSourceTrigger=LostFocus}"/>
+                <DataGridTextColumn x:Name="firstNameColumn"  Header="Imię" Binding="{Binding FirstName, UpdateSourceTrigger=LostFocus}"/>
+                <DataGridTextColumn x:Name="lastNameColumn" Header="Nazwisko" Binding="{Binding LastName, UpdateSourceTrigger=LostFocus}"/>
                 <DataGridTemplateColumn x:Name="distanceColumn"  Header="Dystans">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -250,7 +250,6 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn x:Name="isMaleColumn" Width="SizeToHeader" Header="Płeć" Binding="{Binding IsMale, Converter={StaticResource BoolToSexConverter}}"/>
                 <DataGridTextColumn Width="Auto" Header="Telefon" Binding="{Binding PhoneNumber}"/>
             </DataGrid.Columns>
         </adminVew:MultipleChoiceDataGrid>

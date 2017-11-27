@@ -18,29 +18,47 @@ namespace ViewCore.Entities
         public string Name
         {
             get { return DbEntity.Name; }
-            set { DbEntity.Name = SetProperty(DbEntity.Name, value); }
+            set
+            {
+               DbEntity.Name = SetProperty(DbEntity.Name, value);
+                OnUpdateRequested();
+            }
         }
 
+
+        public int YearFrom
+        {
+            get { return DbEntity.YearFrom; }
+            set
+            {
+                DbEntity.YearFrom = SetProperty(DbEntity.YearFrom, value);
+                OnUpdateRequested();
+            }
+        }
+
+        public int YearTo
+        {
+            get { return DbEntity.YearTo; }
+            set
+            {
+                DbEntity.YearTo = SetProperty(DbEntity.YearTo, value);
+                OnUpdateRequested();
+            }
+        }
 
         private void OnDeleteCategory()
         {
             DeleteRequested(this, EventArgs.Empty);
         }
 
-        public int YearFrom
-        {
-            get { return DbEntity.YearFrom; }
-            set { DbEntity.YearFrom = SetProperty(DbEntity.YearFrom, value); }
-        }
-
-        public int YearTo
-        {
-            get { return DbEntity.YearTo; }
-            set { DbEntity.YearTo = SetProperty(DbEntity.YearTo, value); }
-        }
-
-        public event EventHandler DeleteRequested = delegate { };
         public RelayCommand DeleteCategoryCmd { get; private set; }
+        public event EventHandler DeleteRequested = delegate { };
+        public event EventHandler UpdateRequested = delegate { };
+        protected void OnUpdateRequested()
+        {
+            UpdateRequested?.Invoke(this, EventArgs.Empty);
+        }
+
 
     }
 }
