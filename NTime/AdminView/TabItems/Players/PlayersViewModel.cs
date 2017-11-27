@@ -87,9 +87,16 @@ namespace AdminView.Players
 
         private async void OnReadPlayersFromCsvAsync()
         {
-            await _playersManager.AddPlayersFromCsvToDatabase();
-            Players = _playersManager.GetPlayersToDisplay();
-            UpdateRecordsRangeInfo(_playersManager.GetRecordsRangeInfo());
+            try
+            {
+                await _playersManager.AddPlayersFromCsvToDatabase();
+                Players = _playersManager.GetPlayersToDisplay();
+                UpdateRecordsRangeInfo(_playersManager.GetRecordsRangeInfo());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Nie udało się załadować pliku {ex.Message}");
+            }
         }
 
         private async void OnDeleteAllPlayersRequestedAsync()

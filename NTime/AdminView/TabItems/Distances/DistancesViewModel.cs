@@ -29,8 +29,15 @@ namespace AdminView.Distances
 
         private async void OnLoadLogsFromCSVsToDB()
         {
-            await _playerRepository.ImportTimeReadsFromSourcesAsync();
-            MessageBox.Show("Wczytano pomiary z plików");
+            try
+            {
+                await _playerRepository.ImportTimeReadsFromSourcesAsync();
+                MessageBox.Show("Wczytano pomiary z plików");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Nie udało się załadować pliku {ex.Message}");
+            }
         }
 
         private void OnViewLoaded()
