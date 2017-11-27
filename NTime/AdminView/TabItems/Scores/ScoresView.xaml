@@ -18,6 +18,7 @@
     <UserControl.Resources>
         <converters:BoolToSexConverterClass x:Key="BoolToSexConverter"/>
         <converters:RecordsRangeToTextConverterClass x:Key="RecordsRangeToTextConverter"/>
+        <converters:DateToStringConverterClass x:Key="DateToStringConverter"/>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -85,28 +86,30 @@
             </Grid>
         </StackPanel>
         <DataGrid x:Name="playerDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Grid.Row="1"
-                  ItemsSource="{Binding PlayersWithScore}" EnableRowVirtualization="True" AutoGenerateColumns="False"
+                  ItemsSource="{Binding Players}" EnableRowVirtualization="True" AutoGenerateColumns="False"
                   ColumnWidth="*" SelectionMode="Extended" CanUserAddRows="False" >
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="distancePlaceColumn" Width="SizeToHeader" Header="M-ce Open" Binding="{Binding DistancePlaceNumber}"/>
-                <DataGridTextColumn x:Name="categoryPlaceColumn" Width="SizeToHeader" Header="M-ce Kategoria" Binding="{Binding CategoryPlaceNumber}"/>
-                <DataGridTextColumn x:Name="startNumberColumn" Width="SizeToHeader" Header="Numer" Binding="{Binding StartNumber}"/>
-                <DataGridTextColumn x:Name="firstNameColumn"  Header="Imię" Binding="{Binding FirstName}"/>
-                <DataGridTextColumn x:Name="lastNameColumn" Header="Nazwisko" Binding="{Binding LastName}"/>
-                <DataGridTextColumn x:Name="distancedColumn"  Header="Dystans" Binding="{Binding Distance.Name}"/>
-                <DataGridTextColumn x:Name="extraPlayerInfoColumn"  Header="Dodatkowe info" Binding="{Binding ExtraPlayerInfo.Name}"/>
-                <DataGridTextColumn x:Name="teamColumn"  Header="Klub" Binding="{Binding Team}"/>
-                <DataGridTemplateColumn x:Name="birthDateColumn"  Header="Data urodzenia">
+                <DataGridTextColumn x:Name="distancePlaceColumn" Width="SizeToHeader" Header="M-ce Open" Binding="{Binding DistancePlaceNumber}" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="categoryPlaceColumn" Width="SizeToHeader" Header="M-ce Kategoria" Binding="{Binding CategoryPlaceNumber}" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="startNumberColumn" Width="SizeToHeader" Header="Numer" Binding="{Binding StartNumber}" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="firstNameColumn"  Header="Imię" Binding="{Binding FirstName}" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="lastNameColumn" Header="Nazwisko" Binding="{Binding LastName}" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="distancedColumn"  Header="Dystans" Binding="{Binding Distance.Name}" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="startTimeColumn" Header="Czas startu" Binding="{Binding StartTime}" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="extraPlayerInfoColumn"  Header="Dodatkowe info" Binding="{Binding ExtraPlayerInfo.Name}" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="teamColumn"  Header="Klub" Binding="{Binding Team}" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="birthDateColumn" Header="Data urodzenia" Binding="{Binding BirthDate, Converter={StaticResource DateToStringConverter}}" IsReadOnly="True"/>
+                <!--<DataGridTemplateColumn x:Name="birthDateColumn"  Header="Data urodzenia" IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <DatePicker SelectedDate="{Binding BirthDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                            <DatePicker SelectedDate="{Binding BirthDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn x:Name="fullCategoryColumn" Header="kategoria" Binding="{Binding FullCategory}"/>
-                <DataGridTextColumn x:Name="isMaleColumn" Width="SizeToHeader" Header="Płeć" Binding="{Binding IsMale, Converter={StaticResource BoolToSexConverter}}"/>
-                <DataGridTextColumn x:Name="lapsCountColumn" Width="SizeToHeader" Header="Okrążenia" Binding="{Binding LapsCount}"/>
-                <DataGridTextColumn x:Name="timeColumn"  Header="Czas" Binding="{Binding Time}"/>
+                </DataGridTemplateColumn>-->
+                <DataGridTextColumn x:Name="fullCategoryColumn" Header="kategoria" Binding="{Binding FullCategory}" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="isMaleColumn" Width="SizeToHeader" Header="Płeć" Binding="{Binding IsMale, Converter={StaticResource BoolToSexConverter}}" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="lapsCountColumn" Width="SizeToHeader" Header="Okrążenia" Binding="{Binding LapsCount}" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="timeColumn"  Header="Czas" Binding="{Binding Time}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
 

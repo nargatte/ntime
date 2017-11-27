@@ -15,6 +15,7 @@
              d:DesignHeight="300" d:DesignWidth="1000">
     <UserControl.Resources>
         <converters:BoolToSexConverterClass x:Key="BoolToSexConverter"/>
+        <converters:IsMaleToSexEnumConverterClass x:Key="IsMaleToSexEnumConverter"/>
         <converters:RecordsRangeToTextConverterClass x:Key="RecordsRangeToTextConverter"/>
         <Style x:Key="KeyStopButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="Template">
@@ -232,6 +233,20 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <DatePicker SelectedDate="{Binding BirthDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Płeć" Width="Auto">
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <ComboBox Width="70" ItemsSource="{Binding Source={db:EnumBindingSource {x:Type db:SexEnum}}}"
+                                              SelectedItem="{Binding DistanceType, Converter={StaticResource IsMaleToSexEnumConverter}, UpdateSourceTrigger=PropertyChanged}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox Width="60" ItemsSource="{Binding Source={db:EnumBindingSource {x:Type db:SexEnum}}}"
+                                              SelectedItem="{Binding IsMale, Converter={StaticResource IsMaleToSexEnumConverter}, UpdateSourceTrigger=PropertyChanged}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

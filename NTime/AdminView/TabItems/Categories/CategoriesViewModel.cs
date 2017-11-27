@@ -58,7 +58,9 @@ namespace AdminView.Categories
         {
             if (String.IsNullOrWhiteSpace(NewCategory.Name) ||
                 String.IsNullOrWhiteSpace(NewCategory.YearFrom.ToString()) || 
-                String.IsNullOrWhiteSpace(NewCategory.YearTo.ToString()))
+                String.IsNullOrWhiteSpace(NewCategory.YearTo.ToString()) ||
+                !int.TryParse(NewCategory.YearFrom.ToString(), out int result1) ||
+                !int.TryParse(NewCategory.YearFrom.ToString(), out int result2))
             {
                 MessageBox.Show("Kategorie i lata graniczne nie mogę być puste");
                 return;

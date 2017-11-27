@@ -80,7 +80,6 @@ namespace ViewCore.Entities
                 DbEntity.Distance = SetProperty(DbEntity.Distance, value.DbEntity);
                 Debug.Write("Distance updated");
                 OnUpdateRequested();
-                Thread.Sleep(2000);
                 OnPropertyChanged(nameof(FullCategory));
             }
         }
@@ -106,6 +105,7 @@ namespace ViewCore.Entities
             {
                 DbEntity.BirthDate = SetProperty(DbEntity.BirthDate, value);
                 OnUpdateRequested();
+                OnPropertyChanged(nameof(FullCategory));
             }
         }
 

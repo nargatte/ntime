@@ -22,12 +22,12 @@ namespace ViewCore.Managers
         private ObservableCollection<EditablePlayer> _players = new ObservableCollection<EditablePlayer>();
 
         public PlayersManager(IEditableCompetition currentCompetition, ObservableCollection<EditableDistance> definedDistances,
-            ObservableCollection<EditableExtraPlayerInfo> definedExtraPlayerInfos) : base(currentCompetition)
+            ObservableCollection<EditableExtraPlayerInfo> definedExtraPlayerInfos, RangeInfo recordsRangeInfo) : base(currentCompetition)
         {
             _playerRepository = new PlayerRepository(new ContextProvider(), _currentCompetition.DbEntity);
             _definedDistances = definedDistances;
             _definedExtraPlayerInfos = definedExtraPlayerInfos;
-            _recordsRangeInfo = new RangeInfo() { ItemsPerPage = 50, PageNumber = 1, TotalItemsCount = 0 };
+            _recordsRangeInfo = recordsRangeInfo;
         }
 
         public ObservableCollection<EditablePlayer> GetPlayersToDisplay() => _players;
@@ -39,6 +39,8 @@ namespace ViewCore.Managers
             _playerFilter.Query = query;
             if (sortOrder.HasValue && sortOrder.Value == SortOrderEnum.Descending)
                 _playerFilter.DescendingSort = true;
+            else
+                _playerFilter.DescendingSort = false;
             if (sortCriteria.HasValue)
                 _playerFilter.PlayerSort = sortCriteria.Value;
             await AddPlayersFromDatabase(removeAllDisplayedBefore: true);

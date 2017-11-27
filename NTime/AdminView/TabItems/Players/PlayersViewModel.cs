@@ -67,8 +67,11 @@ namespace AdminView.Players
         private async void OnAddPlayerAsync()
         {
             if (await _playersManager.TryAddPlayerAsync(NewPlayer))
-                Players.Add(NewPlayer);
-            ClearNewPlayer();
+            {
+                Players = _playersManager.GetPlayersToDisplay();
+                UpdateRecordsRangeInfo(_playersManager.GetRecordsRangeInfo());
+                ClearNewPlayer();
+            }
         }
 
         private void ClearNewPlayer()

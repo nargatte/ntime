@@ -113,7 +113,7 @@ namespace AdminView
             _extraPlayerInfosManager = new ExtraPlayerInfosManager(_currentCompetition);
             DefinedExtraPlayerInfo = await _extraPlayerInfosManager.DownloadExtraPlayerInfoAsync();
 
-            _playersManager = new PlayersManager(_currentCompetition, DefinedDistances, DefinedExtraPlayerInfo);
+            _playersManager = new PlayersManager(_currentCompetition, DefinedDistances, DefinedExtraPlayerInfo, RecordsRangeInfo);
             await _playersManager.AddPlayersFromDatabase(removeAllDisplayedBefore: true);
 
             Players = _playersManager.GetPlayersToDisplay();
