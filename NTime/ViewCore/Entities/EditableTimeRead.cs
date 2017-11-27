@@ -31,11 +31,10 @@ namespace ViewCore.Entities
             //}
         }
 
-        //public int Reader
-        //{
-        //    get { return DbEntity.Gate.Number; }
-        //    set { DbEntity.Gate.Number = SetProperty(DbEntity.Gate.Number, value); }
-        //}
+        public int Reader
+        {
+            get { return DbEntity.Gate.Number; }
+        }
 
     }
 }

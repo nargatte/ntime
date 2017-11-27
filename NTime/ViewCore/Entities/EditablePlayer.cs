@@ -33,7 +33,6 @@ namespace ViewCore.Entities
             DbEntity = dbPlayer;
             DefinedDistances = new ObservableCollection<EditableDistance>(distances);
             DefinedExtraPlayerInfo = new ObservableCollection<EditableExtraPlayerInfo>(extraPlayerInfos);
-            StartTime = DateTime.Today.ConvertToString();
         }
 
         public int StartNumber
