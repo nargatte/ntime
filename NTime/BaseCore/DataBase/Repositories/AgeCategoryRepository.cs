@@ -71,6 +71,23 @@ namespace BaseCore.DataBase
             });
         }
 
+        public override Task RemoveAsync(AgeCategory item)
+        {
+            CheckNull(item);
+            CheckItem(item);
+            return ContextProvider.DoAsync(async ctx =>
+            {
+                ctx.AgeCategories.Attach(item);
+                await ctx.Players.Where(p => p.AgeCategoryId == item.Id).ForEachAsync(p =>
+                {
+                    p.AgeCategory = null;
+                    p.AgeCategoryId = null;
+                });
+                ctx.AgeCategories.Remove(item);
+                await ctx.SaveChangesAsync();
+            });
+        }
+
 
     }
 }

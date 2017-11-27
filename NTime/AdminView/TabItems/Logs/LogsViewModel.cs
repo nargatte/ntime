@@ -10,6 +10,8 @@ using BaseCore.DataBase;
 using ViewCore.Entities;
 using System.Reflection;
 using System.ComponentModel;
+using System.Windows;
+using BaseCore.TimesProcess;
 using ViewCore.Managers;
 
 namespace AdminView.Logs
@@ -20,8 +22,15 @@ namespace AdminView.Logs
         {
             TabTitle = "Logi";
             ViewLoadedCmd = new RelayCommand(OnViewLoaded);
+            ProcessLogs = new RelayCommand(OnProcessLogs);
         }
 
+        private async void OnProcessLogs()
+        {
+            TimeProcess timeProcess = new TimeProcess(_currentCompetition.DbEntity);
+            await timeProcess.ProcessAllAsync();
+            MessageBox.Show("Przeliczono logi");
+        }
 
         #region Properties
 
@@ -39,6 +48,7 @@ namespace AdminView.Logs
             set { SetProperty(ref _playersWithLogs, value); }
         }
 
+        public RelayCommand ProcessLogs { get; set; }
         #endregion
 
         #region Events and Commands
@@ -51,8 +61,8 @@ namespace AdminView.Logs
             LegendItems = colorLegendManager.GetLegendItems();
             PlayersWithLogsManager playerWithLogsManager = new PlayersWithLogsManager(_currentCompetition, _playerRepository);
             PlayersWithLogs = await playerWithLogsManager.GetAllPlayers();
-            foreach (var player in PlayersWithLogs)
-                player.DownloadTimeReads();
+            //foreach (var player in PlayersWithLogs)
+            //    player.DownloadTimeReads();
         }
         #endregion
     }
