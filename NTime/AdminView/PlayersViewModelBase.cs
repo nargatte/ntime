@@ -148,9 +148,9 @@ namespace AdminView
 
         protected async void OnUpdateFullCategoriesAsync()
         {
-            var task = _playerRepository.UpdateFullCategoryAllAsync();
+            await _playerRepository.UpdateFullCategoryAllAsync();
             MessageBox.Show("Kategorie zostały przeliczone poprawnie");
-            await task;
+            //await task;
             Players = _playersManager.GetPlayersToDisplay();
             UpdateRecordsRangeInfo(_playersManager.GetRecordsRangeInfo());
         }
