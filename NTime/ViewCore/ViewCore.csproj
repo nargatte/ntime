@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="AdminViewModel.cs" />
     <Compile Include="Entities\EditablePlayerWithLogs.cs" />
+    <Compile Include="Managers\AgeCategoryManager.cs" />
     <Compile Include="Managers\ColorLegendManager.cs" />
     <Compile Include="Managers\DistancesManager.cs" />
     <Compile Include="Managers\ExtraPlayerInfosManager.cs" />
