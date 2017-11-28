@@ -24,7 +24,7 @@ namespace BaseCore.DataBase
 
         protected override void CheckItem(TimeReadsLogInfo item)
         {
-            if (item.GateId == Gate.Id) throw new ArgumentException("Wrong GateId");
+            if (item.GateId != Gate.Id) throw new ArgumentException("Wrong GateId");
         }
 
         protected override void PrepareToAdd(TimeReadsLogInfo item)

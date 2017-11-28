@@ -26,7 +26,7 @@ namespace BaseCoreTests.DataBase
 
         protected virtual void Reset(T item) { }
 
-        protected IContextProvider ContextProvider = new ContextProvider("NTimeTests");
+        protected IContextProvider ContextProvider = new ContextProvider("name=Test");
 
         protected bool TheSameDataAndId(T entity1, T entity2)
         {
