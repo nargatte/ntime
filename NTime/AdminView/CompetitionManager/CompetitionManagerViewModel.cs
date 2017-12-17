@@ -17,27 +17,18 @@ using BaseCore.DataBase;
 
 namespace AdminView.CompetitionManager
 {
-    class CompetitionManagerViewModel : AdminViewModel, ViewCore.Entities.ISwitchableViewModel
+    class CompetitionManagerViewModel : CompetitionManagerViewModelBase
     {
 
         public CompetitionManagerViewModel(ViewCore.Entities.IEditableCompetition currentCompetition) : base(currentCompetition)
         {
             GoToCompetitionCmd = new RelayCommand(OnGoToCompetition, CanGoToCompetition);
-            TabItems = new ObservableCollection<BindableBase>()
+            TabItems = new ObservableCollection<TabItemViewModel>()
             {
                 new SettingsViewModel(_currentCompetition), new PlayersViewModel(_currentCompetition), new DistancesViewModel(_currentCompetition),
                 new CategoriesViewModel(_currentCompetition), new LogsViewModel(_currentCompetition),new ScoresViewModel(_currentCompetition)
             };
         }
-
-
-        private ObservableCollection<BindableBase> _tabItems;
-        public ObservableCollection<BindableBase> TabItems
-        {
-            get { return _tabItems; }
-            set { SetProperty(ref _tabItems, value); }
-        }
-
 
         private void OnGoToCompetition()
         {
@@ -49,7 +40,7 @@ namespace AdminView.CompetitionManager
             return true;
         }
 
-        public void DetachAllEvents()
+        public override void DetachAllEvents()
         {
 
         }

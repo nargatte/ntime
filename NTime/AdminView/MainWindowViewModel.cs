@@ -16,7 +16,7 @@ namespace AdminView
 {
     class MainWindowViewModel : BindableBase
     {
-        private ViewCore.Entities.ISwitchableViewModel _currentViewModel;
+        private ISwitchableViewModel _currentViewModel;
         private CompetitionChoiceViewModel _competitionChoiceViewModel;
         private CompetitionManagerViewModel _competitionManagerViewModel;
         private IEditableCompetition _currentCompetition;
@@ -24,11 +24,11 @@ namespace AdminView
         public MainWindowViewModel()
         {
             NavToCompetitionChoiceView();
-            ChangeCompetitionCmd = new RelayCommand(OnChnageCompetition);
+            ChangeCompetitionCmd = new RelayCommand(OnChangeCompetition);
             //NavToCompetitionManagerView();
         }
 
-        private void OnChnageCompetition()
+        private void OnChangeCompetition()
         {
             NavToCompetitionChoiceView();
         }
@@ -36,7 +36,7 @@ namespace AdminView
         private void NavToCompetitionChoiceView()
         {
             CurrentViewModel?.DetachAllEvents();
-            _competitionChoiceViewModel = new CompetitionChoiceViewModel(_currentCompetition);
+            _competitionChoiceViewModel = new CompetitionChoiceViewModel();
             _competitionChoiceViewModel.CompetitionManagerRequested += NavToCompetitionManagerView;
             CurrentViewModel = _competitionChoiceViewModel;
         }
@@ -50,7 +50,7 @@ namespace AdminView
             CurrentViewModel = _competitionManagerViewModel;
         }
 
-        public ViewCore.Entities.ISwitchableViewModel CurrentViewModel
+        public ISwitchableViewModel CurrentViewModel
         {
             get { return _currentViewModel; }
             set { SetProperty(ref _currentViewModel, value); }
