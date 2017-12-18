@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using MvvmHelper;
 using ViewCore;
+using ViewCore.Entities;
 
 namespace AdminView.AddCompetition
 {
@@ -17,15 +18,15 @@ namespace AdminView.AddCompetition
         {
             AddCompetitionCmd = new RelayCommand(OnAddCompetition);
             CancelAddingCmd = new RelayCommand(OnCancelAdding);
-            NewCompetition = new ViewCore.Entities.EditableCompetition(NewCompetition)
+            NewCompetition = new EditableCompetition()
             {
                 DbEntity = new BaseCore.DataBase.Competition(),
                 EventDate = DateTime.Today,
             };
         }
 
-        private ViewCore.Entities.EditableCompetition _newCompetition;
-        public ViewCore.Entities.EditableCompetition NewCompetition
+        private EditableCompetition _newCompetition;
+        public EditableCompetition NewCompetition
         {
             get { return _newCompetition; }
             set { SetProperty(ref _newCompetition, value); }

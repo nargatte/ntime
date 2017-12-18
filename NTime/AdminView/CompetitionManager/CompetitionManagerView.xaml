@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viewCore="clr-namespace:ViewCore;assembly=ViewCore"
             xmlns:players="clr-namespace:AdminView.Players"
             xmlns:scores="clr-namespace:AdminView.Scores"
             xmlns:settings="clr-namespace:AdminView.Settings"
@@ -106,24 +107,6 @@
                     <logs:LogsView/>
                 </DataTemplate>
             </TabControl.Resources>
-            <!--<TabItem Header="Ustawienia" Style="{DynamicResource ResourceKey=styleTabItemLeft}">
-                <TextBlock>The content for General tab.</TextBlock>
-            </TabItem>
-            <TabItem Header="Zawodnicy" Style="{DynamicResource ResourceKey=styleTabItemDefault}">
-                <TextBlock>The content for Action tab.</TextBlock>
-            </TabItem>
-            <TabItem Header="Dystanse" Style="{DynamicResource ResourceKey=styleTabItemDefault}">
-                <TextBlock>The content for Options tab.</TextBlock>
-            </TabItem>
-            <TabItem Header="Kategorie" Style="{DynamicResource ResourceKey=styleTabItemDefault}">
-                <TextBlock>The content for Options tab.</TextBlock>
-            </TabItem>
-            <TabItem Header="Wyniki" Style="{DynamicResource ResourceKey=styleTabItemDefault}">
-                <TextBlock>The content for Options tab.</TextBlock>
-            </TabItem>
-            <TabItem Header="Drukowanie" Style="{DynamicResource ResourceKey=styleTabItemRight}">
-                <TextBlock>The content for Tools tab.</TextBlock>
-            </TabItem>-->
         </TabControl>
     </Grid>
 </UserControl>

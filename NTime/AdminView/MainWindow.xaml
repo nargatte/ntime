@@ -19,15 +19,6 @@
         <DataTemplate DataType="{x:Type competitionChoice:CompetitionChoiceViewModel}">
             <competitionChoice:CompetitionChoiceView/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type players:PlayersViewModel}">
-            <players:PlayersView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type settings:SettingsViewModel}">
-            <settings:SettingsView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type scores:ScoresViewModel}">
-            <scores:ScoresView/>
-        </DataTemplate>
         <DataTemplate DataType="{x:Type competitionManager:CompetitionManagerViewModel}">
             <competitionManager:CompetitionManagerView/>
         </DataTemplate>

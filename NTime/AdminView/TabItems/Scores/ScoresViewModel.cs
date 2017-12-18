@@ -30,13 +30,13 @@ namespace AdminView.Scores
         private async void OnUpdateRankingAllAsync()
         {
             await _playerRepository.UpdateRankingAllAsync();
-            await DownLoadDataFromDatabaseAndDisplay();
+            await DownLoadPlayersFromDatabaseAndDisplay();
             MessageBox.Show("Wyniki zostały przeliczone poprawnie");
         }
 
         private async void OnViewLoadedAsync()
         {
-            await DownLoadDataFromDatabaseAndDisplay();
+            await DownLoadPlayersFromDatabaseAndDisplay();
         }
 
         #endregion

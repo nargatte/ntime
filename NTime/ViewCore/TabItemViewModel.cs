@@ -9,13 +9,19 @@ using MvvmHelper;
 
 namespace ViewCore
 {
-    public class TabItemViewModel : AdminViewModel
+    public class TabItemViewModel : AdminViewModel, ITabItemViewModel
     {
         protected AgeCategoryRepository _ageCategoryRepository { get; set; }
         protected DistanceRepository _distanceRepository { get; set; }
         protected ExtraPlayerInfoRepository _extraPlayerInfoRepository { get; set; }
         protected GateRepository _gateRepository { get; set; }
         protected PlayerRepository _playerRepository { get; set; }
+
+        public TabItemViewModel()
+        {
+
+        }
+
         public TabItemViewModel(Entities.IEditableCompetition currentCompetition) : base(currentCompetition)
         {
             CreateRepositoriesForCurrentCompetition();

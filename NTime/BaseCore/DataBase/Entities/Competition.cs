@@ -10,13 +10,13 @@ namespace BaseCore.DataBase
         {
         }
 
-        public Competition(string name, DateTime eventDate, string description, string link, string organiser, string city)
+        public Competition(string name, DateTime eventDate, string description, string link, string organizer, string city)
         {
             Name = name;
             EventDate = eventDate;
             Description = description;
             Link = link;
-            Organiser = organiser;
+            Organizer = organizer;
             City = city;
         }
 
@@ -36,7 +36,7 @@ namespace BaseCore.DataBase
         public string Link { get; set; }
 
         [StringLength(255)]
-        public string Organiser { get; set; }
+        public string Organizer { get; set; }
 
         [StringLength(255)]
         public string City { get; set; }

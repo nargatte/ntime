@@ -43,6 +43,12 @@ namespace BaseCore.DataBase
 
         public bool IsStartTimeFromReader { get; set; }
 
+        [StringLength(255)]
+        public string FullCategory { get; set; }
+
+        [Phone]
+        public string PhoneNumber { get; set; }
+
         public int LapsCount { get; set; }
 
         public decimal Time { get; set; }
@@ -52,12 +58,6 @@ namespace BaseCore.DataBase
         public int CategoryPlaceNumber { get; set; }
 
         public bool CompetitionCompleted { get; set; }
-
-        [StringLength(255)]
-        public string FullCategory { get; set; }
-
-        [Phone]
-        public string PhoneNumber { get; set; }
 
         public int CompetitionId { get; set; }
         public virtual Competition Competition { get; set; }

@@ -8,9 +8,19 @@ using BaseCore.DataBase;
 
 namespace ViewCore.Entities
 {
-    public class EditableCompetition : EditableBaseClass<Competition>, IEditableCompetition
+    public class EditableCompetition : BindableBase, IEditableCompetition
     {
-        public EditableCompetition(IEditableCompetition currentComptetition): base(currentComptetition) { }
+        public Competition DbEntity { get; set; }
+        public EditableCompetition()
+        {
+            if (DbEntity == null)
+                DbEntity = new Competition();
+        }
+
+        public EditableCompetition(string name, DateTime eventDate, string description, string link, string organiser, string city)
+        {
+            DbEntity = new Competition(name, eventDate, description, link, organiser, city);
+        }
         public string Name
         {
             get { return DbEntity.Name; }
@@ -33,8 +43,8 @@ namespace ViewCore.Entities
 
         public string Organiser
         {
-            get { return DbEntity.Organiser; }
-            set { DbEntity.Organiser = SetProperty(DbEntity.Organiser, value); }
+            get { return DbEntity.Organizer; }
+            set { DbEntity.Organizer = SetProperty(DbEntity.Organizer, value); }
         }
 
         public string Description

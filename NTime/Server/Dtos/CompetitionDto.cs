@@ -19,11 +19,11 @@ namespace BaseCore.Dtos
             SignUpEndDate = competition.SignUpEndDate;
             Description = competition.Description;
             Link = competition.Link;
-            Organiser = competition.Organiser;
+            Organizer = competition.Organizer;
             City = competition.City;
         }
 
-        public Competition UpDateCompetition(Competition competition)
+        public Competition CopyDataFromDto(Competition competition)
         {
             competition.Id = Id;
             competition.Name = Name;
@@ -31,7 +31,7 @@ namespace BaseCore.Dtos
             competition.SignUpEndDate = SignUpEndDate;
             competition.Description = Description;
             competition.Link = Link;
-            competition.Organiser = Organiser;
+            competition.Organizer = Organizer;
             competition.City = City;
             return competition;
         }
@@ -52,7 +52,7 @@ namespace BaseCore.Dtos
         public string Link { get; set; }
 
         [StringLength(255)]
-        public string Organiser { get; set; }
+        public string Organizer { get; set; }
 
         [StringLength(255)]
         public string City { get; set; }

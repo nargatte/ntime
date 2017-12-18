@@ -5,6 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
             xmlns:converters="clr-namespace:ViewCore.XamlConverters;assembly=ViewCore"
             xmlns:adminVew="clr-namespace:AdminView"
+            xmlns:viewCore="clr-namespace:ViewCore;assembly=ViewCore"
+            xmlns:mvvmHelper="clr-namespace:MvvmHelper;assembly=WpfMvvmHelper"
              xmlns:local="clr-namespace:AdminView.Players"
              xmlns:db="clr-namespace:BaseCore.DataBase;assembly=BaseCore"
             xmlns:filter="clr-namespace:BaseCore.PlayerFilter;assembly=BaseCore"
@@ -205,7 +207,7 @@
             </StackPanel>
         </Grid>
 
-        <adminVew:MultipleChoiceDataGrid x:Name="playerDataGrid" Grid.Row="1"
+        <mvvmHelper:MultipleChoiceDataGrid x:Name="playerDataGrid" Grid.Row="1"
                   ItemsSource="{Binding Players}"  AutoGenerateColumns="False" ColumnWidth="*" SelectionMode="Extended"
                     SelectedItemsList="{Binding SelectedPlayersList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <DataGrid.Columns>
@@ -264,7 +266,7 @@
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Width="Auto" Header="Telefon" Binding="{Binding PhoneNumber}"/>
             </DataGrid.Columns>
-        </adminVew:MultipleChoiceDataGrid>
+        </mvvmHelper:MultipleChoiceDataGrid>
 
     </Grid>
 </UserControl>

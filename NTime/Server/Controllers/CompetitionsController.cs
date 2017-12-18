@@ -65,7 +65,7 @@ namespace Server.Controllers
             }
             if (s[0] == "Moderator" && !await _competitionRepository.CanModeratorEdit(user.GetUserId()))
                 return Unauthorized();
-            competitionDto.UpDateCompetition(competition);
+            competitionDto.CopyDataFromDto(competition);
             await _competitionRepository.UpdateAsync(competition);
             return Ok();
         }
@@ -75,7 +75,7 @@ namespace Server.Controllers
         public async Task<IHttpActionResult> Post(CompetitionDto competitionDto)
         {
             Competition competition = new Competition();
-            competitionDto.UpDateCompetition(competition);
+            competitionDto.CopyDataFromDto(competition);
             competition = await _competitionRepository.AddAsync(competition);
             return Created(Url.Content("~/api/competitions/"+ competition.Id), competition);
         }

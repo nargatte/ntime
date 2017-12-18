@@ -12,6 +12,11 @@ namespace ViewCore
     public class CompetitionItemBase : BindableBase
     {
         protected IEditableCompetition _currentCompetition;
+
+        public CompetitionItemBase()
+        {
+
+        }
         public CompetitionItemBase(IEditableCompetition currentComptetition)
         {
             _currentCompetition = currentComptetition;

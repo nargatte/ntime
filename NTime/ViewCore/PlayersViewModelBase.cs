@@ -12,24 +12,34 @@ using ViewCore;
 using ViewCore.Entities;
 using ViewCore.Managers;
 
-namespace AdminView
+namespace ViewCore
 {
-    abstract class PlayersViewModelBase : TabItemViewModel
+    public abstract class PlayersViewModelBase : TabItemViewModel
     {
         protected PlayersManager _playersManager;
         protected DistancesManager _distancesManager;
         protected ExtraPlayerInfosManager _extraPlayerInfosManager;
         protected AgeCategoryManager _ageCategoryManager;
 
+        public PlayersViewModelBase()
+        {
+            OnCreation();
+        }
+
         protected PlayersViewModelBase(IEditableCompetition currentCompetition) : base(currentCompetition)
+        {
+            OnCreation();
+            _distanceSortCriteria = new EditableDistance(_currentCompetition);
+            _extraPlayerInfoSortCriteria = new EditableExtraPlayerInfo(_currentCompetition);
+            _ageCategorySortCriteria = new EditableAgeCategory(_currentCompetition);
+        }
+
+        private void OnCreation()
         {
             UpdateFullCategoriesCmd = new RelayCommand(OnUpdateFullCategoriesAsync);
             PreviousPageCmd = new RelayCommand(OnPreviousPageAsync);
             NextPageCmd = new RelayCommand(OnNextPageAsync);
             RecordsRangeInfo.ChildUpdated += RecordsRangeInfo_ChildUpdated;
-            _distanceSortCriteria = new EditableDistance(_currentCompetition);
-            _extraPlayerInfoSortCriteria = new EditableExtraPlayerInfo(_currentCompetition);
-            _ageCategorySortCriteria = new EditableAgeCategory(_currentCompetition);
         }
 
         #region Properties
@@ -150,16 +160,9 @@ namespace AdminView
         public RelayCommand PreviousPageCmd { get; set; }
         public RelayCommand NextPageCmd { get; set; }
 
-        protected async Task DownLoadDataFromDatabaseAndDisplay()
+        protected async Task DownLoadPlayersFromDatabaseAndDisplay(IEditableCompetition selectedCompeititon = null)
         {
-            _distancesManager = new DistancesManager(_currentCompetition);
-            DefinedDistances = await _distancesManager.DownloadDistancesAsync();
-
-            _extraPlayerInfosManager = new ExtraPlayerInfosManager(_currentCompetition);
-            DefinedExtraPlayerInfo = await _extraPlayerInfosManager.DownloadExtraPlayerInfoAsync();
-
-            _ageCategoryManager = new AgeCategoryManager(_currentCompetition);
-            DefinedAgeCategories = await _ageCategoryManager.DownloadAgeCategoriesAsync();
+            await DownloadPlayersInfo(selectedCompeititon);
 
             _playersManager = new PlayersManager(_currentCompetition, DefinedDistances, DefinedExtraPlayerInfo, RecordsRangeInfo);
             //DistanceSortCriteria = new EditableDistance(_currentCompetition);
@@ -168,6 +171,23 @@ namespace AdminView
 
             Players = _playersManager.GetPlayersToDisplay();
             UpdateRecordsRangeInfo(_playersManager.GetRecordsRangeInfo());
+        }
+
+        public async Task DownloadPlayersInfo(IEditableCompetition selectedCompeititon = null)
+        {
+            if (selectedCompeititon != null)
+            {
+                _currentCompetition = selectedCompeititon;
+            }
+
+            _distancesManager = new DistancesManager(_currentCompetition);
+            DefinedDistances = await _distancesManager.DownloadDistancesAsync();
+
+            _extraPlayerInfosManager = new ExtraPlayerInfosManager(_currentCompetition);
+            DefinedExtraPlayerInfo = await _extraPlayerInfosManager.DownloadExtraPlayerInfoAsync();
+
+            _ageCategoryManager = new AgeCategoryManager(_currentCompetition);
+            DefinedAgeCategories = await _ageCategoryManager.DownloadAgeCategoriesAsync();
         }
 
         protected async void OnPreviousPageAsync()

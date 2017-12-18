@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace AdminView
+namespace MvvmHelper
 {
     public class MultipleChoiceDataGrid : DataGrid
     {
