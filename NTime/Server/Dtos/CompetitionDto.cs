@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using BaseCore.DataBase;
+using Server.Models;
 
 namespace BaseCore.Dtos
 {
@@ -55,5 +56,9 @@ namespace BaseCore.Dtos
 
         [StringLength(255)]
         public string City { get; set; }
+
+        public NameIdModel[] Distances { get; set; }
+
+        public NameIdModel[] ExtraPlayerInfo { get; set; }
     }
 }

@@ -6,7 +6,7 @@ namespace BaseCore.DataBase
     {
         public int Id { get; set; }
 
-        public int AccountId { get; set; }
+        public string AccountId { get; set; }
 
         public virtual ICollection<Competition> Competitions { get; set; }
     }

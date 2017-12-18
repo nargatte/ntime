@@ -2,6 +2,6 @@
 {
     public interface IAccountId
     {
-        int AccountId { get; set; }
+        string AccountId { get; set; }
     }
 }

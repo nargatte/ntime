@@ -36,7 +36,7 @@ namespace BaseCore.DataBase
             return competitions;
         }
 
-        public async Task<PageViewModel<Competition>> GetByAccountId(int accountId, PageBindingModel pageBindingModel)
+        public async Task<PageViewModel<Competition>> GetByAccountId(string accountId, PageBindingModel pageBindingModel)
         {
             PageViewModel<Competition> pageViewModel = new PageViewModel<Competition>();
             await ContextProvider.DoAsync(async ctx =>
@@ -45,6 +45,16 @@ namespace BaseCore.DataBase
                 pageViewModel.TotalCount = await ctx.Set<Competition>().Where(c => c.Players.Any(p => p.PlayerAccount.AccountId == accountId)).CountAsync();
             });
             return pageViewModel;
+        }
+
+        public async Task<bool> CanModeratorEdit(string accountId)
+        {
+            bool b = false;
+            await ContextProvider.DoAsync(async ctx =>
+            {
+                b = await ctx.Competitions.AnyAsync(c => c.OrganizerAccounts.Any(oa => oa.AccountId == accountId));
+            });
+            return b;
         }
     }
 }

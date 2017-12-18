@@ -25,7 +25,7 @@ namespace BaseCore.DataBase
         [Phone]
         public string PhoneNumber { get; set; }
 
-        public int AccountId { get; set; }
+        public string AccountId { get; set; }
 
         public virtual ICollection<Player> Players { get; set; }
     }

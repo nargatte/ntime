@@ -128,7 +128,7 @@ namespace BaseCore.DataBase
             return pageViewModel;
         }
 
-        public async Task<T> GetById(int? id)
+        public async Task<T> GetById(int id)
         {
             T item = null;
             await ContextProvider.DoAsync(async ctx =>
