@@ -34,7 +34,7 @@ namespace BaseCoreTests.DataBase
             if (entity1.Description != entity2.Description) return false;
             if (entity1.EventDate != entity2.EventDate) return false;
             if (entity1.Link != entity2.Link) return false;
-            if (entity1.Organiser != entity2.Organiser) return false;
+            if (entity1.Organizer != entity2.Organizer) return false;
             return true;
         }
 

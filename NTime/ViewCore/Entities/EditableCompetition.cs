@@ -43,8 +43,8 @@ namespace ViewCore.Entities
 
         public string Organiser
         {
-            get { return DbEntity.Organiser; }
-            set { DbEntity.Organiser = SetProperty(DbEntity.Organiser, value); }
+            get { return DbEntity.Organizer; }
+            set { DbEntity.Organizer = SetProperty(DbEntity.Organizer, value); }
         }
 
         public string Description
