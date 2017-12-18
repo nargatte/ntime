@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using BaseCore.Models;
 
 namespace BaseCore.DataBase
 {
@@ -114,6 +115,17 @@ namespace BaseCore.DataBase
                 items = await GetIncludeQuery(GetSortQuery(GetAllQuery(ctx.Set<T>()))).AsNoTracking<T>().ToArrayAsync();
             });
             return items;
+        }
+
+        public async Task<PageViewModel<T>> GetAllAsync(PageBindingModel pageBindingModel)
+        {
+            PageViewModel<T> pageViewModel = new PageViewModel<T>();
+            await ContextProvider.DoAsync(async ctx =>
+            {
+                pageViewModel.Items = await GetIncludeQuery(GetSortQuery(GetAllQuery(ctx.Set<T>()))).Skip(pageBindingModel.ItemsOnPage * pageBindingModel.PageNumber).Take(pageBindingModel.ItemsOnPage).AsNoTracking<T>().ToArrayAsync();
+                pageViewModel.TotalCount = await GetAllQuery(ctx.Set<T>()).CountAsync();
+            });
+            return pageViewModel;
         }
 
         public async Task<T> GetById(int? id)

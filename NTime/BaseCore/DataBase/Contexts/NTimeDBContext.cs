@@ -37,5 +37,9 @@ namespace BaseCore.DataBase
         public DbSet<Gate> Gates { get; set; }
 
         public DbSet<TimeReadsLogInfo> LogsSources { get; set; }
+
+        public DbSet<OrganizerAccount> OrganizerAccounts { get; set; }
+
+        public DbSet<PlayerAccount> PlayerAccounts { get; set; }
     }
 }

@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data;
-using System.Runtime.Remoting.Messaging;
 
 namespace BaseCore.DataBase
 {
@@ -31,6 +28,8 @@ namespace BaseCore.DataBase
 
         public DateTime EventDate { get; set; }
 
+        public DateTime? SignUpEndDate { get; set; }
+
         public string Description { get; set; }
 
         [StringLength(2000)]
@@ -49,5 +48,7 @@ namespace BaseCore.DataBase
         public virtual ICollection<Distance> Distances { get; set; }
 
         public virtual ICollection<AgeCategory> AgeCategories { get; set; }
+
+        public virtual ICollection<OrganizerAccount> OrganizerAccounts { get; set; }
     }
 }
