@@ -3,11 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+            xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:converters ="clr-namespace:ViewCore.XamlConverters;assembly=ViewCore"
              xmlns:validation="clr-namespace:AdminView.Validation;assembly=ViewCore"
              xmlns:local="clr-namespace:DesktopClientView.TabItems.Registration"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="1000">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding ViewLoadedCmd}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <UserControl.Resources>
         <converters:CompetitionToStringConverterClass x:Key="CompetitionToStringConverter"/>
     </UserControl.Resources>
@@ -19,7 +25,7 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Vertical" Grid.Row="0">
             <TextBlock Margin="10" Text="Wybierz istniejące zawody" HorizontalAlignment="Center" FontSize="16"/>
-            <ComboBox ItemsSource="{Binding CompetitionChoiceBase.Competitions}" SelectedItem="{Binding CompetitionChoiceBase.SelectedCompetition, UpdateSourceTrigger=PropertyChanged}" Width="200">
+            <ComboBox ItemsSource="{Binding CompetitionData.Competitions}" SelectedItem="{Binding CompetitionData.SelectedCompetition, UpdateSourceTrigger=PropertyChanged}" Width="200">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Converter={StaticResource CompetitionToStringConverter}, FallbackValue={}}"/>
@@ -32,11 +38,6 @@
         
         <StackPanel Name="PlayerAdding" Orientation="Horizontal" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center">
             <StackPanel DataContext="{Binding NewPlayer}" Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Center">
-                <StackPanel Orientation="Vertical">
-                    <TextBlock Text="Numer"
-                               VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
-                    <TextBox Text="{Binding StartNumber, UpdateSourceTrigger=PropertyChanged}" Width="35" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>
-                </StackPanel>
                 <StackPanel Orientation="Vertical">
                     <TextBlock Text="Imię"
                                VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
@@ -52,17 +53,6 @@
                                VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
                     <ComboBox ItemsSource="{Binding DefinedDistances}" SelectedItem="{Binding Distance, UpdateSourceTrigger=PropertyChanged}" Margin="5" Height="30" Width="100" DisplayMemberPath="Name"></ComboBox>
                     <!--<TextBox Text="{Binding Distance}" Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>-->
-                </StackPanel>
-                <StackPanel Orientation="Vertical">
-                    <TextBlock Text="Czas startu"
-                               VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
-                    <TextBox Name="DistanceStartTimeTB" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="5" Width="100" Height="30">
-                        <Binding Path="StartTime" UpdateSourceTrigger="LostFocus">
-                            <Binding.ValidationRules>
-                                <validation:TimeFormatRule ValidatesOnTargetUpdated="True"/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox>
                 </StackPanel>
                 <StackPanel Orientation="Vertical">
                     <TextBlock Text="Dodatkowe inf."

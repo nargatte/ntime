@@ -50,6 +50,7 @@ namespace DesktopClientView.TabItems.Registration
             if (CompetitionData.IsCompetitionSelected)
             {
                 await DownloadPlayersInfo(CompetitionData.SelectedCompetition);
+                ClearNewPlayer();
             }
         }
 
