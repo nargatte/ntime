@@ -23,6 +23,7 @@ namespace DesktopClientView
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainWindowViewModel();
         }
     }
 }

@@ -59,7 +59,7 @@ namespace AdminView.Players
 
         private async void OnViewLoadedAsync()
         {
-            await DownLoadDataFromDatabaseAndDisplay();
+            await DownLoadPlayersFromDatabaseAndDisplay();
             ClearNewPlayer();
         }
 

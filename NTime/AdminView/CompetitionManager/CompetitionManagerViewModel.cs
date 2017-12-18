@@ -23,7 +23,7 @@ namespace AdminView.CompetitionManager
         public CompetitionManagerViewModel(ViewCore.Entities.IEditableCompetition currentCompetition) : base(currentCompetition)
         {
             GoToCompetitionCmd = new RelayCommand(OnGoToCompetition, CanGoToCompetition);
-            TabItems = new ObservableCollection<TabItemViewModel>()
+            TabItems = new ObservableCollection<ITabItemViewModel>()
             {
                 new SettingsViewModel(_currentCompetition), new PlayersViewModel(_currentCompetition), new DistancesViewModel(_currentCompetition),
                 new CategoriesViewModel(_currentCompetition), new LogsViewModel(_currentCompetition),new ScoresViewModel(_currentCompetition)

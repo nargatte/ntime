@@ -15,14 +15,13 @@ namespace AdminView.CompetitionChoice
     class CompetitionChoiceViewModel : BindableBase, ISwitchableViewModel, ICompetitionChoiceBase
     {
         private CompetitionChoiceBase _competitionChoiceViewModelBase;
-
-        public CompetitionChoiceBase CompetitionChoiceBase => _competitionChoiceViewModelBase;
+        public CompetitionChoiceBase CompetitionData => _competitionChoiceViewModelBase;
+        public string TabTitle { get; set; }
 
         public CompetitionChoiceViewModel()
         {
             _competitionChoiceViewModelBase = CompetitionChoiceFactory.NewCompetitionChoiceViewModelBase();
-            CompetitionChoiceBase.CompetitionChoiceManager = new CompetitionChoiceManager();
-            CompetitionChoiceBase.CompetitionSelected += CompetitionChoiceBase_CompetitionSelected;
+            CompetitionData.CompetitionSelected += CompetitionChoiceBase_CompetitionSelected;
             DisplayAddCompetitionViewCmd = new RelayCommand(OnDisplayAddCompetitionView, CanDisplayAddCompetition);
             AddCompetitionViewRequested += NavToAddCompetitionView;
             GoToCompetitionCmd = new RelayCommand(OnGoToCompetition, CanGoToCompetition);
@@ -34,19 +33,11 @@ namespace AdminView.CompetitionChoice
 
         #region Methods and Events
 
-        private void OnViewLoaded() => DownloadDataFromDatabaseAndDisplay();
-
-        private void DownloadDataFromDatabaseAndDisplay()
-        {
-            CompetitionChoiceBase.CompetitionChoiceManager.DownloadDataFromDatabase();
-            CompetitionChoiceBase.Competitions = CompetitionChoiceBase.CompetitionChoiceManager.GetCompetitionsToDisplay();
-        }
-
+        private void OnViewLoaded() => CompetitionData.DownloadCompetitionsFromDatabaseAndDisplay();
 
         private void OnGoToCompetition() => CompetitionManagerRequested();
 
-
-        private bool CanGoToCompetition() => CompetitionChoiceBase.IsCompetitionSelected;
+        private bool CanGoToCompetition() => CompetitionData.IsCompetitionSelected;
 
         private void NavToAddCompetitionView()
         {
@@ -59,8 +50,8 @@ namespace AdminView.CompetitionChoice
         {
             var addCompetitionViewModel = sender as AddCompetition.AddCompetitionViewModel;
             EditableCompetition competitionToAdd = addCompetitionViewModel.NewCompetition;
-            CompetitionChoiceBase.Competitions.Add(competitionToAdd);
-            await CompetitionChoiceBase.CompetitionChoiceManager.AddAsync(competitionToAdd.DbEntity);
+            CompetitionData.Competitions.Add(competitionToAdd);
+            await CompetitionData.CompetitionChoiceManager.AddAsync(competitionToAdd.DbEntity);
         }
 
         private void OnDisplayAddCompetitionView() => AddCompetitionViewRequested();

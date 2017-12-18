@@ -10,13 +10,27 @@ using ViewCore.Entities;
 
 namespace DesktopClientView.TabItems.PlayersList
 {
-    internal class PlayersListViewModel : PlayersViewModelBase
+    public class PlayersListViewModel : PlayersViewModelBase, ICompetitionChoiceBase
     {
+        private CompetitionChoiceBase _competitionData;
+        public CompetitionChoiceBase CompetitionData => _competitionData;
+
+        public PlayersListViewModel()
+        {
+            OnCreation();
+        }
+
         public PlayersListViewModel(IEditableCompetition currentCompetition) : base(currentCompetition)
         {
+            OnCreation();
+        }
+
+        private void OnCreation()
+        {
             TabTitle = "Wyniki";
-            ViewLoadedCmd = new RelayCommand(OnViewLoadedAsync);
+            ViewLoadedCmd = new RelayCommand(OnViewLoaded);
             UpdateRankingAllCmd = new RelayCommand(OnUpdateRankingAllAsync);
+            _competitionData = CompetitionChoiceFactory.NewCompetitionChoiceViewModelBase();
         }
 
         #region Events and commands
@@ -24,16 +38,32 @@ namespace DesktopClientView.TabItems.PlayersList
         public RelayCommand ViewLoadedCmd { get; set; }
         public RelayCommand UpdateRankingAllCmd { get; set; }
 
+
         private async void OnUpdateRankingAllAsync()
         {
             await _playerRepository.UpdateRankingAllAsync();
-            await DownLoadDataFromDatabaseAndDisplay();
+            await DownLoadPlayersFromDatabaseAndDisplay();
             MessageBox.Show("Wyniki zostały przeliczone poprawnie");
         }
 
-        private async void OnViewLoadedAsync()
+        private void OnViewLoaded()
         {
-            await DownLoadDataFromDatabaseAndDisplay();
+            DetachAllEvents();
+            CompetitionData.DownloadCompetitionsFromDatabaseAndDisplay();
+            CompetitionData.CompetitionSelected += OnCompetitionSelectedAsync;
+        }
+
+        private async void OnCompetitionSelectedAsync()
+        {
+            if (CompetitionData.IsCompetitionSelected)
+            {
+                await DownLoadPlayersFromDatabaseAndDisplay(CompetitionData.SelectedCompetition);
+            }
+        }
+
+        public void DetachAllEvents()
+        {
+            CompetitionData.DetachAllEvents();
         }
         #endregion
 

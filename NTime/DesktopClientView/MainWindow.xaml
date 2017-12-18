@@ -3,9 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:competitionManager="clr-namespace:DesktopClientView.CompetitionManager"
         xmlns:local="clr-namespace:DesktopClientView"
         mc:Ignorable="d"
+        WindowState="Maximized"
         Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type competitionManager:CompetitionManagerViewModel}">
+            <competitionManager:CompetitionManagerView/>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>

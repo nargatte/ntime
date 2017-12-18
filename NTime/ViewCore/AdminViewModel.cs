@@ -16,6 +16,11 @@ namespace ViewCore
         //protected TimeReadRepository _timeReadRepository { get; set; }
         //protected TimeReadsLogInofRepository _timeReadsLogInofRepository { get; set; }
 
+        public AdminViewModel()
+        {
+
+        }
+
         public AdminViewModel(IEditableCompetition currentComptetition) : base(currentComptetition)
         { 
             ContextProvider contextProvider = new ContextProvider();

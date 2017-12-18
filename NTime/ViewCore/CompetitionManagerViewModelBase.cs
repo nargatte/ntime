@@ -8,20 +8,24 @@ using AdminView;
 using MvvmHelper;
 using ViewCore;
 using BaseCore.DataBase;
+using ViewCore.Entities;
 
 namespace AdminView.CompetitionManager
 {
     public abstract class CompetitionManagerViewModelBase: AdminViewModel, ViewCore.Entities.ISwitchableViewModel
     {
-
-        public CompetitionManagerViewModelBase(ViewCore.Entities.IEditableCompetition currentCompetition) : base(currentCompetition)
+        public CompetitionManagerViewModelBase()
         {
-            //GoToCompetitionCmd = new RelayCommand(OnGoToCompetition, CanGoToCompetition);
+
         }
 
+        private ObservableCollection<ITabItemViewModel> _tabItems;
 
-        private ObservableCollection<TabItemViewModel> _tabItems;
-        public ObservableCollection<TabItemViewModel> TabItems
+        public CompetitionManagerViewModelBase(IEditableCompetition currentComptetition) : base(currentComptetition)
+        {
+        }
+
+        public ObservableCollection<ITabItemViewModel> TabItems
         {
             get { return _tabItems; }
             set { SetProperty(ref _tabItems, value); }

@@ -10,7 +10,7 @@ using ViewCore.Managers;
 
 namespace ViewCore
 {
-    public class CompetitionChoiceBase : BindableBase
+    public class CompetitionChoiceBase : BindableBase, ISwitchableViewModel
     {
 
         public ICompetitionChoiceManager CompetitionChoiceManager { get; set; }
@@ -18,6 +18,7 @@ namespace ViewCore
         public CompetitionChoiceBase()
         {
             _selectedCompetition = new EditableCompetition();
+            CompetitionChoiceManager = new CompetitionChoiceManager();
         }
         #region Properties
         private ObservableCollection<EditableCompetition> _competitions = new ObservableCollection<EditableCompetition>();
@@ -50,7 +51,25 @@ namespace ViewCore
             set { _isCompetitionSelected = value; }
         }
 
+
+        #endregion
+
+        #region Methods and Events
+
         public event Action CompetitionSelected = delegate { };
+
+        public void DownloadCompetitionsFromDatabaseAndDisplay()
+        {
+            CompetitionChoiceManager.DownloadDataFromDatabase();
+            Competitions = CompetitionChoiceManager.GetCompetitionsToDisplay();
+        }
+
+        public void DetachAllEvents()
+        {
+            Delegate[] clientList = CompetitionSelected.GetInvocationList();
+            foreach (var deleg in clientList)
+                CompetitionSelected -= (deleg as Action);
+        }
 
         #endregion
     }
