@@ -70,9 +70,12 @@
     <Compile Include="DataBase\Entities\ExtraPlayerInfo.cs" />
     <Compile Include="DataBase\Entities\Gate.cs" />
     <Compile Include="DataBase\Entities\GateOrderItem.cs" />
-    <Compile Include="DataBase\Entities\ICompetitionId.cs" />
-    <Compile Include="DataBase\Entities\IEntityId.cs" />
+    <Compile Include="DataBase\Entities\Interfaces\IAccountId.cs" />
+    <Compile Include="DataBase\Entities\Interfaces\ICompetitionId.cs" />
+    <Compile Include="DataBase\Entities\Interfaces\IEntityId.cs" />
+    <Compile Include="DataBase\Entities\OrganizerAccount.cs" />
     <Compile Include="DataBase\Entities\Player.cs" />
+    <Compile Include="DataBase\Entities\PlayerAccount.cs" />
     <Compile Include="DataBase\Entities\TimeRead.cs" />
     <Compile Include="DataBase\Entities\TimeReadsLogInfo.cs" />
     <Compile Include="DataBase\Entities\TimeReadType.cs" />
@@ -85,6 +88,8 @@
     <Compile Include="DataBase\Enums\SortOrderEnum.cs" />
     <Compile Include="DataBase\Repositories\GateRepository.cs" />
     <Compile Include="DataBase\Repositories\TimeReadsLogInfoRepository.cs" />
+    <Compile Include="Models\PageBindingModel.cs" />
+    <Compile Include="Models\PageViewModel.cs" />
     <Compile Include="PlayerFilter\PlayerSort.cs" />
     <Compile Include="DataBase\Contexts\NTimeDBContext.cs" />
     <Compile Include="DataBase\Contexts\NTimeDBInitializer.cs" />

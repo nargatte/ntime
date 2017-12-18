@@ -71,6 +71,9 @@ namespace BaseCore.DataBase
         public int? AgeCategoryId { get; set; }
         public virtual AgeCategory AgeCategory { get; set; }
 
+        public int? PlayerAccountId { get; set; }
+        public virtual PlayerAccount PlayerAccount { get; set; }
+
         public virtual ICollection<TimeRead> TimeReads { get; set; }
 
         public override string ToString()
