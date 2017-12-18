@@ -21,7 +21,7 @@ namespace BaseCore.DataBase
             Competition competition = null;
             await ContextProvider.DoAsync(async ctx =>
             {
-                competition = (await ctx.Set<T>().FirstOrDefaultAsync(i => i.Id == relatedEntitieId)).Competition;
+                competition = (await ctx.Set<T>().FirstOrDefaultAsync(i => i.Id == relatedEntitieId))?.Competition;
             });
             return competition;
         }
@@ -47,12 +47,13 @@ namespace BaseCore.DataBase
             return pageViewModel;
         }
 
-        public async Task<bool> CanModeratorEdit(string accountId)
+        public async Task<bool> CanModeratorEdit(string accountId, int competitionId)
         {
             bool b = false;
             await ContextProvider.DoAsync(async ctx =>
             {
-                b = await ctx.Competitions.AnyAsync(c => c.OrganizerAccounts.Any(oa => oa.AccountId == accountId));
+                b = await ctx.Competitions.Where(c => c.Id == competitionId)
+                    .AnyAsync(c => c.OrganizerAccounts.Any(oc => oc.AccountId == accountId));
             });
             return b;
         }

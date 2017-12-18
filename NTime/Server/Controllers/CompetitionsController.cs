@@ -38,7 +38,7 @@ namespace Server.Controllers
             Competition competition = await _competitionRepository.GetById(id);
             if (competition == null)
             {
-                return NotFound();
+                return null;
             }
             CompetitionDto competitionDto = new CompetitionDto(competition);
             DistanceRepository distanceRepository = new DistanceRepository(_contextProvider, competition);
@@ -50,20 +50,16 @@ namespace Server.Controllers
             return Ok(competitionDto);
         }
 
-        // PUT /api/competitions/
+        // PUT /api/competitions/1
         [Authorize(Roles = "Administrator,Moderator")]
-        public async Task<IHttpActionResult> Put(CompetitionDto competitionDto)
+        public async Task<IHttpActionResult> Put(int id, CompetitionDto competitionDto)
         {
-            Competition competition = await _competitionRepository.GetById(competitionDto.Id);
-            var user = User.Identity;
-            ApplicationDbContext context = new ApplicationDbContext();
-            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-            var s = UserManager.GetRoles(user.GetUserId());
+            Competition competition = await _competitionRepository.GetById(id);
             if (competition == null)
             {
                 return NotFound();
             }
-            if (s[0] == "Moderator" && !await _competitionRepository.CanModeratorEdit(user.GetUserId()))
+            if (! await ControllerHelper.ModeratorAcess(User, _contextProvider, id))
                 return Unauthorized();
             competitionDto.CopyDataFromDto(competition);
             await _competitionRepository.UpdateAsync(competition);
@@ -77,7 +73,7 @@ namespace Server.Controllers
             Competition competition = new Competition();
             competitionDto.CopyDataFromDto(competition);
             competition = await _competitionRepository.AddAsync(competition);
-            return Created(Url.Content("~/api/competitions/"+ competition.Id), competition);
+            return Created(Url.Content("~/api/competitions/"+ competition.Id), competitionDto);
         }
     }
 }
