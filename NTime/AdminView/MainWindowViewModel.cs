@@ -44,7 +44,7 @@ namespace AdminView
         private void NavToCompetitionManagerView()
         {
             if (_competitionChoiceViewModel != null)
-                _currentCompetition = _competitionChoiceViewModel.SelectedCompetition;
+                _currentCompetition = _competitionChoiceViewModel.CompetitionChoiceBase.SelectedCompetition;
             CurrentViewModel?.DetachAllEvents();
             _competitionManagerViewModel = new CompetitionManagerViewModel(_currentCompetition);
             CurrentViewModel = _competitionManagerViewModel;

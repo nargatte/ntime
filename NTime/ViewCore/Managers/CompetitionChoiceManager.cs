@@ -10,7 +10,7 @@ using ViewCore.Entities;
 
 namespace ViewCore.Managers
 {
-    public class CompetitionChoiceManager : BindableBase
+    public class CompetitionChoiceManager : BindableBase, ICompetitionChoiceManager
     {
         private CompetitionRepository _competitionRepository;
         private ObservableCollection<EditableCompetition> _competitions = new ObservableCollection<EditableCompetition>();
