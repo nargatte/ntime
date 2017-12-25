@@ -7,7 +7,7 @@ using BaseCore.DataBase;
 
 namespace Server.Dtos
 {
-    public class ExtraPlayerInfoDto
+    public class ExtraPlayerInfoDto : IDtoBase<ExtraPlayerInfo>
     {
         public ExtraPlayerInfoDto()
         {

@@ -9,10 +9,10 @@ namespace BaseCoreTests.DataBase
     {
         protected override Distance[] InitialItems { get; set; } =
         {
-            new Distance("Krótki", 10, new DateTime(2000, 1, 1, 16, 30, 0), DistanceTypeEnum.DeterminedLaps),
-            new Distance("Średni", 20, new DateTime(2000, 1, 1, 13, 45, 0), DistanceTypeEnum.DeterminedLaps),
-            new Distance("Długi", 30, new DateTime(2000, 1, 1, 8, 5, 0), DistanceTypeEnum.DeterminedLaps),
-            new Distance("Maraton", 40, new DateTime(2000, 1, 1, 9, 50, 0), DistanceTypeEnum.DeterminedLaps)
+            new Distance("Krótki", 10, DistanceTypeEnum.DeterminedLaps),
+            new Distance("Średni", 20, DistanceTypeEnum.DeterminedLaps),
+            new Distance("Długi", 30, DistanceTypeEnum.DeterminedLaps),
+            new Distance("Maraton", 40, DistanceTypeEnum.DeterminedLaps)
         };
 
         protected override Repository<Distance> Repository { get; set; }
@@ -28,7 +28,6 @@ namespace BaseCoreTests.DataBase
         {
             if (entity1.Name != entity2.Name) return false;
             if (entity1.Length != entity2.Length) return false;
-            if (entity1.StartTime != entity2.StartTime) return false;
             if (entity1.CompetitionId != entity2.CompetitionId) return false;
             return true;
         }

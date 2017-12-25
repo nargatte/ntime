@@ -7,116 +7,47 @@ using Server.Dtos;
 namespace Server.Controllers
 {
     [RoutePrefix("api/Distances")]
-    public class DistancesController : ApiController
+    public class DistancesController : ControllerCompetitionIdBase<DistanceRepository, Distance, DistanceDto>
     {
-        ContextProvider ContextProvider = new ContextProvider();
+        protected override DistanceRepository CreateRepository() =>
+            new DistanceRepository(ContextProvider, Competition);
+
+        protected override DistanceDto CreateDto(Distance entity) =>
+            new DistanceDto(entity);
+
+        protected override string CreatedAdress =>
+            "distances";
 
         // GET api/Distances/FromCompetition/1
         [Route("FromCompetition/{id}")]
-        public async Task<IHttpActionResult> GetFromCompetition(int id)
-        {
-            CompetitionRepository competitionRepository = new CompetitionRepository(ContextProvider);
-            Competition competition = await competitionRepository.GetById(id);
-
-            if (competition == null)
-            {
-                return NotFound();
-            }
-
-            DistanceRepository distanceRepository = new DistanceRepository(ContextProvider, competition);
-            Distance[] distances = await distanceRepository.GetAllAsync();
-            DistanceDto[] distanceDtos = distances.Select(d => new DistanceDto(d)).ToArray();
-
-            return Ok(distanceDtos);
-        }
+        public override Task<IHttpActionResult> GetFromCompetition(int id) =>
+            base.GetFromCompetition(id);
 
         // GET api/Distances/1
         [Route("{id}")]
-        public async Task<IHttpActionResult> Get(int id)
-        {
-            CompetitionRepository competitionRepository = new CompetitionRepository(ContextProvider);
-            Competition competition = await competitionRepository.GetByRelatedEntitieId<Distance>(id);
-
-            if (competition == null)
-            {
-                return NotFound();
-            }
-
-            DistanceRepository distanceRepository = new DistanceRepository(ContextProvider, competition);
-            Distance distance = await distanceRepository.GetById(id);
-            DistanceDto distanceDto = new DistanceDto(distance);
-
-            return Ok(distanceDto);
-        }
+        public override Task<IHttpActionResult> Get(int id) =>
+            base.Get(id);
 
         // PUT api/Distances/1
-        [Authorize(Roles = "Administrator,Moderator")]
+        [Authorize(Roles = "Administrator,Organizer")]
         [Route("{id}")]
-        public async Task<IHttpActionResult> Put(int id, DistanceDto distanceDto)
-        {
-            CompetitionRepository competitionRepository = new CompetitionRepository(ContextProvider);
-            Competition competition = await competitionRepository.GetByRelatedEntitieId<Distance>(id);
+        public override Task<IHttpActionResult> Put(int id, DistanceDto distanceDto) =>
+            base.Put(id, distanceDto);
 
-            if (competition == null)
-            {
-                return NotFound();
-            }
+        // POST /api/Distances/IntoCompetition/1
+        [Authorize(Roles = "Administrator,Organizer")]
+        [Route("IntoCompetition/{id}")]
+        public override Task<IHttpActionResult> PostIntoCompetition(int id, DistanceDto distanceDto) =>
+            base.PostIntoCompetition(id, distanceDto);
 
-            if (!await ControllerHelper.ModeratorAcess(User, ContextProvider, competition.Id))
-                return Unauthorized();
-
-            DistanceRepository distanceRepository = new DistanceRepository(ContextProvider, competition);
-            Distance distance = await distanceRepository.GetById(id);
-
-            distanceDto.CopyDataFromDto(distance);
-            await distanceRepository.UpdateAsync(distance);
-            return Ok();
-        }
-
-        // POST /api/Distances/forcompetition/1
-        [Authorize(Roles = "Administrator,Moderator")]
-        [Route("ForCompetition/{id}")]
-        public async Task<IHttpActionResult> PostForCompetition(int id, DistanceDto distanceDto)
-        {
-            CompetitionRepository competitionRepository = new CompetitionRepository(ContextProvider);
-            Competition competition = await competitionRepository.GetById(id);
-
-            if (competition == null)
-            {
-                return NotFound();
-            }
-
-            if (!await ControllerHelper.ModeratorAcess(User, ContextProvider, id))
-                return Unauthorized();
-
-            DistanceRepository distanceRepository = new DistanceRepository(ContextProvider, competition);
-            Distance distance = new Distance();
-
-            distanceDto.CopyDataFromDto(distance);
-            distance = await distanceRepository.AddAsync(distance);
-            return Created(Url.Content("~/api/Distances/" + distance.Id), distanceDto);
-        }
-
-        //DELETE api/Distances/1
-        [Authorize(Roles = "Administrator,Moderator")]
+        // DELETE api/Distances/1
+        [Authorize(Roles = "Administrator")]
         [Route("{id}")]
-        public async Task<IHttpActionResult> Delete(int id)
+        public override Task<IHttpActionResult> Delete(int id) =>
+            base.Delete(id);
+
+        public DistancesController() : base()
         {
-            CompetitionRepository competitionRepository = new CompetitionRepository(ContextProvider);
-            Competition competition = await competitionRepository.GetByRelatedEntitieId<Distance>(id);
-
-            if (competition == null)
-            {
-                return NotFound();
-            }
-
-            if (!await ControllerHelper.ModeratorAcess(User, ContextProvider, competition.Id))
-                return Unauthorized();
-
-            DistanceRepository distanceRepository = new DistanceRepository(ContextProvider, competition);
-            Distance distance = await distanceRepository.GetById(id);
-            await distanceRepository.RemoveAsync(distance);
-            return Ok();
         }
     }
 }

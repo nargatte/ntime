@@ -1,11 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using BaseCore.DataBase;
+using Server.Dtos;
 using Server.Models;
 
 namespace BaseCore.Dtos
 {
-    public class CompetitionDto
+    public class CompetitionDto : IDtoBase<Competition>
     {
         public CompetitionDto()
         {

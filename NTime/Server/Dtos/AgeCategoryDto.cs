@@ -7,7 +7,7 @@ using BaseCore.DataBase;
 
 namespace Server.Dtos
 {
-    public class AgeCategoryDto
+    public class AgeCategoryDto : IDtoBase<AgeCategory>
     {
         public AgeCategoryDto()
         {

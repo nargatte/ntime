@@ -36,11 +36,11 @@ namespace BaseCoreTests
 
             await dr.AddRangeAsync(new[]
             {
-                new Distance("MINI", 0, DateTime.Now, DistanceTypeEnum.DeterminedLaps) {LapsCount = 1},
-                new Distance("+RODZINNY", 0, DateTime.Now, DistanceTypeEnum.DeterminedLaps) {LapsCount = 2},
-                new Distance("MEGA", 0, DateTime.Now, DistanceTypeEnum.DeterminedLaps) {LapsCount = 2},
-                new Distance("RODZINNY", 0, DateTime.Now, DistanceTypeEnum.DeterminedLaps) {LapsCount = 1},
-                new Distance("GIGA", 0, DateTime.Now, DistanceTypeEnum.DeterminedDistance) {LapsCount = 3}
+                new Distance("MINI", 0, DistanceTypeEnum.DeterminedLaps) {LapsCount = 1},
+                new Distance("+RODZINNY", 0, DistanceTypeEnum.DeterminedLaps) {LapsCount = 2},
+                new Distance("MEGA", 0, DistanceTypeEnum.DeterminedLaps) {LapsCount = 2},
+                new Distance("RODZINNY", 0, DistanceTypeEnum.DeterminedLaps) {LapsCount = 1},
+                new Distance("GIGA", 0, DistanceTypeEnum.DeterminedDistance) {LapsCount = 3}
             });
 
             await akr.AddRangeAsync(new[]
@@ -139,10 +139,10 @@ namespace BaseCoreTests
             //await timeProcess.ProcessSingleAsync(p);
             //await timeProcess.ProcessAllAsync();
 
-            await pr.ImportTimeReadsFromSourcesAsync();
+            //await pr.ImportTimeReadsFromSourcesAsync();
 
-            await pr.UpdateFullCategoryAllAsync();
-            await pr.UpdateRankingAllAsync();
+            //await pr.UpdateFullCategoryAllAsync();
+            //await pr.UpdateRankingAllAsync();
 
             p.Distance = darr.FirstOrDefault(d => d.Name == "GIGA");
             await pr.UpdateAsync(p, p.Distance, p.ExtraPlayerInfo);

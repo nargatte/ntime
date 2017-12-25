@@ -10,20 +10,16 @@ using Server.Models;
 
 namespace Server.Controllers
 {
-    public class CompetitionsController : ApiController
+    public class CompetitionsController : ControllerNTimeBase
     {
-        private readonly ContextProvider _contextProvider = new ContextProvider();
-        private readonly CompetitionRepository _competitionRepository;
-
-        public CompetitionsController()
+        protected CompetitionsController() : base()
         {
-            _competitionRepository =  new CompetitionRepository(_contextProvider);
         }
 
         // GET /api/competitions?ItemsOnPage=10&PageNumber=0
         public async Task<PageViewModel<CompetitionDto>> Get([FromUri]PageBindingModel pageBindingModel)
         {
-            PageViewModel<Competition> pageViewModel = await _competitionRepository.GetAllAsync(pageBindingModel);
+            PageViewModel<Competition> pageViewModel = await CompetitionRepository.GetAllAsync(pageBindingModel);
             PageViewModel<CompetitionDto> pageViewModelDto = new PageViewModel<CompetitionDto>
             {
                 TotalCount = pageViewModel.TotalCount,
@@ -35,14 +31,13 @@ namespace Server.Controllers
         // GET /api/competitions/1
         public async Task<IHttpActionResult> Get(int id)
         {
-            Competition competition = await _competitionRepository.GetById(id);
-            if (competition == null)
+            if (await InitComprtitionById(id) == false)
             {
-                return null;
+                return NotFound();
             }
-            CompetitionDto competitionDto = new CompetitionDto(competition);
-            DistanceRepository distanceRepository = new DistanceRepository(_contextProvider, competition);
-            ExtraPlayerInfoRepository extraPlayerInfoRepository = new ExtraPlayerInfoRepository(_contextProvider, competition);
+            CompetitionDto competitionDto = new CompetitionDto(Competition);
+            DistanceRepository distanceRepository = new DistanceRepository(ContextProvider, Competition);
+            ExtraPlayerInfoRepository extraPlayerInfoRepository = new ExtraPlayerInfoRepository(ContextProvider, Competition);
             competitionDto.Distances = (await distanceRepository.GetAllAsync())
                 .Select(d => new NameIdModel(d.Id, d.Name)).ToArray();
             competitionDto.ExtraPlayerInfo = (await extraPlayerInfoRepository.GetAllAsync())
@@ -54,15 +49,14 @@ namespace Server.Controllers
         [Authorize(Roles = "Administrator,Moderator")]
         public async Task<IHttpActionResult> Put(int id, CompetitionDto competitionDto)
         {
-            Competition competition = await _competitionRepository.GetById(id);
-            if (competition == null)
-            {
+            if (await InitComprtitionById(id) == false)
                 return NotFound();
-            }
-            if (! await ControllerHelper.ModeratorAcess(User, _contextProvider, id))
+
+            if (await CanOrganizerAcess() == false)
                 return Unauthorized();
-            competitionDto.CopyDataFromDto(competition);
-            await _competitionRepository.UpdateAsync(competition);
+
+            competitionDto.CopyDataFromDto(Competition);
+            await CompetitionRepository.UpdateAsync(Competition);
             return Ok();
         }
 
@@ -72,7 +66,8 @@ namespace Server.Controllers
         {
             Competition competition = new Competition();
             competitionDto.CopyDataFromDto(competition);
-            competition = await _competitionRepository.AddAsync(competition);
+            competition = await CompetitionRepository.AddAsync(competition);
+            competitionDto.Id = competition.Id;
             return Created(Url.Content("~/api/competitions/"+ competition.Id), competitionDto);
         }
     }

@@ -13,7 +13,7 @@ namespace BaseCore.DataBase
 
         protected bool Equals(Distance other)
         {
-            return Id == other.Id && string.Equals(Name, other.Name) && Length == other.Length && StartTime.Equals(other.StartTime) && DistanceTypeId == other.DistanceTypeId && LapsCount == other.LapsCount && TimeLimit == other.TimeLimit;
+            return Id == other.Id && string.Equals(Name, other.Name) && Length == other.Length && DistanceTypeId == other.DistanceTypeId && LapsCount == other.LapsCount && TimeLimit == other.TimeLimit && CompetitionId == other.CompetitionId;
         }
 
         public override bool Equals(object obj)
@@ -31,19 +31,18 @@ namespace BaseCore.DataBase
                 var hashCode = Id;
                 hashCode = (hashCode * 397) ^ (Name != null ? Name.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ Length.GetHashCode();
-                hashCode = (hashCode * 397) ^ StartTime.GetHashCode();
                 hashCode = (hashCode * 397) ^ DistanceTypeId;
                 hashCode = (hashCode * 397) ^ LapsCount;
                 hashCode = (hashCode * 397) ^ TimeLimit.GetHashCode();
+                hashCode = (hashCode * 397) ^ CompetitionId;
                 return hashCode;
             }
         }
 
-        public Distance(string name, decimal length, DateTime startTime, DistanceTypeEnum distanceTypeEnum)
+        public Distance(string name, decimal length, DistanceTypeEnum distanceTypeEnum)
         {
             Name = name;
             Length = length;
-            StartTime = startTime;
             DistanceTypeEnum = distanceTypeEnum;
         }
 
@@ -53,8 +52,6 @@ namespace BaseCore.DataBase
         public string Name { get; set; }
 
         public decimal Length { get; set; }
-
-        public DateTime StartTime { get; set; }
 
         public int DistanceTypeId { get; set; }
         public virtual DistanceType DistanceType { get; set; }

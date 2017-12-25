@@ -7,7 +7,7 @@ using BaseCore.DataBase;
 
 namespace Server.Dtos
 {
-    public class PlayerDto
+    public class PlayerDto : IDtoBase<Player>
     {
         public PlayerDto()
         {

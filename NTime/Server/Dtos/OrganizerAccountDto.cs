@@ -7,7 +7,7 @@ using BaseCore.DataBase;
 
 namespace Server.Dtos
 {
-    public class OrganizerAccountDto
+    public class OrganizerAccountDto : IDtoBase<OrganizerAccount>
     {
         public OrganizerAccountDto()
         {

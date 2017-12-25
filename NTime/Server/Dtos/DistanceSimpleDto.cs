@@ -7,7 +7,7 @@ using BaseCore.DataBase;
 
 namespace Server.Dtos
 {
-    public class DistanceSimpleDto
+    public class DistanceSimpleDto : IDtoBase<Distance>
     {
         public DistanceSimpleDto()
         {

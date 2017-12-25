@@ -47,7 +47,7 @@ namespace BaseCore.DataBase
             return pageViewModel;
         }
 
-        public async Task<bool> CanModeratorEdit(string accountId, int competitionId)
+        public async Task<bool> CanOrganizerEdit(string accountId, int competitionId)
         {
             bool b = false;
             await ContextProvider.DoAsync(async ctx =>
