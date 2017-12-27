@@ -71,6 +71,7 @@
     <Compile Include="DataBase\Entities\Gate.cs" />
     <Compile Include="DataBase\Entities\GateOrderItem.cs" />
     <Compile Include="DataBase\Entities\Interfaces\IAccountId.cs" />
+    <Compile Include="DataBase\Entities\Interfaces\IFullName.cs" />
     <Compile Include="DataBase\Entities\Interfaces\ICompetitionId.cs" />
     <Compile Include="DataBase\Entities\Interfaces\IEntityId.cs" />
     <Compile Include="DataBase\Entities\OrganizerAccount.cs" />
@@ -87,6 +88,9 @@
     <Compile Include="DataBase\Enums\SexEnum.cs" />
     <Compile Include="DataBase\Enums\SortOrderEnum.cs" />
     <Compile Include="DataBase\Repositories\GateRepository.cs" />
+    <Compile Include="DataBase\Repositories\OrganizerAccountRepository.cs" />
+    <Compile Include="DataBase\Repositories\PlayerAccountRepository.cs" />
+    <Compile Include="DataBase\Repositories\RepositoryAccountBase.cs" />
     <Compile Include="DataBase\Repositories\TimeReadsLogInfoRepository.cs" />
     <Compile Include="Models\PageBindingModel.cs" />
     <Compile Include="Models\PageViewModel.cs" />

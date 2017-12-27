@@ -48,9 +48,9 @@ namespace Server.Dtos
         public string LastName { get; set; }
 
         [Required]
-        public DateTime BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
 
-        public bool IsMale { get; set; }
+        public bool? IsMale { get; set; }
 
         [StringLength(255)]
         public string Team { get; set; }

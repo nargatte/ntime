@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BaseCore.DataBase
 {
-    public class OrganizerAccount : IEntityId, IAccountId
+    public class OrganizerAccount : IEntityId, IAccountId, IFullName
     {
         public int Id { get; set; }
 

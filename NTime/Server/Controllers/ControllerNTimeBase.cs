@@ -37,13 +37,13 @@ namespace Server.Controllers
             return true;
         }
 
-        protected async Task<bool> CanOrganizerAcess()
+        protected async Task<bool> CanOrganizerAccess()
         {
             ApplicationDbContext context = new ApplicationDbContext();
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             var s = UserManager.GetRoles(User.Identity.GetUserId());
             if (s[0] == "Organizer" &&
-                !await CompetitionRepository.CanOrganizerEdit(User.Identity.GetUserId(), Competition.Id))
+                !await CompetitionRepository.CanOrganizerEdit(User.Identity.GetUserId(), Competition))
                 return false;
             return true;
         }

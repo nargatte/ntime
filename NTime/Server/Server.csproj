@@ -235,6 +235,7 @@
     <Compile Include="Controllers\DistancesController.cs" />
     <Compile Include="Controllers\ExtraPlayerInfoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PlayerAccountController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Dtos\AgeCategoryDto.cs" />
     <Compile Include="Dtos\CompetitionDto.cs" />

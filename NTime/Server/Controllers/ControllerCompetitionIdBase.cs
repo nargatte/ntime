@@ -66,7 +66,7 @@ namespace Server.Controllers
             if (await InitCompetytionByRelatedEntitieId<Te>(id) == false)
                 return NotFound();
 
-            if (await CanOrganizerAcess() == false)
+            if (await CanOrganizerAccess() == false)
                 return Unauthorized();
 
             Te entity = await Repository.GetById(id);
@@ -82,7 +82,7 @@ namespace Server.Controllers
             if (await InitComprtitionById(id) == false)
                 return NotFound();
 
-            if (await CanOrganizerAcess() == false)
+            if (await CanOrganizerAccess() == false)
                 return Unauthorized();
 
             Te entity = new Te();
@@ -99,7 +99,7 @@ namespace Server.Controllers
             if (await InitCompetytionByRelatedEntitieId<Te>(id) == false)
                 return NotFound();
 
-            if (await CanOrganizerAcess() == false)
+            if (await CanOrganizerAccess() == false)
                 return Unauthorized();
 
             Te entity = await Repository.GetById(id);

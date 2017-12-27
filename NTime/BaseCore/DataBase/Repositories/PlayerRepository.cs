@@ -523,5 +523,15 @@ namespace BaseCore.DataBase
             }
             //await Task.WhenAll(tasks);
         }
+
+        public async Task<bool> CanPlayerEdit(string accountId, Player player)
+        {
+            bool b = false;
+            await ContextProvider.DoAsync(async ctx =>
+            {
+                b = await ctx.Players.Where(p => p.Id == player.Id).AllAsync(p => p.PlayerAccountId != null && p.PlayerAccount.AccountId == accountId);
+            });
+            return b;
+        }
     }
 }

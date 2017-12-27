@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
+using BaseCore.DataBase;
+using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -336,6 +338,14 @@ namespace Server.Controllers
             {
                 return GetErrorResult(result);
             }
+
+            await UserManager.AddToRoleAsync(user.Id, "Player");
+
+            PlayerAccountRepository accountRepository = new PlayerAccountRepository(new ContextProvider());
+            PlayerAccount playerAccount = new PlayerAccount();
+            playerAccount.EMail = model.Email;
+            playerAccount.AccountId = user.Id;
+            await accountRepository.AddAsync(playerAccount);
 
             return Ok();
         }

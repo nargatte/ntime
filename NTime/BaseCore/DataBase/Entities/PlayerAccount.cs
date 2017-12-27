@@ -4,20 +4,19 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BaseCore.DataBase
 {
-    public class PlayerAccount : IEntityId, IAccountId
+    public class PlayerAccount : IEntityId, IAccountId, IFullName
     {
         public int Id { get; set; }
 
-        [StringLength(255), Required]
+        [StringLength(255)]
         public string FirstName { get; set; }
 
-        [StringLength(255), Required]
+        [StringLength(255)]
         public string LastName { get; set; }
 
-        [Required]
-        public DateTime BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
 
-        public bool IsMale { get; set; }
+        public bool? IsMale { get; set; }
 
         [StringLength(255)]
         public string Team { get; set; }

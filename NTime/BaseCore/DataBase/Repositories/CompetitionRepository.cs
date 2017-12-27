@@ -36,24 +36,13 @@ namespace BaseCore.DataBase
             return competitions;
         }
 
-        public async Task<PageViewModel<Competition>> GetByAccountId(string accountId, PageBindingModel pageBindingModel)
-        {
-            PageViewModel<Competition> pageViewModel = new PageViewModel<Competition>();
-            await ContextProvider.DoAsync(async ctx =>
-            {
-                pageViewModel.Items = await GetSortQuery(ctx.Set<Competition>().Where(c => c.Players.Any(p => p.PlayerAccount.AccountId == accountId))).Skip(pageBindingModel.ItemsOnPage * pageBindingModel.PageNumber).Take(pageBindingModel.ItemsOnPage).AsNoTracking<Competition>().ToArrayAsync();
-                pageViewModel.TotalCount = await ctx.Set<Competition>().Where(c => c.Players.Any(p => p.PlayerAccount.AccountId == accountId)).CountAsync();
-            });
-            return pageViewModel;
-        }
-
-        public async Task<bool> CanOrganizerEdit(string accountId, int competitionId)
+        public async Task<bool> CanOrganizerEdit(string accountId, Competition competition)
         {
             bool b = false;
             await ContextProvider.DoAsync(async ctx =>
             {
-                b = await ctx.Competitions.Where(c => c.Id == competitionId)
-                    .AnyAsync(c => c.OrganizerAccounts.Any(oc => oc.AccountId == accountId));
+                b = await ctx.Competitions.Where(c => c.Id == competition.Id)
+                    .AllAsync(c => c.OrganizerAccounts.Any(oc => oc.AccountId == accountId));
             });
             return b;
         }

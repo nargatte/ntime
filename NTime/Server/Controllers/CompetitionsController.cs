@@ -46,13 +46,13 @@ namespace Server.Controllers
         }
 
         // PUT /api/competitions/1
-        [Authorize(Roles = "Administrator,Moderator")]
+        [Authorize(Roles = "Administrator,Organizer")]
         public async Task<IHttpActionResult> Put(int id, CompetitionDto competitionDto)
         {
             if (await InitComprtitionById(id) == false)
                 return NotFound();
 
-            if (await CanOrganizerAcess() == false)
+            if (await CanOrganizerAccess() == false)
                 return Unauthorized();
 
             competitionDto.CopyDataFromDto(Competition);
