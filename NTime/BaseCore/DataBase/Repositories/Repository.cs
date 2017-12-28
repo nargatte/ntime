@@ -117,12 +117,16 @@ namespace BaseCore.DataBase
             return items;
         }
 
-        public async Task<PageViewModel<T>> GetAllAsync(PageBindingModel pageBindingModel)
+        public Task<PageViewModel<T>> GetAllAsync(PageBindingModel pageBindingModel) =>
+            PageTemplate<T>(pageBindingModel, e => GetIncludeQuery(GetSortQuery(GetAllQuery(e))));
+
+        protected async Task<PageViewModel<TL>> PageTemplate<TL>(PageBindingModel bindingModel, Func<IQueryable<TL>, IQueryable<TL>> filters)
+            where TL: class
         {
-            PageViewModel<T> pageViewModel = new PageViewModel<T>();
+            PageViewModel<TL> pageViewModel = new PageViewModel<TL>();
             await ContextProvider.DoAsync(async ctx =>
             {
-                pageViewModel.Items = await GetIncludeQuery(GetSortQuery(GetAllQuery(ctx.Set<T>()))).Skip(pageBindingModel.ItemsOnPage * pageBindingModel.PageNumber).Take(pageBindingModel.ItemsOnPage).AsNoTracking<T>().ToArrayAsync();
+                pageViewModel.Items = await filters(ctx.Set<TL>()).Skip(bindingModel.ItemsOnPage * bindingModel.PageNumber).Take(bindingModel.ItemsOnPage).AsNoTracking<TL>().ToArrayAsync();
                 pageViewModel.TotalCount = await GetAllQuery(ctx.Set<T>()).CountAsync();
             });
             return pageViewModel;

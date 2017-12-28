@@ -20,5 +20,41 @@ namespace BaseCore.DataBase
             });
             return organizerAccounts;
         }
+
+        public Task SetCompetiton(OrganizerAccount account, Competition competition) =>
+            ContextProvider.DoAsync(async ctx =>
+            {
+                bool b = await ctx.OrganizerAccounts.Where(o => o.AccountId == account.AccountId).AllAsync(o => o.Competitions.Any(c => c.Id == competition.Id));
+                if (!b)
+                {
+                    OrganizerAccount ac =
+                        await ctx.OrganizerAccounts.FirstOrDefaultAsync(o => o.AccountId == account.AccountId);
+
+                    Competition co =
+                        await ctx.Competitions.FirstOrDefaultAsync(c => c.Id == competition.Id);
+
+                    ac.Competitions.Add(co);
+
+                    await ctx.SaveChangesAsync();
+                }
+            });
+
+        public Task UnsetCompetiton(OrganizerAccount account, Competition competition) =>
+            ContextProvider.DoAsync(async ctx =>
+            {
+                bool b = await ctx.OrganizerAccounts.Where(o => o.AccountId == account.AccountId).AllAsync(o => o.Competitions.Any(c => c.Id == competition.Id));
+                if (b)
+                {
+                    OrganizerAccount ac =
+                        await ctx.OrganizerAccounts.FirstOrDefaultAsync(o => o.AccountId == account.AccountId);
+
+                    Competition co =
+                        await ctx.Competitions.FirstOrDefaultAsync(c => c.Id == competition.Id);
+
+                    ac.Competitions.Remove(co);
+
+                    await ctx.SaveChangesAsync();
+                }
+            });
     }
 }

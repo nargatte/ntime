@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using BaseCore.DataBase;
 
@@ -26,12 +27,15 @@ namespace Server.Dtos
             StartTime = player.StartTime;
             IsStartTimeFromReader = player.IsStartTimeFromReader;
             FullCategory = player.FullCategory;
-            PhoneNumber = player.PhoneNumber;
             LapsCount = player.LapsCount;
             Time = player.Time;
             DistancePlaceNumber = player.DistancePlaceNumber;
             CategoryPlaceNumber = player.CategoryPlaceNumber;
             CompetitionCompleted = player.CompetitionCompleted;
+            ExtraPlayerInfoId = player.ExtraPlayerInfoId;
+            DistanceId = player.DistanceId;
+            AgeCategoryId = player.AgeCategoryId;
+            PlayerAccountId = player.PlayerAccountId;
         }
 
         public Player CopyDataFromDto(Player player)
@@ -46,12 +50,33 @@ namespace Server.Dtos
             player.StartTime = StartTime;
             player.IsStartTimeFromReader = IsStartTimeFromReader;
             player.FullCategory = FullCategory;
-            player.PhoneNumber = PhoneNumber;
             player.LapsCount = LapsCount;
             player.Time = Time;
             player.DistancePlaceNumber = DistancePlaceNumber;
             player.CategoryPlaceNumber = CategoryPlaceNumber;
             player.CompetitionCompleted = CompetitionCompleted;
+            player.ExtraPlayerInfoId = ExtraPlayerInfoId;
+            player.DistanceId = DistanceId;
+            player.AgeCategoryId = AgeCategoryId;
+            player.PlayerAccountId = PlayerAccountId;
+            return player;
+        }
+
+        public async Task<Player> CopyDataFromDto(Player player, IContextProvider contextProvider, Competition competition)
+        {
+            ExtraPlayerInfoRepository extraPlayerInfoRepository = new ExtraPlayerInfoRepository(contextProvider, competition);
+            DistanceRepository distanceRepository = new DistanceRepository(contextProvider, competition);
+
+            CopyDataFromDto(player);
+
+            if(ExtraPlayerInfoId != null)
+                player.ExtraPlayerInfo = await extraPlayerInfoRepository.GetById(ExtraPlayerInfoId.Value);
+
+            if(DistanceId != null)
+                player.Distance = await distanceRepository.GetById(DistanceId.Value);
+
+
+
             return player;
         }
 
@@ -81,9 +106,6 @@ namespace Server.Dtos
         [StringLength(255)]
         public string FullCategory { get; set; }
 
-        [Phone]
-        public string PhoneNumber { get; set; }
-
         public int LapsCount { get; set; }
 
         public decimal Time { get; set; }
@@ -94,5 +116,12 @@ namespace Server.Dtos
 
         public bool CompetitionCompleted { get; set; }
 
+        public int? ExtraPlayerInfoId { get; set; }
+
+        public int? DistanceId { get; set; }
+
+        public int? AgeCategoryId { get; set; }
+
+        public int? PlayerAccountId { get; set; }
     }
 }

@@ -19,12 +19,10 @@ namespace BaseCore.DataBase
         {
             if (query == null)
                 return await GetAllAsync(pageBindingModel);
-            PageViewModel<T> pageViewModel = new PageViewModel<T>();
-            await ContextProvider.DoAsync(async ctx =>
-            {
-                pageViewModel.Items = await GetSortQuery(ctx.Set<T>().Where(e => e.FirstName.StartsWith(query) || e.LastName.StartsWith(query))).Skip(pageBindingModel.ItemsOnPage * pageBindingModel.PageNumber).Take(pageBindingModel.ItemsOnPage).AsNoTracking<T>().ToArrayAsync();
-                pageViewModel.TotalCount = await GetAllQuery(ctx.Set<T>()).CountAsync();
-            });
+
+            PageViewModel<T> pageViewModel = await PageTemplate<T>(pageBindingModel,
+                e => GetSortQuery(e.Where(a => a.FirstName.StartsWith(query) || a.LastName.StartsWith(query))));
+
             return pageViewModel;
         }
 

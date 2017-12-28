@@ -21,17 +21,17 @@ namespace Server.Controllers
         {
         }
 
-        protected override async Task<bool> InitCompetytionByRelatedEntitieId<T>(int id)
+        protected override async Task<bool> InitCompetitionByRelatedEntitieId<T>(int id)
         {
-            if (await base.InitCompetytionByRelatedEntitieId<T>(id) == false)
+            if (await base.InitCompetitionByRelatedEntitieId<T>(id) == false)
                 return false;
             Repository = CreateRepository();
             return true;
         }
 
-        protected override async Task<bool> InitComprtitionById(int Id)
+        protected override async Task<bool> InitCompetitionById(int Id)
         {
-            if (await base.InitComprtitionById(Id) == false)
+            if (await base.InitCompetitionById(Id) == false)
                 return false;
             Repository = CreateRepository();
             return true;
@@ -39,7 +39,7 @@ namespace Server.Controllers
 
         public virtual async Task<IHttpActionResult> GetFromCompetition(int id)
         {
-            if (await InitComprtitionById(id) == false)
+            if (await InitCompetitionById(id) == false)
             {
                 return NotFound();
             }
@@ -52,7 +52,7 @@ namespace Server.Controllers
 
         public virtual async Task<IHttpActionResult> Get(int id)
         {
-            if (await InitCompetytionByRelatedEntitieId<Te>(id) == false)
+            if (await InitCompetitionByRelatedEntitieId<Te>(id) == false)
                 return NotFound();
 
             Te entity = await Repository.GetById(id);
@@ -63,7 +63,9 @@ namespace Server.Controllers
 
         public virtual async Task<IHttpActionResult> Put(int id, Td entityDto)
         {
-            if (await InitCompetytionByRelatedEntitieId<Te>(id) == false)
+            entityDto.Id = id;
+
+            if (await InitCompetitionByRelatedEntitieId<Te>(id) == false)
                 return NotFound();
 
             if (await CanOrganizerAccess() == false)
@@ -79,7 +81,7 @@ namespace Server.Controllers
 
         public virtual async Task<IHttpActionResult> PostIntoCompetition(int id, Td entityDto)
         {
-            if (await InitComprtitionById(id) == false)
+            if (await InitCompetitionById(id) == false)
                 return NotFound();
 
             if (await CanOrganizerAccess() == false)
@@ -96,7 +98,7 @@ namespace Server.Controllers
 
         public virtual async Task<IHttpActionResult> Delete(int id)
         {
-            if (await InitCompetytionByRelatedEntitieId<Te>(id) == false)
+            if (await InitCompetitionByRelatedEntitieId<Te>(id) == false)
                 return NotFound();
 
             if (await CanOrganizerAccess() == false)

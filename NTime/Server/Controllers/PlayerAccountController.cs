@@ -21,17 +21,6 @@ namespace Server.Controllers
             _playerAccountRepository = new PlayerAccountRepository(ContextProvider);
         }
 
-        private bool CanPlayerAccess(PlayerAccount playerAccount)
-        {
-            ApplicationDbContext context = new ApplicationDbContext();
-            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-            var s = UserManager.GetRoles(User.Identity.GetUserId());
-            if (s[0] == "Player" &&
-                playerAccount.AccountId != User.Identity.GetUserId())
-                return false;
-            return true;
-        }
-
         // GET api/PlayerAccount/Search/Ada?ItemsOnPage=10&PageNumber=0
         // GET api/PlayerAccount/Search?ItemsOnPage=10&PageNumber=0
         [Route("Search/{query?}")]
@@ -61,7 +50,7 @@ namespace Server.Controllers
         }
 
         // GET api/PlayerAccount/1
-        [Route("{id}")]
+        [Route("{id:int:min(1)}")]
         [Authorize(Roles = "Administrator,Player")]
         public async Task<IHttpActionResult> Get(int id)
         {
@@ -77,15 +66,15 @@ namespace Server.Controllers
         }
 
         // GET api/PlayerAccount/FromCompetition/1?ItemsOnPage=10&PageNumber=0
-        [Route("FromCompetition/{id}")]
+        [Route("FromCompetition/{id:int:min(1)}")]
         [Authorize(Roles = "Administrator")]
         public async Task<IHttpActionResult> GetFromCompetition([FromUri] PageBindingModel pageBindingModel, int id)
         {
-            if (await InitComprtitionById(id) == false)
+            if (await InitCompetitionById(id) == false)
                 return NotFound();
 
             PageViewModel<PlayerAccount> viewModel =
-                await _playerAccountRepository.GetOrganizersByCompetition(Competition, pageBindingModel);
+                await _playerAccountRepository.GetPlayersAccountsByCompetition(Competition, pageBindingModel);
             PageViewModel<PlayerAccountDto> viewModelDto = new PageViewModel<PlayerAccountDto>
             {
                 Items = viewModel.Items.Select(pa => new PlayerAccountDto(pa)).ToArray(),
@@ -95,10 +84,12 @@ namespace Server.Controllers
         }
 
         // PUT api/PlayerAccount/1
-        [Route("{id}")]
+        [Route("{id:int:min(1)}")]
         [Authorize(Roles = "Administrator,Player")]
         public async Task<IHttpActionResult> Put(int id, PlayerAccountDto accountDto)
         {
+            accountDto.Id = id;
+
             PlayerAccount playerAccount = await _playerAccountRepository.GetById(id);
 
             if (playerAccount == null)

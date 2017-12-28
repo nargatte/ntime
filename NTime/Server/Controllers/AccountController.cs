@@ -62,9 +62,11 @@ namespace Server.Controllers
 
             return new UserInfoViewModel
             {
+                Id = User.Identity.GetUserId(),
                 Email = User.Identity.GetUserName(),
-                HasRegistered = externalLogin == null,
-                LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
+                //HasRegistered = externalLogin == null,
+                //LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null,
+                Status = _userManager.GetRoles(User.Identity.GetUserId())[0]
             };
         }
 

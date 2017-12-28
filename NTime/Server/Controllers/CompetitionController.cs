@@ -10,13 +10,13 @@ using Server.Models;
 
 namespace Server.Controllers
 {
-    public class CompetitionsController : ControllerNTimeBase
+    public class CompetitionController : ControllerNTimeBase
     {
-        protected CompetitionsController() : base()
+        protected CompetitionController() : base()
         {
         }
 
-        // GET /api/competitions?ItemsOnPage=10&PageNumber=0
+        // GET /api/Competition?ItemsOnPage=10&PageNumber=0
         public async Task<PageViewModel<CompetitionDto>> Get([FromUri]PageBindingModel pageBindingModel)
         {
             PageViewModel<Competition> pageViewModel = await CompetitionRepository.GetAllAsync(pageBindingModel);
@@ -28,10 +28,11 @@ namespace Server.Controllers
             return pageViewModelDto;
         }
 
-        // GET /api/competitions/1
+        // GET /api/Competition/1
+        [Route("{id:int:min(1)}")]
         public async Task<IHttpActionResult> Get(int id)
         {
-            if (await InitComprtitionById(id) == false)
+            if (await InitCompetitionById(id) == false)
             {
                 return NotFound();
             }
@@ -45,11 +46,14 @@ namespace Server.Controllers
             return Ok(competitionDto);
         }
 
-        // PUT /api/competitions/1
+        // PUT /api/Competition/1
         [Authorize(Roles = "Administrator,Organizer")]
+        [Route("{id:int:min(1)}")]
         public async Task<IHttpActionResult> Put(int id, CompetitionDto competitionDto)
         {
-            if (await InitComprtitionById(id) == false)
+            competitionDto.Id = id;
+
+            if (await InitCompetitionById(id) == false)
                 return NotFound();
 
             if (await CanOrganizerAccess() == false)
@@ -60,7 +64,7 @@ namespace Server.Controllers
             return Ok();
         }
 
-        // POST /api/competitions/
+        // POST /api/Competition/
         [Authorize(Roles = "Administrator")]
         public async Task<IHttpActionResult> Post(CompetitionDto competitionDto)
         {
@@ -68,7 +72,7 @@ namespace Server.Controllers
             competitionDto.CopyDataFromDto(competition);
             competition = await CompetitionRepository.AddAsync(competition);
             competitionDto.Id = competition.Id;
-            return Created(Url.Content("~/api/competitions/"+ competition.Id), competitionDto);
+            return Created(Url.Content("~/api/Competition/"+ competition.Id), competitionDto);
         }
     }
 }

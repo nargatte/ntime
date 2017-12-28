@@ -1,4 +1,6 @@
-﻿using System.Security.Principal;
+﻿using System;
+using System.Linq;
+using System.Security.Principal;
 using System.Threading.Tasks;
 using System.Web.Http;
 using BaseCore.DataBase;
@@ -20,7 +22,7 @@ namespace Server.Controllers
             CompetitionRepository = new CompetitionRepository(ContextProvider);
         }
 
-        protected virtual async Task<bool> InitCompetytionByRelatedEntitieId<T>(int id)
+        protected virtual async Task<bool> InitCompetitionByRelatedEntitieId<T>(int id)
             where T: class, ICompetitionId, IEntityId
         {
             Competition = await CompetitionRepository.GetByRelatedEntitieId<T>(id);
@@ -29,7 +31,7 @@ namespace Server.Controllers
             return true;
         }
 
-        protected virtual async Task<bool> InitComprtitionById(int Id)
+        protected virtual async Task<bool> InitCompetitionById(int Id)
         {
             Competition = await CompetitionRepository.GetById(Id);
             if (Competition == null)
@@ -46,6 +48,35 @@ namespace Server.Controllers
                 !await CompetitionRepository.CanOrganizerEdit(User.Identity.GetUserId(), Competition))
                 return false;
             return true;
+        }
+
+        protected bool CanPlayerAccess(PlayerAccount playerAccount)
+        {
+            ApplicationDbContext context = new ApplicationDbContext();
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            var s = UserManager.GetRoles(User.Identity.GetUserId());
+            if (s[0] == "Player" &&
+                playerAccount.AccountId != User.Identity.GetUserId())
+                return false;
+            return true;
+        }
+
+        protected bool AmI(string who)
+        {
+            ApplicationDbContext context = new ApplicationDbContext();
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            var s = UserManager.GetRoles(User.Identity.GetUserId());
+            if (s[0] != who)
+                return false;
+            return true;
+        }
+
+        public static string PasswordGenerator()
+        {
+            Random random = new Random();
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
+            return new string(Enumerable.Repeat(chars, 6)
+                .Select(s => s[random.Next(s.Length)]).ToArray()) + "a0";
         }
     }
 }

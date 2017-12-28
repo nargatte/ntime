@@ -46,9 +46,6 @@ namespace BaseCore.DataBase
         [StringLength(255)]
         public string FullCategory { get; set; }
 
-        [Phone]
-        public string PhoneNumber { get; set; }
-
         public int LapsCount { get; set; }
 
         public decimal Time { get; set; }

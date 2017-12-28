@@ -6,8 +6,8 @@ using Server.Dtos;
 
 namespace Server.Controllers
 {
-    [RoutePrefix("api/AgeCategories")]
-    public class AgeCategoriesController : ControllerCompetitionIdBase<AgeCategoryRepository, AgeCategory, AgeCategoryDto>
+    [RoutePrefix("api/AgeCategory")]
+    public class AgeCategoryController : ControllerCompetitionIdBase<AgeCategoryRepository, AgeCategory, AgeCategoryDto>
     {
 
         protected override AgeCategoryRepository CreateRepository() =>
@@ -17,37 +17,37 @@ namespace Server.Controllers
             new AgeCategoryDto(entity);
 
         protected override string CreatedAdress =>
-            "agecategories";
+            "AgeCategory";
 
-        // GET api/AgeCategories/FromCompetition/1
-        [Route("FromCompetition/{id}")]
+        // GET api/AgeCategory/FromCompetition/1
+        [Route("FromCompetition/{id:int:min(1)}")]
         public override Task<IHttpActionResult> GetFromCompetition(int id) =>
             base.GetFromCompetition(id);
 
-        // GET api/AgeCategories/1
-        [Route("{id}")]
+        // GET api/AgeCategory/1
+        [Route("{id:int:min(1)}")]
         public override Task<IHttpActionResult> Get(int id) =>
             base.Get(id);
 
-        // PUT api/AgeCategories/1
+        // PUT api/AgeCategory/1
         [Authorize(Roles = "Administrator,Organizer")]
-        [Route("{id}")]
+        [Route("{id:int:min(1)}")]
         public override Task<IHttpActionResult> Put(int id, AgeCategoryDto ageCategoryDto) =>
             base.Put(id, ageCategoryDto);
 
-        // POST /api/AgeCategories/IntoCompetition/1
+        // POST /api/AgeCategory/IntoCompetition/1
         [Authorize(Roles = "Administrator,Organizer")]
-        [Route("IntoCompetition/{id}")]
+        [Route("IntoCompetition/{id:int:min(1)}")]
         public override Task<IHttpActionResult> PostIntoCompetition(int id, AgeCategoryDto ageCategoryDto) =>
             base.PostIntoCompetition(id, ageCategoryDto);
 
-        // DELETE api/AgeCategories/1
+        // DELETE api/AgeCategory/1
         [Authorize(Roles = "Administrator")]
-        [Route("{id}")]
+        [Route("{id:int:min(1)}")]
         public override Task<IHttpActionResult> Delete(int id) =>
             base.Delete(id);
 
-        public AgeCategoriesController() : base()
+        public AgeCategoryController() : base()
         {
         }
     }

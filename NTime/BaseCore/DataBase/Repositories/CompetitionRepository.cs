@@ -46,5 +46,17 @@ namespace BaseCore.DataBase
             });
             return b;
         }
+
+        public async Task<Competition[]> GetCompetitionsByOrganizer(string accountId)
+        {
+            Competition[] competitions = null;
+            await ContextProvider.DoAsync(async ctx =>
+            {
+                competitions =
+                    await GetSortQuery(ctx.Competitions.Where(c =>
+                        c.OrganizerAccounts.Any(o => o.AccountId == accountId))).AsNoTracking().ToArrayAsync();
+            });
+            return competitions;
+        }
     }
 }

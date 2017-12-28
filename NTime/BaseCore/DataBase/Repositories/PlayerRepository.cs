@@ -7,6 +7,7 @@ using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using BaseCore.Csv;
+using BaseCore.Models;
 using BaseCore.PlayerFilter;
 using BaseCore.TimesProcess;
 
@@ -48,6 +49,17 @@ namespace BaseCore.DataBase
             });
 
             return new Tuple<Player[], int>(players, totalItemsNumber);
+        }
+
+        public async Task<PageViewModel<Player>> GetAllByFilterAsync(PlayerFilterOptions filterOptions, PageBindingModel bindingModel)
+        {
+            Tuple<Player[], int> tuple =
+                await GetAllByFilterAsync(filterOptions, bindingModel.PageNumber, bindingModel.ItemsOnPage);
+            return new PageViewModel<Player>
+            {
+                Items = tuple.Item1,
+                TotalCount = tuple.Item2
+            };
         }
 
         private IQueryable<Player> GetFilteredQuery(IQueryable<Player> items, PlayerFilterOptions filterOptions) =>
@@ -530,6 +542,17 @@ namespace BaseCore.DataBase
             await ContextProvider.DoAsync(async ctx =>
             {
                 b = await ctx.Players.Where(p => p.Id == player.Id).AllAsync(p => p.PlayerAccountId != null && p.PlayerAccount.AccountId == accountId);
+            });
+            return b;
+        }
+
+        public async Task<bool> IsNowRegister(string accountId)
+        {
+            bool b = false;
+            await ContextProvider.DoAsync(async ctx =>
+            {
+                b = await ctx.Players.AnyAsync(p =>
+                    p.CompetitionId == Competition.Id && p.PlayerAccount.AccountId == accountId);
             });
             return b;
         }

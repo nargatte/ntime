@@ -11,19 +11,13 @@ namespace BaseCore.DataBase
         {
         }
 
-        public async Task<PageViewModel<PlayerAccount>> GetOrganizersByCompetition(Competition competition, PageBindingModel bindingModel)
-        {
-            PageViewModel<PlayerAccount> viewModel = new PageViewModel<PlayerAccount>();
-            await ContextProvider.DoAsync(async ctx =>
-            {
-                viewModel.Items = await GetSortQuery(ctx.PlayerAccounts
-                    .Where(pa => pa.Players.Any(p => p.Competition.Id == competition.Id)))
-                    .Skip(bindingModel.ItemsOnPage * bindingModel.PageNumber).Take(bindingModel.ItemsOnPage)
-                    .AsNoTracking().ToArrayAsync();
-                viewModel.TotalCount = await ctx.PlayerAccounts
-                    .Where(pa => pa.Players.Any(p => p.Competition.Id == competition.Id)).CountAsync();
-            });
-            return viewModel;
-        }
+        public Task<PageViewModel<PlayerAccount>> GetPlayersAccountsByCompetition(Competition competition,
+            PageBindingModel bindingModel) =>
+            PageTemplate<PlayerAccount>(bindingModel,
+                e => GetSortQuery(e.Where(pa => pa.Players.Any(p => p.Competition.Id == competition.Id))));
+
+        public Task<PageViewModel<Player>> GetPlayersByPlayerAccount(string accountId, PageBindingModel bindingModel) =>
+            PageTemplate<Player>(bindingModel,
+                e => e.Where(p => p.PlayerAccount.AccountId == accountId).OrderByDescending(p => p.Competition.EventDate));
     }
 }

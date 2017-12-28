@@ -7,26 +7,23 @@ using BaseCore.DataBase;
 
 namespace Server.Dtos
 {
-    public class PlayerDto : IDtoBase<Player>
+    public class PlayerListViewDto : IDtoBase<Player>
     {
-        public PlayerDto()
+        public PlayerListViewDto()
         {
 
         }
 
-        public PlayerDto(Player player)
+        public PlayerListViewDto(Player player)
         {
             Id = player.Id;
             FirstName = player.FirstName;
             LastName = player.LastName;
-            BirthDate = player.BirthDate;
             IsMale = player.IsMale;
             Team = player.Team;
             StartNumber = player.StartNumber;
             StartTime = player.StartTime;
-            IsStartTimeFromReader = player.IsStartTimeFromReader;
             FullCategory = player.FullCategory;
-            PhoneNumber = player.PhoneNumber;
         }
 
         public Player CopyDataFromDto(Player player)
@@ -34,14 +31,11 @@ namespace Server.Dtos
             player.Id = Id;
             player.FirstName = FirstName;
             player.LastName = LastName;
-            player.BirthDate = BirthDate;
             player.IsMale = IsMale;
             player.Team = Team;
             player.StartNumber = StartNumber;
             player.StartTime = StartTime;
-            player.IsStartTimeFromReader = IsStartTimeFromReader;
             player.FullCategory = FullCategory;
-            player.PhoneNumber = PhoneNumber;
             return player;
         }
 
@@ -53,9 +47,6 @@ namespace Server.Dtos
         [StringLength(255), Required]
         public string LastName { get; set; }
 
-        [Required]
-        public DateTime BirthDate { get; set; }
-
         public bool IsMale { get; set; }
 
         [StringLength(255)]
@@ -65,12 +56,7 @@ namespace Server.Dtos
 
         public DateTime? StartTime { get; set; }
 
-        public bool IsStartTimeFromReader { get; set; }
-
         [StringLength(255)]
         public string FullCategory { get; set; }
-
-        [Phone]
-        public string PhoneNumber { get; set; }
     }
 }

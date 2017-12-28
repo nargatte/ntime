@@ -24,6 +24,7 @@ namespace Server
             "Player",
             "Organizer",
             "Moderator",
+            "BustModerator",
             "Administrator"
         }; 
 

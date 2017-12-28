@@ -228,14 +228,18 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AgeCategoriesController.cs" />
-    <Compile Include="Controllers\CompetitionsController.cs" />
+    <Compile Include="Controllers\AdministratorAccountController.cs" />
+    <Compile Include="Controllers\AgeCategoryController.cs" />
+    <Compile Include="Controllers\CompetitionController.cs" />
     <Compile Include="Controllers\ControllerCompetitionIdBase.cs" />
     <Compile Include="Controllers\ControllerNTimeBase.cs" />
-    <Compile Include="Controllers\DistancesController.cs" />
+    <Compile Include="Controllers\DistanceController.cs" />
     <Compile Include="Controllers\ExtraPlayerInfoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ModeratorAccountController.cs" />
+    <Compile Include="Controllers\OrganizerAccountController.cs" />
     <Compile Include="Controllers\PlayerAccountController.cs" />
+    <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Dtos\AgeCategoryDto.cs" />
     <Compile Include="Dtos\CompetitionDto.cs" />
@@ -245,7 +249,8 @@
     <Compile Include="Dtos\ExtraPlayerInfoDto.cs" />
     <Compile Include="Dtos\OrganizerAccountDto.cs" />
     <Compile Include="Dtos\PlayerAccountDto.cs" />
-    <Compile Include="Dtos\PlayerDto.cs" />
+    <Compile Include="Dtos\PlayerCompetitionRegisterDto.cs" />
+    <Compile Include="Dtos\PlayerListViewDto.cs" />
     <Compile Include="Dtos\PlayerWithScoresDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -254,6 +259,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\NameIdModel.cs" />
+    <Compile Include="Models\PlayerFilterOptionsBindingModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
