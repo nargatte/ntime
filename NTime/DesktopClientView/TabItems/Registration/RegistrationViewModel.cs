@@ -16,8 +16,8 @@ namespace DesktopClientView.TabItems.Registration
         public CompetitionChoiceBase CompetitionData => _competitionData;
         public RegistrationViewModel()
         {
-            _competitionData = new CompetitionChoiceBase();
             TabTitle = "Zapisy";
+            _competitionData = new CompetitionChoiceBase();
             ViewLoadedCmd = new RelayCommand(OnViewLoaded);
             AddPlayerCmd = new RelayCommand(OnAddPlayerAsync);
         }

@@ -18,7 +18,7 @@ namespace DesktopClientView.CompetitionManager
         {
             TabItems = new System.Collections.ObjectModel.ObservableCollection<ITabItemViewModel>()
             {
-                new PlayersListViewModel(), new RegistrationViewModel(), new UserAccountViewModel()
+                new PlayersListViewModel(), new RegistrationViewModel(), new MainUserViewModel()
             };
         }
 

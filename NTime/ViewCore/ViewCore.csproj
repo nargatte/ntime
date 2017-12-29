@@ -50,6 +50,7 @@
     <Compile Include="Entities\EditablePlayerWithLogs.cs" />
     <Compile Include="CompetitionChoice\ICompetitionChoiceBase.cs" />
     <Compile Include="ITabItemViewModel.cs" />
+    <Compile Include="Managers\AccountManager.cs" />
     <Compile Include="Managers\AgeCategoryManager.cs" />
     <Compile Include="Managers\ColorLegendManager.cs" />
     <Compile Include="Managers\CompetitionChoiceManager.cs" />

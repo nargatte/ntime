@@ -71,10 +71,18 @@
       <DependentUpon>RegistrationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="TabItems\Registration\RegistrationViewModel.cs" />
+    <Compile Include="TabItems\UserAccount\MainUserView.xaml.cs">
+      <DependentUpon>MainUserView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TabItems\UserAccount\MainUserViewModel.cs" />
     <Compile Include="TabItems\UserAccount\UserAccountView.xaml.cs">
       <DependentUpon>UserAccountView.xaml</DependentUpon>
     </Compile>
     <Compile Include="TabItems\UserAccount\UserAccountViewModel.cs" />
+    <Compile Include="TabItems\UserAccount\UserLoginView.xaml.cs">
+      <DependentUpon>UserLoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TabItems\UserAccount\UserLoginViewModel.cs" />
     <Page Include="CompetitionManager\CompetitionManagerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -110,7 +118,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="TabItems\UserAccount\MainUserView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="TabItems\UserAccount\UserAccountView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TabItems\UserAccount\UserLoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -89,8 +89,8 @@
                 <DataTemplate DataType="{x:Type registration:RegistrationViewModel}">
                     <registration:RegistrationView/>
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type userAccount:UserAccountViewModel}">
-                    <userAccount:UserAccountView/>
+                <DataTemplate DataType="{x:Type userAccount:MainUserViewModel}">
+                    <userAccount:MainUserView/>
                 </DataTemplate>
                 <!--<DataTemplate DataType="{x:Type players:PlayersViewModel}" >
                     <players:PlayersView/>-->

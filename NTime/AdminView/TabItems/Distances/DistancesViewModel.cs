@@ -170,7 +170,7 @@ namespace AdminView.Distances
                 distanceToAdd.DbEntity = new Distance()
                 {
                     Name = NewDistanceName,
-                    StartTime = DateTime.Today
+                    //StartTime = DateTime.Today
                 };
 
                 AddDistanceToGUI(distanceToAdd);

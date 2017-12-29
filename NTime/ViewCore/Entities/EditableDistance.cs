@@ -116,15 +116,15 @@ namespace ViewCore.Entities
             }
         }
 
-        public string StartTime
-        {
-            get { return DbEntity.StartTime.ConvertToString(); }
-            set
-            {
-                if (value.TryConvertToDateTime(out DateTime dateTime))
-                    DbEntity.StartTime = SetProperty(DbEntity.StartTime, dateTime);
-            }
-        }
+        //public string StartTime
+        //{
+        //    get { return DbEntity.StartTime.ConvertToString(); }
+        //    set
+        //    {
+        //        if (value.TryConvertToDateTime(out DateTime dateTime))
+        //            DbEntity.StartTime = SetProperty(DbEntity.StartTime, dateTime);
+        //    }
+        //}
 
         private bool _isValid;
         public bool IsValid
@@ -270,11 +270,11 @@ namespace ViewCore.Entities
                 message = "Długość dystansu nie może być zerowa ani ujemna";
                 return false;
             }
-            if (StartTime == null)
-            {
-                message = "Ustaw poprawnie czas startu";
-                return false;
-            }
+            //if (StartTime == null)
+            //{
+            //    message = "Ustaw poprawnie czas startu";
+            //    return false;
+            //}
 
             if( GatesOrderItems == null ||  GatesOrderItems.Count == 0)
             {

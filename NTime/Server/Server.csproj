@@ -245,8 +245,8 @@
     <Compile Include="Dtos\CompetitionDto.cs" />
     <Compile Include="Dtos\DistanceDto.cs" />
     <Compile Include="Dtos\DistanceSimpleDto.cs" />
-    <Compile Include="Dtos\IDtoBase.cs" />
     <Compile Include="Dtos\ExtraPlayerInfoDto.cs" />
+    <Compile Include="Dtos\IDtoBase.cs" />
     <Compile Include="Dtos\OrganizerAccountDto.cs" />
     <Compile Include="Dtos\PlayerAccountDto.cs" />
     <Compile Include="Dtos\PlayerCompetitionRegisterDto.cs" />
