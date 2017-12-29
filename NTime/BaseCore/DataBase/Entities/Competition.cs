@@ -41,6 +41,8 @@ namespace BaseCore.DataBase
         [StringLength(255)]
         public string City { get; set; }
 
+        public bool OrganizerEditLock { get; set; }
+
         public virtual ICollection<Player> Players { get; set; }
 
         public virtual ICollection<ExtraPlayerInfo> ExtraPlayerInfos { get; set; }

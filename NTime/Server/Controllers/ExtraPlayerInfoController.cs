@@ -41,6 +41,7 @@ namespace Server.Controllers
 
         // DELETE api/ExtraPlayerInfos/1
         [Route("{id:int:min(1)}")]
+        [Authorize(Roles = "Administrator")]
         public override Task<IHttpActionResult> Delete(int id) => 
             base.Delete(id);
     }

@@ -4,12 +4,15 @@ using System.Web.Http;
 using BaseCore.DataBase;
 using BaseCore.Dtos;
 using BaseCore.Models;
+using BaseCoreTests;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Server.Dtos;
 using Server.Models;
 
 namespace Server.Controllers
 {
+    [RoutePrefix("api/Competition")]
     public class CompetitionController : ControllerNTimeBase
     {
         protected CompetitionController() : base()
@@ -17,6 +20,7 @@ namespace Server.Controllers
         }
 
         // GET /api/Competition?ItemsOnPage=10&PageNumber=0
+        [Route]
         public async Task<PageViewModel<CompetitionDto>> Get([FromUri]PageBindingModel pageBindingModel)
         {
             PageViewModel<Competition> pageViewModel = await CompetitionRepository.GetAllAsync(pageBindingModel);
@@ -37,12 +41,7 @@ namespace Server.Controllers
                 return NotFound();
             }
             CompetitionDto competitionDto = new CompetitionDto(Competition);
-            DistanceRepository distanceRepository = new DistanceRepository(ContextProvider, Competition);
-            ExtraPlayerInfoRepository extraPlayerInfoRepository = new ExtraPlayerInfoRepository(ContextProvider, Competition);
-            competitionDto.Distances = (await distanceRepository.GetAllAsync())
-                .Select(d => new NameIdModel(d.Id, d.Name)).ToArray();
-            competitionDto.ExtraPlayerInfo = (await extraPlayerInfoRepository.GetAllAsync())
-                .Select(d => new NameIdModel(d.Id, d.Name)).ToArray();
+           
             return Ok(competitionDto);
         }
 
@@ -56,7 +55,7 @@ namespace Server.Controllers
             if (await InitCompetitionById(id) == false)
                 return NotFound();
 
-            if (await CanOrganizerAccess() == false)
+            if (await CanOrganizerAccessAndEdit() == false)
                 return Unauthorized();
 
             competitionDto.CopyDataFromDto(Competition);
@@ -66,6 +65,7 @@ namespace Server.Controllers
 
         // POST /api/Competition/
         [Authorize(Roles = "Administrator")]
+        [Route]
         public async Task<IHttpActionResult> Post(CompetitionDto competitionDto)
         {
             Competition competition = new Competition();
@@ -73,6 +73,31 @@ namespace Server.Controllers
             competition = await CompetitionRepository.AddAsync(competition);
             competitionDto.Id = competition.Id;
             return Created(Url.Content("~/api/Competition/"+ competition.Id), competitionDto);
+        }
+
+        // POST /api/Competition/1/OrganizerLock/true
+        [Authorize(Roles = "Administrator")]
+        [Route("{id:int:min(1)}/OrganizerLock/{b:bool}")]
+        public async Task<IHttpActionResult> PostOrganizerEditLock(int id, bool b)
+        {
+            if (await InitCompetitionById(id) == false)
+                return NotFound();
+
+            Competition.OrganizerEditLock = b;
+
+            await CompetitionRepository.UpdateAsync(Competition);
+
+            return Ok();
+        }
+
+        // POST /api/Competition/Seed
+        [Authorize(Roles = "Administrator")]
+        [Route("Seed")]
+        public async Task<IHttpActionResult> PostSeed()
+        {
+            IntegrationTests integrationTests = new IntegrationTests();
+            await integrationTests.LoadCsvs();
+            return Ok();
         }
     }
 }

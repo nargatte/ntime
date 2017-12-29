@@ -60,13 +60,26 @@ namespace Server.Controllers
         {
             ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
 
-            return new UserInfoViewModel
+            UserInfoViewModel viewModel = new UserInfoViewModel
             {
                 Id = User.Identity.GetUserId(),
                 Email = User.Identity.GetUserName(),
-                //HasRegistered = externalLogin == null,
-                //LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null,
-                Status = _userManager.GetRoles(User.Identity.GetUserId())[0]
+                HasRegistered = externalLogin == null,
+                LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
+            };
+
+            return viewModel;
+        }
+
+        // GET api/Account/Role
+        [Route("Role")]
+        public RoleViewModel GetRole()
+        {
+            return new RoleViewModel
+            {
+                Id = User.Identity.GetUserId(),
+                Email = User.Identity.GetUserName(),
+                Role = UserManager.GetRoles(User.Identity.GetUserId())[0]
             };
         }
 

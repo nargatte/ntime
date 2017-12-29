@@ -50,6 +50,18 @@ namespace Server.Controllers
             return true;
         }
 
+        protected async Task<bool> CanOrganizerAccessAndEdit()
+        {
+            ApplicationDbContext context = new ApplicationDbContext();
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            var s = UserManager.GetRoles(User.Identity.GetUserId());
+            if (s[0] == "Organizer" &&
+                (!await CompetitionRepository.CanOrganizerEdit(User.Identity.GetUserId(), Competition) ||
+                Competition.OrganizerEditLock == false))
+                return false;
+            return true;
+        }
+
         protected bool CanPlayerAccess(PlayerAccount playerAccount)
         {
             ApplicationDbContext context = new ApplicationDbContext();

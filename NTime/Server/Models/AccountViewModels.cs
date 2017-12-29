@@ -31,11 +31,19 @@ namespace Server.Models
 
         public string Email { get; set; }
 
-        //public bool HasRegistered { get; set; }
+        public bool HasRegistered { get; set; }
 
-        //public string LoginProvider { get; set; }
+        public string LoginProvider { get; set; }
 
-        public string Status { get; set; }
+    }
+
+    public class RoleViewModel
+    {
+        public string Id { get; set; }
+
+        public string Email { get; set; }
+
+        public string Role { get; set; }
     }
 
     public class UserLoginInfoViewModel

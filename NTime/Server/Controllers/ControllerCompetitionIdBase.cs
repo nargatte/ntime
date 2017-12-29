@@ -68,7 +68,7 @@ namespace Server.Controllers
             if (await InitCompetitionByRelatedEntitieId<Te>(id) == false)
                 return NotFound();
 
-            if (await CanOrganizerAccess() == false)
+            if (await CanOrganizerAccessAndEdit() == false)
                 return Unauthorized();
 
             Te entity = await Repository.GetById(id);

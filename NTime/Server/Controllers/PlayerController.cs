@@ -82,10 +82,10 @@ namespace Server.Controllers
             });
         }
 
-        // GET api/Player/TakeFull/FromPlayerAccount/1?ItemsOnPage=10&PageNumber=0
-        [Route("takeFull/FromPlayerAccount/{id:int:min(1)}")]
+        // GET api/Player/TakeFullList/FromPlayerAccount/1?ItemsOnPage=10&PageNumber=0
+        [Route("takeFullList/FromPlayerAccount/{id:int:min(1)}")]
         [Authorize(Roles = "Administrator,Moderator,Player")]
-        public async Task<IHttpActionResult> GetTakeFullFromPlayerAccount([FromUri]PageBindingModel bindingModel, int id)
+        public async Task<IHttpActionResult> GetTakeFullListFromPlayerAccount([FromUri]PageBindingModel bindingModel, int id)
         {
             PlayerAccountRepository accountRepository = new PlayerAccountRepository(ContextProvider);
 
@@ -133,7 +133,7 @@ namespace Server.Controllers
             if (await InitCompetitionByRelatedEntitieId<Player>(id) == false)
                 return NotFound();
 
-            if (await CanOrganizerAccess() == false)
+            if (await CanOrganizerAccessAndEdit() == false)
                 return Unauthorized();
 
             Player player = await _playerRepository.GetById(id);
@@ -153,7 +153,7 @@ namespace Server.Controllers
             if (await InitCompetitionByRelatedEntitieId<Player>(id) == false)
                 return NotFound();
 
-            if (await CanOrganizerAccess() == false)
+            if (await CanOrganizerAccessAndEdit() == false)
                 return Unauthorized();
 
             Player player = await _playerRepository.GetById(id);

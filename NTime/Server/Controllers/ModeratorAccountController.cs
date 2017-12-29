@@ -13,7 +13,7 @@ namespace Server.Controllers
     { 
         private ApplicationDbContext _applicationDBContext = new ApplicationDbContext();
         private UserManager<ApplicationUser> _userManager;
-        private new RoleManager<IdentityRole> _roleManager;
+        private RoleManager<IdentityRole> _roleManager;
 
         protected ModeratorAccountController()
         {
@@ -30,11 +30,11 @@ namespace Server.Controllers
             ApplicationUser[] applicationUsers =
                 _userManager.Users.Where(u => u.Roles.Any(r => roles.Contains(r.RoleId))).ToArray();
 
-            UserInfoViewModel[] infoViewModels = applicationUsers.Select(u => new UserInfoViewModel
+            RoleViewModel[] infoViewModels = applicationUsers.Select(u => new RoleViewModel
             {
                 Id = u.Id,
                 Email = u.Email,
-                Status = _userManager.GetRoles(u.Id)[0]
+                Role = _userManager.GetRoles(u.Id)[0]
             }).ToArray();
             return Ok(infoViewModels);
         }

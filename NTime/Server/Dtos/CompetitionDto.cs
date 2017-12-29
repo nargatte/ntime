@@ -22,6 +22,7 @@ namespace BaseCore.Dtos
             Link = competition.Link;
             Organizer = competition.Organizer;
             City = competition.City;
+            OrganizerEditLock = competition.OrganizerEditLock;
         }
 
         public Competition CopyDataFromDto(Competition competition)
@@ -58,8 +59,6 @@ namespace BaseCore.Dtos
         [StringLength(255)]
         public string City { get; set; }
 
-        public NameIdModel[] Distances { get; set; }
-
-        public NameIdModel[] ExtraPlayerInfo { get; set; }
+        public bool OrganizerEditLock { get; set; }
     }
 }

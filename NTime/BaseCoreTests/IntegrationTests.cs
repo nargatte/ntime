@@ -121,52 +121,49 @@ namespace BaseCoreTests
 
             await pr.ImportPlayersAsync(mainPath +
                 "Zawodnicy.csv");
-            //await pr.ImportTimeReadsAsync(mainPath +
-            //    "log1.csv", g1);
-            //await pr.ImportTimeReadsAsync(mainPath +
-            //    "log2.csv", g1);
-            //await pr.ImportTimeReadsAsync(mainPath +
-            //    "log3.csv", g2);
             await lir1.AddAsync(new TimeReadsLogInfo() { Path = mainPath + "log1.csv" });
             await lir1.AddAsync(new TimeReadsLogInfo() { Path = mainPath + "log2.csv" });
             await lir2.AddAsync(new TimeReadsLogInfo() { Path = mainPath + "log3.csv" });
 
 
-            var pfo = new PlayerFilterOptions { Query = "500" };
-            var p = (await pr.GetAllByFilterAsync(
-                pfo, 0, 1)).Item1[0];
+            //var pfo = new PlayerFilterOptions { Query = "500" };
+            //var p = (await pr.GetAllByFilterAsync(
+            //    pfo, 0, 1)).Item1[0];
 
             //await timeProcess.ProcessSingleAsync(p);
             //await timeProcess.ProcessAllAsync();
 
-            //await pr.ImportTimeReadsFromSourcesAsync();
+            await pr.ImportTimeReadsFromSourcesAsync();
 
-            //await pr.UpdateFullCategoryAllAsync();
-            //await pr.UpdateRankingAllAsync();
-
-            p.Distance = darr.FirstOrDefault(d => d.Name == "GIGA");
-            await pr.UpdateAsync(p, p.Distance, p.ExtraPlayerInfo);
+            await timeProcess.ProcessAllAsync();
 
             await pr.UpdateFullCategoryAllAsync();
 
-            pfo = new PlayerFilterOptions
-            {
-                PlayerSort = PlayerSort.ByRank,
-                CompleatedCompetition = true,
-                HasVoid = false,
-                WithoutStartTime = false,
-                
-            };
-            //pfo.Query = "RODZ";
-            var pall = await pr.GetAllByFilterAsync(
-                pfo, 0, 5000);
+            await pr.UpdateRankingAllAsync();
 
-            foreach (Player player in pall.Item1)
-            {
-                Console.WriteLine(player);
-                var trr = new TimeReadRepository(cp, player);
-                var ts = await trr.GetAllAsync();
-            }
+            //p.Distance = darr.FirstOrDefault(d => d.Name == "GIGA");
+            //await pr.UpdateAsync(p, p.Distance, p.ExtraPlayerInfo);
+
+            //await pr.UpdateFullCategoryAllAsync();
+
+            //pfo = new PlayerFilterOptions
+            //{
+            //    PlayerSort = PlayerSort.ByRank,
+            //    CompleatedCompetition = true,
+            //    HasVoid = false,
+            //    WithoutStartTime = false,
+                
+            //};
+            //pfo.Query = "RODZ";
+            //var pall = await pr.GetAllByFilterAsync(
+            //    pfo, 0, 5000);
+
+            //foreach (Player player in pall.Item1)
+            //{
+            //    Console.WriteLine(player);
+            //    var trr = new TimeReadRepository(cp, player);
+            //    var ts = await trr.GetAllAsync();
+            //}
         }
 
 

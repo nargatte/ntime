@@ -40,6 +40,20 @@ namespace Server.Controllers
             return viewModelDto;
         }
 
+        // GET api/OrganizerAccount/ByCompetition/1
+        [Route("ByCompetition/{id:int:min(1)}")]
+        [Authorize(Roles = "Administrator")]
+        public async Task<IHttpActionResult> GetByCompetition(int id)
+        {
+            if (await InitCompetitionById(id) == false)
+                return NotFound();
+
+            OrganizerAccount[] organizerAccounts =
+                await _organizerAccountRepository.GetOrganizersByCompetition(Competition);
+
+            return Ok(organizerAccounts.Select(o => new OrganizerAccountDto(o)).ToArray());
+        }
+
         // GET api/OrganizerAccount/1
         [Route("{id:int:min(1)}")]
         [Authorize(Roles = "Administrator")]
