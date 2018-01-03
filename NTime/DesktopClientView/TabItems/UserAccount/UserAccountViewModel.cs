@@ -8,20 +8,28 @@ using ViewCore.Entities;
 
 namespace DesktopClientView.TabItems.UserAccount
 {
-    public class UserAccountViewModel : ICompetitionChoiceBase
+    public class UserAccountViewModel : PlayersViewModelBase, ICompetitionChoiceBase
     {
+        private AccountInfo _user;
         private CompetitionChoiceBase _competitionData;
         public CompetitionChoiceBase CompetitionData => _competitionData;
-        public string TabTitle { get; set; }
-        public UserAccountViewModel()
+        public UserAccountViewModel(AccountInfo user)
         {
             _competitionData = new CompetitionChoiceBase();
-            TabTitle = "Moje konto";
+            _user = user;
         }
 
         public void DetachAllEvents()
         {
-            
+            CompetitionData.DetachAllEvents();
+            Delegate[] clientList = UserLoginViewReuqested.GetInvocationList();
+            foreach (var deleg in clientList)
+                UserLoginViewReuqested -= (deleg as Action);
         }
+
+        #region Methods end events
+        public event Action UserLoginViewReuqested = delegate { };
+
+        #endregion
     }
 }

@@ -18,8 +18,16 @@ namespace DesktopClientView.CompetitionManager
         {
             TabItems = new System.Collections.ObjectModel.ObservableCollection<ITabItemViewModel>()
             {
-                new PlayersListViewModel(), new RegistrationViewModel(), new MainUserViewModel()
+                new PlayersListViewModel(User), new RegistrationViewModel(User), new MainUserViewModel(User)
             };
+        }
+
+
+        private AccountInfo _user;
+        public AccountInfo User
+        {
+            get { return _user; }
+            set { SetProperty(ref _user, value); }
         }
 
         public override void DetachAllEvents()

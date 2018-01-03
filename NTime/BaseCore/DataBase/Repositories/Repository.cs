@@ -17,7 +17,7 @@ namespace BaseCore.DataBase
             ContextProvider = contextProvider;
         }
 
-        public  async Task<T> AddAsync(T item)
+        public async Task<T> AddAsync(T item)
         {
             CheckNull(item);
             PrepareToAdd(item);
@@ -54,7 +54,7 @@ namespace BaseCore.DataBase
                 ctx.Entry(item).State = EntityState.Modified;
                 await ctx.SaveChangesAsync();
             });
-            
+
         }
 
         public virtual Task UpdateRangeAsync(IEnumerable<T> items)
@@ -121,7 +121,7 @@ namespace BaseCore.DataBase
             PageTemplate<T>(pageBindingModel, e => GetIncludeQuery(GetSortQuery(GetAllQuery(e))));
 
         protected async Task<PageViewModel<TL>> PageTemplate<TL>(PageBindingModel bindingModel, Func<IQueryable<TL>, IQueryable<TL>> filters)
-            where TL: class
+            where TL : class
         {
             PageViewModel<TL> pageViewModel = new PageViewModel<TL>();
             await ContextProvider.DoAsync(async ctx =>
@@ -154,7 +154,7 @@ namespace BaseCore.DataBase
 
         protected void CheckNull(T item)
         {
-            if(item == null)
+            if (item == null)
                 throw new NullReferenceException(nameof(item));
         }
 

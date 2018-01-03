@@ -7,13 +7,22 @@
              xmlns:playersList="clr-namespace:DesktopClientView.TabItems.PlayersList"
              xmlns:registration="clr-namespace:DesktopClientView.TabItems.Registration"
              xmlns:userAccount="clr-namespace:DesktopClientView.TabItems.UserAccount"
+             xmlns:converters="clr-namespace:ViewCore.XamlConverters;assembly=ViewCore"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <ResourceDictionary Source="/Styles/TabControl.xaml"></ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <TabControl Margin="0" Style="{DynamicResource ResourceKey=styleTabControl}" 
+        <Grid.Resources>
+            <converters:UserNameConverterClass x:Key="UserNameConverter"/>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" HorizontalAlignment="Right" Text="{Binding User.UserName, Converter={StaticResource UserNameConverter}}"/>
+        <TabControl Grid.Row="1" Margin="0" Style="{DynamicResource ResourceKey=styleTabControl}" 
                     ItemsSource="{Binding TabItems}">
             <TabControl.ItemTemplate>
                 <DataTemplate>

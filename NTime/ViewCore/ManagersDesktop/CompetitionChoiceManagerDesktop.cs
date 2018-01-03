@@ -7,15 +7,16 @@ using System.Threading.Tasks;
 using BaseCore.DataBase;
 using MvvmHelper;
 using ViewCore.Entities;
+using ViewCore.ManagersInterfaces;
 
-namespace ViewCore.Managers
+namespace ViewCore.ManagersDesktop
 {
-    public class CompetitionChoiceManager : BindableBase, ICompetitionChoiceManager
+    public class CompetitionChoiceManagerDesktop : BindableBase, ICompetitionChoiceManager
     {
         private CompetitionRepository _competitionRepository;
         private ObservableCollection<EditableCompetition> _competitions = new ObservableCollection<EditableCompetition>();
 
-        public CompetitionChoiceManager()
+        public CompetitionChoiceManagerDesktop()
         {
             _competitionRepository = new CompetitionRepository(new ContextProvider());
         }

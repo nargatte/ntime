@@ -12,11 +12,13 @@ namespace DesktopClientView.TabItems.Registration
 {
     public class RegistrationViewModel : PlayersViewModelBase, ICompetitionChoiceBase 
     {
+        AccountInfo _user;
         private CompetitionChoiceBase _competitionData;
         public CompetitionChoiceBase CompetitionData => _competitionData;
-        public RegistrationViewModel()
+        public RegistrationViewModel(AccountInfo user)
         {
             TabTitle = "Zapisy";
+            _user = user;
             _competitionData = new CompetitionChoiceBase();
             ViewLoadedCmd = new RelayCommand(OnViewLoaded);
             AddPlayerCmd = new RelayCommand(OnAddPlayerAsync);

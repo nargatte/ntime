@@ -47,18 +47,28 @@
     <Compile Include="CompetitionChoice\CompetitionChoiceFactory.cs" />
     <Compile Include="CompetitionManagerViewModelBase.cs" />
     <Compile Include="CompetitionSelectionBase.cs" />
+    <Compile Include="Entities\AccountInfo.cs" />
     <Compile Include="Entities\EditablePlayerWithLogs.cs" />
     <Compile Include="CompetitionChoice\ICompetitionChoiceBase.cs" />
     <Compile Include="ITabItemViewModel.cs" />
-    <Compile Include="Managers\AccountManager.cs" />
-    <Compile Include="Managers\AgeCategoryManager.cs" />
-    <Compile Include="Managers\ColorLegendManager.cs" />
-    <Compile Include="Managers\CompetitionChoiceManager.cs" />
-    <Compile Include="Managers\DistancesManager.cs" />
-    <Compile Include="Managers\ExtraPlayerInfosManager.cs" />
-    <Compile Include="Managers\ICompetitionChoiceManager.cs" />
-    <Compile Include="Managers\PlayersManager.cs" />
-    <Compile Include="Managers\PlayersWithLogsManager.cs" />
+    <Compile Include="ManagersDesktop\AccountManagerDesktop.cs" />
+    <Compile Include="ManagersDesktop\AgeCategoryManagerDesktop.cs" />
+    <Compile Include="ManagersDesktop\ColorLegendManagerDesktop.cs" />
+    <Compile Include="ManagersDesktop\CompetitionChoiceManagerDesktop.cs" />
+    <Compile Include="ManagersDesktop\DistancesManagerDesktop.cs" />
+    <Compile Include="ManagersDesktop\ExtraPlayerInfosManagerDesktop.cs" />
+    <Compile Include="ManagersHttp\AgeCategoryManagerHttp.cs" />
+    <Compile Include="ManagersHttp\CompetitonChoiceManagerHttp.cs" />
+    <Compile Include="ManagersHttp\DistancesManagerHttp.cs" />
+    <Compile Include="ManagersHttp\ExtraPlayerInfosManagerHttp.cs" />
+    <Compile Include="ManagersHttp\PlayersManagerHttp.cs" />
+    <Compile Include="ManagersInterfaces\IAgeCategoryManager.cs" />
+    <Compile Include="ManagersInterfaces\IDistancesManager.cs" />
+    <Compile Include="ManagersInterfaces\IExtraPlayerInfosManager.cs" />
+    <Compile Include="ManagersInterfaces\IPlayersManager.cs" />
+    <Compile Include="ManagersInterfaces\ICompetitionChoiceManager.cs" />
+    <Compile Include="ManagersDesktop\PlayersManagerDesktop.cs" />
+    <Compile Include="ManagersDesktop\PlayersWithLogsManagerDesktop.cs" />
     <Compile Include="PlayersViewModelBase.cs" />
     <Compile Include="TimeReadColorsLegendItem.cs" />
     <Compile Include="CompetitionItemBase.cs" />
@@ -94,6 +104,7 @@
     <Compile Include="XamlConverters\IsMaleToSexEnumConverterClass.cs" />
     <Compile Include="XamlConverters\RecordsRangeToTextConverterClass.cs" />
     <Compile Include="XamlConverters\TimeReadTypeToColorConverterClass.cs" />
+    <Compile Include="XamlConverters\UserNameConverterClass.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BaseCore\BaseCore.csproj">
@@ -105,5 +116,6 @@
       <Name>MvvmHelper</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

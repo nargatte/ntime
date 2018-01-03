@@ -6,7 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using MvvmHelper;
 using ViewCore.Entities;
-using ViewCore.Managers;
+using ViewCore.ManagersDesktop;
+using ViewCore.ManagersInterfaces;
 
 namespace ViewCore
 {
@@ -18,7 +19,7 @@ namespace ViewCore
         public CompetitionChoiceBase()
         {
             _selectedCompetition = new EditableCompetition();
-            CompetitionChoiceManager = new CompetitionChoiceManager();
+            CompetitionChoiceManager = new CompetitionChoiceManagerDesktop();
         }
         #region Properties
         private ObservableCollection<EditableCompetition> _competitions = new ObservableCollection<EditableCompetition>();

@@ -10,14 +10,14 @@ using BaseCore.DataBase;
 using MvvmHelper;
 using ViewCore.Entities;
 
-namespace ViewCore.Managers
+namespace ViewCore.ManagersDesktop
 {
-    public class PlayersWithLogsManager : CompetitionItemBase
+    public class PlayersWithLogsManagerDesktop : CompetitionItemBase
     {
         private PlayerRepository _playerRepository;
         private ObservableCollection<EditablePlayerWithLogs> _playersWithLogs;
 
-        public PlayersWithLogsManager(IEditableCompetition currentComptetition, PlayerRepository playerRepository) : base(currentComptetition)
+        public PlayersWithLogsManagerDesktop(IEditableCompetition currentComptetition, PlayerRepository playerRepository) : base(currentComptetition)
         {
             _playerRepository = playerRepository;
         }

@@ -9,10 +9,11 @@ using BaseCore.DataBase;
 using BaseCore.PlayerFilter;
 using BaseCore.TimesProcess;
 using ViewCore.Entities;
+using ViewCore.ManagersInterfaces;
 
-namespace ViewCore.Managers
+namespace ViewCore.ManagersDesktop
 {
-    public class PlayersManager : CompetitionItemBase
+    public class PlayersManagerDesktop : CompetitionItemBase, IPlayersManager
     {
         private PlayerRepository _playerRepository;
         private ObservableCollection<EditableDistance> _definedDistances;
@@ -21,7 +22,7 @@ namespace ViewCore.Managers
         private RangeInfo _recordsRangeInfo;
         private ObservableCollection<EditablePlayer> _players = new ObservableCollection<EditablePlayer>();
 
-        public PlayersManager(IEditableCompetition currentCompetition, ObservableCollection<EditableDistance> definedDistances,
+        public PlayersManagerDesktop(IEditableCompetition currentCompetition, ObservableCollection<EditableDistance> definedDistances,
             ObservableCollection<EditableExtraPlayerInfo> definedExtraPlayerInfos, RangeInfo recordsRangeInfo) : base(currentCompetition)
         {
             _playerRepository = new PlayerRepository(new ContextProvider(), _currentCompetition.DbEntity);
