@@ -4,10 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ViewCore.Entities
+namespace ViewCore
 {
     public class AccountInfo
     {
+        public AccountInfo()
+        {
+
+        }
         public AccountInfo(string token, string userName)
         {
             Token = token;
@@ -30,6 +34,6 @@ namespace ViewCore.Entities
             private set { _userName = value; }
         }
         #endregion
-
+        public bool IsAuthenticated => !String.IsNullOrWhiteSpace(Token);
     }
 }
