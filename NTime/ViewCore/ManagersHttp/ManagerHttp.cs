@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using ViewCore.HttpClients;
@@ -13,8 +14,10 @@ namespace ViewCore.ManagersHttp
         public string ExcpetionMessage { get; set; }
         public bool IsSuccess { get; set; } = true;
 
-        public async Task<bool> TryCallApi(Func<Task> action)
+        //TODO There might me problems with the method working asynchronously
+        public async Task TryCallApi(Func<Task> action)
         {
+            IsSuccess = true;
             try
             {
                 await action();
@@ -23,9 +26,12 @@ namespace ViewCore.ManagersHttp
             {
                 IsSuccess = false;
                 ExcpetionMessage = e.Message;
-                throw;
             }
-            return IsSuccess;
+            catch (HttpRequestException e)
+            {
+                IsSuccess = false;
+                ExcpetionMessage = $"Niepoprawny adres serwera {Environment.NewLine}{e.Message}";
+            }
+        }
         }
     }
-}

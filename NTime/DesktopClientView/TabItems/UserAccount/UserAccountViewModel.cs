@@ -13,7 +13,7 @@ namespace DesktopClientView.TabItems.UserAccount
         private AccountInfo _user;
         private CompetitionChoiceBase _competitionData;
         public CompetitionChoiceBase CompetitionData => _competitionData;
-        public UserAccountViewModel(AccountInfo user)
+        public UserAccountViewModel(AccountInfo user, ConnectionInfo _connectionInfo)
         {
             _competitionData = new CompetitionChoiceBase();
             _user = user;

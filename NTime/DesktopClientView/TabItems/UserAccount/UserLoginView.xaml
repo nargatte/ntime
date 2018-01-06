@@ -29,17 +29,23 @@
             <TextBlock HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" Margin="0, 0, 0, 20"> Zaloguj się</TextBlock>
             <Grid HorizontalAlignment="Center" Margin="0, 20" Grid.Column="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50"/>
                     <ColumnDefinition Width="80"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="0" Grid.Column="0"> E-mail:</TextBlock>
-                <TextBox Grid.Row="0" Grid.Column="1"></TextBox>
-                <TextBlock Grid.Row="1" Grid.Column="0"> Hasło:</TextBlock>
-                <PasswordBox Grid.Row="1" Grid.Column="1"></PasswordBox>
+                <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"> E-mail:</TextBlock>
+                <TextBox Grid.Row="0" Grid.Column="1" Height="20" Text="{Binding LoginEmail, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"> Hasło:</TextBlock>
+                <PasswordBox Name="LoginPasswordBox" Grid.Row="1" Grid.Column="1" Height="20">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PasswordChanged">
+                            <i:InvokeCommandAction Command="{Binding LoginPasswordChangedCommand}" CommandParameter="{Binding ElementName=LoginPasswordBox}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </PasswordBox>
             </Grid>
             <Button Width="70" Height="20" Command="{Binding LogInCmd}">Zaloguj</Button>
         </StackPanel>
@@ -50,24 +56,30 @@
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="30"/>
-                    <RowDefinition Height="30"/>
-                    <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="80"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"> Imię:</TextBlock>
-                <TextBox Grid.Row="0" Grid.Column="1" Height="20"></TextBox>
-                <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"> Nazwisko:</TextBlock>
-                <TextBox Grid.Row="1" Grid.Column="1" Height="20"></TextBox>
-                <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"> E-mail:</TextBlock>
-                <TextBox Grid.Row="2" Grid.Column="1" Height="20"></TextBox>
-                <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"> Hasło:</TextBlock>
-                <PasswordBox Grid.Row="3" Grid.Column="1" Height="20"></PasswordBox>
-                <TextBlock Grid.Row="4" Grid.Column="0" TextWrapping="WrapWithOverflow"
+                <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"> E-mail:</TextBlock>
+                <TextBox Grid.Row="0" Grid.Column="1" Height="20" Text="{Binding RegistrationEmail, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"> Hasło:</TextBlock>
+                <PasswordBox Name="RegistrationPasswordBox" Grid.Row="1" Grid.Column="1" Height="20">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PasswordChanged">
+                            <i:InvokeCommandAction Command="{Binding RegistrationPasswordChangedCommand}" CommandParameter="{Binding ElementName=RegistrationPasswordBox}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </PasswordBox>
+                <TextBlock Grid.Row="2" Grid.Column="0" TextWrapping="WrapWithOverflow"
                            VerticalAlignment="Center"> Powtórz hasło:</TextBlock>
-                <PasswordBox Grid.Row="4" Grid.Column="1" Height="20"></PasswordBox>
+                <PasswordBox Name="RegistrationConfirmPasswordBox" Grid.Row="2" Grid.Column="1" Height="20">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PasswordChanged">
+                            <i:InvokeCommandAction Command="{Binding RegistrationConfirmPasswordChangedCommand}" CommandParameter="{Binding ElementName=RegistrationConfirmPasswordBox}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </PasswordBox>
             </Grid>
             <Button Width="70" Height="20" Command="{Binding RegisterCmd}">Załóż konto</Button>
         </StackPanel>

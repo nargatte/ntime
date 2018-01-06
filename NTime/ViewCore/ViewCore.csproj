@@ -52,6 +52,9 @@
     <Compile Include="ConnectionInfo.cs" />
     <Compile Include="HttpClients\HttpAuthenticationClient.cs" />
     <Compile Include="HttpClients\CustomHttpRequestException.cs" />
+    <Compile Include="HttpClients\HttpCompetitionClient.cs" />
+    <Compile Include="ManagersHttp\AccountManagerHttp.cs" />
+    <Compile Include="ManagersHttp\ManagerHttp.cs" />
     <Compile Include="ViewModelsData\AdminViewModel.cs" />
     <Compile Include="CompetitionChoice\CompetitionChoiceBase.cs" />
     <Compile Include="CompetitionChoice\CompetitionChoiceFactory.cs" />

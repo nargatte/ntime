@@ -24,14 +24,14 @@ namespace ViewCore
         public string Token
         {
             get { return _token; }
-            private set { _token = value; }
+            set { _token = value; }
         }
 
         private string _userName;
         public string UserName
         {
             get { return _userName; }
-            private set { _userName = value; }
+            set { _userName = value; }
         }
         #endregion
         public bool IsAuthenticated => !String.IsNullOrWhiteSpace(Token);

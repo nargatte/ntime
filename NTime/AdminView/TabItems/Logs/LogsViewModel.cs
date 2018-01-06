@@ -46,7 +46,7 @@ namespace AdminView.Logs
             set
             {
                 SetProperty(ref _onlySignificant, value);
-                OnReloadlogs();
+                OnReloadlogs().GetAwaiter().GetResult();
             }
         }
 

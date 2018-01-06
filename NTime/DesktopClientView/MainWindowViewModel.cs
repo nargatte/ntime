@@ -14,17 +14,19 @@ namespace DesktopClientView
     {
         private ISwitchableViewModel _currentViewModel;
         private AccountInfo _accountInfo;
+        private ConnectionInfo _connectionInfo;
 
 
         public MainWindowViewModel()
         {
             PrepareDependencies();
-            CurrentViewModel = new CompetitionManagerViewModel();
+            CurrentViewModel = new CompetitionManagerViewModel(_accountInfo, _connectionInfo);
         }
 
         private void PrepareDependencies()
         {
             _accountInfo = new AccountInfo();
+            _connectionInfo = new ConnectionInfo() { ServerURL = "http://projektnet.mini.pw.edu.pl/NTime/" };
         }
 
         public ISwitchableViewModel CurrentViewModel

@@ -12,13 +12,17 @@ using ViewCore.Entities;
 
 namespace DesktopClientView.CompetitionManager
 {
-    class CompetitionManagerViewModel : CompetitionManagerViewModelBase
+    public class CompetitionManagerViewModel : CompetitionManagerViewModelBase
     {
-        public CompetitionManagerViewModel()
+        private ConnectionInfo _connectionInfo;
+
+        public CompetitionManagerViewModel(AccountInfo accountInfo, ConnectionInfo connectionInfo)
         {
+            User = accountInfo;
+            _connectionInfo = connectionInfo;
             TabItems = new System.Collections.ObjectModel.ObservableCollection<ITabItemViewModel>()
             {
-                new PlayersListViewModel(User), new RegistrationViewModel(User), new MainUserViewModel(User)
+                new PlayersListViewModel(User, _connectionInfo), new RegistrationViewModel(User, _connectionInfo), new MainUserViewModel(User, _connectionInfo)
             };
         }
 

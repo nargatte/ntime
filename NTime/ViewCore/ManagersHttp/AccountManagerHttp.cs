@@ -57,10 +57,20 @@ namespace ViewCore.ManagersHttp
                 _accountInfo.Token = tempAccountInfo.access_token;
                 _accountInfo.UserName = tempAccountInfo.userName;
             });
+            if (IsSuccess)
+            {
+                _client.SetAuthenticationData(_accountInfo);
+            }
             return IsSuccess;
         }
 
-
-
+        public async Task<bool> Logout()
+        {
+            await TryCallApi(async () =>
+            {
+                await _client.Logout();
+            });
+            return IsSuccess;
+        }
     }
 }

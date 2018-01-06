@@ -19,7 +19,7 @@ namespace ViewCore.XamlConverters
             }
             else
             {
-                return beginning + "gość";
+                return "Użytkownik niezalogowany";
             }
         }
 

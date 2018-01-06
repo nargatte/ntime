@@ -17,12 +17,19 @@ namespace ViewCore.HttpClients
 
         public async Task RegisterUser(RegisterBindingModel registerModel)
         {
-            await PostAsync("/api/Account/Register", registerModel);
+            await base.PostAsync("api/Account/Register", registerModel);
         }
 
         public async Task<TokenInfoDto> Login(string email, string password)
         {
-            return await PostAsync<LoginDataDto, TokenInfoDto>("/token", new LoginDataDto(email, password));
+            var loginData = new LoginDataDto(email, password);
+            var content = loginData.GetDictionary();
+            return await base.PostUrlEncodedAsync<TokenInfoDto>("token", content);
+        }
+
+        public async Task Logout()
+        {
+            await base.PostAsync("api/Account/Logout");
         }
     }
 }

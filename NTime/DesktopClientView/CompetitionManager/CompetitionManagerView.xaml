@@ -18,10 +18,10 @@
             <converters:UserNameConverterClass x:Key="UserNameConverter"/>
         </Grid.Resources>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" HorizontalAlignment="Right" Text="{Binding User.UserName, Converter={StaticResource UserNameConverter}}"/>
+        <TextBlock Grid.Row="0" HorizontalAlignment="Center" FontSize="30" Text="{Binding User.UserName, Converter={StaticResource UserNameConverter}}"/>
         <TabControl Grid.Row="1" Margin="0" Style="{DynamicResource ResourceKey=styleTabControl}" 
                     ItemsSource="{Binding TabItems}">
             <TabControl.ItemTemplate>

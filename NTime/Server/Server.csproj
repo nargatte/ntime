@@ -247,11 +247,13 @@
     <Compile Include="Dtos\DistanceSimpleDto.cs" />
     <Compile Include="Dtos\ExtraPlayerInfoDto.cs" />
     <Compile Include="Dtos\IDtoBase.cs" />
+    <Compile Include="Dtos\LoginDataDto.cs" />
     <Compile Include="Dtos\OrganizerAccountDto.cs" />
     <Compile Include="Dtos\PlayerAccountDto.cs" />
     <Compile Include="Dtos\PlayerCompetitionRegisterDto.cs" />
     <Compile Include="Dtos\PlayerListViewDto.cs" />
     <Compile Include="Dtos\PlayerWithScoresDto.cs" />
+    <Compile Include="Dtos\TokenInfoDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

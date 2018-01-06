@@ -18,10 +18,13 @@ namespace DesktopClientView.TabItems.UserAccount
         private UserAccountViewModel _userAccountViewModel;
         private UserLoginViewModel _userLoginViewModel;
         private AccountInfo _user;
-        public MainUserViewModel(AccountInfo user)
+        private ConnectionInfo _connectionInfo;
+
+        public MainUserViewModel(AccountInfo user, ConnectionInfo connectionInfo)
         {
             TabTitle = "Moje konto";
             _user = user;
+            _connectionInfo = connectionInfo;
             ViewLoadedCmd = new RelayCommand(OnViewLoaded);
         }
 
@@ -40,7 +43,6 @@ namespace DesktopClientView.TabItems.UserAccount
         #region Methods and events
         public RelayCommand ViewLoadedCmd { get; set; }
 
-
         private void OnViewLoaded()
         {
             NavToProperTab();
@@ -53,7 +55,7 @@ namespace DesktopClientView.TabItems.UserAccount
 
         private void NavToProperTab()
         {
-            if (_user == null)
+            if (string.IsNullOrWhiteSpace(_user.Token))
                 NavToUserLoginView();
             else
                 NavToUserAccountView();
@@ -62,7 +64,7 @@ namespace DesktopClientView.TabItems.UserAccount
         private void NavToUserLoginView()
         {
             CurrentViewModel?.DetachAllEvents();
-            _userLoginViewModel = new UserLoginViewModel(_user);
+            _userLoginViewModel = new UserLoginViewModel(_user, _connectionInfo);
             _userLoginViewModel.UserAccountViewRequested += NavToUserAccountView;
             CurrentViewModel = _userLoginViewModel;
         }
@@ -70,7 +72,7 @@ namespace DesktopClientView.TabItems.UserAccount
         private void NavToUserAccountView()
         {
             CurrentViewModel?.DetachAllEvents();
-            _userAccountViewModel = new UserAccountViewModel(_user);
+            _userAccountViewModel = new UserAccountViewModel(_user, _connectionInfo);
             _userAccountViewModel.UserLoginViewReuqested += NavToUserLoginView;
             CurrentViewModel = _userAccountViewModel;
         }
