@@ -26,7 +26,7 @@ namespace DesktopClientView
         private void PrepareDependencies()
         {
             _accountInfo = new AccountInfo();
-            _connectionInfo = new ConnectionInfo() { ServerURL = "http://projektnet.mini.pw.edu.pl/NTime/" };
+            _connectionInfo = new ConnectionInfo() { ServerURL = "http://projektnet.mini.pw.edu.pl/NTime" };
         }
 
         public ISwitchableViewModel CurrentViewModel

@@ -50,9 +50,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConnectionInfo.cs" />
+    <Compile Include="HttpClients\HttpAgeCategoryClient.cs" />
     <Compile Include="HttpClients\HttpAuthenticationClient.cs" />
     <Compile Include="HttpClients\CustomHttpRequestException.cs" />
     <Compile Include="HttpClients\HttpCompetitionClient.cs" />
+    <Compile Include="HttpClients\HttpDistanceClient.cs" />
+    <Compile Include="HttpClients\HttpExtraPlayerInfoClient.cs" />
+    <Compile Include="HttpClients\HttpForSpecificCompetitionClient.cs" />
+    <Compile Include="HttpClients\HttpPlayerClient.cs" />
     <Compile Include="ManagersHttp\AccountManagerHttp.cs" />
     <Compile Include="ManagersHttp\ManagerHttp.cs" />
     <Compile Include="ViewModelsData\AdminViewModel.cs" />
@@ -64,7 +69,6 @@
     <Compile Include="Entities\EditablePlayerWithLogs.cs" />
     <Compile Include="CompetitionChoice\ICompetitionChoiceBase.cs" />
     <Compile Include="HttpClients\HttpClientBase.cs" />
-    <Compile Include="HttpClients\HttpClientCompetition.cs" />
     <Compile Include="ViewModelsData\ITabItemViewModel.cs" />
     <Compile Include="ManagersDesktop\AccountManagerDesktop.cs" />
     <Compile Include="ManagersDesktop\AgeCategoryManagerDesktop.cs" />

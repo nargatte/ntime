@@ -4,7 +4,7 @@ using BaseCore.DataBase;
 using Server.Dtos;
 using Server.Models;
 
-namespace BaseCore.Dtos
+namespace Server.Dtos
 {
     public class CompetitionDto : IDtoBase<Competition>
     {

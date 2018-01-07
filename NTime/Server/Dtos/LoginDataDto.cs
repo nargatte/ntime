@@ -24,10 +24,6 @@ namespace Server.Dtos
             dict.Add(new KeyValuePair<string, string>(nameof(grant_type), grant_type));
             dict.Add(new KeyValuePair<string, string>(nameof(username), username));
             dict.Add(new KeyValuePair<string, string>(nameof(password), password));
-            //foreach (var item in this.GetType().GetProperties())
-            //{
-            //    dict.Add(nameof(item), item.GetValue(item, null).ToString());
-            //}
             return dict;
         }
     }

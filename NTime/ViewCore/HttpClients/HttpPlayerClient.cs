@@ -1,0 +1,100 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using BaseCore.DataBase;
+using BaseCore.PlayerFilter;
+using Server.Dtos;
+
+namespace ViewCore.HttpClients
+{
+    public class HttpPlayerClient : HttpClientBase
+    {
+        protected HttpPlayerClient(AccountInfo accountInfo, ConnectionInfo connectionInfo, string controllerName)
+            : base(accountInfo, connectionInfo, controllerName)
+        {
+        }
+
+        protected PlayerWithScoresDto CreatePlayerWithScoresDto(Player entity)
+            => new PlayerWithScoresDto(entity);
+
+        protected PlayerCompetitionRegisterDto CreatePlayerCompetitionRegisterDto(Player entity)
+            => new PlayerCompetitionRegisterDto(entity);
+
+        protected PlayerListViewDto CreatePlayerListViewDto(Player entity)
+            => new PlayerListViewDto(entity);
+
+        protected string GetFromCompetitionQuery(int competitionId)
+        {
+            return $"TakeFullList/FromPlayerAccount/{competitionId.ToString()}";
+        }
+
+        //POST api/Player/TakeSimpleList/FromCompetition/1?ItemsOnPage=10&PageNumber=0
+        public async Task<IEnumerable<PlayerListViewDto>> GetPlayersListView(Competition competition,
+            int itemsOnPage, int pageNumber, PlayerFilterOptions filterOptions)
+        {
+            return await base.PostAsync<PlayerFilterOptions, IEnumerable<PlayerListViewDto>>(
+                $"TakeSimpleList/FromCompetition/{competition.Id}{base.GetPageQuery(itemsOnPage, pageNumber)}",
+                filterOptions);
+        }
+
+
+        //POST api/Player/TakeFullList/FromCompetition/1?ItemsOnPage=10&PageNumber=0
+        public async Task<IEnumerable<PlayerWithScoresDto>> GetPlayersWithScore(Competition competition,
+            int itemsOnPage, int pageNumber, PlayerFilterOptions filterOptions)
+        {
+            return await base.PostAsync<PlayerFilterOptions, IEnumerable<PlayerWithScoresDto>>(
+                $"TakeFullList/FromCompetition/{competition.Id}{base.GetPageQuery(itemsOnPage, pageNumber)}",
+                filterOptions);
+        }
+
+        //GET api/Player/TakeFullList/FromPlayerAccount/1?ItemsOnPage=10&PageNumber=0
+        public async Task<IEnumerable<PlayerWithScoresDto>> GetPlayersFromTheiCompetitions(PlayerAccount playerAccount,
+            int itemsOnPage, int pageNumber, PlayerFilterOptions filterOptions)
+        {
+            return await base.PostAsync<PlayerFilterOptions, IEnumerable<PlayerWithScoresDto>>(
+                $"TakeFullList/FromPlayerAccount/{playerAccount.Id}{base.GetPageQuery(itemsOnPage, pageNumber)}",
+                filterOptions);
+        }
+
+        //GET api/player/FromPlayerAccount/{idpa}/FromCompetition/{idc}
+        public async Task<PlayerWithScoresDto> GetFullRegisteredPlayerFromCompetition(Competition competition, PlayerAccount playerAccount)
+        {
+            return await base.GetAsync<PlayerWithScoresDto>($"FromPlayerAccount/{playerAccount.Id}/FromCompetition/{competition.Id}");
+        }
+
+        public async Task<PlayerWithScoresDto> GetPlayerInfo(int playerId)
+        {
+            return await base.GetAsync<PlayerWithScoresDto>(playerId.ToString());
+        }
+
+        public async Task Update(Player player)
+        {
+            var playerDto = CreatePlayerWithScoresDto(player);
+            await base.PutAsync<PlayerWithScoresDto>(playerDto.Id.ToString(), playerDto);
+        }
+
+        public async Task Delete(Player player)
+        {
+            await base.DeleteAsync(player.Id.ToString());
+        }
+
+        public async Task<PlayerCompetitionRegisterDto> GetRegisteredPlayer(int playerId)
+        {
+            return await base.GetAsync<PlayerCompetitionRegisterDto>($"Register/{playerId.ToString()}");
+        }
+
+        public async Task UpdateRegisteredPlayer(Player player)
+        {
+            var playerDto = CreatePlayerCompetitionRegisterDto(player);
+            await base.PutAsync<PlayerCompetitionRegisterDto>($"Register/{playerDto.Id.ToString()}", playerDto);
+        }
+
+        public async Task<PlayerCompetitionRegisterDto> AddRegisteredPlayer(int competitionId, Player player)
+        {
+            var playerDto = CreatePlayerCompetitionRegisterDto(player);
+            return await base.PostAsync<PlayerCompetitionRegisterDto, PlayerCompetitionRegisterDto>($"Register/IntoCompetition/{competitionId.ToString()}", playerDto);
+        }
+    }
+}

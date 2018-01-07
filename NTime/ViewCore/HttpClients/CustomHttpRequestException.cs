@@ -8,7 +8,7 @@ namespace ViewCore.HttpClients
 {
     public class CustomHttpRequestException : Exception
     {
-        public CustomHttpRequestException(string responseMessage) : base("Wrong http request or problems with the server. Message: " + responseMessage)
+        public CustomHttpRequestException(string responseMessage) : base("Wrong http request or problems with the server." + responseMessage)
         {
             
         }

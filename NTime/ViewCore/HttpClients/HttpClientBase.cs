@@ -15,7 +15,7 @@ namespace ViewCore.HttpClients
         private AccountInfo _accountInfo;
         private ConnectionInfo _connectionInfo;
         protected HttpClient _client;
-        public string DirectPath { get; set; }
+        private string _controllerName;
 
         protected HttpClientBase(AccountInfo accountInfo, ConnectionInfo connectionInfo, string controllerName)
         {
@@ -24,6 +24,7 @@ namespace ViewCore.HttpClients
             _connectionInfo = connectionInfo;
             _client = new HttpClient();
             SetAuthenticationData(_accountInfo);
+            _controllerName = controllerName;
             SetBaseAddress(controllerName);
         }
 
@@ -43,70 +44,89 @@ namespace ViewCore.HttpClients
             }
             if (string.IsNullOrWhiteSpace(controllerName))
             {
-                _client.BaseAddress = new Uri($"{_connectionInfo.ServerURL}");
+                _client.BaseAddress = new Uri($"{_connectionInfo.ServerURL}/");
             }
             else
             {
-                _client.BaseAddress = new Uri($"{_connectionInfo.ServerURL}/{ controllerName}");
+                _client.BaseAddress = new Uri($"{_connectionInfo.ServerURL}/api/");
+                _controllerName = controllerName;
             }
         }
 
-        //TODO check the string URI for the simple methods
-        protected async Task<TResponse> GetAsync<TResponse>(string uri)
+        protected string GetPageQuery(int itemsOnPage, int pageNumber, bool addStartQuerySign = true)
         {
-            return await ResolveResponseAsync<TResponse>(await _client.GetAsync(uri));
+            var result = "";
+            if (addStartQuerySign)
+            {
+                result += "?";
+            }
+            else
+            {
+                result += "&";
+            }
+            return result + $"ItemsOnPage{itemsOnPage}&PageNumber={pageNumber}";
         }
 
-        protected async Task<TResponse> PutAsync<TRequest, TResponse>(string uri, TRequest content)
+        private string AddControllerName(string uri, bool addSlash = true)
         {
-            return await ResolveResponseAsync<TResponse>(await _client.PutAsync(uri, content, _formatter));
+            string resultUri = "";
+            if(!string.IsNullOrWhiteSpace(_controllerName))
+            {
+                resultUri += _controllerName;
+                if (addSlash)
+                {
+                    resultUri += "/";
+                }
+            }
+            resultUri += uri;
+            return resultUri;
         }
+
+        //TODO check the string URI for the simple methods
+        protected async Task<TResponse> GetAsync<TResponse>(string uri, bool addSlash = true)
+        {
+            return await ResolveResponseAsync<TResponse>(await _client.GetAsync(AddControllerName(uri, addSlash)));
+        }
+
+        //protected async Task<TResponse> PutAsync<TRequest, TResponse>(string uri, TRequest content)
+        //{
+        //    return await ResolveResponseAsync<TResponse>(await _client.PutAsync(uri, content, _formatter));
+        //}
 
         protected async Task PutAsync<TRequest>(string uri, TRequest content)
         {
-            await ResolveResponseAsync(await _client.PutAsync(uri, content, _formatter));
+            await ResolveResponseAsync(await _client.PutAsync(AddControllerName(uri), content, _formatter));
         }
 
-        protected async Task<TResponse> PostUrlEncodedAsync<TResponse>(string uri, IList<KeyValuePair<string,string>> content)
+        protected async Task<TResponse> PostUrlEncodedAsync<TResponse>(string uri, IList<KeyValuePair<string, string>> content)
         {
-            var request = new HttpRequestMessage(HttpMethod.Post, uri) { Content = new FormUrlEncodedContent(content)};
-
-            //var requestContent = string.Format("site={0}&content={1}", Uri.EscapeDataString("http://www.google.com"),
-            //    Uri.EscapeDataString("This is some content"));
-            //request.Content = new StringContent(requestContent, Encoding.UTF8, "application/x-www-form-urlencoded");
-            var createdUri = request.RequestUri;
-            var createdContent = request.Content;
-            var createdHeaders = request.Headers;
-
-
+            var request = new HttpRequestMessage(HttpMethod.Post, AddControllerName(uri)) { Content = new FormUrlEncodedContent(content) };
             return await ResolveResponseAsync<TResponse>(await _client.SendAsync(request));
         }
 
-        protected async Task<TResponse> PostAsync<TRequest, TResponse>(string uri, TRequest content)
+        protected async Task<TResponse> PostAsync<TRequest, TResponse>(string uri, TRequest content, bool addSlash = true)
         {
-            return await ResolveResponseAsync<TResponse>(await _client.PostAsync(uri, content, _formatter));
+            return await ResolveResponseAsync<TResponse>(await _client.PostAsync(AddControllerName(uri, addSlash), content, _formatter));
         }
 
         protected async Task PostAsync<TRequest>(string uri, TRequest content)
         {
-            await ResolveResponseAsync(await _client.PostAsync(uri, content, _formatter));
+            await ResolveResponseAsync(await _client.PostAsync(AddControllerName(uri), content, _formatter));
         }
 
         protected async Task PostAsync(string uri)
         {
-            await ResolveResponseAsync(await _client.PostAsync(uri, null));
+            await ResolveResponseAsync(await _client.PostAsync(AddControllerName(uri), null));
         }
 
-
-
-        protected async Task<TResponse> DeleteAsync<TRequest, TResponse>(string uri)
-        {
-            return await ResolveResponseAsync<TResponse>(await _client.DeleteAsync(string.Empty));
-        }
+        //protected async Task<TResponse> DeleteAsync<TRequest, TResponse>(string uri)
+        //{
+        //    return await ResolveResponseAsync<TResponse>(await _client.DeleteAsync(string.Empty));
+        //}
 
         protected async Task DeleteAsync(string uri)
         {
-            await ResolveResponseAsync(await _client.DeleteAsync(string.Empty));
+            await ResolveResponseAsync(await _client.DeleteAsync(AddControllerName(uri)));
         }
 
         private async Task<TResponse> ResolveResponseAsync<TResponse>(HttpResponseMessage response)

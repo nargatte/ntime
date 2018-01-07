@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using BaseCore.DataBase;
-using BaseCore.Dtos;
 
 namespace Server.Dtos
 {

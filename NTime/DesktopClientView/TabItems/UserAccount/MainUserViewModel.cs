@@ -95,8 +95,16 @@ namespace DesktopClientView.TabItems.UserAccount
             CurrentViewModel?.DetachAllEvents();
             _userLoginViewModel = new UserLoginViewModel(_user, _connectionInfo);
             _userLoginViewModel.UserAccountViewRequested += NavToUserAccountView;
+            _userLoginViewModel.RefreshRequested += OnUserLoginViewRefreshRequested;
             CurrentViewModel = _userLoginViewModel;
             UserChanged();
+        }
+
+        private void OnUserLoginViewRefreshRequested()
+        {
+            NavToUserAccountView();
+            System.Threading.Thread.Sleep(2000);
+            NavToUserLoginView();
         }
 
         private void NavToUserAccountView()

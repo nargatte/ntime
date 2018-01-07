@@ -16,6 +16,7 @@ namespace DesktopClientView.TabItems.UserAccount
         private AccountInfo _user;
         private ConnectionInfo _connectionInfo;
         private AccountManagerHttp _accountManager;
+        PasswordBox loginPasswordBox, registrationPasswordBox, registrationConfirmPasswordBox;
 
         public UserLoginViewModel(AccountInfo user, ConnectionInfo connectionInfo)
         {
@@ -77,6 +78,7 @@ namespace DesktopClientView.TabItems.UserAccount
         public RelayCommand<PasswordBox> RegistrationConfirmPasswordChangedCommand { get; private set; }
 
         public event Action UserAccountViewRequested = delegate { };
+        public event Action RefreshRequested = delegate { };
 
         private async void OnRegisterRequested()
         {
@@ -84,11 +86,19 @@ namespace DesktopClientView.TabItems.UserAccount
             if (isSuccess)
             {
                 DisplayNotification("Twoje konto zostało utworzone. Możesz się zalogować");
+                RegistrationEmail = "";
             }
             else
             {
                 DisplayNotification(_accountManager.ExcpetionMessage);
             }
+            ClearRegistrationPasswordBoxes();
+        }
+
+        private void ClearRegistrationPasswordBoxes()
+        {
+            registrationPasswordBox?.Clear();
+            registrationConfirmPasswordBox?.Clear();
         }
 
         private async void OnLogInRequest()
@@ -97,11 +107,18 @@ namespace DesktopClientView.TabItems.UserAccount
             if (isSuccess)
             {
                 UserAccountViewRequested();
+                LoginEmail = "";
             }
             else
             {
                 DisplayNotification(_accountManager.ExcpetionMessage);
             }
+            ClearLoginPasswordBox();
+        }
+
+        private void ClearLoginPasswordBox()
+        {
+            loginPasswordBox?.Clear();
         }
 
         private void DisplayNotification(string message)
@@ -114,22 +131,38 @@ namespace DesktopClientView.TabItems.UserAccount
             Delegate[] clientList = UserAccountViewRequested.GetInvocationList();
             foreach (var deleg in clientList)
                 UserAccountViewRequested -= (deleg as Action);
+            clientList = RefreshRequested.GetInvocationList();
+            foreach (var deleg in clientList)
+                RefreshRequested -= (deleg as Action);
         }
 
 
         private void OnLoginPasswordChanged(PasswordBox obj)
         {
             LoginPassword = obj.Password;
+            if (loginPasswordBox != obj)
+            {
+                loginPasswordBox = obj;
+            }
         }
 
         private void OnRegistrationPasswordChanged(PasswordBox obj)
         {
             RegistrationPassword = obj.Password;
+            if (registrationPasswordBox != obj)
+            {
+                registrationPasswordBox = obj;
+            }
+
         }
 
         private void OnRegistrationConfirmPasswordChanged(PasswordBox obj)
         {
             RegistrationConfirmPassword = obj.Password;
+            if (registrationConfirmPasswordBox != obj)
+            {
+                registrationConfirmPasswordBox = obj;
+            }
         }
 
         #endregion

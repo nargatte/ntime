@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using System.Web.Http;
 using BaseCore.DataBase;
-using BaseCore.Dtos;
 using BaseCore.Models;
 using BaseCoreTests;
 using Microsoft.AspNet.Identity;
