@@ -6,14 +6,15 @@ using System.Text;
 using System.Threading.Tasks;
 using ViewCore.Entities;
 using BaseCore.DataBase;
+using ViewCore.ManagersInterfaces;
 
-namespace ViewCore.Managers
+namespace ViewCore.ManagersDesktop
 {
-    public class ExtraPlayerInfosManager : CompetitionItemBase
+    public class ExtraPlayerInfosManagerDesktop : CompetitionItemBase, IExtraPlayerInfosManager
     {
         public ObservableCollection<EditableExtraPlayerInfo> DefinedExtraPlayerInfo { get; set; } = new ObservableCollection<EditableExtraPlayerInfo>();
         private ExtraPlayerInfoRepository _extraPlayerInfoRepository;
-        public ExtraPlayerInfosManager(IEditableCompetition currentComptetition) : base(currentComptetition)
+        public ExtraPlayerInfosManagerDesktop(IEditableCompetition currentComptetition) : base(currentComptetition)
         {
             //_playerRepository
             _extraPlayerInfoRepository = new ExtraPlayerInfoRepository(new ContextProvider(), _currentCompetition.DbEntity);

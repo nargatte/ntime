@@ -7,7 +7,7 @@ using ViewCore.Entities;
 using System.Windows;
 using BaseCore.DataBase;
 using BaseCore.TimesProcess;
-using ViewCore.Managers;
+using ViewCore.ManagersDesktop;
 
 namespace AdminView.Logs
 {
@@ -46,7 +46,7 @@ namespace AdminView.Logs
             set
             {
                 SetProperty(ref _onlySignificant, value);
-                OnReloadlogs();
+                OnReloadlogs().GetAwaiter().GetResult();
             }
         }
 
@@ -58,14 +58,14 @@ namespace AdminView.Logs
 
         private async void OnViewLoaded()
         {
-            ColorLegendManager colorLegendManager = new ColorLegendManager();
+            ColorLegendManagerDesktop colorLegendManager = new ColorLegendManagerDesktop();
             LegendItems = colorLegendManager.GetLegendItems();
             await OnReloadlogs();
         }
 
         private async Task OnReloadlogs()
         {
-            PlayersWithLogsManager playerWithLogsManager = new PlayersWithLogsManager(_currentCompetition, _playerRepository);
+            PlayersWithLogsManagerDesktop playerWithLogsManager = new PlayersWithLogsManagerDesktop(_currentCompetition, _playerRepository);
             PlayersWithLogs = await playerWithLogsManager.GetAllPlayers(OnlySignificant);
 
             PlayersWithLogs = new ObservableCollection<EditablePlayerWithLogs>(PlayersWithLogs.OrderBy(p => p.StartNumber)); //TO REMOVE presentation purpose

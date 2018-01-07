@@ -90,6 +90,7 @@
     <Compile Include="DataBase\Repositories\GateRepository.cs" />
     <Compile Include="DataBase\Repositories\OrganizerAccountRepository.cs" />
     <Compile Include="DataBase\Repositories\PlayerAccountRepository.cs" />
+    <Compile Include="DataBase\Repositories\Repository.cs" />
     <Compile Include="DataBase\Repositories\RepositoryAccountBase.cs" />
     <Compile Include="DataBase\Repositories\TimeReadsLogInfoRepository.cs" />
     <Compile Include="Models\PageBindingModel.cs" />
@@ -107,7 +108,6 @@
     <Compile Include="PlayerFilter\PlayerFilterOptions.cs" />
     <Compile Include="DataBase\Repositories\PlayerRepository.cs" />
     <Compile Include="DataBase\Repositories\GateOrderItemRepository.cs" />
-    <Compile Include="DataBase\Repositories\Repository.cs" />
     <Compile Include="DataBase\Repositories\RepositoryCompetitionId.cs" />
     <Compile Include="DataBase\Repositories\TimeReadRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

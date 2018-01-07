@@ -13,7 +13,7 @@ using System.Windows;
 using System.Collections;
 using System.ComponentModel;
 using BaseCore.TimesProcess;
-using ViewCore.Managers;
+using ViewCore.ManagersDesktop;
 
 namespace AdminView.Players
 {

@@ -10,16 +10,16 @@ using BaseCore.PlayerFilter;
 using MvvmHelper;
 using ViewCore;
 using ViewCore.Entities;
-using ViewCore.Managers;
+using ViewCore.ManagersDesktop;
 
 namespace ViewCore
 {
     public abstract class PlayersViewModelBase : TabItemViewModel
     {
-        protected PlayersManager _playersManager;
-        protected DistancesManager _distancesManager;
-        protected ExtraPlayerInfosManager _extraPlayerInfosManager;
-        protected AgeCategoryManager _ageCategoryManager;
+        protected PlayersManagerDesktop _playersManager;
+        protected DistancesManagerDesktop _distancesManager;
+        protected ExtraPlayerInfosManagerDesktop _extraPlayerInfosManager;
+        protected AgeCategoryManagerDesktop _ageCategoryManager;
 
         public PlayersViewModelBase()
         {
@@ -164,7 +164,7 @@ namespace ViewCore
         {
             await DownloadPlayersInfo(selectedCompeititon);
 
-            _playersManager = new PlayersManager(_currentCompetition, DefinedDistances, DefinedExtraPlayerInfo, RecordsRangeInfo);
+            _playersManager = new PlayersManagerDesktop(_currentCompetition, DefinedDistances, DefinedExtraPlayerInfo, RecordsRangeInfo);
             //DistanceSortCriteria = new EditableDistance(_currentCompetition);
             //ExtraPlayerInfoSortCriteria = new EditableExtraPlayerInfo(_currentCompetition);
             await _playersManager.AddPlayersFromDatabase(removeAllDisplayedBefore: true);
@@ -180,13 +180,13 @@ namespace ViewCore
                 _currentCompetition = selectedCompeititon;
             }
 
-            _distancesManager = new DistancesManager(_currentCompetition);
+            _distancesManager = new DistancesManagerDesktop(_currentCompetition);
             DefinedDistances = await _distancesManager.DownloadDistancesAsync();
 
-            _extraPlayerInfosManager = new ExtraPlayerInfosManager(_currentCompetition);
+            _extraPlayerInfosManager = new ExtraPlayerInfosManagerDesktop(_currentCompetition);
             DefinedExtraPlayerInfo = await _extraPlayerInfosManager.DownloadExtraPlayerInfoAsync();
 
-            _ageCategoryManager = new AgeCategoryManager(_currentCompetition);
+            _ageCategoryManager = new AgeCategoryManagerDesktop(_currentCompetition);
             DefinedAgeCategories = await _ageCategoryManager.DownloadAgeCategoriesAsync();
         }
 

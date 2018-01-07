@@ -6,15 +6,16 @@ using System.Text;
 using System.Threading.Tasks;
 using BaseCore.DataBase;
 using ViewCore.Entities;
+using ViewCore.ManagersInterfaces;
 
-namespace ViewCore.Managers
+namespace ViewCore.ManagersDesktop
 {
-    public class AgeCategoryManager : CompetitionItemBase
+    public class AgeCategoryManagerDesktop : CompetitionItemBase, IAgeCategoryManager
     {
         private AgeCategoryRepository _ageCategoryRepository;
         public ObservableCollection<EditableAgeCategory> DefinedAgeCategories { get; set; } = new ObservableCollection<EditableAgeCategory>();
 
-        public AgeCategoryManager(IEditableCompetition currentComptetition) : base(currentComptetition)
+        public AgeCategoryManagerDesktop(IEditableCompetition currentComptetition) : base(currentComptetition)
         {
             _ageCategoryRepository = new AgeCategoryRepository(new ContextProvider(), _currentCompetition.DbEntity);
         }

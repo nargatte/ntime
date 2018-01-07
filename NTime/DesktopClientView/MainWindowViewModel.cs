@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DesktopClientView.CompetitionManager;
 using MvvmHelper;
+using ViewCore;
 using ViewCore.Entities;
 
 namespace DesktopClientView
@@ -12,12 +13,21 @@ namespace DesktopClientView
     internal class MainWindowViewModel : BindableBase
     {
         private ISwitchableViewModel _currentViewModel;
+        private AccountInfo _accountInfo;
+        private ConnectionInfo _connectionInfo;
+
 
         public MainWindowViewModel()
         {
-            CurrentViewModel = new CompetitionManagerViewModel();
+            PrepareDependencies();
+            CurrentViewModel = new CompetitionManagerViewModel(_accountInfo, _connectionInfo);
         }
 
+        private void PrepareDependencies()
+        {
+            _accountInfo = new AccountInfo();
+            _connectionInfo = new ConnectionInfo() { ServerURL = "http://projektnet.mini.pw.edu.pl/NTime/" };
+        }
 
         public ISwitchableViewModel CurrentViewModel
         {

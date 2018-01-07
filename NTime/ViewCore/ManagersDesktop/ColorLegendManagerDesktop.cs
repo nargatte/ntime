@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using BaseCore.DataBase;
 
-namespace ViewCore.Managers
+namespace ViewCore.ManagersDesktop
 {
-    public class ColorLegendManager
+    public class ColorLegendManagerDesktop
     {
         private ObservableCollection<TimeReadColorsLegendItem> _legendItems;
         public ObservableCollection<TimeReadColorsLegendItem> GetLegendItems()

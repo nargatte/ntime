@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using BaseCore.DataBase;
 using ViewCore.Entities;
 
-namespace ViewCore.Managers
+namespace ViewCore.ManagersInterfaces
 {
     public interface ICompetitionChoiceManager
     {

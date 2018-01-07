@@ -8,7 +8,7 @@ using BaseCore.DataBase;
 using MvvmHelper;
 using ViewCore;
 using ViewCore.Entities;
-using ViewCore.Managers;
+using ViewCore.ManagersDesktop;
 
 namespace AdminView.CompetitionChoice
 {

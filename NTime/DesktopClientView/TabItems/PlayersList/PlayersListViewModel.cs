@@ -12,12 +12,16 @@ namespace DesktopClientView.TabItems.PlayersList
 {
     public class PlayersListViewModel : PlayersViewModelBase, ICompetitionChoiceBase
     {
+        private AccountInfo _user;
+        private ConnectionInfo _connectionInfo;
         private CompetitionChoiceBase _competitionData;
         public CompetitionChoiceBase CompetitionData => _competitionData;
 
-        public PlayersListViewModel()
+        public PlayersListViewModel(AccountInfo user, ConnectionInfo connectionInfo)
         {
             OnCreation();
+            _user = user;
+            _connectionInfo = connectionInfo;
         }
 
         public PlayersListViewModel(IEditableCompetition currentCompetition) : base(currentCompetition)

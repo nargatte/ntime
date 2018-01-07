@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ViewCore.Managers
+namespace ViewCore.ManagersDesktop
 {
-    public class AccountManager
+    public class AccountManagerDesktop
     {
+        
         public void Register()
         {
 

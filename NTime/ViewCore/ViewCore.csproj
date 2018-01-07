@@ -30,10 +30,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,26 +49,44 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdminViewModel.cs" />
+    <Compile Include="ConnectionInfo.cs" />
+    <Compile Include="HttpClients\HttpAuthenticationClient.cs" />
+    <Compile Include="HttpClients\CustomHttpRequestException.cs" />
+    <Compile Include="HttpClients\HttpCompetitionClient.cs" />
+    <Compile Include="ManagersHttp\AccountManagerHttp.cs" />
+    <Compile Include="ManagersHttp\ManagerHttp.cs" />
+    <Compile Include="ViewModelsData\AdminViewModel.cs" />
     <Compile Include="CompetitionChoice\CompetitionChoiceBase.cs" />
     <Compile Include="CompetitionChoice\CompetitionChoiceFactory.cs" />
-    <Compile Include="CompetitionManagerViewModelBase.cs" />
+    <Compile Include="ViewModelsData\CompetitionManagerViewModelBase.cs" />
     <Compile Include="CompetitionSelectionBase.cs" />
+    <Compile Include="AccountInfo.cs" />
     <Compile Include="Entities\EditablePlayerWithLogs.cs" />
     <Compile Include="CompetitionChoice\ICompetitionChoiceBase.cs" />
-    <Compile Include="ITabItemViewModel.cs" />
-    <Compile Include="Managers\AccountManager.cs" />
-    <Compile Include="Managers\AgeCategoryManager.cs" />
-    <Compile Include="Managers\ColorLegendManager.cs" />
-    <Compile Include="Managers\CompetitionChoiceManager.cs" />
-    <Compile Include="Managers\DistancesManager.cs" />
-    <Compile Include="Managers\ExtraPlayerInfosManager.cs" />
-    <Compile Include="Managers\ICompetitionChoiceManager.cs" />
-    <Compile Include="Managers\PlayersManager.cs" />
-    <Compile Include="Managers\PlayersWithLogsManager.cs" />
-    <Compile Include="PlayersViewModelBase.cs" />
+    <Compile Include="HttpClients\HttpClientBase.cs" />
+    <Compile Include="HttpClients\HttpClientCompetition.cs" />
+    <Compile Include="ViewModelsData\ITabItemViewModel.cs" />
+    <Compile Include="ManagersDesktop\AccountManagerDesktop.cs" />
+    <Compile Include="ManagersDesktop\AgeCategoryManagerDesktop.cs" />
+    <Compile Include="ManagersDesktop\ColorLegendManagerDesktop.cs" />
+    <Compile Include="ManagersDesktop\CompetitionChoiceManagerDesktop.cs" />
+    <Compile Include="ManagersDesktop\DistancesManagerDesktop.cs" />
+    <Compile Include="ManagersDesktop\ExtraPlayerInfosManagerDesktop.cs" />
+    <Compile Include="ManagersHttp\AgeCategoryManagerHttp.cs" />
+    <Compile Include="ManagersHttp\CompetitonChoiceManagerHttp.cs" />
+    <Compile Include="ManagersHttp\DistancesManagerHttp.cs" />
+    <Compile Include="ManagersHttp\ExtraPlayerInfosManagerHttp.cs" />
+    <Compile Include="ManagersHttp\PlayersManagerHttp.cs" />
+    <Compile Include="ManagersInterfaces\IAgeCategoryManager.cs" />
+    <Compile Include="ManagersInterfaces\IDistancesManager.cs" />
+    <Compile Include="ManagersInterfaces\IExtraPlayerInfosManager.cs" />
+    <Compile Include="ManagersInterfaces\IPlayersManager.cs" />
+    <Compile Include="ManagersInterfaces\ICompetitionChoiceManager.cs" />
+    <Compile Include="ManagersDesktop\PlayersManagerDesktop.cs" />
+    <Compile Include="ManagersDesktop\PlayersWithLogsManagerDesktop.cs" />
+    <Compile Include="ViewModelsData\PlayersViewModelBase.cs" />
     <Compile Include="TimeReadColorsLegendItem.cs" />
-    <Compile Include="CompetitionItemBase.cs" />
+    <Compile Include="ViewModelsData\CompetitionItemBase.cs" />
     <Compile Include="Entities\EditableBaseClass.cs" />
     <Compile Include="Entities\EditableAgeCategory.cs" />
     <Compile Include="Entities\EditableCompetition.cs" />
@@ -79,13 +104,14 @@
     <Compile Include="Entities\LogsInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RangeInfo.cs" />
-    <Compile Include="TabItemViewModel.cs" />
+    <Compile Include="ViewModelsData\TabItemViewModel.cs" />
     <Compile Include="Validation\IsNotEmpty.cs" />
     <Compile Include="Validation\IsNumber20Rule.cs" />
     <Compile Include="Validation\IsNumber30Rule.cs" />
     <Compile Include="Validation\IsPositiveDoubleRule.cs" />
     <Compile Include="Validation\TimeFormatRule.cs" />
     <Compile Include="XamlConverters\BoolToCollapsedConverterClass.cs" />
+    <Compile Include="XamlConverters\BoolToCollapsedNegativeConverterClass.cs" />
     <Compile Include="XamlConverters\BoolToSexConverterClass.cs" />
     <Compile Include="XamlConverters\BoolToHiddenConverterClass.cs" />
     <Compile Include="XamlConverters\CompetitionToStringConverterClass.cs" />
@@ -94,16 +120,24 @@
     <Compile Include="XamlConverters\IsMaleToSexEnumConverterClass.cs" />
     <Compile Include="XamlConverters\RecordsRangeToTextConverterClass.cs" />
     <Compile Include="XamlConverters\TimeReadTypeToColorConverterClass.cs" />
+    <Compile Include="XamlConverters\UserNameConverterClass.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BaseCore\BaseCore.csproj">
       <Project>{becbcdb2-14bb-45bc-acef-2b00f7fd70e2}</Project>
       <Name>BaseCore</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Server\Server.csproj">
+      <Project>{253B1DE5-8E3E-45AD-A68B-27375662F148}</Project>
+      <Name>Server</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WpfMvvmHelper\MvvmHelper.csproj">
       <Project>{d8e2af1d-e296-4eb4-aff0-0dfb1147ea3b}</Project>
       <Name>MvvmHelper</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

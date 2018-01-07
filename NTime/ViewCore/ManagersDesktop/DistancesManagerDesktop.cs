@@ -6,15 +6,16 @@ using System.Text;
 using System.Threading.Tasks;
 using BaseCore.DataBase;
 using ViewCore.Entities;
+using ViewCore.ManagersInterfaces;
 
-namespace ViewCore.Managers
+namespace ViewCore.ManagersDesktop
 {
-    public class DistancesManager : CompetitionItemBase
+    public class DistancesManagerDesktop : CompetitionItemBase, IDistancesManager
     {
         private DistanceRepository _distanceRepository;
         public ObservableCollection<EditableDistance> DefinedDistances { get; set; } = new ObservableCollection<EditableDistance>();
 
-        public DistancesManager(IEditableCompetition currentComptetition) : base(currentComptetition)
+        public DistancesManagerDesktop(IEditableCompetition currentComptetition) : base(currentComptetition)
         {
             _distanceRepository = new DistanceRepository(new ContextProvider(), _currentCompetition.DbEntity);
         }
