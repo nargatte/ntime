@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Security;
 using BaseCore.DataBase;
 using BaseCore.Dtos;
 using BaseCore.Models;
@@ -37,12 +38,35 @@ namespace Server.Controllers
         public async Task<IHttpActionResult> Get(int id)
         {
             if (await InitCompetitionById(id) == false)
-            {
                 return NotFound();
-            }
             CompetitionDto competitionDto = new CompetitionDto(Competition);
            
             return Ok(competitionDto);
+        }
+
+        // GET /api/Competiion/FromPlayerAccount/1?ItemsOnPage=10&PageNumber=0
+        [Authorize(Roles = "Administrator,Player,Moderator")]
+        [Route("FromPlayerAccount/{id:int:min(1)}")]
+        public async Task<IHttpActionResult> GetFromPlayerAccount(int id, [FromUri]PageBindingModel pageBindingModel)
+        {
+            PlayerAccountRepository playerAccountRepository = new PlayerAccountRepository(ContextProvider);
+
+            PlayerAccount playerAccount = await playerAccountRepository.GetById(id);
+            if (playerAccount == null)
+                return NotFound();
+
+            if (CanPlayerAccess(playerAccount) == false)
+                return Unauthorized();
+
+            PageViewModel<Competition> pageViewModel =
+                await CompetitionRepository.GetCompetitionsByPlayerAccount(playerAccount, pageBindingModel);
+            PageViewModel<CompetitionDto> pageViewModelDto = new PageViewModel<CompetitionDto>
+            {
+                TotalCount = pageViewModel.TotalCount,
+                Items = pageViewModel.Items.Select(c => new CompetitionDto(c)).ToArray()
+            };
+
+            return Ok(pageViewModelDto);
         }
 
         // PUT /api/Competition/1

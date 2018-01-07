@@ -58,5 +58,10 @@ namespace BaseCore.DataBase
             });
             return competitions;
         }
+
+        public Task<PageViewModel<Competition>> GetCompetitionsByPlayerAccount(PlayerAccount playerAccount,
+            PageBindingModel pageBindingModel) =>
+            PageTemplate<Competition>(pageBindingModel,
+                e => GetSortQuery(e.Where(c => c.Players.Any(p => p.PlayerAccountId == playerAccount.Id))));
     }
 }

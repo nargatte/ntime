@@ -127,7 +127,7 @@ namespace BaseCore.DataBase
             await ContextProvider.DoAsync(async ctx =>
             {
                 pageViewModel.Items = await filters(ctx.Set<TL>()).Skip(bindingModel.ItemsOnPage * bindingModel.PageNumber).Take(bindingModel.ItemsOnPage).AsNoTracking<TL>().ToArrayAsync();
-                pageViewModel.TotalCount = await GetAllQuery(ctx.Set<T>()).CountAsync();
+                pageViewModel.TotalCount = await filters(ctx.Set<TL>()).CountAsync();
             });
             return pageViewModel;
         }

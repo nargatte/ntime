@@ -104,6 +104,28 @@ namespace Server.Controllers
             });
         }
 
+        // GET api/Player/FromPlayerAccount/1/FromCompetition/1
+        [Route("FromPlayerAccount/{idpa:int:min(1)}/FromCompetition/{idc:int:min(1)}")]
+        [Authorize(Roles = "Administrator,Moderator,Player")]
+        public async Task<IHttpActionResult> GetFromPlayerAccountFromCompetition(int idpa, int idc)
+        {
+            if (await InitCompetitionById(idc) == false)
+                return NotFound();
+
+            PlayerAccountRepository accountRepository = new PlayerAccountRepository(ContextProvider);
+
+            PlayerAccount playerAccount = await accountRepository.GetById(idpa);
+
+            if (CanPlayerAccess(playerAccount) == false)
+                return Unauthorized();
+
+            Player player = await _playerRepository.GetFromPlayerAccountFromCompetition(playerAccount, Competition);
+            if (player == null)
+                return NotFound();
+
+            return Ok(player);
+        }
+
         // GET api/Player/1
         [Route("{id:int:min(1)}")]
         [Authorize(Roles = "Administrator,Organizer,Moderator,Player")]
