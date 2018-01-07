@@ -7,6 +7,7 @@ using AdminView.CompetitionManager;
 using DesktopClientView.TabItems.PlayersList;
 using DesktopClientView.TabItems.Registration;
 using DesktopClientView.TabItems.UserAccount;
+using MvvmHelper;
 using ViewCore;
 using ViewCore.Entities;
 
@@ -15,18 +16,23 @@ namespace DesktopClientView.CompetitionManager
     public class CompetitionManagerViewModel : CompetitionManagerViewModelBase
     {
         private ConnectionInfo _connectionInfo;
+        MainUserViewModel _mainUserViewModel;
 
         public CompetitionManagerViewModel(AccountInfo accountInfo, ConnectionInfo connectionInfo)
         {
             User = accountInfo;
             _connectionInfo = connectionInfo;
+            LogoutCmd = new RelayCommand(OnLogutRequested);
+            _mainUserViewModel = new MainUserViewModel(User, _connectionInfo);
+            _mainUserViewModel.UserChanged += OnUserChanged;
             TabItems = new System.Collections.ObjectModel.ObservableCollection<ITabItemViewModel>()
             {
-                new PlayersListViewModel(User, _connectionInfo), new RegistrationViewModel(User, _connectionInfo), new MainUserViewModel(User, _connectionInfo)
+                new PlayersListViewModel(User, _connectionInfo), new RegistrationViewModel(User, _connectionInfo), _mainUserViewModel
             };
         }
 
 
+        #region Properties
         private AccountInfo _user;
         public AccountInfo User
         {
@@ -34,9 +40,29 @@ namespace DesktopClientView.CompetitionManager
             set { SetProperty(ref _user, value); }
         }
 
+
+        #endregion
+
+        #region Methods and events
+
+        public RelayCommand LogoutCmd { get; private set; }
+
+        private void OnUserChanged()
+        {
+            OnPropertyChanged(nameof(User));
+        }
+
+
+        private void OnLogutRequested()
+        {
+            _mainUserViewModel.Logout();
+        }
+
         public override void DetachAllEvents()
         {
             
         }
+
+        #endregion
     }
 }

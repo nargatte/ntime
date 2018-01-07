@@ -70,6 +70,12 @@ namespace ViewCore.ManagersHttp
             {
                 await _client.Logout();
             });
+            if (IsSuccess)
+            {
+                _accountInfo.Token = "";
+                _accountInfo.UserName = "";
+                _client.SetAuthenticationData(_accountInfo);
+            }
             return IsSuccess;
         }
     }

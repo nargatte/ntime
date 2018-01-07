@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MvvmHelper;
 using ViewCore;
 using ViewCore.Entities;
+using ViewCore.ManagersHttp;
 
 namespace DesktopClientView.TabItems.UserAccount
 {
@@ -17,7 +18,6 @@ namespace DesktopClientView.TabItems.UserAccount
     {
         private UserAccountViewModel _userAccountViewModel;
         private UserLoginViewModel _userLoginViewModel;
-        private AccountInfo _user;
         private ConnectionInfo _connectionInfo;
 
         public MainUserViewModel(AccountInfo user, ConnectionInfo connectionInfo)
@@ -36,12 +36,21 @@ namespace DesktopClientView.TabItems.UserAccount
             set { SetProperty(ref _currentViewModel, value); }
         }
 
+        private AccountInfo _user;
+        public AccountInfo User
+        {
+            get => _user;
+            set => SetProperty(ref _user, value);
+        }
+
         public string TabTitle { get; set; }
 
         #endregion
 
         #region Methods and events
         public RelayCommand ViewLoadedCmd { get; set; }
+
+        public event Action UserChanged = delegate { };
 
         private void OnViewLoaded()
         {
@@ -61,12 +70,33 @@ namespace DesktopClientView.TabItems.UserAccount
                 NavToUserAccountView();
         }
 
+        internal async void Logout()
+        {
+            var accountManager = new AccountManagerHttp(_user, _connectionInfo);
+            bool isSuccess = await accountManager.Logout();
+            if (isSuccess)
+            {
+                NavToUserLoginView();
+                DisplayNotifiation("Wylogowanie przebiegło poprawnie");
+            }
+            else
+            {
+                DisplayNotifiation(accountManager.ExcpetionMessage);
+            }
+        }
+
+        private void DisplayNotifiation(string message)
+        {
+            System.Windows.MessageBox.Show(message);
+        }
+
         private void NavToUserLoginView()
         {
             CurrentViewModel?.DetachAllEvents();
             _userLoginViewModel = new UserLoginViewModel(_user, _connectionInfo);
             _userLoginViewModel.UserAccountViewRequested += NavToUserAccountView;
             CurrentViewModel = _userLoginViewModel;
+            UserChanged();
         }
 
         private void NavToUserAccountView()
@@ -75,6 +105,7 @@ namespace DesktopClientView.TabItems.UserAccount
             _userAccountViewModel = new UserAccountViewModel(_user, _connectionInfo);
             _userAccountViewModel.UserLoginViewReuqested += NavToUserLoginView;
             CurrentViewModel = _userAccountViewModel;
+            UserChanged();
         }
 
         #endregion

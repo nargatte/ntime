@@ -111,6 +111,7 @@
     <Compile Include="Validation\IsPositiveDoubleRule.cs" />
     <Compile Include="Validation\TimeFormatRule.cs" />
     <Compile Include="XamlConverters\BoolToCollapsedConverterClass.cs" />
+    <Compile Include="XamlConverters\BoolToCollapsedNegativeConverterClass.cs" />
     <Compile Include="XamlConverters\BoolToSexConverterClass.cs" />
     <Compile Include="XamlConverters\BoolToHiddenConverterClass.cs" />
     <Compile Include="XamlConverters\CompetitionToStringConverterClass.cs" />

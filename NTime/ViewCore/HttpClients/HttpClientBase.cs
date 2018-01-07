@@ -74,6 +74,10 @@ namespace ViewCore.HttpClients
             //var requestContent = string.Format("site={0}&content={1}", Uri.EscapeDataString("http://www.google.com"),
             //    Uri.EscapeDataString("This is some content"));
             //request.Content = new StringContent(requestContent, Encoding.UTF8, "application/x-www-form-urlencoded");
+            var createdUri = request.RequestUri;
+            var createdContent = request.Content;
+            var createdHeaders = request.Headers;
+
 
             return await ResolveResponseAsync<TResponse>(await _client.SendAsync(request));
         }

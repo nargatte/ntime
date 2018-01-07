@@ -15,6 +15,7 @@ namespace Server.Dtos
         {
             this.username = userName;
             this.password = password;
+            this.grant_type = grantType;
         }
 
         public IList<KeyValuePair<string,string>> GetDictionary()

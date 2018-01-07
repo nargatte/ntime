@@ -16,12 +16,19 @@
     <Grid>
         <Grid.Resources>
             <converters:UserNameConverterClass x:Key="UserNameConverter"/>
+            <converters:BoolToCollapsedNegativeConverterClass x:Key="BoolToCollapsedNegativeConverter"/>
         </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" HorizontalAlignment="Center" FontSize="30" Text="{Binding User.UserName, Converter={StaticResource UserNameConverter}}"/>
+        
+        <StackPanel Grid.Row="0" HorizontalAlignment="Center" Orientation="Horizontal">
+            <TextBlock HorizontalAlignment="Center" FontSize="30" Text="{Binding User.UserName, Converter={StaticResource UserNameConverter}}"/>
+            <Button Margin="20, 0, 0, 0" Command="{Binding LogoutCmd}" Height="30" Width="70" FontWeight="Bold" FontSize="15"
+                    Visibility="{Binding User.IsAuthenticated, Converter={StaticResource BoolToCollapsedNegativeConverter}}"> Wyloguj </Button>
+        </StackPanel>
+        
         <TabControl Grid.Row="1" Margin="0" Style="{DynamicResource ResourceKey=styleTabControl}" 
                     ItemsSource="{Binding TabItems}">
             <TabControl.ItemTemplate>
