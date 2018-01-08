@@ -146,6 +146,7 @@ namespace ViewCore.HttpClients
             {
                 var message = $"{Environment.NewLine}StatusCode: { response.StatusCode} {Environment.NewLine}" +
                                 $"Reason: {response.ReasonPhrase} {Environment.NewLine}" +
+                                $"URI: {response.RequestMessage.RequestUri.ToString() ?? "Server could not be found"} {Environment.NewLine}" +
                                 $"Content: {Environment.NewLine}" +
                                 $"{await response.Content.ReadAsStringAsync()}";
                 throw new CustomHttpRequestException(message);

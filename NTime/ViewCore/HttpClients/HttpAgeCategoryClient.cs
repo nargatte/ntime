@@ -10,7 +10,7 @@ namespace ViewCore.HttpClients
 {
     public class HttpAgeCategoryClient : HttpForSpecificCompetitionClient<AgeCategory, AgeCategoryDto>
     {
-        protected HttpAgeCategoryClient(AccountInfo accountInfo, ConnectionInfo connectionInfo, string controllerName)
+        public HttpAgeCategoryClient(AccountInfo accountInfo, ConnectionInfo connectionInfo, string controllerName)
             : base(accountInfo, connectionInfo, controllerName)
         {
         }

@@ -10,11 +10,11 @@ using ViewCore.ManagersInterfaces;
 
 namespace ViewCore.ManagersDesktop
 {
-    public class ExtraPlayerInfosManagerDesktop : CompetitionItemBase, IExtraPlayerInfosManager
+    public class ExtraPlayerInfoManagerDesktop : CompetitionItemBase, IExtraPlayerInfoManager
     {
         public ObservableCollection<EditableExtraPlayerInfo> DefinedExtraPlayerInfo { get; set; } = new ObservableCollection<EditableExtraPlayerInfo>();
         private ExtraPlayerInfoRepository _extraPlayerInfoRepository;
-        public ExtraPlayerInfosManagerDesktop(IEditableCompetition currentComptetition) : base(currentComptetition)
+        public ExtraPlayerInfoManagerDesktop(IEditableCompetition currentComptetition) : base(currentComptetition)
         {
             //_playerRepository
             _extraPlayerInfoRepository = new ExtraPlayerInfoRepository(new ContextProvider(), _currentCompetition.DbEntity);
@@ -25,11 +25,11 @@ namespace ViewCore.ManagersDesktop
         {
             var dbExtraPlayerInfos = await _extraPlayerInfoRepository.GetAllAsync();
             DefinedExtraPlayerInfo.Clear();
-            foreach (var item in dbExtraPlayerInfos)
+            foreach (var dbExtraPlayerInfo in dbExtraPlayerInfos)
             {
                 DefinedExtraPlayerInfo.Add(new EditableExtraPlayerInfo(_currentCompetition)
                 {
-                    DbEntity = item
+                    DbEntity = dbExtraPlayerInfo
                 });
             }
             DefinedExtraPlayerInfo.Add(new EditableExtraPlayerInfo(_currentCompetition)

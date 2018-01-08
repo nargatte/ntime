@@ -65,7 +65,7 @@ namespace AdminView.Logs
 
         private async Task OnReloadlogs()
         {
-            PlayersWithLogsManagerDesktop playerWithLogsManager = new PlayersWithLogsManagerDesktop(_currentCompetition, _playerRepository);
+            PlayerWithLogsManagerDesktop playerWithLogsManager = new PlayerWithLogsManagerDesktop(_currentCompetition, _playerRepository);
             PlayersWithLogs = await playerWithLogsManager.GetAllPlayers(OnlySignificant);
 
             PlayersWithLogs = new ObservableCollection<EditablePlayerWithLogs>(PlayersWithLogs.OrderBy(p => p.StartNumber)); //TO REMOVE presentation purpose

@@ -10,9 +10,18 @@ namespace ViewCore.ManagersHttp
 {
     public abstract class ManagerHttp
     {
+        protected AccountInfo _accountInfo;
+        protected ConnectionInfo _connectionInfo;
 
         public string ExcpetionMessage { get; set; }
         public bool IsSuccess { get; set; } = true;
+        
+
+        protected ManagerHttp(AccountInfo accountInfo, ConnectionInfo connectionInfo)
+        {
+            _accountInfo = accountInfo;
+            _connectionInfo = connectionInfo;
+        }
 
         //TODO There might me problems with the method working asynchronously
         public async Task TryCallApi(Func<Task> action)

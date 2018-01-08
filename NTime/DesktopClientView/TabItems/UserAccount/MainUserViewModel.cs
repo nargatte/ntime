@@ -72,7 +72,7 @@ namespace DesktopClientView.TabItems.UserAccount
 
         internal async void Logout()
         {
-            var accountManager = new AccountManagerHttp(_user, _connectionInfo);
+            var accountManager = new AuthenticationManagerHttp(_user, _connectionInfo);
             bool isSuccess = await accountManager.Logout();
             if (isSuccess)
             {

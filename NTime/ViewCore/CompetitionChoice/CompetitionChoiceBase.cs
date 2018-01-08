@@ -14,12 +14,12 @@ namespace ViewCore
     public class CompetitionChoiceBase : BindableBase, ISwitchableViewModel
     {
 
-        public ICompetitionChoiceManager CompetitionChoiceManager { get; set; }
+        public ICompetitionManager CompetitionChoiceManager { get; set; }
 
         public CompetitionChoiceBase()
         {
             _selectedCompetition = new EditableCompetition();
-            CompetitionChoiceManager = new CompetitionChoiceManagerDesktop();
+            CompetitionChoiceManager = new CompetitionManagerDesktop();
         }
         #region Properties
         private ObservableCollection<EditableCompetition> _competitions = new ObservableCollection<EditableCompetition>();

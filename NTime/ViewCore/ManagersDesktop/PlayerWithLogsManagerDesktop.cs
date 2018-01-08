@@ -12,12 +12,12 @@ using ViewCore.Entities;
 
 namespace ViewCore.ManagersDesktop
 {
-    public class PlayersWithLogsManagerDesktop : CompetitionItemBase
+    public class PlayerWithLogsManagerDesktop : CompetitionItemBase
     {
         private PlayerRepository _playerRepository;
         private ObservableCollection<EditablePlayerWithLogs> _playersWithLogs;
 
-        public PlayersWithLogsManagerDesktop(IEditableCompetition currentComptetition, PlayerRepository playerRepository) : base(currentComptetition)
+        public PlayerWithLogsManagerDesktop(IEditableCompetition currentComptetition, PlayerRepository playerRepository) : base(currentComptetition)
         {
             _playerRepository = playerRepository;
         }

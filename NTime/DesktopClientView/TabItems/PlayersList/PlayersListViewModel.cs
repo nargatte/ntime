@@ -33,7 +33,7 @@ namespace DesktopClientView.TabItems.PlayersList
         {
             TabTitle = "Wyniki";
             ViewLoadedCmd = new RelayCommand(OnViewLoaded);
-            UpdateRankingAllCmd = new RelayCommand(OnUpdateRankingAllAsync);
+            //UpdateRankingAllCmd = new RelayCommand(OnUpdateRankingAllAsync);
             _competitionData = CompetitionChoiceFactory.NewCompetitionChoiceViewModelBase();
         }
 
@@ -43,12 +43,12 @@ namespace DesktopClientView.TabItems.PlayersList
         public RelayCommand UpdateRankingAllCmd { get; set; }
 
 
-        private async void OnUpdateRankingAllAsync()
-        {
-            await _playerRepository.UpdateRankingAllAsync();
-            await DownLoadPlayersFromDatabaseAndDisplay();
-            MessageBox.Show("Wyniki zostały przeliczone poprawnie");
-        }
+        //private async void OnUpdateRankingAllAsync()
+        //{
+        //    await _playerRepository.UpdateRankingAllAsync();
+        //    await DownLoadPlayersFromDatabaseAndDisplay();
+        //    MessageBox.Show("Wyniki zostały przeliczone poprawnie");
+        //}
 
         private void OnViewLoaded()
         {

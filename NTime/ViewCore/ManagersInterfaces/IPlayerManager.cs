@@ -6,10 +6,9 @@ using ViewCore.Entities;
 
 namespace ViewCore.ManagersInterfaces
 {
-    public interface IPlayersManager
+    public interface IPlayerManager
     {
         Task AddPlayersFromDatabase(bool removeAllDisplayedBefore);
-        Task DeleteAllPlayersFromDatabaseAsync();
         void DeleteSelectedPlayersFromDatabaseAsync(EditablePlayer[] selectedPlayersArray);
         ObservableCollection<EditablePlayer> GetPlayersToDisplay();
         RangeInfo GetRecordsRangeInfo();

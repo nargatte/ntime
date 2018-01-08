@@ -10,7 +10,7 @@ namespace ViewCore.HttpClients
 {
     public class HttpExtraPlayerInfoClient : HttpForSpecificCompetitionClient<ExtraPlayerInfo, ExtraPlayerInfoDto>
     {
-        protected HttpExtraPlayerInfoClient(AccountInfo accountInfo, ConnectionInfo connectionInfo, string controllerName)
+        public HttpExtraPlayerInfoClient(AccountInfo accountInfo, ConnectionInfo connectionInfo, string controllerName)
             : base(accountInfo, connectionInfo, controllerName)
         {
         }

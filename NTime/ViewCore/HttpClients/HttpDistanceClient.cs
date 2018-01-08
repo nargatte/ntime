@@ -10,7 +10,7 @@ namespace ViewCore.HttpClients
 {
     public class HttpDistanceClient : HttpForSpecificCompetitionClient<Distance, DistanceDto>
     {
-        protected HttpDistanceClient(AccountInfo accountInfo, ConnectionInfo connectionInfo, string controllerName)
+        public HttpDistanceClient(AccountInfo accountInfo, ConnectionInfo connectionInfo, string controllerName)
             : base(accountInfo, connectionInfo, controllerName)
         {
         }

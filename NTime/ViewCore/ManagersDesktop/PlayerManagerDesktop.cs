@@ -13,7 +13,7 @@ using ViewCore.ManagersInterfaces;
 
 namespace ViewCore.ManagersDesktop
 {
-    public class PlayersManagerDesktop : CompetitionItemBase, IPlayersManager
+    public class PlayerManagerDesktop : CompetitionItemBase, IPlayerManager
     {
         private PlayerRepository _playerRepository;
         private ObservableCollection<EditableDistance> _definedDistances;
@@ -22,7 +22,7 @@ namespace ViewCore.ManagersDesktop
         private RangeInfo _recordsRangeInfo;
         private ObservableCollection<EditablePlayer> _players = new ObservableCollection<EditablePlayer>();
 
-        public PlayersManagerDesktop(IEditableCompetition currentCompetition, ObservableCollection<EditableDistance> definedDistances,
+        public PlayerManagerDesktop(IEditableCompetition currentCompetition, ObservableCollection<EditableDistance> definedDistances,
             ObservableCollection<EditableExtraPlayerInfo> definedExtraPlayerInfos, RangeInfo recordsRangeInfo) : base(currentCompetition)
         {
             _playerRepository = new PlayerRepository(new ContextProvider(), _currentCompetition.DbEntity);
@@ -32,6 +32,7 @@ namespace ViewCore.ManagersDesktop
         }
 
         public ObservableCollection<EditablePlayer> GetPlayersToDisplay() => _players;
+        public RangeInfo GetRecordsRangeInfo() => _recordsRangeInfo;
 
 
         public async Task UpdateFilterInfo(int pageNumber, string query, SortOrderEnum? sortOrder, PlayerSort? sortCriteria,
@@ -68,16 +69,26 @@ namespace ViewCore.ManagersDesktop
         }
 
 
-        private async Task DeleteSelectedPlayersFromDatabaseAsync(ICollection<EditablePlayer> selectedPlayersList)
+        public void DeleteSelectedPlayersFromDatabaseAsync(EditablePlayer[] selectedPlayersArray)
         {
-            List<Task> tasks = new List<Task>();
-            foreach (var player in selectedPlayersList)
+            foreach (var player in selectedPlayersArray)
             {
-                tasks.Add(_playerRepository.RemoveAsync(player.DbEntity));
+                _playerRepository.RemoveAsync(player.DbEntity);
                 _players.Remove(player);
             }
-            await Task.WhenAll(tasks);
+            _recordsRangeInfo.TotalItemsCount -= selectedPlayersArray.Length;
         }
+
+        //private async Task DeleteSelectedPlayersFromDatabaseAsync(ICollection<EditablePlayer> selectedPlayersList)
+        //{
+        //    List<Task> tasks = new List<Task>();
+        //    foreach (var player in selectedPlayersList)
+        //    {
+        //        tasks.Add(_playerRepository.RemoveAsync(player.DbEntity));
+        //        _players.Remove(player);
+        //    }
+        //    await Task.WhenAll(tasks);
+        //}
 
         public async Task<bool> TryAddPlayerAsync(EditablePlayer newPlayer)
         {
@@ -102,42 +113,6 @@ namespace ViewCore.ManagersDesktop
             }
 
         }
-
-        private async void Player_UpdateRequested(object sender, EventArgs e)
-        {
-            var playerToUpdate = sender as EditablePlayer;
-            await _playerRepository.UpdateAsync(playerToUpdate.DbEntity, playerToUpdate.DbEntity.Distance,
-                playerToUpdate.DbEntity.ExtraPlayerInfo);
-            playerToUpdate.UpdateFullCategoryDisplay();
-        }
-
-        private bool GetSexForPlayer(EditablePlayer newPlayer)
-        {
-            char[] firstName = newPlayer.FirstName.ToCharArray();
-            if (firstName.Last() == 'a' && newPlayer.FirstName.ToLower() != "kuba")
-                return false;
-            else
-                return true;
-        }
-
-        public async Task NavToNextPageAsync()
-        {
-            if (_recordsRangeInfo.LastItem < _recordsRangeInfo.TotalItemsCount)
-            {
-                _recordsRangeInfo.PageNumber++;
-                await AddPlayersFromDatabase(removeAllDisplayedBefore: true);
-            }
-        }
-
-        public async Task NavToPreviousPageAsync()
-        {
-            if (_recordsRangeInfo.PageNumber > 1)
-            {
-                _recordsRangeInfo.PageNumber--;
-                await AddPlayersFromDatabase(removeAllDisplayedBefore: true);
-            }
-        }
-
         private bool CanAddPlayer(EditablePlayer newPlayer, out string message)
         {
             message = "";
@@ -166,20 +141,45 @@ namespace ViewCore.ManagersDesktop
             return true;
         }
 
-        public RangeInfo GetRecordsRangeInfo()
+        private bool GetSexForPlayer(EditablePlayer newPlayer)
         {
-            return _recordsRangeInfo;
+            char[] firstName = newPlayer.FirstName.ToCharArray();
+            if (firstName.Last() == 'a' && newPlayer.FirstName.ToLower() != "kuba")
+                return false;
+            else
+                return true;
         }
 
-        public void DeleteSelectedPlayersFromDatabaseAsync(EditablePlayer[] selectedPlayersArray)
+        private async void Player_UpdateRequested(object sender, EventArgs e)
         {
-            foreach (var player in selectedPlayersArray)
-            {
-                _playerRepository.RemoveAsync(player.DbEntity);
-                _players.Remove(player);
-            }
-            _recordsRangeInfo.TotalItemsCount -= selectedPlayersArray.Length;
+            var playerToUpdate = sender as EditablePlayer;
+            await _playerRepository.UpdateAsync(playerToUpdate.DbEntity, playerToUpdate.DbEntity.Distance,
+                playerToUpdate.DbEntity.ExtraPlayerInfo);
+            playerToUpdate.UpdateFullCategoryDisplay();
         }
+
+        
+
+        public async Task NavToNextPageAsync()
+        {
+            if (_recordsRangeInfo.LastItem < _recordsRangeInfo.TotalItemsCount)
+            {
+                _recordsRangeInfo.PageNumber++;
+                await AddPlayersFromDatabase(removeAllDisplayedBefore: true);
+            }
+        }
+
+        public async Task NavToPreviousPageAsync()
+        {
+            if (_recordsRangeInfo.PageNumber > 1)
+            {
+                _recordsRangeInfo.PageNumber--;
+                await AddPlayersFromDatabase(removeAllDisplayedBefore: true);
+            }
+        }
+
+
+
 
 
         public async Task AddPlayersFromCsvToDatabase()

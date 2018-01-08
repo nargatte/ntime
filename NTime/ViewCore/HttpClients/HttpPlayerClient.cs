@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BaseCore.DataBase;
+using BaseCore.Models;
 using BaseCore.PlayerFilter;
 using Server.Dtos;
 
@@ -11,7 +12,7 @@ namespace ViewCore.HttpClients
 {
     public class HttpPlayerClient : HttpClientBase
     {
-        protected HttpPlayerClient(AccountInfo accountInfo, ConnectionInfo connectionInfo, string controllerName)
+        public HttpPlayerClient(AccountInfo accountInfo, ConnectionInfo connectionInfo, string controllerName)
             : base(accountInfo, connectionInfo, controllerName)
         {
         }
@@ -31,29 +32,29 @@ namespace ViewCore.HttpClients
         }
 
         //POST api/Player/TakeSimpleList/FromCompetition/1?ItemsOnPage=10&PageNumber=0
-        public async Task<IEnumerable<PlayerListViewDto>> GetPlayersListView(Competition competition,
+        public async Task<PageViewModel<PlayerListViewDto>> GetPlayersListView(Competition competition,
             int itemsOnPage, int pageNumber, PlayerFilterOptions filterOptions)
         {
-            return await base.PostAsync<PlayerFilterOptions, IEnumerable<PlayerListViewDto>>(
+            return await base.PostAsync<PlayerFilterOptions, PageViewModel<PlayerListViewDto>>(
                 $"TakeSimpleList/FromCompetition/{competition.Id}{base.GetPageQuery(itemsOnPage, pageNumber)}",
                 filterOptions);
         }
 
 
         //POST api/Player/TakeFullList/FromCompetition/1?ItemsOnPage=10&PageNumber=0
-        public async Task<IEnumerable<PlayerWithScoresDto>> GetPlayersWithScore(Competition competition,
+        public async Task<PageViewModel<PlayerWithScoresDto>> GetPlayersWithScore(Competition competition,
             int itemsOnPage, int pageNumber, PlayerFilterOptions filterOptions)
         {
-            return await base.PostAsync<PlayerFilterOptions, IEnumerable<PlayerWithScoresDto>>(
+            return await base.PostAsync<PlayerFilterOptions, PageViewModel<PlayerWithScoresDto>>(
                 $"TakeFullList/FromCompetition/{competition.Id}{base.GetPageQuery(itemsOnPage, pageNumber)}",
                 filterOptions);
         }
 
         //GET api/Player/TakeFullList/FromPlayerAccount/1?ItemsOnPage=10&PageNumber=0
-        public async Task<IEnumerable<PlayerWithScoresDto>> GetPlayersFromTheiCompetitions(PlayerAccount playerAccount,
+        public async Task<PageViewModel<PlayerWithScoresDto>> GetPlayersFromTheiCompetitions(PlayerAccount playerAccount,
             int itemsOnPage, int pageNumber, PlayerFilterOptions filterOptions)
         {
-            return await base.PostAsync<PlayerFilterOptions, IEnumerable<PlayerWithScoresDto>>(
+            return await base.PostAsync<PlayerFilterOptions, PageViewModel<PlayerWithScoresDto>>(
                 $"TakeFullList/FromPlayerAccount/{playerAccount.Id}{base.GetPageQuery(itemsOnPage, pageNumber)}",
                 filterOptions);
         }
@@ -69,7 +70,7 @@ namespace ViewCore.HttpClients
             return await base.GetAsync<PlayerWithScoresDto>(playerId.ToString());
         }
 
-        public async Task Update(Player player)
+        public async Task UpdatePlayerFullInfo(Player player)
         {
             var playerDto = CreatePlayerWithScoresDto(player);
             await base.PutAsync<PlayerWithScoresDto>(playerDto.Id.ToString(), playerDto);
@@ -85,7 +86,7 @@ namespace ViewCore.HttpClients
             return await base.GetAsync<PlayerCompetitionRegisterDto>($"Register/{playerId.ToString()}");
         }
 
-        public async Task UpdateRegisteredPlayer(Player player)
+        public async Task UpdatePlayerRegisterInfo(Player player)
         {
             var playerDto = CreatePlayerCompetitionRegisterDto(player);
             await base.PutAsync<PlayerCompetitionRegisterDto>($"Register/{playerDto.Id.ToString()}", playerDto);

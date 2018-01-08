@@ -4,7 +4,7 @@ using ViewCore.Entities;
 
 namespace ViewCore.ManagersInterfaces
 {
-    public interface IDistancesManager
+    public interface IDistanceManager
     {
         ObservableCollection<EditableDistance> DefinedDistances { get; set; }
 

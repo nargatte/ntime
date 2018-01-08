@@ -7,16 +7,12 @@ using ViewCore.HttpClients;
 
 namespace ViewCore.ManagersHttp
 {
-    public class AccountManagerHttp : ManagerHttp
+    public class AuthenticationManagerHttp : ManagerHttp
     {
-        private AccountInfo _accountInfo;
-        private ConnectionInfo _connectionInfo;
         private HttpAuthenticationClient _client;
 
-        public AccountManagerHttp(AccountInfo accountInfo, ConnectionInfo connectionInfo)
+        public AuthenticationManagerHttp(AccountInfo accountInfo, ConnectionInfo connectionInfo) : base(accountInfo, connectionInfo)
         {
-            _accountInfo = accountInfo;
-            _connectionInfo = connectionInfo;
             _client = new HttpAuthenticationClient(accountInfo, connectionInfo, string.Empty);
         }
 
@@ -32,21 +28,6 @@ namespace ViewCore.ManagersHttp
                 });
             });
             return IsSuccess;
-            //try
-            //{
-            //    await _client.RegisterUser(new Server.Models.RegisterBindingModel()
-            //    {
-            //        Email = email,
-            //        Password = password,
-            //        ConfirmPassword = confirmPassword
-            //    });
-            //}
-            //catch (CustomHttpRequestException e)
-            //{
-            //    IsSuccess = false;
-            //    ExcpetionMessage = e.Message;
-            //}
-            //return IsSuccess;
         }
 
         public async Task<bool> Login(string email, string password)

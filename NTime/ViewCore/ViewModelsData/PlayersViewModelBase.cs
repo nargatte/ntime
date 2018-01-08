@@ -16,9 +16,9 @@ namespace ViewCore
 {
     public abstract class PlayersViewModelBase : TabItemViewModel
     {
-        protected PlayersManagerDesktop _playersManager;
-        protected DistancesManagerDesktop _distancesManager;
-        protected ExtraPlayerInfosManagerDesktop _extraPlayerInfosManager;
+        protected PlayerManagerDesktop _playersManager;
+        protected DistanceManagerDesktop _distancesManager;
+        protected ExtraPlayerInfoManagerDesktop _extraPlayerInfosManager;
         protected AgeCategoryManagerDesktop _ageCategoryManager;
 
         public PlayersViewModelBase()
@@ -164,7 +164,7 @@ namespace ViewCore
         {
             await DownloadPlayersInfo(selectedCompeititon);
 
-            _playersManager = new PlayersManagerDesktop(_currentCompetition, DefinedDistances, DefinedExtraPlayerInfo, RecordsRangeInfo);
+            _playersManager = new PlayerManagerDesktop(_currentCompetition, DefinedDistances, DefinedExtraPlayerInfo, RecordsRangeInfo);
             //DistanceSortCriteria = new EditableDistance(_currentCompetition);
             //ExtraPlayerInfoSortCriteria = new EditableExtraPlayerInfo(_currentCompetition);
             await _playersManager.AddPlayersFromDatabase(removeAllDisplayedBefore: true);
@@ -180,10 +180,10 @@ namespace ViewCore
                 _currentCompetition = selectedCompeititon;
             }
 
-            _distancesManager = new DistancesManagerDesktop(_currentCompetition);
+            _distancesManager = new DistanceManagerDesktop(_currentCompetition);
             DefinedDistances = await _distancesManager.DownloadDistancesAsync();
 
-            _extraPlayerInfosManager = new ExtraPlayerInfosManagerDesktop(_currentCompetition);
+            _extraPlayerInfosManager = new ExtraPlayerInfoManagerDesktop(_currentCompetition);
             DefinedExtraPlayerInfo = await _extraPlayerInfosManager.DownloadExtraPlayerInfoAsync();
 
             _ageCategoryManager = new AgeCategoryManagerDesktop(_currentCompetition);

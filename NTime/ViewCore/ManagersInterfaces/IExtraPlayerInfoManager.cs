@@ -4,7 +4,7 @@ using ViewCore.Entities;
 
 namespace ViewCore.ManagersInterfaces
 {
-    public interface IExtraPlayerInfosManager
+    public interface IExtraPlayerInfoManager
     {
         ObservableCollection<EditableExtraPlayerInfo> DefinedExtraPlayerInfo { get; set; }
 

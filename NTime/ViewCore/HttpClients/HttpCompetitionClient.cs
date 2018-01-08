@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BaseCore.DataBase;
+using BaseCore.Models;
 using Server.Dtos;
 
 namespace ViewCore.HttpClients
@@ -21,14 +22,14 @@ namespace ViewCore.HttpClients
         /// <param name="itemsOnPage">Number of downloaded items</param>
         /// <param name="pageNumber"> Page number starting from 0</param>
         /// <returns></returns>
-        public async Task<IEnumerable<CompetitionDto>> GetPageAsync(int itemsOnPage, int pageNumber)
+        public async Task<PageViewModel<CompetitionDto>> GetPageAsync(int itemsOnPage, int pageNumber)
         {
-            return await base.GetAsync<IEnumerable<CompetitionDto>>($"{base.GetPageQuery(itemsOnPage, pageNumber)}", addSlash: false);
+            return await base.GetAsync<PageViewModel<CompetitionDto>>($"{base.GetPageQuery(itemsOnPage, pageNumber)}", addSlash: false);
         }
 
-        public async Task<IEnumerable<CompetitionDto>> GetPageFromPlayerAccountAsync(PlayerAccount playerAccount, int itemsOnPage, int pageNumber)
+        public async Task<PageViewModel<CompetitionDto>> GetPageFromPlayerAccountAsync(PlayerAccount playerAccount, int itemsOnPage, int pageNumber)
         {
-            return await base.GetAsync<IEnumerable<CompetitionDto>>(
+            return await base.GetAsync<PageViewModel<CompetitionDto>>(
                 $"FromPlayerAccount/{playerAccount.Id.ToString()}{base.GetPageQuery(itemsOnPage, pageNumber)}");
         }
 
@@ -44,7 +45,7 @@ namespace ViewCore.HttpClients
             await base.PutAsync<CompetitionDto>($"/{contentDto.Id.ToString()}", contentDto);
         }
 
-        public async Task<CompetitionDto> CreateAsync(Competition content)
+        public async Task<CompetitionDto> AddAsync(Competition content)
         {
             var contentDto = new CompetitionDto(content);
             return await base.PostAsync<CompetitionDto, CompetitionDto>(string.Empty, contentDto);

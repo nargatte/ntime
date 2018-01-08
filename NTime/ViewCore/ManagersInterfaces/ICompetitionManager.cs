@@ -5,7 +5,7 @@ using ViewCore.Entities;
 
 namespace ViewCore.ManagersInterfaces
 {
-    public interface ICompetitionChoiceManager
+    public interface ICompetitionManager
     {
         Task AddAsync(Competition dbEntity);
         void ClearDatabase();

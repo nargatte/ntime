@@ -27,9 +27,9 @@ namespace ViewCore.HttpClients
             return await base.GetAsync<TDto>($"/{id.ToString()}");
         }
         
-        public async Task<TDto> GetAllFromCompetitionAsync(int competitionId)
+        public async Task<IEnumerable<TDto>> GetAllFromCompetitionAsync(int competitionId)
         {
-            return await base.GetAsync<TDto>($"/FromCompetition/{competitionId}");
+            return await base.GetAsync<IEnumerable<TDto>>($"/FromCompetition/{competitionId}");
         }
 
         public async Task UpdateAsync(TEntity content)

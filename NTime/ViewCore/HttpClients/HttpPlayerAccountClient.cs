@@ -10,7 +10,7 @@ namespace ViewCore.HttpClients
 {
     public class HttpPlayerAccountClient : HttpClientBase
     {
-        protected HttpPlayerAccountClient(AccountInfo accountInfo, ConnectionInfo connectionInfo, string controllerName)
+        public HttpPlayerAccountClient(AccountInfo accountInfo, ConnectionInfo connectionInfo, string controllerName)
             : base(accountInfo, connectionInfo, controllerName)
         {
         }

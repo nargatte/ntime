@@ -11,36 +11,40 @@ using ViewCore.ManagersInterfaces;
 
 namespace ViewCore.ManagersDesktop
 {
-    public class CompetitionChoiceManagerDesktop : BindableBase, ICompetitionChoiceManager
+    public class CompetitionManagerDesktop : BindableBase, ICompetitionManager
     {
         private CompetitionRepository _competitionRepository;
         private ObservableCollection<EditableCompetition> _competitions = new ObservableCollection<EditableCompetition>();
 
-        public CompetitionChoiceManagerDesktop()
+        public CompetitionManagerDesktop()
         {
             _competitionRepository = new CompetitionRepository(new ContextProvider());
         }
 
         public ObservableCollection<EditableCompetition> GetCompetitionsToDisplay() => _competitions;
 
-        public void DownloadDataFromDatabase()
+        public async void DownloadDataFromDatabase()
         {
-            var repository = new CompetitionRepository(new ContextProvider());
-            DownloadCompetitions(repository);
-        }
-
-        private async void DownloadCompetitions(CompetitionRepository repository)
-        {
-            var dbCompetitions = new List<Competition>(await repository.GetAllAsync());
+            var dbCompetitions = new List<Competition>(await _competitionRepository.GetAllAsync());
             foreach (var dbCompetition in dbCompetitions)
             {
                 _competitions.Add(new EditableCompetition() { DbEntity = dbCompetition });
             }
         }
 
-        public async void ClearDatabase()
+        //private async void DownloadCompetitions(CompetitionRepository repository)
+        //{
+        //    var dbCompetitions = new List<Competition>(await repository.GetAllAsync());
+        //    foreach (var dbCompetition in dbCompetitions)
+        //    {
+        //        _competitions.Add(new EditableCompetition() { DbEntity = dbCompetition });
+        //    }
+        //}
+
+        public void ClearDatabase()
         {
-            await _competitionRepository.RemoveAllAsync();
+            //await _competitionRepository.RemoveAllAsync();
+            System.Windows.MessageBox.Show("Nie masz uprawnień by usunąć wszystkie zawody");
         }
 
         public async void AddSampleCompetitionsToDatabase()

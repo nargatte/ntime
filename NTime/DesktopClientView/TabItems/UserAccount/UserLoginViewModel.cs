@@ -15,7 +15,7 @@ namespace DesktopClientView.TabItems.UserAccount
     {
         private AccountInfo _user;
         private ConnectionInfo _connectionInfo;
-        private AccountManagerHttp _accountManager;
+        private AuthenticationManagerHttp _accountManager;
         PasswordBox loginPasswordBox, registrationPasswordBox, registrationConfirmPasswordBox;
 
         public UserLoginViewModel(AccountInfo user, ConnectionInfo connectionInfo)
@@ -24,7 +24,7 @@ namespace DesktopClientView.TabItems.UserAccount
             RegisterCmd = new RelayCommand(OnRegisterRequested);
             _user = user;
             _connectionInfo = connectionInfo;
-            _accountManager = new AccountManagerHttp(_user, _connectionInfo);
+            _accountManager = new AuthenticationManagerHttp(_user, _connectionInfo);
             LoginPasswordChangedCommand = new RelayCommand<PasswordBox>(OnLoginPasswordChanged);
             RegistrationPasswordChangedCommand = new RelayCommand<PasswordBox>(OnRegistrationPasswordChanged);
             RegistrationConfirmPasswordChangedCommand = new RelayCommand<PasswordBox>(OnRegistrationConfirmPasswordChanged);

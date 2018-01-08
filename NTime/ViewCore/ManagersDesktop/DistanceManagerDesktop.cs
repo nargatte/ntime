@@ -10,12 +10,12 @@ using ViewCore.ManagersInterfaces;
 
 namespace ViewCore.ManagersDesktop
 {
-    public class DistancesManagerDesktop : CompetitionItemBase, IDistancesManager
+    public class DistanceManagerDesktop : CompetitionItemBase, IDistanceManager
     {
         private DistanceRepository _distanceRepository;
         public ObservableCollection<EditableDistance> DefinedDistances { get; set; } = new ObservableCollection<EditableDistance>();
 
-        public DistancesManagerDesktop(IEditableCompetition currentComptetition) : base(currentComptetition)
+        public DistanceManagerDesktop(IEditableCompetition currentComptetition) : base(currentComptetition)
         {
             _distanceRepository = new DistanceRepository(new ContextProvider(), _currentCompetition.DbEntity);
         }
