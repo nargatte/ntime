@@ -556,5 +556,18 @@ namespace BaseCore.DataBase
             });
             return b;
         }
+
+        public async Task<Player> GetFromPlayerAccountFromCompetition(PlayerAccount playerAccount,
+            Competition competition)
+        {
+            Player player = null;
+            await ContextProvider.DoAsync(async ctx =>
+            {
+                player = await ctx.Players.AsNoTracking()
+                    .FirstOrDefaultAsync(
+                        p => p.CompetitionId == Competition.Id && p.PlayerAccountId == playerAccount.Id);
+            });
+            return player;
+        }
     }
 }
