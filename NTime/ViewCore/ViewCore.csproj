@@ -50,6 +50,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConnectionInfo.cs" />
+    <Compile Include="Factories\AgeCategories\AgeCategoryManagerFactoryDesktop.cs" />
+    <Compile Include="Factories\AgeCategories\AgeCategoryManagerFactoryHttp.cs" />
+    <Compile Include="Factories\AgeCategories\IAgeCategoryManagerFactory.cs" />
+    <Compile Include="Factories\Competitions\CompetitionManagerFactoryDesktop.cs" />
+    <Compile Include="Factories\Competitions\CompetitionManagerFactoryHttp.cs" />
+    <Compile Include="Factories\Competitions\ICompetitionManagerFactory.cs" />
+    <Compile Include="Factories\Distances\DistanceManagerFactoryDesktop.cs" />
+    <Compile Include="Factories\Distances\DistanceManagerFactoryHttp.cs" />
+    <Compile Include="Factories\Distances\IDistanceManagerFactory.cs" />
+    <Compile Include="Factories\ExtraPlayerInfos\ExtraPlayerInfoManagerFactoryDesktop.cs" />
+    <Compile Include="Factories\ExtraPlayerInfos\ExtraPlayerInfoManagerFactoryHttp.cs" />
+    <Compile Include="Factories\ExtraPlayerInfos\IExtraPlayerInfoManagerFactory.cs" />
+    <Compile Include="Factories\Players\IPlayerManagerFactory.cs" />
+    <Compile Include="Factories\Players\PlayerManagerFactoryDesktop.cs" />
+    <Compile Include="Factories\Players\PlayerManagerFactoryHttp.cs" />
     <Compile Include="HttpClients\HttpAgeCategoryClient.cs" />
     <Compile Include="HttpClients\HttpAuthenticationClient.cs" />
     <Compile Include="HttpClients\CustomHttpRequestException.cs" />
@@ -77,7 +92,7 @@
     <Compile Include="ManagersDesktop\DistanceManagerDesktop.cs" />
     <Compile Include="ManagersDesktop\ExtraPlayerInfoManagerDesktop.cs" />
     <Compile Include="ManagersHttp\AgeCategoryManagerHttp.cs" />
-    <Compile Include="ManagersHttp\CompetitonManagerHttp.cs" />
+    <Compile Include="ManagersHttp\CompetitionManagerHttp.cs" />
     <Compile Include="ManagersHttp\DistanceManagerHttp.cs" />
     <Compile Include="ManagersHttp\ExtraPlayerInfoManagerHttp.cs" />
     <Compile Include="ManagersHttp\PlayerManagerHttp.cs" />
@@ -143,5 +158,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

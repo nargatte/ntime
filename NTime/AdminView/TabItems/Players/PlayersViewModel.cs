@@ -14,12 +14,19 @@ using System.Collections;
 using System.ComponentModel;
 using BaseCore.TimesProcess;
 using ViewCore.ManagersDesktop;
+using ViewCore.Factories.AgeCategories;
+using ViewCore.Factories.Distances;
+using ViewCore.Factories.ExtraPlayerInfos;
+using ViewCore.Factories.Players;
 
 namespace AdminView.Players
 {
     class PlayersViewModel : PlayersViewModelBase
     {
-        public PlayersViewModel(IEditableCompetition currentCompetition) : base(currentCompetition)
+        public PlayersViewModel(IEditableCompetition currentCompetition,
+                                IPlayerManagerFactory playerManagerFactory, IDistanceManagerFactory distanceManagerFactory,
+                                IExtraPlayerInfoManagerFactory extraPlayerInfoManagerFactory, IAgeCategoryManagerFactory ageCategoryManagerFactory)
+                                : base(currentCompetition, playerManagerFactory, distanceManagerFactory, extraPlayerInfoManagerFactory, ageCategoryManagerFactory)
         {
             ViewLoadedCmd = new RelayCommand(OnViewLoadedAsync);
             AddPlayerCmd = new RelayCommand(OnAddPlayerAsync);

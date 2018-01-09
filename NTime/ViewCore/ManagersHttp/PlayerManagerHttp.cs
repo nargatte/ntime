@@ -23,12 +23,15 @@ namespace ViewCore.ManagersHttp
         private IEditableCompetition _currentCompetition;
         private HttpPlayerClient _client;
 
-        public PlayerManagerHttp(AccountInfo accountInfo, ConnectionInfo connectionInfo, IEditableCompetition currentCompetition,
-                                    ObservableCollection<EditableDistance> definedDistances,
-                                    ObservableCollection<EditableExtraPlayerInfo> definedExtraPlayerInfos, RangeInfo recordsRangeInfo)
+        public PlayerManagerHttp(IEditableCompetition currentCompetition, ObservableCollection<EditableDistance> definedDistances,
+                                    ObservableCollection<EditableExtraPlayerInfo> definedExtraPlayerInfos, RangeInfo recordsRangeInfo,
+                                    AccountInfo accountInfo, ConnectionInfo connectionInfo)
                                     : base(accountInfo, connectionInfo)
         {
             _currentCompetition = currentCompetition;
+            _definedDistances = definedDistances;
+            _definedExtraPlayerInfos = definedExtraPlayerInfos;
+            _recordsRangeInfo = recordsRangeInfo;
             _client = new HttpPlayerClient(accountInfo, connectionInfo, "Player");
         }
 
@@ -181,5 +184,20 @@ namespace ViewCore.ManagersHttp
             return playerPageModel.Items.Select(dto => dto.CopyDataFromDto(new Player())).ToArray();
         }
 
+        public async Task AddPlayersFromCsvToDatabase()
+        {
+            await TryCallApi(async () =>
+            {
+                System.Windows.MessageBox.Show("Nie masz uprawnień do dodawania plików Csv");
+            });
+        }
+
+        public async Task DeleteAllPlayersFromDatabaseAsync()
+        {
+            await TryCallApi(async () =>
+            {
+                System.Windows.MessageBox.Show("Nie masz uprawnień do usunięcia wszystkich zawodników");
+            });
+        }
     }
 }

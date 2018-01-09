@@ -11,14 +11,14 @@ using MvvmHelper;
 using ViewCore;
 using ViewCore.Entities;
 
-namespace DesktopClientView.CompetitionManager
+namespace DesktopClientView.TabManager
 {
-    public class CompetitionManagerViewModel : CompetitionManagerViewModelBase
+    public class TabManagerViewModel : CompetitionManagerViewModelBase
     {
         private ConnectionInfo _connectionInfo;
         MainUserViewModel _mainUserViewModel;
 
-        public CompetitionManagerViewModel(AccountInfo accountInfo, ConnectionInfo connectionInfo)
+        public TabManagerViewModel(AccountInfo accountInfo, ConnectionInfo connectionInfo)
         {
             User = accountInfo;
             _connectionInfo = connectionInfo;

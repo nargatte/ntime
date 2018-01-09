@@ -14,19 +14,31 @@ using AdminView.Logs;
 using MvvmHelper;
 using ViewCore;
 using BaseCore.DataBase;
+using ViewCore.Factories.AgeCategories;
+using ViewCore.Factories.Distances;
+using ViewCore.Factories.ExtraPlayerInfos;
+using ViewCore.Factories.Players;
 
 namespace AdminView.CompetitionManager
 {
     class CompetitionManagerViewModel : CompetitionManagerViewModelBase
     {
+        protected IPlayerManagerFactory _playerManagerFactory = new PlayerManagerFactoryDesktop();
+        protected IDistanceManagerFactory _distanceManagerFactory = new DistanceManagerFactoryDesktop();
+        protected IExtraPlayerInfoManagerFactory _extraPlayerInfoManagerFactory = new ExtraPlayerInfoManagerFactoryDesktop();
+        protected IAgeCategoryManagerFactory _ageCategoryManagerFactory = new AgeCategoryManagerFactoryDesktop();
 
         public CompetitionManagerViewModel(ViewCore.Entities.IEditableCompetition currentCompetition) : base(currentCompetition)
         {
             GoToCompetitionCmd = new RelayCommand(OnGoToCompetition, CanGoToCompetition);
             TabItems = new ObservableCollection<ITabItemViewModel>()
             {
-                new SettingsViewModel(_currentCompetition), new PlayersViewModel(_currentCompetition), new DistancesViewModel(_currentCompetition),
-                new CategoriesViewModel(_currentCompetition), new LogsViewModel(_currentCompetition),new ScoresViewModel(_currentCompetition)
+                new SettingsViewModel(_currentCompetition),
+                new PlayersViewModel(_currentCompetition, _playerManagerFactory, _distanceManagerFactory, _extraPlayerInfoManagerFactory, _ageCategoryManagerFactory),
+                new DistancesViewModel(_currentCompetition),
+                new CategoriesViewModel(_currentCompetition),
+                new LogsViewModel(_currentCompetition),
+                new ScoresViewModel(_currentCompetition, _playerManagerFactory, _distanceManagerFactory, _extraPlayerInfoManagerFactory, _ageCategoryManagerFactory)
             };
         }
 

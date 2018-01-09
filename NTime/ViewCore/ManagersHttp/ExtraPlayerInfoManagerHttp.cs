@@ -17,8 +17,7 @@ namespace ViewCore.ManagersHttp
         private HttpExtraPlayerInfoClient _client;
         public ObservableCollection<EditableExtraPlayerInfo> DefinedExtraPlayerInfo { get; set; }
 
-        public ExtraPlayerInfoManagerHttp(AccountInfo accountInfo, ConnectionInfo connectionInfo,
-            IEditableCompetition currentCompetition) : base(accountInfo, connectionInfo)
+        public ExtraPlayerInfoManagerHttp(IEditableCompetition currentCompetition, AccountInfo accountInfo, ConnectionInfo connectionInfo) : base(accountInfo, connectionInfo)
         {
             _currentCompetition = currentCompetition;
             _client = new HttpExtraPlayerInfoClient(accountInfo, connectionInfo, "ExtraPlayerInfo");

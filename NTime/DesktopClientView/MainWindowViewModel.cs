@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DesktopClientView.CompetitionManager;
+using DesktopClientView.TabManager;
 using MvvmHelper;
 using ViewCore;
 using ViewCore.Entities;
@@ -20,7 +20,7 @@ namespace DesktopClientView
         public MainWindowViewModel()
         {
             PrepareDependencies();
-            CurrentViewModel = new CompetitionManagerViewModel(_accountInfo, _connectionInfo);
+            CurrentViewModel = new TabManagerViewModel(_accountInfo, _connectionInfo);
         }
 
         private void PrepareDependencies()

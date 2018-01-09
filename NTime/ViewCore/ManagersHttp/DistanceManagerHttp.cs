@@ -17,7 +17,7 @@ namespace ViewCore.ManagersHttp
         HttpDistanceClient _client;
         public ObservableCollection<EditableDistance> DefinedDistances { get; set; } = new ObservableCollection<EditableDistance>();
 
-        public DistanceManagerHttp(AccountInfo accountInfo, ConnectionInfo connectionInfo, IEditableCompetition currentCompetition) : base(accountInfo, connectionInfo)
+        public DistanceManagerHttp(IEditableCompetition currentCompetition, AccountInfo accountInfo, ConnectionInfo connectionInfo) : base(accountInfo, connectionInfo)
         {
             _currentCompetition = currentCompetition;
             _client = new HttpDistanceClient(accountInfo, connectionInfo, "Distance");

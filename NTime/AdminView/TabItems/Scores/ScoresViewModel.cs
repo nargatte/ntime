@@ -10,12 +10,19 @@ using BaseCore.DataBase;
 using ViewCore.Entities;
 using BaseCore.PlayerFilter;
 using System.Windows;
+using ViewCore.Factories.AgeCategories;
+using ViewCore.Factories.Distances;
+using ViewCore.Factories.ExtraPlayerInfos;
+using ViewCore.Factories.Players;
 
 namespace AdminView.Scores
 {
     class ScoresViewModel : PlayersViewModelBase
     {
-        public ScoresViewModel(IEditableCompetition currentCompetition) : base(currentCompetition)
+        public ScoresViewModel(IEditableCompetition currentCompetition,
+                                IPlayerManagerFactory playerManagerFactory, IDistanceManagerFactory distanceManagerFactory,
+                                IExtraPlayerInfoManagerFactory extraPlayerInfoManagerFactory, IAgeCategoryManagerFactory ageCategoryManagerFactory)
+                                : base(currentCompetition, playerManagerFactory, distanceManagerFactory, extraPlayerInfoManagerFactory, ageCategoryManagerFactory)
         {
             TabTitle = "Wyniki";
             ViewLoadedCmd = new RelayCommand(OnViewLoadedAsync);

@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DesktopClientView.CompetitionManager
+namespace DesktopClientView.TabManager
 {
     /// <summary>
     /// Interaction logic for CompetitionManagerView.xaml
     /// </summary>
-    public partial class CompetitionManagerView : UserControl
+    public partial class TabManagerView : UserControl
     {
-        public CompetitionManagerView()
+        public TabManagerView()
         {
             InitializeComponent();
         }

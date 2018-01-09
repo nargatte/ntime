@@ -7,6 +7,10 @@ using System.Windows;
 using MvvmHelper;
 using ViewCore;
 using ViewCore.Entities;
+using ViewCore.Factories.AgeCategories;
+using ViewCore.Factories.Distances;
+using ViewCore.Factories.ExtraPlayerInfos;
+using ViewCore.Factories.Players;
 
 namespace DesktopClientView.TabItems.PlayersList
 {
@@ -24,7 +28,10 @@ namespace DesktopClientView.TabItems.PlayersList
             _connectionInfo = connectionInfo;
         }
 
-        public PlayersListViewModel(IEditableCompetition currentCompetition) : base(currentCompetition)
+        public PlayersListViewModel(IEditableCompetition currentCompetition,
+                                    IPlayerManagerFactory playerManagerFactory, IDistanceManagerFactory distanceManagerFactory,
+                                    IExtraPlayerInfoManagerFactory extraPlayerInfoManagerFactory, IAgeCategoryManagerFactory ageCategoryManagerFactory) 
+                                    : base(currentCompetition, playerManagerFactory, distanceManagerFactory, extraPlayerInfoManagerFactory, ageCategoryManagerFactory)
         {
             OnCreation();
         }

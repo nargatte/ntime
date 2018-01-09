@@ -12,12 +12,12 @@ using ViewCore.ManagersInterfaces;
 
 namespace ViewCore.ManagersHttp
 {
-    class CompetitonManagerHttp : ManagerHttp, ICompetitionManager
+    class CompetitionManagerHttp : ManagerHttp, ICompetitionManager
     {
         private HttpCompetitionClient _client;
         private ObservableCollection<EditableCompetition> _competitions = new ObservableCollection<EditableCompetition>();
 
-        protected CompetitonManagerHttp(AccountInfo accountInfo, ConnectionInfo connectionInfo) : base(accountInfo, connectionInfo)
+        public CompetitionManagerHttp(AccountInfo accountInfo, ConnectionInfo connectionInfo) : base(accountInfo, connectionInfo)
         {
             _client = new HttpCompetitionClient(accountInfo, connectionInfo,"Competition");
         }

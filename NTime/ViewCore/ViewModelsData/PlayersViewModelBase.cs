@@ -10,28 +10,44 @@ using BaseCore.PlayerFilter;
 using MvvmHelper;
 using ViewCore;
 using ViewCore.Entities;
+using ViewCore.Factories.AgeCategories;
+using ViewCore.Factories.Distances;
+using ViewCore.Factories.ExtraPlayerInfos;
+using ViewCore.Factories.Players;
 using ViewCore.ManagersDesktop;
+using ViewCore.ManagersInterfaces;
 
 namespace ViewCore
 {
     public abstract class PlayersViewModelBase : TabItemViewModel
     {
-        protected PlayerManagerDesktop _playersManager;
-        protected DistanceManagerDesktop _distancesManager;
-        protected ExtraPlayerInfoManagerDesktop _extraPlayerInfosManager;
-        protected AgeCategoryManagerDesktop _ageCategoryManager;
+        protected IPlayerManager _playersManager;
+        protected IDistanceManager _distancesManager;
+        protected IExtraPlayerInfoManager _extraPlayerInfosManager;
+        protected IAgeCategoryManager _ageCategoryManager;
+
+        protected IPlayerManagerFactory _playerManagerFactory;
+        protected IDistanceManagerFactory _distanceManagerFactory;
+        protected IExtraPlayerInfoManagerFactory _extraPlayerInfoManagerFactory;
+        protected IAgeCategoryManagerFactory _ageCategoryManagerFactory;
 
         public PlayersViewModelBase()
         {
             OnCreation();
         }
 
-        protected PlayersViewModelBase(IEditableCompetition currentCompetition) : base(currentCompetition)
+        protected PlayersViewModelBase(IEditableCompetition currentCompetition,
+                                        IPlayerManagerFactory playerManagerFactory, IDistanceManagerFactory distanceManagerFactory,
+                                        IExtraPlayerInfoManagerFactory extraPlayerInfoManagerFactory, IAgeCategoryManagerFactory ageCategoryManagerFactory) : base(currentCompetition)
         {
             OnCreation();
             _distanceSortCriteria = new EditableDistance(_currentCompetition);
             _extraPlayerInfoSortCriteria = new EditableExtraPlayerInfo(_currentCompetition);
             _ageCategorySortCriteria = new EditableAgeCategory(_currentCompetition);
+            _playerManagerFactory = playerManagerFactory;
+            _distanceManagerFactory = distanceManagerFactory;
+            _extraPlayerInfoManagerFactory = extraPlayerInfoManagerFactory;
+            _ageCategoryManagerFactory = ageCategoryManagerFactory;
         }
 
         private void OnCreation()
@@ -164,7 +180,7 @@ namespace ViewCore
         {
             await DownloadPlayersInfo(selectedCompeititon);
 
-            _playersManager = new PlayerManagerDesktop(_currentCompetition, DefinedDistances, DefinedExtraPlayerInfo, RecordsRangeInfo);
+            _playersManager = _playerManagerFactory.CreateInstance(_currentCompetition, DefinedDistances, DefinedExtraPlayerInfo, RecordsRangeInfo);
             //DistanceSortCriteria = new EditableDistance(_currentCompetition);
             //ExtraPlayerInfoSortCriteria = new EditableExtraPlayerInfo(_currentCompetition);
             await _playersManager.AddPlayersFromDatabase(removeAllDisplayedBefore: true);
@@ -180,13 +196,13 @@ namespace ViewCore
                 _currentCompetition = selectedCompeititon;
             }
 
-            _distancesManager = new DistanceManagerDesktop(_currentCompetition);
+            _distancesManager = _distanceManagerFactory.CreateInstance(_currentCompetition);
             DefinedDistances = await _distancesManager.DownloadDistancesAsync();
 
-            _extraPlayerInfosManager = new ExtraPlayerInfoManagerDesktop(_currentCompetition);
+            _extraPlayerInfosManager = _extraPlayerInfoManagerFactory.CreateInstance(_currentCompetition);
             DefinedExtraPlayerInfo = await _extraPlayerInfosManager.DownloadExtraPlayerInfoAsync();
 
-            _ageCategoryManager = new AgeCategoryManagerDesktop(_currentCompetition);
+            _ageCategoryManager = _ageCategoryManagerFactory.CreateInstance(_currentCompetition);
             DefinedAgeCategories = await _ageCategoryManager.DownloadAgeCategoriesAsync();
         }
 

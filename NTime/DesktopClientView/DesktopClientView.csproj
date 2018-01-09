@@ -62,7 +62,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="CompetitionManager\CompetitionManagerViewModel.cs" />
+    <Compile Include="TabManager\TabManagerViewModel.cs" />
     <Compile Include="TabItems\PlayersList\PlayersListView.xaml.cs">
       <DependentUpon>PlayersListView.xaml</DependentUpon>
     </Compile>
@@ -83,7 +83,7 @@
       <DependentUpon>UserLoginView.xaml</DependentUpon>
     </Compile>
     <Compile Include="TabItems\UserAccount\UserLoginViewModel.cs" />
-    <Page Include="CompetitionManager\CompetitionManagerView.xaml">
+    <Page Include="TabManager\TabManagerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -95,8 +95,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CompetitionManager\CompetitionManagerView.xaml.cs">
-      <DependentUpon>CompetitionManagerView.xaml</DependentUpon>
+    <Compile Include="TabManager\TabManagerView.xaml.cs">
+      <DependentUpon>TabManagerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

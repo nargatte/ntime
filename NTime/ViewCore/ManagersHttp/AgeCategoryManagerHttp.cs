@@ -18,7 +18,7 @@ namespace ViewCore.ManagersHttp
 
         public ObservableCollection<EditableAgeCategory> DefinedAgeCategories { get; set; } = new ObservableCollection<EditableAgeCategory>();
 
-        public AgeCategoryManagerHttp(AccountInfo accountInfo, ConnectionInfo connectionInfo, IEditableCompetition currentCompetition) : base(accountInfo, connectionInfo)
+        public AgeCategoryManagerHttp(IEditableCompetition currentCompetition, AccountInfo accountInfo, ConnectionInfo connectionInfo) : base(accountInfo, connectionInfo)
         {
             _currentCompetition = currentCompetition;
             _client = new HttpAgeCategoryClient(accountInfo, connectionInfo, "AgeCategory");
