@@ -64,7 +64,7 @@ namespace ViewCore.HttpClients
             {
                 result += "&";
             }
-            return result + $"ItemsOnPage{itemsOnPage}&PageNumber={pageNumber}";
+            return result + $"ItemsOnPage={itemsOnPage}&PageNumber={pageNumber}";
         }
 
         private string AddControllerName(string uri, bool addSlash = true)

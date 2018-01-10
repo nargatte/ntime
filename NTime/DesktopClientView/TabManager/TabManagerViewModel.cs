@@ -20,25 +20,7 @@ namespace DesktopClientView.TabManager
 {
     public class TabManagerViewModel : CompetitionManagerViewModelBase
     {
-        //private ConnectionInfo _connectionInfo;
         MainUserViewModel _mainUserViewModel;
-
-        //public TabManagerViewModel(IPlayerManagerFactory playerManagerFactory, IDistanceManagerFactory distanceManagerFactory,
-        //                            IExtraPlayerInfoManagerFactory extraPlayerInfoManagerFactory, IAgeCategoryManagerFactory ageCategoryManagerFactory,
-        //                            AccountInfo user, ConnectionInfo connectionInfo)
-        //{
-        //    User = user;
-        //    _connectionInfo = connectionInfo;
-        //    LogoutCmd = new RelayCommand(OnLogutRequested);
-        //    _mainUserViewModel = new MainUserViewModel(playerManagerFactory, distanceManagerFactory, extraPlayerInfoManagerFactory, ageCategoryManagerFactory, User, _connectionInfo);
-        //    _mainUserViewModel.UserChanged += OnUserChanged;
-        //    TabItems = new System.Collections.ObjectModel.ObservableCollection<ITabItemViewModel>()
-        //    {
-        //        new PlayersListViewModel(new EditableCompetition(), playerManagerFactory, distanceManagerFactory, extraPlayerInfoManagerFactory, ageCategoryManagerFactory, User, _connectionInfo),
-        //        new RegistrationViewModel(new EditableCompetition(), playerManagerFactory, distanceManagerFactory, extraPlayerInfoManagerFactory, ageCategoryManagerFactory, User, _connectionInfo),
-        //        _mainUserViewModel
-        //    };
-        //}
 
         public TabManagerViewModel(DependencyContainer dependencyContainer)
         {

@@ -27,16 +27,6 @@ namespace AdminView.Scores
             UpdateRankingAllCmd = new RelayCommand(OnUpdateRankingAllAsync);
         }
 
-        //public ScoresViewModel(IEditableCompetition currentCompetition,
-        //                        IPlayerManagerFactory playerManagerFactory, IDistanceManagerFactory distanceManagerFactory,
-        //                        IExtraPlayerInfoManagerFactory extraPlayerInfoManagerFactory, IAgeCategoryManagerFactory ageCategoryManagerFactory)
-        //                        : base(currentCompetition, playerManagerFactory, distanceManagerFactory, extraPlayerInfoManagerFactory, ageCategoryManagerFactory)
-        //{
-        //    TabTitle = "Wyniki";
-        //    ViewLoadedCmd = new RelayCommand(OnViewLoadedAsync);
-        //    UpdateRankingAllCmd = new RelayCommand(OnUpdateRankingAllAsync);
-        //}
-
         #region Events and commands
 
         public RelayCommand ViewLoadedCmd { get; set; }

@@ -70,6 +70,18 @@
                                 <TextBlock Text="Ogólny" HorizontalAlignment="Center"/>
                                 <TextBox Height="25" Width="100" Text="{Binding FilterGeneral, UpdateSourceTrigger=PropertyChanged}"/>
                             </StackPanel>
+                            <StackPanel Orientation="Vertical" Margin="5">
+                                <TextBlock Text="Dystans" HorizontalAlignment="Center"/>
+                                <ComboBox ItemsSource="{Binding DefinedDistances}" DisplayMemberPath="Name" SelectedItem="{Binding DistanceSortCriteria, UpdateSourceTrigger=PropertyChanged}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Margin="5">
+                                <TextBlock Text="Dodatkowe inf." HorizontalAlignment="Center"/>
+                                <ComboBox ItemsSource="{Binding DefinedExtraPlayerInfo}" DisplayMemberPath="Name" SelectedItem="{Binding ExtraPlayerInfoSortCriteria, UpdateSourceTrigger=PropertyChanged}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Margin="5">
+                                <TextBlock Text="Kat. wiek." HorizontalAlignment="Center"/>
+                                <ComboBox ItemsSource="{Binding DefinedAgeCategories}" DisplayMemberPath="Name" SelectedItem="{Binding AgeCategorySortCriteria, UpdateSourceTrigger=PropertyChanged}"/>
+                            </StackPanel>
                         </StackPanel>
                     </StackPanel>
                     <StackPanel Name="Sorting" Orientation="Vertical" Margin="30, 0" HorizontalAlignment="Center">
@@ -83,18 +95,7 @@
                                 <TextBlock Text="Kolejność" HorizontalAlignment="Center"/>
                                 <ComboBox ItemsSource="{Binding Source={db:EnumBindingSource {x:Type db:SortOrderEnum}}}"  SelectedItem="{Binding SortOrder, UpdateSourceTrigger=PropertyChanged}"/>
                             </StackPanel>
-                            <StackPanel Orientation="Vertical" Margin="5">
-                                <TextBlock Text="Dystans" HorizontalAlignment="Center"/>
-                                <ComboBox ItemsSource="{Binding DefinedDistances}" DisplayMemberPath="Name" SelectedItem="{Binding DistanceSortCriteria, UpdateSourceTrigger=PropertyChanged}"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Vertical" Margin="5">
-                                <TextBlock Text="Dodatkowe inf." HorizontalAlignment="Center"/>
-                                <ComboBox ItemsSource="{Binding DefinedExtraPlayerInfo}" DisplayMemberPath="Name" SelectedItem="{Binding ExtraPlayerInfoSortCriteria, UpdateSourceTrigger=PropertyChanged}"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Vertical" Margin="5">
-                                <TextBlock Text="Kat. wiek." HorizontalAlignment="Center"/>
-                                <ComboBox ItemsSource="{Binding DefinedAgeCategories}" DisplayMemberPath="Name" SelectedItem="{Binding AgeCategorySortCriteria, UpdateSourceTrigger=PropertyChanged}"/>
-                            </StackPanel>
+
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
@@ -113,14 +114,14 @@
                   ItemsSource="{Binding Players}" EnableRowVirtualization="True" AutoGenerateColumns="False"
                   ColumnWidth="*" SelectionMode="Extended" CanUserAddRows="False" >
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="distancePlaceColumn" Width="SizeToHeader" Header="M-ce Open" Binding="{Binding DistancePlaceNumber}" IsReadOnly="True"/>
-                <DataGridTextColumn x:Name="categoryPlaceColumn" Width="SizeToHeader" Header="M-ce Kategoria" Binding="{Binding CategoryPlaceNumber}" IsReadOnly="True"/>
+                <!--<DataGridTextColumn x:Name="distancePlaceColumn" Width="SizeToHeader" Header="M-ce Open" Binding="{Binding DistancePlaceNumber}" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="categoryPlaceColumn" Width="SizeToHeader" Header="M-ce Kategoria" Binding="{Binding CategoryPlaceNumber}" IsReadOnly="True"/>-->
                 <DataGridTextColumn x:Name="startNumberColumn" Width="SizeToHeader" Header="Numer" Binding="{Binding StartNumber}" IsReadOnly="True"/>
                 <DataGridTextColumn x:Name="firstNameColumn"  Header="Imię" Binding="{Binding FirstName}" IsReadOnly="True"/>
                 <DataGridTextColumn x:Name="lastNameColumn" Header="Nazwisko" Binding="{Binding LastName}" IsReadOnly="True"/>
-                <DataGridTextColumn x:Name="distancedColumn"  Header="Dystans" Binding="{Binding Distance.Name}" IsReadOnly="True"/>
+                <!--<DataGridTextColumn x:Name="distancedColumn"  Header="Dystans" Binding="{Binding Distance.Name}" IsReadOnly="True"/>-->
                 <DataGridTextColumn x:Name="startTimeColumn" Header="Czas startu" Binding="{Binding StartTime}" IsReadOnly="True"/>
-                <DataGridTextColumn x:Name="extraPlayerInfoColumn"  Header="Dodatkowe info" Binding="{Binding ExtraPlayerInfo.Name}" IsReadOnly="True"/>
+                <!--<DataGridTextColumn x:Name="extraPlayerInfoColumn"  Header="Dodatkowe info" Binding="{Binding ExtraPlayerInfo.Name}" IsReadOnly="True"/>-->
                 <DataGridTextColumn x:Name="teamColumn"  Header="Klub" Binding="{Binding Team}" IsReadOnly="True"/>
                 <DataGridTextColumn x:Name="birthDateColumn" Header="Data urodzenia" Binding="{Binding BirthDate, Converter={StaticResource DateToStringConverter}}" IsReadOnly="True"/>
                 <!--<DataGridTemplateColumn x:Name="birthDateColumn"  Header="Data urodzenia" IsReadOnly="True">
@@ -132,8 +133,8 @@
                 </DataGridTemplateColumn>-->
                 <DataGridTextColumn x:Name="fullCategoryColumn" Header="kategoria" Binding="{Binding FullCategory}" IsReadOnly="True"/>
                 <DataGridTextColumn x:Name="isMaleColumn" Width="SizeToHeader" Header="Płeć" Binding="{Binding IsMale, Converter={StaticResource BoolToSexConverter}}" IsReadOnly="True"/>
-                <DataGridTextColumn x:Name="lapsCountColumn" Width="SizeToHeader" Header="Okrążenia" Binding="{Binding LapsCount}" IsReadOnly="True"/>
-                <DataGridTextColumn x:Name="timeColumn"  Header="Czas" Binding="{Binding Time}" IsReadOnly="True"/>
+                <!--<DataGridTextColumn x:Name="lapsCountColumn" Width="SizeToHeader" Header="Okrążenia" Binding="{Binding LapsCount}" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="timeColumn"  Header="Czas" Binding="{Binding Time}" IsReadOnly="True"/>-->
             </DataGrid.Columns>
         </DataGrid>
 

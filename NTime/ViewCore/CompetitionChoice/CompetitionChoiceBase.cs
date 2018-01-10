@@ -25,7 +25,6 @@ namespace ViewCore
 
         public CompetitionChoiceBase(DependencyContainer dependencyContainer)
         {
-            _selectedCompetition = new EditableCompetition();
             CompetitionManager = dependencyContainer.CompetitionManagerFactory.CreateInstance(dependencyContainer.User, dependencyContainer.ConnectionInfo);
         }
         #region Properties
@@ -36,14 +35,14 @@ namespace ViewCore
             set { SetProperty(ref _competitions, value); }
         }
 
-        private EditableCompetition _selectedCompetition;
+        private EditableCompetition _selectedCompetition = new EditableCompetition();
         public EditableCompetition SelectedCompetition
         {
             get { return _selectedCompetition; }
             set
             {
                 SetProperty(ref _selectedCompetition, value);
-                if (!string.IsNullOrWhiteSpace(SelectedCompetition.Name))
+                if (SelectedCompetition != null && !string.IsNullOrWhiteSpace(SelectedCompetition.Name))
                 {
                     IsCompetitionSelected = true;
                 }

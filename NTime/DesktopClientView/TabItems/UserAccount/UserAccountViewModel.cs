@@ -15,17 +15,8 @@ namespace DesktopClientView.TabItems.UserAccount
 {
     public class UserAccountViewModel : PlayersViewModelBase, ICompetitionChoiceBase
     {
-        //private AccountInfo _user;
         private CompetitionChoiceBase _competitionData;
         public CompetitionChoiceBase CompetitionData => _competitionData;
-        //public UserAccountViewModel(IEditableCompetition currentCompetition,
-        //                            IPlayerManagerFactory playerManagerFactory, IDistanceManagerFactory distanceManagerFactory,
-        //                            IExtraPlayerInfoManagerFactory extraPlayerInfoManagerFactory, IAgeCategoryManagerFactory ageCategoryManagerFactory,
-        //                            AccountInfo user, ConnectionInfo connectionInfo)
-        //                            : base(currentCompetition, playerManagerFactory, distanceManagerFactory, extraPlayerInfoManagerFactory, ageCategoryManagerFactory)
-        //{
-        //    _user = user;
-        //}
 
         public UserAccountViewModel(EditableCompetition currentCompetition, DependencyContainer dependencyContainer) : base(currentCompetition, dependencyContainer)
         {

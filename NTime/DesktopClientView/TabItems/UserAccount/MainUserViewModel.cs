@@ -25,26 +25,6 @@ namespace DesktopClientView.TabItems.UserAccount
         private UserLoginViewModel _userLoginViewModel;
 
         private DependencyContainer _dependencyContainer;
-        //private ConnectionInfo _connectionInfo;
-
-        //protected IPlayerManagerFactory _playerManagerFactory;
-        //protected IDistanceManagerFactory _distanceManagerFactory;
-        //protected IExtraPlayerInfoManagerFactory _extraPlayerInfoManagerFactory;
-        //protected IAgeCategoryManagerFactory _ageCategoryManagerFactory;
-
-        //public MainUserViewModel(IPlayerManagerFactory playerManagerFactory, IDistanceManagerFactory distanceManagerFactory,
-        //                            IExtraPlayerInfoManagerFactory extraPlayerInfoManagerFactory, IAgeCategoryManagerFactory ageCategoryManagerFactory,
-        //                            AccountInfo user, ConnectionInfo connectionInfo)
-        //{
-        //    TabTitle = "Moje konto";
-        //    _user = user;
-        //    _connectionInfo = connectionInfo;
-        //    ViewLoadedCmd = new RelayCommand(OnViewLoaded);
-        //    _playerManagerFactory = playerManagerFactory;
-        //    _distanceManagerFactory = distanceManagerFactory;
-        //    _extraPlayerInfoManagerFactory = extraPlayerInfoManagerFactory;
-        //    _ageCategoryManagerFactory = ageCategoryManagerFactory;
-        //}
 
         public MainUserViewModel(DependencyContainer dependencyContainer)
         {

@@ -41,6 +41,10 @@ namespace ViewCore.ManagersHttp
                 IsSuccess = false;
                 ExcpetionMessage = $"Niepoprawny adres serwera {Environment.NewLine}{e.Message}";
             }
+            if (!IsSuccess)
+            {
+                System.Windows.MessageBox.Show(ExcpetionMessage);
+            }
         }
         }
     }

@@ -15,12 +15,12 @@ namespace ViewCore.ManagersHttp
     {
         private IEditableCompetition _currentCompetition;
         private HttpExtraPlayerInfoClient _client;
-        public ObservableCollection<EditableExtraPlayerInfo> DefinedExtraPlayerInfo { get; set; }
+        public ObservableCollection<EditableExtraPlayerInfo> DefinedExtraPlayerInfo { get; set; } = new ObservableCollection<EditableExtraPlayerInfo>();
 
         public ExtraPlayerInfoManagerHttp(IEditableCompetition currentCompetition, AccountInfo accountInfo, ConnectionInfo connectionInfo) : base(accountInfo, connectionInfo)
         {
             _currentCompetition = currentCompetition;
-            _client = new HttpExtraPlayerInfoClient(accountInfo, connectionInfo, "ExtraPlayerInfo");
+            _client = new HttpExtraPlayerInfoClient(accountInfo, connectionInfo, "ExtraPlayerInfos");
         }
 
         public async Task<ObservableCollection<EditableExtraPlayerInfo>> DownloadExtraPlayerInfoAsync()

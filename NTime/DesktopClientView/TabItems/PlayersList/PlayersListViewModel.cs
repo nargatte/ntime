@@ -17,28 +17,8 @@ namespace DesktopClientView.TabItems.PlayersList
 {
     public class PlayersListViewModel : PlayersViewModelBase, ICompetitionChoiceBase
     {
-        //private AccountInfo _user;
-        //private ConnectionInfo _connectionInfo;
         private CompetitionChoiceBase _competitionData;
         public CompetitionChoiceBase CompetitionData => _competitionData;
-
-        //public PlayersListViewModel(AccountInfo user, ConnectionInfo connectionInfo)
-        //{
-        //    OnCreation();
-        //    _user = user;
-        //    _connectionInfo = connectionInfo;
-        //}
-
-        //public PlayersListViewModel(IEditableCompetition currentCompetition,
-        //                            IPlayerManagerFactory playerManagerFactory, IDistanceManagerFactory distanceManagerFactory,
-        //                            IExtraPlayerInfoManagerFactory extraPlayerInfoManagerFactory, IAgeCategoryManagerFactory ageCategoryManagerFactory,
-        //                            AccountInfo user, ConnectionInfo connectionInfo) 
-        //                            : base(currentCompetition, playerManagerFactory, distanceManagerFactory, extraPlayerInfoManagerFactory, ageCategoryManagerFactory)
-        //{
-        //    OnCreation();
-        //    _user = user;
-        //    _connectionInfo = connectionInfo;
-        //}
 
         public PlayersListViewModel(EditableCompetition currentCompetition, DependencyContainer dependencyContainer) :base(currentCompetition, dependencyContainer)
         {
@@ -47,7 +27,7 @@ namespace DesktopClientView.TabItems.PlayersList
 
         private void OnCreation()
         {
-            TabTitle = "Wyniki";
+            TabTitle = "Lista zawodników";
             ViewLoadedCmd = new RelayCommand(OnViewLoaded);
             //UpdateRankingAllCmd = new RelayCommand(OnUpdateRankingAllAsync);
             _competitionData = new CompetitionChoiceBase(_dependencyContainer);

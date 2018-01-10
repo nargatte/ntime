@@ -27,36 +27,7 @@ namespace ViewCore
         protected IExtraPlayerInfoManager _extraPlayerInfosManager;
         protected IAgeCategoryManager _ageCategoryManager;
 
-        //protected IPlayerManagerFactory _playerManagerFactory;
-        //protected IDistanceManagerFactory _distanceManagerFactory;
-        //protected IExtraPlayerInfoManagerFactory _extraPlayerInfoManagerFactory;
-        //protected IAgeCategoryManagerFactory _ageCategoryManagerFactory;
-        //private AccountInfo _user;
-        //private ConnectionInfo _connectionInfo;
-
         protected DependencyContainer _dependencyContainer;
-
-        //public PlayersViewModelBase()
-        //{
-        //    OnCreation();
-        //}
-
-        //protected PlayersViewModelBase(IEditableCompetition currentCompetition,
-        //                                IPlayerManagerFactory playerManagerFactory, IDistanceManagerFactory distanceManagerFactory,
-        //                                IExtraPlayerInfoManagerFactory extraPlayerInfoManagerFactory, IAgeCategoryManagerFactory ageCategoryManagerFactory,
-        //                                AccountInfo user = null, ConnectionInfo connectionInfo = null) : base(currentCompetition)
-        //{
-        //    OnCreation();
-        //    _distanceSortCriteria = new EditableDistance(_currentCompetition);
-        //    _extraPlayerInfoSortCriteria = new EditableExtraPlayerInfo(_currentCompetition);
-        //    _ageCategorySortCriteria = new EditableAgeCategory(_currentCompetition);
-        //    _playerManagerFactory = playerManagerFactory;
-        //    _distanceManagerFactory = distanceManagerFactory;
-        //    _extraPlayerInfoManagerFactory = extraPlayerInfoManagerFactory;
-        //    _ageCategoryManagerFactory = ageCategoryManagerFactory;
-        //    _user = user;
-        //    _connectionInfo = connectionInfo;
-        //}
 
         protected PlayersViewModelBase(IEditableCompetition currentCompetition, DependencyContainer dependencyContainer)
         {

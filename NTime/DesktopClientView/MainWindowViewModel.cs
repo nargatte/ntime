@@ -32,16 +32,16 @@ namespace DesktopClientView
             var user = new AccountInfo();
             var connectionInfo = new ConnectionInfo() { ServerURL = "http://projektnet.mini.pw.edu.pl/NTime" };
 
-            //var playerManagerFactory = new PlayerManagerFactoryHttp();
-            //var distanceManagerFactory = new DistanceManagerFactoryHttp();
-            //var extraPlayerInfoManagerFactory = new ExtraPlayerInfoManagerFactoryHttp();
-            //var ageCategoryManagerFactory = new AgeCategoryManagerFactoryHttp();
-            //var competitionManagerFactory = new CompetitionManagerFactoryHttp();
-            var playerManagerFactory = new PlayerManagerFactoryDesktop();
-            var distanceManagerFactory = new DistanceManagerFactoryDesktop();
-            var extraPlayerInfoManagerFactory = new ExtraPlayerInfoManagerFactoryDesktop();
-            var ageCategoryManagerFactory = new AgeCategoryManagerFactoryDesktop();
-            var competitionManagerFactory = new CompetitionManagerFactoryDesktop();
+            var playerManagerFactory = new PlayerManagerFactoryHttp();
+            var distanceManagerFactory = new DistanceManagerFactoryHttp();
+            var extraPlayerInfoManagerFactory = new ExtraPlayerInfoManagerFactoryHttp();
+            var ageCategoryManagerFactory = new AgeCategoryManagerFactoryHttp();
+            var competitionManagerFactory = new CompetitionManagerFactoryHttp();
+            //var playerManagerFactory = new PlayerManagerFactoryDesktop();
+            //var distanceManagerFactory = new DistanceManagerFactoryDesktop();
+            //var extraPlayerInfoManagerFactory = new ExtraPlayerInfoManagerFactoryDesktop();
+            //var ageCategoryManagerFactory = new AgeCategoryManagerFactoryDesktop();
+            //var competitionManagerFactory = new CompetitionManagerFactoryDesktop();
             dependencyContainer = new DependencyContainer(ageCategoryManagerFactory, competitionManagerFactory, distanceManagerFactory,
                                                             extraPlayerInfoManagerFactory, playerManagerFactory, user, connectionInfo);
         }

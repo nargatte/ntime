@@ -5,8 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BaseCore.DataBase;
+using BaseCore.Models;
 using BaseCore.PlayerFilter;
 using BaseCore.TimesProcess;
+using Server.Dtos;
 using ViewCore.Entities;
 using ViewCore.HttpClients;
 using ViewCore.ManagersInterfaces;
@@ -177,11 +179,24 @@ namespace ViewCore.ManagersHttp
 
         private async Task<Player[]> DownloadPlayersFromDataBase(PlayerFilterOptions playerFilter, int itemsOnPage, int pageNumber)
         {
-            var playerPageModel = await _client.GetPlayersWithScore(_currentCompetition.DbEntity, itemsOnPage, pageNumber, playerFilter);
-            _recordsRangeInfo.TotalItemsCount = playerPageModel.TotalCount;
-            //    await _playerRepository.GetAllByFilterAsync(playerFilter, pageNumber, numberOfItemsOnPage);
-            //_recordsRangeInfo.TotalItemsCount = dbPlayersTuple.Item2;
-            return playerPageModel.Items.Select(dto => dto.CopyDataFromDto(new Player())).ToArray();
+            //PageViewModel<PlayerWithScoresDto> playerPageModel;
+            IEnumerable<Player> downloadedPlayers = new List<Player>();
+            await TryCallApi(async () =>
+            {
+                var playerPageModel = await _client.GetPlayersListView(_currentCompetition.DbEntity, itemsOnPage, pageNumber, playerFilter);
+                _recordsRangeInfo.TotalItemsCount = playerPageModel.TotalCount;
+                //    await _playerRepository.GetAllByFilterAsync(playerFilter, pageNumber, numberOfItemsOnPage);
+                //_recordsRangeInfo.TotalItemsCount = dbPlayersTuple.Item2;
+                downloadedPlayers = playerPageModel.Items.Select(dto => dto.CopyDataFromDto(new Player())).ToArray();
+            });
+            if (IsSuccess)
+            {
+                return downloadedPlayers.ToArray();
+            }
+            else
+            {
+                return new Player[0];
+            }
         }
 
         public async Task AddPlayersFromCsvToDatabase()

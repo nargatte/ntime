@@ -24,18 +24,6 @@ namespace AdminView.Players
 {
     class PlayersViewModel : PlayersViewModelBase
     {
-        //public PlayersViewModel(IEditableCompetition currentCompetition,
-        //                        IPlayerManagerFactory playerManagerFactory, IDistanceManagerFactory distanceManagerFactory,
-        //                        IExtraPlayerInfoManagerFactory extraPlayerInfoManagerFactory, IAgeCategoryManagerFactory ageCategoryManagerFactory)
-        //                        : base(currentCompetition, playerManagerFactory, distanceManagerFactory, extraPlayerInfoManagerFactory, ageCategoryManagerFactory)
-        //{
-        //    ViewLoadedCmd = new RelayCommand(OnViewLoadedAsync);
-        //    AddPlayerCmd = new RelayCommand(OnAddPlayerAsync);
-        //    DeleteSelectedPlayersCmd = new RelayCommand(OnDeleteSelectedPlayersRequestedAsync);
-        //    DeleteAllPlayersCmd = new RelayCommand(OnDeleteAllPlayersRequestedAsync);
-        //    ReadPlayersFromCsvCmd = new RelayCommand(OnReadPlayersFromCsvAsync);
-        //    TabTitle = "Zawodnicy";
-        //}
 
         public PlayersViewModel(IEditableCompetition currentCompetition, DependencyContainer dependencyContainer) : base(currentCompetition, dependencyContainer)
         {

@@ -58,6 +58,18 @@
                                 <TextBlock Text="Ogólny" HorizontalAlignment="Center"/>
                                 <TextBox Height="25" Width="100" Text="{Binding FilterGeneral, UpdateSourceTrigger=PropertyChanged}"/>
                             </StackPanel>
+                            <StackPanel Orientation="Vertical" Margin="5">
+                                <TextBlock Text="Dystans" HorizontalAlignment="Center"/>
+                                <ComboBox ItemsSource="{Binding DefinedDistances}" DisplayMemberPath="Name" SelectedItem="{Binding DistanceSortCriteria, UpdateSourceTrigger=PropertyChanged}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Margin="5">
+                                <TextBlock Text="Dodatkowe inf." HorizontalAlignment="Center"/>
+                                <ComboBox ItemsSource="{Binding DefinedExtraPlayerInfo}" DisplayMemberPath="Name" SelectedItem="{Binding ExtraPlayerInfoSortCriteria, UpdateSourceTrigger=PropertyChanged}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Margin="5">
+                                <TextBlock Text="Kat. wiek." HorizontalAlignment="Center"/>
+                                <ComboBox ItemsSource="{Binding DefinedAgeCategories}" DisplayMemberPath="Name" SelectedItem="{Binding AgeCategorySortCriteria, UpdateSourceTrigger=PropertyChanged}"/>
+                            </StackPanel>
                         </StackPanel>
                     </StackPanel>
                     <StackPanel Name="Sorting" Orientation="Vertical" Margin="30, 0" HorizontalAlignment="Center">
@@ -70,18 +82,6 @@
                             <StackPanel Orientation="Vertical" Margin="5">
                                 <TextBlock Text="Kolejność" HorizontalAlignment="Center"/>
                                 <ComboBox ItemsSource="{Binding Source={db:EnumBindingSource {x:Type db:SortOrderEnum}}}"  SelectedItem="{Binding SortOrder, UpdateSourceTrigger=PropertyChanged}"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Vertical" Margin="5">
-                                <TextBlock Text="Dystans" HorizontalAlignment="Center"/>
-                                <ComboBox ItemsSource="{Binding DefinedDistances}" DisplayMemberPath="Name" SelectedItem="{Binding DistanceSortCriteria, UpdateSourceTrigger=PropertyChanged}"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Vertical" Margin="5">
-                                <TextBlock Text="Dodatkowe inf." HorizontalAlignment="Center"/>
-                                <ComboBox ItemsSource="{Binding DefinedExtraPlayerInfo}" DisplayMemberPath="Name" SelectedItem="{Binding ExtraPlayerInfoSortCriteria, UpdateSourceTrigger=PropertyChanged}"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Vertical" Margin="5">
-                                <TextBlock Text="Kat. wiek." HorizontalAlignment="Center"/>
-                                <ComboBox ItemsSource="{Binding DefinedAgeCategories}" DisplayMemberPath="Name" SelectedItem="{Binding AgeCategorySortCriteria, UpdateSourceTrigger=PropertyChanged}"/>
                             </StackPanel>
                         </StackPanel>
                     </StackPanel>

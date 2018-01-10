@@ -7,6 +7,7 @@ using BaseCore.DataBase;
 using BaseCore.Models;
 using BaseCore.PlayerFilter;
 using Server.Dtos;
+using Server.Models;
 
 namespace ViewCore.HttpClients
 {
@@ -35,9 +36,9 @@ namespace ViewCore.HttpClients
         public async Task<PageViewModel<PlayerListViewDto>> GetPlayersListView(Competition competition,
             int itemsOnPage, int pageNumber, PlayerFilterOptions filterOptions)
         {
-            return await base.PostAsync<PlayerFilterOptions, PageViewModel<PlayerListViewDto>>(
+            return await base.PostAsync<PlayerFilterOptionsBindingModel, PageViewModel<PlayerListViewDto>>(
                 $"TakeSimpleList/FromCompetition/{competition.Id}{base.GetPageQuery(itemsOnPage, pageNumber)}",
-                filterOptions);
+                new PlayerFilterOptionsBindingModel(filterOptions));
         }
 
 
@@ -45,18 +46,18 @@ namespace ViewCore.HttpClients
         public async Task<PageViewModel<PlayerWithScoresDto>> GetPlayersWithScore(Competition competition,
             int itemsOnPage, int pageNumber, PlayerFilterOptions filterOptions)
         {
-            return await base.PostAsync<PlayerFilterOptions, PageViewModel<PlayerWithScoresDto>>(
+            return await base.PostAsync<PlayerFilterOptionsBindingModel, PageViewModel<PlayerWithScoresDto>>(
                 $"TakeFullList/FromCompetition/{competition.Id}{base.GetPageQuery(itemsOnPage, pageNumber)}",
-                filterOptions);
+                new PlayerFilterOptionsBindingModel(filterOptions));
         }
 
         //GET api/Player/TakeFullList/FromPlayerAccount/1?ItemsOnPage=10&PageNumber=0
         public async Task<PageViewModel<PlayerWithScoresDto>> GetPlayersFromTheiCompetitions(PlayerAccount playerAccount,
             int itemsOnPage, int pageNumber, PlayerFilterOptions filterOptions)
         {
-            return await base.PostAsync<PlayerFilterOptions, PageViewModel<PlayerWithScoresDto>>(
+            return await base.PostAsync<PlayerFilterOptionsBindingModel, PageViewModel<PlayerWithScoresDto>>(
                 $"TakeFullList/FromPlayerAccount/{playerAccount.Id}{base.GetPageQuery(itemsOnPage, pageNumber)}",
-                filterOptions);
+                new PlayerFilterOptionsBindingModel(filterOptions));
         }
 
         //GET api/player/FromPlayerAccount/{idpa}/FromCompetition/{idc}
