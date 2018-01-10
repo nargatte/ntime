@@ -7,24 +7,36 @@ using System.Windows.Controls;
 using MvvmHelper;
 using ViewCore;
 using ViewCore.Entities;
+using ViewCore.Factories;
 using ViewCore.ManagersHttp;
 
 namespace DesktopClientView.TabItems.UserAccount
 {
     class UserLoginViewModel : BindableBase, ISwitchableViewModel
     {
-        private AccountInfo _user;
-        private ConnectionInfo _connectionInfo;
+        //private AccountInfo _user;
+        //private ConnectionInfo _connectionInfo;
         private AuthenticationManagerHttp _accountManager;
         PasswordBox loginPasswordBox, registrationPasswordBox, registrationConfirmPasswordBox;
 
-        public UserLoginViewModel(AccountInfo user, ConnectionInfo connectionInfo)
+        //public UserLoginViewModel(AccountInfo user, ConnectionInfo connectionInfo)
+        //{
+        //    LogInCmd = new RelayCommand(OnLogInRequest);
+        //    RegisterCmd = new RelayCommand(OnRegisterRequested);
+        //    _user = user;
+        //    _connectionInfo = connectionInfo;
+        //    _accountManager = new AuthenticationManagerHttp(_user, _connectionInfo);
+        //    LoginPasswordChangedCommand = new RelayCommand<PasswordBox>(OnLoginPasswordChanged);
+        //    RegistrationPasswordChangedCommand = new RelayCommand<PasswordBox>(OnRegistrationPasswordChanged);
+        //    RegistrationConfirmPasswordChangedCommand = new RelayCommand<PasswordBox>(OnRegistrationConfirmPasswordChanged);
+        //}
+
+        public UserLoginViewModel(DependencyContainer dependencyContainer)
         {
             LogInCmd = new RelayCommand(OnLogInRequest);
             RegisterCmd = new RelayCommand(OnRegisterRequested);
-            _user = user;
-            _connectionInfo = connectionInfo;
-            _accountManager = new AuthenticationManagerHttp(_user, _connectionInfo);
+            _dependencyContainer = dependencyContainer;
+            _accountManager = new AuthenticationManagerHttp(dependencyContainer.User, dependencyContainer.ConnectionInfo);
             LoginPasswordChangedCommand = new RelayCommand<PasswordBox>(OnLoginPasswordChanged);
             RegistrationPasswordChangedCommand = new RelayCommand<PasswordBox>(OnRegistrationPasswordChanged);
             RegistrationConfirmPasswordChangedCommand = new RelayCommand<PasswordBox>(OnRegistrationConfirmPasswordChanged);
@@ -62,6 +74,8 @@ namespace DesktopClientView.TabItems.UserAccount
         }
 
         private string _registrationConfirmPassword;
+        private DependencyContainer _dependencyContainer;
+
         public string RegistrationConfirmPassword
         {
             get { return _registrationConfirmPassword; }

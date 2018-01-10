@@ -18,6 +18,8 @@ using ViewCore.Factories.AgeCategories;
 using ViewCore.Factories.Distances;
 using ViewCore.Factories.ExtraPlayerInfos;
 using ViewCore.Factories.Players;
+using ViewCore.Entities;
+using ViewCore.Factories;
 
 namespace AdminView.CompetitionManager
 {
@@ -28,17 +30,31 @@ namespace AdminView.CompetitionManager
         protected IExtraPlayerInfoManagerFactory _extraPlayerInfoManagerFactory = new ExtraPlayerInfoManagerFactoryDesktop();
         protected IAgeCategoryManagerFactory _ageCategoryManagerFactory = new AgeCategoryManagerFactoryDesktop();
 
-        public CompetitionManagerViewModel(ViewCore.Entities.IEditableCompetition currentCompetition) : base(currentCompetition)
+        //public CompetitionManagerViewModel(ViewCore.Entities.IEditableCompetition currentCompetition) : base(currentCompetition)
+        //{
+        //    GoToCompetitionCmd = new RelayCommand(OnGoToCompetition, CanGoToCompetition);
+        //    TabItems = new ObservableCollection<ITabItemViewModel>()
+        //    {
+        //        new SettingsViewModel(_currentCompetition),
+        //        new PlayersViewModel(_currentCompetition, _playerManagerFactory, _distanceManagerFactory, _extraPlayerInfoManagerFactory, _ageCategoryManagerFactory),
+        //        new DistancesViewModel(_currentCompetition),
+        //        new CategoriesViewModel(_currentCompetition),
+        //        new LogsViewModel(_currentCompetition),
+        //        new ScoresViewModel(_currentCompetition, _playerManagerFactory, _distanceManagerFactory, _extraPlayerInfoManagerFactory, _ageCategoryManagerFactory)
+        //    };
+        //}
+
+        public CompetitionManagerViewModel(IEditableCompetition currentCompetition, DependencyContainer dependencyContainer) : base(currentCompetition)
         {
             GoToCompetitionCmd = new RelayCommand(OnGoToCompetition, CanGoToCompetition);
             TabItems = new ObservableCollection<ITabItemViewModel>()
             {
                 new SettingsViewModel(_currentCompetition),
-                new PlayersViewModel(_currentCompetition, _playerManagerFactory, _distanceManagerFactory, _extraPlayerInfoManagerFactory, _ageCategoryManagerFactory),
+                new PlayersViewModel(_currentCompetition, dependencyContainer),
                 new DistancesViewModel(_currentCompetition),
                 new CategoriesViewModel(_currentCompetition),
                 new LogsViewModel(_currentCompetition),
-                new ScoresViewModel(_currentCompetition, _playerManagerFactory, _distanceManagerFactory, _extraPlayerInfoManagerFactory, _ageCategoryManagerFactory)
+                new ScoresViewModel(_currentCompetition, dependencyContainer)
             };
         }
 

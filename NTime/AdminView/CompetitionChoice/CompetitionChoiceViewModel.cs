@@ -8,6 +8,7 @@ using BaseCore.DataBase;
 using MvvmHelper;
 using ViewCore;
 using ViewCore.Entities;
+using ViewCore.Factories;
 using ViewCore.ManagersDesktop;
 
 namespace AdminView.CompetitionChoice
@@ -18,9 +19,14 @@ namespace AdminView.CompetitionChoice
         public CompetitionChoiceBase CompetitionData => _competitionChoiceViewModelBase;
         public string TabTitle { get; set; }
 
-        public CompetitionChoiceViewModel()
+        //public CompetitionChoiceViewModel()
+        //{
+
+        //}
+
+        public CompetitionChoiceViewModel(DependencyContainer dependencyContainer)
         {
-            _competitionChoiceViewModelBase = CompetitionChoiceFactory.NewCompetitionChoiceViewModelBase();
+            _competitionChoiceViewModelBase = new CompetitionChoiceBase(dependencyContainer);
             CompetitionData.CompetitionSelected += CompetitionChoiceBase_CompetitionSelected;
             DisplayAddCompetitionViewCmd = new RelayCommand(OnDisplayAddCompetitionView, CanDisplayAddCompetition);
             AddCompetitionViewRequested += NavToAddCompetitionView;
@@ -51,7 +57,7 @@ namespace AdminView.CompetitionChoice
             var addCompetitionViewModel = sender as AddCompetition.AddCompetitionViewModel;
             EditableCompetition competitionToAdd = addCompetitionViewModel.NewCompetition;
             CompetitionData.Competitions.Add(competitionToAdd);
-            await CompetitionData.CompetitionChoiceManager.AddAsync(competitionToAdd.DbEntity);
+            await CompetitionData.CompetitionManager.AddAsync(competitionToAdd.DbEntity);
         }
 
         private void OnDisplayAddCompetitionView() => AddCompetitionViewRequested();

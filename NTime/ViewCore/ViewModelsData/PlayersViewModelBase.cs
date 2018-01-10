@@ -10,6 +10,7 @@ using BaseCore.PlayerFilter;
 using MvvmHelper;
 using ViewCore;
 using ViewCore.Entities;
+using ViewCore.Factories;
 using ViewCore.Factories.AgeCategories;
 using ViewCore.Factories.Distances;
 using ViewCore.Factories.ExtraPlayerInfos;
@@ -26,28 +27,45 @@ namespace ViewCore
         protected IExtraPlayerInfoManager _extraPlayerInfosManager;
         protected IAgeCategoryManager _ageCategoryManager;
 
-        protected IPlayerManagerFactory _playerManagerFactory;
-        protected IDistanceManagerFactory _distanceManagerFactory;
-        protected IExtraPlayerInfoManagerFactory _extraPlayerInfoManagerFactory;
-        protected IAgeCategoryManagerFactory _ageCategoryManagerFactory;
+        //protected IPlayerManagerFactory _playerManagerFactory;
+        //protected IDistanceManagerFactory _distanceManagerFactory;
+        //protected IExtraPlayerInfoManagerFactory _extraPlayerInfoManagerFactory;
+        //protected IAgeCategoryManagerFactory _ageCategoryManagerFactory;
+        //private AccountInfo _user;
+        //private ConnectionInfo _connectionInfo;
+
+        protected DependencyContainer _dependencyContainer;
 
         //public PlayersViewModelBase()
         //{
         //    OnCreation();
         //}
 
-        protected PlayersViewModelBase(IEditableCompetition currentCompetition,
-                                        IPlayerManagerFactory playerManagerFactory, IDistanceManagerFactory distanceManagerFactory,
-                                        IExtraPlayerInfoManagerFactory extraPlayerInfoManagerFactory, IAgeCategoryManagerFactory ageCategoryManagerFactory) : base(currentCompetition)
+        //protected PlayersViewModelBase(IEditableCompetition currentCompetition,
+        //                                IPlayerManagerFactory playerManagerFactory, IDistanceManagerFactory distanceManagerFactory,
+        //                                IExtraPlayerInfoManagerFactory extraPlayerInfoManagerFactory, IAgeCategoryManagerFactory ageCategoryManagerFactory,
+        //                                AccountInfo user = null, ConnectionInfo connectionInfo = null) : base(currentCompetition)
+        //{
+        //    OnCreation();
+        //    _distanceSortCriteria = new EditableDistance(_currentCompetition);
+        //    _extraPlayerInfoSortCriteria = new EditableExtraPlayerInfo(_currentCompetition);
+        //    _ageCategorySortCriteria = new EditableAgeCategory(_currentCompetition);
+        //    _playerManagerFactory = playerManagerFactory;
+        //    _distanceManagerFactory = distanceManagerFactory;
+        //    _extraPlayerInfoManagerFactory = extraPlayerInfoManagerFactory;
+        //    _ageCategoryManagerFactory = ageCategoryManagerFactory;
+        //    _user = user;
+        //    _connectionInfo = connectionInfo;
+        //}
+
+        protected PlayersViewModelBase(IEditableCompetition currentCompetition, DependencyContainer dependencyContainer)
         {
             OnCreation();
-            _distanceSortCriteria = new EditableDistance(_currentCompetition);
-            _extraPlayerInfoSortCriteria = new EditableExtraPlayerInfo(_currentCompetition);
-            _ageCategorySortCriteria = new EditableAgeCategory(_currentCompetition);
-            _playerManagerFactory = playerManagerFactory;
-            _distanceManagerFactory = distanceManagerFactory;
-            _extraPlayerInfoManagerFactory = extraPlayerInfoManagerFactory;
-            _ageCategoryManagerFactory = ageCategoryManagerFactory;
+            _dependencyContainer = dependencyContainer;
+            _distanceSortCriteria = new EditableDistance(currentCompetition);
+            _extraPlayerInfoSortCriteria = new EditableExtraPlayerInfo(currentCompetition);
+            _ageCategorySortCriteria = new EditableAgeCategory(currentCompetition);
+            _currentCompetition = currentCompetition;
         }
 
         private void OnCreation()
@@ -180,7 +198,8 @@ namespace ViewCore
         {
             await DownloadPlayersInfo(selectedCompeititon);
 
-            _playersManager = _playerManagerFactory.CreateInstance(_currentCompetition, DefinedDistances, DefinedExtraPlayerInfo, RecordsRangeInfo);
+            _playersManager = _dependencyContainer.PlayerManagerFactory.CreateInstance(_currentCompetition, DefinedDistances,
+                DefinedExtraPlayerInfo, RecordsRangeInfo, _dependencyContainer.User, _dependencyContainer.ConnectionInfo);
             //DistanceSortCriteria = new EditableDistance(_currentCompetition);
             //ExtraPlayerInfoSortCriteria = new EditableExtraPlayerInfo(_currentCompetition);
             await _playersManager.AddPlayersFromDatabase(removeAllDisplayedBefore: true);
@@ -196,13 +215,13 @@ namespace ViewCore
                 _currentCompetition = selectedCompeititon;
             }
 
-            _distancesManager = _distanceManagerFactory.CreateInstance(_currentCompetition);
+            _distancesManager = _dependencyContainer.DistanceManagerFactory.CreateInstance(_currentCompetition, _dependencyContainer.User, _dependencyContainer.ConnectionInfo);
             DefinedDistances = await _distancesManager.DownloadDistancesAsync();
 
-            _extraPlayerInfosManager = _extraPlayerInfoManagerFactory.CreateInstance(_currentCompetition);
+            _extraPlayerInfosManager = _dependencyContainer.ExtraPlayerInfoManagerFactory.CreateInstance(_currentCompetition, _dependencyContainer.User, _dependencyContainer.ConnectionInfo);
             DefinedExtraPlayerInfo = await _extraPlayerInfosManager.DownloadExtraPlayerInfoAsync();
 
-            _ageCategoryManager = _ageCategoryManagerFactory.CreateInstance(_currentCompetition);
+            _ageCategoryManager = _dependencyContainer.AgeCategoryManagerFactory.CreateInstance(_currentCompetition, _dependencyContainer.User, _dependencyContainer.ConnectionInfo);
             DefinedAgeCategories = await _ageCategoryManager.DownloadAgeCategoriesAsync();
         }
 

@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using MvvmHelper;
 using ViewCore.Entities;
+using ViewCore.Factories;
+using ViewCore.Factories.Competitions;
 using ViewCore.ManagersDesktop;
 using ViewCore.ManagersInterfaces;
 
@@ -14,12 +16,17 @@ namespace ViewCore
     public class CompetitionChoiceBase : BindableBase, ISwitchableViewModel
     {
 
-        public ICompetitionManager CompetitionChoiceManager { get; set; }
+        public ICompetitionManager CompetitionManager { get; set; }
 
-        public CompetitionChoiceBase()
+        public CompetitionChoiceBase(AccountInfo user, ConnectionInfo connectionInfo)
+        {
+
+        }
+
+        public CompetitionChoiceBase(DependencyContainer dependencyContainer)
         {
             _selectedCompetition = new EditableCompetition();
-            CompetitionChoiceManager = new CompetitionManagerDesktop();
+            CompetitionManager = dependencyContainer.CompetitionManagerFactory.CreateInstance(dependencyContainer.User, dependencyContainer.ConnectionInfo);
         }
         #region Properties
         private ObservableCollection<EditableCompetition> _competitions = new ObservableCollection<EditableCompetition>();
@@ -44,7 +51,6 @@ namespace ViewCore
             }
         }
 
-
         private bool _isCompetitionSelected;
         public bool IsCompetitionSelected
         {
@@ -61,8 +67,8 @@ namespace ViewCore
 
         public void DownloadCompetitionsFromDatabaseAndDisplay()
         {
-            CompetitionChoiceManager.DownloadDataFromDatabase();
-            Competitions = CompetitionChoiceManager.GetCompetitionsToDisplay();
+            CompetitionManager.DownloadDataFromDatabase();
+            Competitions = CompetitionManager.GetCompetitionsToDisplay();
         }
 
         public void DetachAllEvents()

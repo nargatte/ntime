@@ -8,9 +8,9 @@ namespace ViewCore
 {
     public class CompetitionChoiceFactory
     {
-        public static CompetitionChoiceBase NewCompetitionChoiceViewModelBase()
-        {
-            return new CompetitionChoiceBase();
-        }
+        //public static CompetitionChoiceBase CreateInstance()
+        //{
+        //    return new CompetitionChoiceBase();
+        //}
     }
 }

@@ -11,6 +11,12 @@ using AdminView.CompetitionManager;
 using ViewCore;
 using MvvmHelper;
 using ViewCore.Entities;
+using ViewCore.Factories;
+using ViewCore.Factories.AgeCategories;
+using ViewCore.Factories.Competitions;
+using ViewCore.Factories.Distances;
+using ViewCore.Factories.ExtraPlayerInfos;
+using ViewCore.Factories.Players;
 
 namespace AdminView
 {
@@ -21,11 +27,25 @@ namespace AdminView
         private CompetitionManagerViewModel _competitionManagerViewModel;
         private IEditableCompetition _currentCompetition;
 
+        private DependencyContainer dependencyContainer;
+
         public MainWindowViewModel()
         {
+            PrepareDependencied();
             NavToCompetitionChoiceView();
             ChangeCompetitionCmd = new RelayCommand(OnChangeCompetition);
             //NavToCompetitionManagerView();
+        }
+
+        private void PrepareDependencied()
+        {
+            var ageCategoryManagerFactory = new AgeCategoryManagerFactoryDesktop();
+            var competitionManagerFactory = new CompetitionManagerFactoryDesktop();
+            var distanceManagerFactory = new DistanceManagerFactoryDesktop();
+            var extraPlayerInfoManagerFactory = new ExtraPlayerInfoManagerFactoryDesktop();
+            var playerManagerFactory = new PlayerManagerFactoryDesktop();
+            dependencyContainer = new DependencyContainer(ageCategoryManagerFactory, competitionManagerFactory, distanceManagerFactory,
+                extraPlayerInfoManagerFactory, playerManagerFactory);
         }
 
         private void OnChangeCompetition()
@@ -36,7 +56,7 @@ namespace AdminView
         private void NavToCompetitionChoiceView()
         {
             CurrentViewModel?.DetachAllEvents();
-            _competitionChoiceViewModel = new CompetitionChoiceViewModel();
+            _competitionChoiceViewModel = new CompetitionChoiceViewModel(dependencyContainer);
             _competitionChoiceViewModel.CompetitionManagerRequested += NavToCompetitionManagerView;
             CurrentViewModel = _competitionChoiceViewModel;
         }
@@ -46,7 +66,7 @@ namespace AdminView
             if (_competitionChoiceViewModel != null)
                 _currentCompetition = _competitionChoiceViewModel.CompetitionData.SelectedCompetition;
             CurrentViewModel?.DetachAllEvents();
-            _competitionManagerViewModel = new CompetitionManagerViewModel(_currentCompetition);
+            _competitionManagerViewModel = new CompetitionManagerViewModel(_currentCompetition, dependencyContainer);
             CurrentViewModel = _competitionManagerViewModel;
         }
 

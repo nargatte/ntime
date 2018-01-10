@@ -55,6 +55,7 @@
     <Compile Include="Factories\Competitions\CompetitionManagerFactoryDesktop.cs" />
     <Compile Include="Factories\Competitions\CompetitionManagerFactoryHttp.cs" />
     <Compile Include="Factories\Competitions\ICompetitionManagerFactory.cs" />
+    <Compile Include="Factories\DependencyContainer.cs" />
     <Compile Include="Factories\Distances\DistanceManagerFactoryDesktop.cs" />
     <Compile Include="Factories\Distances\DistanceManagerFactoryHttp.cs" />
     <Compile Include="Factories\Distances\IDistanceManagerFactory.cs" />

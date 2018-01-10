@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ViewCore;
 using ViewCore.Entities;
+using ViewCore.Factories;
 using ViewCore.Factories.AgeCategories;
 using ViewCore.Factories.Distances;
 using ViewCore.Factories.ExtraPlayerInfos;
@@ -14,17 +15,21 @@ namespace DesktopClientView.TabItems.UserAccount
 {
     public class UserAccountViewModel : PlayersViewModelBase, ICompetitionChoiceBase
     {
-        private AccountInfo _user;
+        //private AccountInfo _user;
         private CompetitionChoiceBase _competitionData;
         public CompetitionChoiceBase CompetitionData => _competitionData;
-        public UserAccountViewModel(IEditableCompetition currentCompetition,
-                                    IPlayerManagerFactory playerManagerFactory, IDistanceManagerFactory distanceManagerFactory,
-                                    IExtraPlayerInfoManagerFactory extraPlayerInfoManagerFactory, IAgeCategoryManagerFactory ageCategoryManagerFactory,
-                                    AccountInfo user, ConnectionInfo connectionInfo)
-                                    : base(currentCompetition, playerManagerFactory, distanceManagerFactory, extraPlayerInfoManagerFactory, ageCategoryManagerFactory)
+        //public UserAccountViewModel(IEditableCompetition currentCompetition,
+        //                            IPlayerManagerFactory playerManagerFactory, IDistanceManagerFactory distanceManagerFactory,
+        //                            IExtraPlayerInfoManagerFactory extraPlayerInfoManagerFactory, IAgeCategoryManagerFactory ageCategoryManagerFactory,
+        //                            AccountInfo user, ConnectionInfo connectionInfo)
+        //                            : base(currentCompetition, playerManagerFactory, distanceManagerFactory, extraPlayerInfoManagerFactory, ageCategoryManagerFactory)
+        //{
+        //    _user = user;
+        //}
+
+        public UserAccountViewModel(EditableCompetition currentCompetition, DependencyContainer dependencyContainer) : base(currentCompetition, dependencyContainer)
         {
-            _competitionData = new CompetitionChoiceBase();
-            _user = user;
+            _competitionData = new CompetitionChoiceBase(dependencyContainer);
         }
 
         public void DetachAllEvents()

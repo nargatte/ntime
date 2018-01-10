@@ -14,20 +14,28 @@ using ViewCore.Factories.AgeCategories;
 using ViewCore.Factories.Distances;
 using ViewCore.Factories.ExtraPlayerInfos;
 using ViewCore.Factories.Players;
+using ViewCore.Factories;
 
 namespace AdminView.Scores
 {
     class ScoresViewModel : PlayersViewModelBase
     {
-        public ScoresViewModel(IEditableCompetition currentCompetition,
-                                IPlayerManagerFactory playerManagerFactory, IDistanceManagerFactory distanceManagerFactory,
-                                IExtraPlayerInfoManagerFactory extraPlayerInfoManagerFactory, IAgeCategoryManagerFactory ageCategoryManagerFactory)
-                                : base(currentCompetition, playerManagerFactory, distanceManagerFactory, extraPlayerInfoManagerFactory, ageCategoryManagerFactory)
+        public ScoresViewModel(IEditableCompetition currentCompetition, DependencyContainer dependencyContainer) : base(currentCompetition, dependencyContainer)
         {
             TabTitle = "Wyniki";
             ViewLoadedCmd = new RelayCommand(OnViewLoadedAsync);
             UpdateRankingAllCmd = new RelayCommand(OnUpdateRankingAllAsync);
         }
+
+        //public ScoresViewModel(IEditableCompetition currentCompetition,
+        //                        IPlayerManagerFactory playerManagerFactory, IDistanceManagerFactory distanceManagerFactory,
+        //                        IExtraPlayerInfoManagerFactory extraPlayerInfoManagerFactory, IAgeCategoryManagerFactory ageCategoryManagerFactory)
+        //                        : base(currentCompetition, playerManagerFactory, distanceManagerFactory, extraPlayerInfoManagerFactory, ageCategoryManagerFactory)
+        //{
+        //    TabTitle = "Wyniki";
+        //    ViewLoadedCmd = new RelayCommand(OnViewLoadedAsync);
+        //    UpdateRankingAllCmd = new RelayCommand(OnUpdateRankingAllAsync);
+        //}
 
         #region Events and commands
 

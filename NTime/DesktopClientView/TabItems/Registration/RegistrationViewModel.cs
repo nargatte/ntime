@@ -7,6 +7,7 @@ using BaseCore.DataBase;
 using MvvmHelper;
 using ViewCore;
 using ViewCore.Entities;
+using ViewCore.Factories;
 using ViewCore.Factories.AgeCategories;
 using ViewCore.Factories.Distances;
 using ViewCore.Factories.ExtraPlayerInfos;
@@ -16,20 +17,28 @@ namespace DesktopClientView.TabItems.Registration
 {
     public class RegistrationViewModel : PlayersViewModelBase, ICompetitionChoiceBase 
     {
-        AccountInfo _user;
-        private ConnectionInfo _connectionInfo;
+        //AccountInfo _user;
+        //private ConnectionInfo _connectionInfo;
         private CompetitionChoiceBase _competitionData;
         public CompetitionChoiceBase CompetitionData => _competitionData;
-        public RegistrationViewModel(IEditableCompetition currentCompetition,
-                                    IPlayerManagerFactory playerManagerFactory, IDistanceManagerFactory distanceManagerFactory,
-                                    IExtraPlayerInfoManagerFactory extraPlayerInfoManagerFactory, IAgeCategoryManagerFactory ageCategoryManagerFactory,
-                                    AccountInfo user, ConnectionInfo connectionInfo)
-                                    : base(currentCompetition, playerManagerFactory, distanceManagerFactory, extraPlayerInfoManagerFactory, ageCategoryManagerFactory)
+        //public RegistrationViewModel(IEditableCompetition currentCompetition,
+        //                            IPlayerManagerFactory playerManagerFactory, IDistanceManagerFactory distanceManagerFactory,
+        //                            IExtraPlayerInfoManagerFactory extraPlayerInfoManagerFactory, IAgeCategoryManagerFactory ageCategoryManagerFactory,
+        //                            AccountInfo user, ConnectionInfo connectionInfo)
+        //                            : base(currentCompetition, playerManagerFactory, distanceManagerFactory, extraPlayerInfoManagerFactory, ageCategoryManagerFactory)
+        //{
+        //    TabTitle = "Zapisy";
+        //    _user = user;
+        //    _connectionInfo = connectionInfo;
+        //    _competitionData = new CompetitionChoiceBase();
+        //    ViewLoadedCmd = new RelayCommand(OnViewLoaded);
+        //    AddPlayerCmd = new RelayCommand(OnAddPlayerAsync);
+        //}
+
+        public RegistrationViewModel(EditableCompetition currentCompetition, DependencyContainer dependencyContainer) :base(currentCompetition, dependencyContainer)
         {
             TabTitle = "Zapisy";
-            _user = user;
-            _connectionInfo = connectionInfo;
-            _competitionData = new CompetitionChoiceBase();
+            _competitionData = new CompetitionChoiceBase(dependencyContainer);
             ViewLoadedCmd = new RelayCommand(OnViewLoaded);
             AddPlayerCmd = new RelayCommand(OnAddPlayerAsync);
         }

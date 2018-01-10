@@ -7,6 +7,7 @@ using System.Windows;
 using MvvmHelper;
 using ViewCore;
 using ViewCore.Entities;
+using ViewCore.Factories;
 using ViewCore.Factories.AgeCategories;
 using ViewCore.Factories.Distances;
 using ViewCore.Factories.ExtraPlayerInfos;
@@ -16,8 +17,8 @@ namespace DesktopClientView.TabItems.PlayersList
 {
     public class PlayersListViewModel : PlayersViewModelBase, ICompetitionChoiceBase
     {
-        private AccountInfo _user;
-        private ConnectionInfo _connectionInfo;
+        //private AccountInfo _user;
+        //private ConnectionInfo _connectionInfo;
         private CompetitionChoiceBase _competitionData;
         public CompetitionChoiceBase CompetitionData => _competitionData;
 
@@ -28,15 +29,20 @@ namespace DesktopClientView.TabItems.PlayersList
         //    _connectionInfo = connectionInfo;
         //}
 
-        public PlayersListViewModel(IEditableCompetition currentCompetition,
-                                    IPlayerManagerFactory playerManagerFactory, IDistanceManagerFactory distanceManagerFactory,
-                                    IExtraPlayerInfoManagerFactory extraPlayerInfoManagerFactory, IAgeCategoryManagerFactory ageCategoryManagerFactory,
-                                    AccountInfo user, ConnectionInfo connectionInfo) 
-                                    : base(currentCompetition, playerManagerFactory, distanceManagerFactory, extraPlayerInfoManagerFactory, ageCategoryManagerFactory)
+        //public PlayersListViewModel(IEditableCompetition currentCompetition,
+        //                            IPlayerManagerFactory playerManagerFactory, IDistanceManagerFactory distanceManagerFactory,
+        //                            IExtraPlayerInfoManagerFactory extraPlayerInfoManagerFactory, IAgeCategoryManagerFactory ageCategoryManagerFactory,
+        //                            AccountInfo user, ConnectionInfo connectionInfo) 
+        //                            : base(currentCompetition, playerManagerFactory, distanceManagerFactory, extraPlayerInfoManagerFactory, ageCategoryManagerFactory)
+        //{
+        //    OnCreation();
+        //    _user = user;
+        //    _connectionInfo = connectionInfo;
+        //}
+
+        public PlayersListViewModel(EditableCompetition currentCompetition, DependencyContainer dependencyContainer) :base(currentCompetition, dependencyContainer)
         {
             OnCreation();
-            _user = user;
-            _connectionInfo = connectionInfo;
         }
 
         private void OnCreation()
@@ -44,7 +50,7 @@ namespace DesktopClientView.TabItems.PlayersList
             TabTitle = "Wyniki";
             ViewLoadedCmd = new RelayCommand(OnViewLoaded);
             //UpdateRankingAllCmd = new RelayCommand(OnUpdateRankingAllAsync);
-            _competitionData = CompetitionChoiceFactory.NewCompetitionChoiceViewModelBase();
+            _competitionData = new CompetitionChoiceBase(_dependencyContainer);
         }
 
         #region Events and commands

@@ -7,7 +7,9 @@ using DesktopClientView.TabManager;
 using MvvmHelper;
 using ViewCore;
 using ViewCore.Entities;
+using ViewCore.Factories;
 using ViewCore.Factories.AgeCategories;
+using ViewCore.Factories.Competitions;
 using ViewCore.Factories.Distances;
 using ViewCore.Factories.ExtraPlayerInfos;
 using ViewCore.Factories.Players;
@@ -17,30 +19,31 @@ namespace DesktopClientView
     internal class MainWindowViewModel : BindableBase
     {
         private ISwitchableViewModel _currentViewModel;
-        private AccountInfo _user;
-        private ConnectionInfo _connectionInfo;
-
-        protected IPlayerManagerFactory _playerManagerFactory;
-        protected IDistanceManagerFactory _distanceManagerFactory;
-        protected IExtraPlayerInfoManagerFactory _extraPlayerInfoManagerFactory;
-        protected IAgeCategoryManagerFactory _ageCategoryManagerFactory;
-
+        private DependencyContainer dependencyContainer;
 
         public MainWindowViewModel()
         {
             PrepareDependencies();
-            CurrentViewModel = new TabManagerViewModel(_playerManagerFactory, _distanceManagerFactory, _extraPlayerInfoManagerFactory, _ageCategoryManagerFactory, _user, _connectionInfo);
+            CurrentViewModel = new TabManagerViewModel(dependencyContainer);
         }
 
         private void PrepareDependencies()
         {
-            _user = new AccountInfo();
-            _connectionInfo = new ConnectionInfo() { ServerURL = "http://projektnet.mini.pw.edu.pl/NTime" };
+            var user = new AccountInfo();
+            var connectionInfo = new ConnectionInfo() { ServerURL = "http://projektnet.mini.pw.edu.pl/NTime" };
 
-            _playerManagerFactory = new PlayerManagerFactoryDesktop();
-            _distanceManagerFactory = new DistanceManagerFactoryDesktop();
-            _extraPlayerInfoManagerFactory = new ExtraPlayerInfoManagerFactoryDesktop();
-            _ageCategoryManagerFactory = new AgeCategoryManagerFactoryDesktop();
+            //var playerManagerFactory = new PlayerManagerFactoryHttp();
+            //var distanceManagerFactory = new DistanceManagerFactoryHttp();
+            //var extraPlayerInfoManagerFactory = new ExtraPlayerInfoManagerFactoryHttp();
+            //var ageCategoryManagerFactory = new AgeCategoryManagerFactoryHttp();
+            //var competitionManagerFactory = new CompetitionManagerFactoryHttp();
+            var playerManagerFactory = new PlayerManagerFactoryDesktop();
+            var distanceManagerFactory = new DistanceManagerFactoryDesktop();
+            var extraPlayerInfoManagerFactory = new ExtraPlayerInfoManagerFactoryDesktop();
+            var ageCategoryManagerFactory = new AgeCategoryManagerFactoryDesktop();
+            var competitionManagerFactory = new CompetitionManagerFactoryDesktop();
+            dependencyContainer = new DependencyContainer(ageCategoryManagerFactory, competitionManagerFactory, distanceManagerFactory,
+                                                            extraPlayerInfoManagerFactory, playerManagerFactory, user, connectionInfo);
         }
 
         public ISwitchableViewModel CurrentViewModel
