@@ -31,10 +31,10 @@ namespace ViewCore
         protected IExtraPlayerInfoManagerFactory _extraPlayerInfoManagerFactory;
         protected IAgeCategoryManagerFactory _ageCategoryManagerFactory;
 
-        public PlayersViewModelBase()
-        {
-            OnCreation();
-        }
+        //public PlayersViewModelBase()
+        //{
+        //    OnCreation();
+        //}
 
         protected PlayersViewModelBase(IEditableCompetition currentCompetition,
                                         IPlayerManagerFactory playerManagerFactory, IDistanceManagerFactory distanceManagerFactory,

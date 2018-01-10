@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 using MvvmHelper;
 using ViewCore;
 using ViewCore.Entities;
+using ViewCore.Factories.AgeCategories;
+using ViewCore.Factories.Distances;
+using ViewCore.Factories.ExtraPlayerInfos;
+using ViewCore.Factories.Players;
 using ViewCore.ManagersHttp;
 
 namespace DesktopClientView.TabItems.UserAccount
@@ -20,12 +24,23 @@ namespace DesktopClientView.TabItems.UserAccount
         private UserLoginViewModel _userLoginViewModel;
         private ConnectionInfo _connectionInfo;
 
-        public MainUserViewModel(AccountInfo user, ConnectionInfo connectionInfo)
+        protected IPlayerManagerFactory _playerManagerFactory;
+        protected IDistanceManagerFactory _distanceManagerFactory;
+        protected IExtraPlayerInfoManagerFactory _extraPlayerInfoManagerFactory;
+        protected IAgeCategoryManagerFactory _ageCategoryManagerFactory;
+
+        public MainUserViewModel(IPlayerManagerFactory playerManagerFactory, IDistanceManagerFactory distanceManagerFactory,
+                                    IExtraPlayerInfoManagerFactory extraPlayerInfoManagerFactory, IAgeCategoryManagerFactory ageCategoryManagerFactory,
+                                    AccountInfo user, ConnectionInfo connectionInfo)
         {
             TabTitle = "Moje konto";
             _user = user;
             _connectionInfo = connectionInfo;
             ViewLoadedCmd = new RelayCommand(OnViewLoaded);
+            _playerManagerFactory = playerManagerFactory;
+            _distanceManagerFactory = distanceManagerFactory;
+            _extraPlayerInfoManagerFactory = extraPlayerInfoManagerFactory;
+            _ageCategoryManagerFactory = ageCategoryManagerFactory;
         }
 
         #region Properties
@@ -110,7 +125,8 @@ namespace DesktopClientView.TabItems.UserAccount
         private void NavToUserAccountView()
         {
             CurrentViewModel?.DetachAllEvents();
-            _userAccountViewModel = new UserAccountViewModel(_user, _connectionInfo);
+            _userAccountViewModel = new UserAccountViewModel(new EditableCompetition(), _playerManagerFactory, _distanceManagerFactory,
+                _extraPlayerInfoManagerFactory, _ageCategoryManagerFactory, User, _connectionInfo);
             _userAccountViewModel.UserLoginViewReuqested += NavToUserLoginView;
             CurrentViewModel = _userAccountViewModel;
             UserChanged();

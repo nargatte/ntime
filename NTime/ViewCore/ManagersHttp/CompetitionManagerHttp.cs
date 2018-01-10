@@ -40,6 +40,7 @@ namespace ViewCore.ManagersHttp
         public async void DownloadDataFromDatabase()
         {
             var dtoCompetitions = await _client.GetPageAsync(100, 0);
+            _competitions.Clear();
             foreach (var dbCompetition in dtoCompetitions.Items.Select(dto => dto.CopyDataFromDto(new Competition())))
             {
                 _competitions.Add(new EditableCompetition() { DbEntity = dbCompetition });

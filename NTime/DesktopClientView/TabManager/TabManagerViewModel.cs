@@ -10,6 +10,10 @@ using DesktopClientView.TabItems.UserAccount;
 using MvvmHelper;
 using ViewCore;
 using ViewCore.Entities;
+using ViewCore.Factories.AgeCategories;
+using ViewCore.Factories.Distances;
+using ViewCore.Factories.ExtraPlayerInfos;
+using ViewCore.Factories.Players;
 
 namespace DesktopClientView.TabManager
 {
@@ -18,16 +22,20 @@ namespace DesktopClientView.TabManager
         private ConnectionInfo _connectionInfo;
         MainUserViewModel _mainUserViewModel;
 
-        public TabManagerViewModel(AccountInfo accountInfo, ConnectionInfo connectionInfo)
+        public TabManagerViewModel(IPlayerManagerFactory playerManagerFactory, IDistanceManagerFactory distanceManagerFactory,
+                                    IExtraPlayerInfoManagerFactory extraPlayerInfoManagerFactory, IAgeCategoryManagerFactory ageCategoryManagerFactory,
+                                    AccountInfo user, ConnectionInfo connectionInfo)
         {
-            User = accountInfo;
+            User = user;
             _connectionInfo = connectionInfo;
             LogoutCmd = new RelayCommand(OnLogutRequested);
-            _mainUserViewModel = new MainUserViewModel(User, _connectionInfo);
+            _mainUserViewModel = new MainUserViewModel(playerManagerFactory, distanceManagerFactory, extraPlayerInfoManagerFactory, ageCategoryManagerFactory, User, _connectionInfo);
             _mainUserViewModel.UserChanged += OnUserChanged;
             TabItems = new System.Collections.ObjectModel.ObservableCollection<ITabItemViewModel>()
             {
-                new PlayersListViewModel(User, _connectionInfo), new RegistrationViewModel(User, _connectionInfo), _mainUserViewModel
+                new PlayersListViewModel(new EditableCompetition(), playerManagerFactory, distanceManagerFactory, extraPlayerInfoManagerFactory, ageCategoryManagerFactory, User, _connectionInfo),
+                new RegistrationViewModel(new EditableCompetition(), playerManagerFactory, distanceManagerFactory, extraPlayerInfoManagerFactory, ageCategoryManagerFactory, User, _connectionInfo),
+                _mainUserViewModel
             };
         }
 

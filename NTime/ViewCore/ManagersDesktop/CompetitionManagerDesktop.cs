@@ -23,15 +23,6 @@ namespace ViewCore.ManagersDesktop
 
         public ObservableCollection<EditableCompetition> GetCompetitionsToDisplay() => _competitions;
 
-        public async void DownloadDataFromDatabase()
-        {
-            var dbCompetitions = new List<Competition>(await _competitionRepository.GetAllAsync());
-            foreach (var dbCompetition in dbCompetitions)
-            {
-                _competitions.Add(new EditableCompetition() { DbEntity = dbCompetition });
-            }
-        }
-
         //private async void DownloadCompetitions(CompetitionRepository repository)
         //{
         //    var dbCompetitions = new List<Competition>(await repository.GetAllAsync());
@@ -41,10 +32,25 @@ namespace ViewCore.ManagersDesktop
         //    }
         //}
 
+        public async Task AddAsync(Competition dbEntity)
+        {
+            await _competitionRepository.AddAsync(dbEntity);
+        }
+
         public void ClearDatabase()
         {
             //await _competitionRepository.RemoveAllAsync();
             System.Windows.MessageBox.Show("Nie masz uprawnień by usunąć wszystkie zawody");
+        }
+
+        public async void DownloadDataFromDatabase()
+        {
+            var dbCompetitions = new List<Competition>(await _competitionRepository.GetAllAsync());
+            _competitions.Clear();
+            foreach (var dbCompetition in dbCompetitions)
+            {
+                _competitions.Add(new EditableCompetition() { DbEntity = dbCompetition });
+            }
         }
 
         public async void AddSampleCompetitionsToDatabase()
@@ -62,9 +68,5 @@ namespace ViewCore.ManagersDesktop
             });
         }
 
-        public async Task AddAsync(Competition dbEntity)
-        {
-            await _competitionRepository.AddAsync(dbEntity);
-        }
     }
 }

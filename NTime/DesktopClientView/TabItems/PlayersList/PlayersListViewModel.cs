@@ -21,19 +21,22 @@ namespace DesktopClientView.TabItems.PlayersList
         private CompetitionChoiceBase _competitionData;
         public CompetitionChoiceBase CompetitionData => _competitionData;
 
-        public PlayersListViewModel(AccountInfo user, ConnectionInfo connectionInfo)
+        //public PlayersListViewModel(AccountInfo user, ConnectionInfo connectionInfo)
+        //{
+        //    OnCreation();
+        //    _user = user;
+        //    _connectionInfo = connectionInfo;
+        //}
+
+        public PlayersListViewModel(IEditableCompetition currentCompetition,
+                                    IPlayerManagerFactory playerManagerFactory, IDistanceManagerFactory distanceManagerFactory,
+                                    IExtraPlayerInfoManagerFactory extraPlayerInfoManagerFactory, IAgeCategoryManagerFactory ageCategoryManagerFactory,
+                                    AccountInfo user, ConnectionInfo connectionInfo) 
+                                    : base(currentCompetition, playerManagerFactory, distanceManagerFactory, extraPlayerInfoManagerFactory, ageCategoryManagerFactory)
         {
             OnCreation();
             _user = user;
             _connectionInfo = connectionInfo;
-        }
-
-        public PlayersListViewModel(IEditableCompetition currentCompetition,
-                                    IPlayerManagerFactory playerManagerFactory, IDistanceManagerFactory distanceManagerFactory,
-                                    IExtraPlayerInfoManagerFactory extraPlayerInfoManagerFactory, IAgeCategoryManagerFactory ageCategoryManagerFactory) 
-                                    : base(currentCompetition, playerManagerFactory, distanceManagerFactory, extraPlayerInfoManagerFactory, ageCategoryManagerFactory)
-        {
-            OnCreation();
         }
 
         private void OnCreation()

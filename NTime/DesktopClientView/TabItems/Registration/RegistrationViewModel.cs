@@ -7,6 +7,10 @@ using BaseCore.DataBase;
 using MvvmHelper;
 using ViewCore;
 using ViewCore.Entities;
+using ViewCore.Factories.AgeCategories;
+using ViewCore.Factories.Distances;
+using ViewCore.Factories.ExtraPlayerInfos;
+using ViewCore.Factories.Players;
 
 namespace DesktopClientView.TabItems.Registration
 {
@@ -16,7 +20,11 @@ namespace DesktopClientView.TabItems.Registration
         private ConnectionInfo _connectionInfo;
         private CompetitionChoiceBase _competitionData;
         public CompetitionChoiceBase CompetitionData => _competitionData;
-        public RegistrationViewModel(AccountInfo user, ConnectionInfo connectionInfo)
+        public RegistrationViewModel(IEditableCompetition currentCompetition,
+                                    IPlayerManagerFactory playerManagerFactory, IDistanceManagerFactory distanceManagerFactory,
+                                    IExtraPlayerInfoManagerFactory extraPlayerInfoManagerFactory, IAgeCategoryManagerFactory ageCategoryManagerFactory,
+                                    AccountInfo user, ConnectionInfo connectionInfo)
+                                    : base(currentCompetition, playerManagerFactory, distanceManagerFactory, extraPlayerInfoManagerFactory, ageCategoryManagerFactory)
         {
             TabTitle = "Zapisy";
             _user = user;
