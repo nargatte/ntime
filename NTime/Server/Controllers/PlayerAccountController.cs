@@ -46,7 +46,10 @@ namespace Server.Controllers
             if (playerAccount == null)
                 return NotFound();
 
-            return Redirect(Url.Content("~/api/playeraccount/" + playerAccount.Id));
+            if (CanPlayerAccess(playerAccount) == false)
+                return Unauthorized();
+
+            return Ok(new PlayerAccountDto(playerAccount));
         }
 
         // GET api/PlayerAccount/1
