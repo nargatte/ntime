@@ -19,5 +19,15 @@ namespace ViewCore.HttpClients
         {
             return await base.GetAsync<PlayerAccountDto>($"{id}");
         }
+        
+        public async Task<PlayerAccountDto> GetLoggedInPlayerAccount()
+        {
+            return await base.GetAsync<PlayerAccountDto>(null);
+        }
+
+        public async Task UpdatePlayerAccountInfo(PlayerAccount playerAccount)
+        {
+            await base.PutAsync<PlayerAccountDto>(playerAccount.Id.ToString(), new PlayerAccountDto(playerAccount));
+        }
     }
 }

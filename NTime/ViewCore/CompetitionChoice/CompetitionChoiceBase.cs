@@ -53,7 +53,7 @@ namespace ViewCore
         private bool _isCompetitionSelected;
         public bool IsCompetitionSelected
         {
-            get { return _isCompetitionSelected; }
+            get { return _isCompetitionSelected && SelectedCompetition!=null; }
             set { _isCompetitionSelected = value; }
         }
 

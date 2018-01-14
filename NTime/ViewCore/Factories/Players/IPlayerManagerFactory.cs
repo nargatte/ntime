@@ -14,7 +14,7 @@ namespace ViewCore.Factories.Players
     public interface IPlayerManagerFactory
     {
         IPlayerManager CreateInstance(IEditableCompetition currentCompetition, ObservableCollection<EditableDistance> definedDistances,
-                                    ObservableCollection<EditableExtraPlayerInfo> definedExtraPlayerInfos, RangeInfo recordsRangeInfo,
+                                    ObservableCollection<EditableExtraPlayerInfo> definedExtraPlayerInfos, RangeInfo recordsRangeInfo = null,
                                     AccountInfo accountInfo = null, ConnectionInfo connectionInfo = null);
     }
 }

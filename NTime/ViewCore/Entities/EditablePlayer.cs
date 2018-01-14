@@ -25,6 +25,8 @@ namespace ViewCore.Entities
 
             if (BirthDate == null || BirthDate < new DateTime(2000, 1, 1))
                 BirthDate = DateTime.Today;
+            DefinedDistances = new ObservableCollection<EditableDistance>();
+            DefinedExtraPlayerInfo = new ObservableCollection<EditableExtraPlayerInfo>();
         }
 
         public EditablePlayer(IEditableCompetition currentComptetition, ICollection<EditableDistance> distances,

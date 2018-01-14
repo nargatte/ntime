@@ -84,12 +84,15 @@ namespace ViewCore.ManagersHttp
                 var playerToAdd = newPlayer.Clone() as EditablePlayer;
                 var tempDistance = playerToAdd.DbEntity.Distance;
                 var tempExtraPlayerInfo = playerToAdd.DbEntity.ExtraPlayerInfo;
-                await _client.AddRegisteredPlayer(_currentCompetition.DbEntity.Id, playerToAdd.DbEntity);
+                await TryCallApi(async () =>
+                    {
+                        await _client.AddRegisteredPlayer(_currentCompetition.DbEntity.Id, playerToAdd.DbEntity);
+                    }, "Zapis na zawody przebiegł poprawnie");
                 playerToAdd.DbEntity.Distance = tempDistance;
                 playerToAdd.DbEntity.ExtraPlayerInfo = tempExtraPlayerInfo;
                 playerToAdd.UpdateRequested += Player_UpdateRequested;
                 _players.Add(playerToAdd);
-                _recordsRangeInfo.TotalItemsCount++;
+                //_recordsRangeInfo.TotalItemsCount++;
                 return true;
             }
             else
@@ -168,7 +171,7 @@ namespace ViewCore.ManagersHttp
         {
             if (removeAllDisplayedBefore)
                 _players = new ObservableCollection<EditablePlayer>();
-            var dbPlayers = await DownloadPlayersFromDataBase(_playerFilter, _recordsRangeInfo.ItemsPerPage,_recordsRangeInfo.PageNumber - 1);
+            var dbPlayers = await DownloadPlayersFromDataBase(_playerFilter, _recordsRangeInfo.ItemsPerPage, _recordsRangeInfo.PageNumber - 1);
             foreach (var dbPlayer in dbPlayers)
             {
                 EditablePlayer playerToAdd = new EditablePlayer(_currentCompetition, _definedDistances, _definedExtraPlayerInfos, dbPlayer);

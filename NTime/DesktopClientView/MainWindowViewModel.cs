@@ -12,6 +12,7 @@ using ViewCore.Factories.AgeCategories;
 using ViewCore.Factories.Competitions;
 using ViewCore.Factories.Distances;
 using ViewCore.Factories.ExtraPlayerInfos;
+using ViewCore.Factories.PlayerAccounts;
 using ViewCore.Factories.Players;
 
 namespace DesktopClientView
@@ -37,13 +38,18 @@ namespace DesktopClientView
             var extraPlayerInfoManagerFactory = new ExtraPlayerInfoManagerFactoryHttp();
             var ageCategoryManagerFactory = new AgeCategoryManagerFactoryHttp();
             var competitionManagerFactory = new CompetitionManagerFactoryHttp();
+            var playerAccountManagerFactory = new PlayerAccountManagerFactoryHttp();
+
             //var playerManagerFactory = new PlayerManagerFactoryDesktop();
             //var distanceManagerFactory = new DistanceManagerFactoryDesktop();
             //var extraPlayerInfoManagerFactory = new ExtraPlayerInfoManagerFactoryDesktop();
             //var ageCategoryManagerFactory = new AgeCategoryManagerFactoryDesktop();
             //var competitionManagerFactory = new CompetitionManagerFactoryDesktop();
+            //var playerAccountManagerFactory = new PlayerAccountManagerFactoryHttp();
+
             dependencyContainer = new DependencyContainer(ageCategoryManagerFactory, competitionManagerFactory, distanceManagerFactory,
-                                                            extraPlayerInfoManagerFactory, playerManagerFactory, user, connectionInfo);
+                                                            extraPlayerInfoManagerFactory, playerManagerFactory, playerAccountManagerFactory,
+                                                            user, connectionInfo);
         }
 
         public ISwitchableViewModel CurrentViewModel

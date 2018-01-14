@@ -23,8 +23,9 @@ namespace Server.Dtos
             BirthDate = player.BirthDate;
             IsMale = player.IsMale;
             Team = player.Team;
-            ExtraPlayerInfoId = player.ExtraPlayerInfoId ?? throw new Exception("ExtraPlayerInfoId == null");
-            DistanceId = player.DistanceId ?? throw new Exception("DistanceId == null");
+            ExtraPlayerInfoId = player.ExtraPlayerInfo.Id;
+
+            DistanceId = player.Distance.Id;
             CompetitionId = player.CompetitionId;
         }
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using ViewCore.HttpClients;
 
 namespace ViewCore.ManagersHttp
@@ -24,7 +25,7 @@ namespace ViewCore.ManagersHttp
         }
 
         //TODO There might me problems with the method working asynchronously
-        public async Task TryCallApi(Func<Task> action)
+        public async Task TryCallApi(Func<Task> action, string successMessage = null)
         {
             IsSuccess = true;
             try
@@ -43,7 +44,11 @@ namespace ViewCore.ManagersHttp
             }
             if (!IsSuccess)
             {
-                System.Windows.MessageBox.Show(ExcpetionMessage);
+                MessageBox.Show(ExcpetionMessage);
+            }
+            if (IsSuccess && !string.IsNullOrWhiteSpace(successMessage))
+            {
+                MessageBox.Show(successMessage);
             }
         }
         }
