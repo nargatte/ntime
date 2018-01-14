@@ -240,13 +240,16 @@ namespace ViewCore
             }
         }
 
-        protected async void FilterValueChangedAsync()
+        protected void FilterValueChangedAsync()
         {
-            await _playersManager.UpdateFilterInfo(pageNumber: 1, query: FilterGeneral, sortOrder: SortOrder, sortCriteria: SortCriteria,
-                                                    distanceSortCriteria: DistanceSortCriteria, extraPlayerInfoSortCriteria: ExtraPlayerInfoSortCriteria,
-                                                    ageCategorySortCriteria: AgeCategorySortCriteria);
-            Players = _playersManager.GetPlayersToDisplay();
-            UpdateRecordsRangeInfo(_playersManager.GetRecordsRangeInfo());
+            if (_currentCompetition != null && _playersManager != null)
+            {
+                _playersManager.UpdateFilterInfo(pageNumber: 1, query: FilterGeneral, sortOrder: SortOrder, sortCriteria: SortCriteria,
+                                                        distanceSortCriteria: DistanceSortCriteria, extraPlayerInfoSortCriteria: ExtraPlayerInfoSortCriteria,
+                                                        ageCategorySortCriteria: AgeCategorySortCriteria);
+                Players = _playersManager.GetPlayersToDisplay();
+                UpdateRecordsRangeInfo(_playersManager.GetRecordsRangeInfo());
+            }
         }
 
         #endregion

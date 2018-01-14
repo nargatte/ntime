@@ -21,6 +21,19 @@ namespace BaseCore.DataBase
             StartNumber = startNumber;
         }
 
+        public Player(PlayerAccount playerAccount)
+        {
+            FirstName = playerAccount.FirstName;
+            LastName = playerAccount.LastName;
+            BirthDate = playerAccount.BirthDate ?? DateTime.Today;
+            PhoneNumber = playerAccount.PhoneNumber;
+            Team = playerAccount.Team;
+            if (playerAccount.IsMale.HasValue)
+            {
+                IsMale = playerAccount.IsMale.Value;
+            }
+        }
+
         public int Id { get; set; }
 
         [StringLength(255), Required]
@@ -55,6 +68,9 @@ namespace BaseCore.DataBase
         public int CategoryPlaceNumber { get; set; }
 
         public bool CompetitionCompleted { get; set; }
+
+        [Phone]
+        public string PhoneNumber { get; set; }
 
         public int CompetitionId { get; set; }
         public virtual Competition Competition { get; set; }

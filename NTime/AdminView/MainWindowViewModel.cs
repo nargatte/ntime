@@ -45,7 +45,7 @@ namespace AdminView
             var extraPlayerInfoManagerFactory = new ExtraPlayerInfoManagerFactoryDesktop();
             var playerManagerFactory = new PlayerManagerFactoryDesktop();
             dependencyContainer = new DependencyContainer(ageCategoryManagerFactory, competitionManagerFactory, distanceManagerFactory,
-                extraPlayerInfoManagerFactory, playerManagerFactory);
+                extraPlayerInfoManagerFactory, playerManagerFactory, null);
         }
 
         private void OnChangeCompetition()

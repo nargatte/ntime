@@ -25,8 +25,8 @@
             <TextBlock HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" Margin="0, 0, 0, 20"> Witamy w NTime</TextBlock>
             <TextBlock HorizontalAlignment="Center" FontSize="16" FontWeight="Bold"> Zaloguj się by edytować swoje dane</TextBlock>
         </StackPanel>
-        <StackPanel Name="LoginColumn" Orientation="Vertical" Grid.Row="1" Grid.Column="0">
-            <TextBlock HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" Margin="0, 0, 0, 20"> Zaloguj się</TextBlock>
+        <StackPanel Name="LoginColumn" Orientation="Vertical" Grid.Row="1" Grid.Column="0" Margin="0,0,10,0">
+            <TextBlock HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" Margin="0, 0, 0, 0"> Zaloguj się</TextBlock>
             <Grid HorizontalAlignment="Center" Margin="0, 20" Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
@@ -50,7 +50,7 @@
             <Button Width="70" Height="20" Command="{Binding LogInCmd}">Zaloguj</Button>
         </StackPanel>
         <StackPanel Name="RegistrationColumn" Orientation="Vertical" Grid.Row="1" Grid.Column="1">
-            <TextBlock HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" Margin="0, 0, 0, 20"> Załóż nowe konto</TextBlock>
+            <TextBlock HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" Margin="0, 0, 0, 0"> Załóż nowe konto</TextBlock>
             <Grid HorizontalAlignment="Center" Margin="0, 20" Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>

@@ -62,6 +62,8 @@
     <Compile Include="Factories\ExtraPlayerInfos\ExtraPlayerInfoManagerFactoryDesktop.cs" />
     <Compile Include="Factories\ExtraPlayerInfos\ExtraPlayerInfoManagerFactoryHttp.cs" />
     <Compile Include="Factories\ExtraPlayerInfos\IExtraPlayerInfoManagerFactory.cs" />
+    <Compile Include="Factories\PlayerAccounts\IPlayerAccountManagerFactory.cs" />
+    <Compile Include="Factories\PlayerAccounts\PlayerAccountManagerFactoryHttp.cs" />
     <Compile Include="Factories\Players\IPlayerManagerFactory.cs" />
     <Compile Include="Factories\Players\PlayerManagerFactoryDesktop.cs" />
     <Compile Include="Factories\Players\PlayerManagerFactoryHttp.cs" />
@@ -75,10 +77,11 @@
     <Compile Include="HttpClients\HttpPlayerAccountClient.cs" />
     <Compile Include="HttpClients\HttpPlayerClient.cs" />
     <Compile Include="ManagersHttp\AuthenticationManagerHttp.cs" />
+    <Compile Include="ManagersInterfaces\IPlayerAccountManager.cs" />
     <Compile Include="ManagersHttp\ManagerHttp.cs" />
+    <Compile Include="ManagersHttp\PlayerAccountManagerHttp.cs" />
     <Compile Include="ViewModelsData\AdminViewModel.cs" />
     <Compile Include="CompetitionChoice\CompetitionChoiceBase.cs" />
-    <Compile Include="CompetitionChoice\CompetitionChoiceFactory.cs" />
     <Compile Include="ViewModelsData\CompetitionManagerViewModelBase.cs" />
     <Compile Include="CompetitionSelectionBase.cs" />
     <Compile Include="AccountInfo.cs" />
