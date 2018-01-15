@@ -19,7 +19,7 @@ namespace ViewCore.ManagersHttp
 
         public CompetitionManagerHttp(AccountInfo accountInfo, ConnectionInfo connectionInfo) : base(accountInfo, connectionInfo)
         {
-            _client = new HttpCompetitionClient(accountInfo, connectionInfo,"Competition");
+            _client = new HttpCompetitionClient(accountInfo, connectionInfo, "Competition");
         }
 
         public ObservableCollection<EditableCompetition> GetCompetitionsToDisplay() => _competitions;
@@ -39,12 +39,20 @@ namespace ViewCore.ManagersHttp
 
         public async void DownloadDataFromDatabase()
         {
-            var dtoCompetitions = await _client.GetPageAsync(100, 0);
-            _competitions.Clear();
-            foreach (var dbCompetition in dtoCompetitions.Items.Select(dto => dto.CopyDataFromDto(new Competition())))
+            await TryCallApi(async () =>
             {
-                _competitions.Add(new EditableCompetition() { DbEntity = dbCompetition });
-            }
+                var dtoCompetitions = await _client.GetPageAsync(100, 0);
+                _competitions.Clear();
+                foreach (var dbCompetition in dtoCompetitions.Items.Select(dto => dto.CopyDataFromDto(new Competition())))
+                {
+                    _competitions.Add(new EditableCompetition() { DbEntity = dbCompetition });
+                }
+            });
         }
+
+        //public async Task<Competition> GetCompetitionsForPlayerAccount()
+        //{
+
+        //}
     }
 }

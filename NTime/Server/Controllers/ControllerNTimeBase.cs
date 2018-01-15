@@ -75,6 +75,8 @@ namespace Server.Controllers
 
         protected bool AmI(string who)
         {
+            if (User.Identity.IsAuthenticated == false)
+                return false;
             ApplicationDbContext context = new ApplicationDbContext();
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             var s = UserManager.GetRoles(User.Identity.GetUserId());

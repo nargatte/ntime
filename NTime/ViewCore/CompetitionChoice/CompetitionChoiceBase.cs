@@ -64,10 +64,14 @@ namespace ViewCore
 
         public event Action CompetitionSelected = delegate { };
 
-        public void DownloadCompetitionsFromDatabaseAndDisplay()
+        public void DownloadCompetitionsFromDatabaseAndDisplay(bool OnlyWithRegistrationEnabled = false)
         {
             CompetitionManager.DownloadDataFromDatabase();
             Competitions = CompetitionManager.GetCompetitionsToDisplay();
+            if (OnlyWithRegistrationEnabled)
+            {
+                Competitions.Where(c => c.DbEntity.SignUpEndDate > DateTime.Now);
+            }
         }
 
         public void DetachAllEvents()
