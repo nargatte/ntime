@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using BaseCore.DataBase;
 using MvvmHelper;
 using ViewCore;
@@ -28,7 +30,7 @@ namespace DesktopClientView.TabItems.UserAccount
             _competitionData = new CompetitionChoiceBase(dependencyContainer);
             _playerAccountManager = dependencyContainer.PlayerAccountManagerFactory.CreateInstance(dependencyContainer);
             SaveTemplateDataCmd = new RelayCommand(OnSaveTemplateData);
-            DownloadInitialData();
+            ViewLoadedCmd = new RelayCommand(OnViewLoaded);
         }
 
         #region Properties
@@ -41,8 +43,8 @@ namespace DesktopClientView.TabItems.UserAccount
             set { SetProperty(ref _loggedInPlayer, value); }
         }
 
-        private PlayerAccount _fromCompetitonPlayer = new PlayerAccount();
-        public PlayerAccount FromCompetitonPlayer
+        private EditablePlayer _fromCompetitonPlayer;
+        public EditablePlayer FromCompetitonPlayer
         {
             get { return _fromCompetitonPlayer; }
             set { SetProperty(ref _fromCompetitonPlayer, value); }
@@ -55,7 +57,14 @@ namespace DesktopClientView.TabItems.UserAccount
         #region Methods end events
         public event Action UserLoginViewReuqested = delegate { };
         public RelayCommand SaveTemplateDataCmd { get; private set; }
+        public RelayCommand ViewLoadedCmd { get; set; }
 
+
+        private void OnViewLoaded()
+        {
+            ClearNewPlayer();
+            DownloadInitialData();
+        }
         private void OnSaveTemplateData()
         {
             _playerAccountManager.UpdatePlayerTemplateData(LoggedInPlayer);
@@ -64,6 +73,44 @@ namespace DesktopClientView.TabItems.UserAccount
         private async void DownloadInitialData()
         {
             LoggedInPlayer = await _playerAccountManager.DownloadPlayerTemplateData();
+            CompetitionData.DownloadCompetitionsForPlayerAccount();
+            CompetitionData.CompetitionSelected += OnCompetitionSelectedAsync;
+        }
+
+        private async void OnCompetitionSelectedAsync()
+        {
+            if (CompetitionData.IsCompetitionSelected)
+            {
+
+                await DownloadPlayersInfo(CompetitionData.SelectedCompetition);
+                _playersManager = _dependencyContainer.PlayerManagerFactory.CreateInstance(CompetitionData.SelectedCompetition,
+                    DefinedDistances, DefinedExtraPlayerInfo, null, _dependencyContainer.User, _dependencyContainer.ConnectionInfo);
+                await _playersManager.AddPlayersFromDatabase(removeAllDisplayedBefore: true);
+                var players = _playersManager.GetPlayersToDisplay();
+                //FromCompetitonPlayer = players.FirstOrDefault(p => p.)
+                DisplayPlayerData();
+            }
+            else
+            {
+                MessageBox.Show("Najpeirw musisz wybrać zawody");
+            }
+        }
+
+        private void DisplayPlayerData()
+        {
+            FromCompetitonPlayer.DefinedDistances = DefinedDistances;
+            FromCompetitonPlayer.DefinedExtraPlayerInfo = DefinedExtraPlayerInfo;
+        }
+
+        private void ClearNewPlayer()
+        {
+            FromCompetitonPlayer = new EditablePlayer(new EditableCompetition())
+            {
+                Distance = new EditableDistance(new EditableCompetition()),
+                ExtraPlayerInfo = new EditableExtraPlayerInfo(new EditableCompetition()),
+                DefinedDistances = new ObservableCollection<EditableDistance>(),
+                DefinedExtraPlayerInfo = new ObservableCollection<EditableExtraPlayerInfo>()
+            };
         }
 
         public void DetachAllEvents()

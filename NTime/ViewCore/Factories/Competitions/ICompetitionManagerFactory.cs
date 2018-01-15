@@ -13,6 +13,6 @@ namespace ViewCore.Factories.Competitions
 {
     public interface ICompetitionManagerFactory
     {
-        ICompetitionManager CreateInstance(AccountInfo accountInfo = null, ConnectionInfo connectionInfo = null);
+        ICompetitionManager CreateInstance(DependencyContainer dependencyContainer);
     }
 }

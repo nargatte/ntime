@@ -4,9 +4,11 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using BaseCore.DataBase;
 using MvvmHelper;
 using ViewCore.Entities;
+using ViewCore.Factories;
 using ViewCore.ManagersInterfaces;
 
 namespace ViewCore.ManagersDesktop
@@ -14,11 +16,13 @@ namespace ViewCore.ManagersDesktop
     public class CompetitionManagerDesktop : BindableBase, ICompetitionManager
     {
         private CompetitionRepository _competitionRepository;
+        private DependencyContainer _dependencyContainer;
         private ObservableCollection<EditableCompetition> _competitions = new ObservableCollection<EditableCompetition>();
 
-        public CompetitionManagerDesktop()
+        public CompetitionManagerDesktop(DependencyContainer dependencyContainer)
         {
             _competitionRepository = new CompetitionRepository(new ContextProvider());
+            _dependencyContainer = dependencyContainer;
         }
 
         public ObservableCollection<EditableCompetition> GetCompetitionsToDisplay() => _competitions;
@@ -68,5 +72,9 @@ namespace ViewCore.ManagersDesktop
             });
         }
 
+        public async Task GetCompetitionsForPlayerAccount()
+        {
+            MessageBox.Show("W tej wersji konta użytkownika nie sa obsługiwane");
+        }
     }
 }

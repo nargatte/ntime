@@ -25,7 +25,7 @@ namespace ViewCore
 
         public CompetitionChoiceBase(DependencyContainer dependencyContainer)
         {
-            CompetitionManager = dependencyContainer.CompetitionManagerFactory.CreateInstance(dependencyContainer.User, dependencyContainer.ConnectionInfo);
+            CompetitionManager = dependencyContainer.CompetitionManagerFactory.CreateInstance(dependencyContainer);
         }
         #region Properties
         private ObservableCollection<EditableCompetition> _competitions = new ObservableCollection<EditableCompetition>();
@@ -72,6 +72,12 @@ namespace ViewCore
             {
                 Competitions.Where(c => c.DbEntity.SignUpEndDate > DateTime.Now);
             }
+        }
+
+        public void DownloadCompetitionsForPlayerAccount()
+        {
+            CompetitionManager.GetCompetitionsForPlayerAccount();
+            Competitions = CompetitionManager.GetCompetitionsToDisplay();
         }
 
         public void DetachAllEvents()

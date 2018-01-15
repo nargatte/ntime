@@ -13,9 +13,9 @@ namespace ViewCore.Factories.Competitions
 {
     public class CompetitionManagerFactoryHttp : ICompetitionManagerFactory
     {
-        public ICompetitionManager CreateInstance(AccountInfo accountInfo = null, ConnectionInfo connectionInfo = null)
+        public ICompetitionManager CreateInstance(DependencyContainer dependencyContainer)
         {
-            return new CompetitionManagerHttp(accountInfo, connectionInfo);
+            return new CompetitionManagerHttp(dependencyContainer);
         }
     }
 }
