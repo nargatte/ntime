@@ -55,7 +55,7 @@ namespace DesktopClientView.TabItems.Registration
         {
             DetachAllEvents();
             _playerAccountManager = _dependencyContainer.PlayerAccountManagerFactory.CreateInstance(_dependencyContainer);
-            CompetitionData.DownloadCompetitionsFromDatabaseAndDisplay();
+            CompetitionData.DownloadCompetitionsFromDatabaseAndDisplay(OnlyWithRegistrationEnabled: true);
             CompetitionData.CompetitionSelected += OnCompetitionSelectedAsync;
             DownloadPlayerTemplateDataIfLoggedIn();
         }
@@ -111,12 +111,6 @@ namespace DesktopClientView.TabItems.Registration
         private async void OnAddPlayerAsync()
         {
             var isRegistrationSuccessfull = await _playersManager.TryAddPlayerAsync(NewPlayer);
-            if (isRegistrationSuccessfull)
-            {
-                //Players = _playersManager.GetPlayersToDisplay();
-                //UpdateRecordsRangeInfo(_playersManager.GetRecordsRangeInfo());
-                ClearNewPlayer();
-            }
         }
 
         #endregion

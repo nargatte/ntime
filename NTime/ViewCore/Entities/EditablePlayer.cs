@@ -78,7 +78,7 @@ namespace ViewCore.Entities
             }
             set
             {
-                if(!String.IsNullOrWhiteSpace(value.Name))
+                if(value != null && !String.IsNullOrWhiteSpace(value.Name))
                 {
                     DbEntity.Distance = SetProperty(DbEntity.Distance, value.DbEntity);
                     OnUpdateRequested();

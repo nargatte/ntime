@@ -38,7 +38,7 @@ namespace Server.Controllers
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             var s = UserManager.GetRoles(User.Identity.GetUserId());
             if (s[0] == "Player" &&
-                ! await _playerRepository.CanPlayerEdit(User.Identity.GetUserId(), player))
+                !await _playerRepository.CanPlayerEdit(User.Identity.GetUserId(), player))
                 return false;
             return true;
         }
@@ -241,7 +241,11 @@ namespace Server.Controllers
             if (await InitCompetitionById(id) == false)
                 return NotFound();
 
-            if (await CanOrganizerAccess() == false && AmI("Administrator") == false && AmI("Moderator") == false && Competition.SignUpEndDate != null && Competition.SignUpEndDate < DateTime.Now)
+            if (User.Identity.IsAuthenticated == true)
+                if (await CanOrganizerAccess() == false && AmI("Administrator") == false && AmI("Moderator") == false)
+                    return Conflict();
+
+            if (Competition.SignUpEndDate != null && Competition.SignUpEndDate < DateTime.Now)
                 return Conflict();
 
             if (AmIPlayer() && await _playerRepository.IsNowRegister(User.Identity.GetUserId()))

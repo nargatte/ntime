@@ -31,7 +31,8 @@ namespace DesktopClientView
         private void PrepareDependencies()
         {
             var user = new AccountInfo();
-            var connectionInfo = new ConnectionInfo() { ServerURL = "http://projektnet.mini.pw.edu.pl/NTime" };
+            var connectionInfo = new ConnectionInfo() { ServerURL = "http://localhost:58445" };
+            //var connectionInfo = new ConnectionInfo() { ServerURL = "http://projektnet.mini.pw.edu.pl/NTime" };
 
             var playerManagerFactory = new PlayerManagerFactoryHttp();
             var distanceManagerFactory = new DistanceManagerFactoryHttp();
