@@ -27,7 +27,7 @@ namespace ViewCore.ManagersHttp
         {
             await TryCallApi(async () =>
             {
-                _loggedInPlayer = (await _client.GetLoggedInPlayerAccount()).CopyDataFromDto(new PlayerAccount());
+                _loggedInPlayer = await GetLoggedInPlayerAccount();
             });
             return LoggedInPlayer;
         }
@@ -43,6 +43,16 @@ namespace ViewCore.ManagersHttp
             {
                 MessageBox.Show("Dane został poprawnie zapisane");
             }
+        }
+
+        public async Task<PlayerAccount> GetLoggedInPlayerAccount()
+        {
+            PlayerAccount loggedInPlayerAccount = new PlayerAccount();
+            await TryCallApi(async () =>
+            {
+                loggedInPlayerAccount = (await _client.GetLoggedInPlayerAccount()).CopyDataFromDto(new PlayerAccount());
+            });
+            return loggedInPlayerAccount;
         }
     }
 }

@@ -11,5 +11,6 @@ namespace ViewCore.ManagersInterfaces
         void ClearDatabase();
         void DownloadDataFromDatabase();
         ObservableCollection<EditableCompetition> GetCompetitionsToDisplay();
+        Task GetCompetitionsForPlayerAccount();
     }
 }
