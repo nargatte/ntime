@@ -18,5 +18,7 @@ namespace ViewCore.ManagersInterfaces
         Task UpdateFilterInfo(int pageNumber, string query, SortOrderEnum? sortOrder, PlayerSort? sortCriteria, EditableDistance distanceSortCriteria, EditableExtraPlayerInfo extraPlayerInfoSortCriteria, EditableAgeCategory ageCategorySortCriteria);
         Task AddPlayersFromCsvToDatabase();
         Task DeleteAllPlayersFromDatabaseAsync();
+        Task<EditablePlayer> GetFullRegisteredPlayerFromCompetition(Competition competition, PlayerAccount playerAccount);
+        Task UpdatePlayerRegisterInfo(Player player);
     }
 }

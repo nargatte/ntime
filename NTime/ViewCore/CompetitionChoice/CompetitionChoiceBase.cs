@@ -74,9 +74,9 @@ namespace ViewCore
             }
         }
 
-        public void DownloadCompetitionsForPlayerAccount()
+        public  async void DownloadCompetitionsForPlayerAccount()
         {
-            CompetitionManager.GetCompetitionsForPlayerAccount();
+            await CompetitionManager.GetCompetitionsForPlayerAccount();
             Competitions = CompetitionManager.GetCompetitionsToDisplay();
         }
 

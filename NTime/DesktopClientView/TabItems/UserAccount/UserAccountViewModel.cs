@@ -30,6 +30,7 @@ namespace DesktopClientView.TabItems.UserAccount
             _competitionData = new CompetitionChoiceBase(dependencyContainer);
             _playerAccountManager = dependencyContainer.PlayerAccountManagerFactory.CreateInstance(dependencyContainer);
             SaveTemplateDataCmd = new RelayCommand(OnSaveTemplateData);
+            SaveCompetitionDataCmd = new RelayCommand(OnSaveCompetitionData);
             ViewLoadedCmd = new RelayCommand(OnViewLoaded);
         }
 
@@ -58,6 +59,7 @@ namespace DesktopClientView.TabItems.UserAccount
         public event Action UserLoginViewReuqested = delegate { };
         public RelayCommand SaveTemplateDataCmd { get; private set; }
         public RelayCommand ViewLoadedCmd { get; set; }
+        public RelayCommand SaveCompetitionDataCmd { get; set; }
 
 
         private void OnViewLoaded()
@@ -68,6 +70,18 @@ namespace DesktopClientView.TabItems.UserAccount
         private void OnSaveTemplateData()
         {
             _playerAccountManager.UpdatePlayerTemplateData(LoggedInPlayer);
+        }
+
+        private void OnSaveCompetitionData()
+        {
+            if (CompetitionData.IsCompetitionSelected && FromCompetitonPlayer != null && _playersManager != null)
+            {
+                _playersManager.UpdatePlayerRegisterInfo(FromCompetitonPlayer.DbEntity);
+            }
+            else
+            {
+                MessageBox.Show("Nie udało się zapisać danych");
+            }
         }
 
         private async void DownloadInitialData()
@@ -85,10 +99,15 @@ namespace DesktopClientView.TabItems.UserAccount
                 await DownloadPlayersInfo(CompetitionData.SelectedCompetition);
                 _playersManager = _dependencyContainer.PlayerManagerFactory.CreateInstance(CompetitionData.SelectedCompetition,
                     DefinedDistances, DefinedExtraPlayerInfo, null, _dependencyContainer.User, _dependencyContainer.ConnectionInfo);
-                await _playersManager.AddPlayersFromDatabase(removeAllDisplayedBefore: true);
-                var players = _playersManager.GetPlayersToDisplay();
+                //await _playersManager.AddPlayersFromDatabase(removeAllDisplayedBefore: true);
+                //var players = _playersManager.GetPlayersToDisplay();
                 //FromCompetitonPlayer = players.FirstOrDefault(p => p.)
-                DisplayPlayerData();
+                //DisplayPlayerData();
+                FromCompetitonPlayer = await _playersManager.GetFullRegisteredPlayerFromCompetition(CompetitionData.SelectedCompetition.DbEntity, LoggedInPlayer);
+                if (FromCompetitonPlayer != null)
+                {
+                    DisplayPlayerData();
+                }
             }
             else
             {
@@ -100,6 +119,8 @@ namespace DesktopClientView.TabItems.UserAccount
         {
             FromCompetitonPlayer.DefinedDistances = DefinedDistances;
             FromCompetitonPlayer.DefinedExtraPlayerInfo = DefinedExtraPlayerInfo;
+            FromCompetitonPlayer.Distance = DefinedDistances.FirstOrDefault(defined => defined.DbEntity.Id == FromCompetitonPlayer.DbEntity.DistanceId);
+            FromCompetitonPlayer.ExtraPlayerInfo = DefinedExtraPlayerInfo.FirstOrDefault(defined => defined.DbEntity.Id == FromCompetitonPlayer.DbEntity.ExtraPlayerInfoId);
         }
 
         private void ClearNewPlayer()
