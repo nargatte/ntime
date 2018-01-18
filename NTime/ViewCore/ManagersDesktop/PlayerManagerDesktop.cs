@@ -214,5 +214,15 @@ namespace ViewCore.ManagersDesktop
             _recordsRangeInfo.TotalItemsCount = dbPlayersTuple.Item2;
             return dbPlayersTuple.Item1;
         }
+
+        public Task<EditablePlayer> GetFullRegisteredPlayerFromCompetition(Competition competition, PlayerAccount playerAccount)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdatePlayerRegisterInfo(Player player)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

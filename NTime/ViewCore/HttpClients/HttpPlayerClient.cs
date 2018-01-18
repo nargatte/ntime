@@ -77,6 +77,12 @@ namespace ViewCore.HttpClients
             await base.PutAsync<PlayerWithScoresDto>(playerDto.Id.ToString(), playerDto);
         }
 
+        public async Task UpdatePlayerRegisterInfo(Player player)
+        {
+            var playerDto = CreatePlayerCompetitionRegisterDto(player);
+            await base.PutAsync<PlayerCompetitionRegisterDto>($"Register/{playerDto.Id.ToString()}", playerDto);
+        }
+
         public async Task Delete(Player player)
         {
             await base.DeleteAsync(player.Id.ToString());
@@ -87,16 +93,11 @@ namespace ViewCore.HttpClients
             return await base.GetAsync<PlayerCompetitionRegisterDto>($"Register/{playerId.ToString()}");
         }
 
-        public async Task UpdatePlayerRegisterInfo(Player player)
-        {
-            var playerDto = CreatePlayerCompetitionRegisterDto(player);
-            await base.PutAsync<PlayerCompetitionRegisterDto>($"Register/{playerDto.Id.ToString()}", playerDto);
-        }
-
         public async Task<PlayerCompetitionRegisterDto> AddRegisteredPlayer(int competitionId, Player player)
         {
             var playerDto = CreatePlayerCompetitionRegisterDto(player);
             return await base.PostAsync<PlayerCompetitionRegisterDto, PlayerCompetitionRegisterDto>($"Register/IntoCompetition/{competitionId.ToString()}", playerDto);
         }
+
     }
 }

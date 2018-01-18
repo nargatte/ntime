@@ -88,10 +88,10 @@ namespace DesktopClientView.TabItems.UserAccount
                 DisplayNotification("Twoje konto zostało utworzone. Możesz się zalogować");
                 RegistrationEmail = "";
             }
-            else
-            {
-                DisplayNotification(_accountManager.ExcpetionMessage);
-            }
+            //else
+            //{
+            //    DisplayNotification(_accountManager.ExcpetionMessage);
+            //}
             ClearRegistrationPasswordBoxes();
         }
 
@@ -106,13 +106,13 @@ namespace DesktopClientView.TabItems.UserAccount
             bool isSuccess = await _accountManager.Login(LoginEmail, LoginPassword);
             if (isSuccess)
             {
-                UserAccountViewRequested();
+                UserAccountViewRequested?.Invoke();
                 LoginEmail = "";
             }
-            else
-            {
-                DisplayNotification(_accountManager.ExcpetionMessage);
-            }
+            //else
+            //{
+            //    DisplayNotification(_accountManager.ExcpetionMessage);
+            //}
             ClearLoginPasswordBox();
         }
 

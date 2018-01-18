@@ -156,15 +156,15 @@ namespace ViewCore.Entities
 
 
 
-        //public string PhoneNumber
-        //{
-        //    get { return DbEntity.PhoneNumber; }
-        //    set
-        //    {
-        //        DbEntity.PhoneNumber = SetProperty(DbEntity.PhoneNumber, value);
-        //        OnUpdateRequested();
-        //    }
-        //}
+        public string PhoneNumber
+        {
+            get { return DbEntity.PhoneNumber; }
+            set
+            {
+                DbEntity.PhoneNumber = SetProperty(DbEntity.PhoneNumber, value);
+                OnUpdateRequested();
+            }
+        }
 
         public bool IsMale
         {

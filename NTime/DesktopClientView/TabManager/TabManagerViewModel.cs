@@ -20,13 +20,20 @@ namespace DesktopClientView.TabManager
 {
     public class TabManagerViewModel : CompetitionManagerViewModelBase
     {
-        MainUserViewModel _mainUserViewModel;
+        private MainUserViewModel _mainUserViewModel;
+        private DependencyContainer _dependencyContainer;
 
         public TabManagerViewModel(DependencyContainer dependencyContainer)
         {
             User = dependencyContainer.User;
+            _dependencyContainer = dependencyContainer;
             //_connectionInfo = connectionInfo;
             LogoutCmd = new RelayCommand(OnLogutRequested);
+            PrepareTabs(dependencyContainer);
+        }
+
+        private void PrepareTabs(DependencyContainer dependencyContainer)
+        {
             _mainUserViewModel = new MainUserViewModel(dependencyContainer);
             _mainUserViewModel.UserChanged += OnUserChanged;
             TabItems = new System.Collections.ObjectModel.ObservableCollection<ITabItemViewModel>()
@@ -40,14 +47,11 @@ namespace DesktopClientView.TabManager
 
         #region Properties
         private AccountInfo _user;
-        private DependencyContainer dependencyContainer;
-
         public AccountInfo User
         {
             get { return _user; }
             set { SetProperty(ref _user, value); }
         }
-
 
         #endregion
 
@@ -61,9 +65,13 @@ namespace DesktopClientView.TabManager
         }
 
 
-        private void OnLogutRequested()
+        private async void OnLogutRequested()
         {
-            _mainUserViewModel.Logout();
+            var isSuccess = await _mainUserViewModel.Logout();
+            if (isSuccess)
+            {
+                PrepareTabs(_dependencyContainer);
+            }
         }
 
         public override void DetachAllEvents()

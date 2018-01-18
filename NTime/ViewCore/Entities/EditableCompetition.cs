@@ -58,5 +58,17 @@ namespace ViewCore.Entities
             get { return DbEntity.Link; }
             set { DbEntity.Link = SetProperty(DbEntity.Link, value); }
         }
+
+        public DateTime? SignUpEndDate
+        {
+            get { return DbEntity.SignUpEndDate; }
+            set { DbEntity.SignUpEndDate = SetProperty(DbEntity.SignUpEndDate, value); }
+        }
+
+        public bool OrganizerEditLock
+        {
+            get { return DbEntity.OrganizerEditLock; }
+            set { DbEntity.OrganizerEditLock = SetProperty(DbEntity.OrganizerEditLock, value); }
+        }
     }
 }

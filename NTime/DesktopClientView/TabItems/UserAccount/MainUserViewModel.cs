@@ -74,19 +74,20 @@ namespace DesktopClientView.TabItems.UserAccount
                 NavToUserAccountView();
         }
 
-        internal async void Logout()
+        internal async Task<bool> Logout()
         {
             var accountManager = new AuthenticationManagerHttp(User, _dependencyContainer.ConnectionInfo);
             bool isSuccess = await accountManager.Logout();
             if (isSuccess)
             {
-                NavToUserLoginView();
                 DisplayNotifiation("Wylogowanie przebiegło poprawnie");
+                NavToUserLoginView();
             }
             else
             {
                 DisplayNotifiation(accountManager.ExcpetionMessage);
             }
+            return isSuccess;
         }
 
         private void DisplayNotifiation(string message)
@@ -101,7 +102,7 @@ namespace DesktopClientView.TabItems.UserAccount
             _userLoginViewModel.UserAccountViewRequested += NavToUserAccountView;
             _userLoginViewModel.RefreshRequested += OnUserLoginViewRefreshRequested;
             CurrentViewModel = _userLoginViewModel;
-            UserChanged();
+            UserChanged?.Invoke();
         }
 
         private void OnUserLoginViewRefreshRequested()

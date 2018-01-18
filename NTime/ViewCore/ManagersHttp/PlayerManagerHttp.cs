@@ -76,6 +76,28 @@ namespace ViewCore.ManagersHttp
             _recordsRangeInfo.TotalItemsCount -= selectedPlayersArray.Length;
         }
 
+        public async Task<EditablePlayer> GetFullRegisteredPlayerFromCompetition(Competition competition, PlayerAccount playerAccount)
+        {
+            EditablePlayer player = new EditablePlayer(new EditableCompetition() { DbEntity = competition});
+            await TryCallApi(async () =>
+            {
+                player = new EditablePlayer(new EditableCompetition() { DbEntity = competition })
+                {
+                    DbEntity = (await _client.GetFullRegisteredPlayerFromCompetition(competition, playerAccount)).CopyDataFromDto(new Player())
+                };
+                player.Distance = _definedDistances.FirstOrDefault(defined => defined.DbEntity.Id == player.DbEntity.DistanceId);
+                player.ExtraPlayerInfo = _definedExtraPlayerInfos.FirstOrDefault(defined => defined.DbEntity.Id == player.DbEntity.ExtraPlayerInfoId);
+            });
+            if (player.DbEntity != null)
+            {
+                return player;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public async Task<bool> TryAddPlayerAsync(EditablePlayer newPlayer)
         {
             if (CanAddPlayer(newPlayer, out string message))
@@ -216,6 +238,14 @@ namespace ViewCore.ManagersHttp
             {
                 System.Windows.MessageBox.Show("Nie masz uprawnień do usunięcia wszystkich zawodników");
             });
+        }
+
+        public async Task UpdatePlayerRegisterInfo(Player player)
+        {
+            await TryCallApi(async () =>
+            {
+                await _client.UpdatePlayerRegisterInfo(player);
+            }, "Twoje dane zostały poprawnie zapisane");
         }
     }
 }

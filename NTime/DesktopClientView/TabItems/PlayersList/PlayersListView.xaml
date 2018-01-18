@@ -123,7 +123,6 @@
                 <DataGridTextColumn x:Name="startTimeColumn" Header="Czas startu" Binding="{Binding StartTime}" IsReadOnly="True"/>
                 <!--<DataGridTextColumn x:Name="extraPlayerInfoColumn"  Header="Dodatkowe info" Binding="{Binding ExtraPlayerInfo.Name}" IsReadOnly="True"/>-->
                 <DataGridTextColumn x:Name="teamColumn"  Header="Klub" Binding="{Binding Team}" IsReadOnly="True"/>
-                <DataGridTextColumn x:Name="birthDateColumn" Header="Data urodzenia" Binding="{Binding BirthDate, Converter={StaticResource DateToStringConverter}}" IsReadOnly="True"/>
                 <!--<DataGridTemplateColumn x:Name="birthDateColumn"  Header="Data urodzenia" IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

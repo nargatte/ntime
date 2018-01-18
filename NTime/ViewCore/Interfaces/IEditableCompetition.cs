@@ -7,9 +7,11 @@ namespace ViewCore.Entities
         string City { get; set; }
         string Description { get; set; }
         DateTime EventDate { get; set; }
+        DateTime? SignUpEndDate { get; set; }
         string Link { get; set; }
         string Name { get; set; }
         string Organiser { get; set; }
+        bool OrganizerEditLock { get; set; }
         BaseCore.DataBase.Competition DbEntity { get; set; }
     }
 }

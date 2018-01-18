@@ -46,7 +46,7 @@ namespace ViewCore
                 {
                     IsCompetitionSelected = true;
                 }
-                CompetitionSelected();
+                CompetitionSelected?.Invoke();
             }
         }
 
@@ -70,13 +70,14 @@ namespace ViewCore
             Competitions = CompetitionManager.GetCompetitionsToDisplay();
             if (OnlyWithRegistrationEnabled)
             {
-                Competitions.Where(c => c.DbEntity.SignUpEndDate > DateTime.Now);
+                Competitions =  new ObservableCollection<EditableCompetition>(Competitions.Where(
+                    c => c.DbEntity.SignUpEndDate == null || c.DbEntity.SignUpEndDate > DateTime.Now ));
             }
         }
 
-        public void DownloadCompetitionsForPlayerAccount()
+        public  async void DownloadCompetitionsForPlayerAccount()
         {
-            CompetitionManager.GetCompetitionsForPlayerAccount();
+            await CompetitionManager.GetCompetitionsForPlayerAccount();
             Competitions = CompetitionManager.GetCompetitionsToDisplay();
         }
 

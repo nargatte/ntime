@@ -31,6 +31,13 @@ namespace ViewCore.ManagersHttp
             try
             {
                 await action();
+                //int timeout = 50000;
+                //if (!(await Task.WhenAny(task, Task.Delay(timeout)) == task))
+                //{
+                //    MessageBox.Show($"Nie udało połączyć się z bazą w ciągu {timeout / 1000} sekund. Operacja została przerwana");
+                //    IsSuccess = false;
+                //    //return;
+                //}
             }
             catch (CustomHttpRequestException e)
             {
