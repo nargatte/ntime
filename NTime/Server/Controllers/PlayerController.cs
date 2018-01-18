@@ -260,6 +260,7 @@ namespace Server.Controllers
                 PlayerAccountRepository accountRepository = new PlayerAccountRepository(ContextProvider);
                 player.PlayerAccount = await accountRepository.GetByAccountId(User.Identity.GetUserId());
                 player.PlayerAccountId = player.PlayerAccount.Id;
+                player.PlayerAccount = null;
             }
 
             await _playerRepository.AddAsync(player, player.Distance, player.ExtraPlayerInfo);
