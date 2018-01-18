@@ -46,7 +46,7 @@ namespace ViewCore
                 {
                     IsCompetitionSelected = true;
                 }
-                CompetitionSelected();
+                CompetitionSelected?.Invoke();
             }
         }
 
@@ -70,7 +70,8 @@ namespace ViewCore
             Competitions = CompetitionManager.GetCompetitionsToDisplay();
             if (OnlyWithRegistrationEnabled)
             {
-                Competitions.Where(c => c.DbEntity.SignUpEndDate > DateTime.Now);
+                Competitions =  new ObservableCollection<EditableCompetition>(Competitions.Where(
+                    c => c.DbEntity.SignUpEndDate == null || c.DbEntity.SignUpEndDate > DateTime.Now ));
             }
         }
 
