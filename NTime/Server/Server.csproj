@@ -332,9 +332,12 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="src\index.html" />
-    <Content Include="src\styles.css" />
-    <Content Include="src\systemjs.config.js" />
+    <Content Include="AngularSrc\favicon.ico" />
+    <Content Include="AngularSrc\index.html" />
+    <Content Include="AngularSrc\styles.css" />
+    <Content Include="AngularSrc\systemjs-angular-loader.js" />
+    <Content Include="AngularSrc\systemjs.config.extras.js" />
+    <Content Include="AngularSrc\systemjs.config.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -353,7 +356,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.2.1.min.map" />
-    <Content Include="src\tsconfig.json" />
+    <Content Include="AngularSrc\tsconfig.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -372,9 +375,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="src\app\app.component.spec.ts" />
-    <TypeScriptCompile Include="src\app\app.component.ts" />
-    <TypeScriptCompile Include="src\app\app.module.ts" />
+    <TypeScriptCompile Include="AngularSrc\app\app.component.spec.ts" />
+    <TypeScriptCompile Include="AngularSrc\app\app.component.ts" />
+    <TypeScriptCompile Include="AngularSrc\app\app.module.ts" />
+    <TypeScriptCompile Include="AngularSrc\main.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
