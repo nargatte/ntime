@@ -123,7 +123,7 @@ namespace Server.Controllers
             if (player == null)
                 return NotFound();
 
-            return Ok(player);
+            return Ok(new PlayerWithScoresDto(player));
         }
 
         // GET api/Player/1
