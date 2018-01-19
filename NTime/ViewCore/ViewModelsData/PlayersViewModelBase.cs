@@ -222,9 +222,9 @@ namespace ViewCore
             OnPropertyChanged(nameof(RecordsRangeInfo));
         }
 
-        protected async void OnUpdateFullCategoriesAsync()
+        protected void OnUpdateFullCategoriesAsync()
         {
-            await _playerRepository.UpdateFullCategoryAllAsync();
+            _playerRepository.UpdateFullCategoryAllAsync().RunSynchronously();
             MessageBox.Show("Kategorie zostały przeliczone poprawnie");
             //await task;
             Players = _playersManager.GetPlayersToDisplay();
@@ -240,7 +240,7 @@ namespace ViewCore
             }
         }
 
-        protected void FilterValueChangedAsync()
+        protected async void FilterValueChangedAsync()
         {
             if (_currentCompetition != null && _playersManager != null)
             {

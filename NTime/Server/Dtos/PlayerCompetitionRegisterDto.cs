@@ -23,8 +23,8 @@ namespace Server.Dtos
             BirthDate = player.BirthDate;
             IsMale = player.IsMale;
             Team = player.Team;
+            PhoneNumber = player.PhoneNumber;
             ExtraPlayerInfoId = player.ExtraPlayerInfo.Id;
-
             DistanceId = player.Distance.Id;
             CompetitionId = player.CompetitionId;
         }
@@ -37,8 +37,10 @@ namespace Server.Dtos
             player.BirthDate = BirthDate;
             player.IsMale = IsMale;
             player.Team = Team;
+            player.PhoneNumber = PhoneNumber;
             player.ExtraPlayerInfoId = ExtraPlayerInfoId;
             player.DistanceId = DistanceId;
+            player.CompetitionId = CompetitionId;
             return player;
         }
 
@@ -68,6 +70,9 @@ namespace Server.Dtos
         public DateTime BirthDate { get; set; }
 
         public bool IsMale { get; set; }
+
+        [Phone]
+        public string PhoneNumber { get; set; }
 
         [StringLength(255)]
         public string Team { get; set; }
