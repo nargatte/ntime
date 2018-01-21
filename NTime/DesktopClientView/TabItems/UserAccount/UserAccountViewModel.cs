@@ -87,7 +87,7 @@ namespace DesktopClientView.TabItems.UserAccount
         private async void DownloadInitialData()
         {
             LoggedInPlayer = await _playerAccountManager.DownloadPlayerTemplateData();
-            CompetitionData.DownloadCompetitionsForPlayerAccount();
+            CompetitionData.DownloadCompetitionsForPlayerAccount(OnlyWithRegistrationEnabled: true);
             CompetitionData.CompetitionSelected += OnCompetitionSelectedAsync;
         }
 

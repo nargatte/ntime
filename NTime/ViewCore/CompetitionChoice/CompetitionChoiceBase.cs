@@ -75,10 +75,15 @@ namespace ViewCore
             }
         }
 
-        public  async void DownloadCompetitionsForPlayerAccount()
+        public  async void DownloadCompetitionsForPlayerAccount(bool OnlyWithRegistrationEnabled = false)
         {
             await CompetitionManager.GetCompetitionsForPlayerAccount();
             Competitions = CompetitionManager.GetCompetitionsToDisplay();
+            if (OnlyWithRegistrationEnabled)
+            {
+                Competitions = new ObservableCollection<EditableCompetition>(Competitions.Where(
+                    c => c.DbEntity.SignUpEndDate == null || c.DbEntity.SignUpEndDate > DateTime.Now));
+            }
         }
 
         public void DetachAllEvents()
