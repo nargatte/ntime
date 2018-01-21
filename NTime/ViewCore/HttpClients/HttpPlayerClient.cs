@@ -61,9 +61,9 @@ namespace ViewCore.HttpClients
         }
 
         //GET api/player/FromPlayerAccount/{idpa}/FromCompetition/{idc}
-        public async Task<PlayerWithScoresDto> GetFullRegisteredPlayerFromCompetition(Competition competition, PlayerAccount playerAccount)
+        public async Task<PlayerCompetitionRegisterDto> GetFullRegisteredPlayerFromCompetition(Competition competition, PlayerAccount playerAccount)
         {
-            return await base.GetAsync<PlayerWithScoresDto>($"FromPlayerAccount/{playerAccount.Id}/FromCompetition/{competition.Id}");
+            return await base.GetAsync<PlayerCompetitionRegisterDto>($"FromPlayerAccount/{playerAccount.Id}/FromCompetition/{competition.Id}");
         }
 
         public async Task<PlayerWithScoresDto> GetPlayerInfo(int playerId)

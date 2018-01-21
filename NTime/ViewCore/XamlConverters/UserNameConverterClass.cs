@@ -13,7 +13,7 @@ namespace ViewCore.XamlConverters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             string beginning = "Zalogowany jako ";
-            if (value != null && value is string userName)
+            if (value != null && value is string userName && !string.IsNullOrWhiteSpace(userName))
             {
                 return beginning + userName;
             }

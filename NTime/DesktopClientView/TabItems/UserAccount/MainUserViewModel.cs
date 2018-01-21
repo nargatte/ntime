@@ -63,7 +63,7 @@ namespace DesktopClientView.TabItems.UserAccount
 
         public void DetachAllEvents()
         {
-            throw new NotImplementedException();
+            
         }
 
         private void NavToProperTab()
@@ -107,8 +107,8 @@ namespace DesktopClientView.TabItems.UserAccount
 
         private void OnUserLoginViewRefreshRequested()
         {
-            NavToUserAccountView();
-            System.Threading.Thread.Sleep(2000);
+            //NavToUserAccountView();
+            //System.Threading.Thread.Sleep(2000);
             NavToUserLoginView();
         }
 

@@ -108,6 +108,7 @@ namespace ViewCore.ManagersHttp
                 var tempExtraPlayerInfo = playerToAdd.DbEntity.ExtraPlayerInfo;
                 await TryCallApi(async () =>
                     {
+                        playerToAdd.CompetitionId = _currentCompetition.DbEntity.Id;
                         await _client.AddRegisteredPlayer(_currentCompetition.DbEntity.Id, playerToAdd.DbEntity);
                     }, "Zapis na zawody przebiegł poprawnie");
                 playerToAdd.DbEntity.Distance = tempDistance;
@@ -244,6 +245,7 @@ namespace ViewCore.ManagersHttp
         {
             await TryCallApi(async () =>
             {
+                player.CompetitionId = _currentCompetition.DbEntity.Id;
                 await _client.UpdatePlayerRegisterInfo(player);
             }, "Twoje dane zostały poprawnie zapisane");
         }

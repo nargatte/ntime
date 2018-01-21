@@ -62,6 +62,8 @@ namespace DesktopClientView.TabManager
         private void OnUserChanged()
         {
             OnPropertyChanged(nameof(User));
+            OnPropertyChanged(nameof(User.UserName));
+            OnPropertyChanged(nameof(User.IsAuthenticated));
         }
 
 

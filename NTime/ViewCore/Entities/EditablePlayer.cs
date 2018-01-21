@@ -68,6 +68,16 @@ namespace ViewCore.Entities
             }
         }
 
+        public int CompetitionId
+        {
+            get { return DbEntity.CompetitionId; }
+            set
+            {
+                OnUpdateRequested();
+                DbEntity.CompetitionId = SetProperty(DbEntity.CompetitionId, value);
+            }
+        }
+
         //Some notifiers might be necessary
         public EditableDistance Distance
         {
@@ -78,12 +88,13 @@ namespace ViewCore.Entities
             }
             set
             {
-                if(value != null && !String.IsNullOrWhiteSpace(value.Name))
-                {
-                    DbEntity.Distance = SetProperty(DbEntity.Distance, value.DbEntity);
-                    OnUpdateRequested();
-                    OnPropertyChanged(nameof(FullCategory));
-                }
+                if (value != null)
+                    if (value != null && !String.IsNullOrWhiteSpace(value.Name))
+                    {
+                        DbEntity.Distance = SetProperty(DbEntity.Distance, value.DbEntity);
+                        OnUpdateRequested();
+                        OnPropertyChanged(nameof(FullCategory));
+                    }
             }
         }
 
@@ -96,12 +107,13 @@ namespace ViewCore.Entities
             }
             set
             {
-                if (!String.IsNullOrWhiteSpace(value.Name))
-                {
-                    DbEntity.ExtraPlayerInfo = SetProperty(DbEntity.ExtraPlayerInfo, value.DbEntity);
-                    OnUpdateRequested();
-                    OnPropertyChanged(nameof(FullCategory));
-                }
+                if (value != null)
+                    if (!String.IsNullOrWhiteSpace(value.Name))
+                    {
+                        DbEntity.ExtraPlayerInfo = SetProperty(DbEntity.ExtraPlayerInfo, value.DbEntity);
+                        OnUpdateRequested();
+                        OnPropertyChanged(nameof(FullCategory));
+                    }
             }
         }
 
@@ -115,27 +127,17 @@ namespace ViewCore.Entities
             }
         }
 
-
-        //public DateTime? StartTime
-        //{
-        //    get { return DbEntity.StartTime; }
-        //    set
-        //    {
-        //        DbEntity.StartTime = SetProperty(DbEntity.StartTime, value);
-        //        OnUpdateRequested();
-        //    }
-        //}
-
         public string StartTime
         {
             get { return DbEntity.StartTime.GetValueOrDefault().ConvertToString(); }
             set
             {
-                if (value.TryConvertToDateTime(out DateTime dateTime))
-                {
-                    DbEntity.StartTime = SetProperty(DbEntity.StartTime, dateTime);
-                    OnUpdateRequested();
-                }
+                if (value != null)
+                    if (value.TryConvertToDateTime(out DateTime dateTime))
+                    {
+                        DbEntity.StartTime = SetProperty(DbEntity.StartTime, dateTime);
+                        OnUpdateRequested();
+                    }
             }
         }
 
