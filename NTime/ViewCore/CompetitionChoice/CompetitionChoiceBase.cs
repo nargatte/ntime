@@ -64,9 +64,9 @@ namespace ViewCore
 
         public event Action CompetitionSelected = delegate { };
 
-        public void DownloadCompetitionsFromDatabaseAndDisplay(bool OnlyWithRegistrationEnabled = false)
+        public async void DownloadCompetitionsFromDatabaseAndDisplay(bool OnlyWithRegistrationEnabled = false)
         {
-            CompetitionManager.DownloadDataFromDatabase();
+            await CompetitionManager.DownloadDataFromDatabase();
             Competitions = CompetitionManager.GetCompetitionsToDisplay();
             if (OnlyWithRegistrationEnabled)
             {

@@ -47,7 +47,7 @@ namespace ViewCore.ManagersDesktop
             System.Windows.MessageBox.Show("Nie masz uprawnień by usunąć wszystkie zawody");
         }
 
-        public async void DownloadDataFromDatabase()
+        public async Task DownloadDataFromDatabase()
         {
             var dbCompetitions = new List<Competition>(await _competitionRepository.GetAllAsync());
             _competitions.Clear();

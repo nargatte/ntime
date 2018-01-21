@@ -40,7 +40,7 @@ namespace ViewCore.ManagersHttp
             System.Windows.MessageBox.Show("Nie masz uprawnień, by usunąć wszystkie zawody");
         }
 
-        public async void DownloadDataFromDatabase()
+        public async Task DownloadDataFromDatabase()
         {
             await TryCallApi(async () =>
             {

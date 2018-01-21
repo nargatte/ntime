@@ -9,7 +9,7 @@ namespace ViewCore.ManagersInterfaces
     {
         Task AddAsync(Competition dbEntity);
         void ClearDatabase();
-        void DownloadDataFromDatabase();
+        Task DownloadDataFromDatabase();
         ObservableCollection<EditableCompetition> GetCompetitionsToDisplay();
         Task GetCompetitionsForPlayerAccount();
     }
