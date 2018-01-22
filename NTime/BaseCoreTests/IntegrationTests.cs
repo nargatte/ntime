@@ -121,9 +121,9 @@ namespace BaseCoreTests
 
             await pr.ImportPlayersAsync(mainPath +
                 "Zawodnicy.csv");
-            await lir1.AddAsync(new TimeReadsLogInfo() { Path = mainPath + "log1.csv" });
-            await lir1.AddAsync(new TimeReadsLogInfo() { Path = mainPath + "log2.csv" });
-            await lir2.AddAsync(new TimeReadsLogInfo() { Path = mainPath + "log3.csv" });
+            //await lir1.AddAsync(new TimeReadsLogInfo() { Path = mainPath + "log1.csv" });
+            //await lir1.AddAsync(new TimeReadsLogInfo() { Path = mainPath + "log2.csv" });
+            //await lir2.AddAsync(new TimeReadsLogInfo() { Path = mainPath + "log3.csv" });
 
 
             //var pfo = new PlayerFilterOptions { Query = "500" };
@@ -133,13 +133,13 @@ namespace BaseCoreTests
             //await timeProcess.ProcessSingleAsync(p);
             //await timeProcess.ProcessAllAsync();
 
-            await pr.ImportTimeReadsFromSourcesAsync();
+            //await pr.ImportTimeReadsFromSourcesAsync();
 
-            await timeProcess.ProcessAllAsync();
+            //await timeProcess.ProcessAllAsync();
 
-            await pr.UpdateFullCategoryAllAsync();
+            //await pr.UpdateFullCategoryAllAsync();
 
-            await pr.UpdateRankingAllAsync();
+            //await pr.UpdateRankingAllAsync();
 
             //p.Distance = darr.FirstOrDefault(d => d.Name == "GIGA");
             //await pr.UpdateAsync(p, p.Distance, p.ExtraPlayerInfo);

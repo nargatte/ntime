@@ -15,9 +15,6 @@ namespace Server.Controllers
     [RoutePrefix("api/Competition")]
     public class CompetitionController : ControllerNTimeBase
     {
-        protected CompetitionController() : base()
-        {
-        }
 
         // GET /api/Competition?ItemsOnPage=10&PageNumber=0
         [Route]
