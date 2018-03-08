@@ -7,6 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
+var common_1 = require("@angular/common");
 var router_1 = require("@angular/router");
 var about_us_tab_component_1 = require("../about-us-tab/about-us-tab.component");
 var contact_tab_component_1 = require("../contact-tab/contact-tab.component");
@@ -31,7 +32,8 @@ var AppRoutingModule = /** @class */ (function () {
             imports: [
                 router_1.RouterModule.forRoot(routes)
             ],
-            exports: [router_1.RouterModule]
+            exports: [router_1.RouterModule],
+            providers: [{ provide: common_1.APP_BASE_HREF, useValue: '/' }]
         })
     ], AppRoutingModule);
     return AppRoutingModule;
