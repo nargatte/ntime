@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { APP_BASE_HREF } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutUsTabComponent } from '../about-us-tab/about-us-tab.component';
 import { ContactTabComponent } from '../contact-tab/contact-tab.component';
@@ -21,7 +22,8 @@ const routes: Routes = [
     imports: [
         RouterModule.forRoot(routes)
     ],
-    exports: [RouterModule]
+    exports: [RouterModule],
+    providers: [{ provide: APP_BASE_HREF, useValue: '/' }]
 })
 
 export class AppRoutingModule { }
