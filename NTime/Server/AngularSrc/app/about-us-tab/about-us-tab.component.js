@@ -12,9 +12,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var AboutUsTabComponent = /** @class */ (function () {
     function AboutUsTabComponent() {
+        this.model = {
+            left: true,
+            middle: false,
+            right: false
+        };
     }
     AboutUsTabComponent.prototype.ngOnInit = function () {
     };
+    ;
     AboutUsTabComponent = __decorate([
         core_1.Component({
             selector: 'app-about-us-tab',

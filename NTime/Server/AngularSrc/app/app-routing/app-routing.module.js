@@ -15,6 +15,7 @@ var my_account_tab_component_1 = require("../my-account-tab/my-account-tab.compo
 var offer_tab_component_1 = require("../offer-tab/offer-tab.component");
 var registration_tab_component_1 = require("../registration-tab/registration-tab.component");
 var scores_tab_component_1 = require("../scores-tab/scores-tab.component");
+var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
 var routes = [
     { path: 'about', component: about_us_tab_component_1.AboutUsTabComponent },
     { path: 'contact', component: contact_tab_component_1.ContactTabComponent },
@@ -30,7 +31,8 @@ var AppRoutingModule = /** @class */ (function () {
     AppRoutingModule = __decorate([
         core_1.NgModule({
             imports: [
-                router_1.RouterModule.forRoot(routes)
+                router_1.RouterModule.forRoot(routes),
+                ng_bootstrap_1.NgbModule,
             ],
             exports: [router_1.RouterModule],
             providers: [{ provide: common_1.APP_BASE_HREF, useValue: '/' }]

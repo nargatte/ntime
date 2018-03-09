@@ -7,6 +7,7 @@ import { MyAccountTabComponent } from '../my-account-tab/my-account-tab.componen
 import { OfferTabComponent } from '../offer-tab/offer-tab.component';
 import { RegistrationTabComponent } from '../registration-tab/registration-tab.component';
 import { ScoresTabComponent } from '../scores-tab/scores-tab.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const routes: Routes = [
     { path: 'about', component: AboutUsTabComponent },
@@ -20,7 +21,8 @@ const routes: Routes = [
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(routes)
+        RouterModule.forRoot(routes),
+        NgbModule,
     ],
     exports: [RouterModule],
     providers: [{ provide: APP_BASE_HREF, useValue: '/' }]

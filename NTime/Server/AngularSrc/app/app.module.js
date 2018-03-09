@@ -8,6 +8,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
+var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
+var forms_1 = require("@angular/forms");
 var app_component_1 = require("./app.component");
 var scores_tab_component_1 = require("./scores-tab/scores-tab.component");
 var my_account_tab_component_1 = require("./my-account-tab/my-account-tab.component");
@@ -21,7 +23,11 @@ var AppModule = /** @class */ (function () {
     }
     AppModule = __decorate([
         core_1.NgModule({
-            imports: [platform_browser_1.BrowserModule, app_routing_module_1.AppRoutingModule],
+            imports: [
+                platform_browser_1.BrowserModule, app_routing_module_1.AppRoutingModule,
+                ng_bootstrap_1.NgbModule.forRoot(),
+                forms_1.FormsModule,
+            ],
             declarations: [app_component_1.AppComponent, scores_tab_component_1.ScoresTabComponent, my_account_tab_component_1.MyAccountTabComponent, registration_tab_component_1.RegistrationTabComponent, offer_tab_component_1.OfferTabComponent, contact_tab_component_1.ContactTabComponent, about_us_tab_component_1.AboutUsTabComponent],
             bootstrap: [app_component_1.AppComponent]
         })
