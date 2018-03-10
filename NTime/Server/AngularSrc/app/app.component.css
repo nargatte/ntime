@@ -11,7 +11,14 @@ h2 {
     padding-top: 0;
 }
 
-nav a {
+.example-button-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+
+/*nav a {
     padding: 5px 10px;
     text-decoration: none;
     margin-top: 10px;
@@ -31,4 +38,4 @@ nav a {
 
     nav a.active {
         color: #039be5;
-    }
+    }*/

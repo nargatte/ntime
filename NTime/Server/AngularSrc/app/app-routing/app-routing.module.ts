@@ -7,20 +7,26 @@ import { MyAccountTabComponent } from '../my-account-tab/my-account-tab.componen
 import { OfferTabComponent } from '../offer-tab/offer-tab.component';
 import { RegistrationTabComponent } from '../registration-tab/registration-tab.component';
 import { ScoresTabComponent } from '../scores-tab/scores-tab.component';
+import { MatButtonModule } from '@angular/material'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+
+//import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const routes: Routes = [
-    { path: 'about', component: AboutUsTabComponent },
-    { path: 'contact', component: ContactTabComponent },
-    { path: 'account', component: MyAccountTabComponent },
-    { path: 'offer', component: OfferTabComponent },
-    { path: 'registration', component: RegistrationTabComponent },
-    { path: 'scores', component: ScoresTabComponent },
+    { path: 'about', component: AboutUsTabComponent, data: { name: 'about' } },
+    { path: 'contact', component: ContactTabComponent, data: { name: 'contact' } },
+    { path: 'account', component: MyAccountTabComponent, data: { name: 'account' } },
+    { path: 'offer', component: OfferTabComponent, data: { name: 'offer' } },
+    { path: 'registration', component: RegistrationTabComponent, data: { name: 'registration' } },
+    { path: 'scores', component: ScoresTabComponent, data: { name: 'scores' } },
     { path: '', redirectTo: '/about', pathMatch:'full' },
 ]
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(routes)
+        RouterModule.forRoot(routes),
+        BrowserAnimationsModule, MatButtonModule //Material
+        //NgbModule,
     ],
     exports: [RouterModule],
     providers: [{ provide: APP_BASE_HREF, useValue: '/' }]

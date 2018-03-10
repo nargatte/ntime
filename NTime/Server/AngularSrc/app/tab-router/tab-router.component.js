@@ -10,26 +10,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var AboutUsTabComponent = /** @class */ (function () {
-    function AboutUsTabComponent() {
-        this.model = {
-            left: true,
-            middle: false,
-            right: false
-        };
+var TabRouterComponent = /** @class */ (function () {
+    function TabRouterComponent() {
     }
-    AboutUsTabComponent.prototype.ngOnInit = function () {
+    TabRouterComponent.prototype.ngOnInit = function () {
     };
-    ;
-    AboutUsTabComponent = __decorate([
+    TabRouterComponent = __decorate([
         core_1.Component({
-            selector: 'app-about-us-tab',
-            templateUrl: './about-us-tab.component.html',
-            styleUrls: ['./about-us-tab.component.css']
+            selector: 'app-tab-router',
+            templateUrl: './tab-router.component.html',
+            styleUrls: ['./tab-router.component.css']
         }),
         __metadata("design:paramtypes", [])
-    ], AboutUsTabComponent);
-    return AboutUsTabComponent;
+    ], TabRouterComponent);
+    return TabRouterComponent;
 }());
-exports.AboutUsTabComponent = AboutUsTabComponent;
-//# sourceMappingURL=about-us-tab.component.js.map
+exports.TabRouterComponent = TabRouterComponent;
+//# sourceMappingURL=tab-router.component.js.map

@@ -288,6 +288,8 @@
     <Content Include="AngularSrc\app\registration-tab\registration-tab.component.html" />
     <Content Include="AngularSrc\app\scores-tab\scores-tab.component.css" />
     <Content Include="AngularSrc\app\scores-tab\scores-tab.component.html" />
+    <Content Include="AngularSrc\app\tab-router\tab-router.component.css" />
+    <Content Include="AngularSrc\app\tab-router\tab-router.component.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -329,6 +331,7 @@
     <Content Include="package.json" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
+    <None Include="Properties\PublishProfiles\testing.time2win.aspnet.pl - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -402,6 +405,8 @@
     <TypeScriptCompile Include="AngularSrc\app\registration-tab\registration-tab.component.ts" />
     <TypeScriptCompile Include="AngularSrc\app\scores-tab\scores-tab.component.spec.ts" />
     <TypeScriptCompile Include="AngularSrc\app\scores-tab\scores-tab.component.ts" />
+    <TypeScriptCompile Include="AngularSrc\app\tab-router\tab-router.component.spec.ts" />
+    <TypeScriptCompile Include="AngularSrc\app\tab-router\tab-router.component.ts" />
     <TypeScriptCompile Include="AngularSrc\main.ts" />
   </ItemGroup>
   <ItemGroup>
