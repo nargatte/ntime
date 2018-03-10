@@ -30,7 +30,7 @@ var AppModule = /** @class */ (function () {
                 platform_browser_1.BrowserModule, app_routing_module_1.AppRoutingModule,
                 //NgbModule.forRoot(),
                 forms_1.FormsModule,
-                animations_1.BrowserAnimationsModule, material_1.MatButtonModule //Material
+                animations_1.BrowserAnimationsModule, material_1.MatButtonModule, material_1.MatTabsModule //Material
             ],
             declarations: [app_component_1.AppComponent, scores_tab_component_1.ScoresTabComponent, my_account_tab_component_1.MyAccountTabComponent, registration_tab_component_1.RegistrationTabComponent, offer_tab_component_1.OfferTabComponent, contact_tab_component_1.ContactTabComponent, about_us_tab_component_1.AboutUsTabComponent, tab_router_component_1.TabRouterComponent],
             bootstrap: [app_component_1.AppComponent]

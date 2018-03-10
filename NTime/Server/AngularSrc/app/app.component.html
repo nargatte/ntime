@@ -1,15 +1,19 @@
-﻿<!--<p>
-    Our app finally working
-</p>-->
-
-
-<!--<app-main-tabs-view></app-main-tabs-view>-->
-<nav >
-    <a routerLink="/about">O nas</a>
-    <a routerLink="/scores">Wyniki</a>
-    <a routerLink="/registration">Zapisy</a>
-    <a routerLink="/account">Moje konto</a>
-    <a routerLink="/offer">Oferta</a>
-    <a routerLink="/contact">Kontakt</a>
+﻿<nav md-tab-nav-bar>
+    <a md-tab-link routerLink="/about">O nas</a>
+    <a md-tab-link routerLink="/scores">Wyniki</a>
+    <a md-tab-link routerLink="/registration">Zapisy</a>
+    <a md-tab-link routerLink="/account">Moje konto</a>
+    <a md-tab-link routerLink="/offer">Oferta</a>
+    <a md-tab-link routerLink="/contact">Kontakt</a>
 </nav>
+
+<!--<nav mat-tab-nav-bar>
+    <a mat-tab-link routerLink="/about">O nas</a>
+    <a mat-tab-link routerLink="/scores">Wyniki</a>
+    <a mat-tab-link routerLink="/registration">Zapisy</a>
+    <a mat-tab-link routerLink="/account">Moje konto</a>
+    <a mat-tab-link routerLink="/offer">Oferta</a>
+    <a mat-tab-link routerLink="/contact">Kontakt</a>
+</nav>-->
+
 <router-outlet></router-outlet>
