@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 //import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
-import { MatButtonModule, MatTabsModule } from '@angular/material'
+import { MatButtonModule, MatTabsModule, MatIconModule } from '@angular/material'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 import { AppComponent } from './app.component';
@@ -20,7 +20,7 @@ import { TabRouterComponent } from './tab-router/tab-router.component';
         BrowserModule, AppRoutingModule,
         //NgbModule.forRoot(),
         FormsModule,
-        BrowserAnimationsModule, MatButtonModule, MatTabsModule //Material
+        BrowserAnimationsModule, MatButtonModule, MatTabsModule, MatIconModule //Material
     ],
     declarations: [AppComponent, ScoresTabComponent, MyAccountTabComponent, RegistrationTabComponent, OfferTabComponent, ContactTabComponent, AboutUsTabComponent, TabRouterComponent],
     bootstrap: [AppComponent]
