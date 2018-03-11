@@ -1,0 +1,1 @@
+{"version":3,"file":"CompetitionService.js","sourceRoot":"","sources":["CompetitionService.ts"],"names":[],"mappings":";;;;;;;;;;;AAAA,sCAAmD;AAInD,6CAA+D;AAK/D;IAII,4BAAoB,IAAgB;QAAhB,SAAI,GAAJ,IAAI,CAAY;QAH5B,uBAAkB,GAAG,mDAAmD,CAAC;IAKjF,CAAC;IACD,qCAAQ,GAAR;IAEA,CAAC;IATQ,kBAAkB;QAD9B,iBAAU,EAAE;yCAKiB,iBAAU;OAJ3B,kBAAkB,CAU9B;IAAD,yBAAC;CAAA,AAVD,IAUC;AAVY,gDAAkB"}

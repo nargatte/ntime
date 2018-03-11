@@ -9,14 +9,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var common_1 = require("@angular/common");
 var router_1 = require("@angular/router");
-var about_us_tab_component_1 = require("../about-us-tab/about-us-tab.component");
-var contact_tab_component_1 = require("../contact-tab/contact-tab.component");
-var my_account_tab_component_1 = require("../my-account-tab/my-account-tab.component");
-var offer_tab_component_1 = require("../offer-tab/offer-tab.component");
-var registration_tab_component_1 = require("../registration-tab/registration-tab.component");
-var scores_tab_component_1 = require("../scores-tab/scores-tab.component");
+var about_us_tab_component_1 = require("../Tabs/about-us-tab/about-us-tab.component");
+var contact_tab_component_1 = require("../Tabs/contact-tab/contact-tab.component");
+var my_account_tab_component_1 = require("../Tabs/my-account-tab/my-account-tab.component");
+var offer_tab_component_1 = require("../Tabs/offer-tab/offer-tab.component");
+var registration_tab_component_1 = require("../Tabs/registration-tab/registration-tab.component");
+var scores_tab_component_1 = require("../Tabs/scores-tab/scores-tab.component");
 var material_1 = require("@angular/material");
 var animations_1 = require("@angular/platform-browser/animations");
+//import { registerLocaleData } from '@angular/common'
+//import localePl from '@angular/common/locales/pl';
+//registerLocaleData(localePl, 'pl');
 //import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 var routes = [
     { path: 'about', component: about_us_tab_component_1.AboutUsTabComponent, data: { name: 'about' } },
@@ -38,7 +41,9 @@ var AppRoutingModule = /** @class */ (function () {
                 //NgbModule,
             ],
             exports: [router_1.RouterModule],
-            providers: [{ provide: common_1.APP_BASE_HREF, useValue: '/' }]
+            providers: [
+                { provide: common_1.APP_BASE_HREF, useValue: '/' },
+            ]
         })
     ], AppRoutingModule);
     return AppRoutingModule;

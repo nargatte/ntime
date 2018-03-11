@@ -274,22 +274,24 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AngularSrc\app\about-us-tab\about-us-tab.component.css" />
-    <Content Include="AngularSrc\app\about-us-tab\about-us-tab.component.html" />
+    <Content Include="AngularSrc\app\Tabs\about-us-tab\about-us-tab.component.css" />
+    <Content Include="AngularSrc\app\Tabs\about-us-tab\about-us-tab.component.html" />
     <Content Include="AngularSrc\app\app.component.css" />
-    <Content Include="AngularSrc\app\contact-tab\contact-tab.component.css" />
-    <Content Include="AngularSrc\app\contact-tab\contact-tab.component.html" />
+    <Content Include="AngularSrc\app\Tabs\contact-tab\contact-tab.component.css" />
+    <Content Include="AngularSrc\app\Tabs\contact-tab\contact-tab.component.html" />
     <Content Include="AngularSrc\app\app.component.html" />
-    <Content Include="AngularSrc\app\my-account-tab\my-account-tab.component.css" />
-    <Content Include="AngularSrc\app\my-account-tab\my-account-tab.component.html" />
-    <Content Include="AngularSrc\app\offer-tab\offer-tab.component.css" />
-    <Content Include="AngularSrc\app\offer-tab\offer-tab.component.html" />
-    <Content Include="AngularSrc\app\registration-tab\registration-tab.component.css" />
-    <Content Include="AngularSrc\app\registration-tab\registration-tab.component.html" />
-    <Content Include="AngularSrc\app\scores-tab\scores-tab.component.css" />
-    <Content Include="AngularSrc\app\scores-tab\scores-tab.component.html" />
-    <Content Include="AngularSrc\app\tab-router\tab-router.component.css" />
-    <Content Include="AngularSrc\app\tab-router\tab-router.component.html" />
+    <Content Include="AngularSrc\app\Tabs\my-account-tab\my-account-tab.component.css" />
+    <Content Include="AngularSrc\app\Tabs\my-account-tab\my-account-tab.component.html" />
+    <Content Include="AngularSrc\app\navbar\navbar.component.css" />
+    <Content Include="AngularSrc\app\navbar\navbar.component.html" />
+    <Content Include="AngularSrc\app\Tabs\offer-tab\offer-tab.component.css" />
+    <Content Include="AngularSrc\app\Tabs\offer-tab\offer-tab.component.html" />
+    <Content Include="AngularSrc\app\Tabs\registration-tab\registration-tab.component.css" />
+    <Content Include="AngularSrc\app\Tabs\registration-tab\registration-tab.component.html" />
+    <Content Include="AngularSrc\app\Tabs\scores-tab\scores-tab.component.css" />
+    <Content Include="AngularSrc\app\Tabs\scores-tab\scores-tab.component.html" />
+    <Content Include="AngularSrc\app\SharedComponents\competitions-select\competitions-select.component.css" />
+    <Content Include="AngularSrc\app\SharedComponents\competitions-select\competitions-select.component.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -389,24 +391,29 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="AngularSrc\app\about-us-tab\about-us-tab.component.spec.ts" />
-    <TypeScriptCompile Include="AngularSrc\app\about-us-tab\about-us-tab.component.ts" />
+    <TypeScriptCompile Include="AngularSrc\app\Models\Competition.ts" />
+    <TypeScriptCompile Include="AngularSrc\app\Models\PlayerCompetitionRegister.ts" />
+    <TypeScriptCompile Include="AngularSrc\app\Services\CompetitionService.ts" />
+    <TypeScriptCompile Include="AngularSrc\app\Tabs\about-us-tab\about-us-tab.component.spec.ts" />
+    <TypeScriptCompile Include="AngularSrc\app\Tabs\about-us-tab\about-us-tab.component.ts" />
     <TypeScriptCompile Include="AngularSrc\app\app-routing\app-routing.module.ts" />
     <TypeScriptCompile Include="AngularSrc\app\app.component.spec.ts" />
     <TypeScriptCompile Include="AngularSrc\app\app.component.ts" />
     <TypeScriptCompile Include="AngularSrc\app\app.module.ts" />
-    <TypeScriptCompile Include="AngularSrc\app\contact-tab\contact-tab.component.spec.ts" />
-    <TypeScriptCompile Include="AngularSrc\app\contact-tab\contact-tab.component.ts" />
-    <TypeScriptCompile Include="AngularSrc\app\my-account-tab\my-account-tab.component.spec.ts" />
-    <TypeScriptCompile Include="AngularSrc\app\my-account-tab\my-account-tab.component.ts" />
-    <TypeScriptCompile Include="AngularSrc\app\offer-tab\offer-tab.component.spec.ts" />
-    <TypeScriptCompile Include="AngularSrc\app\offer-tab\offer-tab.component.ts" />
-    <TypeScriptCompile Include="AngularSrc\app\registration-tab\registration-tab.component.spec.ts" />
-    <TypeScriptCompile Include="AngularSrc\app\registration-tab\registration-tab.component.ts" />
-    <TypeScriptCompile Include="AngularSrc\app\scores-tab\scores-tab.component.spec.ts" />
-    <TypeScriptCompile Include="AngularSrc\app\scores-tab\scores-tab.component.ts" />
-    <TypeScriptCompile Include="AngularSrc\app\tab-router\tab-router.component.spec.ts" />
-    <TypeScriptCompile Include="AngularSrc\app\tab-router\tab-router.component.ts" />
+    <TypeScriptCompile Include="AngularSrc\app\Tabs\contact-tab\contact-tab.component.spec.ts" />
+    <TypeScriptCompile Include="AngularSrc\app\Tabs\contact-tab\contact-tab.component.ts" />
+    <TypeScriptCompile Include="AngularSrc\app\Tabs\my-account-tab\my-account-tab.component.spec.ts" />
+    <TypeScriptCompile Include="AngularSrc\app\Tabs\my-account-tab\my-account-tab.component.ts" />
+    <TypeScriptCompile Include="AngularSrc\app\navbar\navbar.component.spec.ts" />
+    <TypeScriptCompile Include="AngularSrc\app\navbar\navbar.component.ts" />
+    <TypeScriptCompile Include="AngularSrc\app\Tabs\offer-tab\offer-tab.component.spec.ts" />
+    <TypeScriptCompile Include="AngularSrc\app\Tabs\offer-tab\offer-tab.component.ts" />
+    <TypeScriptCompile Include="AngularSrc\app\Tabs\registration-tab\registration-tab.component.spec.ts" />
+    <TypeScriptCompile Include="AngularSrc\app\Tabs\registration-tab\registration-tab.component.ts" />
+    <TypeScriptCompile Include="AngularSrc\app\Tabs\scores-tab\scores-tab.component.spec.ts" />
+    <TypeScriptCompile Include="AngularSrc\app\Tabs\scores-tab\scores-tab.component.ts" />
+    <TypeScriptCompile Include="AngularSrc\app\SharedComponents\competitions-select\competitions-select.component.spec.ts" />
+    <TypeScriptCompile Include="AngularSrc\app\SharedComponents\competitions-select\competitions-select.component.ts" />
     <TypeScriptCompile Include="AngularSrc\main.ts" />
   </ItemGroup>
   <ItemGroup>
