@@ -10,20 +10,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var TabRouterComponent = /** @class */ (function () {
-    function TabRouterComponent() {
+var NavbarComponent = /** @class */ (function () {
+    function NavbarComponent() {
     }
-    TabRouterComponent.prototype.ngOnInit = function () {
+    NavbarComponent.prototype.ngOnInit = function () {
     };
-    TabRouterComponent = __decorate([
+    NavbarComponent = __decorate([
         core_1.Component({
-            selector: 'app-tab-router',
-            templateUrl: './tab-router.component.html',
-            styleUrls: ['./tab-router.component.css']
+            selector: 'app-navbar',
+            templateUrl: './navbar.component.html',
+            styleUrls: ['./navbar.component.css']
         }),
         __metadata("design:paramtypes", [])
-    ], TabRouterComponent);
-    return TabRouterComponent;
+    ], NavbarComponent);
+    return NavbarComponent;
 }());
-exports.TabRouterComponent = TabRouterComponent;
-//# sourceMappingURL=tab-router.component.js.map
+exports.NavbarComponent = NavbarComponent;
+//# sourceMappingURL=navbar.component.js.map

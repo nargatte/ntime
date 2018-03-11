@@ -17,6 +17,7 @@
             '@angular/core': 'npm:@angular/core/bundles/core.umd.js',
             '@angular/common': 'npm:@angular/common/bundles/common.umd.js',
             '@angular/common/http': 'npm:@angular/common/bundles/common-http.umd.js',
+            '@angular/common/locales/pl': 'npm:@angular/common/locales/pl',
             '@angular/compiler': 'npm:@angular/compiler/bundles/compiler.umd.js',
             '@angular/platform-browser': 'npm:@angular/platform-browser/bundles/platform-browser.umd.js',
             '@angular/platform-browser-dynamic': 'npm:@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
@@ -27,6 +28,10 @@
             '@angular/animations': 'npm:@angular/animations/bundles/animations.umd.js',
             '@angular/animations/browser': 'npm:@angular/animations/bundles/animations-browser.umd.js',
             '@angular/platform-browser/animations': 'npm:@angular/platform-browser/bundles/platform-browser-animations.umd.js',
+            '@angular/flex-layout': 'npm:@angular/flex-layout/bundles/flex-layout.umd.js',
+
+            //'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
+
 
             // CDK individual packages
             '@angular/cdk/platform': '../npm:@angular/cdk/bundles/cdk-platform.umd.js',

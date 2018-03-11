@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-//import {NgbModule} from '@ng-bootstrap/ng-bootstrap'
 
 @Component({
     selector: 'app-root',
@@ -7,14 +6,5 @@ import { Component } from '@angular/core';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-    title = 'Tour of heroes';
+    title = 'Time2Win';
 }
-
-
-//import { Component } from '@angular/core';
-
-//@Component({
-//  selector: 'app-root',
-//  template: `<h1>Hello {{name}}</h1>`,
-//})
-//export class AppComponent  { name = 'Angular'; }

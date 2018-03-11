@@ -7,10 +7,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-//import {NgbModule} from '@ng-bootstrap/ng-bootstrap'
 var AppComponent = /** @class */ (function () {
     function AppComponent() {
-        this.title = 'Tour of heroes';
+        this.title = 'Time2Win';
     }
     AppComponent = __decorate([
         core_1.Component({
@@ -22,10 +21,4 @@ var AppComponent = /** @class */ (function () {
     return AppComponent;
 }());
 exports.AppComponent = AppComponent;
-//import { Component } from '@angular/core';
-//@Component({
-//  selector: 'app-root',
-//  template: `<h1>Hello {{name}}</h1>`,
-//})
-//export class AppComponent  { name = 'Angular'; }
 //# sourceMappingURL=app.component.js.map
