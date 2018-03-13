@@ -10,19 +10,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var http_1 = require("@angular/common/http");
-var CompetitionService = /** @class */ (function () {
-    function CompetitionService(http) {
-        this.http = http;
-        this.baseCompetitionUrl = "http://testing.time2win.aspnet.pl/api/Competition";
+var MessageService = /** @class */ (function () {
+    function MessageService() {
+        this.message = [];
     }
-    CompetitionService.prototype.ngOnInit = function () {
+    MessageService.prototype.addLog = function (message) {
+        console.log(message);
+        this.message.push(message);
     };
-    CompetitionService = __decorate([
+    MessageService.prototype.clear = function () {
+        this.message = [];
+    };
+    MessageService = __decorate([
         core_1.Injectable(),
-        __metadata("design:paramtypes", [http_1.HttpClient])
-    ], CompetitionService);
-    return CompetitionService;
+        __metadata("design:paramtypes", [])
+    ], MessageService);
+    return MessageService;
 }());
-exports.CompetitionService = CompetitionService;
-//# sourceMappingURL=CompetitionService.js.map
+exports.MessageService = MessageService;
+//# sourceMappingURL=message.service.js.map

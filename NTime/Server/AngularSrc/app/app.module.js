@@ -10,6 +10,7 @@ var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 //import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 var forms_1 = require("@angular/forms");
+var http_1 = require("@angular/common/http");
 var material_1 = require("@angular/material");
 var animations_1 = require("@angular/platform-browser/animations");
 //import { FlexLayoutModule } from '@angular/flex-layout';
@@ -23,21 +24,25 @@ var about_us_tab_component_1 = require("./Tabs/about-us-tab/about-us-tab.compone
 var app_routing_module_1 = require("./app-routing/app-routing.module");
 var navbar_component_1 = require("./navbar/navbar.component");
 var competitions_select_component_1 = require("./SharedComponents/competitions-select/competitions-select.component");
+var competition_service_1 = require("./Services/competition.service");
+var message_service_1 = require("./Services/message.service");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
             imports: [
-                platform_browser_1.BrowserModule, app_routing_module_1.AppRoutingModule, forms_1.ReactiveFormsModule,
+                platform_browser_1.BrowserModule, forms_1.FormsModule, app_routing_module_1.AppRoutingModule, forms_1.ReactiveFormsModule, http_1.HttpClientModule,
                 //NgbModule.forRoot(),
-                forms_1.FormsModule,
                 animations_1.BrowserAnimationsModule, material_1.MatButtonModule, material_1.MatTabsModule, material_1.MatIconModule,
                 material_1.MatToolbarModule //Material 
             ],
             declarations: [app_component_1.AppComponent, scores_tab_component_1.ScoresTabComponent, my_account_tab_component_1.MyAccountTabComponent,
                 registration_tab_component_1.RegistrationTabComponent, offer_tab_component_1.OfferTabComponent, contact_tab_component_1.ContactTabComponent,
                 about_us_tab_component_1.AboutUsTabComponent, navbar_component_1.NavbarComponent, competitions_select_component_1.CompetitionsSelectComponent],
+            providers: [
+                competition_service_1.CompetitionService, message_service_1.MessageService
+            ],
             bootstrap: [app_component_1.AppComponent]
         })
     ], AppModule);

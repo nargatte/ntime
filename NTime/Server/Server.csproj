@@ -391,9 +391,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="AngularSrc\app\MockData\mockCompetitions.ts" />
     <TypeScriptCompile Include="AngularSrc\app\Models\Competition.ts" />
     <TypeScriptCompile Include="AngularSrc\app\Models\PlayerCompetitionRegister.ts" />
-    <TypeScriptCompile Include="AngularSrc\app\Services\CompetitionService.ts" />
+    <TypeScriptCompile Include="AngularSrc\app\Services\competition.service.spec.ts" />
+    <TypeScriptCompile Include="AngularSrc\app\Services\competition.service.ts" />
+    <TypeScriptCompile Include="AngularSrc\app\Services\message.service.spec.ts" />
+    <TypeScriptCompile Include="AngularSrc\app\Services\message.service.ts" />
     <TypeScriptCompile Include="AngularSrc\app\Tabs\about-us-tab\about-us-tab.component.spec.ts" />
     <TypeScriptCompile Include="AngularSrc\app\Tabs\about-us-tab\about-us-tab.component.ts" />
     <TypeScriptCompile Include="AngularSrc\app\app-routing\app-routing.module.ts" />
