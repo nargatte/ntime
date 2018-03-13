@@ -11,11 +11,7 @@ var platform_browser_1 = require("@angular/platform-browser");
 //import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 var forms_1 = require("@angular/forms");
 var material_1 = require("@angular/material");
-//import { MatSelectModule } from '@angular/material/select';
 var animations_1 = require("@angular/platform-browser/animations");
-//import { registerLocaleData } from '@angular/common'
-//import localePl from '@angular/common/locales/pl';
-//registerLocaleData(localePl, 'pl');
 //import { FlexLayoutModule } from '@angular/flex-layout';
 var app_component_1 = require("./app.component");
 var scores_tab_component_1 = require("./Tabs/scores-tab/scores-tab.component");
@@ -37,7 +33,7 @@ var AppModule = /** @class */ (function () {
                 //NgbModule.forRoot(),
                 forms_1.FormsModule,
                 animations_1.BrowserAnimationsModule, material_1.MatButtonModule, material_1.MatTabsModule, material_1.MatIconModule,
-                material_1.MatToolbarModule, material_1.MatSelectModule //Material 
+                material_1.MatToolbarModule //Material 
             ],
             declarations: [app_component_1.AppComponent, scores_tab_component_1.ScoresTabComponent, my_account_tab_component_1.MyAccountTabComponent,
                 registration_tab_component_1.RegistrationTabComponent, offer_tab_component_1.OfferTabComponent, contact_tab_component_1.ContactTabComponent,

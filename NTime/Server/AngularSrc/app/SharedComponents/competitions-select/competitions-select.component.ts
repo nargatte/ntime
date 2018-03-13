@@ -9,13 +9,5 @@ import { FormControl, Validators, ReactiveFormsModule} from '@angular/forms'
     styleUrls: ['./competitions-select.component.css']
 })
 export class CompetitionsSelectComponent {
-    animalControl = new FormControl('', [Validators.required]);
-
-    animals = [
-        { name: 'Dog', sound: 'Woof!' },
-        { name: 'Cat', sound: 'Meow!' },
-        { name: 'Cow', sound: 'Moo!' },
-        { name: 'Fox', sound: 'Wa-pa-pa-pa-pa-pa-pow!' },
-    ];
-
+    
 }

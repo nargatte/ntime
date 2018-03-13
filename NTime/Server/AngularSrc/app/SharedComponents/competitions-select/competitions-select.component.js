@@ -7,17 +7,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var forms_1 = require("@angular/forms");
 //import { Competition } from '../../Models/Competition';
 var CompetitionsSelectComponent = /** @class */ (function () {
     function CompetitionsSelectComponent() {
-        this.animalControl = new forms_1.FormControl('', [forms_1.Validators.required]);
-        this.animals = [
-            { name: 'Dog', sound: 'Woof!' },
-            { name: 'Cat', sound: 'Meow!' },
-            { name: 'Cow', sound: 'Moo!' },
-            { name: 'Fox', sound: 'Wa-pa-pa-pa-pa-pa-pow!' },
-        ];
     }
     CompetitionsSelectComponent = __decorate([
         core_1.Component({

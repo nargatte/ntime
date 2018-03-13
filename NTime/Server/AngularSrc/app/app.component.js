@@ -10,6 +10,11 @@ var core_1 = require("@angular/core");
 var AppComponent = /** @class */ (function () {
     function AppComponent() {
         this.title = 'Time2Win';
+        this.foods = [
+            { value: 'steak-0', viewValue: 'Steak' },
+            { value: 'pizza-1', viewValue: 'Pizza' },
+            { value: 'tacos-2', viewValue: 'Tacos' }
+        ];
     }
     AppComponent = __decorate([
         core_1.Component({

@@ -4,12 +4,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
     MatButtonModule, MatTabsModule, MatIconModule, MatToolbarModule,
-    MatSelectModule} from '@angular/material';
-//import { MatSelectModule } from '@angular/material/select';
+} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-//import { registerLocaleData } from '@angular/common'
-//import localePl from '@angular/common/locales/pl';
-//registerLocaleData(localePl, 'pl');
+
 
 //import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -31,7 +28,7 @@ import { CompetitionsSelectComponent } from './SharedComponents/competitions-sel
         //NgbModule.forRoot(),
         FormsModule,
         BrowserAnimationsModule, MatButtonModule, MatTabsModule, MatIconModule, //Material
-        MatToolbarModule, MatSelectModule//Material 
+        MatToolbarModule//Material 
     ],
     declarations: [AppComponent, ScoresTabComponent, MyAccountTabComponent,
         RegistrationTabComponent, OfferTabComponent, ContactTabComponent,
