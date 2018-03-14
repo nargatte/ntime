@@ -1,0 +1,49 @@
+﻿<div class="example-container mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource">
+
+        <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Number Column -->
+        <ng-container matColumnDef="number"> 
+            <mat-header-cell *matHeaderCellDef> Numer </mat-header-cell>
+            <mat-cell *matCellDef="let competition"> {{competition.Id}} </mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef> Nazwa </mat-header-cell>
+            <mat-cell *matCellDef="let competition"> {{competition.Name}} </mat-cell>
+        </ng-container>
+
+        <!-- City Column -->
+        <ng-container matColumnDef="city">
+            <mat-header-cell *matHeaderCellDef> Miasto </mat-header-cell>
+            <mat-cell *matCellDef="let competition"> {{competition.City}} </mat-cell>
+        </ng-container>
+
+        <!-- EventDate Column -->
+        <ng-container matColumnDef="date">
+            <mat-header-cell *matHeaderCellDef> Data zawodów </mat-header-cell>
+            <mat-cell *matCellDef="let competition"> {{competition.EventDate.toLocaleDateString("pl-pl")}} </mat-cell>
+        </ng-container>
+
+        <!-- SignUpEndDate Column -->
+        <ng-container matColumnDef="signUpEndDate">
+            <mat-header-cell *matHeaderCellDef> Data końca zapisów </mat-header-cell>
+            <mat-cell *matCellDef="let competition"> {{competition.SignUpEndDate}} </mat-cell>
+        </ng-container>
+
+        <!-- Link Column -->
+        <ng-container matColumnDef="link">
+            <mat-header-cell *matHeaderCellDef> Link do strony </mat-header-cell>
+            <mat-cell *matCellDef="let competition"> {{competition.Link}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[10, 20, 50]" [showFirstLastButtons]="true">
+    </mat-paginator>
+</div>
