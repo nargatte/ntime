@@ -274,31 +274,15 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AngularSrc\app\Tabs\about-us-tab\about-us-tab.component.css" />
-    <Content Include="AngularSrc\app\Tabs\about-us-tab\about-us-tab.component.html" />
-    <Content Include="AngularSrc\app\app.component.css" />
-    <Content Include="AngularSrc\app\Tabs\contact-tab\contact-tab.component.css" />
-    <Content Include="AngularSrc\app\Tabs\contact-tab\contact-tab.component.html" />
-    <Content Include="AngularSrc\app\app.component.html" />
-    <Content Include="AngularSrc\app\Tabs\my-account-tab\my-account-tab.component.css" />
-    <Content Include="AngularSrc\app\Tabs\my-account-tab\my-account-tab.component.html" />
-    <Content Include="AngularSrc\app\navbar\navbar.component.css" />
-    <Content Include="AngularSrc\app\navbar\navbar.component.html" />
-    <Content Include="AngularSrc\app\Tabs\offer-tab\offer-tab.component.css" />
-    <Content Include="AngularSrc\app\Tabs\offer-tab\offer-tab.component.html" />
-    <Content Include="AngularSrc\app\Tabs\registration-tab\registration-tab.component.css" />
-    <Content Include="AngularSrc\app\Tabs\registration-tab\registration-tab.component.html" />
-    <Content Include="AngularSrc\app\Tabs\scores-tab\scores-tab.component.css" />
-    <Content Include="AngularSrc\app\Tabs\scores-tab\scores-tab.component.html" />
-    <Content Include="AngularSrc\app\SharedComponents\competitions-select\competitions-select.component.css" />
-    <Content Include="AngularSrc\app\SharedComponents\competitions-select\competitions-select.component.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Bundles\favicon.ico" />
+    <Content Include="Bundles\index.html" />
+    <Content Include="Bundles\inline.bundle.js" />
+    <Content Include="Bundles\main.bundle.js" />
+    <Content Include="Bundles\polyfills.bundle.js" />
+    <Content Include="Bundles\styles.bundle.css" />
+    <Content Include="Bundles\vendor.bundle.js" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
     <Content Include="Areas\HelpPage\Views\Shared\_Layout.cshtml" />
@@ -319,63 +303,118 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <Content Include="ApplicationInsights.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="package.json" />
+    <Content Include="ntimeAngular\.angular-cli.json" />
+    <Content Include="ntimeAngular\.editorconfig" />
+    <Content Include="ntimeAngular\e2e\tsconfig.e2e.json" />
+    <Content Include="ntimeAngular\package-lock.json" />
+    <Content Include="ntimeAngular\package.json" />
+    <Content Include="ntimeAngular\README.md" />
+    <Content Include="ntimeAngular\src\app\app.component.js.map" />
+    <Content Include="ntimeAngular\src\app\app.component.spec.js.map" />
+    <Content Include="ntimeAngular\src\app\app.module.js.map" />
+    <Content Include="ntimeAngular\src\app\MockData\mockCompetitions.js.map" />
+    <Content Include="ntimeAngular\src\app\Models\Competition.js.map" />
+    <Content Include="ntimeAngular\src\app\Models\PlayerCompetitionRegister.js.map" />
+    <Content Include="ntimeAngular\src\app\navbar\navbar.component.js.map" />
+    <Content Include="ntimeAngular\src\app\navbar\navbar.component.spec.js.map" />
+    <Content Include="ntimeAngular\src\app\Services\competition.service.js.map" />
+    <Content Include="ntimeAngular\src\app\Services\competition.service.spec.js.map" />
+    <Content Include="ntimeAngular\src\app\Services\message.service.js.map" />
+    <Content Include="ntimeAngular\src\app\Services\message.service.spec.js.map" />
+    <Content Include="ntimeAngular\src\app\SharedComponents\competitions-select\competitions-select.component.js.map" />
+    <Content Include="ntimeAngular\src\app\SharedComponents\competitions-select\competitions-select.component.spec.js.map" />
+    <Content Include="ntimeAngular\src\app\Tabs\about-us-tab\about-us-tab.component.js.map" />
+    <Content Include="ntimeAngular\src\app\Tabs\about-us-tab\about-us-tab.component.spec.js.map" />
+    <Content Include="ntimeAngular\src\app\Tabs\contact-tab\contact-tab.component.js.map" />
+    <Content Include="ntimeAngular\src\app\Tabs\contact-tab\contact-tab.component.spec.js.map" />
+    <Content Include="ntimeAngular\src\app\Tabs\my-account-tab\my-account-tab.component.js.map" />
+    <Content Include="ntimeAngular\src\app\Tabs\my-account-tab\my-account-tab.component.spec.js.map" />
+    <Content Include="ntimeAngular\src\app\Tabs\offer-tab\offer-tab.component.js.map" />
+    <Content Include="ntimeAngular\src\app\Tabs\offer-tab\offer-tab.component.spec.js.map" />
+    <Content Include="ntimeAngular\src\app\Tabs\registration-tab\registration-tab.component.js.map" />
+    <Content Include="ntimeAngular\src\app\Tabs\registration-tab\registration-tab.component.spec.js.map" />
+    <Content Include="ntimeAngular\src\app\Tabs\scores-tab\scores-tab.component.js.map" />
+    <Content Include="ntimeAngular\src\app\Tabs\scores-tab\scores-tab.component.spec.js.map" />
+    <Content Include="ntimeAngular\src\assets\.gitkeep" />
+    <Content Include="ntimeAngular\src\tsconfig.app.json" />
+    <Content Include="ntimeAngular\src\tsconfig.spec.json" />
+    <Content Include="ntimeAngular\tsconfig.json" />
+    <Content Include="ntimeAngular\tslint.json" />
+    <Content Include="Bundles\inline.bundle.js.map" />
+    <Content Include="Bundles\main.bundle.js.map" />
+    <Content Include="Bundles\polyfills.bundle.js.map" />
+    <Content Include="Bundles\styles.bundle.css.map" />
+    <Content Include="Bundles\vendor.bundle.js.map" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\testing.time2win.aspnet.pl - Web Deploy.pubxml" />
-    <None Include="Scripts\jquery-3.2.1.intellisense.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\jquery-3.2.1.js" />
-    <Content Include="Scripts\jquery-3.2.1.min.js" />
-    <Content Include="Scripts\jquery-3.2.1.slim.js" />
-    <Content Include="Scripts\jquery-3.2.1.slim.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\respond.js" />
-    <Content Include="Scripts\respond.matchmedia.addListener.js" />
-    <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
-    <Content Include="Scripts\respond.min.js" />
-    <Content Include="AngularSrc\systemjs-angular-loader.js" />
-    <Content Include="AngularSrc\systemjs.config.extras.js" />
-    <Content Include="AngularSrc\systemjs.config.js" />
+    <Content Include="ntimeAngular\.gitignore" />
+    <Content Include="ntimeAngular\karma.conf.js" />
+    <Content Include="ntimeAngular\protractor.conf.js" />
+    <Content Include="ntimeAngular\src\app\app.component.css" />
+    <Content Include="ntimeAngular\src\app\app.component.html" />
+    <Content Include="ntimeAngular\src\app\app.component.js" />
+    <Content Include="ntimeAngular\src\app\app.component.spec.js" />
+    <Content Include="ntimeAngular\src\app\app.module.js" />
+    <Content Include="ntimeAngular\src\app\MockData\mockCompetitions.js" />
+    <Content Include="ntimeAngular\src\app\Models\Competition.js" />
+    <Content Include="ntimeAngular\src\app\Models\PlayerCompetitionRegister.js" />
+    <Content Include="ntimeAngular\src\app\navbar\navbar.component.css" />
+    <Content Include="ntimeAngular\src\app\navbar\navbar.component.html" />
+    <Content Include="ntimeAngular\src\app\navbar\navbar.component.js" />
+    <Content Include="ntimeAngular\src\app\navbar\navbar.component.spec.js" />
+    <Content Include="ntimeAngular\src\app\Services\competition.service.js" />
+    <Content Include="ntimeAngular\src\app\Services\competition.service.spec.js" />
+    <Content Include="ntimeAngular\src\app\Services\message.service.js" />
+    <Content Include="ntimeAngular\src\app\Services\message.service.spec.js" />
+    <Content Include="ntimeAngular\src\app\SharedComponents\competitions-select\competitions-select.component.css" />
+    <Content Include="ntimeAngular\src\app\SharedComponents\competitions-select\competitions-select.component.html" />
+    <Content Include="ntimeAngular\src\app\SharedComponents\competitions-select\competitions-select.component.js" />
+    <Content Include="ntimeAngular\src\app\SharedComponents\competitions-select\competitions-select.component.spec.js" />
+    <Content Include="ntimeAngular\src\app\SharedComponents\new-player-input\new-player-input.component.css" />
+    <Content Include="ntimeAngular\src\app\SharedComponents\new-player-input\new-player-input.component.html" />
+    <Content Include="ntimeAngular\src\app\Tabs\about-us-tab\about-us-tab.component.css" />
+    <Content Include="ntimeAngular\src\app\Tabs\about-us-tab\about-us-tab.component.html" />
+    <Content Include="ntimeAngular\src\app\Tabs\about-us-tab\about-us-tab.component.js" />
+    <Content Include="ntimeAngular\src\app\Tabs\about-us-tab\about-us-tab.component.spec.js" />
+    <Content Include="ntimeAngular\src\app\Tabs\contact-tab\contact-tab.component.css" />
+    <Content Include="ntimeAngular\src\app\Tabs\contact-tab\contact-tab.component.html" />
+    <Content Include="ntimeAngular\src\app\Tabs\contact-tab\contact-tab.component.js" />
+    <Content Include="ntimeAngular\src\app\Tabs\contact-tab\contact-tab.component.spec.js" />
+    <Content Include="ntimeAngular\src\app\Tabs\my-account-tab\my-account-tab.component.css" />
+    <Content Include="ntimeAngular\src\app\Tabs\my-account-tab\my-account-tab.component.html" />
+    <Content Include="ntimeAngular\src\app\Tabs\my-account-tab\my-account-tab.component.js" />
+    <Content Include="ntimeAngular\src\app\Tabs\my-account-tab\my-account-tab.component.spec.js" />
+    <Content Include="ntimeAngular\src\app\Tabs\offer-tab\offer-tab.component.css" />
+    <Content Include="ntimeAngular\src\app\Tabs\offer-tab\offer-tab.component.html" />
+    <Content Include="ntimeAngular\src\app\Tabs\offer-tab\offer-tab.component.js" />
+    <Content Include="ntimeAngular\src\app\Tabs\offer-tab\offer-tab.component.spec.js" />
+    <Content Include="ntimeAngular\src\app\Tabs\registration-tab\registration-tab.component.css" />
+    <Content Include="ntimeAngular\src\app\Tabs\registration-tab\registration-tab.component.html" />
+    <Content Include="ntimeAngular\src\app\Tabs\registration-tab\registration-tab.component.js" />
+    <Content Include="ntimeAngular\src\app\Tabs\registration-tab\registration-tab.component.spec.js" />
+    <Content Include="ntimeAngular\src\app\Tabs\scores-tab\scores-tab.component.css" />
+    <Content Include="ntimeAngular\src\app\Tabs\scores-tab\scores-tab.component.html" />
+    <Content Include="ntimeAngular\src\app\Tabs\scores-tab\scores-tab.component.js" />
+    <Content Include="ntimeAngular\src\app\Tabs\scores-tab\scores-tab.component.spec.js" />
+    <Content Include="ntimeAngular\src\favicon.ico" />
+    <Content Include="ntimeAngular\src\index.html" />
+    <Content Include="ntimeAngular\src\styles.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
-    <Content Include="Content\Site.css" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.2.1.min.map" />
-    <Content Include="AngularSrc\tsconfig.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\" />
+    <Folder Include="fonts\" />
+    <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -391,33 +430,47 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="AngularSrc\app\Models\Competition.ts" />
-    <TypeScriptCompile Include="AngularSrc\app\Models\PlayerCompetitionRegister.ts" />
-    <TypeScriptCompile Include="AngularSrc\app\Services\CompetitionService.ts" />
-    <TypeScriptCompile Include="AngularSrc\app\Tabs\about-us-tab\about-us-tab.component.spec.ts" />
-    <TypeScriptCompile Include="AngularSrc\app\Tabs\about-us-tab\about-us-tab.component.ts" />
-    <TypeScriptCompile Include="AngularSrc\app\app-routing\app-routing.module.ts" />
-    <TypeScriptCompile Include="AngularSrc\app\app.component.spec.ts" />
-    <TypeScriptCompile Include="AngularSrc\app\app.component.ts" />
-    <TypeScriptCompile Include="AngularSrc\app\app.module.ts" />
-    <TypeScriptCompile Include="AngularSrc\app\Tabs\contact-tab\contact-tab.component.spec.ts" />
-    <TypeScriptCompile Include="AngularSrc\app\Tabs\contact-tab\contact-tab.component.ts" />
-    <TypeScriptCompile Include="AngularSrc\app\Tabs\my-account-tab\my-account-tab.component.spec.ts" />
-    <TypeScriptCompile Include="AngularSrc\app\Tabs\my-account-tab\my-account-tab.component.ts" />
-    <TypeScriptCompile Include="AngularSrc\app\navbar\navbar.component.spec.ts" />
-    <TypeScriptCompile Include="AngularSrc\app\navbar\navbar.component.ts" />
-    <TypeScriptCompile Include="AngularSrc\app\Tabs\offer-tab\offer-tab.component.spec.ts" />
-    <TypeScriptCompile Include="AngularSrc\app\Tabs\offer-tab\offer-tab.component.ts" />
-    <TypeScriptCompile Include="AngularSrc\app\Tabs\registration-tab\registration-tab.component.spec.ts" />
-    <TypeScriptCompile Include="AngularSrc\app\Tabs\registration-tab\registration-tab.component.ts" />
-    <TypeScriptCompile Include="AngularSrc\app\Tabs\scores-tab\scores-tab.component.spec.ts" />
-    <TypeScriptCompile Include="AngularSrc\app\Tabs\scores-tab\scores-tab.component.ts" />
-    <TypeScriptCompile Include="AngularSrc\app\SharedComponents\competitions-select\competitions-select.component.spec.ts" />
-    <TypeScriptCompile Include="AngularSrc\app\SharedComponents\competitions-select\competitions-select.component.ts" />
-    <TypeScriptCompile Include="AngularSrc\main.ts" />
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <TypeScriptCompile Include="ntimeAngular\e2e\app.e2e-spec.ts" />
+    <TypeScriptCompile Include="ntimeAngular\e2e\app.po.ts" />
+    <TypeScriptCompile Include="ntimeAngular\src\app\app.component.spec.ts" />
+    <TypeScriptCompile Include="ntimeAngular\src\app\app.component.ts" />
+    <TypeScriptCompile Include="ntimeAngular\src\app\app.module.ts" />
+    <TypeScriptCompile Include="ntimeAngular\src\app\MockData\mockCompetitions.ts" />
+    <TypeScriptCompile Include="ntimeAngular\src\app\Models\Competition.ts" />
+    <TypeScriptCompile Include="ntimeAngular\src\app\Models\PlayerCompetitionRegister.ts" />
+    <TypeScriptCompile Include="ntimeAngular\src\app\Modules\app-routing.module.ts" />
+    <TypeScriptCompile Include="ntimeAngular\src\app\Modules\material-custom.module.ts" />
+    <TypeScriptCompile Include="ntimeAngular\src\app\navbar\navbar.component.spec.ts" />
+    <TypeScriptCompile Include="ntimeAngular\src\app\navbar\navbar.component.ts" />
+    <TypeScriptCompile Include="ntimeAngular\src\app\Services\competition.service.spec.ts" />
+    <TypeScriptCompile Include="ntimeAngular\src\app\Services\competition.service.ts" />
+    <TypeScriptCompile Include="ntimeAngular\src\app\Services\message.service.spec.ts" />
+    <TypeScriptCompile Include="ntimeAngular\src\app\Services\message.service.ts" />
+    <TypeScriptCompile Include="ntimeAngular\src\app\SharedComponents\competitions-select\competitions-select.component.spec.ts" />
+    <TypeScriptCompile Include="ntimeAngular\src\app\SharedComponents\competitions-select\competitions-select.component.ts" />
+    <TypeScriptCompile Include="ntimeAngular\src\app\SharedComponents\new-player-input\new-player-input.component.spec.ts" />
+    <TypeScriptCompile Include="ntimeAngular\src\app\SharedComponents\new-player-input\new-player-input.component.ts" />
+    <TypeScriptCompile Include="ntimeAngular\src\app\Tabs\about-us-tab\about-us-tab.component.spec.ts" />
+    <TypeScriptCompile Include="ntimeAngular\src\app\Tabs\about-us-tab\about-us-tab.component.ts" />
+    <TypeScriptCompile Include="ntimeAngular\src\app\Tabs\contact-tab\contact-tab.component.spec.ts" />
+    <TypeScriptCompile Include="ntimeAngular\src\app\Tabs\contact-tab\contact-tab.component.ts" />
+    <TypeScriptCompile Include="ntimeAngular\src\app\Tabs\my-account-tab\my-account-tab.component.spec.ts" />
+    <TypeScriptCompile Include="ntimeAngular\src\app\Tabs\my-account-tab\my-account-tab.component.ts" />
+    <TypeScriptCompile Include="ntimeAngular\src\app\Tabs\offer-tab\offer-tab.component.spec.ts" />
+    <TypeScriptCompile Include="ntimeAngular\src\app\Tabs\offer-tab\offer-tab.component.ts" />
+    <TypeScriptCompile Include="ntimeAngular\src\app\Tabs\registration-tab\registration-tab.component.spec.ts" />
+    <TypeScriptCompile Include="ntimeAngular\src\app\Tabs\registration-tab\registration-tab.component.ts" />
+    <TypeScriptCompile Include="ntimeAngular\src\app\Tabs\scores-tab\scores-tab.component.spec.ts" />
+    <TypeScriptCompile Include="ntimeAngular\src\app\Tabs\scores-tab\scores-tab.component.ts" />
+    <TypeScriptCompile Include="ntimeAngular\src\environments\environment.prod.ts" />
+    <TypeScriptCompile Include="ntimeAngular\src\environments\environment.ts" />
+    <TypeScriptCompile Include="ntimeAngular\src\main.ts" />
+    <TypeScriptCompile Include="ntimeAngular\src\polyfills.ts" />
+    <TypeScriptCompile Include="ntimeAngular\src\test.ts" />
+    <TypeScriptCompile Include="ntimeAngular\src\typings.d.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -454,6 +507,12 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <Target Name="NgDebug" BeforeTargets="Build" Condition="'$(Configuration)' == 'Debug'">
+    <Exec WorkingDirectory="$(ProjectDir)ntimeAngular" Command="ng build -ec" />
+  </Target>
+  <Target Name="NgRelease" BeforeTargets="Build" Condition="'$(Configuration)' == 'Release'">
+    <Exec WorkingDirectory="$(ProjectDir)ntimeAngular" Command="ng build --prod --build-optimizer" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
