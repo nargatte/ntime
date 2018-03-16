@@ -1,17 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-// import {
-//     MatButtonModule, MatTabsModule, MatIconModule, MatToolbarModule
-// } from '@angular/material';
 
 //import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppRoutingModule } from './Modules/app-routing.module';
-import {MaterialCustomModule} from './Modules/material-custom.module';
+import { MaterialCustomModule } from './Modules/material-custom.module';
 
 import { AppComponent } from './app.component';
 import { ScoresTabComponent } from './Tabs/scores-tab/scores-tab.component';
@@ -24,16 +21,12 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { CompetitionsSelectComponent } from './SharedComponents/competitions-select/competitions-select.component';
 import { CompetitionService } from './Services/competition.service'
 import { MessageService } from './Services/message.service';
-//import { NewPlayerInputComponent } from './new-player-input/new-player-input.component'
 
 
 @NgModule({
     imports: [
         BrowserModule, FormsModule, AppRoutingModule,
-         ReactiveFormsModule, HttpClientModule, MaterialCustomModule,
-        //NgbModule.forRoot(),
-        // BrowserAnimationsModule, MatButtonModule, MatTabsModule, MatIconModule, //Material
-        // MatToolbarModule//Material 
+        ReactiveFormsModule, HttpClientModule, MaterialCustomModule,
     ],
     declarations: [AppComponent, ScoresTabComponent, MyAccountTabComponent,
         RegistrationTabComponent, OfferTabComponent, ContactTabComponent,

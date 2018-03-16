@@ -2,11 +2,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
 import { Competition } from '../Models/Competition';
 import { COMPETITIONS } from '../MockData/mockCompetitions'
-import { MessageService } from '../Services/message.service'
+import { MessageService } from '../Services/message.service';
+import { from } from 'rxjs/observable/from';
+import { PageViewModel } from '../Models/PageViewModel';
+import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 
 @Injectable()
 export class CompetitionService {
@@ -21,30 +24,32 @@ export class CompetitionService {
 
     }
 
-    getCompetitions(): Observable<Competition[]> {
-        return this.http.get<Competition[]>(this.getCompetitionsUrl).pipe(
-            tap(competitions => this.log('Pobrano zawody')),
-            catchError(this.handleError('getCompetitions', []))
+    getCompetitions(): Observable<PageViewModel<Competition>> {
+        return this.http.get<PageViewModel<Competition>>(this.getCompetitionsUrl).pipe(
+            tap(()=> this.log('Competitions fetched')),
+            catchError(this.handleError)
         );
     }
-    // getCompetitions(): Competition[]{
-    //     return COMPETITIONS;
+    // getCompetitions(): Observable<PageViewModel<Competition>>{
+    //     return from(COMPETITIONS);
     // }
 
     private log(message: string) {
         this.messageService.addLog('CompetitionService: ' + message);
     }
-
-    private handleError<T>(operation = 'operation', result?: T) {
-        return (error: any): Observable<T> => {
-            //TODO: send the error to remote logging infrastructure
-            console.error(error); // Right now only logging to console
-
-            //TODO: better job of transforming error fo user consumption
-            this.log(`${operation} failed: ${error.message}`);
-
-            //Let the app keep running by returning an empty result.
-            return of(result as T);
+    private handleError(errorResponse: HttpErrorResponse) {
+        if (errorResponse.error instanceof ErrorEvent) {
+          // A client-side or network error occurred. Handle it accordingly.
+          console.error('An error occurred:', errorResponse.error.message);
+        } else {
+          // The backend returned an unsuccessful response code.
+          // The response body may contain clues as to what went wrong,
+          console.error(
+            `Backend returned code ${errorResponse.status}, ` +
+            `body was: ${errorResponse.error}`);
         }
-    }
+        // return an ErrorObservable with a user-facing error message
+        return new ErrorObservable(
+          'Something bad happened; please try again later.');
+      };
 }
