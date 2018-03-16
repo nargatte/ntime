@@ -20,28 +20,30 @@ import 'rxjs/add/operator/map';
 })
 export class CompetitionsSelectComponent implements OnInit {
     competitions: Competition[] = [
-        new Competition(3, "Szczecin", new Date(2018, 9, 13)),
+        new Competition(3, "Szczecin", new Date(2018, 9, 13,), new Date(2018, 9,11)),
     ];
 
     constructor(private competitionService: CompetitionService) { }
 
-    ngOnInit() {
-        // this.dataSource = new ExampleDataSource(, this.paginator)
-        this.getCompetitions();
-    }
-
     displayedColumns = ['name', 'city', 'date', 'signUpEndDate', 'link'];
     dataSource: MatTableDataSource<Competition> = new MatTableDataSource<Competition>(this.competitions);
-
+    
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatTable) table: MatTable<Competition>;
 
+    ngOnInit() {
+        // this.dataSource = new ExampleDataSource(, this.paginator)
+        // this.render();
+    }
+    
+    
     /**
      * Set the paginator after the view init since this component will
      * be able to query its view for the initialized paginator.
      */
     ngAfterViewInit() {
         this.renderTable();
+        this.getCompetitions();
     }
 
 
@@ -58,7 +60,7 @@ export class CompetitionsSelectComponent implements OnInit {
             },
             error => console.log(error) , //Errors
             // () => this.table.renderRows()
-            this.onSuccessfullLoading //Success
+            this.render //Success
         );
     }
     
@@ -75,6 +77,8 @@ export class CompetitionsSelectComponent implements OnInit {
         // this.dataSource = new MatTableDataSource<Competition>(this.competitions)
         // this.table.renderRows();
         console.log('Competitions fetched successfully');
+        // this.dataSource = new MatTableDataSource<Competition>(this.competitions);        
+        // this.render();
     }
 
     renderTable(): void {
@@ -82,9 +86,10 @@ export class CompetitionsSelectComponent implements OnInit {
         this.table.renderRows();
     }
     render(){
-        this.competitions.push(new Competition(3, "Szczecin2", new Date(2018, 9, 13)))
+        // this.competitions.push(new Competition(3, "Szczecin2", new Date(2018, 9, 13)))
         this.dataSource = new MatTableDataSource<Competition>(this.competitions);
         console.log("Button clicked");
+        // this.dataSource.data = this.competitions;
         this.table.renderRows();
     }
 
