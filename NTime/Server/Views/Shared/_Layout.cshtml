@@ -2,40 +2,20 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <base href="/AngularSrc/">
+    <meta charset="utf-8">
+    <title>NtimeAngular</title>
+    <base href="/">
 
-    <title>NTime</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="We're gitting REST" />
-    <link rel="canonical" href="http:/blogs.example.com/fetch-data/canonicaldemo" />
-    <link rel="alternate" hreflang="es" href="http://es.example.com/fetchstuff" />
-    <link href="/node_modules/@Html.Raw("@")angular/material/prebuilt-themes/deeppurple-amber.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-
-
-    @Styles.Render("~/Content/css")
-    @*@Scripts.Render("~/bundles/modernizr")*@
-
-    <script src="/node_modules/core-js/client/shim.min.js"></script>
-    <script src="/node_modules/zone.js/dist/zone.js"></script>
-    <script src="/node_modules/systemjs/dist/system.src.js"></script>
-    <script src="/AngularSrc/systemjs.config.js"></script>
-    <script>
-        System.import('main.js').catch(function (err) { console.error(err); });
-    </script>
+    <script src="https://rawgit.com/web-animations/web-animations-js/master/web-animations.min.js"></script>
+    @Styles.Render("~/Content/Styles")
 </head>
 <body>
-    <div class="container body-content">
+    <main role="main" class="container">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Time2Win</p>
-        </footer>
-    </div>
-
-    @*@Scripts.Render("~/bundles/jquery")*@
-    @*@Scripts.Render("~/bundles/bootstrap")*@
-    @RenderSection("scripts", required: false)
+    </main>
+    @Scripts.Render("~/Script/Bundles")
 </body>
 </html>
