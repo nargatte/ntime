@@ -24,16 +24,12 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { CompetitionsSelectComponent } from './SharedComponents/competitions-select/competitions-select.component';
 import { CompetitionService } from './Services/competition.service'
 import { MessageService } from './Services/message.service';
-//import { NewPlayerInputComponent } from './new-player-input/new-player-input.component'
 
 
 @NgModule({
     imports: [
         BrowserModule, FormsModule, AppRoutingModule,
          ReactiveFormsModule, HttpClientModule, MaterialCustomModule,
-        //NgbModule.forRoot(),
-        // BrowserAnimationsModule, MatButtonModule, MatTabsModule, MatIconModule, //Material
-        // MatToolbarModule//Material 
     ],
     declarations: [AppComponent, ScoresTabComponent, MyAccountTabComponent,
         RegistrationTabComponent, OfferTabComponent, ContactTabComponent,

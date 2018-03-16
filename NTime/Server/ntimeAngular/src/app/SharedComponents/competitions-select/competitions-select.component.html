@@ -3,13 +3,12 @@
 
         <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
-
         <!-- Number Column -->
+        <!--If I wanna make it CDK table I can just change mat to cdk in the lines below-->
         <ng-container matColumnDef="number"> 
             <mat-header-cell *matHeaderCellDef> Numer </mat-header-cell>
             <mat-cell *matCellDef="let competition"> {{competition.Id}} </mat-cell>
         </ng-container>
-
         <!-- Name Column -->
         <ng-container matColumnDef="name">
             <mat-header-cell *matHeaderCellDef> Nazwa </mat-header-cell>
