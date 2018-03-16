@@ -60,7 +60,7 @@ export class CompetitionsSelectComponent implements OnInit {
             },
             error => console.log(error) , //Errors
             // () => this.table.renderRows()
-            this.render //Success
+            () => this.render() //Success
         );
     }
     
@@ -90,7 +90,7 @@ export class CompetitionsSelectComponent implements OnInit {
         this.dataSource = new MatTableDataSource<Competition>(this.competitions);
         console.log("Button clicked");
         // this.dataSource.data = this.competitions;
-        this.table.renderRows();
+        //this.table.renderRows();
     }
 
 }
