@@ -24,15 +24,15 @@ export class CompetitionService {
 
     }
 
-    // getCompetitions(): Observable<PageViewModel<Competition>> {
-    //     return this.http.get<PageViewModel<Competition>>(this.getCompetitionsUrl).pipe(
-    //         tap(()=> this.log('Competitions fetched')),
-    //         catchError(this.handleError)
-    //     );
-    // }
-    getCompetitions(): Observable<PageViewModel<Competition>>{
-        return from(COMPETITIONS);
+    getCompetitions(): Observable<PageViewModel<Competition>> {
+        return this.http.get<PageViewModel<Competition>>(this.getCompetitionsUrl).pipe(
+            tap(()=> this.log('Competitions fetched')),
+            catchError(this.handleError)
+        );
     }
+    // getCompetitions(): Observable<PageViewModel<Competition>>{
+    //     return from(COMPETITIONS);
+    // }
 
     private log(message: string) {
         this.messageService.addLog('CompetitionService: ' + message);

@@ -51,6 +51,7 @@ export class CompetitionsSelectComponent implements OnInit {
                 console.log(page)
                 console.log(`Items: ${page.TotalCount}`);
                 this.competitions = page.Items;
+                this.convertDates();
                 // page.Items.forEach(competition => {
                 //     this.competitions.push(competition);
                 // });
@@ -61,8 +62,17 @@ export class CompetitionsSelectComponent implements OnInit {
         );
     }
     
+    private convertDates() {
+        this.competitions.forEach(element => {
+            let date = new Date(element.EventDate);
+            element.EventDate = date;
+            date = new Date(element.SignUpEndDate);
+            element.SignUpEndDate = date;
+        });
+    }
+
     onSuccessfullLoading(){
-        this.dataSource = new MatTableDataSource<Competition>(this.competitions)
+        // this.dataSource = new MatTableDataSource<Competition>(this.competitions)
         // this.table.renderRows();
         console.log('Competitions fetched successfully');
     }
@@ -71,6 +81,13 @@ export class CompetitionsSelectComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
         this.table.renderRows();
     }
+    render(){
+        this.competitions.push(new Competition(3, "Szczecin2", new Date(2018, 9, 13)))
+        this.dataSource = new MatTableDataSource<Competition>(this.competitions);
+        console.log("Button clicked");
+        this.table.renderRows();
+    }
+
 }
 
 // export class ExampleDataSource extends DataSource<any> {
