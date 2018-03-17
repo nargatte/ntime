@@ -5,7 +5,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
 import { Competition } from '../Models/Competition';
-import { COMPETITIONS } from '../MockData/mockCompetitions'
+import { COMPETITIONS } from '../MockData/mockCompetitions';
 import { MessageService } from '../Services/message.service';
 import { from } from 'rxjs/observable/from';
 import { PageViewModel } from '../Models/PageViewModel';
@@ -13,8 +13,8 @@ import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 
 @Injectable()
 export class CompetitionService {
-    private baseCompetitionUrl = "http://testing.time2win.aspnet.pl/api/Competition";
-    private getCompetitionsUrl: string = this.baseCompetitionUrl + "?ItemsOnPage=10&PageNumber=0";
+    private baseCompetitionUrl = 'http://testing.time2win.aspnet.pl/api/Competition';
+    private getCompetitionsUrl: string = this.baseCompetitionUrl + '?ItemsOnPage=10&PageNumber=0';
 
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -26,7 +26,7 @@ export class CompetitionService {
 
     getCompetitions(): Observable<PageViewModel<Competition>> {
         return this.http.get<PageViewModel<Competition>>(this.getCompetitionsUrl).pipe(
-            tap(()=> this.log('Competitions fetched')),
+            tap(() => this.log('Competitions fetched')),
             catchError(this.handleError)
         );
     }
@@ -51,5 +51,5 @@ export class CompetitionService {
         // return an ErrorObservable with a user-facing error message
         return new ErrorObservable(
           'Something bad happened; please try again later.');
-      };
+      }
 }
