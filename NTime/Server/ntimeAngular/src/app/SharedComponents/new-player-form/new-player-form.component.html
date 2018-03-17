@@ -1,0 +1,33 @@
+<mat-card class="example-card">
+  <mat-card-content>
+    <div class="example-container">
+      <mat-form-field>
+        <input matInput placeholder="Imię">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Nazwisko">
+      </mat-form-field>
+
+      <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Wybierz datę urodzenia">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+      <mat-form-field>
+        <textarea matInput placeholder="Textarea"></textarea>
+      </mat-form-field>
+
+
+      <mat-form-field>
+        <mat-select placeholder="Select">
+          <mat-option value="option">Option</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </mat-card-content>
+  <!-- <mat-card-actions>
+    <button mat-raised-button color="primary" routerLink="/zawody">Wszystkie zawody</button>
+  </mat-card-actions> -->
+</mat-card>

@@ -2,15 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-registration-tab',
-  templateUrl: './registration-tab.component.html',
-  styleUrls: ['./registration-tab.component.css', '../tab-style.css']
+  selector: 'app-players-list-tab',
+  templateUrl: './players-list-tab.component.html',
+  styleUrls: ['./players-list-tab.component.css', '../tab-style.css']
 })
-export class RegistrationTabComponent implements OnInit {
+export class PlayersListTabComponent implements OnInit {
   public competitionId: number;
 
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {

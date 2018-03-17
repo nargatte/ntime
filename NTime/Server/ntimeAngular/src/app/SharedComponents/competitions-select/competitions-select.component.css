@@ -9,4 +9,12 @@
     overflow: auto;
     max-height: 500px;
   }
+
+  button{
+    margin: 2%;
+  }
   
+  a{
+    text-decoration: none;
+    font-weight: 600;
+}

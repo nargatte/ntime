@@ -1,2 +1,14 @@
-<p>Wybierz interesujące Cię zawody <br /> </p>
-<app-competitions-select></app-competitions-select>
+<mat-card class="example-card">
+  <mat-card-content>
+    <p>
+      Zapisz się na zawody o id: {{competitionId}}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" routerLink="/lista-zawodnikow/{{competitionId}}">
+    <button mat-raised-button color="primary" routerLink="/zawody">Wszystkie zawody</button>
+      Lista zawodników
+    </button>
+  </mat-card-actions>
+</mat-card>
+<app-new-player-form></app-new-player-form>
