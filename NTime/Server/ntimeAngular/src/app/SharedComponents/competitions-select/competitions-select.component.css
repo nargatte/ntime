@@ -14,3 +14,7 @@
     margin: 2%;
   }
   
+  a{
+    text-decoration: none;
+    font-weight: 600;
+}

@@ -19,8 +19,8 @@ const routes: Routes = [
     { path: 'konto', component: MyAccountTabComponent, data: { name: 'account' } },
     { path: 'oferta', component: OfferTabComponent, data: { name: 'offer' } },
     { path: 'zawody', component: CompetitionTabComponent, data: { name: 'competitions' } },
-    { path: 'zapisy/:Id', component: RegistrationTabComponent},
-    { path: 'lista-zawodnikow/:Id', component: PlayersListTabComponent},
+    { path: 'zapisy/:id', component: RegistrationTabComponent},
+    { path: 'lista-zawodnikow/:id', component: PlayersListTabComponent},
     // { path: 'wyniki', component: ScoresTabComponent, data: { name: 'scores' } },
 ];
 
@@ -28,7 +28,6 @@ const routes: Routes = [
     imports: [
         RouterModule.forRoot(routes),
         BrowserAnimationsModule, MatButtonModule // Material
-        // NgbModule,
     ],
     exports: [RouterModule],
     providers: [

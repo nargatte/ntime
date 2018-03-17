@@ -8,6 +8,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 import { AppRoutingModule } from './Modules/app-routing.module';
 import { MaterialCustomModule } from './Modules/material-custom.module';
+import { MAT_DATE_LOCALE } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { ScoresTabComponent } from './Tabs/scores-tab/scores-tab.component';
@@ -22,6 +23,7 @@ import { CompetitionService } from './Services/competition.service';
 import { MessageService } from './Services/message.service';
 import { RegistrationTabComponent } from './Tabs/registration-tab/registration-tab.component';
 import { PlayersListTabComponent } from './Tabs/players-list-tab/players-list-tab.component';
+import { NewPlayerFormComponent } from './SharedComponents/new-player-form/new-player-form.component';
 
 
 @NgModule({
@@ -31,9 +33,11 @@ import { PlayersListTabComponent } from './Tabs/players-list-tab/players-list-ta
     ],
     declarations: [AppComponent, ScoresTabComponent, MyAccountTabComponent,
         CompetitionTabComponent, OfferTabComponent, ContactTabComponent,
-        AboutUsTabComponent, NavbarComponent, CompetitionsSelectComponent, RegistrationTabComponent, PlayersListTabComponent],
+        AboutUsTabComponent, NavbarComponent, CompetitionsSelectComponent,
+        RegistrationTabComponent, PlayersListTabComponent, NewPlayerFormComponent],
     providers: [
-        CompetitionService, MessageService
+        CompetitionService, MessageService, // Custom services
+        {provide: MAT_DATE_LOCALE, useValue: 'pl-pl'},
     ],
     bootstrap: [AppComponent]
 })
