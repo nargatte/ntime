@@ -2,9 +2,15 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators, ReactiveFormsModule } from '@angular/forms'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MatPaginator, MatTableDataSource, MatTable } from '@angular/material';
+import { DataSource } from '@angular/cdk/table';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { Competition } from '../../Models/Competition';
 import { CompetitionService } from '../../Services/competition.service'
+import { PageViewModel } from '../../Models/PageViewModel';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/merge';
+import 'rxjs/add/operator/map';
 
 
 @Component({
@@ -12,16 +18,15 @@ import { CompetitionService } from '../../Services/competition.service'
     templateUrl: './competitions-select.component.html',
     styleUrls: ['./competitions-select.component.css']
 })
-export class CompetitionsSelectComponent implements OnInit {
+export class CompetitionsSelectComponent {
     competitions: Competition[] = [];
+    public todayDate: Date;
 
-    constructor(private competitionService: CompetitionService) { }
-
-    ngOnInit() {
-        // this.getHeroes();
+    constructor(private competitionService: CompetitionService) {
+        this.todayDate = new Date(Date.now());
     }
 
-    displayedColumns = ['name', 'city', 'date', 'signUpEndDate', 'link'];
+    displayedColumns = ['name', 'city', 'date', 'signUpEndDate', 'link', 'actions'];
     dataSource: MatTableDataSource<Competition> = new MatTableDataSource<Competition>(this.competitions);
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -32,36 +37,37 @@ export class CompetitionsSelectComponent implements OnInit {
      * be able to query its view for the initialized paginator.
      */
     ngAfterViewInit() {
+        this.setPaginator();
         this.getCompetitions();
-        //    this.dataSource.paginator = this.paginator;
-
     }
-
 
     getCompetitions(): void {
         this.competitionService.getCompetitions().subscribe(
-            competitions => {
-                this.pushCompetitions(competitions);
-                this.renderTable();
-            }
+            (page: PageViewModel<Competition>) => {
+                console.log(page)
+                console.log(`Items: ${page.TotalCount}`);
+                this.competitions = page.Items;
+                this.competitions = this.convertDates(this.competitions);
+            },
+            error => console.log(error), //Errors
+            () => this.setDataSource() //Success
         );
-        // this.renderTable();
     }
-    // getCompetitions(): void {
-    //     this.pushCompetitions(this.competitionService.getCompetitions());
-    //     this.renderTable();
-    // }
 
-    pushCompetitions(competitions): void {
+    private convertDates(competitions: Competition[]) {
         competitions.forEach(element => {
-            this.competitions.push(element);
+            element.EventDate = new Date(element.EventDate);
+            element.SignUpEndDate = new Date(element.SignUpEndDate);
         });
+        return competitions;
     }
 
-    renderTable(): void {
-        // this.dataSource = new MatTableDataSource<Competition>(this.competitions);
-        // this.dataSource.paginator = this.paginator;
+    setPaginator(): void {
         this.dataSource.paginator = this.paginator;
-        this.table.renderRows();
     }
+    setDataSource() {
+        this.dataSource = new MatTableDataSource<Competition>(this.competitions);
+        console.log("Datasource set");
+    }
+
 }

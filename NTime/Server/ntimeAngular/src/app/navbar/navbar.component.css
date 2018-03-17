@@ -1,3 +1,6 @@
 router-outlet{
     margin-left: 2em;
 }
+.companyName{
+    font-size: 150%;
+}
