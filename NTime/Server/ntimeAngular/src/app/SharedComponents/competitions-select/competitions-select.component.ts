@@ -18,12 +18,15 @@ import 'rxjs/add/operator/map';
     templateUrl: './competitions-select.component.html',
     styleUrls: ['./competitions-select.component.css']
 })
-export class CompetitionsSelectComponent{
+export class CompetitionsSelectComponent {
     competitions: Competition[] = [];
+    public todayDate: Date;
 
-    constructor(private competitionService: CompetitionService) { }
+    constructor(private competitionService: CompetitionService) {
+        this.todayDate = new Date(Date.now());
+    }
 
-    displayedColumns = ['name', 'city', 'date', 'signUpEndDate', 'link'];
+    displayedColumns = ['name', 'city', 'date', 'signUpEndDate', 'link', 'actions'];
     dataSource: MatTableDataSource<Competition> = new MatTableDataSource<Competition>(this.competitions);
 
     @ViewChild(MatPaginator) paginator: MatPaginator;

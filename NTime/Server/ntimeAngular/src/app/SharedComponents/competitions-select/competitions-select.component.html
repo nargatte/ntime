@@ -5,7 +5,7 @@
             The actual rendered columns are set as a property on the row definition" -->
         <!-- Number Column -->
         <!--If I wanna make it CDK table I can just change mat to cdk in the lines below-->
-        <ng-container matColumnDef="number"> 
+        <ng-container matColumnDef="number">
             <mat-header-cell *matHeaderCellDef> Numer </mat-header-cell>
             <mat-cell *matCellDef="let competition"> {{competition.Id}} </mat-cell>
         </ng-container>
@@ -26,7 +26,6 @@
             <mat-header-cell *matHeaderCellDef> Data zawodów </mat-header-cell>
             <mat-cell *matCellDef="let competition"> {{competition.EventDate.toLocaleDateString("pl-pl")}} </mat-cell>
         </ng-container>
-        <!-- .toLocaleDateString("pl-pl") -->
         <!-- SignUpEndDate Column -->
         <ng-container matColumnDef="signUpEndDate">
             <mat-header-cell *matHeaderCellDef> Data końca zapisów </mat-header-cell>
@@ -35,7 +34,19 @@
         <!-- Link Column -->
         <ng-container matColumnDef="link">
             <mat-header-cell *matHeaderCellDef> Link do strony </mat-header-cell>
-            <mat-cell *matCellDef="let competition"><a href="https://{{competition.Link}}">{{competition.Link}}</a> </mat-cell>
+            <mat-cell *matCellDef="let competition">
+                <a href="https://{{competition.Link}}">{{competition.Link}}</a>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+            <mat-cell *matCellDef="let competition">
+                <button mat-raised-button color="primary">Lista zawodników</button>
+                <div *ngIf="competition.SignUpEndDate > todayDate">
+                    <button mat-raised-button color="primary">Zarejestruj się</button>
+                </div>
+            </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

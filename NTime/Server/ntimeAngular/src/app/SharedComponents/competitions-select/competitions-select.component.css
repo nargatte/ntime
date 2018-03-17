@@ -9,4 +9,8 @@
     overflow: auto;
     max-height: 500px;
   }
+
+  button{
+    margin: 2%;
+  }
   
