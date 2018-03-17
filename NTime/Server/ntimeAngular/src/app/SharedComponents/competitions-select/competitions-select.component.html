@@ -42,9 +42,13 @@
         <ng-container matColumnDef="actions">
             <mat-header-cell *matHeaderCellDef> </mat-header-cell>
             <mat-cell *matCellDef="let competition">
-                <button mat-raised-button color="primary">Lista zawodników</button>
+                <button mat-raised-button color="primary" routerLink="/lista-zawodnikow/{{competition.Id}}">
+                    Lista zawodników
+                </button>
                 <div *ngIf="competition.SignUpEndDate > todayDate">
-                    <button mat-raised-button color="primary">Zarejestruj się</button>
+                    <button mat-raised-button color="primary" routerLink="/zapisy/{{competition.Id}}">
+                        Zarejestruj się
+                    </button>
                 </div>
             </mat-cell>
         </ng-container>

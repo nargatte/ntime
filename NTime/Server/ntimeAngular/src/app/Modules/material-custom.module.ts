@@ -11,7 +11,7 @@ import {
     MatToolbarModule, MatButtonModule, MatTabsModule,
      MatIconModule, MatTableModule, MatPaginatorModule,
   ],
-  exports:[
+  exports: [
     MatToolbarModule, MatButtonModule, MatTabsModule,
     MatIconModule,  MatTableModule, MatPaginatorModule,
   ],

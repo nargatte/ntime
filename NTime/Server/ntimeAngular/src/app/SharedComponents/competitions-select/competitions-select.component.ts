@@ -1,12 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, Validators, ReactiveFormsModule } from '@angular/forms'
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MatPaginator, MatTableDataSource, MatTable } from '@angular/material';
 import { DataSource } from '@angular/cdk/table';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { Competition } from '../../Models/Competition';
-import { CompetitionService } from '../../Services/competition.service'
+import { CompetitionService } from '../../Services/competition.service';
 import { PageViewModel } from '../../Models/PageViewModel';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/merge';
@@ -18,7 +18,7 @@ import 'rxjs/add/operator/map';
     templateUrl: './competitions-select.component.html',
     styleUrls: ['./competitions-select.component.css']
 })
-export class CompetitionsSelectComponent {
+export class CompetitionsSelectComponent implements AfterViewInit {
     competitions: Competition[] = [];
     public todayDate: Date;
 
@@ -37,20 +37,20 @@ export class CompetitionsSelectComponent {
      * be able to query its view for the initialized paginator.
      */
     ngAfterViewInit() {
-        this.setPaginator();
         this.getCompetitions();
+        this.setPaginator();
     }
 
     getCompetitions(): void {
         this.competitionService.getCompetitions().subscribe(
             (page: PageViewModel<Competition>) => {
-                console.log(page)
+                console.log(page);
                 console.log(`Items: ${page.TotalCount}`);
                 this.competitions = page.Items;
                 this.competitions = this.convertDates(this.competitions);
             },
-            error => console.log(error), //Errors
-            () => this.setDataSource() //Success
+            error => console.log(error), // Errors
+            () => this.setDataSource() // Success
         );
     }
 
@@ -62,12 +62,13 @@ export class CompetitionsSelectComponent {
         return competitions;
     }
 
-    setPaginator(): void {
-        this.dataSource.paginator = this.paginator;
-    }
     setDataSource() {
         this.dataSource = new MatTableDataSource<Competition>(this.competitions);
-        console.log("Datasource set");
+        console.log('Datasource set');
+    }
+
+    setPaginator(): void {
+        this.dataSource.paginator = this.paginator;
     }
 
 }
