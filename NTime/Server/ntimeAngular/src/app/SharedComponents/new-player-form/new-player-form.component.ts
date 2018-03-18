@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Competition } from '../../Models/Competition';
 import { CompetitionService } from '../../Services/competition.service';
 import { MessageService } from '../../Services/message.service';
@@ -11,9 +11,12 @@ import { PlayerCompetitionRegister } from '../../Models/PlayerCompetitionRegiste
   styleUrls: ['./new-player-form.component.css']
 })
 export class NewPlayerFormComponent implements OnInit {
-  public id = 2;
-  public competition: Competition = new Competition(1, 'Łask', new Date(Date.now()),  new Date(2018, 9, 13));
+  @Input() competition: Competition;
+
+  public todayDate: Date;
+  // public competition: Competition = new Competition(1, 'Łask', new Date(Date.now()),  new Date(2018, 9, 13));
   public newPlayer: PlayerCompetitionRegister = new PlayerCompetitionRegister();
+
   public checkboxes: boolean[] = [false, false, false];
   // competitionRegulationDeclarationText: string;
   // personalDataDeclarationText: string;
@@ -28,7 +31,9 @@ export class NewPlayerFormComponent implements OnInit {
 
   heroForm: FormGroup;
 
-  constructor(private competitionService: CompetitionService, private messageService: MessageService) { }
+  constructor(private competitionService: CompetitionService, private messageService: MessageService) {
+    this.todayDate = new Date(Date.now());
+   }
 
   ngOnInit() {
     // this.heroForm = new FormGroup({
@@ -44,10 +49,10 @@ export class NewPlayerFormComponent implements OnInit {
   }
 
 
-  private getCompetition() {
-    this.competitionService.getCompetition(this.id)
-      .subscribe(competition => this.competition = this.competition);
-  }
+  // private getCompetition() {
+  //   this.competitionService.getCompetition(this.id)
+  //     .subscribe(c => this.competition = this.competition);
+  // }
 
   public addPlayer() {
     this.messageService.addLog('Zawodnik został zapisany na zawody');

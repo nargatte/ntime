@@ -1,126 +1,173 @@
 <mat-card class="example-card">
-  <form #myForm="ngForm">
-    <mat-card-content>
-      <div class="form-container">
-        <mat-form-field>
-          <input matInput placeholder="Imię" name="firstName" required minlength="4" [(ngModel)]="newPlayer.FirstName">
-        </mat-form-field>
+  <!-- <ng-container *ngIf="competition.SignUpEndDate > todayDate; else elseTemplate"> -->
+    <form #myForm="ngForm">
+      <mat-card-content>
+        <div class="form-container">
+          <mat-form-field>
+            <input matInput placeholder="Imię" name="firstName" required minlength="4" [(ngModel)]="newPlayer.FirstName" #firstName="ngModel">
+            <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger">
+              <div *ngIf="firstName.errors.required">
+                Imię jest wymagane
+              </div>
+            </div>
+          </mat-form-field>
 
-        <!-- <mat-form-field>
-          <input matInput placeholder="Nazwisko" name="lastName" required
-          [(ngModel)] = "newPlayer.LastName" >
-        </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Nazwisko" name="lastName" required [(ngModel)]="newPlayer.LastName" #lastName="ngModel">
+            <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger">
+              <div *ngIf="lastName.errors.required">
+                Nazwisko jest wymagane
+              </div>
+            </div>
+          </mat-form-field>
 
-        <mat-form-field>
-          <mat-select placeholder="Płeć" name="isMale" required 
-          [(ngModel)] = "newPlayer.IsMale" >
-            <mat-option value="female">Kobieta</mat-option>
-            <mat-option value="male">Mężczyzna</mat-option>
-          </mat-select>
-        </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Płeć" name="isMale" required [(ngModel)]="newPlayer.IsMale" #isMale="ngModel">
+              <mat-option value="female">Kobieta</mat-option>
+              <mat-option value="male">Mężczyzna</mat-option>
+            </mat-select>
+            <div *ngIf="isMale.invalid && (isMale.dirty || isMale.touched)" class="alert alert-danger">
+              <div *ngIf="isMale.errors.required">
+                Płeć jest wymagana
+              </div>
+            </div>
+          </mat-form-field>
 
-        <mat-form-field>
-          <input matInput [matDatepicker]="picker" placeholder="Data urodzenia" name="birthDate" required 
-          [(ngModel)] = "newPlayer.BirthDate" >
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker startView="multi-year"></mat-datepicker>
-        </mat-form-field>
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker" placeholder="Data urodzenia" name="birthDate" required [(ngModel)]="newPlayer.BirthDate"
+              #birthDate="ngModel">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker startView="multi-year"></mat-datepicker>
+            <div *ngIf="birthDate.invalid && (birthDate.dirty || birthDate.touched)" class="alert alert-danger">
+              <div *ngIf="birthDate.errors.required">
+                Data urodzenia jest wymagana
+              </div>
+            </div>
+          </mat-form-field>
 
-        <mat-form-field>
-          <input matInput placeholder="Miasto zamieszkania" name="city" required
-          [(ngModel)] = "newPlayer.City">
-        </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Miejscowość zamieszkania" name="city" required [(ngModel)]="newPlayer.City" #city="ngModel">
+            <div *ngIf="city.invalid && (city.dirty || city.touched)" class="alert alert-danger">
+              <div *ngIf="city.errors.required">
+                Miejscowość zamieszkania jest wymagana
+              </div>
+            </div>
+          </mat-form-field>
 
-        <mat-form-field>
-          <mat-select placeholder="Dystans" name="distance" required
-          [(ngModel)] = "newPlayer.DistanceId">
-            <mat-option value="mini">MINI</mat-option>
-            <mat-option value="mega">MEGA</mat-option>
-            <mat-option value="mega">GIGA</mat-option>
-          </mat-select>
-        </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Dystans" name="distance" required [(ngModel)]="newPlayer.DistanceId" #distance="ngModel">
+              <mat-option value="mini">MINI</mat-option>
+              <mat-option value="mega">MEGA</mat-option>
+              <mat-option value="mega">GIGA</mat-option>
+            </mat-select>
+            <div *ngIf="distance.invalid && (distance.dirty || distance.touched)" class="alert alert-danger">
+              <div *ngIf="distance.errors.required">
+                Dystans jest wymagany
+              </div>
+            </div>
+          </mat-form-field>
 
-        <mat-form-field>
-          <mat-select placeholder="Typ roweru" name="extraPlayerInfo" required
-          [(ngModel)] = "newPlayer.ExtraPlayerInfoId">
-            <mat-option value="szosowy">Szosowy</mat-option>
-            <mat-option value="inny">Inny</mat-option>
-          </mat-select>
-        </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Typ roweru" name="extraPlayerInfo" required [(ngModel)]="newPlayer.ExtraPlayerInfoId" #extraPlayerInfo="ngModel">
+              <mat-option value="szosowy">Szosowy</mat-option>
+              <mat-option value="inny">Inny</mat-option>
+            </mat-select>
+            <div *ngIf="extraPlayerInfo.invalid && (extraPlayerInfo.dirty || extraPlayerInfo.touched)" class="alert alert-danger">
+              <div *ngIf="extraPlayerInfo.errors.required">
+                Typ roweru jest wymagany
+              </div>
+            </div>
+          </mat-form-field>
 
-        <mat-form-field>
-          <textarea matInput placeholder="Klub" name="team" matTextareaAutosize matAutosizeMinRows="2"
-           matAutosizeMaxRows="5" [(ngModel)] = "newPlayer.Team"></textarea>
-        </mat-form-field>
+          <mat-form-field>
+            <textarea matInput placeholder="Klub" name="team" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5" [(ngModel)]="newPlayer.Team"
+              #team="ngModel"></textarea>
+          </mat-form-field>
 
-        <mat-form-field>
-          <input matInput type="email" placeholder="Adres e-mail" name="email"
-          [(ngModel)] = "newPlayer.Email" [email]="newPlayer.Email!='' && newPlayer.Email!=null"> 
-        </mat-form-field>
+          <mat-form-field>
+            <input matInput type="email" placeholder="Adres e-mail" name="email" [(ngModel)]="newPlayer.Email" [email]="newPlayer.Email!='' && newPlayer.Email!=null"
+              #email="ngModel">
+          </mat-form-field>
 
-        <mat-form-field>
-          <input matInput type="tel" placeholder="Numer telefonu" name="phoneNumber"
-          [(ngModel)] = "newPlayer.PhoneNumber">
-        </mat-form-field> -->
+          <mat-form-field>
+            <input matInput type="tel" placeholder="Numer telefonu" name="phoneNumber" [(ngModel)]="newPlayer.PhoneNumber" #phoneNumber="ngModel">
+          </mat-form-field>
 
+        </div>
+      </mat-card-content>
+
+      <div class="giodo-declarations">
+        <mat-card class="example-card">
+          <mat-card-content>
+            <mat-checkbox name="ch1" [(ngModel)]="checkboxes[0]" required #ch1="ngModel"></mat-checkbox>
+            <div *ngIf="ch1.invalid && (ch1.dirty || ch1.touched)" class="alert alert-danger">
+              <div *ngIf="ch1.errors.required">
+                Zgoda jest wymagana
+              </div>
+            </div>
+            <p>
+              Oświadczam, iż upoważniam Organizatora do przetwarzania moich danych osobowych przekazanych przeze mnie przy okazji zgłoszenia
+              udziału w niniejszym wyścigu, w celu jego przeprowadzenia, w celu przekazywania komunikatów informacyjnych
+              związanych z organizacją niniejszego wyścigu, archiwizacji oraz prowadzenia klasyfikacji zawodów odbywanych
+              w ramach niniejszego wyścigu
+              <br/> Oświadczam także, iż został-am (-em) pouczon-a (-y) o prawie wglądu do własnych danych osobowych, prawie żądania
+              ich poprawienia, a także prawie wniesienia pisemnego umotywowanego żądania zaprzestania przetwarzania danych
+              osobowych oraz możliwości przekazania moich danych osobowych uprawnionym organom.
+            </p>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="example-card">
+          <mat-card-content>
+            <mat-checkbox name="ch2" [(ngModel)]="checkboxes[1]" required #ch2="ngModel"></mat-checkbox>
+            <div *ngIf="ch2.invalid && (ch2.dirty || ch2.touched)" class="alert alert-danger">
+              <div *ngIf="ch2.errors.required">
+                Zgoda jest wymagana
+              </div>
+            </div>
+            <p>
+              Oświadczam, iż zapoznał-am(-em) się z Regulaminem zawodów:
+              <span class="italian"> {{competition.Name}} </span>
+              dostępnym na stronie internetowej
+              <a href="http://{{competition.Link}}">{{competition.Link}}</a>, akceptuję jego postanowienia i zobowiązuję się do ich przestrzegania.
+            </p>
+          </mat-card-content>
+        </mat-card>
+        <mat-card class="example-card">
+          <mat-card-content>
+            <mat-checkbox name="ch3" [(ngModel)]="checkboxes[2]" required #ch3="ngModel"></mat-checkbox>
+            <div *ngIf="ch3.invalid && (ch3.dirty || ch3.touched)" class="alert alert-danger">
+              <div *ngIf="ch3.errors.required">
+                Zgoda jest wymagana
+              </div>
+            </div>
+            <p>
+              Wyrażam zgodę na wykorzystanie przez Organizatora mojego wizerunku, w tym na obrót egzemplarzami, na których utrwalono ten
+              wizerunek, oraz na zwielokrotnianie wizerunku wszelkimi dostępnymi aktualnie technikami i metodami, rozpowszechnianie
+              oraz publikowanie, także wraz z wizerunkami innych osób utrwalonymi w ramach wyścigu, materiałach służących
+              popularyzacji działań w zakresie imprez sportowych organizowanych przez Organizatora poprzez rozpowszechnianie
+              wizerunku w:
+            </p>
+            <ul>
+              <li>mediach elektronicznych, w szczególności na stronach internetowych,</li>
+              <li>prasie,</li>
+              <li>broszurach, ulotkach, gazetkach itp.</li>
+            </ul>
+            Oświadczam, że wykorzystanie wizerunku zgodnie z niniejszą zgodą nie narusza niczyich dóbr osobistych ani innych praw.
+            <p> Organizator: {{competition.Organizer}} </p>
+          </mat-card-content>
+        </mat-card>
       </div>
-    </mat-card-content>
-
-    <div class="giodo-declarations">
-      <!-- <form> -->
-      <mat-card class="example-card">
-        <mat-card-content>
-          <mat-checkbox name="ch1" [(ngModel)] = "checkboxes[0]" required></mat-checkbox>
-          <p>
-            Oświadczam, iż upoważniam Organizatora do przetwarzania moich danych osobowych przekazanych przeze mnie przy okazji zgłoszenia
-            udziału w niniejszym wyścigu, w celu jego przeprowadzenia, w celu przekazywania komunikatów informacyjnych związanych
-            z organizacją niniejszego wyścigu, archiwizacji oraz prowadzenia klasyfikacji zawodów odbywanych w ramach niniejszego
-            wyścigu
-            <br/> Oświadczam także, iż został-am (-em) pouczon-a (-y) o prawie wglądu do własnych danych osobowych, prawie żądania
-            ich poprawienia, a także prawie wniesienia pisemnego umotywowanego żądania zaprzestania przetwarzania danych
-            osobowych oraz możliwości przekazania moich danych osobowych uprawnionym organom.
-          </p>
-        </mat-card-content>
-      </mat-card>
-
-      <mat-card class="example-card">
-        <mat-card-content>
-          <mat-checkbox name="ch2" [(ngModel)] = "checkboxes[1]" required></mat-checkbox>
-          <p>
-            Oświadczam, iż zapoznał-am(-em) się z Regulaminem zawodów: {{competition.Name}} dostępnym na stronie internetowej {{competition.Link}},
-            akceptuję jego postanowienia i zobowiązuję się do ich przestrzegania.
-          </p>
-        </mat-card-content>
-      </mat-card>
-      <mat-card class="example-card">
-        <mat-card-content>
-          <mat-checkbox name="ch3" [(ngModel)] = "checkboxes[2]" required></mat-checkbox>
-          <p>
-            Wyrażam zgodę na wykorzystanie przez Organizatora mojego wizerunku, w tym na obrót egzemplarzami, na których utrwalono ten
-            wizerunek, oraz na zwielokrotnianie wizerunku wszelkimi dostępnymi aktualnie technikami i metodami, rozpowszechnianie
-            oraz publikowanie, także wraz z wizerunkami innych osób utrwalonymi w ramach wyścigu, materiałach służących popularyzacji
-            działań w zakresie imprez sportowych organizowanych przez Organizatora poprzez rozpowszechnianie wizerunku w:
-          </p>
-          <ul>
-            <li>mediach elektronicznych, w szczególności na stronach internetowych,</li>
-            <li>prasie,</li>
-            <li>broszurach, ulotkach, gazetkach itp.</li>
-          </ul>
-          Oświadczam, że wykorzystanie wizerunku zgodnie z niniejszą zgodą nie narusza niczyich dóbr osobistych ani innych praw.
-        </mat-card-content>
-      </mat-card>
-      <!-- </form> -->
-
-    </div>
-    <mat-card-actions>
-      <button mat-raised-button color="primary" type="submit" (click)="addPlayer()" [disabled]="myForm.invalid">
-        Zarejestruj się
-      </button>
-    </mat-card-actions>
-  </form>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" type="submit" (click)="addPlayer()" [disabled]="myForm.invalid">
+          Zarejestruj się
+        </button>
+      </mat-card-actions>
+    </form>
+  <!-- </ng-container>
+  <ng-template #elseTemplate>
+    <mat-card>
+      <p>Zapisy na te zawody już się zakończyły</p>
+    </mat-card>
+  </ng-template> -->
 </mat-card>
-<!-- <form #heroForm="ngForm">
-  <input id="name" name="name" required minlength="4" [(ngModel)]="hero.name" />
-
-  <button type="submit" [disabled]="heroForm.invalid">Submit</button>
-</form> -->

@@ -9,3 +9,15 @@
     width: 100%;
   }
 
+.alert{
+  color: red;
+}
+
+a{
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.italian{
+  font-style: italic;
+}
