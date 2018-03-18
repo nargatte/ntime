@@ -3,7 +3,6 @@
         <p>
             Lista zawodników
             <br/> {{competition.Name}}
-            <br/> Zawodnicy: {{players}}
         </p>
     </mat-card-content>
     <mat-card-actions>
@@ -13,3 +12,4 @@
             </button>
     </mat-card-actions>
 </mat-card>
+<app-players-list [competition]="competition"></app-players-list>

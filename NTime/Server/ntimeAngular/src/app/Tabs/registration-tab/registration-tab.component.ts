@@ -15,7 +15,7 @@ import { ExtraPlayerInfo } from '../../Models/ExtraPlayerInfo';
 })
 export class RegistrationTabComponent implements OnInit {
   public competitionId: number;
-  public competition: Competition;
+  public competition: Competition = COMPETITIONS[0];
   public distances: Distance[];
   public extraPlayerInfos: ExtraPlayerInfo[];
   public todayDate: Date;
@@ -32,8 +32,10 @@ export class RegistrationTabComponent implements OnInit {
   ngOnInit() {
     this.competitionId = +this.route.snapshot.paramMap.get('id');
     this.getCompetition(this.competitionId);
-    this.getDistanceFromCompetition(this.competitionId);
-    this.getExtraPlayerInfoFromCompetition(this.competitionId);
+    setTimeout(() => this.getExtraPlayerInfoFromCompetition(this.competitionId), 20);
+    setTimeout(() => this.getDistanceFromCompetition(this.competitionId), 50);
+    // this.getDistanceFromCompetition(this.competitionId);
+    // this.getExtraPlayerInfoFromCompetition(this.competitionId);
   }
 
   getCompetition(id: number): void {

@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PlayerListService } from '../../Services/player-list.service';
+import { PlayerService } from '../../Services/player.service';
 import { PlayerListView } from '../../Models/PlayerListView';
 import { PlayerFilterOptions } from '../../Models/PlayerFilterOptions';
 import { PageViewModel } from '../../Models/PageViewModel';
@@ -20,12 +20,10 @@ export class PlayersListTabComponent implements OnInit, AfterViewInit {
   public players: PlayerListView[] = [];
   public todayDate: Date;
 
-  private filter: PlayerFilterOptions = new PlayerFilterOptions();
-
   constructor(
     private route: ActivatedRoute,
     private competitionService: CompetitionService,
-    private playerListService: PlayerListService) {
+    private playerListService: PlayerService) {
     this.todayDate = new Date(Date.now());
   }
 
@@ -50,9 +48,9 @@ export class PlayersListTabComponent implements OnInit, AfterViewInit {
     );
   }
 
-  private getPlayers() {
-    this.playerListService.getPlayerListView(this.competitionId, this.filter, 10, 0).subscribe((page: PageViewModel<PlayerListView>) => {
-      this.players = page.Items;
-    });
-  }
+  // private getPlayers() {
+  //   this.playerListService.getPlayerListView(this.competitionId, this.filter, 10, 0).subscribe((page: PageViewModel<PlayerListView>) => {
+  //     this.players = page.Items;
+  //   });
+  // }
 }

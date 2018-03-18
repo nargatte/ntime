@@ -6,7 +6,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PlayerCompetitionRegister } from '../../Models/PlayerCompetitionRegister';
 import { ExtraPlayerInfo } from '../../Models/ExtraPlayerInfo';
 import { Distance } from '../../Models/Distance';
-import { PlayerListService } from '../../Services/player-list.service';
+import { PlayerService } from '../../Services/player.service';
 
 @Component({
   selector: 'app-new-player-form',
@@ -34,7 +34,7 @@ export class NewPlayerFormComponent implements OnInit {
   constructor(
     private competitionService: CompetitionService,
     private messageService: MessageService,
-    private playerService: PlayerListService,
+    private playerService: PlayerService,
   ) {
     this.todayDate = new Date(Date.now());
    }

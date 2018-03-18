@@ -23,7 +23,7 @@ export class DistanceService {
   getDistanceFromCompetition(competitionId: number): Observable<Distance[]> {
     return this.http.get<Distance[]>(this.getDistanceFromCompetitionUrl + competitionId).pipe(
       tap((distance) => {
-        // this.log(`Distance for competition with id:${distance} fetched`);
+        this.log(`Distance for competition with id:${distance} fetched`);
         console.log(distance);
       }),
       catchError(this.handleError)

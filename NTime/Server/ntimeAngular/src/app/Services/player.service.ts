@@ -10,9 +10,10 @@ import { PlayerFilterOptions } from '../Models/PlayerFilterOptions';
 import { PlayerListView } from '../Models/PlayerListView';
 import { StringHelper } from '../Helpers/StringHelper';
 import { PlayerCompetitionRegister } from '../Models/PlayerCompetitionRegister';
+import { Distance } from '../Models/Distance';
 
 @Injectable()
-export class PlayerListService {
+export class PlayerService {
   private baseCompetitionUrl = 'http://testing.time2win.aspnet.pl';
   private controlerUrl = '/api/player';
   private simpleListUrl = '/takeSimpleList/FromCompetition/';
@@ -38,9 +39,19 @@ export class PlayerListService {
   addPlayer(player: PlayerCompetitionRegister, competitionId: number): Observable<PlayerCompetitionRegister> {
     const requestUrl = this.baseCompetitionUrl + this.controlerUrl + this.playerRegisterUrl + competitionId;
     this.log('Trying to add player from service');
-    return this.http.post<PlayerCompetitionRegister>(requestUrl, player).pipe(
+    this.log(requestUrl);
+    this.log(player.toString());
+    this.log(competitionId.toString());
+    return this.http.post<PlayerCompetitionRegister>(requestUrl, player, this.httpOptions).pipe(
         catchError(this.handleError)
     );
+    // this.http.get<Distance[]>(this.getDistanceFromCompetitionUrl + competitionId).pipe(
+    //   tap((distance) => {
+    //     // this.log(`Distance for competition with id:${distance} fetched`);
+    //     console.log(distance);
+    //   }),
+    //   catchError(this.handleError)
+    // );
   }
 
   private log(message: string) {
