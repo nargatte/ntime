@@ -31,10 +31,12 @@ import { NewPlayerFormComponent } from './SharedComponents/new-player-form/new-p
         BrowserModule, FormsModule, AppRoutingModule,
         ReactiveFormsModule, HttpClientModule, MaterialCustomModule,
     ],
-    declarations: [AppComponent, ScoresTabComponent, MyAccountTabComponent,
+    declarations: [
+        AppComponent, ScoresTabComponent, MyAccountTabComponent,
         CompetitionTabComponent, OfferTabComponent, ContactTabComponent,
         AboutUsTabComponent, NavbarComponent, CompetitionsSelectComponent,
-        RegistrationTabComponent, PlayersListTabComponent, NewPlayerFormComponent],
+        RegistrationTabComponent, PlayersListTabComponent, NewPlayerFormComponent,
+    ],
     providers: [
         CompetitionService, MessageService, // Custom services
         {provide: MAT_DATE_LOCALE, useValue: 'pl-pl'},

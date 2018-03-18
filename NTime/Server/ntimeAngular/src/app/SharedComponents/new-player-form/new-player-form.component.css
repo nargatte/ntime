@@ -1,8 +1,11 @@
-.example-container {
+.form-container {
     display: flex;
     flex-direction: column;
+    max-width: 20em;
   }
   
-  .example-container > * {
+  .form-container > * {
+    /* max-width: 20em; */
     width: 100%;
   }
+

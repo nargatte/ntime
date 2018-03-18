@@ -5,7 +5,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
 import { Competition } from '../Models/Competition';
-import { COMPETITIONS } from '../MockData/mockCompetitions';
+import { COMPETITIONS_PAGE, COMPETITIONS } from '../MockData/mockCompetitions';
 import { MessageService } from '../Services/message.service';
 import { from } from 'rxjs/observable/from';
 import { PageViewModel } from '../Models/PageViewModel';
@@ -15,6 +15,7 @@ import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 export class CompetitionService {
     private baseCompetitionUrl = 'http://testing.time2win.aspnet.pl/api/Competition';
     private getCompetitionsUrl: string = this.baseCompetitionUrl + '?ItemsOnPage=10&PageNumber=0';
+    private getCompetitionbyIdUrl: string = this.baseCompetitionUrl + '/1';
 
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -33,6 +34,18 @@ export class CompetitionService {
     // getCompetitions(): Observable<PageViewModel<Competition>>{
     //     return from(COMPETITIONS);
     // }
+
+
+    // getCompetition(id: number): Observable<Competition> {
+    //     return this.http.get<Competition>(this.getCompetitionbyIdUrl + id).pipe(
+    //         tap(() => this.log(`Competition with id:${id} fetched`)),
+    //         catchError(this.handleError)
+    //     );
+    // }
+
+    getCompetition(id: number): Observable<Competition> {
+        return from(COMPETITIONS);
+    }
 
     private log(message: string) {
         this.messageService.addLog('CompetitionService: ' + message);
