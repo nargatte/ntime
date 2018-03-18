@@ -7,4 +7,6 @@ export class PlayerListView {
     StartNumber: number;
     StartTime: number;
     FullCategory: string;
+    City: string;
+    IsPaidUp: boolean;
 }

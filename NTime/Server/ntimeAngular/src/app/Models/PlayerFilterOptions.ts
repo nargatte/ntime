@@ -1,6 +1,6 @@
 export class PlayerFilterOptions {
-    PlayerSort: number;
-    DescendingSort: boolean;
+    PlayerSort: PlayerSort = PlayerSort.ByFirstName;
+    DescendingSort = false;
     Query?: string;
     Men?: boolean;
     WithoutStartTime?: boolean;
@@ -10,4 +10,15 @@ export class PlayerFilterOptions {
     Distance?: number;
     AgeCategory?: number;
     ExtraPlayerInfo?: number;
+  }
+
+  export enum PlayerSort {
+    ByFirstName,
+    ByLastName,
+    ByTeam,
+    ByStartNumber,
+    ByStartTime,
+    ByFullCategory,
+    ByBirthDate,
+    ByRank
   }

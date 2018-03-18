@@ -50,9 +50,16 @@ namespace BaseCore.DataBase
         [StringLength(255)]
         public string Team { get; set; }
 
+        public string City { get; set; }
+
         public int StartNumber { get; set; }
 
         public DateTime? StartTime { get; set; }
+
+        [StringLength(255)]
+        public string Email { get; set; }
+
+        public bool IsPaidUp { get; set; }
 
         public bool IsStartTimeFromReader { get; set; }
 
