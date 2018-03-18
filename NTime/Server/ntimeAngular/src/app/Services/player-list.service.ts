@@ -23,8 +23,9 @@ export class PlayerListService {
 
   getPlayerListView(competitionId: number, playerFilterOptions: PlayerFilterOptions, pageSize: number, pageNumber: number):
   Observable<PageViewModel<PlayerListView>> {
-    return this.http.get<PageViewModel<Competition>>(this.baseCompetitionUrl +
-      this.controlerUrl + competitionId + '/' + StringHelper.generatPageRequest(pageSize, pageNumber) ).pipe(
+    return this.http.post<PageViewModel<Competition>>(this.baseCompetitionUrl +
+      this.controlerUrl + competitionId + StringHelper.generatPageRequest(pageSize, pageNumber),
+      playerFilterOptions ).pipe(
         tap(() => this.log('PlayerListView fetched')),
         catchError(this.handleError)
     );

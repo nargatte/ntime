@@ -24,6 +24,7 @@ import { MessageService } from './Services/message.service';
 import { RegistrationTabComponent } from './Tabs/registration-tab/registration-tab.component';
 import { PlayersListTabComponent } from './Tabs/players-list-tab/players-list-tab.component';
 import { NewPlayerFormComponent } from './SharedComponents/new-player-form/new-player-form.component';
+import { PlayerListService } from './Services/player-list.service';
 
 
 @NgModule({
@@ -38,7 +39,7 @@ import { NewPlayerFormComponent } from './SharedComponents/new-player-form/new-p
         RegistrationTabComponent, PlayersListTabComponent, NewPlayerFormComponent,
     ],
     providers: [
-        CompetitionService, MessageService, // Custom services
+        CompetitionService, MessageService, PlayerListService, // Custom services
         {provide: MAT_DATE_LOCALE, useValue: 'pl-pl'},
     ],
     bootstrap: [AppComponent]
