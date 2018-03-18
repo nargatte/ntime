@@ -14,7 +14,6 @@ export class PlayersListTabComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.competitionId = +this.route.snapshot.paramMap.get('id');
   }
 
 }
