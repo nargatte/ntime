@@ -3,6 +3,7 @@ import { Competition } from '../../Models/Competition';
 import { CompetitionService } from '../../Services/competition.service';
 import { MessageService } from '../../Services/message.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { PlayerCompetitionRegister } from '../../Models/PlayerCompetitionRegister';
 
 @Component({
   selector: 'app-new-player-form',
@@ -12,6 +13,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class NewPlayerFormComponent implements OnInit {
   public id = 2;
   public competition: Competition = new Competition(1, 'Łask', new Date(Date.now()),  new Date(2018, 9, 13));
+  public newPlayer: PlayerCompetitionRegister = new PlayerCompetitionRegister();
+  public checkboxes: boolean[] = [false, false, false];
   // competitionRegulationDeclarationText: string;
   // personalDataDeclarationText: string;
   // pressMediaDeclarationText: string;

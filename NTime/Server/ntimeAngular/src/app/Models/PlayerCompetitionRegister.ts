@@ -11,4 +11,9 @@
     ExtraPlayerInfoId: number;
     DistanceId: number;
     CompetitionId: number;
+
+
+    constructor() {
+    }
 }
+
