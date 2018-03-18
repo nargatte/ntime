@@ -1,107 +1,121 @@
 <mat-card class="example-card">
-  <mat-card-content>
-    <div class="form-container">
-      <mat-form-field>
-        <input matInput placeholder="Imię" required>
-      </mat-form-field>
+  <form #myForm="ngForm">
+    <mat-card-content>
+      <div class="form-container">
+        <mat-form-field>
+          <input matInput placeholder="Imię" name="name" required minlength="4" [(ngModel)]="hero.name" >
+        </mat-form-field>
 
-      <mat-form-field>
-        <input matInput placeholder="Nazwisko" required>
-      </mat-form-field>
+        <!-- <mat-form-field>
+          <input matInput placeholder="Nazwisko" required>
+        </mat-form-field>
 
-      <mat-form-field>
-        <mat-select placeholder="Płeć" required>
-          <mat-option value="female">Kobieta</mat-option>
-          <mat-option value="male">Mężczyzna</mat-option>
-        </mat-select>
-      </mat-form-field>
+        <mat-form-field>
+          <mat-select placeholder="Płeć" required>
+            <mat-option value="female">Kobieta</mat-option>
+            <mat-option value="male">Mężczyzna</mat-option>
+          </mat-select>
+        </mat-form-field>
 
-      <mat-form-field>
-        <input matInput [matDatepicker]="picker" placeholder="Data urodzenia" required>
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Data urodzenia" required>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
 
-      <mat-form-field>
-        <input matInput placeholder="Miasto zamieszkania" required>
-      </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Miasto zamieszkania" required>
+        </mat-form-field>
 
-      <mat-form-field>
-        <mat-select placeholder="Dystans" required>
-          <mat-option value="mini">MINI</mat-option>
-          <mat-option value="mega">MEGA</mat-option>
-          <mat-option value="mega">GIGA</mat-option>
-        </mat-select>
-      </mat-form-field>
+        <mat-form-field>
+          <mat-select placeholder="Dystans" required>
+            <mat-option value="mini">MINI</mat-option>
+            <mat-option value="mega">MEGA</mat-option>
+            <mat-option value="mega">GIGA</mat-option>
+          </mat-select>
+        </mat-form-field>
 
-      <mat-form-field>
-        <mat-select placeholder="Typ roweru" required>
-          <mat-option value="szosowy">Szosowy</mat-option>
-          <mat-option value="inny">Inny</mat-option>
-        </mat-select>
-      </mat-form-field>
+        <mat-form-field>
+          <mat-select placeholder="Typ roweru" required>
+            <mat-option value="szosowy">Szosowy</mat-option>
+            <mat-option value="inny">Inny</mat-option>
+          </mat-select>
+        </mat-form-field>
 
-      <mat-form-field>
-        <textarea matInput placeholder="Klub"></textarea>
-      </mat-form-field>
+        <mat-form-field>
+          <textarea matInput placeholder="Klub" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
+        </mat-form-field>
 
-      <mat-form-field>
-        <input matInput type="email" placeholder="Adres e-mail">
-      </mat-form-field>
+        <mat-form-field>
+          <input matInput type="email" placeholder="Adres e-mail">
+        </mat-form-field>
 
-      <mat-form-field>
-        <input matInput type="tel" placeholder="Numer telefonu">
-      </mat-form-field>
+        <mat-form-field>
+          <input matInput type="tel" placeholder="Numer telefonu">
+        </mat-form-field> -->
 
-    </div>
-  </mat-card-content>
-  <!-- <mat-card-actions>
+      </div>
+    </mat-card-content>
+    <!-- <mat-card-actions>
     <button mat-raised-button color="primary" routerLink="/zawody">Wszystkie zawody</button>
   </mat-card-actions> -->
-  <div class="giodo-declarations">
-    <form>
-      <mat-card class="example-card">
-        <mat-card-content>
-          <mat-checkbox ></mat-checkbox>
-          <p>
-            Oświadczam, iż upoważniam Organizatora do przetwarzania moich danych osobowych przekazanych przeze mnie przy okazji zgłoszenia
-            udziału w niniejszym wyścigu, w celu jego przeprowadzenia, w celu przekazywania komunikatów informacyjnych związanych
-            z organizacją niniejszego wyścigu, archiwizacji oraz prowadzenia klasyfikacji zawodów odbywanych w ramach niniejszego
-            wyścigu
-            <br/> Oświadczam także, iż został-am (-em) pouczon-a (-y) o prawie wglądu do własnych danych osobowych, prawie żądania
-            ich poprawienia, a także prawie wniesienia pisemnego umotywowanego żądania zaprzestania przetwarzania danych
-            osobowych oraz możliwości przekazania moich danych osobowych uprawnionym organom.
-          </p>
-        </mat-card-content>
-      </mat-card>
+    <!-- <div class="giodo-declarations">
+      <form>
+        <mat-card class="example-card">
+          <mat-card-content>
+            <mat-checkbox></mat-checkbox>
+            <p>
+              Oświadczam, iż upoważniam Organizatora do przetwarzania moich danych osobowych przekazanych przeze mnie przy okazji zgłoszenia
+              udziału w niniejszym wyścigu, w celu jego przeprowadzenia, w celu przekazywania komunikatów informacyjnych
+              związanych z organizacją niniejszego wyścigu, archiwizacji oraz prowadzenia klasyfikacji zawodów odbywanych
+              w ramach niniejszego wyścigu
+              <br/> Oświadczam także, iż został-am (-em) pouczon-a (-y) o prawie wglądu do własnych danych osobowych, prawie żądania
+              ich poprawienia, a także prawie wniesienia pisemnego umotywowanego żądania zaprzestania przetwarzania danych
+              osobowych oraz możliwości przekazania moich danych osobowych uprawnionym organom.
+            </p>
+          </mat-card-content>
+        </mat-card>
 
-      <mat-card class="example-card">
-        <mat-card-content>
-          <mat-checkbox ></mat-checkbox>
-          <p>
-            Oświadczam, iż zapoznał-am(-em) się z Regulaminem zawodów: {{competition.Name}} dostępnym na stronie internetowej {{competition.Link}},
-            akceptuję jego postanowienia i zobowiązuję się do ich przestrzegania.
-          </p>
-        </mat-card-content>
-      </mat-card>
-      <mat-card class="example-card">
-        <mat-card-content>
-          <mat-checkbox></mat-checkbox>
-          <p>
-            Wyrażam zgodę na wykorzystanie przez Organizatora mojego wizerunku, w tym na obrót egzemplarzami, na których utrwalono ten
-            wizerunek, oraz na zwielokrotnianie wizerunku wszelkimi dostępnymi aktualnie technikami i metodami, rozpowszechnianie
-            oraz publikowanie, także wraz z wizerunkami innych osób utrwalonymi w ramach wyścigu, materiałach służących popularyzacji
-            działań w zakresie imprez sportowych organizowanych przez Organizatora poprzez rozpowszechnianie wizerunku w:
-          </p>
-          <ul>
-            <li>mediach elektronicznych, w szczególności na stronach internetowych,</li>
-            <li>prasie,</li>
-            <li>broszurach, ulotkach, gazetkach itp.</li>
-          </ul>
-          Oświadczam, że wykorzystanie wizerunku zgodnie z niniejszą zgodą nie narusza niczyich dóbr osobistych ani innych praw.          
-        </mat-card-content>
-      </mat-card>
-    </form>
+        <mat-card class="example-card">
+          <mat-card-content>
+            <mat-checkbox></mat-checkbox>
+            <p>
+              Oświadczam, iż zapoznał-am(-em) się z Regulaminem zawodów: {{competition.Name}} dostępnym na stronie internetowej {{competition.Link}},
+              akceptuję jego postanowienia i zobowiązuję się do ich przestrzegania.
+            </p>
+          </mat-card-content>
+        </mat-card>
+        <mat-card class="example-card">
+          <mat-card-content>
+            <mat-checkbox></mat-checkbox>
+            <p>
+              Wyrażam zgodę na wykorzystanie przez Organizatora mojego wizerunku, w tym na obrót egzemplarzami, na których utrwalono ten
+              wizerunek, oraz na zwielokrotnianie wizerunku wszelkimi dostępnymi aktualnie technikami i metodami, rozpowszechnianie
+              oraz publikowanie, także wraz z wizerunkami innych osób utrwalonymi w ramach wyścigu, materiałach służących
+              popularyzacji działań w zakresie imprez sportowych organizowanych przez Organizatora poprzez rozpowszechnianie
+              wizerunku w:
+            </p>
+            <ul>
+              <li>mediach elektronicznych, w szczególności na stronach internetowych,</li>
+              <li>prasie,</li>
+              <li>broszurach, ulotkach, gazetkach itp.</li>
+            </ul>
+            Oświadczam, że wykorzystanie wizerunku zgodnie z niniejszą zgodą nie narusza niczyich dóbr osobistych ani innych praw.
+          </mat-card-content>
+        </mat-card>
+      </form>
 
-  </div>
+    </div> -->
+    <h1>"myForm.myInput.$valid"</h1>
+    <mat-card-actions>
+    </mat-card-actions>
+    <button mat-raised-button color="primary" type="submit" (click)="addPlayer()" [disabled]="myForm.invalid">
+      Przejdź do zawodów
+    </button>
+  </form>
 </mat-card>
+<form #heroForm="ngForm">
+  <input id="name" name="name" required minlength="4" [(ngModel)]="hero.name" />
+
+  <button type="submit" [disabled]="heroForm.invalid">Submit</button>
+</form>
