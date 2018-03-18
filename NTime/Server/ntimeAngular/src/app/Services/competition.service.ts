@@ -3,13 +3,13 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
+import { from } from 'rxjs/observable/from';
 
 import { Competition } from '../Models/Competition';
 import { COMPETITIONS_PAGE, COMPETITIONS } from '../MockData/mockCompetitions';
 import { MessageService } from '../Services/message.service';
-import { from } from 'rxjs/observable/from';
 import { PageViewModel } from '../Models/PageViewModel';
-import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 
 @Injectable()
 export class CompetitionService {

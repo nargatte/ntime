@@ -4,6 +4,9 @@ import { CompetitionService } from '../../Services/competition.service';
 import { MessageService } from '../../Services/message.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PlayerCompetitionRegister } from '../../Models/PlayerCompetitionRegister';
+import { ExtraPlayerInfo } from '../../Models/ExtraPlayerInfo';
+import { Distance } from '../../Models/Distance';
+import { PlayerListService } from '../../Services/player-list.service';
 
 @Component({
   selector: 'app-new-player-form',
@@ -12,6 +15,8 @@ import { PlayerCompetitionRegister } from '../../Models/PlayerCompetitionRegiste
 })
 export class NewPlayerFormComponent implements OnInit {
   @Input() competition: Competition;
+  @Input() distances: Distance[];
+  @Input() extraPlayerInfos: ExtraPlayerInfo[];
 
   public todayDate: Date;
   // public competition: Competition = new Competition(1, 'Łask', new Date(Date.now()),  new Date(2018, 9, 13));
@@ -22,16 +27,15 @@ export class NewPlayerFormComponent implements OnInit {
   // personalDataDeclarationText: string;
   // pressMediaDeclarationText: string;
 
-  competitionRegulationDeclarationCheckbox: boolean;
-  personalDataDeclarationCheckbox: boolean;
-  pressMediaDeclarationCheckbox: boolean;
-  powers = ['Really Smart', 'Super Flexible', 'Weather Changer'];
+  // competitionRegulationDeclarationCheckbox: boolean;
+  // personalDataDeclarationCheckbox: boolean;
+  // pressMediaDeclarationCheckbox: boolean;
 
-  hero = {name: 'Dr.', alterEgo: 'Dr. What', power: this.powers[0]};
-
-  heroForm: FormGroup;
-
-  constructor(private competitionService: CompetitionService, private messageService: MessageService) {
+  constructor(
+    private competitionService: CompetitionService,
+    private messageService: MessageService,
+    private playerService: PlayerListService,
+  ) {
     this.todayDate = new Date(Date.now());
    }
 
@@ -55,6 +59,7 @@ export class NewPlayerFormComponent implements OnInit {
   // }
 
   public addPlayer() {
-    this.messageService.addLog('Zawodnik został zapisany na zawody');
+    console.log('Trying to add Player');
+    this.playerService.addPlayer(this.newPlayer, this.competition.Id);
   }
 }

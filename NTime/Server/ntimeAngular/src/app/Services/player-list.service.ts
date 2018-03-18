@@ -9,11 +9,15 @@ import { MessageService } from './message.service';
 import { PlayerFilterOptions } from '../Models/PlayerFilterOptions';
 import { PlayerListView } from '../Models/PlayerListView';
 import { StringHelper } from '../Helpers/StringHelper';
+import { PlayerCompetitionRegister } from '../Models/PlayerCompetitionRegister';
 
 @Injectable()
 export class PlayerListService {
   private baseCompetitionUrl = 'http://testing.time2win.aspnet.pl';
-  private controlerUrl = '/api/player/takeSimpleList/FromCompetition/';
+  private controlerUrl = '/api/player';
+  private simpleListUrl = '/takeSimpleList/FromCompetition/';
+  private playerRegisterUrl = '/register/intocompetition/';
+
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -24,9 +28,17 @@ export class PlayerListService {
   getPlayerListView(competitionId: number, playerFilterOptions: PlayerFilterOptions, pageSize: number, pageNumber: number):
   Observable<PageViewModel<PlayerListView>> {
     return this.http.post<PageViewModel<Competition>>(this.baseCompetitionUrl +
-      this.controlerUrl + competitionId + StringHelper.generatPageRequest(pageSize, pageNumber),
+      this.controlerUrl + this.simpleListUrl + competitionId + StringHelper.generatPageRequest(pageSize, pageNumber),
       playerFilterOptions ).pipe(
         tap(() => this.log('PlayerListView fetched')),
+        catchError(this.handleError)
+    );
+  }
+
+  addPlayer(player: PlayerCompetitionRegister, competitionId: number): Observable<PlayerCompetitionRegister> {
+    const requestUrl = this.baseCompetitionUrl + this.controlerUrl + this.playerRegisterUrl + competitionId;
+    this.log('Trying to add player from service');
+    return this.http.post<PlayerCompetitionRegister>(requestUrl, player).pipe(
         catchError(this.handleError)
     );
   }

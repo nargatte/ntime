@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { APP_BASE_HREF, Location } from '@angular/common';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 // import { FlexLayoutModule } from '@angular/flex-layout';
@@ -25,6 +26,8 @@ import { RegistrationTabComponent } from './Tabs/registration-tab/registration-t
 import { PlayersListTabComponent } from './Tabs/players-list-tab/players-list-tab.component';
 import { NewPlayerFormComponent } from './SharedComponents/new-player-form/new-player-form.component';
 import { PlayerListService } from './Services/player-list.service';
+import { DistanceService } from './Services/distance.service';
+import { ExtraPlayerInfoService } from './Services/extra-player-info.service';
 
 
 @NgModule({
@@ -39,8 +42,9 @@ import { PlayerListService } from './Services/player-list.service';
         RegistrationTabComponent, PlayersListTabComponent, NewPlayerFormComponent,
     ],
     providers: [
-        CompetitionService, MessageService, PlayerListService, // Custom services
-        {provide: MAT_DATE_LOCALE, useValue: 'pl-pl'},
+        CompetitionService, PlayerListService, DistanceService, ExtraPlayerInfoService,
+        MessageService,  // Custom services
+        { provide: MAT_DATE_LOCALE, useValue: 'pl-pl' },
     ],
     bootstrap: [AppComponent]
 })
