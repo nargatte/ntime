@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Competition } from '../../Models/Competition';
 import { CompetitionService } from '../../Services/competition.service';
+import { MessageService } from '../../Services/message.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-new-player-form',
@@ -17,11 +19,24 @@ export class NewPlayerFormComponent implements OnInit {
   competitionRegulationDeclarationCheckbox: boolean;
   personalDataDeclarationCheckbox: boolean;
   pressMediaDeclarationCheckbox: boolean;
+  powers = ['Really Smart', 'Super Flexible', 'Weather Changer'];
 
+  hero = {name: 'Dr.', alterEgo: 'Dr. What', power: this.powers[0]};
 
-  constructor(private competitionService: CompetitionService) { }
+  heroForm: FormGroup;
+
+  constructor(private competitionService: CompetitionService, private messageService: MessageService) { }
 
   ngOnInit() {
+    // this.heroForm = new FormGroup({
+    //   'name': new FormControl(this.hero.name, [
+    //     Validators.required,
+    //     Validators.minLength(4),
+    //   ]),
+    //   'alterEgo': new FormControl(this.hero.alterEgo),
+    //   'power': new FormControl(this.hero.power, Validators.required)
+    // });
+
     // this.getCompetition();
   }
 
@@ -29,5 +44,9 @@ export class NewPlayerFormComponent implements OnInit {
   private getCompetition() {
     this.competitionService.getCompetition(this.id)
       .subscribe(competition => this.competition = this.competition);
+  }
+
+  public addPlayer() {
+    this.messageService.addLog('Zawodnik został zapisany na zawody');
   }
 }
