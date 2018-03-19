@@ -7,7 +7,7 @@
     Team: string;
     PhoneNumber: string;
     City: string;
-    Emal: string;
+    Email: string;
     ExtraPlayerInfoId: number;
     DistanceId: number;
     CompetitionId: number;

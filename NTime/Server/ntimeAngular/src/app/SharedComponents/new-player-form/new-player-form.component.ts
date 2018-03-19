@@ -7,6 +7,7 @@ import { PlayerCompetitionRegister } from '../../Models/PlayerCompetitionRegiste
 import { ExtraPlayerInfo } from '../../Models/ExtraPlayerInfo';
 import { Distance } from '../../Models/Distance';
 import { PlayerService } from '../../Services/player.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-new-player-form',
@@ -19,39 +20,28 @@ export class NewPlayerFormComponent implements OnInit {
   @Input() extraPlayerInfos: ExtraPlayerInfo[];
 
   public todayDate: Date;
-  // public competition: Competition = new Competition(1, 'Łask', new Date(Date.now()),  new Date(2018, 9, 13));
   public newPlayer: PlayerCompetitionRegister = new PlayerCompetitionRegister();
+  private competitionId: number;
 
   public checkboxes: boolean[] = [false, false, false];
-  // competitionRegulationDeclarationText: string;
-  // personalDataDeclarationText: string;
-  // pressMediaDeclarationText: string;
-
-  // competitionRegulationDeclarationCheckbox: boolean;
-  // personalDataDeclarationCheckbox: boolean;
-  // pressMediaDeclarationCheckbox: boolean;
 
   constructor(
+    private route: ActivatedRoute,
     private competitionService: CompetitionService,
     private messageService: MessageService,
     private playerService: PlayerService,
   ) {
+    this.competitionId = +this.route.snapshot.paramMap.get('id');
     this.todayDate = new Date(Date.now());
    }
 
   ngOnInit() {
-    // this.heroForm = new FormGroup({
-    //   'name': new FormControl(this.hero.name, [
-    //     Validators.required,
-    //     Validators.minLength(4),
-    //   ]),
-    //   'alterEgo': new FormControl(this.hero.alterEgo),
-    //   'power': new FormControl(this.hero.power, Validators.required)
-    // });
 
-    // this.getCompetition();
   }
 
+  log(message: string): void {
+    this.messageService.addLog(message);
+  }
 
   // private getCompetition() {
   //   this.competitionService.getCompetition(this.id)
@@ -59,7 +49,11 @@ export class NewPlayerFormComponent implements OnInit {
   // }
 
   public addPlayer() {
+    this.newPlayer.DistanceId = 27;
     console.log('Trying to add Player');
-    this.playerService.addPlayer(this.newPlayer, this.competition.Id);
+    this.playerService.addPlayer(this.newPlayer, this.competitionId).subscribe(
+      player => this.log(`Dodano zawodnika ${player}`),
+      error => this.log(`Wystąpił problem podczas dodawania zawodnika: ${error}`)
+    );
   }
 }

@@ -14,6 +14,7 @@ import { PageViewModel } from '../../Models/PageViewModel';
 import { PlayerListView } from '../../Models/PlayerListView';
 import { Competition } from '../../Models/Competition';
 import { PlayerFilterOptions } from '../../Models/PlayerFilterOptions';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-players-list',
@@ -22,6 +23,7 @@ import { PlayerFilterOptions } from '../../Models/PlayerFilterOptions';
 })
 export class PlayersListComponent implements AfterViewInit {
   @Input() competition: Competition;
+  private competitionId: number;
   private players: PlayerListView[] = [];
   public todayDate: Date;
   private filter: PlayerFilterOptions = new PlayerFilterOptions();
@@ -37,24 +39,28 @@ export class PlayersListComponent implements AfterViewInit {
   public playersCount = 0;
   // public pageEvent: PageEvent;
 
-  constructor(private playerService: PlayerService, private messageService: MessageService) {
+  constructor(
+    private playerService: PlayerService,
+    private messageService: MessageService,
+    private route: ActivatedRoute) {
     this.todayDate = new Date(Date.now());
   }
 
   ngAfterViewInit() {
-    this.getPlayers(this.competition.Id, this.filter, this.pageSize, this.pageNumber);
+    this.competitionId = +this.route.snapshot.paramMap.get('id');
+    this.getPlayers(this.competitionId, this.filter, this.pageSize, this.pageNumber);
     // this.setPaginator();
   }
 
   getPlayers(competitionId: number, playerFilterOptions: PlayerFilterOptions, pageSize: number, pageNumber: number): void {
     this.playerService.getPlayerListView(competitionId, playerFilterOptions, pageSize, pageNumber).subscribe(
       (page: PageViewModel<PlayerListView>) => {
-        console.log(page);
-        console.log(`Items: ${page.TotalCount}`);
+        this.log(page.toString());
+        this.log(`Items: ${page.TotalCount}`);
         this.players = page.Items;
         this.playersCount = page.TotalCount;
       },
-      error => console.log(error), // Errors
+      error => this.log(error), // Errors
       () => this.setDataSource() // Success
     );
   }
@@ -65,20 +71,14 @@ export class PlayersListComponent implements AfterViewInit {
 
   setDataSource() {
     this.dataSource = new MatTableDataSource<PlayerListView>(this.players);
-    this.log('Datasource set');
-    // this.setPaginator();
   }
 
-  setPaginator(): void {
-    // this.dataSource.paginator = this.paginator;
-    this.playersCount = 100;
-  }
+  // setPaginator(): void {
+  //   this.dataSource.paginator = this.paginator;
+  //   this.playersCount = 100;
+  // }
 
   onPageEvent(event: PageEvent) {
     this.getPlayers(this.competition.Id, this.filter, event.pageSize, event.pageIndex);
-  }
-
-  onClick(): void {
-    this.dataSource.paginator = this.paginator;
   }
 }

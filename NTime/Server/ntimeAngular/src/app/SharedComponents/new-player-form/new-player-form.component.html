@@ -23,8 +23,8 @@
 
           <mat-form-field>
             <mat-select placeholder="Płeć" name="isMale" required [(ngModel)]="newPlayer.IsMale" #isMale="ngModel">
-              <mat-option value="female">Kobieta</mat-option>
-              <mat-option value="male">Mężczyzna</mat-option>
+              <mat-option value="false">Kobieta</mat-option>
+              <mat-option value="true">Mężczyzna</mat-option>
             </mat-select>
             <div *ngIf="isMale.invalid && (isMale.dirty || isMale.touched)" class="alert alert-danger">
               <div *ngIf="isMale.errors.required">
@@ -34,7 +34,7 @@
           </mat-form-field>
 
           <mat-form-field>
-            <input matInput [matDatepicker]="picker" placeholder="Data urodzenia" name="birthDate" required [(ngModel)]="newPlayer.BirthDate"
+            <input matInput [matDatepicker]="picker" [max]="todayDate" placeholder="Data urodzenia" name="birthDate" required [(ngModel)]="newPlayer.BirthDate"
               #birthDate="ngModel">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker startView="multi-year"></mat-datepicker>
@@ -54,7 +54,7 @@
             </div>
           </mat-form-field>
 
-          <mat-form-field>
+          <!-- <mat-form-field>
             <mat-select placeholder="Dystans" name="distance" required [(ngModel)]="newPlayer.DistanceId" #distance="ngModel">
                 <mat-option *ngFor="let dist of distances" [(value)]="dist.Id">
                     {{dist.Name}}
@@ -65,7 +65,7 @@
                 Dystans jest wymagany
               </div>
             </div>
-          </mat-form-field>
+          </mat-form-field> -->
 
           <mat-form-field>
             <mat-select placeholder="Typ roweru" name="extraPlayerInfo" required [(ngModel)]="newPlayer.ExtraPlayerInfoId" #extraPlayerInfo="ngModel">
