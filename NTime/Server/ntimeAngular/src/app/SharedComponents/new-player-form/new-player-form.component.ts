@@ -55,7 +55,7 @@ export class NewPlayerFormComponent implements OnInit {
   // }
 
   public addPlayer() {
-    this.newPlayer.DistanceId = 27;
+    // this.newPlayer.DistanceId = 27;
     console.log('Trying to add Player');
     this.playerService.addPlayer(this.newPlayer, this.competitionId).subscribe(
       player => this.onSuccessfulAddPlayer(player),
