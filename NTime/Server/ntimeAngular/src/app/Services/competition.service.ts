@@ -13,7 +13,7 @@ import { PageViewModel } from '../Models/PageViewModel';
 
 @Injectable()
 export class CompetitionService {
-    private baseCompetitionUrl = 'http://testing.time2win.aspnet.pl/api/Competition';
+    private baseCompetitionUrl = '/api/Competition';
     private getCompetitionsUrl: string = this.baseCompetitionUrl + '?ItemsOnPage=20&PageNumber=0';
     private getCompetitionbyIdUrl: string = this.baseCompetitionUrl + '/';
 

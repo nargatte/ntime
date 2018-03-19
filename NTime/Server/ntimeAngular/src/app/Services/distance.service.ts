@@ -11,7 +11,7 @@ import { Distance } from '../Models/Distance';
 
 @Injectable()
 export class DistanceService {
-  private baseDistanceUrl = 'http://testing.time2win.aspnet.pl/api/Distance';
+  private baseDistanceUrl = '/api/Distance';
   private getDistanceFromCompetitionUrl = this.baseDistanceUrl + '/FromCompetition/';
 
   httpOptions = {

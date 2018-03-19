@@ -2,7 +2,7 @@
   "/api": {
     "target": "http://testing.time2win.aspnet.pl",
     "secure": false,
-    "logLevel": "debug",
+    "logLevel": "info",
     "changeOrigin": true
   }
 }

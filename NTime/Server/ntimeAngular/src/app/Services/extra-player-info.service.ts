@@ -10,7 +10,7 @@ import { ExtraPlayerInfo } from '../Models/ExtraPlayerInfo';
 
 @Injectable()
 export class ExtraPlayerInfoService {
-  private baseExtraPlayerInfoUrl = 'http://testing.time2win.aspnet.pl/api/ExtraPlayerInfos';
+  private baseExtraPlayerInfoUrl = '/api/ExtraPlayerInfos';
   private getExtraPlayerInfoFromCompetitionUrl = this.baseExtraPlayerInfoUrl + '/FromCompetition/';
 
   httpOptions = {
