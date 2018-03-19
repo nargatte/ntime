@@ -29,6 +29,7 @@ import { PlayerService } from './Services/player.service';
 import { DistanceService } from './Services/distance.service';
 import { ExtraPlayerInfoService } from './Services/extra-player-info.service';
 import { PlayersListComponent } from './SharedComponents/players-list/players-list.component';
+import { PlayerAddedDialogComponent } from './SharedComponents/player-added-dialog/player-added-dialog.component';
 
 
 @NgModule({
@@ -40,13 +41,16 @@ import { PlayersListComponent } from './SharedComponents/players-list/players-li
         AppComponent, ScoresTabComponent, MyAccountTabComponent,
         CompetitionTabComponent, OfferTabComponent, ContactTabComponent,
         AboutUsTabComponent, NavbarComponent, CompetitionsSelectComponent,
-        RegistrationTabComponent, PlayersListTabComponent, NewPlayerFormComponent, PlayersListComponent,
+        RegistrationTabComponent, PlayersListTabComponent, NewPlayerFormComponent, PlayersListComponent, PlayerAddedDialogComponent,
     ],
     providers: [
         CompetitionService, PlayerService, ExtraPlayerInfoService, DistanceService,
         MessageService,  // Custom services
         { provide: MAT_DATE_LOCALE, useValue: 'pl-pl' },
     ],
+    entryComponents: [
+        PlayerAddedDialogComponent
+      ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

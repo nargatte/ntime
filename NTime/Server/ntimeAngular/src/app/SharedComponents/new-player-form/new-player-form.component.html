@@ -1,6 +1,6 @@
 <mat-card class="example-card">
   <!-- <ng-container *ngIf="competition.SignUpEndDate > todayDate; else elseTemplate"> -->
-    <form #myForm="ngForm">
+    <form #newPlayerForm="ngForm">
       <mat-card-content>
         <div class="form-container">
           <mat-form-field>
@@ -160,7 +160,8 @@
         </mat-card>
       </div>
       <mat-card-actions>
-        <button mat-raised-button color="primary" type="submit" (click)="addPlayer()" [disabled]="myForm.invalid">
+        <button mat-raised-button color="primary" type="submit" 
+        (click)="addPlayer(); newPlayerForm.reset()" [disabled]="newPlayerForm.invalid">
           Zarejestruj się
         </button>
       </mat-card-actions>

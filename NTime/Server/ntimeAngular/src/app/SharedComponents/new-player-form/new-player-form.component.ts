@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Inject } from '@angular/core';
 import { Competition } from '../../Models/Competition';
 import { CompetitionService } from '../../Services/competition.service';
 import { MessageService } from '../../Services/message.service';
@@ -8,11 +8,16 @@ import { ExtraPlayerInfo } from '../../Models/ExtraPlayerInfo';
 import { Distance } from '../../Models/Distance';
 import { PlayerService } from '../../Services/player.service';
 import { ActivatedRoute } from '@angular/router';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
+import { PlayerAddedDialogComponent } from '../player-added-dialog/player-added-dialog.component';
 
 @Component({
   selector: 'app-new-player-form',
   templateUrl: './new-player-form.component.html',
-  styleUrls: ['./new-player-form.component.css']
+  styleUrls: ['./new-player-form.component.css'],
+  entryComponents: [
+    PlayerAddedDialogComponent
+  ]
 })
 export class NewPlayerFormComponent implements OnInit {
   @Input() competition: Competition;
@@ -30,6 +35,7 @@ export class NewPlayerFormComponent implements OnInit {
     private competitionService: CompetitionService,
     private messageService: MessageService,
     private playerService: PlayerService,
+    private dialog: MatDialog
   ) {
     this.competitionId = +this.route.snapshot.paramMap.get('id');
     this.todayDate = new Date(Date.now());
@@ -52,8 +58,22 @@ export class NewPlayerFormComponent implements OnInit {
     this.newPlayer.DistanceId = 27;
     console.log('Trying to add Player');
     this.playerService.addPlayer(this.newPlayer, this.competitionId).subscribe(
-      player => this.log(`Dodano zawodnika ${player}`),
+      player => this.onSuccessfulAddPlayer(player),
       error => this.log(`Wystąpił problem podczas dodawania zawodnika: ${error}`)
     );
   }
+
+  private onSuccessfulAddPlayer(player: PlayerCompetitionRegister): void {
+    this.log(`Dodano zawodnika ${player}`);
+    this.dialog.open(PlayerAddedDialogComponent
+    );
+  }
 }
+
+// @Component({
+//   selector: 'dialog-data-example-dialog',
+//   templateUrl: 'dialog-data-example-dialog.html',
+// })
+// export class DialogDataExampleDialog {
+//   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
+// }
