@@ -4,13 +4,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MatPaginator, MatTableDataSource, MatTable } from '@angular/material';
 import { DataSource } from '@angular/cdk/table';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-
-import { Competition } from '../../Models/Competition';
-import { CompetitionService } from '../../Services/competition.service';
 import { PageViewModel } from '../../Models/PageViewModel';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/map';
+
+import { Competition } from '../../Models/Competition';
+import { CompetitionService } from '../../Services/competition.service';
 
 
 @Component({

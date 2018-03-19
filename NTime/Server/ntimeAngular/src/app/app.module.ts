@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { APP_BASE_HREF, Location } from '@angular/common';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 // import { FlexLayoutModule } from '@angular/flex-layout';
@@ -24,7 +25,11 @@ import { MessageService } from './Services/message.service';
 import { RegistrationTabComponent } from './Tabs/registration-tab/registration-tab.component';
 import { PlayersListTabComponent } from './Tabs/players-list-tab/players-list-tab.component';
 import { NewPlayerFormComponent } from './SharedComponents/new-player-form/new-player-form.component';
-import { PlayerListService } from './Services/player-list.service';
+import { PlayerService } from './Services/player.service';
+import { DistanceService } from './Services/distance.service';
+import { ExtraPlayerInfoService } from './Services/extra-player-info.service';
+import { PlayersListComponent } from './SharedComponents/players-list/players-list.component';
+import { PlayerAddedDialogComponent } from './SharedComponents/player-added-dialog/player-added-dialog.component';
 
 
 @NgModule({
@@ -36,12 +41,16 @@ import { PlayerListService } from './Services/player-list.service';
         AppComponent, ScoresTabComponent, MyAccountTabComponent,
         CompetitionTabComponent, OfferTabComponent, ContactTabComponent,
         AboutUsTabComponent, NavbarComponent, CompetitionsSelectComponent,
-        RegistrationTabComponent, PlayersListTabComponent, NewPlayerFormComponent,
+        RegistrationTabComponent, PlayersListTabComponent, NewPlayerFormComponent, PlayersListComponent, PlayerAddedDialogComponent,
     ],
     providers: [
-        CompetitionService, MessageService, PlayerListService, // Custom services
-        {provide: MAT_DATE_LOCALE, useValue: 'pl-pl'},
+        CompetitionService, PlayerService, ExtraPlayerInfoService, DistanceService,
+        MessageService,  // Custom services
+        { provide: MAT_DATE_LOCALE, useValue: 'pl-pl' },
     ],
+    entryComponents: [
+        PlayerAddedDialogComponent
+      ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

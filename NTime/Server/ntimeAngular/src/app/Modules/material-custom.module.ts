@@ -4,7 +4,8 @@ import {
   MatButtonModule, MatToolbarModule, MatIconModule,
   MatTabsModule, MatTableModule, MatPaginatorModule,
   MatCardModule, MatFormFieldModule, MatInputModule,
-  MatSelectModule, MatDatepickerModule, MatCheckboxModule
+  MatSelectModule, MatDatepickerModule, MatCheckboxModule,
+  MatDialogModule,
 } from '@angular/material';
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
 
@@ -15,14 +16,14 @@ import {MatMomentDateModule} from '@angular/material-moment-adapter';
     MatIconModule, MatTableModule, MatPaginatorModule,
     MatCardModule, MatFormFieldModule, MatInputModule,
     MatSelectModule, MatDatepickerModule, MatMomentDateModule,
-    MatCheckboxModule,
+    MatCheckboxModule, MatDialogModule,
   ],
   exports: [
     MatToolbarModule, MatButtonModule, MatTabsModule,
     MatIconModule, MatTableModule, MatPaginatorModule,
     MatCardModule, MatFormFieldModule, MatInputModule,
     MatSelectModule, MatDatepickerModule, MatMomentDateModule,
-    MatCheckboxModule,
+    MatCheckboxModule, MatDialogModule,
   ],
   declarations: []
 })

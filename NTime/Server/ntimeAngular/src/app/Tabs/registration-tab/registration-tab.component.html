@@ -1,14 +1,23 @@
 <mat-card class="example-card">
   <mat-card-content>
-    <p>
-      Zapisz się na zawody o id: {{competitionId}}
-    </p>
+    <ng-container *ngIf="competition; else elseTemplate">
+        <p>
+            Zapisy<br/>
+            {{competition.Name}}
+          </p>
+    </ng-container>   
+    <ng-template #elseTemplate>
+      <p>
+        Pobieranie zawodów
+      </p>
+    </ng-template>
   </mat-card-content>
   <mat-card-actions>
+    <button mat-raised-button color="primary" routerLink="/zawody">Wszystkie zawody</button>
     <button mat-raised-button color="primary" routerLink="/lista-zawodnikow/{{competitionId}}">
       Lista zawodników
     </button>
-    <button mat-raised-button color="primary" routerLink="/zawody">Wszystkie zawody</button>
   </mat-card-actions>
 </mat-card>
-<app-new-player-form></app-new-player-form>
+<app-new-player-form [competition]="competition" [distances]="distances"
+[extraPlayerInfos]="extraPlayerInfos"></app-new-player-form>
