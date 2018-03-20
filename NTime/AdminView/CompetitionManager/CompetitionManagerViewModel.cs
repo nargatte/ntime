@@ -47,9 +47,11 @@ namespace AdminView.CompetitionManager
         public CompetitionManagerViewModel(IEditableCompetition currentCompetition, DependencyContainer dependencyContainer) : base(currentCompetition)
         {
             GoToCompetitionCmd = new RelayCommand(OnGoToCompetition, CanGoToCompetition);
+            var settingViewModel = new SettingsViewModel(_currentCompetition);
+            settingViewModel.CompetitionRemoved += SettingViewModel_CompetitionRemoved;
             TabItems = new ObservableCollection<ITabItemViewModel>()
             {
-                new SettingsViewModel(_currentCompetition),
+                settingViewModel,
                 new PlayersViewModel(_currentCompetition, dependencyContainer),
                 new DistancesViewModel(_currentCompetition),
                 new CategoriesViewModel(_currentCompetition),
@@ -58,9 +60,14 @@ namespace AdminView.CompetitionManager
             };
         }
 
+        private void SettingViewModel_CompetitionRemoved()
+        {
+            CompetitionRemoved?.Invoke();
+        }
+
         private void OnGoToCompetition()
         {
-            
+            // TODO: Clean it up
         }
 
         private bool CanGoToCompetition()
@@ -74,5 +81,7 @@ namespace AdminView.CompetitionManager
         }
 
         public RelayCommand GoToCompetitionCmd { get; private set; }
+
+        public event Action CompetitionRemoved = delegate { };
     }
 }

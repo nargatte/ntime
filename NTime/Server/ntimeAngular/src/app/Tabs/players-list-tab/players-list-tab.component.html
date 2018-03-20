@@ -1,0 +1,15 @@
+<mat-card class="example-card">
+    <mat-card-content>
+        <p>
+            Lista zawodników
+            <br/> {{competition.Name}}
+        </p>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button color="primary" routerLink="/zawody">Wszystkie zawody</button>
+            <button *ngIf="competition.SignUpEndDate > todayDate" mat-raised-button color="primary" routerLink="/zapisy/{{competitionId}}">
+                Zarejestruj się
+            </button>
+    </mat-card-actions>
+</mat-card>
+<app-players-list [competition]="competition"></app-players-list>

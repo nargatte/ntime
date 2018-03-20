@@ -24,6 +24,7 @@ namespace Server.Dtos
             Team = playerAccount.Team;
             PhoneNumber = playerAccount.PhoneNumber;
             EMail = playerAccount.EMail;
+            City = playerAccount.City;
         }
 
         public PlayerAccount CopyDataFromDto(PlayerAccount playerAccount)
@@ -36,6 +37,7 @@ namespace Server.Dtos
             playerAccount.Team = Team;
             playerAccount.PhoneNumber = PhoneNumber;
             playerAccount.EMail = EMail;
+            playerAccount.City = City;
             return playerAccount;
         }
 
@@ -60,5 +62,7 @@ namespace Server.Dtos
 
         [EmailAddress]
         public string EMail { get; set; }
+
+        public string City { get; set; }
     }
 }

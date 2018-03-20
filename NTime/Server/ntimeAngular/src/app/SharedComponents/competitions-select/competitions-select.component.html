@@ -1,0 +1,63 @@
+﻿<div class="example-container mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource">
+
+        <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+        <!-- Number Column -->
+        <!--If I wanna make it CDK table I can just change mat to cdk in the lines below-->
+        <ng-container matColumnDef="number">
+            <mat-header-cell *matHeaderCellDef> Numer </mat-header-cell>
+            <mat-cell *matCellDef="let competition"> {{competition.Id}} </mat-cell>
+        </ng-container>
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef> Nazwa </mat-header-cell>
+            <mat-cell *matCellDef="let competition"> {{competition.Name}} </mat-cell>
+        </ng-container>
+
+        <!-- City Column -->
+        <ng-container matColumnDef="city">
+            <mat-header-cell *matHeaderCellDef> Miasto </mat-header-cell>
+            <mat-cell *matCellDef="let competition"> {{competition.City}} </mat-cell>
+        </ng-container>
+
+        <!-- EventDate Column -->
+        <ng-container matColumnDef="date">
+            <mat-header-cell *matHeaderCellDef> Data zawodów </mat-header-cell>
+            <mat-cell *matCellDef="let competition"> {{competition.EventDate.toLocaleDateString("pl-pl")}} </mat-cell>
+        </ng-container>
+        <!-- SignUpEndDate Column -->
+        <ng-container matColumnDef="signUpEndDate">
+            <mat-header-cell *matHeaderCellDef> Data końca zapisów </mat-header-cell>
+            <mat-cell *matCellDef="let competition"> {{competition.SignUpEndDate.toLocaleDateString("pl-pl")}} </mat-cell>
+        </ng-container>
+        <!-- Link Column -->
+        <ng-container matColumnDef="link">
+            <mat-header-cell *matHeaderCellDef> Link do strony </mat-header-cell>
+            <mat-cell *matCellDef="let competition">
+                <a href="https://{{competition.Link}}">{{competition.Link}}</a>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+            <mat-cell *matCellDef="let competition">
+                <button mat-raised-button color="primary" routerLink="/lista-zawodnikow/{{competition.Id}}">
+                    Lista zawodników
+                </button>
+                <div *ngIf="competition.SignUpEndDate > todayDate">
+                    <button mat-raised-button color="primary" routerLink="/zapisy/{{competition.Id}}">
+                        Zarejestruj się
+                    </button>
+                </div>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <mat-paginator #paginator [pageSize]="20" [pageSizeOptions]="[10, 20, 50]" [showFirstLastButtons]="true"
+    [(length)]="competitionsCount" (page) = "onPageEvent($event)">
+    </mat-paginator>
+</div>

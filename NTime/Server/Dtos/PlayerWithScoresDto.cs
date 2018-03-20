@@ -26,6 +26,9 @@ namespace Server.Dtos
             Team = player.Team;
             StartNumber = player.StartNumber;
             StartTime = player.StartTime;
+            City = player.City;
+            IsPaidUp = player.IsPaidUp;
+            Email = player.Email;
             IsStartTimeFromReader = player.IsStartTimeFromReader;
             FullCategory = player.FullCategory;
             LapsCount = player.LapsCount;
@@ -50,6 +53,9 @@ namespace Server.Dtos
             player.Team = Team;
             player.StartNumber = StartNumber;
             player.StartTime = StartTime;
+            player.City = City;
+            player.IsPaidUp = IsPaidUp;
+            player.Email = Email;
             player.IsStartTimeFromReader = IsStartTimeFromReader;
             player.FullCategory = FullCategory;
             player.LapsCount = LapsCount;
@@ -105,6 +111,13 @@ namespace Server.Dtos
         public int StartNumber { get; set; }
 
         public DateTime? StartTime { get; set; }
+
+        public string City { get; set; }
+
+        public bool IsPaidUp { get; set; }
+
+        [EmailAddress]
+        public string Email { get; set; }
 
         public bool IsStartTimeFromReader { get; set; }
 
