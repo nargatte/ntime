@@ -7,7 +7,7 @@
              xmlns:DataBase="clr-namespace:BaseCore.DataBase;assembly=BaseCore" x:Class="AdminView.Settings.SettingsView"
              mc:Ignorable="d" 
              HorizontalAlignment="Center"
-             d:DesignHeight="400" d:DesignWidth="400" Loaded="UserControl_Loaded">
+             d:DesignHeight="450" d:DesignWidth="400" Loaded="UserControl_Loaded">
     <UserControl.Resources>
         <CollectionViewSource x:Key="competitionViewSource" d:DesignSource="{d:DesignInstance {x:Type DataBase:Competition}, CreateList=True}"/>
     </UserControl.Resources>
@@ -49,6 +49,12 @@
                 <CheckBox x:Name="organizerEditLockTextBox" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"  Margin="3" Grid.Row="7" IsChecked="{Binding OrganizerEditLock, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
             <Button Command="{Binding SaveChangesCmd}" Height="30" Grid.Row="6" Width="80" Grid.ColumnSpan="2" Margin="0, 0"> Zapisz zmiany </Button>
+            <Button Command="{Binding RemoveCompetitionCmd}" Height="30" Width="60" Margin="0,50">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="pack://application:,,,/AdminView;component/Images/Remove.png" Height="30" Width="20"/>
+                    <TextBlock Text="Usuń" Height="20"/>
+                </StackPanel>
+            </Button>
         </StackPanel>
     </Grid>
 </UserControl>

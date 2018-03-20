@@ -17,6 +17,7 @@ using ViewCore.Factories.Competitions;
 using ViewCore.Factories.Distances;
 using ViewCore.Factories.ExtraPlayerInfos;
 using ViewCore.Factories.Players;
+using System.Windows;
 
 namespace AdminView
 {
@@ -67,7 +68,14 @@ namespace AdminView
                 _currentCompetition = _competitionChoiceViewModel.CompetitionData.SelectedCompetition;
             CurrentViewModel?.DetachAllEvents();
             _competitionManagerViewModel = new CompetitionManagerViewModel(_currentCompetition, dependencyContainer);
+            _competitionManagerViewModel.CompetitionRemoved += OnCompetitionRemoved;
             CurrentViewModel = _competitionManagerViewModel;
+        }
+
+        private void OnCompetitionRemoved()
+        {
+            NavToCompetitionChoiceView();
+            MessageBox.Show("Zawody zostały poprawnie usunięte");
         }
 
         public ISwitchableViewModel CurrentViewModel

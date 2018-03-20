@@ -29,7 +29,10 @@ import { PlayerService } from './Services/player.service';
 import { DistanceService } from './Services/distance.service';
 import { ExtraPlayerInfoService } from './Services/extra-player-info.service';
 import { PlayersListComponent } from './SharedComponents/players-list/players-list.component';
-import { PlayerAddedDialogComponent } from './SharedComponents/player-added-dialog/player-added-dialog.component';
+import { PlayerAddedDialogComponent } from './SharedComponents/Dialogs/player-added-dialog/player-added-dialog.component';
+import {
+    SingUpEndDateErrorDialogComponent
+ } from './SharedComponents/Dialogs/sing-up-end-date-error-dialog/sing-up-end-date-error-dialog.component';
 
 
 @NgModule({
@@ -41,7 +44,8 @@ import { PlayerAddedDialogComponent } from './SharedComponents/player-added-dial
         AppComponent, ScoresTabComponent, MyAccountTabComponent,
         CompetitionTabComponent, OfferTabComponent, ContactTabComponent,
         AboutUsTabComponent, NavbarComponent, CompetitionsSelectComponent,
-        RegistrationTabComponent, PlayersListTabComponent, NewPlayerFormComponent, PlayersListComponent, PlayerAddedDialogComponent,
+        RegistrationTabComponent, PlayersListTabComponent, NewPlayerFormComponent,
+        PlayersListComponent, PlayerAddedDialogComponent, SingUpEndDateErrorDialogComponent,
     ],
     providers: [
         CompetitionService, PlayerService, ExtraPlayerInfoService, DistanceService,
@@ -49,7 +53,7 @@ import { PlayerAddedDialogComponent } from './SharedComponents/player-added-dial
         { provide: MAT_DATE_LOCALE, useValue: 'pl-pl' },
     ],
     entryComponents: [
-        PlayerAddedDialogComponent
+        PlayerAddedDialogComponent, SingUpEndDateErrorDialogComponent
       ],
     bootstrap: [AppComponent]
 })

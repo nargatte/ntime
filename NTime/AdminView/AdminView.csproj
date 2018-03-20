@@ -256,5 +256,10 @@
     <Resource Include="Images\LeftArrow.jpg" />
     <Resource Include="Images\RightArrow.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Remove.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

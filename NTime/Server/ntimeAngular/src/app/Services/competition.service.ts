@@ -10,11 +10,12 @@ import { Competition } from '../Models/Competition';
 import { COMPETITIONS_PAGE, COMPETITIONS } from '../MockData/mockCompetitions';
 import { MessageService } from '../Services/message.service';
 import { PageViewModel } from '../Models/PageViewModel';
+import { StringHelper } from '../Helpers/StringHelper';
 
 @Injectable()
 export class CompetitionService {
     private baseCompetitionUrl = '/api/Competition';
-    private getCompetitionsUrl: string = this.baseCompetitionUrl + '?ItemsOnPage=20&PageNumber=0';
+    // private getCompetitionsUrl: string = this.baseCompetitionUrl + '?ItemsOnPage=20&PageNumber=0';
     private getCompetitionbyIdUrl: string = this.baseCompetitionUrl + '/';
 
     httpOptions = {
@@ -25,8 +26,9 @@ export class CompetitionService {
 
     }
 
-    getCompetitions(): Observable<PageViewModel<Competition>> {
-        return this.http.get<PageViewModel<Competition>>(this.getCompetitionsUrl).pipe(
+    getCompetitions(pageSize: number, pageNumber: number): Observable<PageViewModel<Competition>> {
+        return this.http.get<PageViewModel<Competition>>(this.baseCompetitionUrl +
+            StringHelper.generatPageRequest(pageSize, pageNumber)).pipe(
             tap(() => this.log('Competitions fetched')),
             catchError(this.handleError)
         );

@@ -6,8 +6,10 @@ import {
   MatCardModule, MatFormFieldModule, MatInputModule,
   MatSelectModule, MatDatepickerModule, MatCheckboxModule,
   MatDialogModule,
+  MatPaginatorIntl,
 } from '@angular/material';
-import {MatMomentDateModule} from '@angular/material-moment-adapter';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { PolishPaginatorIntl } from '../Helpers/PolishPaginatorIntl';
 
 @NgModule({
   imports: [
@@ -24,6 +26,9 @@ import {MatMomentDateModule} from '@angular/material-moment-adapter';
     MatCardModule, MatFormFieldModule, MatInputModule,
     MatSelectModule, MatDatepickerModule, MatMomentDateModule,
     MatCheckboxModule, MatDialogModule,
+  ],
+  providers: [
+    { provide: MatPaginatorIntl, useClass: PolishPaginatorIntl},
   ],
   declarations: []
 })
