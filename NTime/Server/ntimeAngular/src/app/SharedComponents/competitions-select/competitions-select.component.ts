@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { MatPaginator, MatTableDataSource, MatTable } from '@angular/material';
+import { MatPaginator, MatTableDataSource, MatTable, PageEvent } from '@angular/material';
 import { DataSource } from '@angular/cdk/table';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { PageViewModel } from '../../Models/PageViewModel';
@@ -11,6 +11,7 @@ import 'rxjs/add/operator/map';
 
 import { Competition } from '../../Models/Competition';
 import { CompetitionService } from '../../Services/competition.service';
+import { MessageService } from '../../Services/message.service';
 
 
 @Component({
@@ -19,56 +20,55 @@ import { CompetitionService } from '../../Services/competition.service';
     styleUrls: ['./competitions-select.component.css']
 })
 export class CompetitionsSelectComponent implements AfterViewInit {
-    competitions: Competition[] = [];
     public todayDate: Date;
 
-    constructor(private competitionService: CompetitionService) {
+    constructor(private competitionService: CompetitionService, private messageService: MessageService) {
         this.todayDate = new Date(Date.now());
     }
 
+    @ViewChild(MatTable) table: MatTable<Competition>;
+    competitions: Competition[] = [];
     displayedColumns = ['name', 'city', 'date', 'signUpEndDate', 'link', 'actions'];
     dataSource: MatTableDataSource<Competition> = new MatTableDataSource<Competition>(this.competitions);
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
-    @ViewChild(MatTable) table: MatTable<Competition>;
+    public pageNumber = 0;
+    public pageSize = 20;
+    public pageSizeOptions = [10, 20, 50];
+    public competitionsCount = 0;
 
     /**
      * Set the paginator after the view init since this component will
      * be able to query its view for the initialized paginator.
      */
     ngAfterViewInit() {
-        this.getCompetitions();
-        this.setPaginator();
+        this.getCompetitions(this.pageSize, this.pageNumber);
     }
 
-    getCompetitions(): void {
-        this.competitionService.getCompetitions().subscribe(
+    getCompetitions(pageSize: number, pageNumber: number): void {
+        this.competitionService.getCompetitions(pageSize, pageNumber).subscribe(
             (page: PageViewModel<Competition>) => {
-                console.log(page);
+                this.log(page.toString());
                 console.log(`Items: ${page.TotalCount}`);
+                this.competitionsCount = page.TotalCount;
                 this.competitions = page.Items;
-                this.competitions = this.convertDates(this.competitions);
+                this.competitions.forEach(competition => Competition.convertDates(competition));
             },
             error => console.log(error), // Errors
             () => this.setDataSource() // Success
         );
     }
 
-    private convertDates(competitions: Competition[]) {
-        competitions.forEach(element => {
-            element.EventDate = new Date(element.EventDate);
-            element.SignUpEndDate = new Date(element.SignUpEndDate);
-        });
-        return competitions;
+    private log(message: string) {
+        this.messageService.addLog(message);
     }
 
-    setDataSource() {
+    private setDataSource() {
         this.dataSource = new MatTableDataSource<Competition>(this.competitions);
         console.log('Datasource set');
     }
 
-    setPaginator(): void {
-        this.dataSource.paginator = this.paginator;
-    }
-
+    onPageEvent(event: PageEvent) {
+        this.getCompetitions(event.pageSize, event.pageIndex);
+      }
 }

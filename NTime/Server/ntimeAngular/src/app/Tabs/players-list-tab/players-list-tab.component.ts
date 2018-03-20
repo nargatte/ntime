@@ -41,18 +41,14 @@ export class PlayersListTabComponent implements OnInit, AfterViewInit {
     this.competitionService.getCompetition(id).subscribe(
       (competition: Competition) => {
         // console.log(`Competition received ${competition}`);
-        this.competition = competition;
-        this.convertDate();
+        this.competition = Competition.convertDates(competition); // TODO: Try to make not static
       },
       error => console.log(error), // Errors
       // () => console.log('Succes getting data') // Success
     );
   }
 
-  private convertDate() {
-    this.competition.EventDate = new Date(this.competition.EventDate);
-    this.competition.SignUpEndDate = new Date(this.competition.SignUpEndDate);
-}
+
 
   // private getPlayers() {
   //   this.playerListService.getPlayerListView(this.competitionId, this.filter, 10, 0).subscribe((page: PageViewModel<PlayerListView>) => {

@@ -8,4 +8,10 @@
     Link: string;
     Organizer: string;
     OrganizerEditLock: boolean;
+
+    public static convertDates(competition: Competition): Competition {
+        competition.EventDate = new Date(competition.EventDate);
+        competition.SignUpEndDate = new Date(competition.SignUpEndDate);
+        return competition;
+    }
 }

@@ -42,7 +42,7 @@ export class RegistrationTabComponent implements OnInit {
     this.competitionService.getCompetition(id).subscribe(
       (competition: Competition) => {
         // console.log(`Competition received ${competition}`);
-        this.competition = competition;
+        this.competition = Competition.convertDates(competition); // TODO: Try to make it unmutabel
       },
       error => console.log(error), // Errors
       // () => console.log('Succes getting data') // Success

@@ -9,7 +9,8 @@ import { Distance } from '../../Models/Distance';
 import { PlayerService } from '../../Services/player.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
-import { PlayerAddedDialogComponent } from '../player-added-dialog/player-added-dialog.component';
+import { PlayerAddedDialogComponent } from '../Dialogs/player-added-dialog/player-added-dialog.component';
+import { SingUpEndDateErrorDialogComponent } from '../Dialogs/sing-up-end-date-error-dialog/sing-up-end-date-error-dialog.component';
 
 @Component({
   selector: 'app-new-player-form',
@@ -56,11 +57,18 @@ export class NewPlayerFormComponent implements OnInit {
 
   public addPlayer() {
     // this.newPlayer.DistanceId = 27;
+    if (this.extraPlayerInfos.length === 1) {
+      this.newPlayer.ExtraPlayerInfoId = this.extraPlayerInfos[0].Id;
+    }
     console.log('Trying to add Player');
-    this.playerService.addPlayer(this.newPlayer, this.competitionId).subscribe(
-      player => this.onSuccessfulAddPlayer(player),
-      error => this.log(`Wystąpił problem podczas dodawania zawodnika: ${error}`)
-    );
+    if ( this.competition.SignUpEndDate > this.todayDate) {
+      this.playerService.addPlayer(this.newPlayer, this.competitionId).subscribe(
+        player => this.onSuccessfulAddPlayer(player),
+        error => this.log(`Wystąpił problem podczas dodawania zawodnika: ${error}`)
+      );
+    } else {
+      this.dialog.open(SingUpEndDateErrorDialogComponent);
+    }
   }
 
   private onSuccessfulAddPlayer(player: PlayerCompetitionRegister): void {

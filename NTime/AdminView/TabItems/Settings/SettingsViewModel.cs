@@ -18,6 +18,7 @@ namespace AdminView.Settings
             //this.CurrentCompetition = currentCompetition;
             TabTitle = "Ustawienia";
             SaveChangesCmd = new RelayCommand(OnSaveChanges);
+            RemoveCompetitionCmd = new RelayCommand(OnRemoveCompetition);
         }
 
         public ViewCore.Entities.IEditableCompetition CurrentCompetition
@@ -33,7 +34,23 @@ namespace AdminView.Settings
             );
         }
 
+        private void OnRemoveCompetition()
+        {
+            MessageBoxResult result = MessageBox.Show(
+             $"Czy na pewno chcesz usunąć te zawody. Zmiana jest nieodwracalna?",
+                $"",
+                MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                repository.RemoveAsync(CurrentCompetition.DbEntity);
+                CompetitionRemoved?.Invoke();
+            }
+        }
+
         public RelayCommand SaveChangesCmd { get; private set; }
-        public event Action AddCompetitionRequested = delegate { };
+        public RelayCommand RemoveCompetitionCmd { get; private set; }
+
+        public event Action AddCompetitionRequested = delegate { }; //Probably unnecessary
+        public event Action CompetitionRemoved = delegate { };
     }
 }

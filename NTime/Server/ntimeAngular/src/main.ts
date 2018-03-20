@@ -5,7 +5,7 @@ import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
 import 'hammerjs';
-//Here we can put the change of the server
+// Here we can put the change of the server
 if (environment.production) {
   enableProdMode();
 }
