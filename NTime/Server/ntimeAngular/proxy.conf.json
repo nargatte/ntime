@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target": "http://testing.time2win.aspnet.pl",
+    "target": "https://www.testing.time2win.aspnet.pl",
     "secure": false,
     "logLevel": "info",
     "changeOrigin": true

@@ -11,6 +11,7 @@
     ExtraPlayerInfoId: number;
     DistanceId: number;
     CompetitionId: number;
+    ReCaptchaToken: string;
 
 
     constructor() {

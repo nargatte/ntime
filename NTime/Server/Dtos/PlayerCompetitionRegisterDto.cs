@@ -91,5 +91,7 @@ namespace Server.Dtos
         public int DistanceId { get; set; }
 
         public int CompetitionId { get; set; }
+
+        public string ReCaptchaToken { get; set; }
     }
 }

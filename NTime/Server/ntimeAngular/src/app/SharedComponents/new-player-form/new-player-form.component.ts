@@ -1,8 +1,8 @@
-import { Component, OnInit, Input, ViewChild, Inject } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Inject, AfterViewInit } from '@angular/core';
 import { Competition } from '../../Models/Competition';
 import { CompetitionService } from '../../Services/competition.service';
 import { MessageService } from '../../Services/message.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { PlayerCompetitionRegister } from '../../Models/PlayerCompetitionRegister';
 import { ExtraPlayerInfo } from '../../Models/ExtraPlayerInfo';
 import { Distance } from '../../Models/Distance';
@@ -20,7 +20,7 @@ import { SingUpEndDateErrorDialogComponent } from '../Dialogs/sing-up-end-date-e
     PlayerAddedDialogComponent
   ]
 })
-export class NewPlayerFormComponent implements OnInit {
+export class NewPlayerFormComponent implements OnInit, AfterViewInit {
   @Input() competition: Competition;
   @Input() distances: Distance[];
   @Input() extraPlayerInfos: ExtraPlayerInfo[];
@@ -28,8 +28,11 @@ export class NewPlayerFormComponent implements OnInit {
   public todayDate: Date;
   public newPlayer: PlayerCompetitionRegister = new PlayerCompetitionRegister();
   private competitionId: number;
+  private recaptchaId;
 
   public checkboxes: boolean[] = [false, false, false];
+
+  @ViewChild('newPlayerForm') newPlayerForm: NgForm;
 
   constructor(
     private route: ActivatedRoute,
@@ -40,10 +43,15 @@ export class NewPlayerFormComponent implements OnInit {
   ) {
     this.competitionId = +this.route.snapshot.paramMap.get('id');
     this.todayDate = new Date(Date.now());
+
+    window['NewPlayerFormComponentReCaptcha'] = (token => this.ButtonClick(token));
+   }
+
+   ngAfterViewInit() {
+    this.recaptchaId = window['grecaptcha'].render('NewPlayerFormComponentButton');
    }
 
   ngOnInit() {
-
   }
 
   log(message: string): void {
@@ -55,11 +63,13 @@ export class NewPlayerFormComponent implements OnInit {
   //     .subscribe(c => this.competition = this.competition);
   // }
 
-  public addPlayer() {
-    // this.newPlayer.DistanceId = 27;
+  public addPlayer(reCaptchaToken: string) {
     if (this.extraPlayerInfos.length === 1) {
       this.newPlayer.ExtraPlayerInfoId = this.extraPlayerInfos[0].Id;
     }
+
+    this.newPlayer.ReCaptchaToken = reCaptchaToken;
+
     console.log('Trying to add Player');
     if ( this.competition.SignUpEndDate > this.todayDate) {
       this.playerService.addPlayer(this.newPlayer, this.competitionId).subscribe(
@@ -73,15 +83,19 @@ export class NewPlayerFormComponent implements OnInit {
 
   private onSuccessfulAddPlayer(player: PlayerCompetitionRegister): void {
     this.log(`Dodano zawodnika ${player}`);
-    this.dialog.open(PlayerAddedDialogComponent
-    );
+    this.modalUp();
+  }
+
+  public ButtonClick(token: string) {
+    window['grecaptcha'].reset(this.recaptchaId);
+    this.addPlayer(token);
+    this.newPlayerForm.reset();
+  }
+
+  public modalUp() {
+    this.dialog.open(PlayerAddedDialogComponent, {
+      data: { competitionId: this.competitionId }
+    });
   }
 }
 
-// @Component({
-//   selector: 'dialog-data-example-dialog',
-//   templateUrl: 'dialog-data-example-dialog.html',
-// })
-// export class DialogDataExampleDialog {
-//   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
-// }
