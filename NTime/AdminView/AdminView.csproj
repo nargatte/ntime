@@ -178,7 +178,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <None Include="AdminView_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\BaseCore.DataBase.AgeCategory.datasource" />
     <None Include="Properties\DataSources\BaseCore.DataBase.AgeCategoryBase.datasource" />
