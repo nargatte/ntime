@@ -93,6 +93,11 @@
     <Compile Include="DataBase\Repositories\Repository.cs" />
     <Compile Include="DataBase\Repositories\RepositoryAccountBase.cs" />
     <Compile Include="DataBase\Repositories\TimeReadsLogInfoRepository.cs" />
+    <Compile Include="Migrations\201804121401166_InitialCreate.cs" />
+    <Compile Include="Migrations\201804121401166_InitialCreate.Designer.cs">
+      <DependentUpon>201804121401166_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\PageBindingModel.cs" />
     <Compile Include="Models\PageViewModel.cs" />
     <Compile Include="PlayerFilter\PlayerSort.cs" />
@@ -121,6 +126,10 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201804121401166_InitialCreate.resx">
+      <DependentUpon>201804121401166_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace BaseCore.DataBase
 {
-    public class NTimeDBInitializer : DropCreateDatabaseIfModelChanges<NTimeDBContext>
+    public class NTimeDBInitializer : CreateDatabaseIfNotExists<NTimeDBContext>
     {
         protected override void Seed(NTimeDBContext context)
         {
