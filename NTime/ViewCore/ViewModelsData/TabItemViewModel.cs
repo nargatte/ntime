@@ -17,10 +17,10 @@ namespace ViewCore
         protected GateRepository _gateRepository { get; set; }
         protected PlayerRepository _playerRepository { get; set; }
 
-        public TabItemViewModel()
-        {
+        //public TabItemViewModel()
+        //{
 
-        }
+        //}
 
         public TabItemViewModel(Entities.IEditableCompetition currentCompetition) : base(currentCompetition)
         {

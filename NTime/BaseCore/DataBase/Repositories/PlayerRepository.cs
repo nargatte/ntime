@@ -274,7 +274,7 @@ namespace BaseCore.DataBase
 
                 Dictionary<int, AgeCategory> ageCategoriesDictionary = new Dictionary<int, AgeCategory>();
 
-                foreach(Player player in players)
+                foreach (Player player in players)
                 {
                     if (!ageCategoriesDictionary.TryGetValue(player.BirthDate.Year, out AgeCategory ageCategory))
                     {
@@ -300,7 +300,7 @@ namespace BaseCore.DataBase
 
                 await ctx.SaveChangesAsync();
             });
-            
+
 
         }
 
@@ -396,7 +396,7 @@ namespace BaseCore.DataBase
         protected virtual string GetFullCategory(Distance distance, ExtraPlayerInfo extraPlayerInfo, AgeCategory ageCategory,
             bool male) =>
             (distance == null || extraPlayerInfo == null || ageCategory == null) ? null :
-            distance.Name.Substring(0, Math.Min(4, distance.Name.Length)) + " " + (male ? "M" : "K") + ageCategory.Name + extraPlayerInfo.ShortName;
+            distance.Name.Substring(0, Math.Min(4, distance.Name.Length)) + " " + (male ? "M" : "K") + ageCategory.Name + (extraPlayerInfo.ShortName == "*" ? "" : extraPlayerInfo.ShortName);
 
         public async Task<Tuple<int, int>> ImportTimeReadsAsync(string fileName, Gate gate)
         {
@@ -476,7 +476,7 @@ namespace BaseCore.DataBase
 
             foreach (PlayerRecord record in playerRecords)
             {
-                if(record.StartNumber == -1) continue;
+                if (record.StartNumber == -1) continue;
                 Player p = new Player(record.FirstName, record.LastName, record.BirthDate, record.IsMale, record.Team,
                     record.StartNumber)
                 { StartTime = record.StartTime };

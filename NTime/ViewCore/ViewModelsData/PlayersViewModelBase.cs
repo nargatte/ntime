@@ -29,7 +29,7 @@ namespace ViewCore
 
         protected DependencyContainer _dependencyContainer;
 
-        protected PlayersViewModelBase(IEditableCompetition currentCompetition, DependencyContainer dependencyContainer)
+        protected PlayersViewModelBase(IEditableCompetition currentCompetition, DependencyContainer dependencyContainer) : base(currentCompetition)
         {
             OnCreation();
             _dependencyContainer = dependencyContainer;
@@ -222,9 +222,9 @@ namespace ViewCore
             OnPropertyChanged(nameof(RecordsRangeInfo));
         }
 
-        protected void OnUpdateFullCategoriesAsync()
+        protected async void OnUpdateFullCategoriesAsync()
         {
-            _playerRepository.UpdateFullCategoryAllAsync().RunSynchronously();
+            await _playerRepository.UpdateFullCategoryAllAsync();
             MessageBox.Show("Kategorie zostały przeliczone poprawnie");
             //await task;
             Players = _playersManager.GetPlayersToDisplay();
