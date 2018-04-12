@@ -44,7 +44,7 @@ export class NewPlayerFormComponent implements OnInit, AfterViewInit {
     this.competitionId = +this.route.snapshot.paramMap.get('id');
     this.todayDate = new Date(Date.now());
 
-    window['NewPlayerFormComponentReCaptcha'] = (token => this.ButtonClick(token));
+    window['NewPlayerFormComponentReCaptcha'] = (token => this.InvokeRecapcha(token));
    }
 
    ngAfterViewInit() {
@@ -86,7 +86,11 @@ export class NewPlayerFormComponent implements OnInit, AfterViewInit {
     this.modalUp();
   }
 
-  public ButtonClick(token: string) {
+  public ButtonClick() {
+    window['grecaptcha'].execute();
+  }
+
+  public InvokeRecapcha(token: string) {
     window['grecaptcha'].reset(this.recaptchaId);
     this.addPlayer(token);
     this.newPlayerForm.reset();

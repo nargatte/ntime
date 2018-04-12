@@ -162,12 +162,16 @@
       <mat-card-actions>
         <button mat-raised-button color="primary" type="submit" 
         [disabled]="newPlayerForm.invalid"
-        class="g-recaptcha"
-        data-sitekey="6LfUoFAUAAAAAN7APs4zQzVcRtsnc7EoO1NQETG2"
-        data-callback="NewPlayerFormComponentReCaptcha"
-        id="NewPlayerFormComponentButton">
+        (click)="ButtonClick()"
+        >
           Zarejestruj się
         </button>
+        <div class="g-recaptcha"
+        data-sitekey="6LfUoFAUAAAAAN7APs4zQzVcRtsnc7EoO1NQETG2"
+        data-callback="NewPlayerFormComponentReCaptcha"
+        id="NewPlayerFormComponentButton"
+          data-size="invisible">
+    </div>
       </mat-card-actions>
     </form>
   <!-- </ng-container>
