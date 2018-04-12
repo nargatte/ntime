@@ -161,7 +161,11 @@
       </div>
       <mat-card-actions>
         <button mat-raised-button color="primary" type="submit" 
-        (click)="addPlayer(); newPlayerForm.reset()" [disabled]="newPlayerForm.invalid">
+        [disabled]="newPlayerForm.invalid"
+        class="g-recaptcha"
+        data-sitekey="6LfUoFAUAAAAAN7APs4zQzVcRtsnc7EoO1NQETG2"
+        data-callback="NewPlayerFormComponentReCaptcha"
+        id="NewPlayerFormComponentButton">
           Zarejestruj się
         </button>
       </mat-card-actions>

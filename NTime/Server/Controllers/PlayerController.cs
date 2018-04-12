@@ -1,11 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using BaseCore.DataBase;
 using BaseCore.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Newtonsoft.Json;
 using Server.Dtos;
 using Server.Models;
 
@@ -14,6 +19,13 @@ namespace Server.Controllers
     [RoutePrefix("api/player")]
     public class PlayerController : ControllerNTimeBase
     {
+        private const string RegisterPrivateKey = "6LfUoFAUAAAAAEGYb9BcgluK0dDdqqhTTxieoVGU";
+
+        private static HttpClient httpClient = new HttpClient
+        {
+            BaseAddress = new Uri("https://www.google.com/")
+        };
+
         private PlayerRepository _playerRepository;
 
         protected override async Task<bool> InitCompetitionByRelatedEntitieId<T>(int id)
@@ -45,6 +57,36 @@ namespace Server.Controllers
 
         protected bool AmIPlayer() =>
             AmI("Player");
+
+        private async Task CheckReCaptcha(string privateKey, string token)
+        {
+            Dictionary<string, string> postData = new Dictionary<string, string>
+            {
+                {"secret", RegisterPrivateKey},
+                {"response", token},
+                {"remoteip", HttpContext.Current.Request.UserHostAddress},
+            };
+
+            ReCaptchaResponseModel reCaptchaResponseModel = null;
+
+            using (var httpClient = new HttpClient { BaseAddress = new Uri("https://www.google.com/")})
+            {
+                using (var content = new FormUrlEncodedContent(postData))
+                {
+                    content.Headers.Clear();
+                    content.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+
+                    HttpResponseMessage response = await httpClient.PostAsync("recaptcha/api/siteverify", content);
+
+                    response.EnsureSuccessStatusCode();
+
+                    reCaptchaResponseModel = await response.Content.ReadAsAsync<ReCaptchaResponseModel>();
+
+                }
+            }
+            if(reCaptchaResponseModel.Success == false)
+                throw new Exception("ReCaptcha problem: " + reCaptchaResponseModel.ErrorCodes.ToString());
+        }
 
         // POST api/Player/TakeSimpleList/FromCompetition/1?ItemsOnPage=10&PageNumber=0
         [Route("takeSimpleList/FromCompetition/{id:int:min(1)}")]
@@ -254,6 +296,8 @@ namespace Server.Controllers
             Player player = new Player();
             if (await competitionRegisterDto.CopyDataFromDto(player, ContextProvider, Competition) == null)
                 return NotFound();
+
+            await CheckReCaptcha(RegisterPrivateKey, competitionRegisterDto.ReCaptchaToken);
 
             if (AmIPlayer())
             {
