@@ -46,12 +46,12 @@ namespace Server
                 }
             }
  
-            if (!userManager.Users.Any(u => u.UserName == "admin@ntime.pl"))
+            if (!userManager.Users.Any(u => u.UserName == "admin@t2w.pl"))
             {      
 
                 var user = new ApplicationUser();
-                user.UserName = "admin@ntime.pl";
-                user.Email = "admin@ntime.pl";
+                user.UserName = "admin@t2w.pl";
+                user.Email = "admin@t2w.pl";
 
                 string userPWD = "admin1";
 

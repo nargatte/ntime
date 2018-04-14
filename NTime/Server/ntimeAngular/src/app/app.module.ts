@@ -33,6 +33,7 @@ import { PlayerAddedDialogComponent } from './SharedComponents/Dialogs/player-ad
 import {
     SingUpEndDateErrorDialogComponent
  } from './SharedComponents/Dialogs/sing-up-end-date-error-dialog/sing-up-end-date-error-dialog.component';
+import { RegisterConfirmationComponent } from './RegisterComponents/register-confirmation/register-confirmation.component';
 
 
 @NgModule({
@@ -45,7 +46,7 @@ import {
         CompetitionTabComponent, OfferTabComponent, ContactTabComponent,
         AboutUsTabComponent, NavbarComponent, CompetitionsSelectComponent,
         RegistrationTabComponent, PlayersListTabComponent, NewPlayerFormComponent,
-        PlayersListComponent, PlayerAddedDialogComponent, SingUpEndDateErrorDialogComponent,
+        PlayersListComponent, PlayerAddedDialogComponent, SingUpEndDateErrorDialogComponent, RegisterConfirmationComponent,
     ],
     providers: [
         CompetitionService, PlayerService, ExtraPlayerInfoService, DistanceService,

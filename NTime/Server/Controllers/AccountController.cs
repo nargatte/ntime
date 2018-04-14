@@ -362,7 +362,38 @@ namespace Server.Controllers
             playerAccount.AccountId = user.Id;
             await accountRepository.AddAsync(playerAccount);
 
+            string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+            await UserManager.SendEmailAsync(user.Id,
+                "Potwierdzenie rejrstracji w systemie Time2Win", "Kliknij w link żeby potwierdzić rejestrace swojego konta: <a href=\""
+                + Url.Content("/api/Account/ConfirmEmail?userId=" + user.Id + "&token=" + HttpUtility.UrlDecode(code)) + "\">KLIKNIJ</a>");
+
             return Ok();
+        }
+
+        // GET api/Account/ResendConfirmEmail
+        [Route("ResendConfirmEmail")]
+        [HttpGet]
+        public async Task<IHttpActionResult> ResendConfirmEmail()
+        {
+            var userId = User.Identity.GetUserId();
+            string code = await UserManager.GenerateEmailConfirmationTokenAsync(userId);
+            await UserManager.SendEmailAsync(userId,
+                "Potwierdzenie rejrstracji w systemie Time2Win", "Kliknij w link żeby potwierdzić rejestrace swojego konta: <a href=\""
+                + Url.Content("/api/Account/ConfirmEmail?userId=" + userId + "&token=" + HttpUtility.UrlDecode(code)) + "\">KLIKNIJ</a>");
+            return Ok();
+        }
+
+        // GET api/Account/ConfirmEmail?userId=...&code=
+        [AllowAnonymous]
+        [Route("ConfirmEmail")]
+        [HttpGet]
+        public async Task<IHttpActionResult> ConfirmEmail(string userId, string token)
+        {
+            token = token.Replace(' ', '+');
+            var result = await UserManager.ConfirmEmailAsync(userId, token);
+            if (result.Succeeded)
+                return Redirect(Url.Content("~/potwierdzenie-rejestracji"));
+            return Conflict();
         }
 
         // POST api/Account/RegisterExternal
