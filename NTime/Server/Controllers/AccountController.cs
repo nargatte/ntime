@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
+using System.Web.Mvc;
 using BaseCore.DataBase;
 using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
@@ -21,8 +22,8 @@ using Server.Results;
 
 namespace Server.Controllers
 {
-    [Authorize]
-    [RoutePrefix("api/Account")]
+    [System.Web.Http.Authorize]
+    [System.Web.Http.RoutePrefix("api/Account")]
     public class AccountController : ApiController
     {
         private const string LocalLoginProvider = "Local";
@@ -55,7 +56,7 @@ namespace Server.Controllers
 
         // GET api/Account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
-        [Route("UserInfo")]
+        [System.Web.Http.Route("UserInfo")]
         public UserInfoViewModel GetUserInfo()
         {
             ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
@@ -72,7 +73,7 @@ namespace Server.Controllers
         }
 
         // GET api/Account/Role
-        [Route("Role")]
+        [System.Web.Http.Route("Role")]
         public RoleViewModel GetRole()
         {
             return new RoleViewModel
@@ -84,7 +85,7 @@ namespace Server.Controllers
         }
 
         // POST api/Account/Logout
-        [Route("Logout")]
+        [System.Web.Http.Route("Logout")]
         public IHttpActionResult Logout()
         {
             Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
@@ -92,7 +93,7 @@ namespace Server.Controllers
         }
 
         // GET api/Account/ManageInfo?returnUrl=%2F&generateState=true
-        [Route("ManageInfo")]
+        [System.Web.Http.Route("ManageInfo")]
         public async Task<ManageInfoViewModel> GetManageInfo(string returnUrl, bool generateState = false)
         {
             IdentityUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
@@ -132,7 +133,7 @@ namespace Server.Controllers
         }
 
         // POST api/Account/ChangePassword
-        [Route("ChangePassword")]
+        [System.Web.Http.Route("ChangePassword")]
         public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
         {
             if (!ModelState.IsValid)
@@ -152,7 +153,7 @@ namespace Server.Controllers
         }
 
         // POST api/Account/SetPassword
-        [Route("SetPassword")]
+        [System.Web.Http.Route("SetPassword")]
         public async Task<IHttpActionResult> SetPassword(SetPasswordBindingModel model)
         {
             if (!ModelState.IsValid)
@@ -171,7 +172,7 @@ namespace Server.Controllers
         }
 
         // POST api/Account/AddExternalLogin
-        [Route("AddExternalLogin")]
+        [System.Web.Http.Route("AddExternalLogin")]
         public async Task<IHttpActionResult> AddExternalLogin(AddExternalLoginBindingModel model)
         {
             if (!ModelState.IsValid)
@@ -209,7 +210,7 @@ namespace Server.Controllers
         }
 
         // POST api/Account/RemoveLogin
-        [Route("RemoveLogin")]
+        [System.Web.Http.Route("RemoveLogin")]
         public async Task<IHttpActionResult> RemoveLogin(RemoveLoginBindingModel model)
         {
             if (!ModelState.IsValid)
@@ -238,10 +239,10 @@ namespace Server.Controllers
         }
 
         // GET api/Account/ExternalLogin
-        [OverrideAuthentication]
+        [System.Web.Http.OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
-        [AllowAnonymous]
-        [Route("ExternalLogin", Name = "ExternalLogin")]
+        [System.Web.Http.AllowAnonymous]
+        [System.Web.Http.Route("ExternalLogin", Name = "ExternalLogin")]
         public async Task<IHttpActionResult> GetExternalLogin(string provider, string error = null)
         {
             if (error != null)
@@ -295,8 +296,8 @@ namespace Server.Controllers
         }
 
         // GET api/Account/ExternalLogins?returnUrl=%2F&generateState=true
-        [AllowAnonymous]
-        [Route("ExternalLogins")]
+        [System.Web.Http.AllowAnonymous]
+        [System.Web.Http.Route("ExternalLogins")]
         public IEnumerable<ExternalLoginViewModel> GetExternalLogins(string returnUrl, bool generateState = false)
         {
             IEnumerable<AuthenticationDescription> descriptions = Authentication.GetExternalAuthenticationTypes();
@@ -336,8 +337,8 @@ namespace Server.Controllers
         }
 
         // POST api/Account/Register
-        [AllowAnonymous]
-        [Route("Register")]
+        [System.Web.Http.AllowAnonymous]
+        [System.Web.Http.Route("Register")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
             if (!ModelState.IsValid)
@@ -365,28 +366,28 @@ namespace Server.Controllers
             string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
             await UserManager.SendEmailAsync(user.Id,
                 "Potwierdzenie rejrstracji w systemie Time2Win", "Kliknij w link żeby potwierdzić rejestrace swojego konta: <a href=\""
-                + Url.Content("/api/Account/ConfirmEmail?userId=" + user.Id + "&token=" + HttpUtility.UrlDecode(code)) + "\">KLIKNIJ</a>");
+                + Url.Content("/potwierdzenie-rejestracji?userId=" + user.Id + "&token=" + HttpUtility.UrlDecode(code)) + "\">KLIKNIJ</a>");
 
             return Ok();
         }
 
         // GET api/Account/ResendConfirmEmail
-        [Route("ResendConfirmEmail")]
-        [HttpGet]
+        [System.Web.Http.Route("ResendConfirmEmail")]
+        [System.Web.Http.HttpGet]
         public async Task<IHttpActionResult> ResendConfirmEmail()
         {
             var userId = User.Identity.GetUserId();
             string code = await UserManager.GenerateEmailConfirmationTokenAsync(userId);
             await UserManager.SendEmailAsync(userId,
                 "Potwierdzenie rejrstracji w systemie Time2Win", "Kliknij w link żeby potwierdzić rejestrace swojego konta: <a href=\""
-                + Url.Content("/api/Account/ConfirmEmail?userId=" + userId + "&token=" + HttpUtility.UrlDecode(code)) + "\">KLIKNIJ</a>");
+                + Url.Content("/potwierdzenie-rejestracji?userId=" + userId + "&token=" + HttpUtility.UrlDecode(code)) + "\">KLIKNIJ</a>");
             return Ok();
         }
 
         // GET api/Account/ConfirmEmail?userId=...&code=
-        [AllowAnonymous]
-        [Route("ConfirmEmail")]
-        [HttpGet]
+        [System.Web.Http.AllowAnonymous]
+        [System.Web.Http.Route("ConfirmEmail")]
+        [System.Web.Http.HttpGet]
         public async Task<IHttpActionResult> ConfirmEmail(string userId, string token)
         {
             token = token.Replace(' ', '+');
@@ -396,10 +397,42 @@ namespace Server.Controllers
             return Conflict();
         }
 
+        // GET /Account/ForgotPassword?email=abc@cde.net
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.AllowAnonymous]
+        [System.Web.Http.Route("ForgotPassword")]
+        public async Task<IHttpActionResult> ForgotPassword(string email)
+        {
+            var user = await UserManager.FindByNameAsync(email);
+            if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+            {
+                return Conflict();
+            }
+
+            string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+            await UserManager.SendEmailAsync(user.Id, "Przywracanie hasła do serwisu Time2Win", "Kliknij w link żeby przywrócić hasło: <a href=\"" +
+            Url.Content("/reset-hasla?userId=" + user.Id + "&token=" + code) + "\">KLIKNIJ</a>");
+
+            return Ok();
+        }
+
+        // POST /Account/ResetPassword
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.Route("ResetPassword")]
+        [System.Web.Http.AllowAnonymous]
+        public async Task<IHttpActionResult> ResetPassword(ResetPasswordBindingModel model)
+        {
+            var result = await UserManager.ResetPasswordAsync(model.UserId, model.Token, model.NewPassword);
+            if(result.Succeeded)
+                return Ok();
+            return Conflict();
+        }
+
+
         // POST api/Account/RegisterExternal
-        [OverrideAuthentication]
+        [System.Web.Http.OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
-        [Route("RegisterExternal")]
+        [System.Web.Http.Route("RegisterExternal")]
         public async Task<IHttpActionResult> RegisterExternal(RegisterExternalBindingModel model)
         {
             if (!ModelState.IsValid)
