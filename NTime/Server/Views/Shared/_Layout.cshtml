@@ -1,8 +1,9 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="pl">
 <head>
     <meta charset="utf-8" />
-    <meta charset="utf-8">
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="502252104558-l75qjlgrh3uh5528v8tbobb80tuh259u.apps.googleusercontent.com">
     <title>Time2Win - Elektroniczny pomiar czasu na Twoich zawodach sportowych</title>
     <base href="/">
 
@@ -10,12 +11,12 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://rawgit.com/web-animations/web-animations-js/master/web-animations.min.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js?hl=pl&render=explicit'></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     @Styles.Render("~/Content/Styles")
 </head>
 <body>
-    <main role="main" class="container">
         @RenderBody()
-    </main>
     @Scripts.Render("~/Script/Bundles")
 </body>
 </html>

@@ -107,12 +107,12 @@
               </div>
             </div>
             <p>
-              Oświadczam, iż upoważniam Organizatora do przetwarzania moich danych osobowych przekazanych przeze mnie przy okazji zgłoszenia
+              Oświadczam, iż upoważniam Organizatora oraz firmę Time2Win do przetwarzania moich danych osobowych przekazanych przeze mnie przy okazji zgłoszenia
               udziału w niniejszym wyścigu, w celu jego przeprowadzenia, w celu przekazywania komunikatów informacyjnych
-              związanych z organizacją niniejszego wyścigu, archiwizacji oraz prowadzenia klasyfikacji zawodów odbywanych
-              w ramach niniejszego wyścigu
+              związanych z organizacją niniejszego wyścigu, archiwizacji oraz prowadzenia klasyfikacji zawodów odbywających się
+              w ramach niniejszego wyścigu i jeśli dotyczy również w ramach całego cyklu.
               <br/> Oświadczam także, iż został-am (-em) pouczon-a (-y) o prawie wglądu do własnych danych osobowych, prawie żądania
-              ich poprawienia, a także prawie wniesienia pisemnego umotywowanego żądania zaprzestania przetwarzania danych
+              ich poprawienia, a także prawie żądania zaprzestania przetwarzania danych
               osobowych oraz możliwości przekazania moich danych osobowych uprawnionym organom.
             </p>
           </mat-card-content>
@@ -161,9 +161,17 @@
       </div>
       <mat-card-actions>
         <button mat-raised-button color="primary" type="submit" 
-        (click)="addPlayer(); newPlayerForm.reset()" [disabled]="newPlayerForm.invalid">
+        [disabled]="newPlayerForm.invalid"
+        (click)="ButtonClick()"
+        >
           Zarejestruj się
         </button>
+        <div class="g-recaptcha"
+        data-sitekey="6LfUoFAUAAAAAN7APs4zQzVcRtsnc7EoO1NQETG2"
+        data-callback="NewPlayerFormComponentReCaptcha"
+        id="NewPlayerFormComponentButton"
+          data-size="invisible">
+    </div>
       </mat-card-actions>
     </form>
   <!-- </ng-container>

@@ -59,11 +59,11 @@ namespace Server
             //    appId: "",
             //    appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "502252104558-ul5hbhdadh5njvivab684e12hdo94ppg.apps.googleusercontent.com",
+                ClientSecret = "rzVmFCH8h4PRDygeEIROBqTH"
+            });
         }
     }
 }

@@ -7,6 +7,11 @@ namespace BaseCore.DataBase
 {
     public class NTimeDBContext : DbContext
     {
+        public NTimeDBContext()
+        {
+            Database.SetInitializer(new NTimeDBInitializer());
+        }
+
         public NTimeDBContext(string nameOrConnectionString = "NTime") : base(nameOrConnectionString)
         {
             Database.SetInitializer(new NTimeDBInitializer());

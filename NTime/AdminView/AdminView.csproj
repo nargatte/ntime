@@ -59,7 +59,10 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -178,7 +181,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <None Include="AdminView_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\BaseCore.DataBase.AgeCategory.datasource" />
     <None Include="Properties\DataSources\BaseCore.DataBase.AgeCategoryBase.datasource" />

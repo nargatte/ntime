@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegistrationTabComponent } from '../Tabs/registration-tab/registration-tab.component';
 import { PlayersListTabComponent } from '../Tabs/players-list-tab/players-list-tab.component';
+import { RegisterConfirmationComponent } from '../RegisterComponents/register-confirmation/register-confirmation.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/zawody', pathMatch: 'full' },
@@ -21,6 +22,8 @@ const routes: Routes = [
     { path: 'zawody', component: CompetitionTabComponent, data: { name: 'competitions' } },
     { path: 'zapisy/:id', component: RegistrationTabComponent},
     { path: 'lista-zawodnikow/:id', component: PlayersListTabComponent},
+    { path: 'potwierdzenie-rejestracji', component: RegisterConfirmationComponent},
+    { path: '**', redirectTo: '/zawody', pathMatch: 'full' }
     // { path: 'wyniki', component: ScoresTabComponent, data: { name: 'scores' } },
 ];
 
