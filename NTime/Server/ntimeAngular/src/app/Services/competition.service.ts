@@ -1,10 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
-import { catchError, map, tap } from 'rxjs/operators';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
-import { from } from 'rxjs/observable/from';
+import { HttpClient} from '@angular/common/http';
 
 import { Competition } from '../Models/Competition';
 import { COMPETITIONS_PAGE, COMPETITIONS } from '../MockData/mockCompetitions';

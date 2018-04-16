@@ -11,7 +11,7 @@ import { MatButtonModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegistrationTabComponent } from '../Tabs/registration-tab/registration-tab.component';
 import { PlayersListTabComponent } from '../Tabs/players-list-tab/players-list-tab.component';
-import { RegisterConfirmationComponent } from '../RegisterComponents/register-confirmation/register-confirmation.component';
+import { RegisterConfirmationComponent } from '../AccountComponents/register-confirmation/register-confirmation.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/zawody', pathMatch: 'full' },

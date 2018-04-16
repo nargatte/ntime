@@ -62,6 +62,13 @@ export abstract class BaseHttpService {
     );
   }
 
+  protected postNoBody<TResponse>(requestUrl: string): Observable<TResponse> {
+    this.log('Preparing post request');
+    return this.http.post<TResponse>(requestUrl, this.httpOptions).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   protected put<TResponse, TContent>(requestUrl: string, content: TContent): Observable<TResponse> {
     this.log('Preparing put request');
     return this.http.put<TResponse>(requestUrl, content).pipe(

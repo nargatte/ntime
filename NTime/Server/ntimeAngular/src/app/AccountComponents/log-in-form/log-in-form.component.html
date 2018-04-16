@@ -1,0 +1,25 @@
+<mat-card class="example-card">
+  <!-- <ng-container *ngIf="competition.SignUpEndDate > todayDate; else elseTemplate"> -->
+  <form #logInForm="ngForm">
+    <mat-card-content>
+      <div class="form-container">
+        
+        <mat-form-field>
+          <input matInput type="email" placeholder="Adres e-mail" name="email" [(ngModel)]="newPlayer.Email" [email]="newPlayer.Email!='' && newPlayer.Email!=null"
+            #email="ngModel">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="password" placeholder="Hasło" name="password" [(ngModel)]="newPlayer.Password" [password]="newPlayer.Password!='' && newPlayer.Password!=null"
+            #password="ngModel">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="password" placeholder="Powtórz hasło" name="passwordRepeat" [(ngModel)]="newPlayer.passwordRepeat" [password]="newPlayer.passwordRepeat!='' && newPlayer.passwordRepeat!=null"
+            #passwordRepeat="ngModel">
+        </mat-form-field>
+
+      </div>
+    </mat-card-content>
+  </form>
+</mat-card>
