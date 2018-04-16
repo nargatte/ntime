@@ -5,10 +5,10 @@ import { PageViewModel } from '../Models/PageViewModel';
 import { Competition } from '../Models/Competition';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { catchError, map, tap } from 'rxjs/operators';
+
 import { MessageService } from './message.service';
 import { PlayerFilterOptions } from '../Models/PlayerFilterOptions';
 import { PlayerListView } from '../Models/PlayerListView';
-import { StringHelper } from '../Helpers/StringHelper';
 import { PlayerCompetitionRegister } from '../Models/PlayerCompetitionRegister';
 import { Distance } from '../Models/Distance';
 
@@ -29,7 +29,7 @@ export class PlayerService {
   getPlayerListView(competitionId: number, playerFilterOptions: PlayerFilterOptions, pageSize: number, pageNumber: number):
   Observable<PageViewModel<PlayerListView>> {
     return this.http.post<PageViewModel<Competition>>(this.baseCompetitionUrl +
-      this.controlerUrl + this.simpleListUrl + competitionId + StringHelper.generatPageRequest(pageSize, pageNumber),
+      this.controlerUrl + this.simpleListUrl + competitionId + UrlHelper.generatPageRequest(pageSize, pageNumber),
       playerFilterOptions ).pipe(
         tap(() => this.log('PlayerListView fetched')),
         catchError(this.handleError)
