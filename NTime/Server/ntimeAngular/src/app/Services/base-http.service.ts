@@ -13,11 +13,11 @@ import { UrlBuilder } from '../Helpers/UrlBuilder';
 @Injectable()
 export abstract class BaseHttpService {
 
-  private baseUrl = '/api';
   httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
-  constructor(private http: HttpClient, private controllerName: string, private messageService: MessageService) { }
+  constructor(private http: HttpClient, protected controllerName: string, private messageService: MessageService) { }
 
+  /** Creates get request to the following url: ${baseAddress}/api/${controllerName}/?ItemsOnPage=${pageSize}&PageNumber=${pageNumber} */
   public getPage<TResponse>(pageSize: number, pageNumber: number): Observable<PageViewModel<TResponse>> {
     return this.http.get<PageViewModel<TResponse>>(
       new UrlBuilder()
@@ -30,7 +30,8 @@ export abstract class BaseHttpService {
     );
   }
 
-  get<TResponse>(id: number): Observable<TResponse> {
+  /** Creates get request to the following url: ${baseAddress}/api/${controllerName}/id */
+  protected getById<TResponse>(id: number): Observable<TResponse> {
     return this.http.get<TResponse>(
       new UrlBuilder()
         .addControllerName(this.controllerName)
@@ -44,9 +45,41 @@ export abstract class BaseHttpService {
     );
   }
 
-  private log(message: string) {
+  protected get<TResponse>(requestUrl: string): Observable<TResponse> {
+    return this.http.get<TResponse>(requestUrl).pipe(
+      tap((item) => {
+        this.log(`Item fetched`);
+        this.log(item.toString());
+      }),
+      catchError(this.handleError)
+    );
+  }
+
+  protected post<TResponse, TContent>(requestUrl: string, content: TContent): Observable<TResponse> {
+    this.log('Preparing post request');
+    return this.http.post<TResponse>(requestUrl, content, this.httpOptions).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  protected put<TResponse, TContent>(requestUrl: string, content: TContent): Observable<TResponse> {
+    this.log('Preparing put request');
+    return this.http.put<TResponse>(requestUrl, content).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  protected delete(requestUrl: string) {
+    this.log('Preparing delete request');
+    return this.http.delete(requestUrl).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  private log(message: string): void {
     this.messageService.addLog('CompetitionService: ' + message);
   }
+
   private handleError(errorResponse: HttpErrorResponse) {
     if (errorResponse.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
