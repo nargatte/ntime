@@ -1,3 +1,42 @@
-<p>
-  register-form works!
-</p>
+<mat-card class="example-card">
+  <!-- <ng-container *ngIf="competition.SignUpEndDate > todayDate; else elseTemplate"> -->
+  <p>
+    Nie masz konta? Szybko i wygodnie załóż nowe.
+  </p>
+  <form #logInForm="ngForm">
+    <mat-card-content>
+      <div class="form-container">
+
+        <mat-form-field>
+          <input matInput type="email" placeholder="Adres e-mail" name="email" [(ngModel)]="registerData.Email" [email]="newPlayer.Email!='' && newPlayer.Email!=null"
+            #email="ngModel">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="password" placeholder="Hasło" name="password" required [(ngModel)]="registerData.Password" #password="ngModel">
+          <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+            <div *ngIf="password.errors.required">
+              Hasło jest wymagane
+            </div>
+          </div>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="password" placeholder="Powtórz hasło" name="confirmPassword" required [(ngModel)]="registerData.ConfirmPassword"
+            #confirmPassword="ngModel">
+          <div *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)" class="alert alert-danger">
+            <div *ngIf="confirmPassword.errors.required">
+              Powtórzone hasło jest wymagane
+            </div>
+          </div>
+        </mat-form-field>
+
+      </div>
+    </mat-card-content>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="newPlayerForm.invalid" (click)="registerButtonClick()">
+      Załóż konto
+    </button>
+
+  </form>
+</mat-card>

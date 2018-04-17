@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { RegisterBindingModel } from '../../Models/RegisterBindingModel';
+import { AuthenticationService } from '../../Services/authentication.service';
 
 @Component({
   selector: 'app-register-form',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterFormComponent implements OnInit {
 
-  constructor() { }
+  public registerData: RegisterBindingModel = new RegisterBindingModel();
+
+  constructor(private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
+  }
+
+  public registerButtonClick() {
+    this.authenticationService.RegisterUser(this.registerData);
   }
 
 }
