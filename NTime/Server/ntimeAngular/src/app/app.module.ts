@@ -39,6 +39,7 @@ import { AuthenticationService } from './Services/authentication.service';
 import { UserRegisteredDialogComponent } from './SharedComponents/Dialogs/user-registered-dialog/user-registered-dialog.component';
 import { SuccessfullActionDialogComponent } from './SharedComponents/Dialogs/successfull-action-dialog/successfull-action-dialog.component';
 import { FailedActionDialogComponent } from './SharedComponents/Dialogs/failed-action-dialog/failed-action-dialog.component';
+import { AuthenticatedUserService } from './Services/authenticated-user.service';
 
 
 @NgModule({
@@ -57,7 +58,7 @@ import { FailedActionDialogComponent } from './SharedComponents/Dialogs/failed-a
     ],
     providers: [
         CompetitionService, PlayerService,
-        ExtraPlayerInfoService, DistanceService, MessageService, AuthenticationService,  // Custom services
+        ExtraPlayerInfoService, DistanceService, MessageService, AuthenticationService, AuthenticatedUserService, // Custom services
         { provide: MAT_DATE_LOCALE, useValue: 'pl-pl' },
     ],
     entryComponents: [

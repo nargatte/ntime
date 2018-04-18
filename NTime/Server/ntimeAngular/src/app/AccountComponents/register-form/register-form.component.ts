@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RegisterBindingModel } from '../../Models/RegisterBindingModel';
+import { RegisterBindingModel } from '../../Models/Authentication/RegisterBindingModel';
 import { AuthenticationService } from '../../Services/authentication.service';
 import { MessageService } from '../../Services/message.service';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';

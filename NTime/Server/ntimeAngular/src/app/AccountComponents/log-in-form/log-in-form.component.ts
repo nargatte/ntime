@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../Services/authentication.service';
-import { LoginData } from '../../Models/LoginData';
+import { LoginData } from '../../Models/Authentication/LoginData';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 // tslint:disable-next-line:max-line-length
 import {SuccessfullActionDialogComponent } from '../../SharedComponents/Dialogs/successfull-action-dialog/successfull-action-dialog.component';
-import { TokenInfo } from '../../Models/TokenInfo';
+import { TokenInfo } from '../../Models/Authentication/TokenInfo';
 import { MessageService } from '../../Services/message.service';
 import { FailedActionDialogComponent } from '../../SharedComponents/Dialogs/failed-action-dialog/failed-action-dialog.component';
+import { AuthenticatedUserService } from '../../Services/authenticated-user.service';
+import { AuthenticatedUser } from '../../Models/Authentication/AuthenticatedUser';
+import { RoleEnum } from '../../Models/Enums/RoleEnum';
 
 @Component({
   selector: 'app-log-in-form',
@@ -24,7 +27,8 @@ export class LogInFormComponent implements OnInit {
   constructor(
     private authenticationService: AuthenticationService,
     private messageService: MessageService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private authenticatedUserService: AuthenticatedUserService
   ) { }
 
   ngOnInit() {
@@ -46,11 +50,17 @@ export class LogInFormComponent implements OnInit {
   private onSuccessfullLogin(loggedUser: TokenInfo) {
     this.messageService.addLog('Logowanie przebiegło prawidło');
     this.messageService.addObject(loggedUser);
+    this.authenticatedUserService.addUser(new AuthenticatedUser(
+      loggedUser.access_token, 'first', 'last', loggedUser.userName, RoleEnum.Player
+    ));
+    this.messageService.addLog('Displaying authenticated user');
+    this.messageService.addObject(this.authenticatedUserService.User);
     this.successModalUp();
   }
 
   private onFailedLogin(errorResponse: HttpErrorResponse) {
     this.messageService.addError('Logowanie nieprawidłowe');
+    this.messageService.addError(errorResponse.message);
     this.messageService.addObject(errorResponse);
     this.failedModalUp();
   }
@@ -63,7 +73,7 @@ export class LogInFormComponent implements OnInit {
 
   public failedModalUp() {
     this.dialog.open(FailedActionDialogComponent, {
-      data: { text: 'Nastąpił błąd podczas logowania'}
+      data: { text: 'Wystąpił błąd podczas logowania'}
     });
   }
 

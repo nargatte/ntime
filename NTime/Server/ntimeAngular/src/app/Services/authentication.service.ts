@@ -6,10 +6,10 @@ import { HttpClient } from '@angular/common/http';
 
 import { BaseHttpService } from './base-http.service';
 import { MessageService } from './message.service';
-import { RegisterBindingModel } from '../Models/RegisterBindingModel';
+import { RegisterBindingModel } from '../Models/Authentication/RegisterBindingModel';
 import { UrlBuilder } from '../Helpers/UrlBuilder';
-import { LoginData } from '../Models/LoginData';
-import { TokenInfo } from '../Models/TokenInfo';
+import { LoginData } from '../Models/Authentication/LoginData';
+import { TokenInfo } from '../Models/Authentication/TokenInfo';
 
 @Injectable()
 export class AuthenticationService extends BaseHttpService {
