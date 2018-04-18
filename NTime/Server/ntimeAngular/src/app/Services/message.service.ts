@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class MessageService {
-    messages: string[] = [];
-    errors: string[] = [];
+    private messages: string[] = [];
+    private errors: string[] = [];
+    private objects: any[] = [];
 
     constructor() { }
 
@@ -23,5 +24,14 @@ export class MessageService {
 
     public clearErrors(): void {
         this.errors = [];
+    }
+
+    public addObject(item: any) {
+        console.log(item);
+        this.objects.push(item);
+    }
+
+    public clearObjects() {
+        this.objects = [];
     }
 }

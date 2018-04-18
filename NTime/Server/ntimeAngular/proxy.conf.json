@@ -4,5 +4,11 @@
     "secure": false,
     "logLevel": "info",
     "changeOrigin": true
+  },
+    "/token": {
+    "target": "https://www.testing.time2win.aspnet.pl",
+    "secure": false,
+    "logLevel": "info",
+    "changeOrigin": true
   }
 }

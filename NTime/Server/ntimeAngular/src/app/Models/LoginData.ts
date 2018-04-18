@@ -1,5 +1,6 @@
 export class LoginData {
-    grant_type: string;
     username: string;
     password: string;
+
+    constructor(public grant_type: string = 'password') {}
 }

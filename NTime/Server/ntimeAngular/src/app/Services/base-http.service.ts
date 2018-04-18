@@ -14,6 +14,7 @@ import { UrlBuilder } from '../Helpers/UrlBuilder';
 export abstract class BaseHttpService {
 
   httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+  httpOptionsUrlEncoded = { headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }) };
 
   constructor(private http: HttpClient, protected controllerName: string, private messageService: MessageService) { }
 
@@ -62,7 +63,15 @@ export abstract class BaseHttpService {
     );
   }
 
-  protected postNoBody<TResponse>(requestUrl: string): Observable<TResponse> {
+  protected postUrlEncoded<TResponse>(requestUrl: string, content: URLSearchParams): Observable<TResponse> {
+    this.log('Preparing post request urlencoded');
+    // const body = `username=tomek@tomek.pl&password=tomek123&grant_type=password`;
+    return this.http.post<TResponse>(requestUrl, content.toString(), this.httpOptionsUrlEncoded).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  protected postWithoutBody<TResponse>(requestUrl: string): Observable<TResponse> {
     this.log('Preparing post request');
     return this.http.post<TResponse>(requestUrl, this.httpOptions).pipe(
       catchError(this.handleError)
@@ -87,20 +96,27 @@ export abstract class BaseHttpService {
     this.messageService.addLog('CompetitionService: ' + message);
   }
 
+  private logError(errorMessage: string ) {
+    this.messageService.addError(errorMessage);
+  }
+
+  private logObject(item: any) {
+    this.messageService.addObject(item);
+  }
+
   private handleError(errorResponse: HttpErrorResponse) {
     if (errorResponse.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
-      console.error('An error occurred:', errorResponse.error.message);
+      this.messageService.addError(`An error occured ${errorResponse.error.message}`);
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
-      console.error(
-        `Backend returned code ${errorResponse.status}, ` +
-        `body was: ${errorResponse.error}`);
+      this.messageService.addError(`Backend return code ${errorResponse.status}`);
+      this.messageService.addObject(errorResponse.error);
     }
     // return an ErrorObservable with a user-facing error message
     return new ErrorObservable(
-      'Something bad happened; please try again later.');
+      `Something bad happened; please try again later`);
   }
 
 

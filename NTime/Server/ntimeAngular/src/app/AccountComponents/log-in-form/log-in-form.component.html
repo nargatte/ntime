@@ -8,23 +8,31 @@
       <div class="form-container">
 
         <mat-form-field>
-          <input matInput type="email" placeholder="Adres e-mail" name="email" [(ngModel)]="loginData.username" [email]="loginData.username!='' && loginData.username!=null"
+          <input matInput type="email" placeholder="Adres e-mail" name="email" required [(ngModel)]="loginData.username" [email]="loginData.username!='' && loginData.username!=null"
             #email="ngModel">
+          <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+            <ng-container *ngIf="email.errors.required; else notEmtyTemplate">
+              E-mail jest wymagany
+            </ng-container>
+            <ng-template #notEmtyTemplate>
+              E-mail jest nieprawidłowy
+            </ng-template>
+          </div>
         </mat-form-field>
 
         <mat-form-field>
-            <input matInput type="password" placeholder="Hasło" name="password" required [(ngModel)]="loginData.password" #password="ngModel">
-            <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
-              <div *ngIf="password.errors.required">
-                Hasło jest wymagane
-              </div>
-            </div>
-          </mat-form-field>
+          <input matInput type="password" placeholder="Hasło" name="password" required [(ngModel)]="loginData.password" #password="ngModel">
+          <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+            <ng-container *ngIf="password.errors.required">
+              Hasło jest wymagane
+            </ng-container>
+          </div> 
+        </mat-form-field>
 
       </div>
     </mat-card-content>
 
-    <button mat-raised-button color="primary" type="submit" [disabled]="loginData.invalid" (click)="loginButtonClick()">
+    <button mat-raised-button color="primary" type="submit" [disabled]="logInForm.invalid" (click)="loginButtonClick()">
       Zaloguj się
     </button>
 

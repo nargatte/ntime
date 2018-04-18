@@ -8,8 +8,16 @@
       <div class="form-container">
 
         <mat-form-field>
-          <input matInput type="email" placeholder="Adres e-mail" name="email" [(ngModel)]="registerData.Email" [email]="newPlayer.Email!='' && newPlayer.Email!=null"
+          <input matInput type="email" placeholder="Adres e-mail" name="email" required [(ngModel)]="registerData.Email" [email]="registerData.Email!='' && registerData.Email!=null"
             #email="ngModel">
+          <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+            <ng-container *ngIf="email.errors.required; else notEmtyTemplate">
+              E-mail jest wymagany
+            </ng-container>
+            <ng-template #notEmtyTemplate>
+              E-mail jest nieprawidłowy
+            </ng-template>
+          </div>
         </mat-form-field>
 
         <mat-form-field>
@@ -34,7 +42,7 @@
       </div>
     </mat-card-content>
 
-    <button mat-raised-button color="primary" type="submit" [disabled]="newPlayerForm.invalid" (click)="registerButtonClick()">
+    <button mat-raised-button color="primary" type="submit" [disabled]="logInForm.invalid" (click)="registerButtonClick()">
       Załóż konto
     </button>
 

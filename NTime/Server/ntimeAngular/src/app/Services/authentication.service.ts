@@ -28,7 +28,7 @@ export class AuthenticationService extends BaseHttpService {
   }
 
   public LogOut(): Observable<void> {
-    return super.postNoBody<void>(
+    return super.postWithoutBody<void>(
       new UrlBuilder()
         .addControllerName(this.controllerName)
         .addCustomUrlPart('/Logout')
@@ -36,8 +36,8 @@ export class AuthenticationService extends BaseHttpService {
     );
   }
 
-  public Login(loginData: LoginData) {
-    return super.post<TokenInfo, LoginData>(
+  public Login(loginData: URLSearchParams) {
+    return super.postUrlEncoded<TokenInfo>(
       new UrlBuilder()
         .addCustomUrlPart('/token')
         .toString(),
