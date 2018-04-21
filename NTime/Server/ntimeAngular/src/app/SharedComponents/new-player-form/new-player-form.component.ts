@@ -45,11 +45,11 @@ export class NewPlayerFormComponent implements OnInit, AfterViewInit {
     this.todayDate = new Date(Date.now());
 
     window['NewPlayerFormComponentReCaptcha'] = (token => this.InvokeRecapcha(token));
-   }
+  }
 
-   ngAfterViewInit() {
+  ngAfterViewInit() {
     this.recaptchaId = window['grecaptcha'].render('NewPlayerFormComponentButton');
-   }
+  }
 
   ngOnInit() {
   }
@@ -70,8 +70,8 @@ export class NewPlayerFormComponent implements OnInit, AfterViewInit {
 
     this.newPlayer.ReCaptchaToken = reCaptchaToken;
 
-    console.log('Trying to add Player');
-    if ( this.competition.SignUpEndDate > this.todayDate) {
+    this.log('Trying to add Player');
+    if (this.competition.SignUpEndDate > this.todayDate) {
       this.playerService.addPlayer(this.newPlayer, this.competitionId).subscribe(
         player => this.onSuccessfulAddPlayer(player),
         error => this.log(`Wystąpił problem podczas dodawania zawodnika: ${error}`)

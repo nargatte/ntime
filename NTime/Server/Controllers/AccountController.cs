@@ -365,7 +365,7 @@ namespace Server.Controllers
 
             string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
             await UserManager.SendEmailAsync(user.Id,
-                "Potwierdzenie rejrstracji w systemie Time2Win", "Kliknij w link żeby potwierdzić rejestrace swojego konta: <a href=\""
+                "Potwierdzenie rejrstracji w systemie Time2Win", "Kliknij w link żeby potwierdzić rejestrację swojego konta: <a href=\""
                 + Url.Content("/potwierdzenie-rejestracji?userId=" + user.Id + "&token=" + HttpUtility.UrlDecode(code)) + "\">KLIKNIJ</a>");
 
             return Ok();
@@ -379,7 +379,7 @@ namespace Server.Controllers
             var userId = User.Identity.GetUserId();
             string code = await UserManager.GenerateEmailConfirmationTokenAsync(userId);
             await UserManager.SendEmailAsync(userId,
-                "Potwierdzenie rejrstracji w systemie Time2Win", "Kliknij w link żeby potwierdzić rejestrace swojego konta: <a href=\""
+                "Potwierdzenie rejrstracji w systemie Time2Win", "Kliknij w link żeby potwierdzić rejestrację swojego konta: <a href=\""
                 + Url.Content("/potwierdzenie-rejestracji?userId=" + userId + "&token=" + HttpUtility.UrlDecode(code)) + "\">KLIKNIJ</a>");
             return Ok();
         }
@@ -393,8 +393,8 @@ namespace Server.Controllers
             token = token.Replace(' ', '+');
             var result = await UserManager.ConfirmEmailAsync(userId, token);
             if (result.Succeeded)
-                return Redirect(Url.Content("~/potwierdzenie-rejestracji"));
-            return Conflict();
+                return Redirect(Url.Content("~/konto?isActivated=true"));
+            return Redirect(Url.Content("~/konto?isActivated=false"));
         }
 
         // GET /Account/ForgotPassword?email=abc@cde.net
@@ -410,7 +410,7 @@ namespace Server.Controllers
             }
 
             string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-            await UserManager.SendEmailAsync(user.Id, "Przywracanie hasła do serwisu Time2Win", "Kliknij w link żeby przywrócić hasło: <a href=\"" +
+            await UserManager.SendEmailAsync(user.Id, "Resetowanie hasła do serwisu Time2Win", "Kliknij w link żeby zresetować hasło: <a href=\"" +
             Url.Content("/reset-hasla?userId=" + user.Id + "&token=" + code) + "\">KLIKNIJ</a>");
 
             return Ok();

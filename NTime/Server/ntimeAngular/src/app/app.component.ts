@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UrlBuilder } from './Helpers/UrlBuilder';
 
 @Component({
     selector: 'app-root',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
     title = 'Time2Win';
+    constructor() {
+        const builtString = new UrlBuilder()
+                            .addControllerName('Competition')
+                            .addId(15)
+                            .toString();
+        console.log(builtString);
+    }
 }

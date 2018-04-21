@@ -9,6 +9,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 import { AppRoutingModule } from './Modules/app-routing.module';
 import { MaterialCustomModule } from './Modules/material-custom.module';
+import { AuthenticationModule } from './Modules/authentication.module';
 import { MAT_DATE_LOCALE } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -32,30 +33,38 @@ import { PlayersListComponent } from './SharedComponents/players-list/players-li
 import { PlayerAddedDialogComponent } from './SharedComponents/Dialogs/player-added-dialog/player-added-dialog.component';
 import {
     SingUpEndDateErrorDialogComponent
- } from './SharedComponents/Dialogs/sing-up-end-date-error-dialog/sing-up-end-date-error-dialog.component';
-import { RegisterConfirmationComponent } from './RegisterComponents/register-confirmation/register-confirmation.component';
+} from './SharedComponents/Dialogs/sing-up-end-date-error-dialog/sing-up-end-date-error-dialog.component';
+import { RegisterConfirmationComponent } from './AccountComponents/register-confirmation/register-confirmation.component';
+import { AuthenticationService } from './Services/authentication.service';
+import { UserRegisteredDialogComponent } from './SharedComponents/Dialogs/user-registered-dialog/user-registered-dialog.component';
+import { SuccessfullActionDialogComponent } from './SharedComponents/Dialogs/successfull-action-dialog/successfull-action-dialog.component';
+import { FailedActionDialogComponent } from './SharedComponents/Dialogs/failed-action-dialog/failed-action-dialog.component';
+import { AuthenticatedUserService } from './Services/authenticated-user.service';
 
 
 @NgModule({
     imports: [
-        BrowserModule, FormsModule, AppRoutingModule,
-        ReactiveFormsModule, HttpClientModule, MaterialCustomModule,
+        BrowserModule, FormsModule, AppRoutingModule, ReactiveFormsModule,
+        HttpClientModule, MaterialCustomModule, AuthenticationModule
     ],
     declarations: [
         AppComponent, ScoresTabComponent, MyAccountTabComponent,
         CompetitionTabComponent, OfferTabComponent, ContactTabComponent,
         AboutUsTabComponent, NavbarComponent, CompetitionsSelectComponent,
         RegistrationTabComponent, PlayersListTabComponent, NewPlayerFormComponent,
-        PlayersListComponent, PlayerAddedDialogComponent, SingUpEndDateErrorDialogComponent, RegisterConfirmationComponent,
+        PlayersListComponent, PlayerAddedDialogComponent, SingUpEndDateErrorDialogComponent,
+        RegisterConfirmationComponent,
+        UserRegisteredDialogComponent, SuccessfullActionDialogComponent, FailedActionDialogComponent,
     ],
     providers: [
-        CompetitionService, PlayerService, ExtraPlayerInfoService, DistanceService,
-        MessageService,  // Custom services
+        CompetitionService, PlayerService,
+        ExtraPlayerInfoService, DistanceService, MessageService, AuthenticationService, AuthenticatedUserService, // Custom services
         { provide: MAT_DATE_LOCALE, useValue: 'pl-pl' },
     ],
     entryComponents: [
-        PlayerAddedDialogComponent, SingUpEndDateErrorDialogComponent
-      ],
+        PlayerAddedDialogComponent, SingUpEndDateErrorDialogComponent, UserRegisteredDialogComponent,
+        SuccessfullActionDialogComponent, FailedActionDialogComponent
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {
