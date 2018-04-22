@@ -67,7 +67,7 @@
     <Compile Include="DataBase\Entities\DistanceType.cs" />
     <Compile Include="DataBase\Entities\Distance.cs" />
     <Compile Include="DataBase\Entities\EnumTable.cs" />
-    <Compile Include="DataBase\Entities\ExtraPlayerInfo.cs" />
+    <Compile Include="DataBase\Entities\Subcategory.cs" />
     <Compile Include="DataBase\Entities\Gate.cs" />
     <Compile Include="DataBase\Entities\GateOrderItem.cs" />
     <Compile Include="DataBase\Entities\Interfaces\IAccountId.cs" />
@@ -77,6 +77,7 @@
     <Compile Include="DataBase\Entities\OrganizerAccount.cs" />
     <Compile Include="DataBase\Entities\Player.cs" />
     <Compile Include="DataBase\Entities\PlayerAccount.cs" />
+    <Compile Include="DataBase\Entities\SubcategoryDistance.cs" />
     <Compile Include="DataBase\Entities\TimeRead.cs" />
     <Compile Include="DataBase\Entities\TimeReadsLogInfo.cs" />
     <Compile Include="DataBase\Entities\TimeReadType.cs" />
@@ -97,6 +98,10 @@
     <Compile Include="Migrations\201804121401166_InitialCreate.Designer.cs">
       <DependentUpon>201804121401166_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804211522007_CategoryModelUpdate.cs" />
+    <Compile Include="Migrations\201804211522007_CategoryModelUpdate.Designer.cs">
+      <DependentUpon>201804211522007_CategoryModelUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\PageBindingModel.cs" />
     <Compile Include="Models\PageViewModel.cs" />
@@ -109,7 +114,7 @@
     <Compile Include="DataBase\Repositories\AgeCategoryTemplateRepository.cs" />
     <Compile Include="DataBase\Repositories\CompetitionRepository.cs" />
     <Compile Include="DataBase\Repositories\DistanceRepository.cs" />
-    <Compile Include="DataBase\Repositories\ExtraPlayerInfoRepository.cs" />
+    <Compile Include="DataBase\Repositories\SubcategoryRepository.cs" />
     <Compile Include="PlayerFilter\PlayerFilterOptions.cs" />
     <Compile Include="DataBase\Repositories\PlayerRepository.cs" />
     <Compile Include="DataBase\Repositories\GateOrderItemRepository.cs" />
@@ -129,6 +134,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201804121401166_InitialCreate.resx">
       <DependentUpon>201804121401166_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804211522007_CategoryModelUpdate.resx">
+      <DependentUpon>201804211522007_CategoryModelUpdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

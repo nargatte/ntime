@@ -21,12 +21,12 @@ namespace BaseCore.DataBase
             StartNumber = startNumber;
         }
 
-        public Player(PlayerAccount playerAccount)
+        public Player(PlayerAccount playerAccount, string firstName, string lastName, string phoneNumber)
         {
-            FirstName = playerAccount.FirstName;
-            LastName = playerAccount.LastName;
+            FirstName = firstName;
+            LastName = lastName;
             BirthDate = playerAccount.BirthDate ?? DateTime.Today;
-            PhoneNumber = playerAccount.PhoneNumber;
+            PhoneNumber = phoneNumber;
             Team = playerAccount.Team;
             if (playerAccount.IsMale.HasValue)
             {
@@ -35,6 +35,8 @@ namespace BaseCore.DataBase
         }
 
         public int Id { get; set; }
+
+        public DateTime RegistrationDate { get; set; } = DateTime.Now;
 
         [StringLength(255), Required]
         public string FirstName { get; set; }
@@ -66,6 +68,8 @@ namespace BaseCore.DataBase
         [StringLength(255)]
         public string FullCategory { get; set; }
 
+        public bool IsCategoryFixed { get; set; }
+
         public int LapsCount { get; set; }
 
         public decimal Time { get; set; }
@@ -79,11 +83,13 @@ namespace BaseCore.DataBase
         [Phone]
         public string PhoneNumber { get; set; }
 
+        public string ExtraData { get; set; }
+
         public int CompetitionId { get; set; }
         public virtual Competition Competition { get; set; }
 
-        public int? ExtraPlayerInfoId { get; set; }
-        public virtual ExtraPlayerInfo ExtraPlayerInfo { get; set; }
+        public int? SubcategoryId { get; set; }
+        public virtual Subcategory Subcategory { get; set; }
 
         public int? DistanceId { get; set; }
         public virtual Distance Distance { get; set; }

@@ -8,7 +8,7 @@ namespace BaseCore.DataBase
         {
         }
 
-        public AgeCategory(string name, int yearFrom, int yearTo) : base(name, yearFrom, yearTo)
+        public AgeCategory(string name, int yearFrom, int yearTo, bool male) : base(name, yearFrom, yearTo, male)
         {
         }
 

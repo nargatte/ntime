@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using BaseCore.DataBase;
+using Server.Models;
 
 namespace Server.Dtos
 {
@@ -17,19 +18,20 @@ namespace Server.Dtos
         public OrganizerAccountDto(OrganizerAccount organizerAccount)
         {
             Id = organizerAccount.Id;
-            FirstName = organizerAccount.FirstName;
-            LastName = organizerAccount.LastName;
-            PhoneNumber = organizerAccount.PhoneNumber;
-            EMail = organizerAccount.EMail;
+        }
+
+        public OrganizerAccountDto(OrganizerAccount organizerAccount, ApplicationUser applicationUser)
+        : this(organizerAccount)
+        {
+            FirstName = applicationUser.FirstName;
+            LastName = applicationUser.LastName;
+            PhoneNumber = applicationUser.PhoneNumber;
+            EMail = applicationUser.Email;
         }
 
         public OrganizerAccount CopyDataFromDto(OrganizerAccount organizerAccount)
         {
             organizerAccount.Id = Id;
-            organizerAccount.FirstName = FirstName;
-            organizerAccount.LastName = LastName;
-            organizerAccount.PhoneNumber = PhoneNumber;
-            organizerAccount.EMail = EMail;
             return organizerAccount;
         }
 

@@ -204,7 +204,7 @@ namespace Server.Controllers
 
             await playerWithScoresDto.CopyDataFromDto(player, ContextProvider, Competition);
 
-            await _playerRepository.UpdateAsync(player, player.Distance, player.ExtraPlayerInfo);
+            await _playerRepository.UpdateAsync(player, player.Distance, player.Subcategory);
 
             return Ok();
         }
@@ -270,7 +270,7 @@ namespace Server.Controllers
             if (await competitionRegisterDto.CopyDataFromDto(player, ContextProvider, Competition) == null)
                 return NotFound();
 
-            await _playerRepository.UpdateAsync(player, player.Distance, player.ExtraPlayerInfo);
+            await _playerRepository.UpdateAsync(player, player.Distance, player.Subcategory);
 
             return Ok();
         }
@@ -307,7 +307,7 @@ namespace Server.Controllers
                 player.PlayerAccount = null;
             }
 
-            await _playerRepository.AddAsync(player, player.Distance, player.ExtraPlayerInfo);
+            await _playerRepository.AddAsync(player, player.Distance, player.Subcategory);
 
             competitionRegisterDto.Id = player.Id;
             return Created(Url.Content("~/player/register/" + competitionRegisterDto.Id), competitionRegisterDto);

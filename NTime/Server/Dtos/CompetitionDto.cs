@@ -19,6 +19,8 @@ namespace Server.Dtos
             EventDate = competition.EventDate;
             SignUpEndDate = competition.SignUpEndDate;
             Description = competition.Description;
+            ExtraDataHeders = competition.ExtraDataHeders;
+            SubcategoryAlternativeName = competition.SubcategoryAlternativeName;
             Link = competition.Link;
             Organizer = competition.Organizer;
             City = competition.City;
@@ -32,6 +34,8 @@ namespace Server.Dtos
             competition.EventDate = EventDate;
             competition.SignUpEndDate = SignUpEndDate;
             competition.Description = Description;
+            competition.ExtraDataHeders = ExtraDataHeders;
+            competition.SubcategoryAlternativeName = SubcategoryAlternativeName;
             competition.Link = Link;
             competition.Organizer = Organizer;
             competition.City = City;
@@ -49,6 +53,10 @@ namespace Server.Dtos
         public DateTime? SignUpEndDate { get; set; }
 
         public string Description { get; set; }
+
+        public string ExtraDataHeders { get; set; }
+
+        public string SubcategoryAlternativeName { get; set; }
 
         [StringLength(2000)]
         public string Link { get; set; }

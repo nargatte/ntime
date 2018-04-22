@@ -26,6 +26,7 @@ namespace Server.Dtos
             FullCategory = player.FullCategory;
             City = player.City;
             IsPaidUp = player.IsPaidUp;
+            ExtraData = player.ExtraData;
         }
 
         public Player CopyDataFromDto(Player player)
@@ -40,6 +41,7 @@ namespace Server.Dtos
             player.FullCategory = FullCategory;
             player.City = City;
             player.IsPaidUp = IsPaidUp;
+            player.ExtraData = ExtraData;
             return player;
         }
 
@@ -66,5 +68,7 @@ namespace Server.Dtos
         public string City { get; set; }
 
         public bool IsPaidUp { get; set; }
+
+        public string ExtraData { get; set; }
     }
 }

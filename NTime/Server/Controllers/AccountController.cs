@@ -74,13 +74,18 @@ namespace Server.Controllers
 
         // GET api/Account/Role
         [System.Web.Http.Route("Role")]
-        public RoleViewModel GetRole()
+        public async Task<RoleViewModel> GetRole()
         {
+            string id = User.Identity.GetUserId();
+            var userItem = await UserManager.FindByIdAsync(id);
+
             return new RoleViewModel
             {
-                Id = User.Identity.GetUserId(),
-                Email = User.Identity.GetUserName(),
-                Role = UserManager.GetRoles(User.Identity.GetUserId())[0]
+                Id = id,
+                Email = userItem.Email,
+                Role = (await UserManager.GetRolesAsync(User.Identity.GetUserId()))[0],
+                FirstName = userItem.FirstName,
+                LastName = userItem.LastName,
             };
         }
 
@@ -359,7 +364,6 @@ namespace Server.Controllers
 
             PlayerAccountRepository accountRepository = new PlayerAccountRepository(new ContextProvider());
             PlayerAccount playerAccount = new PlayerAccount();
-            playerAccount.EMail = model.Email;
             playerAccount.AccountId = user.Id;
             await accountRepository.AddAsync(playerAccount);
 

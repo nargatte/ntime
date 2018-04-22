@@ -85,7 +85,7 @@ namespace AdminView.Players
             NewPlayer = new EditablePlayer(_currentCompetition, DefinedDistances, DefinedExtraPlayerInfo, new Player()
             {
                 Distance = new Distance(),
-                ExtraPlayerInfo = new ExtraPlayerInfo(),
+                Subcategory = new Subcategory(),
                 StartTime = DateTime.Today,
                 BirthDate = DateTime.Today
             });

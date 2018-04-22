@@ -13,17 +13,17 @@ namespace ViewCore.ManagersDesktop
     public class ExtraPlayerInfoManagerDesktop : CompetitionItemBase, IExtraPlayerInfoManager
     {
         public ObservableCollection<EditableExtraPlayerInfo> DefinedExtraPlayerInfo { get; set; } = new ObservableCollection<EditableExtraPlayerInfo>();
-        private ExtraPlayerInfoRepository _extraPlayerInfoRepository;
+        private SubcategoryRepository _subcategoryRepository;
         public ExtraPlayerInfoManagerDesktop(IEditableCompetition currentComptetition) : base(currentComptetition)
         {
             //_playerRepository
-            _extraPlayerInfoRepository = new ExtraPlayerInfoRepository(new ContextProvider(), _currentCompetition.DbEntity);
+            _subcategoryRepository = new SubcategoryRepository(new ContextProvider(), _currentCompetition.DbEntity);
         }
 
 
         public async Task<ObservableCollection<EditableExtraPlayerInfo>> DownloadExtraPlayerInfoAsync()
         {
-            var dbExtraPlayerInfos = await _extraPlayerInfoRepository.GetAllAsync();
+            var dbExtraPlayerInfos = await _subcategoryRepository.GetAllAsync();
             DefinedExtraPlayerInfo.Clear();
             foreach (var dbExtraPlayerInfo in dbExtraPlayerInfos)
             {
@@ -34,7 +34,7 @@ namespace ViewCore.ManagersDesktop
             }
             DefinedExtraPlayerInfo.Add(new EditableExtraPlayerInfo(_currentCompetition)
             {
-                DbEntity = new ExtraPlayerInfo()
+                DbEntity = new Subcategory()
             });
             return DefinedExtraPlayerInfo;
         }

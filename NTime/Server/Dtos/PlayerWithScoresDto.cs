@@ -23,6 +23,7 @@ namespace Server.Dtos
             BirthDate = player.BirthDate;
             IsMale = player.IsMale;
             PhoneNumber = player.PhoneNumber;
+            ExtraData = player.ExtraData;
             Team = player.Team;
             StartNumber = player.StartNumber;
             StartTime = player.StartTime;
@@ -36,7 +37,7 @@ namespace Server.Dtos
             DistancePlaceNumber = player.DistancePlaceNumber;
             CategoryPlaceNumber = player.CategoryPlaceNumber;
             CompetitionCompleted = player.CompetitionCompleted;
-            ExtraPlayerInfoId = player.ExtraPlayerInfoId;
+            ExtraPlayerInfoId = player.SubcategoryId;
             DistanceId = player.DistanceId;
             AgeCategoryId = player.AgeCategoryId;
             PlayerAccountId = player.PlayerAccountId;
@@ -50,6 +51,7 @@ namespace Server.Dtos
             player.BirthDate = BirthDate;
             player.IsMale = IsMale;
             player.PhoneNumber = PhoneNumber;
+            player.ExtraData = ExtraData;
             player.Team = Team;
             player.StartNumber = StartNumber;
             player.StartTime = StartTime;
@@ -63,7 +65,7 @@ namespace Server.Dtos
             player.DistancePlaceNumber = DistancePlaceNumber;
             player.CategoryPlaceNumber = CategoryPlaceNumber;
             player.CompetitionCompleted = CompetitionCompleted;
-            player.ExtraPlayerInfoId = ExtraPlayerInfoId;
+            player.SubcategoryId = ExtraPlayerInfoId;
             player.DistanceId = DistanceId;
             player.AgeCategoryId = AgeCategoryId;
             player.PlayerAccountId = PlayerAccountId;
@@ -72,13 +74,13 @@ namespace Server.Dtos
 
         public async Task<Player> CopyDataFromDto(Player player, IContextProvider contextProvider, Competition competition)
         {
-            ExtraPlayerInfoRepository extraPlayerInfoRepository = new ExtraPlayerInfoRepository(contextProvider, competition);
+            SubcategoryRepository subcategoryRepository = new SubcategoryRepository(contextProvider, competition);
             DistanceRepository distanceRepository = new DistanceRepository(contextProvider, competition);
 
             CopyDataFromDto(player);
 
             if(ExtraPlayerInfoId != null)
-                player.ExtraPlayerInfo = await extraPlayerInfoRepository.GetById(ExtraPlayerInfoId.Value);
+                player.Subcategory = await subcategoryRepository.GetById(ExtraPlayerInfoId.Value);
 
             if(DistanceId != null)
                 player.Distance = await distanceRepository.GetById(DistanceId.Value);
@@ -104,6 +106,8 @@ namespace Server.Dtos
 
         [Phone]
         public string PhoneNumber { get; set; }
+
+        public string ExtraData { get; set; }
 
         [StringLength(255)]
         public string Team { get; set; }

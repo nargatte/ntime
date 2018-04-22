@@ -23,15 +23,15 @@ namespace BaseCoreTests
             var cr = new CompetitionRepository(cp);
             var com = await cr.AddAsync(new Competition("Zawody Integracyjne", DateTime.Now, "Integration City", null, null, null));
             var pr = new PlayerRepository(cp, com);
-            var eifr = new ExtraPlayerInfoRepository(cp, com);
+            var eifr = new SubcategoryRepository(cp, com);
             var dr = new DistanceRepository(cp, com);
             var akr = new AgeCategoryRepository(cp, com);
             var gr = new GateRepository(cp, com);
 
             await eifr.AddRangeAsync(new[]
             {
-                new ExtraPlayerInfo("inny", "i"),
-                new ExtraPlayerInfo("szosowy", "s")
+                new Subcategory("inny", "i"),
+                new Subcategory("szosowy", "s")
             });
 
             await dr.AddRangeAsync(new[]
@@ -142,7 +142,7 @@ namespace BaseCoreTests
             //await pr.UpdateRankingAllAsync();
 
             //p.Distance = darr.FirstOrDefault(d => d.Name == "GIGA");
-            //await pr.UpdateAsync(p, p.Distance, p.ExtraPlayerInfo);
+            //await pr.UpdateAsync(p, p.Distance, p.Subcategory);
 
             //await pr.UpdateFullCategoryAllAsync();
 

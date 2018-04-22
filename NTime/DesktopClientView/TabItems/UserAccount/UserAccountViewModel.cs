@@ -120,7 +120,7 @@ namespace DesktopClientView.TabItems.UserAccount
             FromCompetitonPlayer.DefinedDistances = DefinedDistances;
             FromCompetitonPlayer.DefinedExtraPlayerInfo = DefinedExtraPlayerInfo;
             FromCompetitonPlayer.Distance = DefinedDistances.FirstOrDefault(defined => defined.DbEntity.Id == FromCompetitonPlayer.DbEntity.DistanceId);
-            FromCompetitonPlayer.ExtraPlayerInfo = DefinedExtraPlayerInfo.FirstOrDefault(defined => defined.DbEntity.Id == FromCompetitonPlayer.DbEntity.ExtraPlayerInfoId);
+            FromCompetitonPlayer.ExtraPlayerInfo = DefinedExtraPlayerInfo.FirstOrDefault(defined => defined.DbEntity.Id == FromCompetitonPlayer.DbEntity.SubcategoryId);
         }
 
         private void ClearNewPlayer()

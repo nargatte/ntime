@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using BaseCore.DataBase;
@@ -30,13 +31,14 @@ namespace Server.Controllers
         [Authorize(Roles = "Administrator")]
         public async Task<PageViewModel<OrganizerAccountDto>> GetSearch([FromUri] PageBindingModel pageBindingModel, string query = null)
         {
-            PageViewModel<OrganizerAccount> viewModel = await _organizerAccountRepository.GetByQuery(query, pageBindingModel);
-            PageViewModel<OrganizerAccountDto> viewModelDto = new PageViewModel<OrganizerAccountDto>
-            {
-                Items = viewModel.Items.Select(pa => new OrganizerAccountDto(pa)).ToArray(),
-                TotalCount = viewModel.TotalCount
-            };
-            return viewModelDto;
+            //PageViewModel<OrganizerAccount> viewModel = await _organizerAccountRepository.GetByQuery(query, pageBindingModel);
+            //PageViewModel<OrganizerAccountDto> viewModelDto = new PageViewModel<OrganizerAccountDto>
+            //{
+            //    Items = viewModel.Items.Select(pa => new OrganizerAccountDto(pa)).ToArray(),
+            //    TotalCount = viewModel.TotalCount
+            //};
+            //return viewModelDto;
+            throw new NotImplementedException();
         }
 
         // GET api/OrganizerAccount/ByCompetition/1

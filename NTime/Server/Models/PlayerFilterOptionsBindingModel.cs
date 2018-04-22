@@ -36,8 +36,8 @@ namespace Server.Models
                 Distance = filterOptions.Distance.Id;
             if (filterOptions.AgeCategory != null)
                 AgeCategory = filterOptions.AgeCategory.Id;
-            if (filterOptions.ExtraPlayerInfo != null)
-                ExtraPlayerInfo = filterOptions.ExtraPlayerInfo.Id;
+            if (filterOptions.Subcategory != null)
+                ExtraPlayerInfo = filterOptions.Subcategory.Id;
         }
 
         public PlayerFilterOptions CreatePlayerFilterOptions()
@@ -56,7 +56,7 @@ namespace Server.Models
             if (AgeCategory != null)
                 filterOptions.AgeCategory = new AgeCategory() { Id = AgeCategory.Value };
             if (ExtraPlayerInfo != null)
-                filterOptions.ExtraPlayerInfo = new ExtraPlayerInfo() { Id = ExtraPlayerInfo.Value };
+                filterOptions.Subcategory = new Subcategory() { Id = ExtraPlayerInfo.Value };
             return filterOptions;
         }
     }

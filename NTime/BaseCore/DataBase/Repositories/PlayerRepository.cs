@@ -23,7 +23,7 @@ namespace BaseCore.DataBase
             items.OrderBy(i => i.LastName);
 
         protected override IQueryable<Player> GetIncludeQuery(IQueryable<Player> items) =>
-            items.Include(p => p.Distance).Include(p => p.AgeCategory).Include(p => p.ExtraPlayerInfo);
+            items.Include(p => p.Distance).Include(p => p.AgeCategory).Include(p => p.Subcategory);
 
         public async Task SetSelectedStartTimeAsync(Player[] players, DateTime startTime)
         {
@@ -73,8 +73,8 @@ namespace BaseCore.DataBase
             if (filterOptions.Distance != null)
                 items = items.Where(i => i.DistanceId == filterOptions.Distance.Id);
 
-            if (filterOptions.ExtraPlayerInfo != null)
-                items = items.Where(i => i.ExtraPlayerInfoId == filterOptions.ExtraPlayerInfo.Id);
+            if (filterOptions.Subcategory != null)
+                items = items.Where(i => i.SubcategoryId == filterOptions.Subcategory.Id);
 
             if (filterOptions.Men != null)
                 items = items.Where(i => i.IsMale == filterOptions.Men);
@@ -84,7 +84,7 @@ namespace BaseCore.DataBase
 
             if (filterOptions.Invalid != null)
                 items = items.Where(i => (i.AgeCategoryId == null || i.DistanceId == null ||
-                                         i.ExtraPlayerInfoId == null) ^ !filterOptions.Invalid.Value);
+                                         i.SubcategoryId == null) ^ !filterOptions.Invalid.Value);
 
             if (filterOptions.CompleatedCompetition != null)
                 items = items.Where(i => i.CompetitionCompleted == filterOptions.CompleatedCompetition);
@@ -92,6 +92,8 @@ namespace BaseCore.DataBase
             if (filterOptions.HasVoid != null)
                 items = items.Where(i => i.TimeReads.All(t => t.TimeReadTypeId != (int)TimeReadTypeEnum.Void) !=
                                          filterOptions.HasVoid);
+            if (filterOptions.IsPaidUp != null)
+                items = items.Where(i => i.IsPaidUp == filterOptions.IsPaidUp);
 
             return items;
         }
@@ -133,7 +135,7 @@ namespace BaseCore.DataBase
             string[] strings = filterOptions.Query.Split(' ');
             foreach (string s in strings)
                 items = items.Where(i => i.FirstName.StartsWith(s) || i.LastName.StartsWith(s) ||
-                                         i.Team.StartsWith(s) || i.FullCategory.Contains(s));
+                i.Team.Contains(s) || i.FullCategory.Contains(s) || i.ExtraData.Contains(s));
 
             return items;
         }
@@ -198,26 +200,26 @@ namespace BaseCore.DataBase
             }
         }
 
-        public async Task<Player> AddAsync(Player player, Distance distance, ExtraPlayerInfo extraPlayerInfo)
+        public async Task<Player> AddAsync(Player player, AgeCategory ageCategory, Distance distance, Subcategory subcategory)
         {
             AgeCategory ageCategory = await (new AgeCategoryRepository(ContextProvider, Competition)).GetFittingAsync(player);
-            await AddAsync(PreparePlayer(player, distance, extraPlayerInfo, ageCategory));
+            await AddAsync(PreparePlayer(player, distance, subcategory, ageCategory));
             player.Distance = distance;
-            player.ExtraPlayerInfo = extraPlayerInfo;
+            player.Subcategory = subcategory;
             player.AgeCategory = ageCategory;
             return player;
         }
 
-        public async Task UpdateAsync(Player player, Distance distance, ExtraPlayerInfo extraPlayerInfo)
+        public async Task UpdateAsync(Player player, Distance distance, Subcategory subcategory)
         {
             AgeCategory ageCategory = await (new AgeCategoryRepository(ContextProvider, Competition)).GetFittingAsync(player);
             player.Distance = distance;
             player.DistanceId = distance?.Id;
-            player.ExtraPlayerInfo = extraPlayerInfo;
-            player.ExtraPlayerInfoId = extraPlayerInfo?.Id;
+            player.Subcategory = subcategory;
+            player.SubcategoryId = subcategory?.Id;
             player.AgeCategory = ageCategory;
             player.AgeCategoryId = ageCategory?.Id;
-            player.FullCategory = GetFullCategory(distance, extraPlayerInfo, ageCategory, player.IsMale);
+            player.FullCategory = GetFullCategory(distance, subcategory, ageCategory, player.IsMale);
             CheckNull(player);
             CheckItem(player);
             await ContextProvider.DoAsync(async ctx =>
@@ -257,12 +259,12 @@ namespace BaseCore.DataBase
             //    player.AgeCategory = ageCategory;
             //    player.AgeCategoryId = ageCategory?.Id;
 
-            //    player.FullCategory = GetFullCategory(player.Distance, player.ExtraPlayerInfo, player.AgeCategory,
+            //    player.FullCategory = GetFullCategory(player.Distance, player.Subcategory, player.AgeCategory,
             //        player.IsMale);
 
             //    player.AgeCategory = null;
             //    player.Distance = null;
-            //    player.ExtraPlayerInfo = null;
+            //    player.Subcategory = null;
             //});
 
             //await UpdateRangeAsync(players);
@@ -290,12 +292,12 @@ namespace BaseCore.DataBase
                     player.AgeCategory = ageCategory;
                     player.AgeCategoryId = ageCategory?.Id;
 
-                    player.FullCategory = GetFullCategory(player.Distance, player.ExtraPlayerInfo, player.AgeCategory,
+                    player.FullCategory = GetFullCategory(player.Distance, player.Subcategory, player.AgeCategory,
                         player.IsMale);
 
                     //player.AgeCategory = null;
                     //player.Distance = null;
-                    //player.ExtraPlayerInfo = null;
+                    //player.Subcategory = null;
                 }
 
                 await ctx.SaveChangesAsync();
@@ -308,7 +310,7 @@ namespace BaseCore.DataBase
             await ContextProvider.DoAsync(async ctx =>
             {
                 AgeCategory[] ageCategories = await ctx.AgeCategories.Where(a => a.CompetitionId == Competition.Id).AsNoTracking().ToArrayAsync();
-                ExtraPlayerInfo[] playerInfos = await ctx.ExtraPlayerInfo.Where(a => a.CompetitionId == Competition.Id).AsNoTracking().ToArrayAsync();
+                Subcategory[] playerInfos = await ctx.Subcategory.Where(a => a.CompetitionId == Competition.Id).AsNoTracking().ToArrayAsync();
                 Distance[] distances = await ctx.Distances.Where(a => a.CompetitionId == Competition.Id).AsNoTracking().ToArrayAsync();
 
                 PlayerFilterOptions filterOptions = new PlayerFilterOptions()
@@ -328,15 +330,15 @@ namespace BaseCore.DataBase
                     {
                         filterOptions.Distance = distance;
                         filterOptions.AgeCategory = null;
-                        filterOptions.ExtraPlayerInfo = null;
+                        filterOptions.Subcategory = null;
                         OrderSet(GetFilteredQuery(ctx.Players.Where(i => i.CompetitionId == Competition.Id),
                             filterOptions), (i, player) => player.DistancePlaceNumber = i + 1);
-                        foreach (ExtraPlayerInfo extraPlayerInfo in playerInfos)
+                        foreach (Subcategory extraPlayerInfo in playerInfos)
                         {
                             foreach (AgeCategory ageCategory in ageCategories)
                             {
                                 filterOptions.AgeCategory = ageCategory;
-                                filterOptions.ExtraPlayerInfo = extraPlayerInfo;
+                                filterOptions.Subcategory = extraPlayerInfo;
                                 OrderSet(GetFilteredQuery(ctx.Players.Where(i => i.CompetitionId == Competition.Id),
                                     filterOptions), (i, player) => player.CategoryPlaceNumber = i + 1);
                             }
@@ -358,45 +360,45 @@ namespace BaseCore.DataBase
             }
         }
 
-        private async Task<Player> PreparePlayer(Player player, Distance distance, ExtraPlayerInfo extraPlayerInfo)
+        private async Task<Player> PreparePlayer(Player player, Distance distance, Subcategory subcategory)
         {
             PrepareToAdd(player);
 
             player.DistanceId = distance?.Id;
             player.Distance = null;
 
-            player.ExtraPlayerInfoId = extraPlayerInfo?.Id;
-            player.ExtraPlayerInfo = null;
+            player.SubcategoryId = subcategory?.Id;
+            player.Subcategory = null;
 
             AgeCategory ageCategory = await (new AgeCategoryRepository(ContextProvider, Competition)).GetFittingAsync(player);
             player.AgeCategoryId = ageCategory?.Id;
             player.AgeCategory = null;
 
-            player.FullCategory = GetFullCategory(distance, extraPlayerInfo, ageCategory, player.IsMale);
+            player.FullCategory = GetFullCategory(distance, subcategory, ageCategory, player.IsMale);
             return player;
         }
 
-        private Player PreparePlayer(Player player, Distance distance, ExtraPlayerInfo extraPlayerInfo, AgeCategory ageCategory)
+        private Player PreparePlayer(Player player, Distance distance, Subcategory subcategory, AgeCategory ageCategory)
         {
             PrepareToAdd(player);
 
             player.DistanceId = distance?.Id;
             player.Distance = null;
 
-            player.ExtraPlayerInfoId = extraPlayerInfo?.Id;
-            player.ExtraPlayerInfo = null;
+            player.SubcategoryId = subcategory?.Id;
+            player.Subcategory = null;
 
             player.AgeCategoryId = ageCategory?.Id;
             player.AgeCategory = null;
 
-            player.FullCategory = GetFullCategory(distance, extraPlayerInfo, ageCategory, player.IsMale);
+            player.FullCategory = GetFullCategory(distance, subcategory, ageCategory, player.IsMale);
             return player;
         }
 
-        protected virtual string GetFullCategory(Distance distance, ExtraPlayerInfo extraPlayerInfo, AgeCategory ageCategory,
+        protected virtual string GetFullCategory(Distance distance, Subcategory subcategory, AgeCategory ageCategory,
             bool male) =>
-            (distance == null || extraPlayerInfo == null || ageCategory == null) ? null :
-            distance.Name.Substring(0, Math.Min(4, distance.Name.Length)) + " " + (male ? "M" : "K") + ageCategory.Name + (extraPlayerInfo.ShortName == "*" ? "" : extraPlayerInfo.ShortName);
+            (distance == null || subcategory == null || ageCategory == null) ? null :
+            distance.Name.Substring(0, Math.Min(4, distance.Name.Length)) + " " + (male ? "M" : "K") + ageCategory.Name + (subcategory.ShortName == "*" ? "" : subcategory.ShortName);
 
         public async Task<Tuple<int, int>> ImportTimeReadsAsync(string fileName, Gate gate)
         {
@@ -448,18 +450,18 @@ namespace BaseCore.DataBase
             PlayerRecord[] playerRecords = await csvImporter.GetAllRecordsAsync();
 
             Distance[] distances = null;
-            ExtraPlayerInfo[] extraPlayerInfos = null;
+            Subcategory[] subcategories = null;
             AgeCategory[] ageCategories = null;
 
             await ContextProvider.DoAsync(async ctx =>
             {
                 distances = await ctx.Distances.Where(d => d.CompetitionId == Competition.Id).AsNoTracking().ToArrayAsync();
-                extraPlayerInfos = await ctx.ExtraPlayerInfo.Where(e => e.CompetitionId == Competition.Id).AsNoTracking().ToArrayAsync();
+                subcategories = await ctx.Subcategory.Where(e => e.CompetitionId == Competition.Id).AsNoTracking().ToArrayAsync();
                 ageCategories = await ctx.AgeCategories.Where(e => e.CompetitionId == Competition.Id).AsNoTracking().ToArrayAsync();
             });
 
             Dictionary<string, Distance> distancesDictionary = new Dictionary<string, Distance>();
-            Dictionary<string, ExtraPlayerInfo> extraPlayerInfosDictionary = new Dictionary<string, ExtraPlayerInfo>();
+            Dictionary<string, Subcategory> extraPlayerInfosDictionary = new Dictionary<string, Subcategory>();
             Dictionary<int, AgeCategory> ageCategoriesDictionary = new Dictionary<int, AgeCategory>();
 
             foreach (Distance distance in distances)
@@ -467,7 +469,7 @@ namespace BaseCore.DataBase
                 distancesDictionary.Add(distance.Name, distance);
             }
 
-            foreach (ExtraPlayerInfo extraPlayerInfo in extraPlayerInfos)
+            foreach (Subcategory extraPlayerInfo in subcategories)
             {
                 extraPlayerInfosDictionary.Add(extraPlayerInfo.Name, extraPlayerInfo);
             }
@@ -484,8 +486,8 @@ namespace BaseCore.DataBase
                 Distance distance;
                 distancesDictionary.TryGetValue(record.StringDistance, out distance);
 
-                ExtraPlayerInfo extraPlayerInfo;
-                extraPlayerInfosDictionary.TryGetValue(record.StringAditionalInfo, out extraPlayerInfo);
+                Subcategory subcategory;
+                extraPlayerInfosDictionary.TryGetValue(record.StringAditionalInfo, out subcategory);
 
                 AgeCategory ageCategory;
                 if (!ageCategoriesDictionary.TryGetValue(record.BirthDate.Year, out ageCategory))
@@ -498,7 +500,7 @@ namespace BaseCore.DataBase
                     }
                 }
 
-                p = PreparePlayer(p, distance, extraPlayerInfo, ageCategory);
+                p = PreparePlayer(p, distance, subcategory, ageCategory);
 
                 players.Add(p);
             }

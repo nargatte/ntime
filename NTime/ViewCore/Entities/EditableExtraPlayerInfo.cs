@@ -8,7 +8,7 @@ using MvvmHelper;
 
 namespace ViewCore.Entities
 {
-    public class EditableExtraPlayerInfo : EditableBaseClass<ExtraPlayerInfo>
+    public class EditableExtraPlayerInfo : EditableBaseClass<Subcategory>
     {
         public EditableExtraPlayerInfo(IEditableCompetition currentComptetition) : base(currentComptetition)
         {

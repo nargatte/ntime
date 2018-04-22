@@ -32,6 +32,10 @@ namespace BaseCore.DataBase
 
         public string Description { get; set; }
 
+        public string ExtraDataHeders { get; set; }
+
+        public string SubcategoryAlternativeName { get; set; }
+
         [StringLength(2000)]
         public string Link { get; set; }
 
@@ -45,7 +49,7 @@ namespace BaseCore.DataBase
 
         public virtual ICollection<Player> Players { get; set; }
 
-        public virtual ICollection<ExtraPlayerInfo> ExtraPlayerInfos { get; set; }
+        public virtual ICollection<Subcategory> Subcategories { get; set; }
 
         public virtual ICollection<Distance> Distances { get; set; }
 
