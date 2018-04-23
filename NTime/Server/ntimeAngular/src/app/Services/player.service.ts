@@ -13,14 +13,15 @@ import { PlayerCompetitionRegister } from '../Models/PlayerCompetitionRegister';
 import { Distance } from '../Models/Distance';
 import { BaseHttpService } from './base-http.service';
 import { UrlBuilder } from '../Helpers/UrlBuilder';
+import { AuthenticatedUserService } from './authenticated-user.service';
 
 @Injectable()
 export class PlayerService extends BaseHttpService {
   private simpleListUrl = '/takeSimpleList/FromCompetition';
   private playerRegisterUrl = '/register/intocompetition';
 
-  constructor(http: HttpClient, messageService: MessageService) {
-    super(http, 'player', messageService);
+  constructor(http: HttpClient, messageService: MessageService, authenticatedUserService: AuthenticatedUserService) {
+    super(http, 'player', messageService, authenticatedUserService);
   }
 
   getPlayerListView(competitionId: number, playerFilterOptions: PlayerFilterOptions, pageSize: number, pageNumber: number):

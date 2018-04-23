@@ -9,6 +9,7 @@ import { from } from 'rxjs/observable/from';
 import { MessageService } from './message.service';
 import { PageViewModel } from '../Models/PageViewModel';
 import { UrlBuilder } from '../Helpers/UrlBuilder';
+import { AuthenticatedUserService } from './authenticated-user.service';
 
 @Injectable()
 export abstract class BaseHttpService {
@@ -16,13 +17,21 @@ export abstract class BaseHttpService {
   httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
   httpOptionsUrlEncoded = { headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }) };
 
-  constructor(private http: HttpClient, protected controllerName: string, private messageService: MessageService) { }
+  constructor(private http: HttpClient, protected controllerName: string, private messageService: MessageService,
+    private authenticatedUserService: AuthenticatedUserService
+  ) {
+    if (authenticatedUserService.IsAuthenticated) {
+      this.httpOptions.headers = this.httpOptions.headers.append('Authorization', `Bearer ${authenticatedUserService.Token}`);
+    }
+    // this.httpOptions.headers =  this.httpOptions.headers.append('Authorization', 'B--u6wLiNty1U5MAeBekggUy7ssvBnWgJr85eqpL-ABEAEJRzM45Tg29Fp4RO6iOouJINULXrYlCaitH-k-6SQK98Jwzs9c-9i2b39MQNRPLxldSVqAmph1BeizlMzq1EPKQTha3qaPylQYEbkj1Zc44kt2yk1mgk9aQ0PseLfsas3w1SadYa6pgR0fLUmOkk2dLE-b772qKS2_e-2iVgeaEvxsCbp-_NT-XAOuDfsF51ZE9mEV_jYH54nYudzKR1vP4lIQu1wUAnQ8LGLvYHY9BBLDsG1tijHwp_9IZDBCxOxfofeAZwYk9E273_0SA03kIwb92tw0yQh_PS3sFq4lpBwsfJmqjvtnK3aM5L1rEbW-7nv8pato_NilHpK7UbfLIe6f7V9mhzl6aBSlnem7ReCezC56XdgAsFmnwyjm0-CqzTg5_it5AXgwGxnPWYGEMW8AExEplLxEKZRAFTyh8lZlyT0Gf2SaWz9VbZYsyOY_e-vgdODkSrCr02fgzzUGVTTsOfvj5gIMZ5kNDJA');
+  }
 
   /** Creates get request to the following url: ${baseAddress}/api/${controllerName}/?ItemsOnPage=${pageSize}&PageNumber=${pageNumber} */
-  public getPage<TResponse>(pageSize: number, pageNumber: number): Observable<PageViewModel<TResponse>> {
+  public getPage<TResponse>(pageSize: number, pageNumber: number, customUrl: string): Observable<PageViewModel<TResponse>> {
     return this.http.get<PageViewModel<TResponse>>(
       new UrlBuilder()
         .addControllerName(this.controllerName)
+        .addCustomUrlPart(customUrl)
         .addPageRequest(pageSize, pageNumber)
         .toString()
     ).pipe(
@@ -96,7 +105,7 @@ export abstract class BaseHttpService {
     this.messageService.addLog('CompetitionService: ' + message);
   }
 
-  private logError(errorMessage: string ) {
+  private logError(errorMessage: string) {
     this.messageService.addError(errorMessage);
   }
 

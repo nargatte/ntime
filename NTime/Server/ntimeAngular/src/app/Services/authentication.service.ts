@@ -10,11 +10,12 @@ import { RegisterBindingModel } from '../Models/Authentication/RegisterBindingMo
 import { UrlBuilder } from '../Helpers/UrlBuilder';
 import { LoginData } from '../Models/Authentication/LoginData';
 import { TokenInfo } from '../Models/Authentication/TokenInfo';
+import { AuthenticatedUserService } from './authenticated-user.service';
 
 @Injectable()
 export class AuthenticationService extends BaseHttpService {
-  constructor(http: HttpClient, messageService: MessageService) {
-    super(http, 'Account', messageService);
+  constructor(http: HttpClient, messageService: MessageService, authenticatedUserService: AuthenticatedUserService) {
+    super(http, 'Account', messageService, authenticatedUserService);
   }
 
   public RegisterUser(registerModel: RegisterBindingModel): Observable<RegisterBindingModel> {

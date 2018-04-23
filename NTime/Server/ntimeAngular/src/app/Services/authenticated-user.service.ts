@@ -6,8 +6,8 @@ export class AuthenticatedUserService {
   private _user: AuthenticatedUser;
   constructor() { }
 
-  public IsAuthenticated(): boolean {
-    if (this._user === null || this._user.Email === null || this._user.Email === '') {
+  public get IsAuthenticated(): boolean {
+    if (this._user == null || this._user.Email == null || this._user.Email === '') {
       return false;
     } else {
       return true;

@@ -7,6 +7,12 @@
     <a mat-button routerLink="/konto">Moje konto</a>
     <a mat-button routerLink="/oferta">Oferta</a>
     <a mat-button routerLink="/kontakt">Kontakt</a>
+    <!-- <ng-container *ngIf="User && authenticatedUserService.IsAuthenticated">
+        <span>
+            Witaj {{User.Email}}
+        </span>
+    </ng-container> -->
+    
 </mat-toolbar>
 
 <router-outlet></router-outlet>
