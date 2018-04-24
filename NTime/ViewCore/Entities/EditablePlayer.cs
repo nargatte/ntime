@@ -42,8 +42,8 @@ namespace ViewCore.Entities
             get { return DbEntity.StartNumber; }
             set
             {
-                OnUpdateRequested();
                 DbEntity.StartNumber = SetProperty(DbEntity.StartNumber, value);
+                OnUpdateRequested();
             }
         }
 
@@ -52,8 +52,8 @@ namespace ViewCore.Entities
             get { return DbEntity.FirstName; }
             set
             {
-                OnUpdateRequested();
                 DbEntity.FirstName = SetProperty(DbEntity.FirstName, value);
+                OnUpdateRequested();
             }
         }
 
@@ -73,8 +73,8 @@ namespace ViewCore.Entities
             get { return DbEntity.CompetitionId; }
             set
             {
-                OnUpdateRequested();
                 DbEntity.CompetitionId = SetProperty(DbEntity.CompetitionId, value);
+                OnUpdateRequested();
             }
         }
 
@@ -122,8 +122,8 @@ namespace ViewCore.Entities
             get { return DbEntity.BirthDate; }
             set
             {
-                OnUpdateRequested();
                 DbEntity.BirthDate = SetProperty(DbEntity.BirthDate, value);
+                OnUpdateRequested();
             }
         }
 
@@ -178,6 +178,17 @@ namespace ViewCore.Entities
             }
         }
 
+
+        public bool IsPaidUp
+        {
+            get { return DbEntity.IsPaidUp; }
+            set
+            {
+                DbEntity.IsPaidUp = SetProperty(DbEntity.IsPaidUp, value);
+                OnUpdateRequested();
+            }
+        }
+
         public string FullCategory
         {
             get { return DbEntity.FullCategory; }
@@ -212,6 +223,7 @@ namespace ViewCore.Entities
                     DbEntity.Time = SetProperty(DbEntity.Time, dateTime.ToDecimal());
             }
         }
+
 
         private ObservableCollection<EditableDistance> _definedDistances;
         public ObservableCollection<EditableDistance> DefinedDistances

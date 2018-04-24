@@ -265,6 +265,7 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Width="Auto" Header="Telefon" Binding="{Binding PhoneNumber}"/>
+                <DataGridCheckBoxColumn Width="Auto" Header="Opłacony" Binding="{Binding IsPaidUp, UpdateSourceTrigger=PropertyChanged}"/>
             </DataGrid.Columns>
         </mvvmHelper:MultipleChoiceDataGrid>
 
