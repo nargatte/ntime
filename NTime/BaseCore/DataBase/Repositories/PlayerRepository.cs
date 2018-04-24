@@ -202,7 +202,6 @@ namespace BaseCore.DataBase
 
         public async Task<Player> AddAsync(Player player, AgeCategory ageCategory, Distance distance, Subcategory subcategory)
         {
-            AgeCategory ageCategory = await (new AgeCategoryRepository(ContextProvider, Competition)).GetFittingAsync(player);
             await AddAsync(PreparePlayer(player, distance, subcategory, ageCategory));
             player.Distance = distance;
             player.Subcategory = subcategory;
@@ -210,9 +209,8 @@ namespace BaseCore.DataBase
             return player;
         }
 
-        public async Task UpdateAsync(Player player, Distance distance, Subcategory subcategory)
+        public async Task UpdateAsync(Player player, AgeCategory ageCategory, Distance distance, Subcategory subcategory)
         {
-            AgeCategory ageCategory = await (new AgeCategoryRepository(ContextProvider, Competition)).GetFittingAsync(player);
             player.Distance = distance;
             player.DistanceId = distance?.Id;
             player.Subcategory = subcategory;
@@ -232,45 +230,9 @@ namespace BaseCore.DataBase
 
         public Task UpdateFullCategoryAllAsync()
         {
-            //Old slow version
-            //Player[] players = await GetAllAsync();
-            //AgeCategory[] categories = null;
-            //await ContextProvider.DoAsync(async ctx =>
-            //{
-            //    categories = await ctx.AgeCategories.Where(a => a.CompetitionId == Competition.Id)
-            //        .AsNoTracking().ToArrayAsync();
-            //});
-
-            //Dictionary<int, AgeCategory> ageCategoriesDictionary = new Dictionary<int, AgeCategory>();
-
-            //Parallel.ForEach(players, player =>
-            //{
-            //    if (!ageCategoriesDictionary.TryGetValue(player.BirthDate.Year, out AgeCategory ageCategory))
-            //    {
-            //        ageCategory = categories
-            //            .FirstOrDefault(a =>
-            //                a.YearFrom <= player.BirthDate.Year && player.BirthDate.Year <= a.YearTo);
-            //        if (ageCategory != null)
-            //        {
-            //            ageCategoriesDictionary.Add(player.BirthDate.Year, ageCategory);
-            //        }
-            //    }
-
-            //    player.AgeCategory = ageCategory;
-            //    player.AgeCategoryId = ageCategory?.Id;
-
-            //    player.FullCategory = GetFullCategory(player.Distance, player.Subcategory, player.AgeCategory,
-            //        player.IsMale);
-
-            //    player.AgeCategory = null;
-            //    player.Distance = null;
-            //    player.Subcategory = null;
-            //});
-
-            //await UpdateRangeAsync(players);
             return ContextProvider.DoAsync(async ctx =>
             {
-                Player[] players = await ctx.Players.Where(p => p.CompetitionId == Competition.Id).ToArrayAsync();
+                Player[] players = await ctx.Players.Where(p => p.CompetitionId == Competition.Id).Include(p => p.AgeCategory).ToArrayAsync();
                 AgeCategory[] categories = await ctx.AgeCategories.Where(a => a.CompetitionId == Competition.Id)
                         .ToArrayAsync();
 
@@ -278,6 +240,9 @@ namespace BaseCore.DataBase
 
                 foreach (Player player in players)
                 {
+                    if(player.IsCategoryFixed)
+                        continue;
+
                     if (!ageCategoriesDictionary.TryGetValue(player.BirthDate.Year, out AgeCategory ageCategory))
                     {
                         ageCategory = categories
@@ -294,10 +259,6 @@ namespace BaseCore.DataBase
 
                     player.FullCategory = GetFullCategory(player.Distance, player.Subcategory, player.AgeCategory,
                         player.IsMale);
-
-                    //player.AgeCategory = null;
-                    //player.Distance = null;
-                    //player.Subcategory = null;
                 }
 
                 await ctx.SaveChangesAsync();
@@ -370,7 +331,7 @@ namespace BaseCore.DataBase
             player.SubcategoryId = subcategory?.Id;
             player.Subcategory = null;
 
-            AgeCategory ageCategory = await (new AgeCategoryRepository(ContextProvider, Competition)).GetFittingAsync(player);
+            AgeCategory ageCategory = (await (new AgeCategoryRepository(ContextProvider, Competition)).GetFittingAsync(player))[0];
             player.AgeCategoryId = ageCategory?.Id;
             player.AgeCategory = null;
 
