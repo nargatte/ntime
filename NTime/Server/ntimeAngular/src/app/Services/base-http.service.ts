@@ -23,7 +23,6 @@ export abstract class BaseHttpService {
     if (authenticatedUserService.IsAuthenticated) {
       this.httpOptions.headers = this.httpOptions.headers.append('Authorization', `Bearer ${authenticatedUserService.Token}`);
     }
-    // this.httpOptions.headers =  this.httpOptions.headers.append('Authorization', 'B--u6wLiNty1U5MAeBekggUy7ssvBnWgJr85eqpL-ABEAEJRzM45Tg29Fp4RO6iOouJINULXrYlCaitH-k-6SQK98Jwzs9c-9i2b39MQNRPLxldSVqAmph1BeizlMzq1EPKQTha3qaPylQYEbkj1Zc44kt2yk1mgk9aQ0PseLfsas3w1SadYa6pgR0fLUmOkk2dLE-b772qKS2_e-2iVgeaEvxsCbp-_NT-XAOuDfsF51ZE9mEV_jYH54nYudzKR1vP4lIQu1wUAnQ8LGLvYHY9BBLDsG1tijHwp_9IZDBCxOxfofeAZwYk9E273_0SA03kIwb92tw0yQh_PS3sFq4lpBwsfJmqjvtnK3aM5L1rEbW-7nv8pato_NilHpK7UbfLIe6f7V9mhzl6aBSlnem7ReCezC56XdgAsFmnwyjm0-CqzTg5_it5AXgwGxnPWYGEMW8AExEplLxEKZRAFTyh8lZlyT0Gf2SaWz9VbZYsyOY_e-vgdODkSrCr02fgzzUGVTTsOfvj5gIMZ5kNDJA');
   }
 
   /** Creates get request to the following url: ${baseAddress}/api/${controllerName}/?ItemsOnPage=${pageSize}&PageNumber=${pageNumber} */

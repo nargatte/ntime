@@ -178,7 +178,6 @@ namespace ViewCore.Entities
             }
         }
 
-
         public bool IsPaidUp
         {
             get { return DbEntity.IsPaidUp; }

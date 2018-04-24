@@ -9,6 +9,17 @@
     overflow: auto;
   }
 
+  /* .mat-table-row {
+    background-color: aquamarine;
+  } */
+
+  .paid {
+    background-color: rgb(205, 255, 205);
+  }
+  /* .mat-row:nth-child(odd) {
+    background-color: rgb(205, 255, 205);
+  } */
+
   button{
     margin: 2%;
   }

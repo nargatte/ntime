@@ -26,23 +26,37 @@
         </ng-template>
       </mat-cell>
     </ng-container>
-    
-    <ng-container matColumnDef="team">
-        <mat-header-cell *matHeaderCellDef> Klub </mat-header-cell>
-        <mat-cell *matCellDef="let player"> {{player.Team}} </mat-cell>
-      </ng-container>
 
-      <ng-container matColumnDef="fullCategory">
-          <mat-header-cell *matHeaderCellDef> Kategoria </mat-header-cell>
-          <mat-cell *matCellDef="let player"> {{player.FullCategory}} </mat-cell>
+    <ng-container matColumnDef="team">
+      <mat-header-cell *matHeaderCellDef> Klub </mat-header-cell>
+      <mat-cell *matCellDef="let player"> {{player.Team}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="fullCategory">
+      <mat-header-cell *matHeaderCellDef> Kategoria </mat-header-cell>
+      <mat-cell *matCellDef="let player"> {{player.FullCategory}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="isPaidUp">
+      <mat-header-cell *matHeaderCellDef > Opłacony </mat-header-cell>
+      <mat-cell *matCellDef="let player">
+        <ng-container *ngIf="player.IsPaidUp; else elseTemplate">
+          Tak
         </ng-container>
+        <ng-template #elseTemplate>
+          Nie
+        </ng-template>
+      </mat-cell>
+    </ng-container>
+
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-row  *matRowDef="let row; columns: displayedColumns;"
+    [ngStyle]="{'background-color':row.IsPaidUp === true ? 'rgb(205, 255, 205)' : 'white' }"></mat-row>
   </mat-table>
 
-  <mat-paginator #paginator [pageSize]="20" [pageSizeOptions]="[10, 20, 50]" [showFirstLastButtons]="true"
-    [(length)]="playersCount" (page) = "onPageEvent($event)">
+  <mat-paginator #paginator [pageSize]="20" [pageSizeOptions]="[10, 20, 50]" [showFirstLastButtons]="true" [(length)]="playersCount"
+    (page)="onPageEvent($event)">
   </mat-paginator>
   <!-- <button mat-button (click)="onClick()">Set paginator</button> -->
 </div>
