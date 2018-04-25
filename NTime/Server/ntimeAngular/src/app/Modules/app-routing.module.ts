@@ -18,6 +18,7 @@ const routes: Routes = [
     { path: 'o-nas', component: AboutUsTabComponent, data: { name: 'about' } },
     { path: 'kontakt', component: ContactTabComponent, data: { name: 'contact' } },
     { path: 'konto', component: MyAccountTabComponent, data: { name: 'account' } },
+    { path: 'wyloguj', redirectTo: '/konto?logout=true', pathMatch: 'full' },
     { path: 'oferta', component: OfferTabComponent, data: { name: 'offer' } },
     { path: 'zawody', component: CompetitionTabComponent, data: { name: 'competitions' } },
     { path: 'zapisy/:id', component: RegistrationTabComponent},

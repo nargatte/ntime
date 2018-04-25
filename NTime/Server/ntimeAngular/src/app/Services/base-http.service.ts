@@ -103,7 +103,7 @@ export abstract class BaseHttpService {
   protected postWithoutBody<TResponse>(requestUrl: string): Observable<TResponse> {
     this.updateAuthorizedUser();
     this.log('Preparing post request');
-    return this.http.post<TResponse>(requestUrl, this.httpOptions).pipe(
+    return this.http.post<TResponse>(requestUrl, [], this.httpOptions).pipe(
       catchError(this.handleError)
     );
   }

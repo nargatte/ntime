@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 
 @Injectable()
 export class MessageService {
@@ -9,7 +9,9 @@ export class MessageService {
     constructor() { }
 
     public addLog(message: string) {
-        // console.log(message);
+        if (isDevMode()) {
+            console.log(message);
+        }
         this.messages.push(message);
     }
 
@@ -18,7 +20,9 @@ export class MessageService {
     }
 
     public addError(error: string) {
-        // console.error(error);
+        if (isDevMode()) {
+            console.error(error);
+        }
         this.errors.push(error);
     }
 
@@ -27,7 +31,9 @@ export class MessageService {
     }
 
     public addObject(item: any) {
-        // console.log(item);
+        if (isDevMode()) {
+            console.log(item);
+        }
         this.objects.push(item);
     }
 
