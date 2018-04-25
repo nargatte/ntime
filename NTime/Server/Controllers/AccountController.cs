@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
@@ -143,7 +144,7 @@ namespace Server.Controllers
 
             IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
                 model.NewPassword);
-            
+
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
@@ -276,9 +277,9 @@ namespace Server.Controllers
             if (hasRegistered)
             {
                 Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-                
-                 ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
-                    OAuthDefaults.AuthenticationType);
+
+                ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
+                   OAuthDefaults.AuthenticationType);
                 ClaimsIdentity cookieIdentity = await user.GenerateUserIdentityAsync(UserManager,
                     CookieAuthenticationDefaults.AuthenticationType);
 
@@ -346,7 +347,7 @@ namespace Server.Controllers
                 return BadRequest(ModelState);
             }
 
-            if( !(model.Role == RoleEnum.Player || model.Role == RoleEnum.Organizer) )
+            if (!(model.Role == RoleEnum.Player || model.Role == RoleEnum.Organizer))
                 throw new Exception("Role invalid");
 
             var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
@@ -370,7 +371,8 @@ namespace Server.Controllers
             }
             else if (model.Role == RoleEnum.Organizer)
             {
-                OrganizerAccountRepository organizerAccountRepository = new OrganizerAccountRepository(new ContextProvider());
+                OrganizerAccountRepository organizerAccountRepository =
+                    new OrganizerAccountRepository(new ContextProvider());
                 OrganizerAccount organizerAccount = new OrganizerAccount();
                 organizerAccount.EMail = model.Email;
                 organizerAccount.AccountId = user.Id;
@@ -384,10 +386,34 @@ namespace Server.Controllers
                 throw new Exception("Role invalid");
             }
 
-            string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-            await UserManager.SendEmailAsync(user.Id,
-                "Potwierdzenie rejrstracji w systemie Time2Win", "Kliknij w link żeby potwierdzić rejestrację swojego konta: <a href=\""
-                + Url.Content("/potwierdzenie-rejestracji?userId=" + user.Id + "&token=" + HttpUtility.UrlDecode(code)) + "\">KLIKNIJ</a>");
+            try
+            {
+                string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                await UserManager.SendEmailAsync(user.Id,
+                    "Potwierdzenie rejrstracji w systemie Time2Win",
+                    "Kliknij w link żeby potwierdzić rejestrację swojego konta: <a href=\""
+                    + Url.Content("/potwierdzenie-rejestracji?userId=" + user.Id + "&token=" +
+                                  HttpUtility.UrlDecode(code)) + "\">KLIKNIJ</a>");
+            }
+            catch (SmtpFailedRecipientException)
+            {
+                if (model.Role == RoleEnum.Player)
+                {
+                    PlayerAccountRepository accountRepository = new PlayerAccountRepository(new ContextProvider());
+                    PlayerAccount p = await accountRepository.GetByAccountId(user.Id);
+                    await accountRepository.RemoveAsync(p);
+                }
+                else if (model.Role == RoleEnum.Organizer)
+                {
+                    OrganizerAccountRepository accountRepository = new OrganizerAccountRepository(new ContextProvider());
+                    OrganizerAccount p = await accountRepository.GetByAccountId(user.Id);
+                    await accountRepository.RemoveAsync(p);
+                }
+
+                await UserManager.DeleteAsync(user);
+
+                return BadRequest("Podany email nie istnieje");
+            }
 
             return Ok();
         }
@@ -444,7 +470,7 @@ namespace Server.Controllers
         public async Task<IHttpActionResult> ResetPassword(ResetPasswordBindingModel model)
         {
             var result = await UserManager.ResetPasswordAsync(model.UserId, model.Token, model.NewPassword);
-            if(result.Succeeded)
+            if (result.Succeeded)
                 return Ok();
             return Conflict();
         }
@@ -478,7 +504,7 @@ namespace Server.Controllers
             result = await UserManager.AddLoginAsync(user.Id, info.Login);
             if (!result.Succeeded)
             {
-                return GetErrorResult(result); 
+                return GetErrorResult(result);
             }
             return Ok();
         }

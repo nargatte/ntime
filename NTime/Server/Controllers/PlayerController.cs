@@ -213,6 +213,29 @@ namespace Server.Controllers
             return Ok();
         }
 
+        // PUT api/Player
+        [System.Web.Http.Route]
+        [System.Web.Http.Authorize(Roles = "Administrator,Organizer,Moderator")]
+        public async Task<IHttpActionResult> Put(PlayerWithScoresDto[] playerWithScoresDtos)
+        {
+            foreach (PlayerWithScoresDto p in playerWithScoresDtos)
+            {
+                if (await InitCompetitionByRelatedEntitieId<Player>(p.Id) == false)
+                    return NotFound();
+
+                if (await CanOrganizerAccessAndEdit() == false)
+                    return Unauthorized();
+
+                Player player = await _playerRepository.GetById(p.Id);
+
+                await p.CopyDataFromDto(player, ContextProvider, Competition);
+
+                await _playerRepository.UpdateAsync(player, player.Distance, player.ExtraPlayerInfo);
+            }
+
+            return Ok();
+        }
+
         // DELETE api/Player/1
         [System.Web.Http.Route("{id:int:min(1)}")]
         [System.Web.Http.Authorize(Roles = "Administrator,Organizer,Moderator,Player")]
