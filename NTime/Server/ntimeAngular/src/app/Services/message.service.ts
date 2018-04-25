@@ -9,7 +9,7 @@ export class MessageService {
     constructor() { }
 
     public addLog(message: string) {
-        console.log(message);
+        // console.log(message);
         this.messages.push(message);
     }
 
@@ -18,7 +18,7 @@ export class MessageService {
     }
 
     public addError(error: string) {
-        console.error(error);
+        // console.error(error);
         this.errors.push(error);
     }
 
@@ -27,7 +27,7 @@ export class MessageService {
     }
 
     public addObject(item: any) {
-        console.log(item);
+        // console.log(item);
         this.objects.push(item);
     }
 

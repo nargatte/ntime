@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { UrlBuilder } from './Helpers/UrlBuilder';
+import { MessageService } from './Services/message.service';
 
 @Component({
     selector: 'app-root',
@@ -8,11 +9,11 @@ import { UrlBuilder } from './Helpers/UrlBuilder';
 })
 export class AppComponent {
     title = 'Time2Win';
-    constructor() {
+    constructor(private messageService: MessageService) {
         const builtString = new UrlBuilder()
                             .addControllerName('Competition')
                             .addId(15)
                             .toString();
-        console.log(builtString);
+        this.messageService.addLog(builtString);
     }
 }
