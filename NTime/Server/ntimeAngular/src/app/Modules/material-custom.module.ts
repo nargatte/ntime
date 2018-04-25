@@ -10,6 +10,7 @@ import {
 } from '@angular/material';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { PolishPaginatorIntl } from '../Helpers/PolishPaginatorIntl';
+import { SelectionModel } from '@angular/cdk/collections';
 
 @NgModule({
   imports: [
@@ -28,7 +29,7 @@ import { PolishPaginatorIntl } from '../Helpers/PolishPaginatorIntl';
     MatCheckboxModule, MatDialogModule,
   ],
   providers: [
-    { provide: MatPaginatorIntl, useClass: PolishPaginatorIntl},
+    { provide: MatPaginatorIntl, useClass: PolishPaginatorIntl },
   ],
   declarations: []
 })

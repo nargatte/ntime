@@ -11,6 +11,7 @@ import { FailedActionDialogComponent } from '../../SharedComponents/Dialogs/fail
 import { AuthenticatedUserService } from '../../Services/authenticated-user.service';
 import { AuthenticatedUser } from '../../Models/Authentication/AuthenticatedUser';
 import { RoleEnum } from '../../Models/Enums/RoleEnum';
+import { RoleViewModel } from '../../Models/Authentication/RoleViewModel';
 
 @Component({
   selector: 'app-log-in-form',
@@ -41,18 +42,28 @@ export class LogInFormComponent implements OnInit {
     body.set('password', this.loginData.password);
     body.set('grant_type', this.loginData.grant_type);
     console.log(body);
-    this.authenticationService.Login(body).subscribe(
+    this.authenticationService.login(body).subscribe(
       loggedUser => this.onSuccessfullLogin(loggedUser),
       error => this.onFailedLogin(error),
     );
   }
 
   private onSuccessfullLogin(loggedUser: TokenInfo) {
+    this.authenticationService.getRole().subscribe(
+      role => this.onSuccessfullRoleImport(loggedUser, role),
+      error => this.onFailedLogin(error),
+    );
+
+  }
+
+  private onSuccessfullRoleImport(loggedUser: TokenInfo, role: RoleViewModel) {
     this.messageService.addLog('Logowanie przebiegło prawidło');
     this.messageService.addObject(loggedUser);
     this.authenticatedUserService.addUser(new AuthenticatedUser(
       loggedUser.access_token, 'first', 'last', loggedUser.userName, RoleEnum.Player
     ));
+    this.authenticatedUserService.User.Role =  +role.Role;
+    this.messageService.addLog(`Role downloaed ${this.authenticatedUserService.User.Role}`);
     this.messageService.addLog('Displaying authenticated user');
     this.messageService.addObject(this.authenticatedUserService.User);
     this.successModalUp();

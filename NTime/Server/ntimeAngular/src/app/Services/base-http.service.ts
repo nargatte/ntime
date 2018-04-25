@@ -17,7 +17,7 @@ export abstract class BaseHttpService {
   httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
   httpOptionsUrlEncoded = { headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }) };
 
-  constructor(private http: HttpClient, protected controllerName: string, private messageService: MessageService,
+  constructor(private http: HttpClient, protected controllerName: string, protected messageService: MessageService,
     private authenticatedUserService: AuthenticatedUserService
   ) {
     if (authenticatedUserService.IsAuthenticated) {

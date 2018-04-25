@@ -27,7 +27,7 @@ export class MyAccountTabComponent implements OnInit, AfterViewInit {
       this.dialog.open(SuccessfullActionDialogComponent, {
         data: { text: 'konto zostało pomyślnie aktywowane' }
       });
-    } else if (isActivated === 'true') {
+    } else if (isActivated === 'false') {
       this.dialog.open(FailedActionDialogComponent, {
         data: { text: 'Konto nie zostało aktywowane' }
       });

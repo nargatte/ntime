@@ -11,6 +11,8 @@ import { UrlBuilder } from '../Helpers/UrlBuilder';
 import { LoginData } from '../Models/Authentication/LoginData';
 import { TokenInfo } from '../Models/Authentication/TokenInfo';
 import { AuthenticatedUserService } from './authenticated-user.service';
+import { RoleEnum } from '../Models/Enums/RoleEnum';
+import { RoleViewModel } from '../Models/Authentication/RoleViewModel';
 
 @Injectable()
 export class AuthenticationService extends BaseHttpService {
@@ -18,7 +20,9 @@ export class AuthenticationService extends BaseHttpService {
     super(http, 'Account', messageService, authenticatedUserService);
   }
 
-  public RegisterUser(registerModel: RegisterBindingModel): Observable<RegisterBindingModel> {
+  public registerUser(registerModel: RegisterBindingModel, role: RoleEnum): Observable<RegisterBindingModel> {
+    registerModel.role = role;
+    this.messageService.addLog(`Trying to register as ${role.toString()}`);
     return super.post<RegisterBindingModel, RegisterBindingModel>(
       new UrlBuilder()
         .addControllerName(this.controllerName)
@@ -28,7 +32,7 @@ export class AuthenticationService extends BaseHttpService {
     );
   }
 
-  public LogOut(): Observable<void> {
+  public logOut(): Observable<void> {
     return super.postWithoutBody<void>(
       new UrlBuilder()
         .addControllerName(this.controllerName)
@@ -37,12 +41,21 @@ export class AuthenticationService extends BaseHttpService {
     );
   }
 
-  public Login(loginData: URLSearchParams) {
+  public login(loginData: URLSearchParams): Observable<TokenInfo> {
     return super.postUrlEncoded<TokenInfo>(
       new UrlBuilder()
         .addCustomUrlPart('/token')
         .toString(),
       loginData
+    );
+  }
+
+  public getRole(): Observable<RoleViewModel> {
+    return super.get<RoleViewModel>(
+      new UrlBuilder()
+      .addControllerName('account')
+      .addCustomUrlPart('/role')
+      .toString()
     );
   }
 

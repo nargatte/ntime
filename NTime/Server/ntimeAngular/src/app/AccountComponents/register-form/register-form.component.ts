@@ -8,6 +8,8 @@ import { FailedActionDialogComponent } from '../../SharedComponents/Dialogs/fail
 // tslint:disable-next-line:max-line-length
 import { SuccessfullActionDialogComponent } from '../../SharedComponents/Dialogs/successfull-action-dialog/successfull-action-dialog.component';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ActivatedRoute, Params } from '@angular/router';
+import { RoleStringToEnumConverter } from '../../Helpers/RoleStringToEnumConverter';
 
 @Component({
   selector: 'app-register-form',
@@ -25,14 +27,23 @@ export class RegisterFormComponent implements OnInit {
   constructor(
     private authenticationService: AuthenticationService,
     private messageService: MessageService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
   }
 
   public registerButtonClick() {
-    this.authenticationService.RegisterUser(this.registerData).subscribe(
+    let roleString = 'player';
+    this.activatedRoute.queryParams.subscribe((params: Params) => {
+      if (params['role']) {
+        roleString = params['role'];
+      }
+      this.messageService.addLog(`Role string ${roleString}`);
+    });
+    const role = RoleStringToEnumConverter.Convert(roleString);
+    this.authenticationService.registerUser(this.registerData, role).subscribe(
       registeredUser => this.onSuccessfullyRegisteredUser(registeredUser),
       error => this.onFailedRegisterUser(error)
     );
@@ -45,20 +56,20 @@ export class RegisterFormComponent implements OnInit {
   }
 
   private onFailedRegisterUser(error: HttpErrorResponse) {
-    this.messageService.addError('Error while registering a user');
+    this.messageService.addError('Error while trying to register');
     this.messageService.addObject(error);
     this.failedModalUp();
   }
 
   private successModalUp() {
     this.dialog.open(SuccessfullActionDialogComponent, {
-      data: { text: 'Rejestracja przebiegła prawidłwo' }
+      data: { text: 'Rejestracja przebiegła prawidłowo' }
     });
   }
 
   public failedModalUp() {
     this.dialog.open(FailedActionDialogComponent, {
-      data: { text: 'Nastąpił błąd podczas logowania' }
+      data: { text: 'Wystąpił błąd podczas rejestracji' }
     });
   }
 
