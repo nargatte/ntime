@@ -10,7 +10,7 @@ import { NavigationEnd, Router } from '@angular/router';
 })
 export class AppComponent {
     title = 'Time2Win';
-    constructor(private messageService: MessageService, private router: Router) {
+    constructor(private router: Router) {
         // override the route reuse strategy
         this.router.routeReuseStrategy.shouldReuseRoute = function () {
             return false;
