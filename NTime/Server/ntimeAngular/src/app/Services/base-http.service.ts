@@ -26,16 +26,22 @@ export abstract class BaseHttpService {
   public updateAuthorizedUser(): void {
     const authorizationHeaderName = 'Authorization';
     if (this.authenticatedUserService.IsAuthenticated) {
-      if (this.httpOptions.headers.has(authorizationHeaderName) === false) {
-        this.httpOptions.headers = this.httpOptions.headers.append(
-          authorizationHeaderName, `Bearer ${this.authenticatedUserService.Token}`
-        );
-      }
-      if (this.httpOptionsUrlEncoded.headers.has(authorizationHeaderName) === false) {
-        this.httpOptionsUrlEncoded.headers = this.httpOptions.headers.append(
-          authorizationHeaderName, `Bearer ${this.authenticatedUserService.Token}`
-        );
-      }
+      this.httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+      this.httpOptionsUrlEncoded = { headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }) };
+      this.httpOptions.headers = this.httpOptions.headers.append(
+        authorizationHeaderName, `Bearer ${this.authenticatedUserService.Token}`);
+      this.httpOptionsUrlEncoded.headers = this.httpOptions.headers.append(
+        authorizationHeaderName, `Bearer ${this.authenticatedUserService.Token}`);
+      // if (this.httpOptions.headers.has(authorizationHeaderName) === false) {
+      //   this.httpOptions.headers = this.httpOptions.headers.append(
+      //     authorizationHeaderName, `Bearer ${this.authenticatedUserService.Token}`
+      //   );
+      // }
+      // if (this.httpOptionsUrlEncoded.headers.has(authorizationHeaderName) === false) {
+      //   this.httpOptionsUrlEncoded.headers = this.httpOptions.headers.append(
+      //     authorizationHeaderName, `Bearer ${this.authenticatedUserService.Token}`
+      //   );
+      // }
     }
   }
 

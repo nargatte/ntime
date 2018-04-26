@@ -42,10 +42,10 @@ import { FailedActionDialogComponent } from './SharedComponents/Dialogs/failed-a
 import { AuthenticatedUserService } from './Services/authenticated-user.service';
 import { PlayersSelectComponent } from './SharedComponents/Players/players-select/players-select.component';
 import { PlayersListUnauthorizedComponent } from './SharedComponents/Players/players-list-unauthorized/players-list-unauthorized.component';
-import { PlayersListAdminComponent } from './SharedComponents/Players/players-list-admin/players-list-admin.component';
+import { PlayersListAdminComponent } from './SharedComponents/Players/players-list-staff/players-list-admin.component';
 // tslint:disable-next-line:max-line-length
 import { PlayersTabHeaderUnauthorizedComponent } from './SharedComponents/Players/players-tab-header-unauthorized/players-tab-header-unauthorized.component';
-import { PlayersTabHeaderAdminComponent } from './SharedComponents/Players/players-tab-header-admin/players-tab-header-admin.component';
+import { PlayersTabHeaderAdminComponent } from './SharedComponents/Players/players-tab-header-staff/players-tab-header-admin.component';
 
 
 @NgModule({

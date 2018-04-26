@@ -46,9 +46,12 @@ export class MyAccountTabComponent implements OnInit, AfterViewInit {
       if (isLogout === 'true') {
         if (this.authenticatedUserService.IsAuthenticated) {
           this.authenticationService.logOut().subscribe(
-            result => this.dialog.open(SuccessfullActionDialogComponent, {
-              data: { text: 'Wylogowanie nastąpiło poprawnie' }
-            }),
+            result => {
+              this.dialog.open(SuccessfullActionDialogComponent, {
+                data: { text: 'Wylogowanie nastąpiło poprawnie' }
+              });
+              this.authenticatedUserService.removeUser();
+            },
             error => {
               this.messageService.addError('Could not log out');
               this.messageService.addObject(error);
