@@ -12,6 +12,10 @@ import 'rxjs/add/operator/map';
 import { Competition } from '../../../Models/Competition';
 import { CompetitionService } from '../../../Services/competition.service';
 import { MessageService } from '../../../Services/message.service';
+import { AuthenticatedUserService } from '../../../Services/authenticated-user.service';
+import { RoleEnum } from '../../../Models/Enums/RoleEnum';
+import { OrganizerAccountService } from '../../../Services/organizer-account.service';
+import { OrganizerAccount } from '../../../Models/OrganizerAccount';
 
 
 @Component({
@@ -22,7 +26,11 @@ import { MessageService } from '../../../Services/message.service';
 export class CompetitionsSelectComponent implements AfterViewInit {
     public todayDate: Date;
 
-    constructor(private competitionService: CompetitionService, private messageService: MessageService) {
+    constructor(
+        private competitionService: CompetitionService,
+        private messageService: MessageService,
+        private authenticatedUserService: AuthenticatedUserService,
+        private organizerAccountService: OrganizerAccountService) {
         this.todayDate = new Date(Date.now());
     }
 
@@ -46,17 +54,31 @@ export class CompetitionsSelectComponent implements AfterViewInit {
     }
 
     getCompetitions(pageSize: number, pageNumber: number): void {
-        this.competitionService.getCompetitions(pageSize, pageNumber).subscribe(
-            (page: PageViewModel<Competition>) => {
-                this.log(page.toString());
-                this.messageService.addLog(`Items: ${page.TotalCount}`);
-                this.competitionsCount = page.TotalCount;
-                this.competitions = page.Items;
-                this.competitions.forEach(competition => Competition.convertDates(competition));
-            },
-            error => this.messageService.addError(error), // Errors
-            () => this.setDataSource() // Success
-        );
+        if ( this.authenticatedUserService.IsAuthenticated === true && this.authenticatedUserService.User.Role === RoleEnum.Organizer ) {
+            this.organizerAccountService.getMyInfo().subscribe(
+                (organizer: OrganizerAccount) => {
+                    this.log(organizer.toString());
+                    this.messageService.addLog(`Items: ${organizer.CompetitionDtos.length}`);
+                    this.competitionsCount = organizer.CompetitionDtos.length;
+                    this.competitions = organizer.CompetitionDtos;
+                    this.competitions.forEach(competition => Competition.convertDates(competition));
+                },
+                error => this.messageService.addError(error), // Errors
+                () => this.setDataSource() // Success
+            );
+        } else {
+            this.competitionService.getCompetitions(pageSize, pageNumber).subscribe(
+                (page: PageViewModel<Competition>) => {
+                    this.log(page.toString());
+                    this.messageService.addLog(`Items: ${page.TotalCount}`);
+                    this.competitionsCount = page.TotalCount;
+                    this.competitions = page.Items;
+                    this.competitions.forEach(competition => Competition.convertDates(competition));
+                },
+                error => this.messageService.addError(error), // Errors
+                () => this.setDataSource() // Success
+            );
+        }
     }
 
     private log(message: string) {

@@ -46,6 +46,7 @@ import { PlayersListAdminComponent } from './SharedComponents/Players/players-li
 // tslint:disable-next-line:max-line-length
 import { PlayersTabHeaderUnauthorizedComponent } from './SharedComponents/Players/players-tab-header-unauthorized/players-tab-header-unauthorized.component';
 import { PlayersTabHeaderAdminComponent } from './SharedComponents/Players/players-tab-header-staff/players-tab-header-admin.component';
+import { OrganizerAccountService } from './Services/organizer-account.service';
 
 
 @NgModule({
@@ -65,7 +66,8 @@ import { PlayersTabHeaderAdminComponent } from './SharedComponents/Players/playe
     ],
     providers: [
         CompetitionService, PlayerService,
-        ExtraPlayerInfoService, DistanceService, MessageService, AuthenticationService, AuthenticatedUserService, // Custom services
+        ExtraPlayerInfoService, DistanceService, MessageService, AuthenticationService,
+         AuthenticatedUserService, OrganizerAccountService, // Custom services
         { provide: MAT_DATE_LOCALE, useValue: 'pl-pl' },
     ],
     entryComponents: [

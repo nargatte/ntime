@@ -194,6 +194,7 @@ namespace Server.Controllers
         // PUT api/Player/1
         [System.Web.Http.Route("{id:int:min(1)}")]
         [System.Web.Http.Authorize(Roles = "Administrator,Organizer,Moderator")]
+        [System.Web.Http.HttpPut]
         public async Task<IHttpActionResult> Put(int id, PlayerWithScoresDto playerWithScoresDto)
         {
             playerWithScoresDto.Id = id;
@@ -216,6 +217,7 @@ namespace Server.Controllers
         // PUT api/Player
         [System.Web.Http.Route]
         [System.Web.Http.Authorize(Roles = "Administrator,Organizer,Moderator")]
+        [System.Web.Http.HttpPut]
         public async Task<IHttpActionResult> Put(PlayerWithScoresDto[] playerWithScoresDtos)
         {
             foreach (PlayerWithScoresDto p in playerWithScoresDtos)

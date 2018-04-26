@@ -78,6 +78,21 @@ export abstract class BaseHttpService {
     );
   }
 
+  protected getFromController<TResponse>(): Observable<TResponse> {
+    this.updateAuthorizedUser();
+    return this.http.get<TResponse>(
+      new UrlBuilder()
+        .addControllerName(this.controllerName)
+        .toString(),
+      this.httpOptions
+    ).pipe(
+      tap((item) => {
+        this.log(`Item without id fetched`);
+      }),
+      catchError(this.handleError)
+    );
+  }
+
   protected get<TResponse>(requestUrl: string): Observable<TResponse> {
     this.updateAuthorizedUser();
     return this.http.get<TResponse>(requestUrl, this.httpOptions).pipe(
