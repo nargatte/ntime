@@ -1,0 +1,11 @@
+<mat-card class="example-card">
+    <mat-card-content>
+        <p>
+            Lista zawodników
+            <br/> {{competition.Name}} {{competition.EventDate.toLocaleDateString("pl-pl")}}
+        </p>
+    </mat-card-content>
+    <mat-card-actions>
+        <a mat-raised-button color="primary" routerLink="/zawody">Wszystkie zawody</a>
+    </mat-card-actions>
+</mat-card>

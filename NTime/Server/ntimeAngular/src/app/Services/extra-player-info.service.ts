@@ -23,7 +23,7 @@ export class ExtraPlayerInfoService {
     return this.http.get<ExtraPlayerInfo[]>(this.getExtraPlayerInfoFromCompetitionUrl + competitionId).pipe(
       tap((extraPlayerInfo) => {
         this.log(`Distance for competition with id:${extraPlayerInfo} fetched`);
-        console.log(extraPlayerInfo);
+        this.messageService.addObject(extraPlayerInfo);
       }),
       catchError(this.handleError)
     );
@@ -35,11 +35,11 @@ export class ExtraPlayerInfoService {
   private handleError(errorResponse: HttpErrorResponse) {
     if (errorResponse.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
-      console.error('An error occurred:', errorResponse.error.message);
+      this.messageService.addError('An error occurred: ' + errorResponse.error.message);
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
-      console.error(
+      this.messageService.addError(
         `Backend returned code ${errorResponse.status}, ` +
         `body was: ${errorResponse.error}`);
     }

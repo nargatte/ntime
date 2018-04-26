@@ -1,0 +1,24 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    margin: 10px;
+  }
+  
+  /* .mat-table {
+    overflow: auto;
+  } */
+
+  button{
+    margin: 2%;
+    white-space: normal;
+    /* padding: 1em; */
+  }
+  
+  a{
+    text-decoration: none;
+    margin: 1%;
+    white-space: normal;
+    /* margin: 
+    font-weight: 600; */
+}

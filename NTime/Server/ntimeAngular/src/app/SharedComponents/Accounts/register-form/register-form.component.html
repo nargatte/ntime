@@ -1,0 +1,50 @@
+<mat-card class="example-card">
+  <!-- <ng-container *ngIf="competition.SignUpEndDate > todayDate; else elseTemplate"> -->
+  <p>
+    Nie masz konta? Szybko i wygodnie załóż nowe.
+  </p>
+  <form #registerForm="ngForm" autocomplete="off">
+    <mat-card-content>
+      <div class="form-container">
+
+        <mat-form-field>
+          <input matInput type="email" placeholder="Adres e-mail" name="email" required [(ngModel)]="registerData.Email" [email]="registerData.Email!='' && registerData.Email!=null"
+            #email="ngModel">
+          <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+            <ng-container *ngIf="email.errors.required; else notEmtyTemplate">
+              E-mail jest wymagany
+            </ng-container>
+            <ng-template #notEmtyTemplate>
+              E-mail jest nieprawidłowy
+            </ng-template>
+          </div>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="password" placeholder="Hasło" name="password" required [(ngModel)]="registerData.Password" #password="ngModel" autocomplete="new-password">
+          <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+            <div *ngIf="password.errors.required">
+              Hasło jest wymagane
+            </div>
+          </div>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="password" placeholder="Powtórz hasło" name="confirmPassword" required [(ngModel)]="registerData.ConfirmPassword"
+            #confirmPassword="ngModel">
+          <div *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)" class="alert alert-danger">
+            <div *ngIf="confirmPassword.errors.required">
+              Powtórzone hasło jest wymagane
+            </div>
+          </div>
+        </mat-form-field>
+
+      </div>
+    </mat-card-content>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid" (click)="registerButtonClick()">
+      Załóż konto
+    </button>
+
+  </form>
+</mat-card>

@@ -17,22 +17,44 @@ export abstract class BaseHttpService {
   httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
   httpOptionsUrlEncoded = { headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }) };
 
-  constructor(private http: HttpClient, protected controllerName: string, private messageService: MessageService,
+  constructor(private http: HttpClient, protected controllerName: string, protected messageService: MessageService,
     private authenticatedUserService: AuthenticatedUserService
   ) {
-    if (authenticatedUserService.IsAuthenticated) {
-      this.httpOptions.headers = this.httpOptions.headers.append('Authorization', `Bearer ${authenticatedUserService.Token}`);
+    this.updateAuthorizedUser();
+  }
+
+  public updateAuthorizedUser(): void {
+    const authorizationHeaderName = 'Authorization';
+    if (this.authenticatedUserService.IsAuthenticated) {
+      this.httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+      this.httpOptionsUrlEncoded = { headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }) };
+      this.httpOptions.headers = this.httpOptions.headers.append(
+        authorizationHeaderName, `Bearer ${this.authenticatedUserService.Token}`);
+      this.httpOptionsUrlEncoded.headers = this.httpOptions.headers.append(
+        authorizationHeaderName, `Bearer ${this.authenticatedUserService.Token}`);
+      // if (this.httpOptions.headers.has(authorizationHeaderName) === false) {
+      //   this.httpOptions.headers = this.httpOptions.headers.append(
+      //     authorizationHeaderName, `Bearer ${this.authenticatedUserService.Token}`
+      //   );
+      // }
+      // if (this.httpOptionsUrlEncoded.headers.has(authorizationHeaderName) === false) {
+      //   this.httpOptionsUrlEncoded.headers = this.httpOptions.headers.append(
+      //     authorizationHeaderName, `Bearer ${this.authenticatedUserService.Token}`
+      //   );
+      // }
     }
   }
 
   /** Creates get request to the following url: ${baseAddress}/api/${controllerName}/?ItemsOnPage=${pageSize}&PageNumber=${pageNumber} */
   public getPage<TResponse>(pageSize: number, pageNumber: number, customUrl: string): Observable<PageViewModel<TResponse>> {
+    this.updateAuthorizedUser();
     return this.http.get<PageViewModel<TResponse>>(
       new UrlBuilder()
         .addControllerName(this.controllerName)
         .addCustomUrlPart(customUrl)
         .addPageRequest(pageSize, pageNumber)
-        .toString()
+        .toString(),
+      this.httpOptions
     ).pipe(
       tap(() => this.log(`Array fetched`)),
       catchError(this.handleError)
@@ -41,11 +63,13 @@ export abstract class BaseHttpService {
 
   /** Creates get request to the following url: ${baseAddress}/api/${controllerName}/id */
   protected getById<TResponse>(id: number): Observable<TResponse> {
+    this.updateAuthorizedUser();
     return this.http.get<TResponse>(
       new UrlBuilder()
         .addControllerName(this.controllerName)
         .addId(id)
-        .toString()
+        .toString(),
+      this.httpOptions
     ).pipe(
       tap((item) => {
         this.log(`Item with id:${id} fetched`);
@@ -55,7 +79,8 @@ export abstract class BaseHttpService {
   }
 
   protected get<TResponse>(requestUrl: string): Observable<TResponse> {
-    return this.http.get<TResponse>(requestUrl).pipe(
+    this.updateAuthorizedUser();
+    return this.http.get<TResponse>(requestUrl, this.httpOptions).pipe(
       tap((item) => {
         this.log(`Item fetched`);
         this.log(item.toString());
@@ -65,6 +90,7 @@ export abstract class BaseHttpService {
   }
 
   protected post<TResponse, TContent>(requestUrl: string, content: TContent): Observable<TResponse> {
+    this.updateAuthorizedUser();
     this.log('Preparing post request');
     return this.http.post<TResponse>(requestUrl, content, this.httpOptions).pipe(
       catchError(this.handleError)
@@ -72,6 +98,7 @@ export abstract class BaseHttpService {
   }
 
   protected postUrlEncoded<TResponse>(requestUrl: string, content: URLSearchParams): Observable<TResponse> {
+    this.updateAuthorizedUser();
     this.log('Preparing post request urlencoded');
     // const body = `username=tomek@tomek.pl&password=tomek123&grant_type=password`;
     return this.http.post<TResponse>(requestUrl, content.toString(), this.httpOptionsUrlEncoded).pipe(
@@ -80,22 +107,25 @@ export abstract class BaseHttpService {
   }
 
   protected postWithoutBody<TResponse>(requestUrl: string): Observable<TResponse> {
+    this.updateAuthorizedUser();
     this.log('Preparing post request');
-    return this.http.post<TResponse>(requestUrl, this.httpOptions).pipe(
+    return this.http.post<TResponse>(requestUrl, [], this.httpOptions).pipe(
       catchError(this.handleError)
     );
   }
 
   protected put<TResponse, TContent>(requestUrl: string, content: TContent): Observable<TResponse> {
+    this.updateAuthorizedUser();
     this.log('Preparing put request');
-    return this.http.put<TResponse>(requestUrl, content).pipe(
+    return this.http.put<TResponse>(requestUrl, content, this.httpOptions).pipe(
       catchError(this.handleError)
     );
   }
 
   protected delete(requestUrl: string) {
+    this.updateAuthorizedUser();
     this.log('Preparing delete request');
-    return this.http.delete(requestUrl).pipe(
+    return this.http.delete(requestUrl, this.httpOptions).pipe(
       catchError(this.handleError)
     );
   }

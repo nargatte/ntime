@@ -7,6 +7,7 @@ import { DistanceService } from '../../Services/distance.service';
 import { ExtraPlayerInfoService } from '../../Services/extra-player-info.service';
 import { Distance } from '../../Models/Distance';
 import { ExtraPlayerInfo } from '../../Models/ExtraPlayerInfo';
+import { MessageService } from '../../Services/message.service';
 
 @Component({
   selector: 'app-registration-tab',
@@ -25,6 +26,7 @@ export class RegistrationTabComponent implements OnInit {
     private competitionService: CompetitionService,
     private distanceService: DistanceService,
     private extraPlayerInfoService: ExtraPlayerInfoService,
+    private messageService: MessageService
   ) {
     this.todayDate = new Date(Date.now());
   }
@@ -34,40 +36,34 @@ export class RegistrationTabComponent implements OnInit {
     this.getCompetition(this.competitionId);
     setTimeout(() => this.getExtraPlayerInfoFromCompetition(this.competitionId), 20);
     setTimeout(() => this.getDistanceFromCompetition(this.competitionId), 50);
-    // this.getDistanceFromCompetition(this.competitionId);
-    // this.getExtraPlayerInfoFromCompetition(this.competitionId);
   }
 
   getCompetition(id: number): void {
     this.competitionService.getCompetition(id).subscribe(
       (competition: Competition) => {
-        // console.log(`Competition received ${competition}`);
         this.competition = Competition.convertDates(competition); // TODO: Try to make it unmutabel
       },
-      error => console.log(error), // Errors
-      // () => console.log('Succes getting data') // Success
+      error => this.messageService.addError(error), // Errors
     );
   }
 
   getDistanceFromCompetition(competitionId: number): void {
     this.distanceService.getDistanceFromCompetition(competitionId).subscribe(
       (distance: Distance[]) => {
-        console.log(`Distance received ${distance}`);
+        this.messageService.addLog(`Distance received ${distance}`);
         this.distances = distance;
       },
-      error => console.log(error), // Errors
-      // () => console.log('Succes getting data') // Success
+      error => this.messageService.addError(error), // Errors
     );
   }
 
   getExtraPlayerInfoFromCompetition(competitionId: number): void {
     this.extraPlayerInfoService.getExtraPlayerInfoFromCompetition(competitionId).subscribe(
       (extraPlayerInfo: ExtraPlayerInfo[]) => {
-        console.log(`ExtraPlayerInfo received ${extraPlayerInfo}`);
+        this.messageService.addLog(`ExtraPlayerInfo received ${extraPlayerInfo}`);
         this.extraPlayerInfos = extraPlayerInfo;
       },
-      error => console.log(error), // Errors
-      // () => console.log('Succes getting data') // Success
+      error => this.messageService.addError(error), // Errors
     );
   }
 

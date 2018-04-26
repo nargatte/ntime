@@ -1,0 +1,43 @@
+/* .mat-toolbar {
+    display: unset; */
+    /* flex-direction: initial;
+} */
+
+router-outlet{
+    margin-left: 2em;
+}
+.companyName{
+    font-size: 150%;
+}
+
+div {
+    display: block;
+}
+
+a{
+    /* display: block; */
+    text-decoration: none;
+    /* flex-direction: unset; */
+    font-size: 110%;
+    white-space: normal;
+}
+
+button{
+    /* padding: 0; */
+    font-size: 110%;
+    min-width: min-content;
+}
+
+.example-icon {
+    padding: 0 14px;
+  }
+  
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+
+/* .mat-sidenav {
+    text-align: left;
+    background-color: $primary;
+} */
+
