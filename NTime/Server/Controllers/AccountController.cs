@@ -386,6 +386,7 @@ namespace Server.Controllers
                 throw new Exception("Role invalid");
             }
 
+<<<<<<< Updated upstream
             try
             {
                 string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -414,6 +415,12 @@ namespace Server.Controllers
 
                 return BadRequest("Podany email nie istnieje");
             }
+=======
+            string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+            await UserManager.SendEmailAsync(user.Id,
+                "Potwierdzenie rejrstracji w systemie Time2Win", "Kliknij w link żeby potwierdzić rejestrację swojego konta: <a href=\""
+                + Url.Content("/api/Account/ConfirmEmail?userId=" + user.Id + "&token=" + HttpUtility.UrlDecode(code)) + "\">KLIKNIJ</a>");
+>>>>>>> Stashed changes
 
             return Ok();
         }
@@ -427,7 +434,7 @@ namespace Server.Controllers
             string code = await UserManager.GenerateEmailConfirmationTokenAsync(userId);
             await UserManager.SendEmailAsync(userId,
                 "Potwierdzenie rejrstracji w systemie Time2Win", "Kliknij w link żeby potwierdzić rejestrację swojego konta: <a href=\""
-                + Url.Content("/potwierdzenie-rejestracji?userId=" + userId + "&token=" + HttpUtility.UrlDecode(code)) + "\">KLIKNIJ</a>");
+                + Url.Content("/api/Account/ConfirmEmail?userId=" + userId + "&token=" + HttpUtility.UrlDecode(code)) + "\">KLIKNIJ</a>");
             return Ok();
         }
 
@@ -440,8 +447,8 @@ namespace Server.Controllers
             token = token.Replace(' ', '+');
             var result = await UserManager.ConfirmEmailAsync(userId, token);
             if (result.Succeeded)
-                return Redirect(Url.Content("~/konto?isActivated=true"));
-            return Redirect(Url.Content("~/konto?isActivated=false"));
+                return Redirect(Url.Content("~/konto?isAfterActivation=true"));
+            return Redirect(Url.Content("~/konto?isAfterActivation=false"));
         }
 
         // GET /Account/ForgotPassword?email=abc@cde.net

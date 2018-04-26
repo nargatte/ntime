@@ -70,6 +70,24 @@ namespace Server.Controllers
             });
         }
 
+        // GET api/OrganizerAccount
+        [Route()]
+        [Authorize(Roles = "Organizer")]
+        public async Task<IHttpActionResult> Get()
+        {
+            OrganizerAccount organizerAccount =
+                await _organizerAccountRepository.GetByAccountId(User.Identity.GetUserId());
+
+            if (organizerAccount == null)
+                return NotFound();
+
+            return Ok(new OrganizerAccountDto(organizerAccount)
+            {
+                CompetitionDtos = (await CompetitionRepository.GetCompetitionsByOrganizer(organizerAccount.AccountId))
+                    .Select(c => new CompetitionDto(c)).ToArray()
+            });
+        }
+
         // PUT api/OrganizerAccount/1
         [Route("{id:int:min(1)}")]
         [Authorize(Roles = "Administrator")]
