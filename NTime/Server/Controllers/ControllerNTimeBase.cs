@@ -57,7 +57,7 @@ namespace Server.Controllers
             var s = UserManager.GetRoles(User.Identity.GetUserId());
             if (s[0] == "Organizer" &&
                 (!await CompetitionRepository.CanOrganizerEdit(User.Identity.GetUserId(), Competition) ||
-                Competition.OrganizerEditLock))
+                Competition.OrganizerEditLock == false))
                 return false;
             return true;
         }
