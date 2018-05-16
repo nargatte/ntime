@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PlayersListUnauthorizedComponent } from './players-list-unauthorized.component';
+import { AppModule } from '../../../app.module';
 
 describe('PlayersListUnauthorizedComponent', () => {
   let component: PlayersListUnauthorizedComponent;
@@ -8,7 +9,7 @@ describe('PlayersListUnauthorizedComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PlayersListUnauthorizedComponent ]
+      imports: [ AppModule]
     })
     .compileComponents();
   }));

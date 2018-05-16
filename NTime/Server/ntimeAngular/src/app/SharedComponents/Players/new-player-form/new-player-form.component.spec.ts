@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NewPlayerFormComponent } from './new-player-form.component';
+import { AppModule } from '../../../app.module';
 
 describe('NewPlayerFormComponent', () => {
   let component: NewPlayerFormComponent;
@@ -8,7 +9,7 @@ describe('NewPlayerFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NewPlayerFormComponent ]
+      imports: [AppModule]
     })
     .compileComponents();
   }));

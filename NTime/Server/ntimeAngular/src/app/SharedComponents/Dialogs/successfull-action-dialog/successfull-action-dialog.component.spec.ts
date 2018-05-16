@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SuccessfullActionDialogComponent } from './successfull-action-dialog.component';
+import { AppModule } from '../../../app.module';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 describe('SuccessfullActionDialogComponent', () => {
   let component: SuccessfullActionDialogComponent;
@@ -8,7 +10,11 @@ describe('SuccessfullActionDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SuccessfullActionDialogComponent ]
+      imports: [ AppModule],
+      providers: [
+        { provide: MatDialogRef, useValue: {} },
+        { provide: MAT_DIALOG_DATA, useValue: [] }
+      ]
     })
     .compileComponents();
   }));

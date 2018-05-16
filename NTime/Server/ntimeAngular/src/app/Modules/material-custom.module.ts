@@ -6,9 +6,10 @@ import {
   MatTabsModule, MatTableModule, MatPaginatorModule,
   MatCardModule, MatFormFieldModule, MatInputModule,
   MatSelectModule, MatDatepickerModule, MatCheckboxModule,
-  MatDialogModule,
+  // MatDialogModule,
   MatPaginatorIntl,
 } from '@angular/material';
+import {MatDialogModule} from '@angular/material/dialog';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { PolishPaginatorIntl } from '../Helpers/PolishPaginatorIntl';
 import { SelectionModel } from '@angular/cdk/collections';

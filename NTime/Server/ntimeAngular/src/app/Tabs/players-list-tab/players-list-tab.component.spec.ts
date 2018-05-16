@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PlayersListTabComponent } from './players-list-tab.component';
+import { MaterialCustomModule } from '../../Modules/material-custom.module';
+import { AppModule } from '../../app.module';
 
 describe('PlayersListTabComponent', () => {
   let component: PlayersListTabComponent;
@@ -8,7 +10,7 @@ describe('PlayersListTabComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PlayersListTabComponent ]
+      imports: [AppModule]
     })
     .compileComponents();
   }));

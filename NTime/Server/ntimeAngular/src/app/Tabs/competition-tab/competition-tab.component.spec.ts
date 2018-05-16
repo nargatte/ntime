@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CompetitionTabComponent } from './competition-tab.component';
+import { MaterialCustomModule } from '../../Modules/material-custom.module';
+import { AppModule } from '../../app.module';
 
 describe('CompetitionTabComponent', () => {
   let component: CompetitionTabComponent;
@@ -8,7 +10,7 @@ describe('CompetitionTabComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CompetitionTabComponent ]
+      imports: [AppModule]
     })
     .compileComponents();
   }));

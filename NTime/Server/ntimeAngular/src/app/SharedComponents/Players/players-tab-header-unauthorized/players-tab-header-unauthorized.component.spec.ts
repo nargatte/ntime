@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PlayersTabHeaderUnauthorizedComponent } from './players-tab-header-unauthorized.component';
+import { AppModule } from '../../../app.module';
 
 describe('PlayersTabHeaderUnauthorizedComponent', () => {
   let component: PlayersTabHeaderUnauthorizedComponent;
@@ -8,7 +9,7 @@ describe('PlayersTabHeaderUnauthorizedComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PlayersTabHeaderUnauthorizedComponent ]
+      imports: [AppModule]
     })
     .compileComponents();
   }));

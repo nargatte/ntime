@@ -20,11 +20,11 @@
             <a mat-button routerLink="/wyloguj">
                 <mat-icon>power_settings_new</mat-icon> Wyloguj
             </a>
-            <ng-container *ngIf="User && authenticatedUserService.IsAuthenticated">
+            <!-- <ng-container *ngIf="User && authenticatedUserService.IsAuthenticated">
                 <span>
                     Witaj {{User.Email}}
                 </span>
-            </ng-container>
+            </ng-container> -->
         </div>
 
     </mat-toolbar>
@@ -45,11 +45,11 @@
                 <a mat-button routerLink="/wyloguj">
                     <mat-icon>power_settings_new</mat-icon> Wyloguj
                 </a>
-                <ng-container *ngIf="User && authenticatedUserService.IsAuthenticated">
+                <!-- <ng-container *ngIf="User && authenticatedUserService.IsAuthenticated">
                     <span>
                         Witaj {{User.Email}}
                     </span>
-                </ng-container>
+                </ng-container> -->
             </div>
         </mat-sidenav>
         <mat-sidenav-content fxFlexFill>

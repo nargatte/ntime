@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UserRegisteredDialogComponent } from './user-registered-dialog.component';
+import { AppModule } from '../../../app.module';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 describe('UserRegisteredDialogComponent', () => {
   let component: UserRegisteredDialogComponent;
@@ -8,7 +10,11 @@ describe('UserRegisteredDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserRegisteredDialogComponent ]
+      imports: [ AppModule],
+      providers: [
+        { provide: MatDialogRef, useValue: {} },
+        { provide: MAT_DIALOG_DATA, useValue: [] }
+      ]
     })
     .compileComponents();
   }));

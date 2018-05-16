@@ -1,11 +1,14 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { DistanceService } from './distance.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { MessageService } from './message.service';
 
 describe('DistanceService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [DistanceService]
+      imports: [ HttpClientModule ],
+      providers: [DistanceService, HttpClient, MessageService, ]
     });
   });
 

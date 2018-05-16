@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PlayersTabHeaderAdminComponent } from './players-tab-header-admin.component';
+import { AppModule } from '../../../app.module';
 
 describe('PlayersTabHeaderAdminComponent', () => {
   let component: PlayersTabHeaderAdminComponent;
@@ -8,7 +9,7 @@ describe('PlayersTabHeaderAdminComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PlayersTabHeaderAdminComponent ]
+      imports: [AppModule]
     })
     .compileComponents();
   }));
