@@ -7,6 +7,8 @@ import { FailedActionDialogComponent } from '../../SharedComponents/Dialogs/fail
 import { AuthenticationService } from '../../Services/authentication.service';
 import { AuthenticatedUserService } from '../../Services/authenticated-user.service';
 import { MessageService } from '../../Services/message.service';
+import { RoleHelpers } from '../../Helpers/RoleHelpers';
+import { RoleEnum } from '../../Models/Enums/RoleEnum';
 
 @Component({
   selector: 'app-my-account-tab',
@@ -17,7 +19,7 @@ import { MessageService } from '../../Services/message.service';
   ]
 })
 export class MyAccountTabComponent implements OnInit, AfterViewInit {
-
+public isOrganizer = false;
 
   constructor(
     private dialog: MatDialog,
@@ -26,8 +28,24 @@ export class MyAccountTabComponent implements OnInit, AfterViewInit {
     private authenticatedUserService: AuthenticatedUserService,
     private messageService: MessageService
   ) {
+    this.OrganizerCheck();
     this.modalUp();
   }
+
+private OrganizerCheck() {
+  let roleString = 'player';
+    this.activatedRoute.queryParams.subscribe((params: Params) => {
+      if (params['role']) {
+        roleString = params['role'];
+      }
+      this.messageService.addLog(`Role string ${roleString}`);
+    });
+    const role = RoleHelpers.ConvertStringToRoleEnum(roleString);
+
+    if (role === RoleEnum.Organizer) {
+      this.isOrganizer = true;
+    }
+}
 
   private modalUp() {
     this.activatedRoute.queryParams.subscribe((params: Params) => {

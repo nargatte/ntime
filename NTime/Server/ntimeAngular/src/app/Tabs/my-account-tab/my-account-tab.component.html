@@ -11,5 +11,5 @@
     <button mat-raised-button color="primary" routerLink="/zawody">Przejdź do zawodów</button>
   </mat-card-actions>
 </mat-card>
-<app-log-in-form></app-log-in-form>
-<app-register-form></app-register-form>
+<app-log-in-form *ngIf="isOrganizer"></app-log-in-form>
+<app-register-form *ngIf="isOrganizer"></app-register-form>

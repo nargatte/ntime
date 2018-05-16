@@ -392,7 +392,7 @@ namespace Server.Controllers
                 await UserManager.SendEmailAsync(user.Id,
                     "Potwierdzenie rejrstracji w systemie Time2Win",
                     "Kliknij w link żeby potwierdzić rejestrację swojego konta: <a href=\""
-                    + Url.Content("/potwierdzenie-rejestracji?userId=" + user.Id + "&token=" +
+                    + Url.Content("/api/Account/ConfirmEmail?userId=" + user.Id + "&token=" +
                                   HttpUtility.UrlDecode(code)) + "\">KLIKNIJ</a>");
             }
             catch (SmtpFailedRecipientException)
