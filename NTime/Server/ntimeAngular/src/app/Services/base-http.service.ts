@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -8,16 +8,20 @@ import { from } from 'rxjs/observable/from';
 
 import { MessageService } from './message.service';
 import { PageViewModel } from '../Models/PageViewModel';
-import { UrlBuilder } from '../Helpers/UrlBuilder';
+import { UrlBuilder } from '../Helpers/url-builder';
 import { AuthenticatedUserService } from './authenticated-user.service';
+import { HttpParamsOptions } from '@angular/common/http/src/params';
 
 @Injectable()
 export abstract class BaseHttpService {
 
-  httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-  httpOptionsUrlEncoded = { headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }) };
+  private httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+  private httpOptionsUrlEncoded = { headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }) };
 
-  constructor(private http: HttpClient, protected controllerName: string, protected messageService: MessageService,
+  constructor(
+    private http: HttpClient,
+    @Inject('controllerName') protected controllerName: string,
+    protected messageService: MessageService,
     private authenticatedUserService: AuthenticatedUserService
   ) {
     this.updateAuthorizedUser();

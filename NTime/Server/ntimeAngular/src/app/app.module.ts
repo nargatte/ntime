@@ -28,7 +28,7 @@ import { PlayersListTabComponent } from './Tabs/players-list-tab/players-list-ta
 import { NewPlayerFormComponent } from './SharedComponents/Players/new-player-form/new-player-form.component';
 import { PlayerService } from './Services/player.service';
 import { DistanceService } from './Services/distance.service';
-import { ExtraPlayerInfoService } from './Services/extra-player-info.service';
+import { SubcategoryService } from './Services/subcategory.service';
 import { PlayersListComponent } from './SharedComponents/Players/players-list/players-list.component';
 import { PlayerAddedDialogComponent } from './SharedComponents/Dialogs/player-added-dialog/player-added-dialog.component';
 import {
@@ -66,7 +66,7 @@ import { OrganizerAccountService } from './Services/organizer-account.service';
     ],
     providers: [
         CompetitionService, PlayerService,
-        ExtraPlayerInfoService, DistanceService, MessageService, AuthenticationService,
+        SubcategoryService, DistanceService, MessageService, AuthenticationService,
          AuthenticatedUserService, OrganizerAccountService, // Custom services
         { provide: MAT_DATE_LOCALE, useValue: 'pl-pl' },
     ],

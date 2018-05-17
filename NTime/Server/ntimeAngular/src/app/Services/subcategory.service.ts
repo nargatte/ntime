@@ -6,10 +6,10 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 
 import { MessageService } from './message.service';
-import { ExtraPlayerInfo } from '../Models/ExtraPlayerInfo';
+import { Subcategory } from '../Models/ExtraPlayerInfo';
 
 @Injectable()
-export class ExtraPlayerInfoService {
+export class SubcategoryService {
   private baseExtraPlayerInfoUrl = '/api/ExtraPlayerInfos';
   private getExtraPlayerInfoFromCompetitionUrl = this.baseExtraPlayerInfoUrl + '/FromCompetition/';
 
@@ -19,8 +19,8 @@ export class ExtraPlayerInfoService {
 
   constructor(private http: HttpClient, private messageService: MessageService) { }
 
-  getExtraPlayerInfoFromCompetition(competitionId: number): Observable<ExtraPlayerInfo[]> {
-    return this.http.get<ExtraPlayerInfo[]>(this.getExtraPlayerInfoFromCompetitionUrl + competitionId).pipe(
+  getSubcategoryFromCompetition(competitionId: number): Observable<Subcategory[]> {
+    return this.http.get<Subcategory[]>(this.getExtraPlayerInfoFromCompetitionUrl + competitionId).pipe(
       tap((extraPlayerInfo) => {
         this.log(`Distance for competition with id:${extraPlayerInfo} fetched`);
         this.messageService.addObject(extraPlayerInfo);

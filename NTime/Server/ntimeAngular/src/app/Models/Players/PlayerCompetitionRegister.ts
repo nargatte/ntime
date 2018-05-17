@@ -14,7 +14,10 @@
     ReCaptchaToken: string;
 
 
-    constructor() {
+    constructor(id: number, firstName: string, lastName: string) {
+        this.Id = id;
+        this.FirstName = firstName;
+        this.LastName = lastName;
     }
 }
 

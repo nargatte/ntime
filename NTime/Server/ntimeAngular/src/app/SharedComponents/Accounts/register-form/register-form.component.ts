@@ -9,7 +9,7 @@ import { FailedActionDialogComponent } from '../../Dialogs/failed-action-dialog/
 import { SuccessfullActionDialogComponent } from '../../Dialogs/successfull-action-dialog/successfull-action-dialog.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Params } from '@angular/router';
-import { RoleHelpers } from '../../../Helpers/RoleHelpers';
+import { RoleHelpers } from '../../../Helpers/role-helpers';
 
 @Component({
   selector: 'app-register-form',

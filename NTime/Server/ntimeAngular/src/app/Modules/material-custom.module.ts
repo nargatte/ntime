@@ -11,7 +11,7 @@ import {
 } from '@angular/material';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
-import { PolishPaginatorIntl } from '../Helpers/PolishPaginatorIntl';
+import { PolishPaginatorIntl } from '../Helpers/polish-paginator-intl';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatSidenavModule } from '@angular/material/sidenav';
 

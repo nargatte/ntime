@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { BaseHttpService } from './base-http.service';
 import { MessageService } from './message.service';
 import { RegisterBindingModel } from '../Models/Authentication/RegisterBindingModel';
-import { UrlBuilder } from '../Helpers/UrlBuilder';
+import { UrlBuilder } from '../Helpers/url-builder';
 import { LoginData } from '../Models/Authentication/LoginData';
 import { TokenInfo } from '../Models/Authentication/TokenInfo';
 import { AuthenticatedUserService } from './authenticated-user.service';
@@ -44,7 +44,7 @@ export class AuthenticationService extends BaseHttpService {
   public login(loginData: URLSearchParams): Observable<TokenInfo> {
     return super.postUrlEncoded<TokenInfo>(
       new UrlBuilder()
-        .addCustomUrlPart('/token')
+        .addCustomUrlPart('/Token')
         .toString(),
       loginData
     );
@@ -53,8 +53,8 @@ export class AuthenticationService extends BaseHttpService {
   public getRole(): Observable<RoleViewModel> {
     return super.get<RoleViewModel>(
       new UrlBuilder()
-      .addControllerName('account')
-      .addCustomUrlPart('/role')
+      .addControllerName('Account')
+      .addCustomUrlPart('/Role')
       .toString()
     );
   }

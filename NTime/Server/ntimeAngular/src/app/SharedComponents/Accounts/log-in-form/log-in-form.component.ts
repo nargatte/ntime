@@ -11,7 +11,7 @@ import { AuthenticatedUserService } from '../../../Services/authenticated-user.s
 import { AuthenticatedUser } from '../../../Models/Authentication/AuthenticatedUser';
 import { RoleEnum } from '../../../Models/Enums/RoleEnum';
 import { RoleViewModel } from '../../../Models/Authentication/RoleViewModel';
-import { RoleHelpers } from '../../../Helpers/RoleHelpers';
+import { RoleHelpers } from '../../../Helpers/role-helpers';
 
 @Component({
   selector: 'app-log-in-form',

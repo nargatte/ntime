@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PageViewModel } from '../../../Models/PageViewModel';
-import { COMPETITIONS } from '../../../MockData/mockCompetitions';
+import { MockCompetitions } from '../../../MockData/mockCompetitions';
 import { Competition } from '../../../Models/Competition';
 import { CompetitionService } from '../../../Services/competition.service';
 import { MessageService } from '../../../Services/message.service';
@@ -14,7 +14,7 @@ import { MessageService } from '../../../Services/message.service';
 export class PlayersListAdminComponent implements OnInit {
 
   public competitionId: number;
-  public competition: Competition = COMPETITIONS[0];
+  public competition: Competition = MockCompetitions[0];
 
 
   constructor(

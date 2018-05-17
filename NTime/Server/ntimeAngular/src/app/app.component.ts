@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UrlBuilder } from './Helpers/UrlBuilder';
+import { UrlBuilder } from './Helpers/url-builder';
 import { MessageService } from './Services/message.service';
 import { NavigationEnd, Router } from '@angular/router';
 

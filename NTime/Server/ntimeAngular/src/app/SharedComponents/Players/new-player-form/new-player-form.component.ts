@@ -4,13 +4,14 @@ import { CompetitionService } from '../../../Services/competition.service';
 import { MessageService } from '../../../Services/message.service';
 import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { PlayerCompetitionRegister } from '../../../Models/Players/PlayerCompetitionRegister';
-import { ExtraPlayerInfo } from '../../../Models/ExtraPlayerInfo';
+import { Subcategory } from '../../../Models/ExtraPlayerInfo';
 import { Distance } from '../../../Models/Distance';
 import { PlayerService } from '../../../Services/player.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { PlayerAddedDialogComponent } from '../../Dialogs/player-added-dialog/player-added-dialog.component';
 import { SingUpEndDateErrorDialogComponent } from '../../Dialogs/sing-up-end-date-error-dialog/sing-up-end-date-error-dialog.component';
+import { MockPlayersCompetitionRegister } from '../../../MockData/MockPlayers';
 
 @Component({
   selector: 'app-new-player-form',
@@ -23,12 +24,12 @@ import { SingUpEndDateErrorDialogComponent } from '../../Dialogs/sing-up-end-dat
 export class NewPlayerFormComponent implements OnInit, AfterViewInit {
   @Input() competition: Competition;
   @Input() distances: Distance[];
-  @Input() extraPlayerInfos: ExtraPlayerInfo[];
+  @Input() extraPlayerInfos: Subcategory[];
 
   public todayDate: Date;
-  public newPlayer: PlayerCompetitionRegister = new PlayerCompetitionRegister();
+  public newPlayer: PlayerCompetitionRegister = MockPlayersCompetitionRegister[0];
   private competitionId: number;
-  private recaptchaId;
+  private recaptchaId: number;
 
   public checkboxes: boolean[] = [false, false, false];
 
@@ -48,7 +49,7 @@ export class NewPlayerFormComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.recaptchaId = window['grecaptcha'].render('NewPlayerFormComponentButton');
+      this.recaptchaId = window['grecaptcha'].render('NewPlayerFormComponentButton');
   }
 
   ngOnInit() {

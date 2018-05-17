@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { PlayersTabHeaderUnauthorizedComponent } from './players-tab-header-unauthorized.component';
 import { AppModule } from '../../../app.module';
 import { Competition } from '../../../Models/Competition';
-import { MockCompetition } from '../../../MockData/MockCompetition';
+import { MockCompetitions } from '../../../MockData/MockCompetitions';
 
 describe('PlayersTabHeaderUnauthorizedComponent', () => {
   let component: PlayersTabHeaderUnauthorizedComponent;
@@ -13,7 +13,7 @@ describe('PlayersTabHeaderUnauthorizedComponent', () => {
     TestBed.configureTestingModule({
       imports: [AppModule],
       providers: [
-        { provide: Competition, useValue: { MockCompetition } }
+        { provide: Competition, useValue: { MockCompetitions } }
       ]
     })
       .compileComponents();

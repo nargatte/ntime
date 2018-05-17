@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Competition } from '../../Models/Competition';
-import { COMPETITIONS } from '../../MockData/mockCompetitions';
+import { MockCompetitions } from '../../MockData/mockCompetitions';
 import { CompetitionService } from '../../Services/competition.service';
 import { DistanceService } from '../../Services/distance.service';
-import { ExtraPlayerInfoService } from '../../Services/extra-player-info.service';
+import { SubcategoryService } from '../../Services/subcategory.service';
 import { Distance } from '../../Models/Distance';
-import { ExtraPlayerInfo } from '../../Models/ExtraPlayerInfo';
+import { Subcategory } from '../../Models/ExtraPlayerInfo';
 import { MessageService } from '../../Services/message.service';
 
 @Component({
@@ -16,16 +16,16 @@ import { MessageService } from '../../Services/message.service';
 })
 export class RegistrationTabComponent implements OnInit {
   public competitionId: number;
-  public competition: Competition = COMPETITIONS[0];
+  public competition: Competition = MockCompetitions[0];
   public distances: Distance[];
-  public extraPlayerInfos: ExtraPlayerInfo[];
+  public extraPlayerInfos: Subcategory[];
   public todayDate: Date;
 
   constructor(
     private route: ActivatedRoute,
     private competitionService: CompetitionService,
     private distanceService: DistanceService,
-    private extraPlayerInfoService: ExtraPlayerInfoService,
+    private extraPlayerInfoService: SubcategoryService,
     private messageService: MessageService
   ) {
     this.todayDate = new Date(Date.now());
@@ -58,8 +58,8 @@ export class RegistrationTabComponent implements OnInit {
   }
 
   getExtraPlayerInfoFromCompetition(competitionId: number): void {
-    this.extraPlayerInfoService.getExtraPlayerInfoFromCompetition(competitionId).subscribe(
-      (extraPlayerInfo: ExtraPlayerInfo[]) => {
+    this.extraPlayerInfoService.getSubcategoryFromCompetition(competitionId).subscribe(
+      (extraPlayerInfo: Subcategory[]) => {
         this.messageService.addLog(`ExtraPlayerInfo received ${extraPlayerInfo}`);
         this.extraPlayerInfos = extraPlayerInfo;
       },

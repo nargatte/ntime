@@ -15,9 +15,9 @@ export class OrganizerAccountService extends BaseHttpService {
     super(http, 'OrganizerAccount', messageService, authenticatedUserService);
   }
 
-  public getOrganizerAccountInfo(organizerId: number): Observable<OrganizerAccount> {
-    return super.getById(organizerId);
-  }
+  // public getOrganizerAccountInfo(organizerId: number): Observable<OrganizerAccount> {
+  //   return super.getById(organizerId);
+  // }
 
   public getMyInfo(): Observable<OrganizerAccount> {
     return super.getFromController();

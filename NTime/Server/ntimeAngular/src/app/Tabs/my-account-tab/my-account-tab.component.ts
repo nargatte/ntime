@@ -7,7 +7,7 @@ import { FailedActionDialogComponent } from '../../SharedComponents/Dialogs/fail
 import { AuthenticationService } from '../../Services/authentication.service';
 import { AuthenticatedUserService } from '../../Services/authenticated-user.service';
 import { MessageService } from '../../Services/message.service';
-import { RoleHelpers } from '../../Helpers/RoleHelpers';
+import { RoleHelpers } from '../../Helpers/role-helpers';
 import { RoleEnum } from '../../Models/Enums/RoleEnum';
 
 @Component({

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticatedUserService } from '../../Services/authenticated-user.service';
 import { RoleEnum } from '../../Models/Enums/RoleEnum';
-import { RoleHelpers } from '../../Helpers/RoleHelpers';
+import { RoleHelpers } from '../../Helpers/role-helpers';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -17,7 +17,7 @@ export class PlayersListTabComponent {
     private route: ActivatedRoute,
   ) {
     const competitionId = +this.route.snapshot.paramMap.get('id');
-    this.isStaffViewDisplayed = RoleHelpers.resolveIsStaffViewDisplayed(this.authenticatedUserService, competitionId);
+    this.isStaffViewDisplayed = RoleHelpers.resolveIsStaffViewDisplayed(this.authenticatedUserService);
     // this.isStaffViewDisplayed = true;
   }
 }

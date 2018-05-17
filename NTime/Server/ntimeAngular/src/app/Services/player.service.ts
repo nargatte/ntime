@@ -12,7 +12,7 @@ import { PlayerListView } from '../Models/Players/PlayerListView';
 import { PlayerCompetitionRegister } from '../Models/Players/PlayerCompetitionRegister';
 import { Distance } from '../Models/Distance';
 import { BaseHttpService } from './base-http.service';
-import { UrlBuilder } from '../Helpers/UrlBuilder';
+import { UrlBuilder } from '../Helpers/url-builder';
 import { AuthenticatedUserService } from './authenticated-user.service';
 import { PlayersWithScores } from '../Models/Players/PlayerWithScores';
 
@@ -23,7 +23,7 @@ export class PlayerService extends BaseHttpService {
   private playerRegisterUrl = '/register/intocompetition';
 
   constructor(http: HttpClient, messageService: MessageService, authenticatedUserService: AuthenticatedUserService) {
-    super(http, 'player', messageService, authenticatedUserService);
+    super(http, 'Player', messageService, authenticatedUserService);
   }
 
   public getPlayerListView(competitionId: number, playerFilterOptions: PlayerFilterOptions, pageSize: number, pageNumber: number):
