@@ -36,16 +36,6 @@ export abstract class BaseHttpService {
         authorizationHeaderName, `Bearer ${this.authenticatedUserService.Token}`);
       this.httpOptionsUrlEncoded.headers = this.httpOptions.headers.append(
         authorizationHeaderName, `Bearer ${this.authenticatedUserService.Token}`);
-      // if (this.httpOptions.headers.has(authorizationHeaderName) === false) {
-      //   this.httpOptions.headers = this.httpOptions.headers.append(
-      //     authorizationHeaderName, `Bearer ${this.authenticatedUserService.Token}`
-      //   );
-      // }
-      // if (this.httpOptionsUrlEncoded.headers.has(authorizationHeaderName) === false) {
-      //   this.httpOptionsUrlEncoded.headers = this.httpOptions.headers.append(
-      //     authorizationHeaderName, `Bearer ${this.authenticatedUserService.Token}`
-      //   );
-      // }
     }
   }
 

@@ -52,7 +52,7 @@ export class LogInFormComponent implements OnInit {
   private onSuccessfullLogin(loggedUser: TokenInfo) {
     this.messageService.addLog('Logowanie przebiegło prawidło');
     this.messageService.addObject(loggedUser);
-    this.authenticatedUserService.addUser(new AuthenticatedUser(
+    this.authenticatedUserService.setUser(new AuthenticatedUser(
       loggedUser.access_token, 'first', 'last', loggedUser.userName, RoleEnum.Player
     ));
     this.authenticationService.getRole().subscribe(

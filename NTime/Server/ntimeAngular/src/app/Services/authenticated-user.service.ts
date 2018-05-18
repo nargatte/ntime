@@ -14,7 +14,7 @@ export class AuthenticatedUserService {
     }
   }
 
-  public addUser(user: AuthenticatedUser) {
+  public setUser(user: AuthenticatedUser) {
     this._user = user;
   }
 

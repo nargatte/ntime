@@ -15,7 +15,7 @@ import {
 import { PlayersWithScores } from '../Models/Players/PlayerWithScores';
 import { PlayerCompetitionRegister } from '../Models/Players/PlayerCompetitionRegister';
 
-fdescribe('PlayerService', () => {
+describe('PlayerService', () => {
   let playerService: PlayerService;
   let httpMock: HttpTestingController;
 

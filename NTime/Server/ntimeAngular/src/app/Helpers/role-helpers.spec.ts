@@ -4,7 +4,7 @@ import { TestBed } from '@angular/core/testing';
 import { AuthenticatedUserService } from '../Services/authenticated-user.service';
 import { AuthenticatedUser } from '../Models/Authentication/AuthenticatedUser';
 
-fdescribe('RoleHelperConverter', () => {
+describe('RoleHelperConverter', () => {
   it('should create an instance', () => {
     expect(new RoleHelpers()).toBeTruthy();
   });
@@ -52,7 +52,7 @@ fdescribe('RoleHelperConverter', () => {
 
 });
 
-fdescribe('IsStaffViewDisplayed', () => {
+describe('IsStaffViewDisplayed', () => {
   let authenticatedUserService: AuthenticatedUserService;
 
   beforeEach(() => {
@@ -68,27 +68,27 @@ fdescribe('IsStaffViewDisplayed', () => {
   });
 
   it('resolveIsStaffViewDisplayed-testRole-admin', () => {
-    authenticatedUserService.addUser(new AuthenticatedUser('test', 'test', 'test', 'test', RoleEnum.Administrator));
+    authenticatedUserService.setUser(new AuthenticatedUser('test', 'test', 'test', 'test', RoleEnum.Administrator));
     expect(RoleHelpers.resolveIsStaffViewDisplayed(authenticatedUserService)).toEqual(true);
   });
 
   it('resolveIsStaffViewDisplayed-testRole-bustModerator', () => {
-    authenticatedUserService.addUser(new AuthenticatedUser('test', 'test', 'test', 'test', RoleEnum.BustModerator));
+    authenticatedUserService.setUser(new AuthenticatedUser('test', 'test', 'test', 'test', RoleEnum.BustModerator));
     expect(RoleHelpers.resolveIsStaffViewDisplayed(authenticatedUserService)).toEqual(false);
   });
 
   it('resolveIsStaffViewDisplayed-testRole-moderator', () => {
-    authenticatedUserService.addUser(new AuthenticatedUser('test', 'test', 'test', 'test', RoleEnum.Moderator));
+    authenticatedUserService.setUser(new AuthenticatedUser('test', 'test', 'test', 'test', RoleEnum.Moderator));
     expect(RoleHelpers.resolveIsStaffViewDisplayed(authenticatedUserService)).toEqual(true);
   });
 
   it('resolveIsStaffViewDisplayed-testRole-organizer', () => {
-    authenticatedUserService.addUser(new AuthenticatedUser('test', 'test', 'test', 'test', RoleEnum.Organizer));
+    authenticatedUserService.setUser(new AuthenticatedUser('test', 'test', 'test', 'test', RoleEnum.Organizer));
     expect(RoleHelpers.resolveIsStaffViewDisplayed(authenticatedUserService)).toEqual(true);
   });
 
   it('resolveIsStaffViewDisplayed-testRole-player', () => {
-    authenticatedUserService.addUser(new AuthenticatedUser('test', 'test', 'test', 'test', RoleEnum.Player));
+    authenticatedUserService.setUser(new AuthenticatedUser('test', 'test', 'test', 'test', RoleEnum.Player));
     expect(RoleHelpers.resolveIsStaffViewDisplayed(authenticatedUserService)).toEqual(false);
   });
 });

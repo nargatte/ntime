@@ -8,7 +8,7 @@ import { Distance } from '../Models/Distance';
 import { HttpResponse } from 'selenium-webdriver/http';
 import { Subcategory } from '../Models/ExtraPlayerInfo';
 
-fdescribe('DistanceService', () => {
+describe('DistanceService', () => {
   let distanceService: DistanceService;
   let httpMock: HttpTestingController;
 
