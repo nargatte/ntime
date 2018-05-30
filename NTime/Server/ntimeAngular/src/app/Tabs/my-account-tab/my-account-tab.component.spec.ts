@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MyAccountTabComponent } from './my-account-tab.component';
+import { MaterialCustomModule } from '../../Modules/material-custom.module';
+import { AppModule } from '../../app.module';
 
 describe('MyAccountTabComponent', () => {
   let component: MyAccountTabComponent;
@@ -8,7 +10,7 @@ describe('MyAccountTabComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MyAccountTabComponent ]
+      imports: [AppModule]
     })
     .compileComponents();
   }));

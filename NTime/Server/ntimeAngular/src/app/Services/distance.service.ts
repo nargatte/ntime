@@ -24,7 +24,7 @@ export class DistanceService {
     return this.http.get<Distance[]>(this.getDistanceFromCompetitionUrl + competitionId).pipe(
       tap((distance) => {
         this.log(`Distance for competition with id:${distance} fetched`);
-        console.log(distance);
+        this.messageService.addObject(distance);
       }),
       catchError(this.handleError)
     );
@@ -36,11 +36,11 @@ export class DistanceService {
   private handleError(errorResponse: HttpErrorResponse) {
     if (errorResponse.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
-      console.error('An error occurred:', errorResponse.error.message);
+      this.messageService.addError('An error occurred:' + errorResponse.error.message);
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
-      console.error(
+      this.messageService.addError(
         `Backend returned code ${errorResponse.status}, ` +
         `body was: ${errorResponse.error}`);
     }

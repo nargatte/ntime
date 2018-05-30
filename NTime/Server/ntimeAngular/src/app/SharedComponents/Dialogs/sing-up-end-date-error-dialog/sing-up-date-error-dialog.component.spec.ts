@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SingUpEndDateErrorDialogComponent } from './sing-up-end-date-error-dialog.component';
+import { AppModule } from '../../../app.module';
 
 describe('SingUpDateErrorDialogComponent', () => {
   let component: SingUpEndDateErrorDialogComponent;
@@ -8,7 +9,7 @@ describe('SingUpDateErrorDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SingUpEndDateErrorDialogComponent ]
+      imports: [AppModule]
     })
     .compileComponents();
   }));

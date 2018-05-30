@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ContactTabComponent } from './contact-tab.component';
+import { MaterialCustomModule } from '../../Modules/material-custom.module';
+import { AppModule } from '../../app.module';
 
 describe('ContactTabComponent', () => {
   let component: ContactTabComponent;
@@ -8,7 +10,7 @@ describe('ContactTabComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ContactTabComponent ]
+      imports: [AppModule]
     })
     .compileComponents();
   }));

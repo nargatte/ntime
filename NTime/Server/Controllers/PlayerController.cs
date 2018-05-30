@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using System.Web.Mvc;
 using BaseCore.DataBase;
 using BaseCore.Models;
 using Microsoft.AspNet.Identity;
@@ -16,7 +20,7 @@ using Server.Models;
 
 namespace Server.Controllers
 {
-    [RoutePrefix("api/player")]
+    [System.Web.Http.RoutePrefix("api/player")]
     public class PlayerController : ControllerNTimeBase
     {
         private const string RegisterPrivateKey = "6LfUoFAUAAAAAEGYb9BcgluK0dDdqqhTTxieoVGU";
@@ -69,7 +73,7 @@ namespace Server.Controllers
 
             ReCaptchaResponseModel reCaptchaResponseModel = null;
 
-            using (var httpClient = new HttpClient { BaseAddress = new Uri("https://www.google.com/")})
+            using (var httpClient = new HttpClient { BaseAddress = new Uri("https://www.google.com/") })
             {
                 using (var content = new FormUrlEncodedContent(postData))
                 {
@@ -84,12 +88,12 @@ namespace Server.Controllers
 
                 }
             }
-            if(reCaptchaResponseModel.Success == false)
+            if (reCaptchaResponseModel.Success == false)
                 throw new Exception("ReCaptcha problem: " + reCaptchaResponseModel.ErrorCodes.ToString());
         }
 
         // POST api/Player/TakeSimpleList/FromCompetition/1?ItemsOnPage=10&PageNumber=0
-        [Route("takeSimpleList/FromCompetition/{id:int:min(1)}")]
+        [System.Web.Http.Route("takeSimpleList/FromCompetition/{id:int:min(1)}")]
         public async Task<IHttpActionResult> PostTakeSimpleListFromCompetition(int id, [FromUri]PageBindingModel bindingModel,
             PlayerFilterOptionsBindingModel filterOptions)
         {
@@ -105,8 +109,8 @@ namespace Server.Controllers
         }
 
         // POST api/Player/TakeFullList/FromCompetition/1?ItemsOnPage=10&PageNumber=0
-        [Authorize(Roles = "Administrator,Organizer,Moderator")]
-        [Route("takeFullList/FromCompetition/{id:int:min(1)}")]
+        [System.Web.Http.Authorize(Roles = "Administrator,Organizer,Moderator")]
+        [System.Web.Http.Route("takeFullList/FromCompetition/{id:int:min(1)}")]
         public async Task<IHttpActionResult> PostTakeFullListFromCompetition(int id, [FromUri]PageBindingModel bindingModel,
             PlayerFilterOptionsBindingModel filterOptions)
         {
@@ -125,8 +129,8 @@ namespace Server.Controllers
         }
 
         // GET api/Player/TakeFullList/FromPlayerAccount/1?ItemsOnPage=10&PageNumber=0
-        [Route("takeFullList/FromPlayerAccount/{id:int:min(1)}")]
-        [Authorize(Roles = "Administrator,Moderator,Player")]
+        [System.Web.Http.Route("takeFullList/FromPlayerAccount/{id:int:min(1)}")]
+        [System.Web.Http.Authorize(Roles = "Administrator,Moderator,Player")]
         public async Task<IHttpActionResult> GetTakeFullListFromPlayerAccount([FromUri]PageBindingModel bindingModel, int id)
         {
             PlayerAccountRepository accountRepository = new PlayerAccountRepository(ContextProvider);
@@ -147,8 +151,8 @@ namespace Server.Controllers
         }
 
         // GET api/Player/FromPlayerAccount/1/FromCompetition/1
-        [Route("FromPlayerAccount/{idpa:int:min(1)}/FromCompetition/{idc:int:min(1)}")]
-        [Authorize(Roles = "Administrator,Moderator,Player")]
+        [System.Web.Http.Route("FromPlayerAccount/{idpa:int:min(1)}/FromCompetition/{idc:int:min(1)}")]
+        [System.Web.Http.Authorize(Roles = "Administrator,Moderator,Player")]
         public async Task<IHttpActionResult> GetFromPlayerAccountFromCompetition(int idpa, int idc)
         {
             if (await InitCompetitionById(idc) == false)
@@ -169,8 +173,8 @@ namespace Server.Controllers
         }
 
         // GET api/Player/1
-        [Route("{id:int:min(1)}")]
-        [Authorize(Roles = "Administrator,Organizer,Moderator,Player")]
+        [System.Web.Http.Route("{id:int:min(1)}")]
+        [System.Web.Http.Authorize(Roles = "Administrator,Organizer,Moderator,Player")]
         public async Task<IHttpActionResult> Get(int id)
         {
             if (await InitCompetitionByRelatedEntitieId<Player>(id) == false)
@@ -188,8 +192,9 @@ namespace Server.Controllers
         }
 
         // PUT api/Player/1
-        [Route("{id:int:min(1)}")]
-        [Authorize(Roles = "Administrator,Organizer,Moderator")]
+        [System.Web.Http.Route("{id:int:min(1)}")]
+        [System.Web.Http.Authorize(Roles = "Administrator,Organizer,Moderator")]
+        [System.Web.Http.HttpPut]
         public async Task<IHttpActionResult> Put(int id, PlayerWithScoresDto playerWithScoresDto)
         {
             playerWithScoresDto.Id = id;
@@ -209,9 +214,33 @@ namespace Server.Controllers
             return Ok();
         }
 
+        // PUT api/Player
+        [System.Web.Http.Route]
+        [System.Web.Http.Authorize(Roles = "Administrator,Organizer,Moderator")]
+        [System.Web.Http.HttpPut]
+        public async Task<IHttpActionResult> Put(PlayerWithScoresDto[] playerWithScoresDtos)
+        {
+            foreach (PlayerWithScoresDto p in playerWithScoresDtos)
+            {
+                if (await InitCompetitionByRelatedEntitieId<Player>(p.Id) == false)
+                    return NotFound();
+
+                if (await CanOrganizerAccessAndEdit() == false)
+                    return Unauthorized();
+
+                Player player = await _playerRepository.GetById(p.Id);
+
+                await p.CopyDataFromDto(player, ContextProvider, Competition);
+
+                await _playerRepository.UpdateAsync(player, player.Distance, player.ExtraPlayerInfo);
+            }
+
+            return Ok();
+        }
+
         // DELETE api/Player/1
-        [Route("{id:int:min(1)}")]
-        [Authorize(Roles = "Administrator,Organizer,Moderator,Player")]
+        [System.Web.Http.Route("{id:int:min(1)}")]
+        [System.Web.Http.Authorize(Roles = "Administrator,Organizer,Moderator,Player")]
         public async Task<IHttpActionResult> Delete(int id)
         {
             if (await InitCompetitionByRelatedEntitieId<Player>(id) == false)
@@ -231,8 +260,8 @@ namespace Server.Controllers
         }
 
         // GET api/Player/Register/1
-        [Route("register/{id:int:min(1)}")]
-        [Authorize(Roles = "Administrator,Organizer,Moderator,Player")]
+        [System.Web.Http.Route("register/{id:int:min(1)}")]
+        [System.Web.Http.Authorize(Roles = "Administrator,Organizer,Moderator,Player")]
         public async Task<IHttpActionResult> GetRegister(int id)
         {
             if (await InitCompetitionByRelatedEntitieId<Player>(id) == false)
@@ -250,8 +279,8 @@ namespace Server.Controllers
         }
 
         // PUT api/Player/Register/1
-        [Route("register/{id:int:min(1)}")]
-        [Authorize(Roles = "Player")]
+        [System.Web.Http.Route("register/{id:int:min(1)}")]
+        [System.Web.Http.Authorize(Roles = "Player")]
         public async Task<IHttpActionResult> PutRegister(int id, PlayerCompetitionRegisterDto competitionRegisterDto)
         {
             competitionRegisterDto.Id = id;
@@ -276,7 +305,7 @@ namespace Server.Controllers
         }
 
         // POST api/Player/Register/IntoCompetition/1
-        [Route("register/intocompetition/{id:int:min(1)}")]
+        [System.Web.Http.Route("register/intocompetition/{id:int:min(1)}")]
         public async Task<IHttpActionResult> PostRegisterIntoCompetition(int id,
             PlayerCompetitionRegisterDto competitionRegisterDto)
         {
@@ -311,6 +340,52 @@ namespace Server.Controllers
 
             competitionRegisterDto.Id = player.Id;
             return Created(Url.Content("~/player/register/" + competitionRegisterDto.Id), competitionRegisterDto);
+        }
+
+        // GET api/Player/ExtortFromCompetition/1
+        [System.Web.Http.Authorize(Roles = "Administrator,Organizer,Moderator")]
+        [System.Web.Http.Route("ExtortFromCompetition/{id:int:min(1)}")]
+        public async Task<HttpResponseMessage> GetExtortFromCompetition(int id)
+        {
+            if (await InitCompetitionById(id) == false)
+                throw new Exception("Invalid competition id");
+
+            if (await CanOrganizerAccess() == false)
+                throw new Exception("Unauthorized");
+
+            Player[] players = await _playerRepository.GetAllAsync();
+
+            StringBuilder builder = new StringBuilder();
+
+            builder.AppendLine(
+                @"nr_startowy;imie;nazwisko;miejscowosc;klub;data_urodzenia;plec;telefon;pay;czas_startu;kategoria;kat_wiek;nazwa_dystansu;dlugosc");
+
+            foreach (Player p in players)
+            {
+                string birthDate = p.BirthDate.ToString("yyyy-MM-dd");
+                string sex = p.IsMale ? "M" : "K";
+                string pay = p.IsPaidUp ? "1" : "";
+
+                builder.AppendLine(
+                    $"{p.StartNumber};{p.FirstName};{p.LastName};{p.City??""};{p.Team??""};{birthDate};{sex};{p.PhoneNumber??""};{pay};{p.StartTime?.ToString("T") ?? ""};{p.FullCategory ?? ""};{p.AgeCategory?.Name ?? ""};{p.Distance?.Name??""};");
+            }
+
+            var stream = new MemoryStream();
+            var writer = new StreamWriter(stream);
+            writer.Write(builder.ToString());
+            writer.Flush();
+            stream.Position = 0;
+
+            HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
+            result.Content = new StreamContent(stream);
+            result.Content.Headers.ContentDisposition =
+                new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
+            result.Content.Headers.ContentDisposition.FileName =
+                "zawodnicy " + DateTime.Now.ToString("d") + " " + DateTime.Now.ToString("t") + ".csv";
+            result.Content.Headers.ContentType =
+                new MediaTypeHeaderValue("application/octet-stream");
+            return result;
+            
         }
     }
 }

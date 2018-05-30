@@ -7,17 +7,22 @@ import { HttpClient } from '@angular/common/http';
 import { BaseHttpService } from './base-http.service';
 import { MessageService } from './message.service';
 import { RegisterBindingModel } from '../Models/Authentication/RegisterBindingModel';
-import { UrlBuilder } from '../Helpers/UrlBuilder';
+import { UrlBuilder } from '../Helpers/url-builder';
 import { LoginData } from '../Models/Authentication/LoginData';
 import { TokenInfo } from '../Models/Authentication/TokenInfo';
+import { AuthenticatedUserService } from './authenticated-user.service';
+import { RoleEnum } from '../Models/Enums/RoleEnum';
+import { RoleViewModel } from '../Models/Authentication/RoleViewModel';
 
 @Injectable()
 export class AuthenticationService extends BaseHttpService {
-  constructor(http: HttpClient, messageService: MessageService) {
-    super(http, 'Account', messageService);
+  constructor(http: HttpClient, messageService: MessageService, authenticatedUserService: AuthenticatedUserService) {
+    super(http, 'Account', messageService, authenticatedUserService);
   }
 
-  public RegisterUser(registerModel: RegisterBindingModel): Observable<RegisterBindingModel> {
+  public registerUser(registerModel: RegisterBindingModel, role: RoleEnum): Observable<RegisterBindingModel> {
+    registerModel.role = role;
+    this.messageService.addLog(`Trying to register as ${role.toString()}`);
     return super.post<RegisterBindingModel, RegisterBindingModel>(
       new UrlBuilder()
         .addControllerName(this.controllerName)
@@ -27,7 +32,7 @@ export class AuthenticationService extends BaseHttpService {
     );
   }
 
-  public LogOut(): Observable<void> {
+  public logOut(): Observable<void> {
     return super.postWithoutBody<void>(
       new UrlBuilder()
         .addControllerName(this.controllerName)
@@ -36,12 +41,21 @@ export class AuthenticationService extends BaseHttpService {
     );
   }
 
-  public Login(loginData: URLSearchParams) {
+  public login(loginData: URLSearchParams): Observable<TokenInfo> {
     return super.postUrlEncoded<TokenInfo>(
       new UrlBuilder()
-        .addCustomUrlPart('/token')
+        .addCustomUrlPart('/Token')
         .toString(),
       loginData
+    );
+  }
+
+  public getRole(): Observable<RoleViewModel> {
+    return super.get<RoleViewModel>(
+      new UrlBuilder()
+      .addControllerName('Account')
+      .addCustomUrlPart('/Role')
+      .toString()
     );
   }
 
