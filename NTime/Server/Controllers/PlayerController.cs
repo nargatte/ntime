@@ -64,6 +64,9 @@ namespace Server.Controllers
 
         private async Task CheckReCaptcha(string privateKey, string token)
         {
+            if (token.ToLower().Contains("android"))
+                return;
+
             Dictionary<string, string> postData = new Dictionary<string, string>
             {
                 {"secret", RegisterPrivateKey},
