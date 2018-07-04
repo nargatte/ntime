@@ -104,7 +104,7 @@ namespace BaseCore.DataBase
 
         public override string ToString()
         {
-            return $"{nameof(FirstName)}: {FirstName}, {nameof(LastName)}: {LastName}, {nameof(IsMale)}: {IsMale}, {nameof(StartNumber)}: {StartNumber}, {nameof(StartTime)}: {StartTime}, {nameof(LapsCount)}: {LapsCount}, {nameof(Time)}: {Time.ToDateTime()}, {nameof(FullCategory)}: {FullCategory}";
+            return $"{nameof(FirstName)}: {FirstName}, {nameof(LastName)}: {LastName}, {nameof(IsMale)}: {IsMale}, {nameof(StartNumber)}: {StartNumber}, {nameof(StartTime)}: {StartTime}, {nameof(LapsCount)}: {LapsCount}, {nameof(Time)}: {Time.ToDateTime()}, {nameof(FullCategory)}: {FullCategory}, {nameof(ExtraData)}: {ExtraData}";
         }
     }
 }

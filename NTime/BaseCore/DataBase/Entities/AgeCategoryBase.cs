@@ -26,5 +26,7 @@ namespace BaseCore.DataBase
         public int YearTo { get; set; }
 
         public bool Male { get; set; }
+
+        
     }
 }

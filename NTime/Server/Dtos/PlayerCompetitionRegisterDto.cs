@@ -61,6 +61,10 @@ namespace Server.Dtos
 
             if (player.Subcategory == null || player.Distance == null)
                 return null;
+
+            if (player.Subcategory.Male != player.IsMale) return null;
+            if (player.AgeCategory.Male != player.IsMale) return null;
+            if (player.Distance.Id != player)
             return player;
         }
 

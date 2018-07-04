@@ -232,7 +232,7 @@ namespace BaseCore.DataBase
         {
             return ContextProvider.DoAsync(async ctx =>
             {
-                Player[] players = await ctx.Players.Where(p => p.CompetitionId == Competition.Id).Include(p => p.AgeCategory).ToArrayAsync();
+                Player[] players = await ctx.Players.Where(p => p.CompetitionId == Competition.Id && p.IsCategoryFixed == false).Include(p => p.AgeCategory).ToArrayAsync();
                 AgeCategory[] categories = await ctx.AgeCategories.Where(a => a.CompetitionId == Competition.Id)
                         .ToArrayAsync();
 
@@ -240,9 +240,6 @@ namespace BaseCore.DataBase
 
                 foreach (Player player in players)
                 {
-                    if(player.IsCategoryFixed)
-                        continue;
-
                     if (!ageCategoriesDictionary.TryGetValue(player.BirthDate.Year, out AgeCategory ageCategory))
                     {
                         ageCategory = categories
@@ -531,6 +528,29 @@ namespace BaseCore.DataBase
                         p => p.CompetitionId == Competition.Id && p.PlayerAccountId == playerAccount.Id);
             });
             return player;
+        }
+
+        public Task ExtraDataModyfication(int[] permutation)
+        {
+            return ContextProvider.DoAsync(async ctx =>
+            {
+                Player[] players = await ctx.Players.Where(p => p.CompetitionId == Competition.Id).ToArrayAsync();
+
+                foreach (Player player in players)
+                {
+                    string[] extraData = player.ExtraData.Split(new[] {';'}, StringSplitOptions.None);
+                    string[] newExtraData = new string[permutation.Length];
+                    for (int x = 0; x < newExtraData.Length; x++)
+                    {
+                        if (permutation[x] >= 0 && permutation[x] < extraData.Length)
+                            newExtraData[x] = extraData[permutation[x]];
+                    }
+
+                    player.ExtraData = String.Join(";", newExtraData);
+                }
+
+                await ctx.SaveChangesAsync();
+            });
         }
     }
 }
