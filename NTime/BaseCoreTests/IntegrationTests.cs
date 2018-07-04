@@ -30,8 +30,10 @@ namespace BaseCoreTests
 
             await eifr.AddRangeAsync(new[]
             {
-                new Subcategory("inny", "i"),
-                new Subcategory("szosowy", "s")
+                new Subcategory("inny", "i", true),
+                new Subcategory("szosowy", "s", true),
+                new Subcategory("inny", "i", false),
+                new Subcategory("szosowy", "s", false)
             });
 
             await dr.AddRangeAsync(new[]
@@ -45,10 +47,10 @@ namespace BaseCoreTests
 
             await akr.AddRangeAsync(new[]
             {
-                new AgeCategory("Młodziki", 2001, 2005),
-                new AgeCategory("Starsi", 1996, 2000),
-                new AgeCategory("Starszaki", 1986, 1995),
-                new AgeCategory("inny", 1900, 1985)
+                new AgeCategory("Młodziki", 2001, 2005, false),
+                new AgeCategory("Starsi", 1996, 2000, false),
+                new AgeCategory("Starszaki", 1986, 1995, false),
+                new AgeCategory("inny", 1900, 1985, false)
             });
 
             var g1 = await gr.AddAsync(new Gate("Pierwszy", 1));

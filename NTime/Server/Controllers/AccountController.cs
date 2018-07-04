@@ -352,9 +352,6 @@ namespace Server.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (!(model.Role == RoleEnum.Player || model.Role == RoleEnum.Organizer))
-                throw new Exception("Role invalid");
-
             var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
@@ -366,15 +363,10 @@ namespace Server.Controllers
 
             await UserManager.AddToRoleAsync(user.Id, model.Role.ToString());
 
-            PlayerAccountRepository accountRepository = new PlayerAccountRepository(new ContextProvider());
-            PlayerAccount playerAccount = new PlayerAccount();
-            playerAccount.AccountId = user.Id;
-            await accountRepository.AddAsync(playerAccount);
             if (model.Role == RoleEnum.Player)
             {
                 PlayerAccountRepository accountRepository = new PlayerAccountRepository(new ContextProvider());
                 PlayerAccount playerAccount = new PlayerAccount();
-                playerAccount.EMail = model.Email;
                 playerAccount.AccountId = user.Id;
                 await accountRepository.AddAsync(playerAccount);
             }
@@ -383,11 +375,7 @@ namespace Server.Controllers
                 OrganizerAccountRepository organizerAccountRepository =
                     new OrganizerAccountRepository(new ContextProvider());
                 OrganizerAccount organizerAccount = new OrganizerAccount();
-                organizerAccount.EMail = model.Email;
                 organizerAccount.AccountId = user.Id;
-                organizerAccount.FirstName = "Organizator";
-                organizerAccount.LastName = "Organizator";
-                organizerAccount.PhoneNumber = "123 123 123";
                 await organizerAccountRepository.AddAsync(organizerAccount);
             }
             else
