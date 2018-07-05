@@ -1,16 +1,16 @@
 ﻿namespace BaseCore.DataBase
 {
-    public class SubcategoryDistance : IEntityId, ICompetitionId
+    public class AgeCategoryDistance : IEntityId, ICompetitionId
     {
-        public SubcategoryDistance()
+        public AgeCategoryDistance()
         {
         }
 
         public int Id { get; set; }
         public int CompetitionId { get; set; }
         public virtual Competition Competition { get; set; }
-        public int? SubcategoryId { get; set; }
-        public virtual Subcategory Subcategory { get; set; }
+        public int? AgeCategoryId { get; set; }
+        public virtual AgeCategory AgeCategory { get; set; }
         public int? DistanceId { get; set; }
         public virtual Distance Distance { get; set; }
     }

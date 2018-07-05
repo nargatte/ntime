@@ -29,11 +29,10 @@ namespace BaseCore.DataBase
             return Id;
         }
 
-        public Subcategory(string name, string shortName, bool male)
+        public Subcategory(string name, string shortName)
         {
             Name = name;
             ShortName = shortName;
-            Male = male;
         }
 
         public int Id { get; set; }
@@ -44,13 +43,9 @@ namespace BaseCore.DataBase
         [StringLength(255), Required]
         public string ShortName { get; set; }
 
-        public bool Male { get; set; }
-
         public int CompetitionId { get; set; }
         public virtual Competition Competition { get; set; } 
 
         public virtual ICollection<Player> Players { get; set; }
-
-        public virtual ICollection<SubcategoryDistance> SubcategoryDistances { get; set; }
     }
 }

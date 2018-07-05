@@ -16,5 +16,7 @@ namespace BaseCore.DataBase
         public virtual Competition Competition { get; set; }
 
         public virtual ICollection<Player> Players { get; set; }
+
+        public virtual ICollection<AgeCategory> AgeCategories { get; set; }
     }
 }

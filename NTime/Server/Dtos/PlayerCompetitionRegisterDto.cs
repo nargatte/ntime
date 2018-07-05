@@ -29,6 +29,7 @@ namespace Server.Dtos
             ExtraData = player.ExtraData;
             SubcategoryId = player.Subcategory.Id;
             DistanceId = player.Distance.Id;
+            AgeCategoryId = player.AgeCategory.Id;
             CompetitionId = player.CompetitionId;
         }
 
@@ -46,6 +47,7 @@ namespace Server.Dtos
             player.ExtraData = ExtraData;
             player.SubcategoryId = SubcategoryId;
             player.DistanceId = DistanceId;
+            player.AgeCategoryId = AgeCategoryId;
             player.CompetitionId = CompetitionId;
             return player;
         }
@@ -54,17 +56,20 @@ namespace Server.Dtos
         {
             SubcategoryRepository subcategoryRepository = new SubcategoryRepository(contextProvider, competition);
             DistanceRepository distanceRepository = new DistanceRepository(contextProvider, competition);
+            AgeCategoryRepository ageCategoryRepository = new AgeCategoryRepository(contextProvider, competition);
 
             CopyDataFromDto(player);
             player.Subcategory = await subcategoryRepository.GetById(SubcategoryId);
             player.Distance = await distanceRepository.GetById(DistanceId);
+            player.AgeCategory = await ageCategoryRepository.GetById(AgeCategoryId);
 
-            if (player.Subcategory == null || player.Distance == null)
+            if (player.Subcategory == null || player.Distance == null || player.AgeCategory == null)
                 return null;
 
-            if (player.Subcategory.Male != player.IsMale) return null;
             if (player.AgeCategory.Male != player.IsMale) return null;
-            if (player.Distance.Id != player)
+            if (!(await ageCategoryRepository.IsAgeCategoryAndDistanceMatch(player.AgeCategory, player.Distance)))
+                return null;
+
             return player;
         }
 
@@ -97,6 +102,8 @@ namespace Server.Dtos
         public int SubcategoryId { get; set; }
 
         public int DistanceId { get; set; }
+
+        public int AgeCategoryId { get; set; }
 
         public int CompetitionId { get; set; }
 

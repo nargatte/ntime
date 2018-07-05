@@ -87,7 +87,17 @@ namespace BaseCore.DataBase
                 await ctx.SaveChangesAsync();
             });
         }
-
+        public async Task<bool> IsAgeCategoryAndDistanceMatch(AgeCategory ageCategory, Distance distance)
+        {
+            bool answer = false;
+            await ContextProvider.DoAsync(async ctx =>
+            {
+                answer = await ctx.AgeCategoryDistances.AnyAsync(acd =>
+                    acd.CompetitionId == Competition.Id && acd.AgeCategoryId == ageCategory.Id &&
+                    acd.DistanceId == distance.Id);
+            });
+            return answer;
+        }
 
     }
 }

@@ -19,7 +19,6 @@ namespace Server.Dtos
             Id = subcategory.Id;
             Name = subcategory.Name;
             ShortName = subcategory.ShortName;
-            Male = subcategory.Male;
         }
 
         public Subcategory CopyDataFromDto(Subcategory subcategory)
@@ -27,7 +26,6 @@ namespace Server.Dtos
             subcategory.Id = Id;
             subcategory.Name = Name;
             subcategory.ShortName = ShortName;
-            subcategory.Male = Male;
             return subcategory;
         }
 

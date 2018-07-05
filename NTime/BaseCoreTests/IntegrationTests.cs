@@ -30,10 +30,8 @@ namespace BaseCoreTests
 
             await eifr.AddRangeAsync(new[]
             {
-                new Subcategory("inny", "i", true),
-                new Subcategory("szosowy", "s", true),
-                new Subcategory("inny", "i", false),
-                new Subcategory("szosowy", "s", false)
+                new Subcategory("inny", "i"),
+                new Subcategory("szosowy", "s")
             });
 
             await dr.AddRangeAsync(new[]

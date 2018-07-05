@@ -98,7 +98,7 @@ namespace ViewCore.ManagersDesktop
                 var playerToAdd = newPlayer.Clone() as EditablePlayer;
                 var tempDistance = playerToAdd.DbEntity.Distance;
                 var tempExtraPlayerInfo = playerToAdd.DbEntity.Subcategory;
-                await _playerRepository.AddAsync(playerToAdd.DbEntity, playerToAdd.DbEntity.Distance, playerToAdd.DbEntity.Subcategory);
+                await _playerRepository.AddAsync(playerToAdd.DbEntity, playerToAdd.DbEntity.AgeCategory, playerToAdd.DbEntity.Distance, playerToAdd.DbEntity.Subcategory);
                 playerToAdd.DbEntity.Distance = tempDistance;
                 playerToAdd.DbEntity.Subcategory = tempExtraPlayerInfo;
                 playerToAdd.UpdateRequested += Player_UpdateRequested;
@@ -153,7 +153,7 @@ namespace ViewCore.ManagersDesktop
         private async void Player_UpdateRequested(object sender, EventArgs e)
         {
             var playerToUpdate = sender as EditablePlayer;
-            await _playerRepository.UpdateAsync(playerToUpdate.DbEntity, playerToUpdate.DbEntity.Distance,
+            await _playerRepository.UpdateAsync(playerToUpdate.DbEntity, playerToUpdate.DbEntity.AgeCategory, playerToUpdate.DbEntity.Distance,
                 playerToUpdate.DbEntity.Subcategory);
             playerToUpdate.UpdateFullCategoryDisplay();
         }

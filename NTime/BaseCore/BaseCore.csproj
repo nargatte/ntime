@@ -77,7 +77,7 @@
     <Compile Include="DataBase\Entities\OrganizerAccount.cs" />
     <Compile Include="DataBase\Entities\Player.cs" />
     <Compile Include="DataBase\Entities\PlayerAccount.cs" />
-    <Compile Include="DataBase\Entities\SubcategoryDistance.cs" />
+    <Compile Include="DataBase\Entities\AgeCategoryDistance.cs" />
     <Compile Include="DataBase\Entities\TimeRead.cs" />
     <Compile Include="DataBase\Entities\TimeReadsLogInfo.cs" />
     <Compile Include="DataBase\Entities\TimeReadType.cs" />
@@ -97,10 +97,6 @@
     <Compile Include="Migrations\201804121401166_InitialCreate.cs" />
     <Compile Include="Migrations\201804121401166_InitialCreate.Designer.cs">
       <DependentUpon>201804121401166_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804211522007_CategoryModelUpdate.cs" />
-    <Compile Include="Migrations\201804211522007_CategoryModelUpdate.Designer.cs">
-      <DependentUpon>201804211522007_CategoryModelUpdate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\PageBindingModel.cs" />
@@ -134,9 +130,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201804121401166_InitialCreate.resx">
       <DependentUpon>201804121401166_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804211522007_CategoryModelUpdate.resx">
-      <DependentUpon>201804211522007_CategoryModelUpdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

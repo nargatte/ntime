@@ -47,6 +47,6 @@ namespace BaseCore.DataBase
 
         public DbSet<PlayerAccount> PlayerAccounts { get; set; }
 
-        public DbSet<SubcategoryDistance> SubcategoryDistances { get; set; }
+        public DbSet<AgeCategoryDistance> AgeCategoryDistances { get; set; }
     }
 }
