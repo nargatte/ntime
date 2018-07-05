@@ -125,7 +125,7 @@ namespace Server.Controllers
         // POST /api/Competition/1/ExtraDataHederModyfication
         [Authorize(Roles = "Administrator,Organizer,Moderator")]
         [Route("{id:int:min(1)}/ExtraDataHederModyfication")]
-        public async Task<IHttpActionResult> PostExtraDataHederModyfication(int id, List<PermutationPair> permutationPairs)
+        public async Task<IHttpActionResult> PostExtraDataHederModyfication(int id, PermutationPair[] permutationPairs)
         {
             if (await InitCompetitionById(id) == false)
                 throw new Exception("Invalid competition id");
