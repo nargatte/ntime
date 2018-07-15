@@ -18,6 +18,8 @@ using ViewCore.Factories.Distances;
 using ViewCore.Factories.ExtraPlayerInfos;
 using ViewCore.Factories.Players;
 using System.Windows;
+using BaseCore.Csv.CompetitionSeries;
+using System.IO;
 
 namespace AdminView
 {
@@ -35,6 +37,7 @@ namespace AdminView
             PrepareDependencied();
             NavToCompetitionChoiceView();
             ChangeCompetitionCmd = new RelayCommand(OnChangeCompetition);
+            CalculateStandings = new RelayCommand(OnCalculateStandings);
             //NavToCompetitionManagerView();
         }
 
@@ -52,6 +55,37 @@ namespace AdminView
         private void OnChangeCompetition()
         {
             NavToCompetitionChoiceView();
+        }
+
+        private void OnCalculateStandings()
+        {
+            string mainPath = Path.GetTempPath();
+            string aleksandrowFileName = "Aleksandrow.csv";
+            string zdunskaFileName = "Zdunska.csv";
+
+            Dictionary<string, string> filesDictionary = new Dictionary<string, string>();
+            filesDictionary.Add(aleksandrowFileName, Properties.Resources.Aleksandrow);
+            filesDictionary.Add(zdunskaFileName, Properties.Resources.Zdunska);
+
+            foreach (KeyValuePair<string, string> dpv in filesDictionary)
+            {
+                if (File.Exists(mainPath + dpv.Key))
+                    File.Delete(mainPath + dpv.Key);
+
+                using (FileStream fs = File.Create(mainPath + dpv.Key))
+                {
+                    byte[] tb = new UTF8Encoding(true).GetBytes(dpv.Value);
+                    fs.Write(tb, 0, tb.Length);
+                }
+            }
+
+            var seriesStandings = new SeriesStandings();
+            var competitions = new List<string>
+            {
+                mainPath + aleksandrowFileName,
+                mainPath + zdunskaFileName,
+            };
+            seriesStandings.ImportScoresFromCsv(competitions);
         }
 
         private void NavToCompetitionChoiceView()
@@ -85,5 +119,6 @@ namespace AdminView
         }
 
         public RelayCommand ChangeCompetitionCmd { get; private set; }
+        public RelayCommand CalculateStandings { get; private set; }
     }
 }

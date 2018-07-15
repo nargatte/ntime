@@ -36,6 +36,9 @@
                 <TextBlock Text="Zmień zawody" TextWrapping="Wrap" Height="20"/>
             </StackPanel>
         </Button>
+        <Button Command="{Binding CalculateStandings}" Height="40" Width="90" Grid.Column="2" VerticalAlignment="Top" Margin="0, 20">
+            Przelicz ranking
+        </Button>
         <ContentControl Content="{Binding CurrentViewModel}" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="1"/>
     </Grid>
         <!--<Grid.ColumnDefinitions>

@@ -10,11 +10,20 @@ namespace BaseCore.Csv
         where T : class
         where TM : ClassMap<T>
     {
-    private readonly string _fileName;
+        private readonly string _fileName;
+        private readonly char _delimiter;
 
-    public CsvImporter(string fileName) => _fileName = fileName;
+        public CsvImporter(string fileName)
+        {
+            _fileName = fileName;
+        }
 
-    public Task<T[]> GetAllRecordsAsync() =>
+        public CsvImporter(string fileName, char delimiter = ';') : this(fileName)
+        {
+            _delimiter = delimiter;
+        }
+
+        public Task<T[]> GetAllRecordsAsync() =>
         Task.Factory.StartNew(() =>
         {
             T[] readRecords;
@@ -29,7 +38,7 @@ namespace BaseCore.Csv
         {
             CsvReader csv = new CsvReader(tr);
             csv.Configuration.RegisterClassMap<TM>();
-            csv.Configuration.Delimiter = ";";
+            csv.Configuration.Delimiter = _delimiter.ToString();
             return csv.GetRecords<T>().ToArray();
         }
     }

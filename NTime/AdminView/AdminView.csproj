@@ -199,6 +199,8 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <EmbeddedResource Include="Resources\Wyniki z pomiarami Aleksandrow.csv" />
+    <EmbeddedResource Include="Resources\Wyniki z pomiarami Zdunska.csv" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

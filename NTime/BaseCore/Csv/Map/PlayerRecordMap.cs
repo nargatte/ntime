@@ -1,4 +1,5 @@
 ﻿using System;
+using BaseCore.Csv.Converters;
 using CsvHelper;
 using CsvHelper.Configuration;
 using CsvHelper.TypeConversion;
@@ -14,7 +15,7 @@ namespace BaseCore.Csv
             Map(m => m.LastName).Name("nazwisko");
             Map(m => m.City).Name("miejscowosc");
             Map(m => m.Team).Name("klub");
-            Map(m => m.BirthDate).ConvertUsing(DateBirthConverter);
+            Map(m => m.BirthDate).ConvertUsing(BirthDateConverter);
             Map(m => m.IsMale).ConvertUsing(IsMaleConverter);
             Map(m => m.StringAditionalInfo).Name("rower");
             Map(m => m.StartTime).Name("czas_startu");
@@ -23,35 +24,20 @@ namespace BaseCore.Csv
 
         private bool IsMaleConverter(IReaderRow row)
         {
-            string s = row.GetField<string>("plec");
-            if (s == "M") return true;
-            if (s == "K") return false;
-            throw new ArgumentException("Wrong SexString");
+            string maleString = row.GetField<string>("plec");
+            return CsvColumnConverters.ConvertStringToIsMale(maleString);
         }
 
-        private DateTime DateBirthConverter(IReaderRow row)
+        private DateTime BirthDateConverter(IReaderRow row)
         {
-            string s = row.GetField<string>("data_urodzenia");
-
-            DateTime dt;
-            if (DateTime.TryParse(s, out dt))
-                return dt;
-            int year;
-            if(Int32.TryParse(s, out year))
-                return new DateTime(year, 1, 1);
-
-            throw new Exception("Wrong BirthDate format");
+            string dateString = row.GetField<string>("data_urodzenia");
+            return CsvColumnConverters.ConvertStringToDateTime(dateString);
         }
 
         private int StartNumberConverter(IReaderRow row)
         {
-            string s = row.GetField<string>("nr_startowy");
-
-            int result;
-            if (Int32.TryParse(s, out result))
-                return result;
-
-            return -1;
+            string integerString = row.GetField<string>("nr_startowy");
+            return CsvColumnConverters.ConvertStringToInteger(integerString);
         }
     }
 }
