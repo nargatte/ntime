@@ -21,9 +21,10 @@ namespace BaseCore.Csv.Converters
 
         public static int ConvertStringToInteger(string fieldString)
         {
+            if (string.IsNullOrWhiteSpace(fieldString))
+                return -1;
             if (Int32.TryParse(fieldString, out int result))
                 return result;
-
             throw new ArgumentException("This is not a number");
         }
 

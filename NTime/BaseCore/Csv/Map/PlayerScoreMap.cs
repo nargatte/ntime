@@ -19,12 +19,12 @@ namespace BaseCore.Csv.Map
             Map(m => m.City).Name("miejscowosc");
             Map(m => m.BirthDate).ConvertUsing(DateBirthConverter);
             Map(m => m.FullCategory).Name("kategoria");
-            Map(m => m.Subcategory).Name("rower");
-            Map(m => m.Distance).Name("nazwa_dystansu");
+            //Map(m => m.Subcategory).Name("rower");
+            //Map(m => m.Distance).Name("nazwa_dystansu");
             //Map(m => m.Time).Name("czas_przejazdu"); // TODO: Write converter
             Map(m => m.DistancePlaceNumber).ConvertUsing(DistancePlaceConverter);
-            Map(m => m.CategoryPlaceNumber).Name("msc_kat_csv");
-            Map(m => m.LapsCount).Name("liczba_pomiarow");
+            Map(m => m.CategoryPlaceNumber).ConvertUsing(CategoryPlaceConverter);
+            //Map(m => m.LapsCount).Name("liczba_pomiarow");
             //Map(m => m.MeasurementTime).Name("pomiary_csv");
 
         }
