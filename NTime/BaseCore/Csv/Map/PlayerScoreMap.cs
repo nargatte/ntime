@@ -20,7 +20,7 @@ namespace BaseCore.Csv.Map
             Map(m => m.BirthDate).ConvertUsing(DateBirthConverter);
             Map(m => m.AgeCategory).ConvertUsing(CategoryConverter);
             //Map(m => m.Subcategory).Name("rower");
-            //Map(m => m.Distance).Name("nazwa_dystansu");
+            Map(m => m.Distance).Name("nazwa_dystansu");
             //Map(m => m.Time).Name("czas_przejazdu"); // TODO: Write converter
             Map(m => m.DistancePlaceNumber).ConvertUsing(DistancePlaceConverter);
             Map(m => m.CategoryPlaceNumber).ConvertUsing(CategoryPlaceConverter);

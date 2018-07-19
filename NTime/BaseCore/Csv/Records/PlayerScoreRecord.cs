@@ -15,7 +15,7 @@ namespace BaseCore.Csv.Records
         public DateTime BirthDate { get; set; }
         public string AgeCategory { get; set; }
         public ExtraPlayerInfo Subcategory { get; set; }
-        public Distance Distance { get; set; }
+        public string Distance { get; set; }
         public decimal Time { get; set; }
         public int DistancePlaceNumber { get; set; }
         public int CategoryPlaceNumber { get; set; }
