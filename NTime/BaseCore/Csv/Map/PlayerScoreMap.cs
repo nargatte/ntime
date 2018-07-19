@@ -13,12 +13,12 @@ namespace BaseCore.Csv.Map
     class PlayerScoreMap : ClassMap<PlayerScoreRecord>
     {
         public PlayerScoreMap()
-        { 
+        {
             Map(m => m.LastName).Name("nazwisko");
             Map(m => m.FirstName).Name("imie");
             Map(m => m.City).Name("miejscowosc");
             Map(m => m.BirthDate).ConvertUsing(DateBirthConverter);
-            Map(m => m.FullCategory).Name("kategoria");
+            Map(m => m.AgeCategory).ConvertUsing(CategoryConverter);
             //Map(m => m.Subcategory).Name("rower");
             //Map(m => m.Distance).Name("nazwa_dystansu");
             //Map(m => m.Time).Name("czas_przejazdu"); // TODO: Write converter
@@ -27,6 +27,12 @@ namespace BaseCore.Csv.Map
             //Map(m => m.LapsCount).Name("liczba_pomiarow");
             //Map(m => m.MeasurementTime).Name("pomiary_csv");
 
+        }
+
+        private string CategoryConverter(IReaderRow row)
+        {
+            string fullCategoryString = row.GetField<string>("kategoria");
+            return fullCategoryString.Split(' ')[1];
         }
 
         private DateTime DateBirthConverter(IReaderRow row)

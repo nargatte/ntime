@@ -3,6 +3,7 @@ using BaseCore.Csv.Records;
 using BaseCore.DataBase;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace BaseCore.Csv.CompetitionSeries
     {
         private IEnumerable<PlayerScoreRecord> scores = new List<PlayerScoreRecord>();
         private IEnumerable<PlayerScoreRecord> dnfs = new List<PlayerScoreRecord>();
+        private HashSet<string> categories = new HashSet<string>();
         public async Task ImportScoresFromCsv(IEnumerable<string> paths)
         {
             var competitionsScores = new List<PlayerScoreRecord[]>();
@@ -33,8 +35,14 @@ namespace BaseCore.Csv.CompetitionSeries
         public void CalculateResults()
         {
             FilterScores();
+            GetUniqueCategories();
         }
 
+        private void GetUniqueCategories()
+        {
+            scores.ToList().ForEach(x => categories.Add(x.AgeCategory.ToUpper()));
+            categories.ToList().ForEach(category => Debug.WriteLine($"Kategoria: {category}"));
+        }
 
         private void FilterScores()
         {
