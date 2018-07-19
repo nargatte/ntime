@@ -58,7 +58,7 @@ namespace AdminView
             NavToCompetitionChoiceView();
         }
 
-        private void OnCalculateStandings()
+        private async void OnCalculateStandings()
         {
             var filesDictionary = new Dictionary<string, string>();
             filesDictionary.Add("klasyki_punkty.csv", Properties.Resources.klasyki_punkty);
@@ -68,11 +68,12 @@ namespace AdminView
             var resourceLoader = new ResourceLoader();
             var competitionPaths = resourceLoader.LoadFilesToTemp(filesDictionary.Skip(1).ToDictionary(x => x.Key, x => x.Value), Path.GetTempPath());
             var seriesStandings = new SeriesStandings();
-            
-            seriesStandings.ImportScoresFromCsv(competitionPaths);
+            await seriesStandings.ImportScoresFromCsv(competitionPaths);
 
-            var pointsPath = resourceLoader.LoadFilesToTemp(filesDictionary.First(), Path.GetTempPath());
-            seriesStandings.ImportScoresFromCsv("")
+            var pointsPath = resourceLoader.LoadFilesToTemp(filesDictionary.Take(1).ToDictionary(x => x.Key, x => x.Value), Path.GetTempPath());
+            await seriesStandings.ImportPointsTableFromCsv(pointsPath.First());
+
+            seriesStandings.CalculateResults();
         }
 
         private void NavToCompetitionChoiceView()
