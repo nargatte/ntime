@@ -77,6 +77,77 @@ namespace AdminView.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to place;points; 
+        ///1;500;
+        ///2;400;
+        ///3;320;
+        ///4;260;
+        ///5;220;
+        ///6;200;
+        ///7;180;
+        ///8;160;
+        ///9;140;
+        ///10;120;
+        ///11;100;
+        ///12;90;
+        ///13;82;
+        ///14;76;
+        ///15;72;
+        ///16;70;
+        ///17;68;
+        ///18;66;
+        ///19;64;
+        ///20;62;
+        ///21;60;
+        ///22;58;
+        ///23;56;
+        ///24;54;
+        ///25;52;
+        ///26;50;
+        ///27;49;
+        ///28;48;
+        ///29;47;
+        ///30;46;
+        ///31;45;
+        ///32;44;
+        ///33;43;
+        ///34;42;
+        ///35;41;
+        ///36;40;
+        ///37;39;
+        ///38;38;
+        ///39;37;
+        ///40;36;
+        ///41;35;
+        ///42;34;
+        ///43;33;
+        ///44;32;
+        ///45;31;
+        ///46;30;
+        ///47;29;
+        ///48;28;
+        ///49;27;
+        ///50;26;
+        ///51;25;
+        ///52;24;
+        ///53;23;
+        ///54;22;
+        ///55;21;
+        ///56;20;
+        ///57;19;
+        ///58;18;
+        ///59;17;
+        ///60;16;
+        ///61;15;
+        ///62;14; [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string klasyki_punkty {
+            get {
+                return ResourceManager.GetString("klasyki_punkty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to nazwisko,imie,miejscowosc,data_urodzenia,kategoria,rower,nazwa_dystansu,czas_przejazdu,msc_open_csv,msc_kat_csv,liczba_pomiarow,pomiary_csv
         ///Studziński DNS,Adam DNS,,1982,120 M30,,120,,,,0,
         ///Musiałowski DNS,Piotr DNS,,1977,90 M40,,90,,,,0,

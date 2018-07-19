@@ -121,6 +121,9 @@
   <data name="Aleksandrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Wyniki z pomiarami Aleksandrow.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="klasyki_punkty" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\klasyki_punkty.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="Zdunska" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Wyniki z pomiarami Zdunska.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>

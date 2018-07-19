@@ -19,5 +19,11 @@ namespace BaseCore.Csv.CompetitionSeries
                 var scoresRecords = await csvImporter.GetAllRecordsAsync();
             }
         }
+
+        public async void ImportPointsTableFromCsv(string path)
+        {
+            var csvImporter = new CsvImporter<PlacePointsRecord, PlacePointsMap>(path, ';');
+            var pointsAndPlaces = await csvImporter.GetAllRecordsAsync();
+        }
     }
 }

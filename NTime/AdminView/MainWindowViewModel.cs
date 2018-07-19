@@ -20,6 +20,7 @@ using ViewCore.Factories.Players;
 using System.Windows;
 using BaseCore.Csv.CompetitionSeries;
 using System.IO;
+using BaseCore.Csv;
 
 namespace AdminView
 {
@@ -59,33 +60,19 @@ namespace AdminView
 
         private void OnCalculateStandings()
         {
-            string mainPath = Path.GetTempPath();
-            string aleksandrowFileName = "Aleksandrow.csv";
-            string zdunskaFileName = "Zdunska.csv";
+            var filesDictionary = new Dictionary<string, string>();
+            filesDictionary.Add("klasyki_punkty.csv", Properties.Resources.klasyki_punkty);
+            filesDictionary.Add("Aleksandrow.csv", Properties.Resources.Aleksandrow);
+            filesDictionary.Add("Zdunska.csv", Properties.Resources.Zdunska);
 
-            Dictionary<string, string> filesDictionary = new Dictionary<string, string>();
-            filesDictionary.Add(aleksandrowFileName, Properties.Resources.Aleksandrow);
-            filesDictionary.Add(zdunskaFileName, Properties.Resources.Zdunska);
-
-            foreach (KeyValuePair<string, string> dpv in filesDictionary)
-            {
-                if (File.Exists(mainPath + dpv.Key))
-                    File.Delete(mainPath + dpv.Key);
-
-                using (FileStream fs = File.Create(mainPath + dpv.Key))
-                {
-                    byte[] tb = new UTF8Encoding(true).GetBytes(dpv.Value);
-                    fs.Write(tb, 0, tb.Length);
-                }
-            }
-
+            var resourceLoader = new ResourceLoader();
+            var competitionPaths = resourceLoader.LoadFilesToTemp(filesDictionary.Skip(1).ToDictionary(x => x.Key, x => x.Value), Path.GetTempPath());
             var seriesStandings = new SeriesStandings();
-            var competitions = new List<string>
-            {
-                mainPath + aleksandrowFileName,
-                mainPath + zdunskaFileName,
-            };
-            seriesStandings.ImportScoresFromCsv(competitions);
+            
+            seriesStandings.ImportScoresFromCsv(competitionPaths);
+
+            var pointsPath = resourceLoader.LoadFilesToTemp(filesDictionary.First(), Path.GetTempPath());
+            seriesStandings.ImportScoresFromCsv("")
         }
 
         private void NavToCompetitionChoiceView()
