@@ -42,7 +42,7 @@ namespace BaseCore.Csv.Records
 
         public override string ToString()
         {
-            var str = $"{FirstName,-10} {LastName,-12} {BirthDate.Year,-5} {AgeCategory,-4} {CompetitionsStarted,-2} {Points,-2}   ";
+            var str = $"{LastName,-12} {FirstName,-12} {BirthDate.Year,-5} {AgeCategory,-4} {CompetitionsStarted,-2} {Points,-2}   ";
             foreach (var competition in AllCompetitions)
             {
                 string extraString = GetPointsForCompetition(competition);

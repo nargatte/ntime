@@ -118,13 +118,19 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Aleksandrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Wyniki z pomiarami Aleksandrow.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
   <data name="klasyki_punkty" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\klasyki_punkty.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="Aleksandrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Aleksandrow.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="Zdunska" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Wyniki z pomiarami Zdunska.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+    <value>..\Resources\Zdunska.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="Aleksandrow_stare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Aleksandrow stare.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="Zdunska_stare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Zdunska stare.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
 </root>

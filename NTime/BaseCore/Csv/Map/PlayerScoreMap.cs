@@ -16,11 +16,11 @@ namespace BaseCore.Csv.Map
         {
             Map(m => m.LastName).Name("nazwisko");
             Map(m => m.FirstName).Name("imie");
-            Map(m => m.City).Name("miejscowosc");
+            //Map(m => m.City).Name("miejscowosc");
             Map(m => m.BirthDate).ConvertUsing(DateBirthConverter);
             Map(m => m.AgeCategory).ConvertUsing(CategoryConverter);
             //Map(m => m.Subcategory).Name("rower");
-            Map(m => m.Distance).Name("nazwa_dystansu");
+            //Map(m => m.Distance).Name("nazwa_dystansu");
             //Map(m => m.Time).Name("czas_przejazdu"); // TODO: Write converter
             Map(m => m.DistancePlaceNumber).ConvertUsing(DistancePlaceConverter);
             Map(m => m.CategoryPlaceNumber).ConvertUsing(CategoryPlaceConverter);
@@ -32,12 +32,14 @@ namespace BaseCore.Csv.Map
         private string CategoryConverter(IReaderRow row)
         {
             string fullCategoryString = row.GetField<string>("kategoria");
-            return fullCategoryString.Split(' ')[1];
+            return fullCategoryString.Split(' ').Last();
         }
 
         private DateTime DateBirthConverter(IReaderRow row)
         {
             string dateString = row.GetField<string>("data_urodzenia");
+            if (string.IsNullOrWhiteSpace(dateString))
+                return DateTime.Today;
             return CsvColumnConverters.ConvertStringToDateTime(dateString);
         }
 

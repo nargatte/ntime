@@ -61,6 +61,30 @@ namespace AdminView.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to nazwisko;imie;data_urodzenia;kategoria;msc_open_csv;msc_kat_csv
+        ///WOLSKI;KRZYSZTOF;1979;M30;2;1
+        ///Bienias;Przemysław;1973;M40;6;2
+        ///Cichocki;Tomasz;1981;M30;7;3
+        ///Sobczyński;Frnaciszek;1956;M60;17;4
+        ///Wilk;Mariusz;;AMATOR;32;5
+        ///Kałuszka;Paweł;1975;M40;23;6
+        ///Pyciarz;Artur;1970;M40;7;7
+        ///Pyciarz;Krzysztof;1965;M50;11;8
+        ///Nowakowski;Ryszard;1966;M50;13;9
+        ///Lascioli;Edward;1947;M70;9;10
+        ///Pfeifer;Zygmunt;1946;M70;2;11
+        ///Karkowski;Piotr;1970;M40;8;12
+        ///Uciński;Piotr;1970;M40;16;13
+        ///Siemiński DNF;Kacper DNF;;JUNIOR;;14
+        ///Dus [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Aleksandrow {
+            get {
+                return ResourceManager.GetString("Aleksandrow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to nazwisko,imie,miejscowosc,data_urodzenia,kategoria,rower,nazwa_dystansu,czas_przejazdu,msc_open_csv,msc_kat_csv,liczba_pomiarow,pomiary_csv
         ///Ważny,Adam,,1984,M30 M30,,M30,,,,0,
         ///KALODZITSA,ALIAKSANDR,,1960,M50 M50,,M50,,,,0,
@@ -70,14 +94,15 @@ namespace AdminView.Properties {
         ///CZECHOWSKI,TOMASZ,Ksawerów,1986-01-10,M30 M30,,M30,,,,0,
         ///Podwysocki,Bartłomiej,łódź,1984-03-14,AMAT AMATOR,,AMA [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string Aleksandrow {
+        internal static string Aleksandrow_stare {
             get {
-                return ResourceManager.GetString("Aleksandrow", resourceCulture);
+                return ResourceManager.GetString("Aleksandrow_stare", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to place;points; 
+        ///   Looks up a localized string similar to place;points;
+        ///0;0; 
         ///1;500;
         ///2;400;
         ///3;320;
@@ -139,11 +164,34 @@ namespace AdminView.Properties {
         ///59;17;
         ///60;16;
         ///61;15;
-        ///62;14; [rest of string was truncated]&quot;;.
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string klasyki_punkty {
             get {
                 return ResourceManager.GetString("klasyki_punkty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to nazwisko;imie;data_urodzenia;kategoria;msc_open_csv;msc_kat_csv
+        ///WOLSKI;KRZYSZTOF;1979;M30;2;1
+        ///Bienias;Przemysław;1973;M40;9;2
+        ///Cichocki;Tomasz;1981;M30;21;3
+        ///Kałuszka;Paweł;1975;M40;29;6
+        ///Pyciarz;Krzysztof;1965;M50;12;8
+        ///Nowakowski;Ryszard;1966;M50;15;9
+        ///Lascioli;Edward;1947;M70;7;10
+        ///Pfeifer;Zygmunt;1946;M70;3;11
+        ///Karkowski;Piotr;1970;M40;19;12
+        ///Grzegory;Tomasz;1978;M40;21;17
+        ///Torbus;Henryk;1946;M70;8;18
+        ///Michalak;Lechosław;1956;M60;3;23
+        ///Zimnicka;Małgorzata;1983;K30;2;24
+        ///Stolarek;Grzegorz;1968;M50;7;25 [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Zdunska {
+            get {
+                return ResourceManager.GetString("Zdunska", resourceCulture);
             }
         }
         
@@ -157,9 +205,9 @@ namespace AdminView.Properties {
         ///Ważny DNS,Adam DNS,,1984,120 M30,,120,,,,0,
         ///Malinowski DNS,Kamil DNS,Pabianice,1980-09-23,120 M30,,120,,,,0, [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string Zdunska {
+        internal static string Zdunska_stare {
             get {
-                return ResourceManager.GetString("Zdunska", resourceCulture);
+                return ResourceManager.GetString("Zdunska_stare", resourceCulture);
             }
         }
     }

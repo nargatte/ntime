@@ -30,7 +30,7 @@ namespace BaseCore.Csv.CompetitionSeries
             var competitionsScores = new List<PlayerScoreRecord[]>();
             foreach (var path in paths)
             {
-                var csvImporter = new CsvImporter<PlayerScoreRecord, PlayerScoreMap>(path, ',');
+                var csvImporter = new CsvImporter<PlayerScoreRecord, PlayerScoreMap>(path, ';');
                 var scoresRecords = await csvImporter.GetAllRecordsAsync();
                 foreach (var score in scoresRecords)
                     score.CompetitionId = iter;
@@ -39,10 +39,10 @@ namespace BaseCore.Csv.CompetitionSeries
             }
         }
 
-        public async Task<bool> ExportStandingsToCsv()
-        {
-            
-        }
+        //public async Task<bool> ExportStandingsToCsv()
+        //{
+
+        //}
 
         public async Task ImportPointsTableFromCsv(string path)
         {
@@ -79,23 +79,28 @@ namespace BaseCore.Csv.CompetitionSeries
         {
             _scores.ToList().ForEach(player =>
             {
-                var newPlayer = new PlayerWithPoints(player, _competitionsNames)
+                bool pointsPlaceExists = _points.TryGetValue(player.CategoryPlaceNumber, out double competitionPoints);
+                if (pointsPlaceExists)
                 {
-                    Points = _points[player.CategoryPlaceNumber],
-                    CompetitionsStarted = 1,
-                };
-                bool addedBefore = _uniquePlayers.TryGetValue(newPlayer, out PlayerWithPoints playerFound);
-                var competitionPointsPair = new KeyValuePair<int, double>(player.CompetitionId, player.IsDNF() ? -1 : newPlayer.Points );
-                if (addedBefore)
-                {
-                    playerFound.Points += newPlayer.Points;
-                    playerFound.CompetitionsStarted += newPlayer.CompetitionsStarted;
-                    playerFound.CompetitionsPoints.Add(competitionPointsPair.Key, competitionPointsPair.Value);
-                }
-                else
-                {
-                    newPlayer.CompetitionsPoints.Add(competitionPointsPair.Key, competitionPointsPair.Value);
-                    _uniquePlayers.Add(newPlayer, newPlayer);
+                    var newPlayer = new PlayerWithPoints(player, _competitionsNames)
+                    {
+                        //Points = _points[player.CategoryPlaceNumber],
+                        Points = competitionPoints,
+                        CompetitionsStarted = 1,
+                    };
+                    bool addedBefore = _uniquePlayers.TryGetValue(newPlayer, out PlayerWithPoints playerFound);
+                    var competitionPointsPair = new KeyValuePair<int, double>(player.CompetitionId, player.IsDNF() ? -1 : newPlayer.Points);
+                    if (addedBefore)
+                    {
+                        playerFound.Points += newPlayer.Points;
+                        playerFound.CompetitionsStarted += newPlayer.CompetitionsStarted;
+                        playerFound.CompetitionsPoints.Add(competitionPointsPair.Key, competitionPointsPair.Value);
+                    }
+                    else
+                    {
+                        newPlayer.CompetitionsPoints.Add(competitionPointsPair.Key, competitionPointsPair.Value);
+                        _uniquePlayers.Add(newPlayer, newPlayer);
+                    }
                 }
             });
         }
@@ -108,13 +113,16 @@ namespace BaseCore.Csv.CompetitionSeries
 
         private void FilterScores()
         {
+            int limit = 20000;
             _dnfs = _scores.Where(x => x.IsDNF());
-            foreach(var score in _dnfs)
+            foreach (var score in _dnfs)
             {
                 score.DistancePlaceNumber = 0;
                 score.CategoryPlaceNumber = 0;
             }
-            _scores = _scores.Where(x => x.DistancePlaceNumber > 0 && x.CategoryPlaceNumber > 0).Union(_dnfs);
+            _scores = _scores.Where(x => x.DistancePlaceNumber > 0 && x.CategoryPlaceNumber > 0
+                && x.DistancePlaceNumber < limit && x.CategoryPlaceNumber < limit)
+                .Union(_dnfs);
         }
     }
 }
