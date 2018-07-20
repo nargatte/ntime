@@ -1,5 +1,5 @@
 export class PlayerFilterOptions {
-    PlayerSort: PlayerSort = PlayerSort.ByFirstName;
+    PlayerSort: PlayerSort = PlayerSort.ByLastName;
     DescendingSort = false;
     Query?: string;
     Men?: boolean;

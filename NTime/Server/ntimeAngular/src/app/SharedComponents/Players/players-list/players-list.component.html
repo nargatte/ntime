@@ -15,6 +15,11 @@
       <mat-cell *matCellDef="let player"> {{player.LastName}} </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="city">
+      <mat-header-cell *matHeaderCellDef> Miasto </mat-header-cell>
+      <mat-cell *matCellDef="let player"> {{player.City}} </mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="sex">
       <mat-header-cell *matHeaderCellDef> Płeć </mat-header-cell>
       <mat-cell *matCellDef="let player">
@@ -38,7 +43,7 @@
     </ng-container>
 
     <ng-container matColumnDef="isPaidUp">
-      <mat-header-cell *matHeaderCellDef > Opłacony </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Opłacony </mat-header-cell>
       <mat-cell *matCellDef="let player">
         <ng-container *ngIf="player.IsPaidUp; else elseTemplate">
           Tak
@@ -51,8 +56,7 @@
 
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row  *matRowDef="let row; columns: displayedColumns;"
-    [ngStyle]="{'background-color':row.IsPaidUp === true ? 'rgb(205, 255, 205)' : 'white' }"></mat-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" [ngStyle]="{'background-color':row.IsPaidUp === true ? 'rgb(205, 255, 205)' : 'white' }"></mat-row>
   </mat-table>
 
   <mat-paginator #paginator [pageSize]="50" [pageSizeOptions]="[20, 50, 100]" [showFirstLastButtons]="true" [(length)]="playersCount"

@@ -29,7 +29,7 @@ export class PlayersListComponent implements AfterViewInit {
   private filter: PlayerFilterOptions = new PlayerFilterOptions();
 
   @ViewChild(MatTable) table: MatTable<PlayerListView>;
-  displayedColumns = ['firstName', 'lastName', 'sex', 'team', 'fullCategory', 'isPaidUp'];
+  displayedColumns = ['firstName', 'lastName', 'city', 'team', 'fullCategory', 'isPaidUp'];
   dataSource: MatTableDataSource<PlayerListView> = new MatTableDataSource<PlayerListView>(this.players);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
