@@ -12,19 +12,30 @@ namespace BaseCore.Csv.CompetitionSeries
 {
     public class SeriesStandings
     {
-        private Dictionary<int, double> points = new Dictionary<int, double>();
-        private IEnumerable<PlayerScoreRecord> scores = new List<PlayerScoreRecord>();
-        private IEnumerable<PlayerScoreRecord> dnfs = new List<PlayerScoreRecord>();
-        private HashSet<string> categories = new HashSet<string>();
-        private Dictionary<PlayerWithPoints, PlayerWithPoints> uniquePlayers = new Dictionary<PlayerWithPoints, PlayerWithPoints>(new PlayerWithPointsEqualityComparer());
+        private Dictionary<int, double> _points = new Dictionary<int, double>();
+        private IEnumerable<PlayerScoreRecord> _scores = new List<PlayerScoreRecord>();
+        private IEnumerable<PlayerScoreRecord> _dnfs = new List<PlayerScoreRecord>();
+        private HashSet<string> _categories = new HashSet<string>();
+        private Dictionary<PlayerWithPoints, PlayerWithPoints> _uniquePlayers = new Dictionary<PlayerWithPoints, PlayerWithPoints>(new PlayerWithPointsEqualityComparer());
+        private Dictionary<int, string> _competitionsNames;
+
+        public SeriesStandings(Dictionary<int, string> competitionsNames)
+        {
+            _competitionsNames = competitionsNames;
+        }
+
         public async Task ImportScoresFromCsv(IEnumerable<string> paths)
         {
+            int iter = 0;
             var competitionsScores = new List<PlayerScoreRecord[]>();
             foreach (var path in paths)
             {
                 var csvImporter = new CsvImporter<PlayerScoreRecord, PlayerScoreMap>(path, ',');
                 var scoresRecords = await csvImporter.GetAllRecordsAsync();
-                scores = scores.Union(scoresRecords);
+                foreach (var score in scoresRecords)
+                    score.CompetitionId = iter;
+                _scores = _scores.Union(scoresRecords);
+                iter++;
             }
         }
 
@@ -32,7 +43,7 @@ namespace BaseCore.Csv.CompetitionSeries
         {
             var csvImporter = new CsvImporter<PlacePointsRecord, PlacePointsMap>(path, ';');
             var pointsAndPlaces = await csvImporter.GetAllRecordsAsync();
-            pointsAndPlaces.ToList().ForEach(pair => points.Add(pair.Place, pair.Points));
+            pointsAndPlaces.ToList().ForEach(pair => _points.Add(pair.Place, pair.Points));
         }
 
         public void CalculateResults()
@@ -40,18 +51,20 @@ namespace BaseCore.Csv.CompetitionSeries
             FilterScores();
             GetUniqueCategories();
             GiveOutPoints();
-            PrepareStandings();
+            PrepareAndPrintStandings();
         }
 
-        private void PrepareStandings()
+        private void PrepareAndPrintStandings()
         {
-            var categoriesStandings = categories.ToDictionary(x => x, y => new List<PlayerWithPoints>());
-            uniquePlayers.ToList().ForEach(player => categoriesStandings[player.Value.AgeCategory].Add(player.Value));
+            var categoriesStandings = _categories.ToDictionary(x => x, y => new List<PlayerWithPoints>());
+            _uniquePlayers.ToList().ForEach(player => categoriesStandings[player.Value.AgeCategory].Add(player.Value));
 
-            foreach (var item in categoriesStandings)
+            foreach (var item in categoriesStandings.OrderBy(pair => pair.Key))
             {
+                int iter = 1;
                 Debug.WriteLine($"Category {item.Key}");
-                item.Value.ForEach(player => Debug.WriteLine(player));
+                item.Value.OrderByDescending(player => player.Points).ToList()
+                    .ForEach(player => Debug.WriteLine($"{iter++,-2} {player}"));
                 Debug.WriteLine("");
             }
 
@@ -59,33 +72,44 @@ namespace BaseCore.Csv.CompetitionSeries
 
         private void GiveOutPoints()
         {
-            scores.ToList().ForEach(player =>
+            _scores.ToList().ForEach(player =>
             {
-                var playerWithPoints = new PlayerWithPoints(player)
+                var newPlayer = new PlayerWithPoints(player, _competitionsNames)
                 {
-                    Points = points[player.CategoryPlaceNumber], CompetitionsCompleted = 1
+                    Points = _points[player.CategoryPlaceNumber],
+                    CompetitionsStarted = 1,
                 };
-                bool addedBefore = uniquePlayers.TryGetValue(playerWithPoints, out PlayerWithPoints playerFound);
+                bool addedBefore = _uniquePlayers.TryGetValue(newPlayer, out PlayerWithPoints playerFound);
+                var competitionPointsPair = new KeyValuePair<int, double>(player.CompetitionId, player.IsDNF() ? -1 : newPlayer.Points );
                 if (addedBefore)
                 {
-                    playerFound.Points += playerWithPoints.Points;
-                    playerFound.CompetitionsCompleted += playerWithPoints.CompetitionsCompleted;
+                    playerFound.Points += newPlayer.Points;
+                    playerFound.CompetitionsStarted += newPlayer.CompetitionsStarted;
+                    playerFound.CompetitionsPoints.Add(competitionPointsPair.Key, competitionPointsPair.Value);
                 }
                 else
-                    uniquePlayers.Add(playerWithPoints, playerWithPoints);
+                {
+                    newPlayer.CompetitionsPoints.Add(competitionPointsPair.Key, competitionPointsPair.Value);
+                    _uniquePlayers.Add(newPlayer, newPlayer);
+                }
             });
         }
 
         private void GetUniqueCategories()
         {
-            scores.ToList().ForEach(x => categories.Add(x.AgeCategory.ToUpper()));
-            categories.ToList().ForEach(category => Debug.WriteLine($"Kategoria: {category}"));
+            _scores.ToList().ForEach(x => _categories.Add(x.AgeCategory.ToUpper()));
+            _categories.ToList().ForEach(category => Debug.WriteLine($"Kategoria: {category}"));
         }
 
         private void FilterScores()
         {
-            dnfs = scores.Where(x => x.FirstName.ToLower().Contains("dnf") || x.LastName.ToLower().Contains("dnf"));
-            scores = scores.Where(x => x.DistancePlaceNumber > 0 && x.CategoryPlaceNumber > 0);
+            _dnfs = _scores.Where(x => x.IsDNF());
+            foreach(var score in _dnfs)
+            {
+                score.DistancePlaceNumber = 0;
+                score.CategoryPlaceNumber = 0;
+            }
+            _scores = _scores.Where(x => x.DistancePlaceNumber > 0 && x.CategoryPlaceNumber > 0).Union(_dnfs);
         }
     }
 }

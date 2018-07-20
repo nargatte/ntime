@@ -64,10 +64,16 @@ namespace AdminView
             filesDictionary.Add("klasyki_punkty.csv", Properties.Resources.klasyki_punkty);
             filesDictionary.Add("Aleksandrow.csv", Properties.Resources.Aleksandrow);
             filesDictionary.Add("Zdunska.csv", Properties.Resources.Zdunska);
+            var competitionNames = new List<string> { "Aleksandrow", "Zdunska" };
+            var competitionNamesDict = new Dictionary<int, string>();
+            int iter = 0;
+            competitionNames.ForEach(name => competitionNamesDict.Add(iter++, name));
+            if (filesDictionary.Count - 1 != competitionNamesDict.Count)
+                throw new ArgumentException();
 
             var resourceLoader = new ResourceLoader();
             var competitionPaths = resourceLoader.LoadFilesToTemp(filesDictionary.Skip(1).ToDictionary(x => x.Key, x => x.Value), Path.GetTempPath());
-            var seriesStandings = new SeriesStandings();
+            var seriesStandings = new SeriesStandings(competitionNamesDict);
             await seriesStandings.ImportScoresFromCsv(competitionPaths);
 
             var pointsPath = resourceLoader.LoadFilesToTemp(filesDictionary.Take(1).ToDictionary(x => x.Key, x => x.Value), Path.GetTempPath());

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BaseCore.Csv.Records
 {
-    class PlayerScoreRecord
+    public class PlayerScoreRecord
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -21,5 +21,14 @@ namespace BaseCore.Csv.Records
         public int CategoryPlaceNumber { get; set; }
         public int LapsCount { get; set; }
         public decimal MeasurementTime { get; set; }
+        public int CompetitionId { get; set; }
+    }
+
+    public static class ExtensionsForPlayerScore
+    {
+        public static bool IsDNF(this PlayerScoreRecord x)
+        {
+            return x.FirstName.ToLower().Contains("dnf") || x.LastName.ToLower().Contains("dnf");
+        }
     }
 }

@@ -8,16 +8,20 @@ namespace BaseCore.Csv.Records
 {
     class PlayerWithPoints
     {
-        public PlayerWithPoints(PlayerScoreRecord player)
+        public PlayerWithPoints(PlayerScoreRecord player, Dictionary<int, string> allCompetitions)
         {
-            FirstName = player.FirstName;
-            LastName = player.LastName;
+            var firstNameSplit = player.FirstName.Split(' ');
+            FirstName = firstNameSplit[0];
+            var lastNameSplit = player.LastName.Split(' ');
+            LastName = lastNameSplit[0];
             City = player.City;
             BirthDate = player.BirthDate;
             AgeCategory = player.AgeCategory;
+            AllCompetitions = allCompetitions;
         }
 
-        public PlayerWithPoints(PlayerScoreRecord player, int points, int dnfsCount, int seriesCategoryPlace) : this(player)
+        public PlayerWithPoints(PlayerScoreRecord player, Dictionary<int, string> allCompetitions, int points, int dnfsCount, int seriesCategoryPlace)
+            : this(player, allCompetitions)
         {
             Points = points;
             DNFsCount = dnfsCount;
@@ -32,11 +36,27 @@ namespace BaseCore.Csv.Records
         public double Points { get; set; }
         public int DNFsCount { get; set; }
         public int SeriesCategoryPlace { get; set; }
-        public int CompetitionsCompleted { get; set; }
+        public int CompetitionsStarted { get; set; }
+        public Dictionary<int, double> CompetitionsPoints { get; set; } = new Dictionary<int, double>();
+        public Dictionary<int, string> AllCompetitions { get; private set; }
 
         public override string ToString()
         {
-            return $"{FirstName} {LastName} {BirthDate.Year} {AgeCategory} {CompetitionsCompleted} {Points}";
+            var str = $"{FirstName,-10} {LastName,-12} {BirthDate.Year,-5} {AgeCategory,-4} {CompetitionsStarted,-2} {Points,-2}   ";
+            foreach (var competition in AllCompetitions)
+            {
+                bool competitionFound = CompetitionsPoints.TryGetValue(competition.Key, out double points);
+                var extraString = string.Empty;
+                if (competitionFound)
+                {
+                    if (points == -1)
+                        extraString = "DNF";
+                    else
+                        extraString = points.ToString();
+                }
+                str += $"{extraString,-3} ";
+            }
+            return str;
         }
     }
 }
