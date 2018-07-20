@@ -1,15 +1,16 @@
-<mat-card class="example-card">
-  <mat-card-content>
-    <p>
-      Wkrótce udostępnimy możliwość tworzenia własnych kont użytkowników. Dzięki temu będziesz mógł
-      między innymi edytować swoje dane dla każdych zawodów, nie będziesz musiał za każdym razem wpisywać
-      tych samych danych podczas rejestracji na zawody i w wygodny sposób przedstawimy Ci historię wszystich
-      zawodów, w których startowałeś i które obsługiwało Time2Win.
-    </p>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button color="primary" routerLink="/zawody">Przejdź do zawodów</button>
-  </mat-card-actions>
-</mat-card>
-<app-log-in-form *ngIf="isOrganizer"></app-log-in-form>
-<app-register-form *ngIf="isOrganizer"></app-register-form>
+<div>
+  <mat-card class="example-card">
+    <mat-card-content>
+      <p>
+        Wkrótce udostępnimy możliwość tworzenia własnych kont użytkowników. Dzięki temu będziesz mógł między innymi edytować swoje
+        dane dla każdych zawodów, nie będziesz musiał za każdym razem wpisywać tych samych danych podczas rejestracji na
+        zawody i w wygodny sposób przedstawimy Ci historię wszystich zawodów, w których startowałeś i które obsługiwało Time2Win.
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" routerLink="/zawody">Przejdź do zawodów</button>
+    </mat-card-actions>
+  </mat-card>
+  <app-log-in-form *ngIf="isOrganizer"></app-log-in-form>
+  <app-register-form *ngIf="isOrganizer"></app-register-form>
+</div>

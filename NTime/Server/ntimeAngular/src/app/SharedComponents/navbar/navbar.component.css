@@ -11,11 +11,10 @@ router-outlet{
 }
 
 div {
-    display: block;
+    overflow: inherit;
 }
 
 a{
-    /* display: block; */
     text-decoration: none;
     /* flex-direction: unset; */
     font-size: 110%;
@@ -35,7 +34,6 @@ button{
   .example-spacer {
     flex: 1 1 auto;
   }
-
 /* .mat-sidenav {
     text-align: left;
     background-color: $primary;

@@ -6,10 +6,10 @@ namespace BaseCore.PlayerFilter
     [TypeConverter(typeof(EnumDescriptionTypeConverter))]
     public enum PlayerSort
     {
-        [Description("Imię")]
-        ByFirstName,
         [Description("Nazwisko")]
         ByLastName,
+        [Description("Imię")]
+        ByFirstName,
         [Description("Klub")]
         ByTeam,
         [Description("Numer startowy")]

@@ -13,8 +13,8 @@ export class PlayerFilterOptions {
   }
 
   export enum PlayerSort {
-    ByFirstName,
     ByLastName,
+    ByFirstName,
     ByTeam,
     ByStartNumber,
     ByStartTime,
