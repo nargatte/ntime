@@ -39,6 +39,11 @@ namespace BaseCore.Csv.CompetitionSeries
             }
         }
 
+        public async Task<bool> ExportStandingsToCsv()
+        {
+            
+        }
+
         public async Task ImportPointsTableFromCsv(string path)
         {
             var csvImporter = new CsvImporter<PlacePointsRecord, PlacePointsMap>(path, ';');

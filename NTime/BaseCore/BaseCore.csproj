@@ -54,9 +54,11 @@
   <ItemGroup>
     <Compile Include="Csv\CompetitionSeries\SeriesStandings.cs" />
     <Compile Include="Csv\Converters\CsvColumnConverters.cs" />
+    <Compile Include="Csv\CsvExporter.cs" />
     <Compile Include="Csv\CsvImporter.cs" />
     <Compile Include="Csv\Map\PlacePointsMap.cs" />
     <Compile Include="Csv\Map\PlayerScoreMap.cs" />
+    <Compile Include="Csv\Map\PlayerWithPointsMap.cs" />
     <Compile Include="Csv\Records\PlayerRecord.cs" />
     <Compile Include="Csv\Map\PlayerRecordMap.cs" />
     <Compile Include="Csv\Records\PlayerScoreRecord.cs" />

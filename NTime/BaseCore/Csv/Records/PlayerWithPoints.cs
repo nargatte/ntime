@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BaseCore.Csv.Records
 {
-    class PlayerWithPoints
+    public class PlayerWithPoints
     {
         public PlayerWithPoints(PlayerScoreRecord player, Dictionary<int, string> allCompetitions)
         {
@@ -45,18 +45,25 @@ namespace BaseCore.Csv.Records
             var str = $"{FirstName,-10} {LastName,-12} {BirthDate.Year,-5} {AgeCategory,-4} {CompetitionsStarted,-2} {Points,-2}   ";
             foreach (var competition in AllCompetitions)
             {
-                bool competitionFound = CompetitionsPoints.TryGetValue(competition.Key, out double points);
-                var extraString = string.Empty;
-                if (competitionFound)
-                {
-                    if (points == -1)
-                        extraString = "DNF";
-                    else
-                        extraString = points.ToString();
-                }
+                string extraString = GetPointsForCompetition(competition);
                 str += $"{extraString,-3} ";
             }
             return str;
+        }
+
+        private string GetPointsForCompetition(KeyValuePair<int, string> competition)
+        {
+            bool competitionFound = CompetitionsPoints.TryGetValue(competition.Key, out double points);
+            var extraString = string.Empty;
+            if (competitionFound)
+            {
+                if (points == -1)
+                    extraString = "DNF";
+                else
+                    extraString = points.ToString();
+            }
+
+            return extraString;
         }
     }
 }

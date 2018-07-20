@@ -36,7 +36,7 @@ namespace BaseCore.Csv
 
         public T[] GetAllRecordsFromStream(TextReader tr)
         {
-            CsvReader csv = new CsvReader(tr);
+            var csv = new CsvReader(tr);
             csv.Configuration.RegisterClassMap<TM>();
             csv.Configuration.Delimiter = _delimiter.ToString();
             return csv.GetRecords<T>().ToArray();
