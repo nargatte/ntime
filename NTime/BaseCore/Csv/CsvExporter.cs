@@ -17,13 +17,10 @@ namespace BaseCore.Csv
         private readonly string _fileName;
         private readonly char _delimiter;
 
-        public CsvExporter(string fileName)
+
+        public CsvExporter(string fileName, char delimiter = ';')
         {
             _fileName = fileName;
-        }
-
-        public CsvExporter(string fileName, char delimiter = ';') : this(fileName)
-        {
             _delimiter = delimiter;
         }
 

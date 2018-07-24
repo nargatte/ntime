@@ -24,6 +24,17 @@ namespace BaseCore.Csv.CompetitionSeries
             _competitionsNames = competitionsNames;
         }
 
+        public async void CalculateResults()
+        {
+            FilterScores();
+            GetUniqueCategories();
+            GiveOutPoints();
+            var exportableScores = PrepareAndPrintStandings();
+            bool exportedCorrectly = await ExportStandingsToCsv(exportableScores);
+            Debug.WriteLine($"Exported correctly: {exportedCorrectly}");
+        }
+
+
         public async Task ImportScoresFromCsv(IEnumerable<string> paths)
         {
             int iter = 0;
@@ -39,10 +50,16 @@ namespace BaseCore.Csv.CompetitionSeries
             }
         }
 
-        //public async Task<bool> ExportStandingsToCsv()
-        //{
-
-        //}
+        public async Task<bool> ExportStandingsToCsv(IEnumerable<PlayerWithPoints> standingPlayers)
+        {
+            foreach (var player in standingPlayers)
+            {
+                player.SetPointsForCompetitions();
+            }
+            string exportFileName = "results.csv";
+            var exporter = new CsvExporter<PlayerWithPoints, PlayerWithPointsMap>(exportFileName);
+            return await exporter.SaveAllRecordsAsync(standingPlayers);
+        }
 
         public async Task ImportPointsTableFromCsv(string path)
         {
@@ -51,28 +68,27 @@ namespace BaseCore.Csv.CompetitionSeries
             pointsAndPlaces.ToList().ForEach(pair => _points.Add(pair.Place, pair.Points));
         }
 
-        public void CalculateResults()
-        {
-            FilterScores();
-            GetUniqueCategories();
-            GiveOutPoints();
-            PrepareAndPrintStandings();
-        }
-
-        private void PrepareAndPrintStandings()
+        private IEnumerable<PlayerWithPoints> PrepareAndPrintStandings()
         {
             var categoriesStandings = _categories.ToDictionary(x => x, y => new List<PlayerWithPoints>());
             _uniquePlayers.ToList().ForEach(player => categoriesStandings[player.Value.AgeCategory].Add(player.Value));
+            var exportableScores = new List<PlayerWithPoints>();
 
             foreach (var item in categoriesStandings.OrderBy(pair => pair.Key))
             {
                 int iter = 1;
                 Debug.WriteLine($"Category {item.Key}");
                 item.Value.OrderByDescending(player => player.Points).ToList()
-                    .ForEach(player => Debug.WriteLine($"{iter++,-2} {player}"));
+                    .ForEach(player =>
+                    {
+                        Debug.WriteLine($"{iter,-2} {player}");
+                        player.CategoryStandingPlace = iter;
+                        exportableScores.Add(player);
+                        iter++;
+                    });
                 Debug.WriteLine("");
             }
-
+            return exportableScores;
         }
 
         private void GiveOutPoints()

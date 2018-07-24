@@ -28,6 +28,7 @@ namespace BaseCore.Csv.Records
             SeriesCategoryPlace = seriesCategoryPlace;
         }
 
+        public int CategoryStandingPlace { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string City { get; set; }
@@ -39,16 +40,30 @@ namespace BaseCore.Csv.Records
         public int CompetitionsStarted { get; set; }
         public Dictionary<int, double> CompetitionsPoints { get; set; } = new Dictionary<int, double>();
         public Dictionary<int, string> AllCompetitions { get; private set; }
+        public List<string> CompetitionsPointsExport { get; set; } = new List<string>();
 
         public override string ToString()
         {
+            SetPointsForCompetitions();
             var str = $"{LastName,-12} {FirstName,-12} {BirthDate.Year,-5} {AgeCategory,-4} {CompetitionsStarted,-2} {Points,-2}   ";
+            CompetitionsPointsExport.ForEach(points => str += $"{points,-4} ");
+            return str;
+
+            //foreach (var competition in AllCompetitions)
+            //{
+            //    string extraString = GetPointsForCompetition(competition);
+            //    str += $"{extraString,-3} ";
+            //}
+        }
+
+        public void SetPointsForCompetitions()
+        {
+            CompetitionsPointsExport.Clear();
             foreach (var competition in AllCompetitions)
             {
                 string extraString = GetPointsForCompetition(competition);
-                str += $"{extraString,-3} ";
+                CompetitionsPointsExport.Add(extraString);
             }
-            return str;
         }
 
         private string GetPointsForCompetition(KeyValuePair<int, string> competition)
