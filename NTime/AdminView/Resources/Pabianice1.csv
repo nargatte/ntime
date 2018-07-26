@@ -1,0 +1,142 @@
+nazwisko,imie,miejscowosc,data_urodzenia,kategoria,rower,nazwa_dystansu,czas_przejazdu,msc_open_csv,msc_kat_csv,liczba_pomiarow,pomiary_csv
+Dąbek DNF,Tomasz DNF,,1979,89km M30,,89km,,,,0,
+SYSKA DNF,PIOTR DNF,ŁASK,1978,71km M40,,71km,,,,0,
+Gajdka,Sylwia,Pabianice,1994-01-09,55km K20,,55km,01:30:13.995,1,1,1,13:46:13.995
+Michalski,Zbigniew,Warszawa,1935-03-10,37km M80,,37km,01:15:05.950,1,1,1,13:34:05.950
+Filipczak,Jacek,Brzeziny,1980-01-25,55km AMATOR,,55km,01:21:35.035,1,1,1,13:34:35.035
+Hajda,Kamil,Radzionków,1983-10-22,89km M30,,89km,02:14:17.195,1,1,1,14:24:17.195
+Stolarek,Grzegorz,ŁASK,1968,71km M50,,71km,01:45:07.875,1,1,1,13:50:07.875
+PODGÓRSKI,JERZY,Łódź,1937-08-05,37km M80,,37km,01:22:22.935,2,2,1,13:41:22.935
+Juszkiewicz,Żaneta,Katowice,1988-01-09,55km K30,,55km,01:30:14.165,2,1,1,13:46:14.165
+Wolański,Adam,,1966,71km M50,,71km,01:45:12.335,2,2,1,13:50:12.335
+Barczyk,Piotr,,1982,89km M30,,89km,02:14:19.955,2,2,1,14:24:19.955
+Sęk,Łukasz,,1980,55km AMATOR,,55km,01:21:35.085,2,2,1,13:34:35.085
+Wiśniewski,Dawid,,2001,55km JUNIOR,,55km,01:21:35.235,3,1,1,13:34:35.235
+WOLSKI,KRZYSZTOF,OZORKÓW,1979-06-22,89km M30,,89km,02:14:20.930,3,3,1,14:24:20.930
+Frankowski,Mieczysław,,1930,37km M80,,37km,01:22:25.760,3,3,1,13:41:25.760
+Kucal,Joanna,,1973,55km K40,,55km,01:30:14.610,3,1,1,13:46:14.610
+Turkiewicz,Grzegorz,Zdunska Wola,1968-10-05,71km M50,,71km,01:45:12.360,3,3,1,13:50:12.360
+Prymaka,Tomasz,,1970,55km AMATOR,,55km,01:21:35.260,4,3,1,13:34:35.260
+Studziński,Adam,,1982,89km M30,,89km,02:14:20.950,4,4,1,14:24:20.950
+Zimnicka,Małgorzata,Łask,1983-06-24,55km K30,,55km,01:30:15.970,4,2,1,13:46:15.970
+Jach,Adrian,,1971,71km M40,,71km,01:45:12.595,4,1,1,13:50:12.595
+Supczyński,Marcin,,1996,55km AMATOR,,55km,01:21:35.450,5,4,1,13:34:35.450
+Syryjczyk,Marta,Łaziska Górne,1976-03-25,55km K40,,55km,01:42:02.010,5,2,1,13:58:02.010
+Kwiatkowski,Mateusz,Dąbrowa Górnicza,1989-10-09,89km M20,,89km,02:14:21.330,5,1,1,14:24:21.330
+Szafraniec,Piotr,Chocznia,1972-03-26,71km M40,,71km,01:45:12.605,5,2,1,13:50:12.605
+Kądziela,Mateusz,Radzionków,1989-07-14,89km M20,,89km,02:14:21.405,6,2,1,14:24:21.405
+Walczak,Jacek,Koło,1968-05-30,71km M50,,71km,01:45:13.155,6,4,1,13:50:13.155
+Spułtowska,Joanna,Łódź,1972-02-08,55km K40,,55km,02:01:33.880,6,3,1,14:17:33.880
+Juszczak,Adrian,Stobno,1989-12-17,55km AMATOR,,55km,01:21:35.595,6,5,1,13:34:35.595
+Potocki,Adam,,1970,71km M40,,71km,01:45:14.975,7,3,1,13:50:14.975
+Kuropatwa,Mikołaj,,1993,89km M20,,89km,02:14:21.490,7,3,1,14:24:21.490
+Tokłowicz,Marcin,,1975,55km AMATOR,,55km,01:21:35.785,7,6,1,13:34:35.785
+Spławski,Krzysztof,Licheń Stary,1977-02-07,71km M40,,71km,01:45:15.700,8,4,1,13:50:15.700
+Bareła,Michał,,1988,89km M30,,89km,02:14:21.735,8,5,1,14:24:21.735
+Rymarz,Rafał,Piotrków Trybunalski,1996-05-04,55km AMATOR,,55km,01:21:35.895,8,7,1,13:34:35.895
+Różański,Mateusz,Wolica,1982-12-28,55km AMATOR,,55km,01:21:36.155,9,8,1,13:34:36.155
+Stańczykowski,Emil,,1979,89km M30,,89km,02:14:21.745,9,6,1,14:24:21.745
+Łaździn,Arkadiusz,,1974,71km M40,,71km,01:45:15.720,9,5,1,13:50:15.720
+Jabłoński,Jakub,,1982,89km M30,,89km,02:14:21.760,10,7,1,14:24:21.760
+Stram,Marek,,1973,71km M40,,71km,01:45:15.740,10,6,1,13:50:15.740
+Szyszyński,Piotr,Stare Miasto,1980-10-14,55km AMATOR,,55km,01:21:36.615,10,9,1,13:34:36.615
+Lasota,Krzysztof,,1970,71km M40,,71km,01:45:15.810,11,7,1,13:50:15.810
+Skowroński,Adam,Ozorków,1997-06-23,89km M20,,89km,02:14:21.975,11,4,1,14:24:21.975
+Kucal,Sławomir,,1972,55km AMATOR,,55km,01:21:36.740,11,10,1,13:34:36.740
+Skop,Paweł,Legnica,1988-11-11,89km M30,,89km,02:14:22.000,12,8,1,14:24:22.000
+Boszczyk,Ryszard,,1978,71km M40,,71km,01:45:15.910,12,8,1,13:50:15.910
+Golenia,Wojciech,,1971,55km AMATOR,,55km,01:21:36.825,12,11,1,13:34:36.825
+Pelka,Łukasz,Piekary Śląskie,1980-10-11,89km M30,,89km,02:14:22.060,13,9,1,14:24:22.060
+Pyciarz,Krzysztof,Ozorków,1965-09-26,71km M50,,71km,01:45:16.370,13,5,1,13:50:16.370
+Duliba,Łukasz,,1980,55km AMATOR,,55km,01:21:37.345,13,12,1,13:34:37.345
+Olejnik,Michał,,1984,89km M30,,89km,02:14:22.215,14,10,1,14:24:22.215
+Kubiszewski,Michal,Konstantynów Łódzki,1976-01-25,71km M40,,71km,01:45:16.400,14,9,1,13:50:16.400
+Hojak,Marek,Kalisz,1973-02-26,55km AMATOR,,55km,01:21:37.440,14,13,1,13:34:37.440
+Wiśniewski,Tomasz,Łódź,1981,89km M30,,89km,02:14:22.260,15,11,1,14:24:22.260
+Płóciennik,Dominik,Lutomiersk,1992-10-20,55km AMATOR,,55km,01:21:37.525,15,14,1,13:34:37.525
+Kaleta,Dariusz,,1975,71km M40,,71km,01:45:17.240,15,10,1,13:50:17.240
+Brzęczek,Rafał,Lodz,1983-01-26,55km AMATOR,,55km,01:21:37.550,16,15,1,13:34:37.550
+Klama,Rafał,Częstochowa,1975-01-14,71km M40,,71km,01:45:17.280,16,11,1,13:50:17.280
+Kozielec,Grzegorz,Kraków,1994-08-03,89km M20,,89km,02:14:22.835,16,5,1,14:24:22.835
+Sabady,Przemysław,,1995,89km M20,,89km,02:14:24.460,17,6,1,14:24:24.460
+Wągrowski,Sławomir,Wolica,1974-10-25,55km AMATOR,,55km,01:21:37.565,17,16,1,13:34:37.565
+Żywek,Tomasz,,1968,71km M50,,71km,01:45:17.625,17,6,1,13:50:17.625
+Majchrzyk,Damian,,1987,55km AMATOR,,55km,01:21:37.625,18,17,1,13:34:37.625
+Grzegory,Tomasz,Głuchów,1978-08-06,71km M40,,71km,01:45:18.790,18,12,1,13:50:18.790
+Ostojski,Adam,Łask,1991-11-23,89km M20,,89km,02:14:27.560,18,7,1,14:24:27.560
+Koziróg,Jacek,,1976,55km AMATOR,,55km,01:21:37.715,19,18,1,13:34:37.715
+Zaorski,Jędrzej,Łódź,1986-06-01,89km M30,,89km,02:14:29.275,19,12,1,14:24:29.275
+Łuczkiewicz,Jacek,,1967,71km M50,,71km,01:45:18.850,19,7,1,13:50:18.850
+Borowiec,Michał,,1982,89km M30,,89km,02:14:29.295,20,13,1,14:24:29.295
+Łuczek,Sylwester,,,71km M40,,71km,01:45:20.260,20,13,1,13:50:20.260
+Jaworski,Tomasz,Częstochowa,1987-08-20,55km AMATOR,,55km,01:21:37.840,20,19,1,13:34:37.840
+Piątkowski,Arkadiusz,,1991,89km M20,,89km,02:14:30.010,21,8,1,14:24:30.010
+Maciejewski,Jacek,,1973,71km M40,,71km,01:45:20.490,21,14,1,13:50:20.490
+Żurawik,Andrzej,Kraśnica-Kolonia,1964-03-22,55km AMATOR,,55km,01:21:37.865,21,20,1,13:34:37.865
+Wąsiakowski,Bartek,Łódź,1981-03-18,55km AMATOR,,55km,01:21:38.075,22,21,1,13:34:38.075
+Stępnik,Piotr,Zduńska Wola,1984-02-08,89km M30,,89km,02:14:30.820,22,14,1,14:24:30.820
+Grosz,Zbigniew,Turek,1961-06-30,71km M50,,71km,01:45:21.170,22,8,1,13:50:21.170
+Szulc,Mateusz,Łódź,1988-12-27,89km M30,,89km,02:18:08.740,23,15,1,14:28:08.740
+Maj,Cezary,Tuszyn,1982-05-12,55km AMATOR,,55km,01:21:38.115,23,22,1,13:34:38.115
+Nowakowski,Ryszard,,1966,71km M50,,71km,01:45:21.180,23,9,1,13:50:21.180
+Zdzisław,Prochoń,,1959,71km M50,,71km,01:45:21.490,24,10,1,13:50:21.490
+Zabost,Wojciech,,1959,55km AMATOR,,55km,01:21:49.190,24,23,1,13:34:49.190
+SZYC,MARIUSZ,KALISZ,1966-12-21,55km AMATOR,,55km,01:21:49.785,25,24,1,13:34:49.785
+Lech,Robert,,1967,71km M50,,71km,01:45:21.940,25,11,1,13:50:21.940
+Szulc,Sylwester,Pabianice,1981-09-06,55km AMATOR,,55km,01:21:49.795,26,25,1,13:34:49.795
+Uciński,Piotr,Aleksandrów łódzki,1970-01-11,71km M40,,71km,01:45:23.945,26,15,1,13:50:23.945
+Jagieła,Jerzy,,1956,55km M60,,55km,01:25:09.050,27,1,1,13:41:09.050
+LEDUCHOWSKI,DARIUSZ,ŁÓDŹ,1961-12-01,71km M50,,71km,01:45:33.260,27,12,1,13:50:33.260
+Jakuć,Leszek,,1955,55km M60,,55km,01:25:09.200,28,2,1,13:41:09.200
+Bienias,Przemysław,Ozorków,1973-07-02,71km M40,,71km,01:46:17.605,28,16,1,13:51:17.605
+Czarniecki,Dariusz,Środa Śląska,1963-10-18,71km M50,,71km,01:54:31.300,29,13,1,13:59:31.300
+Bylicki,Jerzy,,1950,55km M60,,55km,01:25:09.395,29,3,1,13:41:09.395
+Bednarek,Dariusz,,1969,71km M40,,71km,01:54:31.420,30,17,1,13:59:31.420
+Sujka,Krzysztof,,1955,55km M60,,55km,01:25:09.485,30,4,1,13:41:09.485
+Michalak,Lechosław,,1956,55km M60,,55km,01:25:09.710,31,5,1,13:41:09.710
+Karkowski,Piotr,Aleksandrów Łódzki,1970-08-20,71km M40,,71km,01:58:01.045,31,18,1,14:03:01.045
+Raksyk,Tomasz,,1981,55km AMATOR,,55km,01:28:27.710,32,26,1,13:41:27.710
+Jesionowski,Czeslaw,Ozorkow,1962-02-09,71km M50,,71km,02:12:09.685,32,14,1,14:17:09.685
+Szczęsny,Zbigniew,,1949,55km M60,,55km,01:30:13.300,33,6,1,13:46:13.300
+Sorbian,Marek,,1955,55km M60,,55km,01:30:13.485,34,7,1,13:46:13.485
+Sęk,Marek,,1958,55km M60,,55km,01:30:13.675,35,8,1,13:46:13.675
+Kusal,Longin,,1950,55km M60,,55km,01:30:13.740,36,9,1,13:46:13.740
+Warach,Sławomir,kolo,1955-04-11,55km M60,,55km,01:30:13.925,37,10,1,13:46:13.925
+Twardziszewski,Waldemar,,1956,55km M60,,55km,01:30:13.968,38,11,1,13:46:13.968
+Rek,Henryk,,1952,55km M60,,55km,01:30:14.350,39,12,1,13:46:14.350
+Bukowski,Jan,Naples Usa,1950-10-13,55km M60,,55km,01:30:14.435,40,13,1,13:46:14.435
+Skibicki,Jacek,łódź,1957-09-06,55km M60,,55km,01:30:14.460,41,14,1,13:46:14.460
+Golonka,Kazimierz,,1955,55km M60,,55km,01:30:14.870,42,15,1,13:46:14.870
+Sztendel,Maciej,,1954,55km M60,,55km,01:30:15.765,43,16,1,13:46:15.765
+Fajkowski,Grzegorz,,1948,55km M70,,55km,01:31:24.685,44,1,1,13:50:24.685
+Bittner,Sebastian,,2003,55km JUNIOR,,55km,01:32:51.135,45,2,1,13:45:51.135
+Paszkowski,Bartosz,Łódź,1983-02-14,55km AMATOR,,55km,01:32:51.815,46,27,1,13:45:51.815
+Urbański,Grzegorz,,1978,55km AMATOR,,55km,01:32:52.840,47,28,1,13:45:52.840
+Jóźwiakowski,Krzysztof,,1954,55km M60,,55km,01:33:37.475,48,17,1,13:49:37.475
+Myszkowski,Radosław,,1943,55km M70,,55km,01:34:48.655,49,2,1,13:53:48.655
+Ruciński,Piotr,Łódź,1953-09-21,55km M60,,55km,01:35:17.440,50,18,1,13:51:17.440
+Wawrzyniak,Kamil,,1984,55km AMATOR,,55km,01:36:37.445,51,29,1,13:49:37.445
+Mandat,Piotr,,1991,55km AMATOR,,55km,01:36:40.910,52,30,1,13:49:40.910
+Pietras,Mirosław,,1956,55km M60,,55km,01:37:49.715,53,19,1,13:53:49.715
+Golenia,Igor,,2002,55km JUNIOR,,55km,01:37:55.315,54,3,1,13:50:55.315
+Więcek,Mateusz,,2003,55km JUNIOR,,55km,01:38:02.695,55,4,1,13:51:02.695
+Instunajd,Mariusz,,1960,55km AMATOR,,55km,01:38:17.745,56,31,1,13:51:17.745
+Juszko,Jakub,Pabianice,1992-04-23,55km AMATOR,,55km,01:38:18.990,57,32,1,13:51:18.990
+Szymański,Wielisław,,1943,55km M70,,55km,01:39:49.765,58,3,1,13:58:49.765
+Lascioli,Edward,,1947,55km M70,,55km,01:39:49.850,59,4,1,13:58:49.850
+Chudobski,Tadeusz,,1941,55km M70,,55km,01:40:36.445,60,5,1,13:59:36.445
+Zarzycki,Mateusz,,2003,55km JUNIOR,,55km,01:41:01.790,61,5,1,13:54:01.790
+Kosuń,Szymon,,2003,55km JUNIOR,,55km,01:41:01.815,62,6,1,13:54:01.815
+Gałkiewicz,Patryk,Pabianice,1993-04-23,55km AMATOR,,55km,01:41:24.828,63,33,1,13:54:24.828
+Fabijanowski,Wacław,,1947,55km M70,,55km,01:47:02.230,64,6,1,14:06:02.230
+Kaczmarski,Andrzej,Pabianice,1956-10-19,55km M60,,55km,01:49:56.875,65,20,1,14:05:56.875
+Sobczak,Wojciech,,1964,55km AMATOR,,55km,01:50:53.490,66,34,1,14:03:53.490
+Sosnowski,Michał,,1978,55km AMATOR,,55km,01:51:06.715,67,35,1,14:04:06.715
+Juszczyński,Grzegorz,,1960,55km AMATOR,,55km,01:55:29.580,68,36,1,14:08:29.580
+Konecki,Stanisław,,1955,55km M60,,55km,02:01:39.525,69,21,1,14:17:39.525
+Torbus,Henryk,,1946,55km M70,,55km,02:28:54.415,70,7,1,14:47:54.415
+Gembicz DNF,Marcin DNF,,1973,71km M40,,71km,x---x,99999,,0,
+Dębowski DNF,Janusz DNF,,1968,71km M50,,71km,x---x,99999,,0,
+Sztur DNF,Robert DNF,Wrocław,1989-11-30,55km AMATOR,,55km,x---x,99999,,0,
+Post DSQ,Zbigniew DSQ,,1953,55km M60,,55km,x---x,99999,,0,
+Lewandowski DNF,Piotr DNF,,1968,71km M50,,71km,x---x,99999,,0,

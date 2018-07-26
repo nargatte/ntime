@@ -202,6 +202,7 @@
     <None Include="Resources\Aleksandrow stare.csv" />
     <None Include="Resources\Aleksandrow.csv" />
     <None Include="Resources\klasyki_punkty.csv" />
+    <None Include="Resources\Pabianice1.csv" />
     <None Include="Resources\Zdunska stare.csv" />
     <None Include="Resources\Zdunska.csv" />
   </ItemGroup>

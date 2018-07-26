@@ -13,7 +13,7 @@ namespace BaseCore.Csv
         private readonly string _fileName;
         private readonly char _delimiter;
 
-        public CsvImporter(string fileName, char delimiter = ';')
+        public CsvImporter(string fileName, char delimiter = ',')
         {
             _fileName = fileName;
             _delimiter = delimiter;

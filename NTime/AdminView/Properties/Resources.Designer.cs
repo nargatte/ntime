@@ -61,22 +61,21 @@ namespace AdminView.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to nazwisko;imie;data_urodzenia;kategoria;msc_open_csv;msc_kat_csv
-        ///WOLSKI;KRZYSZTOF;1979;M30;2;1
-        ///Bienias;Przemysław;1973;M40;6;2
-        ///Cichocki;Tomasz;1981;M30;7;3
-        ///Sobczyński;Frnaciszek;1956;M60;17;4
-        ///Wilk;Mariusz;;AMATOR;32;5
-        ///Kałuszka;Paweł;1975;M40;23;6
-        ///Pyciarz;Artur;1970;M40;7;7
-        ///Pyciarz;Krzysztof;1965;M50;11;8
-        ///Nowakowski;Ryszard;1966;M50;13;9
-        ///Lascioli;Edward;1947;M70;9;10
-        ///Pfeifer;Zygmunt;1946;M70;2;11
-        ///Karkowski;Piotr;1970;M40;8;12
-        ///Uciński;Piotr;1970;M40;16;13
-        ///Siemiński DNF;Kacper DNF;;JUNIOR;;14
-        ///Dus [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to nazwisko,imie,data_urodzenia,kategoria,msc_open_csv,msc_kat_csv
+        ///WOLSKI,KRZYSZTOF,1979,M30,2,2
+        ///Bienias,Przemysław,1973,M40,6,6
+        ///Cichocki,Tomasz,1981,M30,7,7
+        ///Sobczyński,Frnaciszek,1956,M60,17,17
+        ///Wilk,Mariusz,,AMATOR,32,32
+        ///Kałuszka,Paweł,1975,M40,23,23
+        ///Pyciarz,Artur,1970,M40,7,7
+        ///Pyciarz,Krzysztof,1965,M50,11,11
+        ///Nowakowski,Ryszard,1966,M50,13,13
+        ///Lascioli,Edward,1947,M70,9,9
+        ///Pfeifer,Zygmunt,1946,M70,2,2
+        ///Karkowski,Piotr,1970,M40,8,8
+        ///Uciński,Piotr,1970,M40,16,16
+        ///Siemiński DNF,Kacper DNF,,JUNIOR,99999, [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Aleksandrow {
             get {
@@ -173,21 +172,36 @@ namespace AdminView.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to nazwisko;imie;data_urodzenia;kategoria;msc_open_csv;msc_kat_csv
-        ///WOLSKI;KRZYSZTOF;1979;M30;2;1
-        ///Bienias;Przemysław;1973;M40;9;2
-        ///Cichocki;Tomasz;1981;M30;21;3
-        ///Kałuszka;Paweł;1975;M40;29;6
-        ///Pyciarz;Krzysztof;1965;M50;12;8
-        ///Nowakowski;Ryszard;1966;M50;15;9
-        ///Lascioli;Edward;1947;M70;7;10
-        ///Pfeifer;Zygmunt;1946;M70;3;11
-        ///Karkowski;Piotr;1970;M40;19;12
-        ///Grzegory;Tomasz;1978;M40;21;17
-        ///Torbus;Henryk;1946;M70;8;18
-        ///Michalak;Lechosław;1956;M60;3;23
-        ///Zimnicka;Małgorzata;1983;K30;2;24
-        ///Stolarek;Grzegorz;1968;M50;7;25 [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to nazwisko,imie,miejscowosc,data_urodzenia,kategoria,rower,nazwa_dystansu,czas_przejazdu,msc_open_csv,msc_kat_csv,liczba_pomiarow,pomiary_csv
+        ///Dąbek DNF,Tomasz DNF,,1979,89km M30,,89km,,,,0,
+        ///SYSKA DNF,PIOTR DNF,ŁASK,1978,71km M40,,71km,,,,0,
+        ///Gajdka,Sylwia,Pabianice,1994-01-09,55km K20,,55km,01:30:13.995,1,1,1,13:46:13.995
+        ///Michalski,Zbigniew,Warszawa,1935-03-10,37km M80,,37km,01:15:05.950,1,1,1,13:34:05.950
+        ///Filipczak,Jacek,Brzeziny,1980-01-25,55km AMATOR,,55km,01:21:35.035,1,1,1,13:34:35.035
+        ///Hajda,Kamil,R [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Pabianice1 {
+            get {
+                return ResourceManager.GetString("Pabianice1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to nazwisko,imie,data_urodzenia,kategoria,msc_open_csv,msc_kat_csv
+        ///WOLSKI,KRZYSZTOF,1979,M30,2,2
+        ///Bienias,Przemysław,1973,M40,12,9
+        ///Cichocki,Tomasz,1981,M30,28,21
+        ///Kałuszka,Paweł,1975,M40,47,29
+        ///Pyciarz,Krzysztof,1965,M50,27,12
+        ///Nowakowski,Ryszard,1966,M50,35,15
+        ///Lascioli,Edward,1947,M70,57,7
+        ///Pfeifer,Zygmunt,1946,M70,53,3
+        ///Karkowski,Piotr,1970,M40,32,19
+        ///Grzegory,Tomasz,1978,M40,37,21
+        ///Torbus,Henryk,1946,M70,61,8
+        ///Michalak,Lechosław,1956,M60,37,3
+        ///Zimnicka,Małgorzata,1983,K30,5,2
+        ///Stolarek,Grzegorz,1968,M50, [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Zdunska {
             get {

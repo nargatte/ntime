@@ -24,6 +24,28 @@ namespace BaseCore.Csv.CompetitionSeries
             _competitionsNames = competitionsNames;
         }
 
+        public async Task ImportScoresFromCsv(IEnumerable<string> paths)
+        {
+            int iter = 0;
+            var competitionsScores = new List<PlayerScoreRecord[]>();
+            foreach (var path in paths)
+            {
+                var csvImporter = new CsvImporter<PlayerScoreRecord, PlayerScoreMap>(path, ',');
+                var scoresRecords = await csvImporter.GetAllRecordsAsync();
+                foreach (var score in scoresRecords)
+                    score.CompetitionId = iter;
+                _scores = _scores.Union(scoresRecords);
+                iter++;
+            }
+        }
+
+        public async Task ImportPointsTableFromCsv(string path)
+        {
+            var csvImporter = new CsvImporter<PlacePointsRecord, PlacePointsMap>(path, ';');
+            var pointsAndPlaces = await csvImporter.GetAllRecordsAsync();
+            pointsAndPlaces.ToList().ForEach(pair => _points.Add(pair.Place, pair.Points));
+        }
+
         public async void CalculateResults()
         {
             FilterScores();
@@ -34,62 +56,26 @@ namespace BaseCore.Csv.CompetitionSeries
             Debug.WriteLine($"Exported correctly: {exportedCorrectly}");
         }
 
-
-        public async Task ImportScoresFromCsv(IEnumerable<string> paths)
+        private void FilterScores()
         {
-            int iter = 0;
-            var competitionsScores = new List<PlayerScoreRecord[]>();
-            foreach (var path in paths)
+            int limit = 20000;
+            _dnfs = _scores.Where(x => x.IsDNF());
+            foreach (var score in _dnfs)
             {
-                var csvImporter = new CsvImporter<PlayerScoreRecord, PlayerScoreMap>(path, ';');
-                var scoresRecords = await csvImporter.GetAllRecordsAsync();
-                foreach (var score in scoresRecords)
-                    score.CompetitionId = iter;
-                _scores = _scores.Union(scoresRecords);
-                iter++;
+                score.DistancePlaceNumber = 0;
+                score.CategoryPlaceNumber = 0;
             }
+            _scores = _scores.Where(x => x.DistancePlaceNumber > 0 && x.CategoryPlaceNumber > 0
+                && x.DistancePlaceNumber < limit && x.CategoryPlaceNumber < limit)
+                .Union(_dnfs);
         }
 
-        public async Task<bool> ExportStandingsToCsv(IEnumerable<PlayerWithPoints> standingPlayers)
+        private void GetUniqueCategories()
         {
-            foreach (var player in standingPlayers)
-            {
-                player.SetPointsForCompetitions();
-            }
-            string exportFileName = "results.csv";
-            var exporter = new CsvExporter<PlayerWithPoints, PlayerWithPointsMap>(exportFileName);
-            return await exporter.SaveAllRecordsAsync(standingPlayers);
+            _scores.ToList().ForEach(x => _categories.Add(x.AgeCategory.ToUpper()));
+            _categories.ToList().ForEach(category => Debug.WriteLine($"Kategoria: {category}"));
         }
 
-        public async Task ImportPointsTableFromCsv(string path)
-        {
-            var csvImporter = new CsvImporter<PlacePointsRecord, PlacePointsMap>(path, ';');
-            var pointsAndPlaces = await csvImporter.GetAllRecordsAsync();
-            pointsAndPlaces.ToList().ForEach(pair => _points.Add(pair.Place, pair.Points));
-        }
-
-        private IEnumerable<PlayerWithPoints> PrepareAndPrintStandings()
-        {
-            var categoriesStandings = _categories.ToDictionary(x => x, y => new List<PlayerWithPoints>());
-            _uniquePlayers.ToList().ForEach(player => categoriesStandings[player.Value.AgeCategory].Add(player.Value));
-            var exportableScores = new List<PlayerWithPoints>();
-
-            foreach (var item in categoriesStandings.OrderBy(pair => pair.Key))
-            {
-                int iter = 1;
-                Debug.WriteLine($"Category {item.Key}");
-                item.Value.OrderByDescending(player => player.Points).ToList()
-                    .ForEach(player =>
-                    {
-                        Debug.WriteLine($"{iter,-2} {player}");
-                        player.CategoryStandingPlace = iter;
-                        exportableScores.Add(player);
-                        iter++;
-                    });
-                Debug.WriteLine("");
-            }
-            return exportableScores;
-        }
 
         private void GiveOutPoints()
         {
@@ -121,24 +107,38 @@ namespace BaseCore.Csv.CompetitionSeries
             });
         }
 
-        private void GetUniqueCategories()
+        private IEnumerable<PlayerWithPoints> PrepareAndPrintStandings()
         {
-            _scores.ToList().ForEach(x => _categories.Add(x.AgeCategory.ToUpper()));
-            _categories.ToList().ForEach(category => Debug.WriteLine($"Kategoria: {category}"));
+            var categoriesStandings = _categories.ToDictionary(x => x, y => new List<PlayerWithPoints>());
+            _uniquePlayers.ToList().ForEach(player => categoriesStandings[player.Value.AgeCategory].Add(player.Value));
+            var exportableScores = new List<PlayerWithPoints>();
+
+            foreach (var item in categoriesStandings.OrderBy(pair => pair.Key))
+            {
+                int iter = 1;
+                Debug.WriteLine($"Category {item.Key}");
+                item.Value.OrderByDescending(player => player.Points).ToList()
+                    .ForEach(player =>
+                    {
+                        Debug.WriteLine($"{iter,-2} {player}");
+                        player.CategoryStandingPlace = iter;
+                        exportableScores.Add(player);
+                        iter++;
+                    });
+                Debug.WriteLine("");
+            }
+            return exportableScores;
         }
 
-        private void FilterScores()
+        public async Task<bool> ExportStandingsToCsv(IEnumerable<PlayerWithPoints> standingPlayers)
         {
-            int limit = 20000;
-            _dnfs = _scores.Where(x => x.IsDNF());
-            foreach (var score in _dnfs)
+            foreach (var player in standingPlayers)
             {
-                score.DistancePlaceNumber = 0;
-                score.CategoryPlaceNumber = 0;
+                player.SetPointsForCompetitions();
             }
-            _scores = _scores.Where(x => x.DistancePlaceNumber > 0 && x.CategoryPlaceNumber > 0
-                && x.DistancePlaceNumber < limit && x.CategoryPlaceNumber < limit)
-                .Union(_dnfs);
+            string exportFileName = "results.csv";
+            var exporter = new CsvExporter<PlayerWithPoints, PlayerWithPointsMap>(exportFileName);
+            return await exporter.SaveAllRecordsAsync(standingPlayers);
         }
     }
 }
