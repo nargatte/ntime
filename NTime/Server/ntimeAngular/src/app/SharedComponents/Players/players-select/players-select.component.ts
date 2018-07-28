@@ -36,13 +36,13 @@ export class PlayersSelectComponent implements AfterViewInit {
   private filter: PlayerFilterOptions = new PlayerFilterOptions();
 
   @ViewChild(MatTable) table: MatTable<PlayerListView>;
-  displayedColumns = ['select', 'firstName', 'lastName', 'sex', 'team', 'fullCategory', 'isPaidUp'];
+  displayedColumns = ['select', 'firstName', 'lastName', 'city', 'team', 'fullCategory', 'isPaidUp'];
   dataSource: MatTableDataSource<PlayersWithScores> = new MatTableDataSource<PlayersWithScores>(this.players);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   public pageNumber = 0;
-  public pageSize = 20;
-  public pageSizeOptions = [10, 20, 50];
+  public pageSize = 50;
+  public pageSizeOptions = [20, 50, 100];
   public playersCount = 0;
 
   constructor(

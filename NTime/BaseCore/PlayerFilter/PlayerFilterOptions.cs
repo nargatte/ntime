@@ -4,7 +4,6 @@ namespace BaseCore.PlayerFilter
 {
     public class PlayerFilterOptions
     {
-
         public PlayerSort PlayerSort { get; set; }
         public bool DescendingSort { get; set; }
         public string Query { get; set; }

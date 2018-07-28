@@ -29,13 +29,13 @@ export class PlayersListComponent implements AfterViewInit {
   private filter: PlayerFilterOptions = new PlayerFilterOptions();
 
   @ViewChild(MatTable) table: MatTable<PlayerListView>;
-  displayedColumns = ['firstName', 'lastName', 'sex', 'team', 'fullCategory', 'isPaidUp'];
+  displayedColumns = ['firstName', 'lastName', 'city', 'team', 'fullCategory', 'isPaidUp'];
   dataSource: MatTableDataSource<PlayerListView> = new MatTableDataSource<PlayerListView>(this.players);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   public pageNumber = 0;
-  public pageSize = 20;
-  public pageSizeOptions = [10, 20, 50];
+  public pageSize = 50;
+  public pageSizeOptions = [20, 50, 100];
   public playersCount = 0;
 
   constructor(
