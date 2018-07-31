@@ -3,10 +3,9 @@ import { FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MatPaginator, MatTableDataSource, MatTable, PageEvent, MatDialog } from '@angular/material';
 import { DataSource } from '@angular/cdk/table';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/merge';
-import 'rxjs/add/operator/map';
+import { BehaviorSubject ,  Observable } from 'rxjs';
+
+
 
 import { PlayerService } from '../../../Services/player.service';
 import { MessageService } from '../../../Services/message.service';

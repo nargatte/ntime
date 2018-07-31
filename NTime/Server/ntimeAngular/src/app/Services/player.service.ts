@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { PageViewModel } from '../Models/PageViewModel';
 import { Competition } from '../Models/Competition';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
