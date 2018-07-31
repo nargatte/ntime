@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { Observable ,  of ,  from } from 'rxjs';
+import { Observable ,  of ,  from, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
@@ -38,7 +38,7 @@ export abstract class BaseHttpService {
   }
 
   /** Creates get request to the following url: ${baseAddress}/api/${controllerName}/?ItemsOnPage=${pageSize}&PageNumber=${pageNumber} */
-  public getPage<TResponse>(pageSize: number, pageNumber: number, customUrl: string): Observable<PageViewModel<TResponse>> {
+  public getPage<TResponse>(pageSize: number, pageNumber: number, customUrl: string): Observable<PageViewModel<TResponse> | {}> {
     this.updateAuthorizedUser();
     return this.http.get<PageViewModel<TResponse>>(
       new UrlBuilder()
@@ -54,7 +54,7 @@ export abstract class BaseHttpService {
   }
 
   /** Creates get request to the following url: ${baseAddress}/api/${controllerName}/id */
-  protected getById<TResponse>(id: number): Observable<TResponse> {
+  protected getById<TResponse>(id: number): Observable<TResponse | {}> {
     this.updateAuthorizedUser();
     return this.http.get<TResponse>(
       new UrlBuilder()
@@ -70,7 +70,7 @@ export abstract class BaseHttpService {
     );
   }
 
-  protected getFromController<TResponse>(): Observable<TResponse> {
+  protected getFromController<TResponse>(): Observable<TResponse | {}> {
     this.updateAuthorizedUser();
     return this.http.get<TResponse>(
       new UrlBuilder()
@@ -121,7 +121,7 @@ export abstract class BaseHttpService {
     );
   }
 
-  protected put<TResponse, TContent>(requestUrl: string, content: TContent): Observable<TResponse> {
+  protected put<TResponse, TContent>(requestUrl: string, content: TContent): Observable<TResponse | {}> {
     this.updateAuthorizedUser();
     this.log('Preparing put request');
     return this.http.put<TResponse>(requestUrl, content, this.httpOptions).pipe(
@@ -160,8 +160,9 @@ export abstract class BaseHttpService {
       this.messageService.addObject(errorResponse.error);
     }
     // return an ErrorObservable with a user-facing error message
-    return new ErrorObservable(
-      `Something bad happened; please try again later`);
+    return throwError(`Something bad happened; please try again later`);
+    // return new ErrorObservable(
+    //   `Something bad happened; please try again later`);
   }
 
 

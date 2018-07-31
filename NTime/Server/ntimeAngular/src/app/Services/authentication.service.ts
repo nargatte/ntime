@@ -41,7 +41,7 @@ export class AuthenticationService extends BaseHttpService {
     );
   }
 
-  public login(loginData: URLSearchParams): Observable<TokenInfo> {
+  public login(loginData: URLSearchParams) {
     return super.postUrlEncoded<TokenInfo>(
       new UrlBuilder()
         .addCustomUrlPart('/Token')
@@ -50,7 +50,7 @@ export class AuthenticationService extends BaseHttpService {
     );
   }
 
-  public getRole(): Observable<RoleViewModel> {
+  public getRole() {
     return super.get<RoleViewModel>(
       new UrlBuilder()
       .addControllerName('Account')

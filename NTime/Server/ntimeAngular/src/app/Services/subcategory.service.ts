@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable ,  of } from 'rxjs';
+import { Observable ,  of, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
@@ -18,7 +18,7 @@ export class SubcategoryService {
 
   constructor(private http: HttpClient, private messageService: MessageService) { }
 
-  getSubcategoryFromCompetition(competitionId: number): Observable<Subcategory[]> {
+  getSubcategoryFromCompetition(competitionId: number): Observable<Subcategory[] | {}> {
     return this.http.get<Subcategory[]>(this.getExtraPlayerInfoFromCompetitionUrl + competitionId).pipe(
       tap((extraPlayerInfo) => {
         this.log(`Distance for competition with id:${extraPlayerInfo} fetched`);
@@ -43,7 +43,7 @@ export class SubcategoryService {
         `body was: ${errorResponse.error}`);
     }
     // return an ErrorObservable with a user-facing error message
-    return new ErrorObservable(
+    return throwError(
       'Something bad happened; please try again later.');
   }
 

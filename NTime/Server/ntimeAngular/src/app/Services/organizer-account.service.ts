@@ -19,7 +19,7 @@ export class OrganizerAccountService extends BaseHttpService {
   //   return super.getById(organizerId);
   // }
 
-  public getMyInfo(): Observable<OrganizerAccount> {
+  public getMyInfo(): Observable<OrganizerAccount | {}> {
     return super.getFromController();
   }
 

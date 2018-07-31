@@ -27,7 +27,7 @@ export class PlayerService extends BaseHttpService {
   }
 
   public getPlayerListView(competitionId: number, playerFilterOptions: PlayerFilterOptions, pageSize: number, pageNumber: number):
-    Observable<PageViewModel<PlayerListView>> {
+    Observable<PageViewModel<PlayerListView> | {}> {
     return super.post<PageViewModel<PlayerListView>, PlayerFilterOptions>(
       new UrlBuilder()
         .addControllerName(this.controllerName)
@@ -36,11 +36,11 @@ export class PlayerService extends BaseHttpService {
         .addPageRequest(pageSize, pageNumber)
         .toString(),
       playerFilterOptions
-    );
+    ).pipe();
   }
 
   public getPlayersWithScores(competitionId: number, playerFilterOptions: PlayerFilterOptions, pageSize: number, pageNumber: number):
-  Observable<PageViewModel<PlayersWithScores>> {
+  Observable<PageViewModel<PlayersWithScores> | {}> {
   return super.post<PageViewModel<PlayersWithScores>, PlayerFilterOptions>(
     new UrlBuilder()
       .addControllerName(this.controllerName)
@@ -63,7 +63,7 @@ export class PlayerService extends BaseHttpService {
     );
   }
 
-  public updateMulitplePlayers(players: PlayersWithScores[]): Observable<PlayersWithScores[]> {
+  public updateMulitplePlayers(players: PlayersWithScores[]): Observable<PlayersWithScores[] | {}> {
     return super.put<PlayersWithScores[], PlayersWithScores[]>(
       new UrlBuilder()
         .addControllerName(this.controllerName)

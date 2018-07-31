@@ -15,16 +15,16 @@ export class CompetitionService extends BaseHttpService {
         super(http, 'Competition', messageService, authenticatedUserService);
     }
 
-    getCompetitions(pageSize: number, pageNumber: number): Observable<PageViewModel<Competition>> {
+    getCompetitions(pageSize: number, pageNumber: number): Observable<PageViewModel<Competition> | {}> {
         return super.getPage<Competition>(pageSize, pageNumber, '');
     }
 
-    getCompetition(id: number): Observable<Competition> {
+    getCompetition(id: number): Observable<Competition | {}> {
         return super.getById<Competition>(id);
     }
 
     getCompetitionsFromPlayerAccount(pageSize: number, pageNumber: number,  playerAccountId: number)
-        : Observable<PageViewModel<Competition>> {
+        : Observable<PageViewModel<Competition> | {}> {
             return super.getPage<Competition>(pageSize, pageNumber, `/FromPlayerAccount/${playerAccountId}`);
     }
 }

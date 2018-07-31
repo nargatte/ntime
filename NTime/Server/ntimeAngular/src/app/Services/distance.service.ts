@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable ,  of ,  from } from 'rxjs';
+import { Observable, of, from, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
@@ -18,7 +18,7 @@ export class DistanceService {
 
   constructor(private http: HttpClient, private messageService: MessageService) { }
 
-  getDistanceFromCompetition(competitionId: number): Observable<Distance[]> {
+  getDistanceFromCompetition(competitionId: number): Observable<Distance[] | {}> {
     return this.http.get<Distance[]>(this.getDistanceFromCompetitionUrl + competitionId).pipe(
       tap((distance) => {
         this.log(`Distance for competition with id:${distance} fetched`);
@@ -43,8 +43,7 @@ export class DistanceService {
         `body was: ${errorResponse.error}`);
     }
     // return an ErrorObservable with a user-facing error message
-    return new ErrorObservable(
-      'Something bad happened; please try again later.');
+    return throwError('Something bad happened; please try again later.');
   }
 
 }
