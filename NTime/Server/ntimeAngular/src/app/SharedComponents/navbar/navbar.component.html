@@ -1,4 +1,4 @@
-<div >
+<div>
     <!-- <div style="height: 100vh;"> -->
     <mat-toolbar color="primary">
         <div fxShow="true" fxHide.gt-sm="true">
@@ -18,9 +18,11 @@
             <a mat-button routerLink="/konto">Moje konto</a>
             <a mat-button routerLink="/oferta">Oferta</a>
             <a mat-button routerLink="/kontakt">Kontakt</a>
-            <a mat-button routerLink="/wyloguj">
-                <mat-icon>power_settings_new</mat-icon> Wyloguj
-            </a>
+            <ng-container *ngIf="authenticatedUserService.IsAuthenticated">
+                <a mat-button routerLink="/wyloguj">
+                    <mat-icon>power_settings_new</mat-icon> Wyloguj
+                </a>
+            </ng-container>
             <!-- <ng-container *ngIf="User && authenticatedUserService.IsAuthenticated">
                 <span>
                     Witaj {{User.Email}}
@@ -31,7 +33,7 @@
     </mat-toolbar>
     <mat-sidenav-container fxFlexFill class="example-container">
 
-        <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over" opened="false">
+        <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over" opened="false" fxHide.gt-sm="true">
             <!-- style="background-color: primary;" -->
 
             <div fxLayout="column">
@@ -43,14 +45,11 @@
                 <a mat-button routerLink="/konto">Moje konto</a>
                 <a mat-button routerLink="/oferta">Oferta</a>
                 <a mat-button routerLink="/kontakt">Kontakt</a>
-                <a mat-button routerLink="/wyloguj">
-                    <mat-icon>power_settings_new</mat-icon> Wyloguj
-                </a>
-                <!-- <ng-container *ngIf="User && authenticatedUserService.IsAuthenticated">
-                    <span>
-                        Witaj {{User.Email}}
-                    </span>
-                </ng-container> -->
+                <ng-container *ngIf="authenticatedUserService.IsAuthenticated">
+                    <a mat-button routerLink="/wyloguj">
+                        <mat-icon>power_settings_new</mat-icon> Wyloguj
+                    </a>
+                </ng-container>
             </div>
         </mat-sidenav>
         <mat-sidenav-content fxFlexFill>

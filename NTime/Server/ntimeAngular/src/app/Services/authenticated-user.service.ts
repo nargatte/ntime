@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { AuthenticatedUser } from '../Models/Authentication/AuthenticatedUser';
+import { MessageService } from './message.service';
 
 @Injectable()
 export class AuthenticatedUserService {
   private _user: AuthenticatedUser;
-  constructor() { }
+  constructor(private messageService: MessageService) { }
 
   public get IsAuthenticated(): boolean {
-    if (this._user == null || this._user.Email == null || this._user.Email === '') {
+    if (this._user == null || this._user.Token == null || this._user.Token === '') {
       return false;
     } else {
       return true;

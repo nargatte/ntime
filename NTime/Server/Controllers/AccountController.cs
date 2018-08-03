@@ -387,7 +387,7 @@ namespace Server.Controllers
             {
                 string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                 await UserManager.SendEmailAsync(user.Id,
-                    "Potwierdzenie rejrstracji w systemie Time2Win",
+                    "Potwierdzenie rejestracji w systemie Time2Win",
                     "Kliknij w link żeby potwierdzić rejestrację swojego konta: <a href=\""
                     + Url.Content("/api/Account/ConfirmEmail?userId=" + user.Id + "&token=" +
                                   HttpUtility.UrlDecode(code)) + "\">KLIKNIJ</a>");

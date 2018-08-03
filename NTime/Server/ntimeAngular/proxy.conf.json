@@ -5,7 +5,7 @@
     "logLevel": "info",
     "changeOrigin": true
   },
-    "/token": {
+    "/Token": {
     "target": "https://www.testing.time2win.aspnet.pl",
     "secure": false,
     "logLevel": "info",
