@@ -8,7 +8,7 @@ namespace BaseCore.DataBase
         {
         }
 
-        public AgeCategory(string name, int yearFrom, int yearTo) : base(name, yearFrom, yearTo)
+        public AgeCategory(string name, int yearFrom, int yearTo, bool male) : base(name, yearFrom, yearTo, male)
         {
         }
 
@@ -16,5 +16,7 @@ namespace BaseCore.DataBase
         public virtual Competition Competition { get; set; }
 
         public virtual ICollection<Player> Players { get; set; }
+
+        public virtual ICollection<AgeCategory> AgeCategories { get; set; }
     }
 }

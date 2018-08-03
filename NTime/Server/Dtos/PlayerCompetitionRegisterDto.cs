@@ -26,8 +26,10 @@ namespace Server.Dtos
             City = player.City;
             Email = player.Email;
             PhoneNumber = player.PhoneNumber;
-            ExtraPlayerInfoId = player.ExtraPlayerInfo.Id;
+            ExtraData = player.ExtraData;
+            SubcategoryId = player.Subcategory.Id;
             DistanceId = player.Distance.Id;
+            AgeCategoryId = player.AgeCategory.Id;
             CompetitionId = player.CompetitionId;
         }
 
@@ -42,23 +44,32 @@ namespace Server.Dtos
             player.City = City;
             player.Email = Email;
             player.PhoneNumber = PhoneNumber;
-            player.ExtraPlayerInfoId = ExtraPlayerInfoId;
+            player.ExtraData = ExtraData;
+            player.SubcategoryId = SubcategoryId;
             player.DistanceId = DistanceId;
+            player.AgeCategoryId = AgeCategoryId;
             player.CompetitionId = CompetitionId;
             return player;
         }
 
         public async Task<Player> CopyDataFromDto(Player player, IContextProvider contextProvider, Competition competition)
         {
-            ExtraPlayerInfoRepository extraPlayerInfoRepository = new ExtraPlayerInfoRepository(contextProvider, competition);
+            SubcategoryRepository subcategoryRepository = new SubcategoryRepository(contextProvider, competition);
             DistanceRepository distanceRepository = new DistanceRepository(contextProvider, competition);
+            AgeCategoryRepository ageCategoryRepository = new AgeCategoryRepository(contextProvider, competition);
 
             CopyDataFromDto(player);
-            player.ExtraPlayerInfo = await extraPlayerInfoRepository.GetById(ExtraPlayerInfoId);
+            player.Subcategory = await subcategoryRepository.GetById(SubcategoryId);
             player.Distance = await distanceRepository.GetById(DistanceId);
+            player.AgeCategory = await ageCategoryRepository.GetById(AgeCategoryId);
 
-            if (player.ExtraPlayerInfo == null || player.Distance == null)
+            if (player.Subcategory == null || player.Distance == null || player.AgeCategory == null)
                 return null;
+
+            if (player.AgeCategory.Male != player.IsMale) return null;
+            if (!(await ageCategoryRepository.IsAgeCategoryAndDistanceMatch(player.AgeCategory, player.Distance)))
+                return null;
+
             return player;
         }
 
@@ -78,6 +89,8 @@ namespace Server.Dtos
         [Phone]
         public string PhoneNumber { get; set; }
 
+        public string ExtraData { get; set; }
+
         [StringLength(255)]
         public string Team { get; set; }
 
@@ -86,9 +99,11 @@ namespace Server.Dtos
         [EmailAddress]
         public string Email { get; set; }
 
-        public int ExtraPlayerInfoId { get; set; }
+        public int SubcategoryId { get; set; }
 
         public int DistanceId { get; set; }
+
+        public int AgeCategoryId { get; set; }
 
         public int CompetitionId { get; set; }
 

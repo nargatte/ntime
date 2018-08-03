@@ -75,5 +75,7 @@ namespace BaseCore.DataBase
         public virtual ICollection<Player> Players { get; set; }
 
         public virtual ICollection<Gate> Gates { get; set; }
+
+        public virtual ICollection<AgeCategoryDistance> SubcategoryDistances { get; set; }
     }
 }

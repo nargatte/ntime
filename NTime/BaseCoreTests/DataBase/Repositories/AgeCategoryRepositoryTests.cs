@@ -8,9 +8,9 @@ namespace BaseCoreTests.DataBase
     {
         protected override AgeCategory[] InitialItems { get; set; } =
         {
-            new AgeCategory("Młodziki", 2000, 2005),
-            new AgeCategory("Starsi", 1995, 2000),
-            new AgeCategory("Starszaki", 1985, 1990)
+            new AgeCategory("Młodziki", 2000, 2005, false),
+            new AgeCategory("Starsi", 1995, 2000, false),
+            new AgeCategory("Starszaki", 1985, 1990, false)
         };
 
         protected override Repository<AgeCategory> Repository { get; set; }

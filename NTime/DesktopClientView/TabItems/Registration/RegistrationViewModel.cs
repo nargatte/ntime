@@ -66,7 +66,7 @@ namespace DesktopClientView.TabItems.Registration
             {
                 var templateData = await _playerAccountManager.DownloadPlayerTemplateData();
                 if (templateData != null)
-                    NewPlayer = new EditablePlayer(new EditableCompetition()) { DbEntity = new Player(templateData) };
+                    NewPlayer = new EditablePlayer(new EditableCompetition()) { DbEntity = new Player() };
             }
         }
 

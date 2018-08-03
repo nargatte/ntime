@@ -17,7 +17,7 @@ namespace BaseCoreTests.DataBase
         {
             InitialCompetition.AgeCategories = null; 
             InitialCompetition.Distances = null;
-            InitialCompetition.ExtraPlayerInfos = null;
+            InitialCompetition.Subcategories = null;
             InitialCompetition.Players = null;
             ctx.Competitions.Add(InitialCompetition);
             await ctx.SaveChangesAsync();

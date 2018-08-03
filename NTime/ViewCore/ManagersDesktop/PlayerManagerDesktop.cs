@@ -46,9 +46,9 @@ namespace ViewCore.ManagersDesktop
             else
                 _playerFilter.Distance = null;
             if (!String.IsNullOrWhiteSpace(extraPlayerInfoSortCriteria?.DbEntity.Name))
-                _playerFilter.ExtraPlayerInfo = extraPlayerInfoSortCriteria.DbEntity;
+                _playerFilter.Subcategory = extraPlayerInfoSortCriteria.DbEntity;
             else
-                _playerFilter.ExtraPlayerInfo = null;
+                _playerFilter.Subcategory = null;
             if (!String.IsNullOrWhiteSpace(ageCategorySortCriteria?.DbEntity.Name))
                 _playerFilter.AgeCategory = ageCategorySortCriteria.DbEntity;
             else
@@ -97,10 +97,10 @@ namespace ViewCore.ManagersDesktop
                 newPlayer.IsMale = GetSexForPlayer(newPlayer);
                 var playerToAdd = newPlayer.Clone() as EditablePlayer;
                 var tempDistance = playerToAdd.DbEntity.Distance;
-                var tempExtraPlayerInfo = playerToAdd.DbEntity.ExtraPlayerInfo;
-                await _playerRepository.AddAsync(playerToAdd.DbEntity, playerToAdd.DbEntity.Distance, playerToAdd.DbEntity.ExtraPlayerInfo);
+                var tempExtraPlayerInfo = playerToAdd.DbEntity.Subcategory;
+                await _playerRepository.AddAsync(playerToAdd.DbEntity, playerToAdd.DbEntity.AgeCategory, playerToAdd.DbEntity.Distance, playerToAdd.DbEntity.Subcategory);
                 playerToAdd.DbEntity.Distance = tempDistance;
-                playerToAdd.DbEntity.ExtraPlayerInfo = tempExtraPlayerInfo;
+                playerToAdd.DbEntity.Subcategory = tempExtraPlayerInfo;
                 playerToAdd.UpdateRequested += Player_UpdateRequested;
                 _players.Add(playerToAdd);
                 _recordsRangeInfo.TotalItemsCount++;
@@ -153,8 +153,8 @@ namespace ViewCore.ManagersDesktop
         private async void Player_UpdateRequested(object sender, EventArgs e)
         {
             var playerToUpdate = sender as EditablePlayer;
-            await _playerRepository.UpdateAsync(playerToUpdate.DbEntity, playerToUpdate.DbEntity.Distance,
-                playerToUpdate.DbEntity.ExtraPlayerInfo);
+            await _playerRepository.UpdateAsync(playerToUpdate.DbEntity, playerToUpdate.DbEntity.AgeCategory, playerToUpdate.DbEntity.Distance,
+                playerToUpdate.DbEntity.Subcategory);
             playerToUpdate.UpdateFullCategoryDisplay();
         }
 

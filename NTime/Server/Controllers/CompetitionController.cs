@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Security;
@@ -117,6 +119,25 @@ namespace Server.Controllers
         {
             IntegrationTests integrationTests = new IntegrationTests();
             await integrationTests.LoadCsvs();
+            return Ok();
+        }
+
+        // POST /api/Competition/1/ExtraDataHederModyfication
+        [Authorize(Roles = "Administrator,Organizer,Moderator")]
+        [Route("{id:int:min(1)}/ExtraDataHederModyfication")]
+        public async Task<IHttpActionResult> PostExtraDataHederModyfication(int id, PermutationPair[] permutationPairs)
+        {
+            if (await InitCompetitionById(id) == false)
+                throw new Exception("Invalid competition id");
+
+            if (await CanOrganizerAccess() == false)
+                throw new Exception("Unauthorized");
+
+            PlayerRepository playerRepository = new PlayerRepository(new ContextProvider(), Competition);
+
+            await playerRepository.ExtraDataModyfication(permutationPairs.Select(pp => pp.PermutationElement).ToArray());
+            Competition.ExtraDataHeders = String.Join(";", permutationPairs.Select(pp => pp.HederName).ToArray());
+
             return Ok();
         }
     }

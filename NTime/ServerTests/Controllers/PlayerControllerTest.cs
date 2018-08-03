@@ -45,7 +45,7 @@ namespace ServerTests.Controllers
         //        DistanceId = 1,
         //        LastName = "Kowalski",
         //        FirstName = "Jan",
-        //        ExtraPlayerInfoId = 1,
+        //        SubcategoryId = 1,
         //        IsMale = true,
         //        PhoneNumber = "123 234 345",
         //        Team = "Testowy"

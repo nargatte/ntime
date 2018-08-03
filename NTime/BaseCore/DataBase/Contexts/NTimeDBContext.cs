@@ -29,7 +29,7 @@ namespace BaseCore.DataBase
 
         public DbSet<Distance> Distances { get; set; }
 
-        public DbSet<ExtraPlayerInfo> ExtraPlayerInfo { get; set; }
+        public DbSet<Subcategory> Subcategory { get; set; }
 
         public DbSet<Player> Players { get; set; }
 
@@ -46,5 +46,7 @@ namespace BaseCore.DataBase
         public DbSet<OrganizerAccount> OrganizerAccounts { get; set; }
 
         public DbSet<PlayerAccount> PlayerAccounts { get; set; }
+
+        public DbSet<AgeCategoryDistance> AgeCategoryDistances { get; set; }
     }
 }

@@ -20,7 +20,7 @@ namespace ViewCore.ManagersHttp
         public ExtraPlayerInfoManagerHttp(IEditableCompetition currentCompetition, AccountInfo accountInfo, ConnectionInfo connectionInfo) : base(accountInfo, connectionInfo)
         {
             _currentCompetition = currentCompetition;
-            _client = new HttpExtraPlayerInfoClient(accountInfo, connectionInfo, "ExtraPlayerInfos");
+            _client = new HttpExtraPlayerInfoClient(accountInfo, connectionInfo, "Subcategories");
         }
 
         public async Task<ObservableCollection<EditableExtraPlayerInfo>> DownloadExtraPlayerInfoAsync()
@@ -33,12 +33,12 @@ namespace ViewCore.ManagersHttp
                 {
                     DefinedExtraPlayerInfo.Add(new EditableExtraPlayerInfo(_currentCompetition)
                     {
-                        DbEntity = dtoExtraPlayerInfo.CopyDataFromDto(new ExtraPlayerInfo())
+                        DbEntity = dtoExtraPlayerInfo.CopyDataFromDto(new Subcategory())
                     });
                 }
                 DefinedExtraPlayerInfo.Add(new EditableExtraPlayerInfo(_currentCompetition)
                 {
-                    DbEntity = new ExtraPlayerInfo()
+                    DbEntity = new Subcategory()
                 });
             });
             return DefinedExtraPlayerInfo;

@@ -4,14 +4,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BaseCore.DataBase
 {
-    [Table("ExtraPlayerInfo")]
-    public class ExtraPlayerInfo : IEntityId, ICompetitionId
+    [Table("Subcategory")]
+    public class Subcategory : IEntityId, ICompetitionId
     {
-        public ExtraPlayerInfo()
+        public Subcategory()
         {
         }
 
-        protected bool Equals(ExtraPlayerInfo other)
+        protected bool Equals(Subcategory other)
         {
             return Id == other.Id;
         }
@@ -21,7 +21,7 @@ namespace BaseCore.DataBase
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((ExtraPlayerInfo) obj);
+            return Equals((Subcategory) obj);
         }
 
         public override int GetHashCode()
@@ -29,7 +29,7 @@ namespace BaseCore.DataBase
             return Id;
         }
 
-        public ExtraPlayerInfo(string name, string shortName)
+        public Subcategory(string name, string shortName)
         {
             Name = name;
             ShortName = shortName;

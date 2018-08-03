@@ -88,13 +88,13 @@ namespace AdminView.Categories
         }
         #endregion
 
-        #region ExtraPlayerInfo
+        #region Subcategory
 
         private async Task DownloadExtraPlayerInfosFromDatabase(bool clearDisplayedCExtraPlayerInfosBefore = true)
         {
             if (clearDisplayedCExtraPlayerInfosBefore)
                 ExtraPlayerInfos.Clear();
-            var dbExtraPlayerInfos = await _extraPlayerInfoRepository.GetAllAsync();
+            var dbExtraPlayerInfos = await SubcategoryRepository.GetAllAsync();
             foreach (var dbExtraPlayerInfo in dbExtraPlayerInfos)
             {
                 var extraPlayerInfoToAdd = new EditableExtraPlayerInfo(_currentCompetition)
@@ -123,21 +123,21 @@ namespace AdminView.Categories
             var extraPlayerInfoToAdd = NewExtraPlayerInfo;
             extraPlayerInfoToAdd.UpdateRequested += ExtraPlayerInfo_UpdateRequestedAsync;
             AddExtraPlayerInfoToGUI(extraPlayerInfoToAdd);
-            await _extraPlayerInfoRepository.AddAsync(extraPlayerInfoToAdd.DbEntity);
+            await SubcategoryRepository.AddAsync(extraPlayerInfoToAdd.DbEntity);
             NewExtraPlayerInfo = new EditableExtraPlayerInfo(_currentCompetition);
         }
 
         private async void ExtraPlayerInfo_UpdateRequestedAsync(object sender, EventArgs e)
         {
             var extraPlayerInfoToUpdate = sender as EditableExtraPlayerInfo;
-            await _extraPlayerInfoRepository.UpdateAsync(extraPlayerInfoToUpdate.DbEntity);
+            await SubcategoryRepository.UpdateAsync(extraPlayerInfoToUpdate.DbEntity);
         }
 
         private async void ExtraPlayerInfo_DeleteRequestedAsync(object sender, EventArgs e)
         {
             var extraPlayerInfoToDelete = sender as EditableExtraPlayerInfo;
             ExtraPlayerInfos.Remove(extraPlayerInfoToDelete);
-            await _extraPlayerInfoRepository.RemoveAsync(extraPlayerInfoToDelete.DbEntity);
+            await SubcategoryRepository.RemoveAsync(extraPlayerInfoToDelete.DbEntity);
         }
         #endregion
 

@@ -12,8 +12,9 @@ namespace BaseCore.PlayerFilter
         public bool? Invalid { get; set; }
         public bool? CompleatedCompetition { get; set; }
         public bool? HasVoid { get; set; }
+        public bool? IsPaidUp { get; set; }
         public Distance Distance { get; set; }
         public AgeCategory AgeCategory { get; set; }
-        public ExtraPlayerInfo ExtraPlayerInfo { get; set; }
+        public Subcategory Subcategory { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace ViewCore
     {
         protected AgeCategoryRepository _ageCategoryRepository { get; set; }
         protected DistanceRepository _distanceRepository { get; set; }
-        protected ExtraPlayerInfoRepository _extraPlayerInfoRepository { get; set; }
+        protected SubcategoryRepository SubcategoryRepository { get; set; }
         protected GateRepository _gateRepository { get; set; }
         protected PlayerRepository _playerRepository { get; set; }
 
@@ -38,7 +38,7 @@ namespace ViewCore
             ContextProvider contextProvider = new ContextProvider();
             _ageCategoryRepository = new AgeCategoryRepository(contextProvider, _currentCompetition.DbEntity);
             _distanceRepository = new DistanceRepository(contextProvider, _currentCompetition.DbEntity);
-            _extraPlayerInfoRepository = new ExtraPlayerInfoRepository(contextProvider, _currentCompetition.DbEntity);
+            SubcategoryRepository = new SubcategoryRepository(contextProvider, _currentCompetition.DbEntity);
             _gateRepository = new GateRepository(contextProvider, _currentCompetition.DbEntity);
             _playerRepository = new PlayerRepository(contextProvider, _currentCompetition.DbEntity);
             //_gateOrderItemRepository = new GateOrderItemRepository(contextProvider, );

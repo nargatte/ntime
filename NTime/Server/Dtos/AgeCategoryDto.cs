@@ -20,6 +20,7 @@ namespace Server.Dtos
             Name = ageCategory.Name;
             YearFrom = ageCategory.YearFrom;
             YearTo = ageCategory.YearTo;
+            Male = ageCategory.Male;
         }
 
         public AgeCategory CopyDataFromDto(AgeCategory ageCategory)
@@ -28,6 +29,7 @@ namespace Server.Dtos
             ageCategory.Name = Name;
             ageCategory.YearFrom = YearFrom;
             ageCategory.YearTo = YearTo;
+            ageCategory.Male = Male;
             return ageCategory;
         }
 
@@ -40,5 +42,7 @@ namespace Server.Dtos
         public int YearFrom { get; set; }
 
         public int YearTo { get; set; }
+
+        public bool Male { get; set; }
     }
 }

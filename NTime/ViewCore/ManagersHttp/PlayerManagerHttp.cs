@@ -50,9 +50,9 @@ namespace ViewCore.ManagersHttp
             else
                 _playerFilter.Distance = null;
             if (!String.IsNullOrWhiteSpace(extraPlayerInfoSortCriteria?.DbEntity.Name))
-                _playerFilter.ExtraPlayerInfo = extraPlayerInfoSortCriteria.DbEntity;
+                _playerFilter.Subcategory = extraPlayerInfoSortCriteria.DbEntity;
             else
-                _playerFilter.ExtraPlayerInfo = null;
+                _playerFilter.Subcategory = null;
             if (!String.IsNullOrWhiteSpace(ageCategorySortCriteria?.DbEntity.Name))
                 _playerFilter.AgeCategory = ageCategorySortCriteria.DbEntity;
             else
@@ -86,7 +86,7 @@ namespace ViewCore.ManagersHttp
                     DbEntity = (await _client.GetFullRegisteredPlayerFromCompetition(competition, playerAccount)).CopyDataFromDto(new Player())
                 };
                 player.Distance = _definedDistances.FirstOrDefault(defined => defined.DbEntity.Id == player.DbEntity.DistanceId);
-                player.ExtraPlayerInfo = _definedExtraPlayerInfos.FirstOrDefault(defined => defined.DbEntity.Id == player.DbEntity.ExtraPlayerInfoId);
+                player.ExtraPlayerInfo = _definedExtraPlayerInfos.FirstOrDefault(defined => defined.DbEntity.Id == player.DbEntity.SubcategoryId);
             });
             if (player.DbEntity != null)
             {
@@ -105,14 +105,14 @@ namespace ViewCore.ManagersHttp
                 newPlayer.IsMale = GetSexForPlayer(newPlayer);
                 var playerToAdd = newPlayer.Clone() as EditablePlayer;
                 var tempDistance = playerToAdd.DbEntity.Distance;
-                var tempExtraPlayerInfo = playerToAdd.DbEntity.ExtraPlayerInfo;
+                var tempExtraPlayerInfo = playerToAdd.DbEntity.Subcategory;
                 await TryCallApi(async () =>
                     {
                         playerToAdd.CompetitionId = _currentCompetition.DbEntity.Id;
                         await _client.AddRegisteredPlayer(_currentCompetition.DbEntity.Id, playerToAdd.DbEntity);
                     }, "Zapis na zawody przebiegł poprawnie");
                 playerToAdd.DbEntity.Distance = tempDistance;
-                playerToAdd.DbEntity.ExtraPlayerInfo = tempExtraPlayerInfo;
+                playerToAdd.DbEntity.Subcategory = tempExtraPlayerInfo;
                 playerToAdd.UpdateRequested += Player_UpdateRequested;
                 _players.Add(playerToAdd);
                 //_recordsRangeInfo.TotalItemsCount++;
@@ -167,7 +167,7 @@ namespace ViewCore.ManagersHttp
         {
             var playerToUpdate = sender as EditablePlayer;
             //await _playerRepository.UpdateAsync(playerToUpdate.DbEntity, playerToUpdate.DbEntity.Distance,
-            //    playerToUpdate.DbEntity.ExtraPlayerInfo);
+            //    playerToUpdate.DbEntity.Subcategory);
             await _client.UpdatePlayerFullInfo(playerToUpdate.DbEntity);
             playerToUpdate.UpdateFullCategoryDisplay();
         }

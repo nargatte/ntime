@@ -75,13 +75,18 @@ namespace Server.Controllers
 
         // GET api/Account/Role
         [System.Web.Http.Route("Role")]
-        public RoleViewModel GetRole()
+        public async Task<RoleViewModel> GetRole()
         {
+            string id = User.Identity.GetUserId();
+            var userItem = await UserManager.FindByIdAsync(id);
+
             return new RoleViewModel
             {
-                Id = User.Identity.GetUserId(),
-                Email = User.Identity.GetUserName(),
-                Role = UserManager.GetRoles(User.Identity.GetUserId())[0]
+                Id = id,
+                Email = userItem.Email,
+                Role = (await UserManager.GetRolesAsync(User.Identity.GetUserId()))[0],
+                FirstName = userItem.FirstName,
+                LastName = userItem.LastName,
             };
         }
 
@@ -347,9 +352,6 @@ namespace Server.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (!(model.Role == RoleEnum.Player || model.Role == RoleEnum.Organizer))
-                throw new Exception("Role invalid");
-
             var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
@@ -365,7 +367,6 @@ namespace Server.Controllers
             {
                 PlayerAccountRepository accountRepository = new PlayerAccountRepository(new ContextProvider());
                 PlayerAccount playerAccount = new PlayerAccount();
-                playerAccount.EMail = model.Email;
                 playerAccount.AccountId = user.Id;
                 await accountRepository.AddAsync(playerAccount);
             }
@@ -374,11 +375,7 @@ namespace Server.Controllers
                 OrganizerAccountRepository organizerAccountRepository =
                     new OrganizerAccountRepository(new ContextProvider());
                 OrganizerAccount organizerAccount = new OrganizerAccount();
-                organizerAccount.EMail = model.Email;
                 organizerAccount.AccountId = user.Id;
-                organizerAccount.FirstName = "Organizator";
-                organizerAccount.LastName = "Organizator";
-                organizerAccount.PhoneNumber = "123 123 123";
                 await organizerAccountRepository.AddAsync(organizerAccount);
             }
             else

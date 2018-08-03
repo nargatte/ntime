@@ -9,9 +9,9 @@ namespace BaseCoreTests.DataBase
     {
         protected override AgeCategoryTemplate[] InitialItems { get; set; } =
         {
-            new AgeCategoryTemplate("Młodziki", 2000, 2005),
-            new AgeCategoryTemplate("Starsi", 1995, 2000),
-            new AgeCategoryTemplate("Starszaki", 1985, 1990)
+            new AgeCategoryTemplate("Młodziki", 2000, 2005, false),
+            new AgeCategoryTemplate("Starsi", 1995, 2000, false),
+            new AgeCategoryTemplate("Starszaki", 1985, 1990, false)
         };
 
         private AgeCategoryCollection InitialAgeCategoryCollection { get; set; } = new AgeCategoryCollection("Collection");

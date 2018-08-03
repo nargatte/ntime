@@ -102,7 +102,7 @@ namespace ViewCore.Entities
         {
             get
             {
-                var temp = DefinedExtraPlayerInfo.FirstOrDefault(info => Equals(info.DbEntity, DbEntity.ExtraPlayerInfo));
+                var temp = DefinedExtraPlayerInfo.FirstOrDefault(info => Equals(info.DbEntity, DbEntity.Subcategory));
                 return temp;
             }
             set
@@ -110,7 +110,7 @@ namespace ViewCore.Entities
                 if (value != null)
                     if (!String.IsNullOrWhiteSpace(value.Name))
                     {
-                        DbEntity.ExtraPlayerInfo = SetProperty(DbEntity.ExtraPlayerInfo, value.DbEntity);
+                        DbEntity.Subcategory = SetProperty(DbEntity.Subcategory, value.DbEntity);
                         OnUpdateRequested();
                         OnPropertyChanged(nameof(FullCategory));
                     }

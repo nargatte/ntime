@@ -243,7 +243,7 @@
     <Compile Include="Controllers\ControllerCompetitionIdBase.cs" />
     <Compile Include="Controllers\ControllerNTimeBase.cs" />
     <Compile Include="Controllers\DistanceController.cs" />
-    <Compile Include="Controllers\ExtraPlayerInfoController.cs" />
+    <Compile Include="Controllers\SubcategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ModeratorAccountController.cs" />
     <Compile Include="Controllers\OrganizerAccountController.cs" />
@@ -253,7 +253,7 @@
     <Compile Include="Dtos\CompetitionDto.cs" />
     <Compile Include="Dtos\DistanceDto.cs" />
     <Compile Include="Dtos\DistanceSimpleDto.cs" />
-    <Compile Include="Dtos\ExtraPlayerInfoDto.cs" />
+    <Compile Include="Dtos\SubcategoryDto.cs" />
     <Compile Include="Dtos\IDtoBase.cs" />
     <Compile Include="Dtos\LoginDataDto.cs" />
     <Compile Include="Dtos\OrganizerAccountDto.cs" />
@@ -267,6 +267,7 @@
     </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\PermutationPair.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\NameIdModel.cs" />
     <Compile Include="Models\PlayerFilterOptionsBindingModel.cs" />

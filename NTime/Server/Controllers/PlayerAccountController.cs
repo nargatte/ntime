@@ -27,13 +27,14 @@ namespace Server.Controllers
         [Authorize(Roles = "Administrator")]
         public async Task<PageViewModel<PlayerAccountDto>> GetSearch([FromUri] PageBindingModel pageBindingModel, string query = null)
         {
-            PageViewModel<PlayerAccount> viewModel = await _playerAccountRepository.GetByQuery(query, pageBindingModel);
-            PageViewModel<PlayerAccountDto> viewModelDto = new PageViewModel<PlayerAccountDto>
-            {
-                Items = viewModel.Items.Select(pa => new PlayerAccountDto(pa)).ToArray(),
-                TotalCount = viewModel.TotalCount
-            };
-            return viewModelDto;
+            //PageViewModel<PlayerAccount> viewModel = await _playerAccountRepository.GetByQuery(query, pageBindingModel);
+            //PageViewModel<PlayerAccountDto> viewModelDto = new PageViewModel<PlayerAccountDto>
+            //{
+            //    Items = viewModel.Items.Select(pa => new PlayerAccountDto(pa)).ToArray(),
+            //    TotalCount = viewModel.TotalCount
+            //};
+            //return viewModelDto;
+            throw new NotImplementedException();
         }
 
         // GET api/PlayerAccount

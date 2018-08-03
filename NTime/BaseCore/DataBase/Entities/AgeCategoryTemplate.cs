@@ -6,7 +6,7 @@
         {
         }
 
-        public AgeCategoryTemplate(string name, int yearFrom, int yearTo) : base(name, yearFrom, yearTo)
+        public AgeCategoryTemplate(string name, int yearFrom, int yearTo, bool male) : base(name, yearFrom, yearTo, male)
         {
         }
 

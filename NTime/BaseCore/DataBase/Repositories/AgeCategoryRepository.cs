@@ -14,12 +14,12 @@ namespace BaseCore.DataBase
         protected override IQueryable<AgeCategory> GetSortQuery(IQueryable<AgeCategory> items) =>
             items.OrderBy(e => e.YearFrom);
 
-        public async Task<AgeCategory> GetFittingAsync(Player player)
+        public async Task<AgeCategory[]> GetFittingAsync(Player player)
         {
-            AgeCategory ret = null;
+            AgeCategory[] ret = null;
             await ContextProvider.DoAsync(async ctx =>
             {
-                ret = await GetAllQuery(ctx.AgeCategories).AsNoTracking().FirstOrDefaultAsync(i => i.YearFrom <= player.BirthDate.Year && player.BirthDate.Year <= i.YearTo);
+                ret = await GetAllQuery(ctx.AgeCategories).AsNoTracking().Where(i => i.YearFrom <= player.BirthDate.Year && player.BirthDate.Year <= i.YearTo && player.IsMale == i.Male).ToArrayAsync();
             });
             return ret;
         }
@@ -32,7 +32,7 @@ namespace BaseCore.DataBase
                     await ctx.AgeCategoryTemplates
                         .Where(e => e.AgeCategoryCollectionId == ageCategoryCollection.Id).ToArrayAsync();
                 AgeCategory[] ageCategories = ageCategoryTemplates
-                    .Select(e => new AgeCategory(e.Name, e.YearFrom, e.YearTo) { CompetitionId = Competition.Id })
+                    .Select(e => new AgeCategory(e.Name, e.YearFrom, e.YearTo, e.Male) { CompetitionId = Competition.Id })
                     .ToArray();
                 ctx.AgeCategories.AddRange(ageCategories);
                 await ctx.SaveChangesAsync();
@@ -54,7 +54,7 @@ namespace BaseCore.DataBase
                         AgeCategory[] ageCategories = await GetAllQuery(ctx.AgeCategories).ToArrayAsync();
                         AgeCategoryTemplate[] ageCategoryTemplates =
                             ageCategories
-                                .Select(a => new AgeCategoryTemplate(a.Name, a.YearFrom, a.YearTo)
+                                .Select(a => new AgeCategoryTemplate(a.Name, a.YearFrom, a.YearTo, a.Male)
                                 {
                                     AgeCategoryCollectionId = ageCategoryCollection.Id
                                 }).ToArray();
@@ -87,7 +87,17 @@ namespace BaseCore.DataBase
                 await ctx.SaveChangesAsync();
             });
         }
-
+        public async Task<bool> IsAgeCategoryAndDistanceMatch(AgeCategory ageCategory, Distance distance)
+        {
+            bool answer = false;
+            await ContextProvider.DoAsync(async ctx =>
+            {
+                answer = await ctx.AgeCategoryDistances.AnyAsync(acd =>
+                    acd.CompetitionId == Competition.Id && acd.AgeCategoryId == ageCategory.Id &&
+                    acd.DistanceId == distance.Id);
+            });
+            return answer;
+        }
 
     }
 }

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using BaseCore.DataBase;
+using Server.Models;
 
 namespace Server.Dtos
 {
@@ -14,29 +15,34 @@ namespace Server.Dtos
 
         }
 
+        /// <summary>
+        /// Use PlayerAccountDto(PlayerAccount account, ApplicationUser applicationUser) insstead
+        /// </summary>
+        /// <param name="playerAccount"></param>
         public PlayerAccountDto(PlayerAccount playerAccount)
         {
             Id = playerAccount.Id;
-            FirstName = playerAccount.FirstName;
-            LastName = playerAccount.LastName;
             BirthDate = playerAccount.BirthDate;
             IsMale = playerAccount.IsMale;
             Team = playerAccount.Team;
-            PhoneNumber = playerAccount.PhoneNumber;
-            EMail = playerAccount.EMail;
             City = playerAccount.City;
+        }
+
+        public PlayerAccountDto(PlayerAccount account, ApplicationUser applicationUser)
+            : this(account)
+        {
+            FirstName = applicationUser.FirstName;
+            LastName = applicationUser.LastName;
+            EMail = applicationUser.Email;
+            PhoneNumber = applicationUser.PhoneNumber;
         }
 
         public PlayerAccount CopyDataFromDto(PlayerAccount playerAccount)
         {
             playerAccount.Id = Id;
-            playerAccount.FirstName = FirstName;
-            playerAccount.LastName = LastName;
             playerAccount.BirthDate = BirthDate;
             playerAccount.IsMale = IsMale;
             playerAccount.Team = Team;
-            playerAccount.PhoneNumber = PhoneNumber;
-            playerAccount.EMail = EMail;
             playerAccount.City = City;
             return playerAccount;
         }
