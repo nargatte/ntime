@@ -27,7 +27,7 @@ export class NewPlayerFormComponent implements OnInit, AfterViewInit {
   @Input() extraPlayerInfos: Subcategory[];
 
   public todayDate: Date;
-  public newPlayer: PlayerCompetitionRegister = MockPlayersCompetitionRegister[0];
+  public newPlayer: PlayerCompetitionRegister = new PlayerCompetitionRegister();
   private competitionId: number;
   private recaptchaId: number;
 

@@ -1,7 +1,7 @@
 import { PlayerListView } from '../Models/Players/PlayerListView';
 import { PageViewModel } from '../Models/PageViewModel';
 import { PlayersWithScores } from '../Models/Players/PlayerWithScores';
-import { PlayerCompetitionRegister } from '../Models/Players/PlayerCompetitionRegister';
+import { PlayerCompetitionRegister, BasicPlayerArguments } from '../Models/Players/PlayerCompetitionRegister';
 
 
 export const MockPlayersListView: PlayerListView[] = [
@@ -21,9 +21,9 @@ export const MockPlayersWithScoresPage: PageViewModel<PlayersWithScores> =
     new PageViewModel<PlayersWithScores>(3, MockPlayersWithScores);
 
 export const MockPlayersCompetitionRegister: PlayerCompetitionRegister[] = [
-    new PlayerCompetitionRegister(1, 'Jan', 'Kowalski'),
-    new PlayerCompetitionRegister(2, 'Marek', 'Tokarczyk'),
-    new PlayerCompetitionRegister(3, 'Jadwiga', 'Storczyk')
+    new PlayerCompetitionRegister(new BasicPlayerArguments(1, 'Jan', 'Kowalski')),
+    new PlayerCompetitionRegister(new BasicPlayerArguments(2, 'Marek', 'Tokarczyk')),
+    new PlayerCompetitionRegister(new BasicPlayerArguments(3, 'Jadwiga', 'Storczyk')),
 ];
 export const MockPlayersCompetitionRegisterPage: PageViewModel<PlayerCompetitionRegister> =
     new PageViewModel<PlayerCompetitionRegister>(3, MockPlayersCompetitionRegister);

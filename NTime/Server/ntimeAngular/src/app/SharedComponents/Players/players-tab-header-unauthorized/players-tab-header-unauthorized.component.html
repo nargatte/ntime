@@ -7,8 +7,8 @@
     </mat-card-content>
     <mat-card-actions>
         <a mat-raised-button color="primary" routerLink="/zawody">Wszystkie zawody</a>
-            <a *ngIf="competition.SignUpEndDate > todayDate" mat-raised-button color="primary" routerLink="/zapisy/{{competitionId}}">
-                Zarejestruj się
-            </a>
+        <a *ngIf="competition.SignUpEndDate > todayDate" mat-raised-button color="primary" routerLink="/zapisy/{{competition.Id}}">
+            Zarejestruj się
+        </a>
     </mat-card-actions>
 </mat-card>

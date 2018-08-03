@@ -1,27 +1,27 @@
-<div class="example-container mat-elevation-z8">
-  <mat-table #table [dataSource]="dataSource">
+<div class="example-container">
+  <table mat-table #table [dataSource]="dataSource" matSort class="mat-elevation-z8" (matSortChange) = "onSortEvent($event)">
 
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
 
     <!--If I wanna make it CDK table I can just change mat to cdk in the lines below-->
-    <ng-container matColumnDef="firstName">
-      <mat-header-cell *matHeaderCellDef> Imię </mat-header-cell>
+    <ng-container matColumnDef="firstName" >
+      <mat-header-cell  *matHeaderCellDef mat-sort-header> Imię </mat-header-cell>
       <mat-cell *matCellDef="let player"> {{player.FirstName}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="lastName">
-      <mat-header-cell *matHeaderCellDef> Nazwisko </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Nazwisko </mat-header-cell>
       <mat-cell *matCellDef="let player"> {{player.LastName}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="city">
-      <mat-header-cell *matHeaderCellDef> Miasto </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Miasto </mat-header-cell>
       <mat-cell *matCellDef="let player"> {{player.City}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="sex">
-      <mat-header-cell *matHeaderCellDef> Płeć </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Płeć </mat-header-cell>
       <mat-cell *matCellDef="let player">
         <ng-container *ngIf="player.IsMale; else elseTemplate">
           Mężczyzna
@@ -33,17 +33,17 @@
     </ng-container>
 
     <ng-container matColumnDef="team">
-      <mat-header-cell *matHeaderCellDef> Klub </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Klub </mat-header-cell>
       <mat-cell *matCellDef="let player"> {{player.Team}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="fullCategory">
-      <mat-header-cell *matHeaderCellDef> Kategoria </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Kategoria </mat-header-cell>
       <mat-cell *matCellDef="let player"> {{player.FullCategory}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="isPaidUp">
-      <mat-header-cell *matHeaderCellDef> Opłacony </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Opłacony </mat-header-cell>
       <mat-cell *matCellDef="let player">
         <ng-container *ngIf="player.IsPaidUp; else elseTemplate">
           Tak
@@ -57,7 +57,7 @@
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;" [ngStyle]="{'background-color':row.IsPaidUp === true ? 'rgb(205, 255, 205)' : 'white' }"></mat-row>
-  </mat-table>
+  </table >
 
   <mat-paginator #paginator [pageSize]="50" [pageSizeOptions]="[20, 50, 100]" [showFirstLastButtons]="true" [(length)]="playersCount"
     (page)="onPageEvent($event)">

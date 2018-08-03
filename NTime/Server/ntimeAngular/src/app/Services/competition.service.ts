@@ -4,7 +4,7 @@ import { HttpClient} from '@angular/common/http';
 
 import { Competition } from '../Models/Competition';
 import { COMPETITIONS_PAGE, MockCompetitions } from '../MockData/mockCompetitions';
-import { MessageService } from '../Services/message.service';
+import { MessageService } from './message.service';
 import { PageViewModel } from '../Models/PageViewModel';
 import { BaseHttpService } from './base-http.service';
 import { AuthenticatedUserService } from './authenticated-user.service';

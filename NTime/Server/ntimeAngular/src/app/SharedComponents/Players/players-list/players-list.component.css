@@ -17,3 +17,10 @@
     text-decoration: none;
     font-weight: 600;
 }
+table {
+  width: 100%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
