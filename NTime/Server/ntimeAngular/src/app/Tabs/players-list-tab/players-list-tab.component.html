@@ -1,6 +1,6 @@
 <ng-container *ngIf="isStaffViewDisplayed; then adminView; else unauthorizedView"></ng-container>
 <ng-template #adminView>
-    <app-players-list-admin></app-players-list-admin>
+    <app-players-list-staff></app-players-list-staff>
 </ng-template>
 <ng-template #unauthorizedView>
     <app-players-list-unauthorized></app-players-list-unauthorized>

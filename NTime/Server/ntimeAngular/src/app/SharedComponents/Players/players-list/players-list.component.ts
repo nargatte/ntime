@@ -52,7 +52,6 @@ export class PlayersListComponent implements AfterViewInit {
   getPlayers(competitionId: number, playerFilterOptions: PlayerFilterOptions, pageSize: number, pageNumber: number): void {
     this.playerService.getPlayerListView(competitionId, playerFilterOptions, pageSize, pageNumber).subscribe(
       (page: PageViewModel<PlayerListView>) => {
-        this.log(page.toString());
         this.log(`Items: ${page.TotalCount}`);
         this.players = page.Items;
         this.playersCount = page.TotalCount;

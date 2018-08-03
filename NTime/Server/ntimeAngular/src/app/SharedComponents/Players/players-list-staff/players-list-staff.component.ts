@@ -7,11 +7,11 @@ import { CompetitionService } from '../../../Services/competition.service';
 import { MessageService } from '../../../Services/message.service';
 
 @Component({
-  selector: 'app-players-list-admin',
-  templateUrl: './players-list-admin.component.html',
-  styleUrls: ['./players-list-admin.component.css']
+  selector: 'app-players-list-staff',
+  templateUrl: './players-list-staff.component.html',
+  styleUrls: ['./players-list-staff.component.css']
 })
-export class PlayersListAdminComponent implements OnInit {
+export class PlayersListStaffComponent implements OnInit {
 
   public competitionId: number;
   public competition: Competition = MockCompetitions[0];

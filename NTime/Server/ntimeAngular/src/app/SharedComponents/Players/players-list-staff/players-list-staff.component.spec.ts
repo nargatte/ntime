@@ -1,11 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PlayersListAdminComponent } from './players-list-admin.component';
+import { PlayersListStaffComponent } from './players-list-staff.component';
 import { AppModule } from '../../../app.module';
 
 describe('PlayersListAdminComponent', () => {
-  let component: PlayersListAdminComponent;
-  let fixture: ComponentFixture<PlayersListAdminComponent>;
+  let component: PlayersListStaffComponent;
+  let fixture: ComponentFixture<PlayersListStaffComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -15,7 +15,7 @@ describe('PlayersListAdminComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PlayersListAdminComponent);
+    fixture = TestBed.createComponent(PlayersListStaffComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

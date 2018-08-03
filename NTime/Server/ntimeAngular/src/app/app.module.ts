@@ -42,37 +42,35 @@ import { FailedActionDialogComponent } from './SharedComponents/Dialogs/failed-a
 import { AuthenticatedUserService } from './Services/authenticated-user.service';
 import { PlayersSelectComponent } from './SharedComponents/Players/players-select/players-select.component';
 import { PlayersListUnauthorizedComponent } from './SharedComponents/Players/players-list-unauthorized/players-list-unauthorized.component';
-import { PlayersListAdminComponent } from './SharedComponents/Players/players-list-staff/players-list-admin.component';
+import { PlayersListStaffComponent } from './SharedComponents/Players/players-list-staff/players-list-staff.component';
 // tslint:disable-next-line:max-line-length
 import { PlayersTabHeaderUnauthorizedComponent } from './SharedComponents/Players/players-tab-header-unauthorized/players-tab-header-unauthorized.component';
-import { PlayersTabHeaderAdminComponent } from './SharedComponents/Players/players-tab-header-staff/players-tab-header-admin.component';
+import { PlayersTabHeaderStaffComponent } from './SharedComponents/Players/players-tab-header-staff/players-tab-header-staff.component';
 import { OrganizerAccountService } from './Services/organizer-account.service';
 
 
 @NgModule({
     imports: [
-        BrowserModule, FormsModule, AppRoutingModule, ReactiveFormsModule,
-        HttpClientModule, MaterialCustomModule, AuthenticationModule
+        AppRoutingModule, AuthenticationModule, BrowserModule, FormsModule,
+        HttpClientModule, MaterialCustomModule, ReactiveFormsModule
     ],
     declarations: [
-        AppComponent, ScoresTabComponent, MyAccountTabComponent,
-        CompetitionTabComponent, OfferTabComponent, ContactTabComponent,
-        AboutUsTabComponent, NavbarComponent, CompetitionsSelectComponent,
-        RegistrationTabComponent, PlayersListTabComponent, NewPlayerFormComponent,
-        PlayersListComponent, PlayerAddedDialogComponent, SingUpEndDateErrorDialogComponent,
-        RegisterConfirmationComponent, UserRegisteredDialogComponent, SuccessfullActionDialogComponent,
-        FailedActionDialogComponent, PlayersSelectComponent, PlayersListUnauthorizedComponent,
-        PlayersListAdminComponent, PlayersTabHeaderUnauthorizedComponent, PlayersTabHeaderAdminComponent
+        AboutUsTabComponent, AppComponent, CompetitionsSelectComponent, ContactTabComponent,
+        CompetitionTabComponent, FailedActionDialogComponent, MyAccountTabComponent, NavbarComponent,
+        NewPlayerFormComponent, OfferTabComponent, PlayerAddedDialogComponent, PlayersListStaffComponent,
+        PlayersListComponent, PlayersListTabComponent, PlayersListUnauthorizedComponent,
+        PlayersSelectComponent, PlayersTabHeaderStaffComponent, PlayersTabHeaderUnauthorizedComponent,
+        RegisterConfirmationComponent, RegistrationTabComponent, ScoresTabComponent,
+        SingUpEndDateErrorDialogComponent, SuccessfullActionDialogComponent, UserRegisteredDialogComponent
     ],
     providers: [
-        CompetitionService, PlayerService,
-        SubcategoryService, DistanceService, MessageService, AuthenticationService,
-         AuthenticatedUserService, OrganizerAccountService, // Custom services
+        AuthenticatedUserService, AuthenticationService, CompetitionService, DistanceService,
+        MessageService, OrganizerAccountService, PlayerService, SubcategoryService,
         { provide: MAT_DATE_LOCALE, useValue: 'pl-pl' },
     ],
     entryComponents: [
-        PlayerAddedDialogComponent, SingUpEndDateErrorDialogComponent, UserRegisteredDialogComponent,
-        SuccessfullActionDialogComponent, FailedActionDialogComponent
+        FailedActionDialogComponent, PlayerAddedDialogComponent, SingUpEndDateErrorDialogComponent,
+        SuccessfullActionDialogComponent, UserRegisteredDialogComponent
     ],
     bootstrap: [AppComponent]
 })

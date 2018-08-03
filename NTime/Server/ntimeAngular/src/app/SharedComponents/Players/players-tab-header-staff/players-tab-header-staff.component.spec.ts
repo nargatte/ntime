@@ -1,12 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PlayersTabHeaderAdminComponent } from './players-tab-header-admin.component';
+import { PlayersTabHeaderStaffComponent } from './players-tab-header-staff.component';
 import { AppModule } from '../../../app.module';
 import { Competition } from '../../../Models/Competition';
 
 describe('PlayersTabHeaderAdminComponent', () => {
-  let component: PlayersTabHeaderAdminComponent;
-  let fixture: ComponentFixture<PlayersTabHeaderAdminComponent>;
+  let component: PlayersTabHeaderStaffComponent;
+  let fixture: ComponentFixture<PlayersTabHeaderStaffComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -16,7 +16,7 @@ describe('PlayersTabHeaderAdminComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PlayersTabHeaderAdminComponent);
+    fixture = TestBed.createComponent(PlayersTabHeaderStaffComponent);
     component = fixture.componentInstance;
     component.competition = new Competition(1, 'Kolumna', new Date(Date.now()), new Date(Date.now()));
     fixture.detectChanges();

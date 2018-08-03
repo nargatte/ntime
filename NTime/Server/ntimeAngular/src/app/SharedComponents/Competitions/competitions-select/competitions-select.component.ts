@@ -56,7 +56,6 @@ export class CompetitionsSelectComponent implements AfterViewInit {
         if ( this.authenticatedUserService.IsAuthenticated === true && this.authenticatedUserService.User.Role === RoleEnum.Organizer ) {
             this.organizerAccountService.getMyInfo().subscribe(
                 (organizer: OrganizerAccount) => {
-                    this.log(organizer.toString());
                     this.messageService.addLog(`Items: ${organizer.CompetitionDtos.length}`);
                     this.competitionsCount = organizer.CompetitionDtos.length;
                     this.competitions = organizer.CompetitionDtos;
@@ -68,7 +67,6 @@ export class CompetitionsSelectComponent implements AfterViewInit {
         } else {
             this.competitionService.getCompetitions(pageSize, pageNumber).subscribe(
                 (page: PageViewModel<Competition>) => {
-                    this.log(page.toString());
                     this.messageService.addLog(`Items: ${page.TotalCount}`);
                     this.competitionsCount = page.TotalCount;
                     this.competitions = page.Items;
