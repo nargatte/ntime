@@ -3,6 +3,7 @@ import { RoleEnum } from '../Models/Enums/RoleEnum';
 import { TestBed } from '@angular/core/testing';
 import { AuthenticatedUserService } from '../Services/authenticated-user.service';
 import { AuthenticatedUser } from '../Models/Authentication/AuthenticatedUser';
+import { MessageService } from '../Services/message.service';
 
 describe('RoleHelperConverter', () => {
   it('should create an instance', () => {
@@ -52,12 +53,12 @@ describe('RoleHelperConverter', () => {
 
 });
 
-describe('IsStaffViewDisplayed', () => {
+describe('RoleHelpers-IsStaffViewDisplayed', () => {
   let authenticatedUserService: AuthenticatedUserService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AuthenticatedUserService]
+      providers: [MessageService, AuthenticatedUserService]
     });
 
     authenticatedUserService = TestBed.get(AuthenticatedUserService);

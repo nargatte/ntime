@@ -3,8 +3,13 @@
     /* flex-direction: initial;
 } */
 
+.mat-sidenav-container {
+    height: 100vh;
+}
+
 router-outlet{
     margin-left: 2em;
+    height: 100%;
 }
 .companyName{
     font-size: 150%;
@@ -33,6 +38,7 @@ button{
   
   .example-spacer {
     flex: 1 1 auto;
+    height: 100vh;
   }
 /* .mat-sidenav {
     text-align: left;

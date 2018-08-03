@@ -4,13 +4,14 @@ import { AuthenticatedUserService } from './authenticated-user.service';
 import { AuthenticatedUser } from '../Models/Authentication/AuthenticatedUser';
 import { MockAuthenticatedUserPlayer } from '../MockData/MockUsers';
 import { RoleEnum } from '../Models/Enums/RoleEnum';
+import { MessageService } from './message.service';
 
 describe('AuthenticatedUserService', () => {
   let authenticatedUserService: AuthenticatedUserService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AuthenticatedUserService]
+      providers: [MessageService, AuthenticatedUserService]
     });
 
     authenticatedUserService = TestBed.get(AuthenticatedUserService);

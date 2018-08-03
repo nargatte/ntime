@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, AfterViewInit, Input } from '@angular/core';
 import { FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { MatPaginator, MatTableDataSource, MatTable, PageEvent, MatDialog } from '@angular/material';
+import { MatPaginator, MatTableDataSource, MatTable, PageEvent, MatDialog, Sort } from '@angular/material';
 import { DataSource } from '@angular/cdk/table';
 import { BehaviorSubject ,  Observable } from 'rxjs';
 
@@ -18,6 +18,8 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { SuccessfullActionDialogComponent } from '../../Dialogs/successfull-action-dialog/successfull-action-dialog.component';
 import { FailedActionDialogComponent } from '../../Dialogs/failed-action-dialog/failed-action-dialog.component';
 import { PlayersWithScores } from '../../../Models/Players/PlayerWithScores';
+import { PlayerSort } from '../../../Models/Enums/PlayerSort';
+import { SortHelper } from '../../../Helpers/SortHelper';
 
 @Component({
   selector: 'app-players-select',
@@ -51,11 +53,12 @@ export class PlayersSelectComponent implements AfterViewInit {
     private dialog: MatDialog,
   ) {
     this.todayDate = new Date(Date.now());
+    this.competitionId = +this.route.snapshot.paramMap.get('id');
   }
 
   ngAfterViewInit() {
-    this.competitionId = +this.route.snapshot.paramMap.get('id');
-    this.getFullPlayers(this.competitionId, this.filter, this.pageSize, this.pageNumber);
+    this.setDefaultSorting();
+    this.getFullFilteredPlayers();
   }
 
   isAllSelected() {
@@ -96,6 +99,10 @@ export class PlayersSelectComponent implements AfterViewInit {
     );
   }
 
+  getFullFilteredPlayers(): void {
+    this.getFullPlayers(this.competitionId, this.filter, this.pageSize, this.pageNumber);
+  }
+
   log(message: string): void {
     this.messageService.addLog(message);
   }
@@ -107,7 +114,24 @@ export class PlayersSelectComponent implements AfterViewInit {
   onPageEvent(event: PageEvent) {
     this.pageSize = event.pageSize;
     this.pageNumber = event.pageIndex;
-    this.getFullPlayers(this.competition.Id, this.filter, this.pageSize, this.pageNumber);
+    this.getFullFilteredPlayers();
+  }
+
+  onSortEvent(event: Sort) {
+    const sortOrder = SortHelper.isSortDescending(event.direction);
+    if (sortOrder === null) {
+      this.setDefaultSorting();
+    } else {
+      this.filter.DescendingSort = sortOrder;
+      this.filter.PlayerSort = SortHelper.getPlayerSort(event.active);
+    }
+
+    this.getFullFilteredPlayers();
+  }
+
+  setDefaultSorting() {
+    this.filter.PlayerSort = PlayerSort.ByLastName;
+    this.filter.DescendingSort = false;
   }
 
 

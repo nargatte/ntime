@@ -1,5 +1,5 @@
 ﻿<div class="example-container mat-elevation-z8">
-    <mat-table #table [dataSource]="dataSource">
+    <mat-table #table [dataSource]="dataSource" [class.isMobile]="isMobile">
 
         <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
@@ -7,34 +7,50 @@
         <!--If I wanna make it CDK table I can just change mat to cdk in the lines below-->
         <ng-container matColumnDef="number">
             <mat-header-cell *matHeaderCellDef> Numer </mat-header-cell>
-            <mat-cell *matCellDef="let competition"> {{competition.Id}} </mat-cell>
+            <mat-cell *matCellDef="let competition">
+                <span class="mobile-label">Numer:</span>
+                {{competition.Id}}
+            </mat-cell>
         </ng-container>
         <!-- Name Column -->
         <ng-container matColumnDef="name">
             <mat-header-cell *matHeaderCellDef> Nazwa </mat-header-cell>
-            <mat-cell *matCellDef="let competition"> {{competition.Name}} </mat-cell>
+            <mat-cell *matCellDef="let competition">
+                <span class="mobile-label">Nazwa:</span>
+                {{competition.Name}}
+            </mat-cell>
         </ng-container>
 
         <!-- City Column -->
         <ng-container matColumnDef="city">
             <mat-header-cell *matHeaderCellDef> Miasto </mat-header-cell>
-            <mat-cell *matCellDef="let competition"> {{competition.City}} </mat-cell>
+            <mat-cell *matCellDef="let competition">
+                <span class="mobile-label">Miasto:</span>
+                {{competition.City}}
+            </mat-cell>
         </ng-container>
 
         <!-- EventDate Column -->
         <ng-container matColumnDef="date">
             <mat-header-cell *matHeaderCellDef> Data zawodów </mat-header-cell>
-            <mat-cell *matCellDef="let competition"> {{competition.EventDate.toLocaleDateString("pl-pl")}} </mat-cell>
+            <mat-cell *matCellDef="let competition">
+                <span class="mobile-label">Data zawodów:</span>
+                {{competition.EventDate.toLocaleDateString("pl-pl")}}
+            </mat-cell>
         </ng-container>
         <!-- SignUpEndDate Column -->
         <ng-container matColumnDef="signUpEndDate">
             <mat-header-cell *matHeaderCellDef> Data końca zapisów </mat-header-cell>
-            <mat-cell *matCellDef="let competition"> {{competition.SignUpEndDate.toLocaleDateString("pl-pl")}} </mat-cell>
+            <mat-cell *matCellDef="let competition">
+                <span class="mobile-label">Data końca zapisów:</span>
+                {{competition.SignUpEndDate.toLocaleDateString("pl-pl")}}
+            </mat-cell>
         </ng-container>
         <!-- Link Column -->
         <ng-container matColumnDef="link">
             <mat-header-cell *matHeaderCellDef> Link do strony </mat-header-cell>
             <mat-cell *matCellDef="let competition">
+                    <span class="mobile-label">Link:</span>
                 <a target="_blank" href="http://{{competition.Link}}">{{competition.Link}}</a>
             </mat-cell>
         </ng-container>
@@ -42,6 +58,7 @@
         <ng-container matColumnDef="actions">
             <mat-header-cell *matHeaderCellDef> </mat-header-cell>
             <mat-cell *matCellDef="let competition">
+                    <!-- <span class="mobile-label">Imię:</span> -->
                 <a mat-raised-button color="primary" routerLink="/lista-zawodnikow/{{competition.Id}}">
                     Lista zawodników
                 </a>

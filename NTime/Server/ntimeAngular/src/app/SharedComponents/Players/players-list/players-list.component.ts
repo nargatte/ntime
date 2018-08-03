@@ -34,7 +34,6 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
   @ViewChild(MatTable) table: MatTable<PlayerListView>;
   displayedColumns = ['firstName', 'lastName', 'city', 'team', 'fullCategory', 'isPaidUp'];
   dataSource: MatTableDataSource<PlayerListView>;
-  @ViewChild(MatSort) sort: MatSort;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   public pageNumber = 0;
@@ -45,26 +44,21 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
   constructor(
     private playerService: PlayerService,
     private messageService: MessageService,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute
+  ) {
     this.todayDate = new Date(Date.now());
     this.competitionId = +this.route.snapshot.paramMap.get('id');
   }
 
   ngOnInit(): void {
-    // this.dataSource.sort = this.sort;
   }
 
   ngAfterViewInit() {
     this.setDefaultSorting();
     this.getFilteredPlayers();
-    // this.setDataSource();
   }
 
   getPlayers(competitionId: number, playerFilterOptions: PlayerFilterOptions, pageSize: number, pageNumber: number): void {
-    // this.players = MockPlayersListView;
-    // this.playersCount = 3;
-    // this.dataSource = new MatTableDataSource<PlayerListView>(this.players);
-    // return;
     this.playerService.getPlayerListView(competitionId, playerFilterOptions, pageSize, pageNumber).subscribe(
       (page: PageViewModel<PlayerListView>) => {
         this.log(`Items: ${page.TotalCount}`);
@@ -87,8 +81,7 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
 
   setDataSource() {
     this.dataSource = new MatTableDataSource<PlayerListView>(this.players);
-    // this.dataSource.sort = this.sort;
-    this.table.renderRows();
+    // this.table.renderRows();
   }
 
   onPageEvent(event: PageEvent) {
@@ -107,9 +100,6 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
     }
 
     this.getFilteredPlayers();
-
-    // this.dataSource.sort.sortChange.forEach(p=> p.direction)
-    // this.getPlayers(this.competition.Id, this.filter, event.pageSize, event.pageIndex);
   }
 
   setDefaultSorting() {
