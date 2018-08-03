@@ -15,6 +15,8 @@ import { Competition } from '../../../Models/Competition';
 import { PlayerFilterOptions } from '../../../Models/Players/PlayerFilterOptions';
 import { ActivatedRoute } from '@angular/router';
 import { MockPlayersListView } from '../../../MockData/MockPlayers';
+import { PlayerSort } from '../../../Models/Enums/PlayerSort';
+import { SortHelper } from '../../../Helpers/SortHelper';
 
 @Component({
   selector: 'app-players-list',
@@ -53,7 +55,8 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit() {
-    this.getPlayers(this.competitionId, this.filter, this.pageSize, this.pageNumber);
+    this.setDefaultSorting();
+    this.getFilteredPlayers();
     // this.setDataSource();
   }
 
@@ -74,24 +77,43 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
     );
   }
 
+  getFilteredPlayers(): void {
+    this.getPlayers(this.competitionId, this.filter, this.pageSize, this.pageNumber);
+  }
+
   log(message: string): void {
     this.messageService.addLog(message);
   }
 
   setDataSource() {
     this.dataSource = new MatTableDataSource<PlayerListView>(this.players);
-    this.dataSource.sort = this.sort;
-    // this.table.renderRows();
+    // this.dataSource.sort = this.sort;
+    this.table.renderRows();
   }
 
   onPageEvent(event: PageEvent) {
-    this.getPlayers(this.competition.Id, this.filter, event.pageSize, event.pageIndex);
+    this.pageSize = event.pageSize;
+    this.pageNumber = event.pageIndex;
+    this.getFilteredPlayers();
   }
 
   onSortEvent(event: Sort) {
-    console.log(event.active);
-    console.log(event.direction);
+    const sortOrder = SortHelper.isSortDescending(event.direction);
+    if (sortOrder === null) {
+      this.setDefaultSorting();
+    } else {
+      this.filter.DescendingSort = sortOrder;
+      this.filter.PlayerSort = SortHelper.getPlayerSort(event.active);
+    }
+
+    this.getFilteredPlayers();
+
     // this.dataSource.sort.sortChange.forEach(p=> p.direction)
     // this.getPlayers(this.competition.Id, this.filter, event.pageSize, event.pageIndex);
+  }
+
+  setDefaultSorting() {
+    this.filter.PlayerSort = PlayerSort.ByLastName;
+    this.filter.DescendingSort = false;
   }
 }

@@ -16,12 +16,12 @@
     </ng-container>
 
     <ng-container matColumnDef="city">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Miasto </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Miasto </mat-header-cell>
       <mat-cell *matCellDef="let player"> {{player.City}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="sex">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Płeć </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Płeć </mat-header-cell>
       <mat-cell *matCellDef="let player">
         <ng-container *ngIf="player.IsMale; else elseTemplate">
           Mężczyzna
@@ -43,7 +43,7 @@
     </ng-container>
 
     <ng-container matColumnDef="isPaidUp">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Opłacony </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Opłacony </mat-header-cell>
       <mat-cell *matCellDef="let player">
         <ng-container *ngIf="player.IsPaidUp; else elseTemplate">
           Tak
