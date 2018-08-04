@@ -6,6 +6,7 @@ namespace BaseCore.PlayerFilter
     {
         public PlayerSort PlayerSort { get; set; }
         public bool DescendingSort { get; set; }
+        public int ExtraDataSortIndex { get; set; }
         public string Query { get; set; }
         public bool? Men { get; set; }
         public bool? WithoutStartTime { get; set; }

@@ -21,6 +21,8 @@ namespace BaseCore.PlayerFilter
         [Description("Data urodzenia")]
         ByBirthDate,
         [Description("Wyniki Open")]
-        ByRank
+        ByRank,
+        [Description("ByExtraData")]
+        ByExtraData
     }
 }
