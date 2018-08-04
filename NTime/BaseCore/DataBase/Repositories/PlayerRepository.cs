@@ -403,7 +403,7 @@ namespace BaseCore.DataBase
 
         public async Task<Tuple<int, int>> ImportPlayersAsync(string fileName)
         {
-            CsvImporter<PlayerRecord, PlayerRecordMap> csvImporter = new CsvImporter<PlayerRecord, PlayerRecordMap>(fileName);
+            CsvImporter<PlayerRecord, PlayerRecordMap> csvImporter = new CsvImporter<PlayerRecord, PlayerRecordMap>(fileName, ';');
 
             PlayerRecord[] playerRecords = await csvImporter.GetAllRecordsAsync();
 
