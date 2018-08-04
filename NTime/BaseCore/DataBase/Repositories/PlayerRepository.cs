@@ -5,6 +5,7 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using BaseCore.Csv;
 using BaseCore.Models;
@@ -47,6 +48,14 @@ namespace BaseCore.DataBase
                 totalItemsNumber = await GetFilteredQuery(ctx.Players.Where(i => i.CompetitionId == Competition.Id),
                     filterOptions).CountAsync();
             });
+
+            if(filterOptions.PlayerSort == PlayerSort.ByExtraData)
+                if (filterOptions.DescendingSort)
+                    players = players.OrderBy(p =>
+                        p.ExtraData.Split(new[] {';'}, StringSplitOptions.None)[filterOptions.ExtraDataSortIndex]).ToArray();
+                else
+                    players = players.OrderBy(p =>
+                        p.ExtraData.Split(new[] { ';' }, StringSplitOptions.None)[filterOptions.ExtraDataSortIndex]).ToArray();
 
             return new Tuple<Player[], int>(players, totalItemsNumber);
         }
@@ -174,6 +183,7 @@ namespace BaseCore.DataBase
                 case PlayerSort.ByFullCategory:
                     return p => p.FullCategory;
 
+                case PlayerSort.ByExtraData:
                 case PlayerSort.ByFirstName:
                     return p => p.FirstName;
 
