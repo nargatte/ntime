@@ -1,6 +1,6 @@
 <div class="example-container mat-elevation-z8">
-  <mat-table #table [dataSource]="dataSource" [class.isMobile]="isMobile" matSort (matSortChange)="onSortEvent($event)">
-    
+  <mat-table #table [dataSource]="dataSource"  matSort (matSortChange)="onSortEvent($event)">
+    <!-- [class.isMobile]="isMobile" -->
     <ng-container matColumnDef="firstName">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Imię </mat-header-cell>
       <mat-cell *matCellDef="let player">

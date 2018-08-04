@@ -6,7 +6,7 @@
 </mat-card>
 
 <div class="example-container mat-elevation-z8">
-  <mat-table #table [dataSource]="dataSource" [class.isMobile]="isMobile" matSort (matSortChange)="onSortEvent($event)">
+  <mat-table #table [dataSource]="dataSource" matSort (matSortChange)="onSortEvent($event)">
 
     <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
