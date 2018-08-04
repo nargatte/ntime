@@ -22,7 +22,7 @@ namespace BaseCoreTests
             var pr = new PlayerRepository(cp, new Competition(){Id = 1});
 
             var ps = await pr.GetAllByFilterAsync(
-                new PlayerFilterOptions() {Query = "", ExtraDataSortIndex = 0, PlayerSort = PlayerSort.ByExtraData, DescendingSort = true}, 0,
+                new PlayerFilterOptions() {Query = "", ExtraDataSortIndex = 1, PlayerSort = PlayerSort.ByExtraData, DescendingSort = true}, 0,
                 1000);
             ;
         }

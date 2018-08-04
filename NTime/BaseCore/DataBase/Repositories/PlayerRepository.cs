@@ -40,22 +40,40 @@ namespace BaseCore.DataBase
         {
             Player[] players = null;
             int totalItemsNumber = 0;
-            await ContextProvider.DoAsync(async ctx =>
-            {
-                players = await GetIncludeQuery(GetFilteredQuery(ctx.Players.Where(i => i.CompetitionId == Competition.Id),
-                    filterOptions).Skip(pageNumber * numberItemsOnPage).Take(numberItemsOnPage)).AsNoTracking().ToArrayAsync();
-
-                totalItemsNumber = await GetFilteredQuery(ctx.Players.Where(i => i.CompetitionId == Competition.Id),
-                    filterOptions).CountAsync();
-            });
 
             if(filterOptions.PlayerSort == PlayerSort.ByExtraData)
+            {
+                filterOptions.PlayerSort = PlayerSort.ByFirstName;
+                pageNumber = 0;
+                numberItemsOnPage = int.MaxValue;
+
+                await ContextProvider.DoAsync(async ctx =>
+                {
+                    players = await GetIncludeQuery(GetFilteredQuery(ctx.Players.Where(i => i.CompetitionId == Competition.Id),
+                        filterOptions).Skip(pageNumber * numberItemsOnPage).Take(numberItemsOnPage)).AsNoTracking().ToArrayAsync();
+
+                    totalItemsNumber = await GetFilteredQuery(ctx.Players.Where(i => i.CompetitionId == Competition.Id),
+                        filterOptions).CountAsync();
+                });
+
                 if (filterOptions.DescendingSort)
-                    players = players.OrderBy(p =>
-                        p.ExtraData.Split(new[] {';'}, StringSplitOptions.None)[filterOptions.ExtraDataSortIndex]).ToArray();
+                    players = players.OrderByDescending(p =>
+                        p.ExtraData.Split(new[] { ';' }, StringSplitOptions.None)[filterOptions.ExtraDataSortIndex]).Skip(pageNumber * numberItemsOnPage).Take(numberItemsOnPage).ToArray();
                 else
                     players = players.OrderBy(p =>
-                        p.ExtraData.Split(new[] { ';' }, StringSplitOptions.None)[filterOptions.ExtraDataSortIndex]).ToArray();
+                        p.ExtraData.Split(new[] { ';' }, StringSplitOptions.None)[filterOptions.ExtraDataSortIndex]).Skip(pageNumber * numberItemsOnPage).Take(numberItemsOnPage).ToArray();
+            }
+            else
+            {
+                await ContextProvider.DoAsync(async ctx =>
+                {
+                    players = await GetIncludeQuery(GetFilteredQuery(ctx.Players.Where(i => i.CompetitionId == Competition.Id),
+                        filterOptions).Skip(pageNumber * numberItemsOnPage).Take(numberItemsOnPage)).AsNoTracking().ToArrayAsync();
+
+                    totalItemsNumber = await GetFilteredQuery(ctx.Players.Where(i => i.CompetitionId == Competition.Id),
+                        filterOptions).CountAsync();
+                });
+            }
 
             return new Tuple<Player[], int>(players, totalItemsNumber);
         }
