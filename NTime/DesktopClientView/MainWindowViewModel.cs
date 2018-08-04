@@ -11,7 +11,7 @@ using ViewCore.Factories;
 using ViewCore.Factories.AgeCategories;
 using ViewCore.Factories.Competitions;
 using ViewCore.Factories.Distances;
-using ViewCore.Factories.ExtraPlayerInfos;
+using ViewCore.Factories.Subcategories;
 using ViewCore.Factories.PlayerAccounts;
 using ViewCore.Factories.Players;
 
@@ -37,7 +37,7 @@ namespace DesktopClientView
 
             var playerManagerFactory = new PlayerManagerFactoryHttp();
             var distanceManagerFactory = new DistanceManagerFactoryHttp();
-            var extraPlayerInfoManagerFactory = new ExtraPlayerInfoManagerFactoryHttp();
+            var subcategoryManagerFactory = new SubcategoryManagerFactoryHttp();
             var ageCategoryManagerFactory = new AgeCategoryManagerFactoryHttp();
             var competitionManagerFactory = new CompetitionManagerFactoryHttp();
             var playerAccountManagerFactory = new PlayerAccountManagerFactoryHttp();
@@ -50,7 +50,7 @@ namespace DesktopClientView
             //var playerAccountManagerFactory = new PlayerAccountManagerFactoryHttp();
 
             dependencyContainer = new DependencyContainer(ageCategoryManagerFactory, competitionManagerFactory, distanceManagerFactory,
-                                                            extraPlayerInfoManagerFactory, playerManagerFactory, playerAccountManagerFactory,
+                                                            subcategoryManagerFactory, playerManagerFactory, playerAccountManagerFactory,
                                                             user, connectionInfo);
         }
 

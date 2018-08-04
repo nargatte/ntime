@@ -14,10 +14,10 @@ namespace ViewCore.Factories.Players
     public class PlayerManagerFactoryHttp : IPlayerManagerFactory
     {
         public IPlayerManager CreateInstance(IEditableCompetition currentCompetition, ObservableCollection<EditableDistance> definedDistances,
-                                                ObservableCollection<EditableExtraPlayerInfo> definedExtraPlayerInfos, RangeInfo recordsRangeInfo = null,
+                                                ObservableCollection<EditableSubcategory> definedSubcategories, RangeInfo recordsRangeInfo = null,
                                                 AccountInfo accountInfo = null, ConnectionInfo connectionInfo = null)
         {
-            return new PlayerManagerHttp(currentCompetition, definedDistances, definedExtraPlayerInfos, recordsRangeInfo, accountInfo, connectionInfo);
+            return new PlayerManagerHttp(currentCompetition, definedDistances, definedSubcategories, recordsRangeInfo, accountInfo, connectionInfo);
         }
     }
 }

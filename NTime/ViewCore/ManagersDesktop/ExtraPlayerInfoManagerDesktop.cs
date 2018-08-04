@@ -10,33 +10,33 @@ using ViewCore.ManagersInterfaces;
 
 namespace ViewCore.ManagersDesktop
 {
-    public class ExtraPlayerInfoManagerDesktop : CompetitionItemBase, IExtraPlayerInfoManager
+    public class SubcategoryManagerDesktop : CompetitionItemBase, ISubcategoryManager
     {
-        public ObservableCollection<EditableExtraPlayerInfo> DefinedExtraPlayerInfo { get; set; } = new ObservableCollection<EditableExtraPlayerInfo>();
+        public ObservableCollection<EditableSubcategory> DefinedSubcategory { get; set; } = new ObservableCollection<EditableSubcategory>();
         private SubcategoryRepository _subcategoryRepository;
-        public ExtraPlayerInfoManagerDesktop(IEditableCompetition currentComptetition) : base(currentComptetition)
+        public SubcategoryManagerDesktop(IEditableCompetition currentComptetition) : base(currentComptetition)
         {
             //_playerRepository
             _subcategoryRepository = new SubcategoryRepository(new ContextProvider(), _currentCompetition.DbEntity);
         }
 
 
-        public async Task<ObservableCollection<EditableExtraPlayerInfo>> DownloadExtraPlayerInfoAsync()
+        public async Task<ObservableCollection<EditableSubcategory>> DownloadSubcategoryAsync()
         {
-            var dbExtraPlayerInfos = await _subcategoryRepository.GetAllAsync();
-            DefinedExtraPlayerInfo.Clear();
-            foreach (var dbExtraPlayerInfo in dbExtraPlayerInfos)
+            var dbSubcategories = await _subcategoryRepository.GetAllAsync();
+            DefinedSubcategory.Clear();
+            foreach (var dbSubcategory in dbSubcategories)
             {
-                DefinedExtraPlayerInfo.Add(new EditableExtraPlayerInfo(_currentCompetition)
+                DefinedSubcategory.Add(new EditableSubcategory(_currentCompetition)
                 {
-                    DbEntity = dbExtraPlayerInfo
+                    DbEntity = dbSubcategory
                 });
             }
-            DefinedExtraPlayerInfo.Add(new EditableExtraPlayerInfo(_currentCompetition)
+            DefinedSubcategory.Add(new EditableSubcategory(_currentCompetition)
             {
                 DbEntity = new Subcategory()
             });
-            return DefinedExtraPlayerInfo;
+            return DefinedSubcategory;
         }
     }
 }

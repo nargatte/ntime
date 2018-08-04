@@ -17,18 +17,18 @@ namespace AdminView.Categories
         public CategoriesViewModel(IEditableCompetition currentCompetition) : base(currentCompetition)
         {
             NewCategory = new EditableAgeCategory(currentCompetition);
-            NewExtraPlayerInfo = new EditableExtraPlayerInfo(_currentCompetition);
+            NewSubcategory = new EditableSubcategory(_currentCompetition);
             TabTitle = "Kategorie";
             AddCategoryCmd = new RelayCommand(OnAddCategoryAsync);
             ViewLoadedCmd = new RelayCommand(OnViewLoadedAsync);
-            AddExtraPlayerInfoCmd = new RelayCommand(OnAddExtraPlayerInfoAsync);
+            AddSubcategoryCmd = new RelayCommand(OnAddSubcategoryAsync);
         }
 
 
         private async void OnViewLoadedAsync()
         {
             await DownloadCategoriesFromDatabase();
-            await DownloadExtraPlayerInfosFromDatabase();
+            await DownloadSubcategoriesFromDatabase();
         }
 
 
@@ -90,54 +90,54 @@ namespace AdminView.Categories
 
         #region Subcategory
 
-        private async Task DownloadExtraPlayerInfosFromDatabase(bool clearDisplayedCExtraPlayerInfosBefore = true)
+        private async Task DownloadSubcategoriesFromDatabase(bool clearDisplayedSubcategoriesBefore = true)
         {
-            if (clearDisplayedCExtraPlayerInfosBefore)
-                ExtraPlayerInfos.Clear();
-            var dbExtraPlayerInfos = await SubcategoryRepository.GetAllAsync();
-            foreach (var dbExtraPlayerInfo in dbExtraPlayerInfos)
+            if (clearDisplayedSubcategoriesBefore)
+                Subcategories.Clear();
+            var dbSubcategories = await SubcategoryRepository.GetAllAsync();
+            foreach (var dbSubcategory in dbSubcategories)
             {
-                var extraPlayerInfoToAdd = new EditableExtraPlayerInfo(_currentCompetition)
+                var subcategoryToAdd = new EditableSubcategory(_currentCompetition)
                 {
-                    DbEntity = dbExtraPlayerInfo
+                    DbEntity = dbSubcategory
                 };
-                extraPlayerInfoToAdd.UpdateRequested += ExtraPlayerInfo_UpdateRequestedAsync;
-                AddExtraPlayerInfoToGUI(extraPlayerInfoToAdd);
+                subcategoryToAdd.UpdateRequested += Subcategory_UpdateRequestedAsync;
+                AddSubcategoryToGUI(subcategoryToAdd);
             }
         }
 
 
-        private void AddExtraPlayerInfoToGUI(EditableExtraPlayerInfo extraPlayerInfoToAdd)
+        private void AddSubcategoryToGUI(EditableSubcategory subcategoryToAdd)
         {
-            extraPlayerInfoToAdd.DeleteRequested += ExtraPlayerInfo_DeleteRequestedAsync;
-            ExtraPlayerInfos.Add(extraPlayerInfoToAdd);
+            subcategoryToAdd.DeleteRequested += Subcategory_DeleteRequestedAsync;
+            Subcategories.Add(subcategoryToAdd);
         }
 
-        private async void OnAddExtraPlayerInfoAsync()
+        private async void OnAddSubcategoryAsync()
         {
-            if (String.IsNullOrWhiteSpace(NewExtraPlayerInfo.Name) || String.IsNullOrWhiteSpace(NewExtraPlayerInfo.ShortName))
+            if (String.IsNullOrWhiteSpace(NewSubcategory.Name) || String.IsNullOrWhiteSpace(NewSubcategory.ShortName))
             {
                 MessageBox.Show("Dodatkowe informacje dla zawodnika muszą posiadać zarówno pełną nazwę jak i skróconą");
                 return;
             }
-            var extraPlayerInfoToAdd = NewExtraPlayerInfo;
-            extraPlayerInfoToAdd.UpdateRequested += ExtraPlayerInfo_UpdateRequestedAsync;
-            AddExtraPlayerInfoToGUI(extraPlayerInfoToAdd);
-            await SubcategoryRepository.AddAsync(extraPlayerInfoToAdd.DbEntity);
-            NewExtraPlayerInfo = new EditableExtraPlayerInfo(_currentCompetition);
+            var subcategoryToAdd = NewSubcategory;
+            subcategoryToAdd.UpdateRequested += Subcategory_UpdateRequestedAsync;
+            AddSubcategoryToGUI(subcategoryToAdd);
+            await SubcategoryRepository.AddAsync(subcategoryToAdd.DbEntity);
+            NewSubcategory = new EditableSubcategory(_currentCompetition);
         }
 
-        private async void ExtraPlayerInfo_UpdateRequestedAsync(object sender, EventArgs e)
+        private async void Subcategory_UpdateRequestedAsync(object sender, EventArgs e)
         {
-            var extraPlayerInfoToUpdate = sender as EditableExtraPlayerInfo;
-            await SubcategoryRepository.UpdateAsync(extraPlayerInfoToUpdate.DbEntity);
+            var subcategoryToUpdate = sender as EditableSubcategory;
+            await SubcategoryRepository.UpdateAsync(subcategoryToUpdate.DbEntity);
         }
 
-        private async void ExtraPlayerInfo_DeleteRequestedAsync(object sender, EventArgs e)
+        private async void Subcategory_DeleteRequestedAsync(object sender, EventArgs e)
         {
-            var extraPlayerInfoToDelete = sender as EditableExtraPlayerInfo;
-            ExtraPlayerInfos.Remove(extraPlayerInfoToDelete);
-            await SubcategoryRepository.RemoveAsync(extraPlayerInfoToDelete.DbEntity);
+            var subcategoryToDelete = sender as EditableSubcategory;
+            Subcategories.Remove(subcategoryToDelete);
+            await SubcategoryRepository.RemoveAsync(subcategoryToDelete.DbEntity);
         }
         #endregion
 
@@ -163,24 +163,24 @@ namespace AdminView.Categories
         }
 
 
-        private EditableExtraPlayerInfo _newExtraPlayerInfo;
-        public EditableExtraPlayerInfo NewExtraPlayerInfo
+        private EditableSubcategory _newSubcategory;
+        public EditableSubcategory NewSubcategory
         {
-            get { return _newExtraPlayerInfo; }
+            get { return _newSubcategory; }
             set
             {
-                SetProperty(ref _newExtraPlayerInfo, value);
-                NewExtraPlayerInfo.DbEntity.Name = _newExtraPlayerInfo.Name;
-                NewExtraPlayerInfo.DbEntity.ShortName = _newExtraPlayerInfo.ShortName;
+                SetProperty(ref _newSubcategory, value);
+                NewSubcategory.DbEntity.Name = _newSubcategory.Name;
+                NewSubcategory.DbEntity.ShortName = _newSubcategory.ShortName;
             }
         }
 
 
-        private ObservableCollection<EditableExtraPlayerInfo> _extraPlayerInfos = new ObservableCollection<EditableExtraPlayerInfo>();
-        public ObservableCollection<EditableExtraPlayerInfo> ExtraPlayerInfos
+        private ObservableCollection<EditableSubcategory> _subcategories = new ObservableCollection<EditableSubcategory>();
+        public ObservableCollection<EditableSubcategory> Subcategories
         {
-            get { return _extraPlayerInfos; }
-            set { SetProperty(ref _extraPlayerInfos, value); }
+            get { return _subcategories; }
+            set { SetProperty(ref _subcategories, value); }
         }
         #endregion
 
@@ -189,7 +189,7 @@ namespace AdminView.Categories
         public RelayCommand ViewLoadedCmd { get; set; }
         public RelayCommand AddCategoryCmd { get; private set; }
         public RelayCommand DeleteCategoryCmd { get; private set; }
-        public RelayCommand AddExtraPlayerInfoCmd { get; set; }
-        public RelayCommand DeleteExtraPlayerInfoCmd { get; set; }
+        public RelayCommand AddSubcategoryCmd { get; set; }
+        public RelayCommand DeleteSubcategoryCmd { get; set; }
     }
 }

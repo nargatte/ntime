@@ -9,13 +9,13 @@ using ViewCore.Entities;
 using System.Collections.ObjectModel;
 using ViewCore.ManagersDesktop;
 
-namespace ViewCore.Factories.ExtraPlayerInfos
+namespace ViewCore.Factories.Subcategories
 {
-    public class ExtraPlayerInfoManagerFactoryHttp : IExtraPlayerInfoManagerFactory
+    public class SubcategoryManagerFactoryHttp : ISubcategoryManagerFactory
     {
-        public IExtraPlayerInfoManager CreateInstance(IEditableCompetition currentCompetition, AccountInfo accountInfo = null, ConnectionInfo connectionInfo = null)
+        public ISubcategoryManager CreateInstance(IEditableCompetition currentCompetition, AccountInfo accountInfo = null, ConnectionInfo connectionInfo = null)
         {
-            return new ExtraPlayerInfoManagerHttp(currentCompetition, accountInfo, connectionInfo);
+            return new SubcategoryManagerHttp(currentCompetition, accountInfo, connectionInfo);
         }
     }
 }

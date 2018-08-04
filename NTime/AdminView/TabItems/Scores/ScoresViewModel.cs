@@ -12,7 +12,7 @@ using BaseCore.PlayerFilter;
 using System.Windows;
 using ViewCore.Factories.AgeCategories;
 using ViewCore.Factories.Distances;
-using ViewCore.Factories.ExtraPlayerInfos;
+using ViewCore.Factories.Subcategories;
 using ViewCore.Factories.Players;
 using ViewCore.Factories;
 

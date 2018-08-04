@@ -4,10 +4,10 @@ using ViewCore.Entities;
 
 namespace ViewCore.ManagersInterfaces
 {
-    public interface IExtraPlayerInfoManager
+    public interface ISubcategoryManager
     {
-        ObservableCollection<EditableExtraPlayerInfo> DefinedExtraPlayerInfo { get; set; }
+        ObservableCollection<EditableSubcategory> DefinedSubcategory { get; set; }
 
-        Task<ObservableCollection<EditableExtraPlayerInfo>> DownloadExtraPlayerInfoAsync();
+        Task<ObservableCollection<EditableSubcategory>> DownloadSubcategoryAsync();
     }
 }

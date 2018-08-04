@@ -12,7 +12,7 @@ using ViewCore.Factories;
 using System.Collections.ObjectModel;
 using ViewCore.Factories.AgeCategories;
 using ViewCore.Factories.Distances;
-using ViewCore.Factories.ExtraPlayerInfos;
+using ViewCore.Factories.Subcategories;
 using ViewCore.Factories.Players;
 using ViewCore.ManagersHttp;
 using ViewCore.ManagersInterfaces;
@@ -77,7 +77,7 @@ namespace DesktopClientView.TabItems.Registration
 
                 await DownloadPlayersInfo(CompetitionData.SelectedCompetition);
                 _playersManager = _dependencyContainer.PlayerManagerFactory.CreateInstance(CompetitionData.SelectedCompetition,
-                    DefinedDistances, DefinedExtraPlayerInfo, null, _dependencyContainer.User, _dependencyContainer.ConnectionInfo);
+                    DefinedDistances, DefinedSubcategory, null, _dependencyContainer.User, _dependencyContainer.ConnectionInfo);
                 DisplayPlayerData();
             }
             else
@@ -94,7 +94,7 @@ namespace DesktopClientView.TabItems.Registration
         private void DisplayPlayerData()
         {
             NewPlayer.DefinedDistances = DefinedDistances;
-            NewPlayer.DefinedExtraPlayerInfo = DefinedExtraPlayerInfo;
+            NewPlayer.DefinedSubcategory = DefinedSubcategory;
         }
 
         private void ClearNewPlayer()
@@ -102,9 +102,9 @@ namespace DesktopClientView.TabItems.Registration
             NewPlayer = new EditablePlayer(new EditableCompetition())
             {
                 Distance = new EditableDistance(new EditableCompetition()),
-                ExtraPlayerInfo = new EditableExtraPlayerInfo(new EditableCompetition()),
+                Subcategories = new EditableSubcategory(new EditableCompetition()),
                 DefinedDistances = new ObservableCollection<EditableDistance>(),
-                DefinedExtraPlayerInfo = new ObservableCollection<EditableExtraPlayerInfo>()
+                DefinedSubcategory = new ObservableCollection<EditableSubcategory>()
             };
         }
 

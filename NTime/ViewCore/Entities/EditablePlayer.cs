@@ -26,15 +26,15 @@ namespace ViewCore.Entities
             if (BirthDate == null || BirthDate < new DateTime(2000, 1, 1))
                 BirthDate = DateTime.Today;
             DefinedDistances = new ObservableCollection<EditableDistance>();
-            DefinedExtraPlayerInfo = new ObservableCollection<EditableExtraPlayerInfo>();
+            DefinedSubcategory = new ObservableCollection<EditableSubcategory>();
         }
 
         public EditablePlayer(IEditableCompetition currentComptetition, ICollection<EditableDistance> distances,
-            ICollection<EditableExtraPlayerInfo> extraPlayerInfos, Player dbPlayer) : this(currentComptetition)
+            ICollection<EditableSubcategory> subcategories, Player dbPlayer) : this(currentComptetition)
         {
             DbEntity = dbPlayer;
             DefinedDistances = new ObservableCollection<EditableDistance>(distances);
-            DefinedExtraPlayerInfo = new ObservableCollection<EditableExtraPlayerInfo>(extraPlayerInfos);
+            DefinedSubcategory = new ObservableCollection<EditableSubcategory>(subcategories);
         }
 
         public int StartNumber
@@ -98,11 +98,11 @@ namespace ViewCore.Entities
             }
         }
 
-        public EditableExtraPlayerInfo ExtraPlayerInfo
+        public EditableSubcategory Subcategories
         {
             get
             {
-                var temp = DefinedExtraPlayerInfo.FirstOrDefault(info => Equals(info.DbEntity, DbEntity.Subcategory));
+                var temp = DefinedSubcategory.FirstOrDefault(info => Equals(info.DbEntity, DbEntity.Subcategory));
                 return temp;
             }
             set
@@ -232,11 +232,11 @@ namespace ViewCore.Entities
         }
 
 
-        private ObservableCollection<EditableExtraPlayerInfo> _definedExtraPlayerInfo;
-        public ObservableCollection<EditableExtraPlayerInfo> DefinedExtraPlayerInfo
+        private ObservableCollection<EditableSubcategory> _definedSubcategory;
+        public ObservableCollection<EditableSubcategory> DefinedSubcategory
         {
-            get { return _definedExtraPlayerInfo; }
-            set { SetProperty(ref _definedExtraPlayerInfo, value); }
+            get { return _definedSubcategory; }
+            set { SetProperty(ref _definedSubcategory, value); }
         }
 
         public object Clone()

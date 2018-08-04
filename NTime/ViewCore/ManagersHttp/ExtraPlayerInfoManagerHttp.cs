@@ -11,37 +11,37 @@ using ViewCore.ManagersInterfaces;
 
 namespace ViewCore.ManagersHttp
 {
-    public class ExtraPlayerInfoManagerHttp : ManagerHttp, IExtraPlayerInfoManager
+    public class SubcategoryManagerHttp : ManagerHttp, ISubcategoryManager
     {
         private IEditableCompetition _currentCompetition;
-        private HttpExtraPlayerInfoClient _client;
-        public ObservableCollection<EditableExtraPlayerInfo> DefinedExtraPlayerInfo { get; set; } = new ObservableCollection<EditableExtraPlayerInfo>();
+        private SubcategoryClient _client;
+        public ObservableCollection<EditableSubcategory> DefinedSubcategory { get; set; } = new ObservableCollection<EditableSubcategory>();
 
-        public ExtraPlayerInfoManagerHttp(IEditableCompetition currentCompetition, AccountInfo accountInfo, ConnectionInfo connectionInfo) : base(accountInfo, connectionInfo)
+        public SubcategoryManagerHttp(IEditableCompetition currentCompetition, AccountInfo accountInfo, ConnectionInfo connectionInfo) : base(accountInfo, connectionInfo)
         {
             _currentCompetition = currentCompetition;
-            _client = new HttpExtraPlayerInfoClient(accountInfo, connectionInfo, "Subcategories");
+            _client = new SubcategoryClient(accountInfo, connectionInfo, "Subcategories");
         }
 
-        public async Task<ObservableCollection<EditableExtraPlayerInfo>> DownloadExtraPlayerInfoAsync()
+        public async Task<ObservableCollection<EditableSubcategory>> DownloadSubcategoryAsync()
         {
             await TryCallApi(async () =>
             {
-                var dtoExtraPlayerInfos = await _client.GetAllFromCompetitionAsync(_currentCompetition.DbEntity.Id);
-                DefinedExtraPlayerInfo.Clear();
-                foreach (var dtoExtraPlayerInfo in dtoExtraPlayerInfos)
+                var dtoSubcategories = await _client.GetAllFromCompetitionAsync(_currentCompetition.DbEntity.Id);
+                DefinedSubcategory.Clear();
+                foreach (var dtoSubcategory in dtoSubcategories)
                 {
-                    DefinedExtraPlayerInfo.Add(new EditableExtraPlayerInfo(_currentCompetition)
+                    DefinedSubcategory.Add(new EditableSubcategory(_currentCompetition)
                     {
-                        DbEntity = dtoExtraPlayerInfo.CopyDataFromDto(new Subcategory())
+                        DbEntity = dtoSubcategory.CopyDataFromDto(new Subcategory())
                     });
                 }
-                DefinedExtraPlayerInfo.Add(new EditableExtraPlayerInfo(_currentCompetition)
+                DefinedSubcategory.Add(new EditableSubcategory(_currentCompetition)
                 {
                     DbEntity = new Subcategory()
                 });
             });
-            return DefinedExtraPlayerInfo;
+            return DefinedSubcategory;
         }
     }
 }

@@ -122,10 +122,10 @@ namespace Server.Controllers
             return Ok();
         }
 
-        // POST /api/Competition/1/ExtraDataHederModyfication
+        // POST /api/Competition/1/ExtraDataHeaderModification
         [Authorize(Roles = "Administrator,Organizer,Moderator")]
-        [Route("{id:int:min(1)}/ExtraDataHederModyfication")]
-        public async Task<IHttpActionResult> PostExtraDataHederModyfication(int id, PermutationPair[] permutationPairs)
+        [Route("{id:int:min(1)}/ExtraDataHeaderModification")]
+        public async Task<IHttpActionResult> PostExtraDataHeaderModification(int id, PermutationPair[] permutationPairs)
         {
             if (await InitCompetitionById(id) == false)
                 throw new Exception("Invalid competition id");
@@ -135,8 +135,8 @@ namespace Server.Controllers
 
             PlayerRepository playerRepository = new PlayerRepository(new ContextProvider(), Competition);
 
-            await playerRepository.ExtraDataModyfication(permutationPairs.Select(pp => pp.PermutationElement).ToArray());
-            Competition.ExtraDataHeders = String.Join(";", permutationPairs.Select(pp => pp.HederName).ToArray());
+            await playerRepository.ExtraDataModification(permutationPairs.Select(pp => pp.PermutationElement).ToArray());
+            Competition.ExtraDataHeaders = String.Join(";", permutationPairs.Select(pp => pp.HeaderName).ToArray());
 
             return Ok();
         }

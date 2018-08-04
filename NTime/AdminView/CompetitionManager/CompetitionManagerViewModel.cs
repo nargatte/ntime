@@ -16,7 +16,7 @@ using ViewCore;
 using BaseCore.DataBase;
 using ViewCore.Factories.AgeCategories;
 using ViewCore.Factories.Distances;
-using ViewCore.Factories.ExtraPlayerInfos;
+using ViewCore.Factories.Subcategories;
 using ViewCore.Factories.Players;
 using ViewCore.Entities;
 using ViewCore.Factories;
@@ -27,7 +27,7 @@ namespace AdminView.CompetitionManager
     {
         protected IPlayerManagerFactory _playerManagerFactory = new PlayerManagerFactoryDesktop();
         protected IDistanceManagerFactory _distanceManagerFactory = new DistanceManagerFactoryDesktop();
-        protected IExtraPlayerInfoManagerFactory _extraPlayerInfoManagerFactory = new ExtraPlayerInfoManagerFactoryDesktop();
+        protected ISubcategoryManagerFactory _subcategoryManagerFactory = new SubcategoryManagerFactoryDesktop();
         protected IAgeCategoryManagerFactory _ageCategoryManagerFactory = new AgeCategoryManagerFactoryDesktop();
 
         //public CompetitionManagerViewModel(ViewCore.Entities.IEditableCompetition currentCompetition) : base(currentCompetition)

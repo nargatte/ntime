@@ -9,10 +9,10 @@ using ViewCore.Entities;
 using System.Collections.ObjectModel;
 using ViewCore.ManagersDesktop;
 
-namespace ViewCore.Factories.ExtraPlayerInfos
+namespace ViewCore.Factories.Subcategories
 {
-    public interface IExtraPlayerInfoManagerFactory
+    public interface ISubcategoryManagerFactory
     {
-        IExtraPlayerInfoManager CreateInstance(IEditableCompetition currentCompetition, AccountInfo accountInfo = null, ConnectionInfo connectionInfo = null);
+        ISubcategoryManager CreateInstance(IEditableCompetition currentCompetition, AccountInfo accountInfo = null, ConnectionInfo connectionInfo = null);
     }
 }

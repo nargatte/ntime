@@ -16,7 +16,7 @@ using BaseCore.TimesProcess;
 using ViewCore.ManagersDesktop;
 using ViewCore.Factories.AgeCategories;
 using ViewCore.Factories.Distances;
-using ViewCore.Factories.ExtraPlayerInfos;
+using ViewCore.Factories.Subcategories;
 using ViewCore.Factories.Players;
 using ViewCore.Factories;
 
@@ -82,7 +82,7 @@ namespace AdminView.Players
 
         private void ClearNewPlayer()
         {
-            NewPlayer = new EditablePlayer(_currentCompetition, DefinedDistances, DefinedExtraPlayerInfo, new Player()
+            NewPlayer = new EditablePlayer(_currentCompetition, DefinedDistances, DefinedSubcategory, new Player()
             {
                 Distance = new Distance(),
                 Subcategory = new Subcategory(),

@@ -19,7 +19,7 @@ namespace Server.Dtos
             EventDate = competition.EventDate;
             SignUpEndDate = competition.SignUpEndDate;
             Description = competition.Description;
-            ExtraDataHeders = competition.ExtraDataHeders;
+            ExtraDataHeaders = competition.ExtraDataHeaders;
             SubcategoryAlternativeName = competition.SubcategoryAlternativeName;
             Link = competition.Link;
             Organizer = competition.Organizer;
@@ -34,7 +34,7 @@ namespace Server.Dtos
             competition.EventDate = EventDate;
             competition.SignUpEndDate = SignUpEndDate;
             competition.Description = Description;
-            competition.ExtraDataHeders = ExtraDataHeders;
+            competition.ExtraDataHeaders = ExtraDataHeaders;
             competition.SubcategoryAlternativeName = SubcategoryAlternativeName;
             competition.Link = Link;
             competition.Organizer = Organizer;
@@ -54,7 +54,7 @@ namespace Server.Dtos
 
         public string Description { get; set; }
 
-        public string ExtraDataHeders { get; set; }
+        public string ExtraDataHeaders { get; set; }
 
         public string SubcategoryAlternativeName { get; set; }
 

@@ -8,11 +8,11 @@ using MvvmHelper;
 
 namespace ViewCore.Entities
 {
-    public class EditableExtraPlayerInfo : EditableBaseClass<Subcategory>
+    public class EditableSubcategory : EditableBaseClass<Subcategory>
     {
-        public EditableExtraPlayerInfo(IEditableCompetition currentComptetition) : base(currentComptetition)
+        public EditableSubcategory(IEditableCompetition currentComptetition) : base(currentComptetition)
         {
-            DeleteExtraPlayerInfoCmd = new RelayCommand(OnDeleteExtraPlayerInfo);
+            DeleteSubcategoryCmd = new RelayCommand(OnDeleteSubcategory);
         }
         public string Name
         {
@@ -34,12 +34,12 @@ namespace ViewCore.Entities
             }
         }
 
-        private void OnDeleteExtraPlayerInfo()
+        private void OnDeleteSubcategory()
         {
             DeleteRequested(this, EventArgs.Empty);
         }
 
-        public RelayCommand DeleteExtraPlayerInfoCmd { get; private set; }
+        public RelayCommand DeleteSubcategoryCmd { get; private set; }
         public event EventHandler DeleteRequested = delegate { };
         public event EventHandler UpdateRequested = delegate { };
 

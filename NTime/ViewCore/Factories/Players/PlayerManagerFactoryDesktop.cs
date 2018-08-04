@@ -14,10 +14,10 @@ namespace ViewCore.Factories.Players
     public class PlayerManagerFactoryDesktop : IPlayerManagerFactory
     {
         public IPlayerManager CreateInstance(IEditableCompetition currentCompetition, ObservableCollection<EditableDistance> definedDistances,
-                                                ObservableCollection<EditableExtraPlayerInfo> definedExtraPlayerInfos, RangeInfo recordsRangeInfo = null,
+                                                ObservableCollection<EditableSubcategory> definedSubcategories, RangeInfo recordsRangeInfo = null,
                                                 AccountInfo accountInfo = null, ConnectionInfo connectionInfo = null)
         {
-            return new PlayerManagerDesktop(currentCompetition, definedDistances, definedExtraPlayerInfos, recordsRangeInfo);
+            return new PlayerManagerDesktop(currentCompetition, definedDistances, definedSubcategories, recordsRangeInfo);
         }
     }
 }

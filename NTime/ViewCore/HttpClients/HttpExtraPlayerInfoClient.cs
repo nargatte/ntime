@@ -8,9 +8,9 @@ using Server.Dtos;
 
 namespace ViewCore.HttpClients
 {
-    public class HttpExtraPlayerInfoClient : HttpForSpecificCompetitionClient<Subcategory, SubcategoryDto>
+    public class SubcategoryClient : HttpForSpecificCompetitionClient<Subcategory, SubcategoryDto>
     {
-        public HttpExtraPlayerInfoClient(AccountInfo accountInfo, ConnectionInfo connectionInfo, string controllerName)
+        public SubcategoryClient(AccountInfo accountInfo, ConnectionInfo connectionInfo, string controllerName)
             : base(accountInfo, connectionInfo, controllerName)
         {
         }

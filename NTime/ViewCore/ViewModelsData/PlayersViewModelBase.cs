@@ -13,7 +13,7 @@ using ViewCore.Entities;
 using ViewCore.Factories;
 using ViewCore.Factories.AgeCategories;
 using ViewCore.Factories.Distances;
-using ViewCore.Factories.ExtraPlayerInfos;
+using ViewCore.Factories.Subcategories;
 using ViewCore.Factories.Players;
 using ViewCore.ManagersDesktop;
 using ViewCore.ManagersInterfaces;
@@ -24,7 +24,7 @@ namespace ViewCore
     {
         protected IPlayerManager _playersManager;
         protected IDistanceManager _distancesManager;
-        protected IExtraPlayerInfoManager _extraPlayerInfosManager;
+        protected ISubcategoryManager _subcategoriesManager;
         protected IAgeCategoryManager _ageCategoryManager;
 
         protected DependencyContainer _dependencyContainer;
@@ -34,7 +34,7 @@ namespace ViewCore
             OnCreation();
             _dependencyContainer = dependencyContainer;
             _distanceSortCriteria = new EditableDistance(currentCompetition);
-            _extraPlayerInfoSortCriteria = new EditableExtraPlayerInfo(currentCompetition);
+            _subcategorySortCriteria = new EditableSubcategory(currentCompetition);
             _ageCategorySortCriteria = new EditableAgeCategory(currentCompetition);
             _currentCompetition = currentCompetition;
         }
@@ -94,13 +94,13 @@ namespace ViewCore
             }
         }
 
-        private EditableExtraPlayerInfo _extraPlayerInfoSortCriteria;
-        public EditableExtraPlayerInfo ExtraPlayerInfoSortCriteria
+        private EditableSubcategory _subcategorySortCriteria;
+        public EditableSubcategory SubcategorySortCriteria
         {
-            get { return _extraPlayerInfoSortCriteria; }
+            get { return _subcategorySortCriteria; }
             set
             {
-                SetProperty(ref _extraPlayerInfoSortCriteria, value);
+                SetProperty(ref _subcategorySortCriteria, value);
                 FilterValueChangedAsync();
             }
         }
@@ -143,11 +143,11 @@ namespace ViewCore
         }
 
 
-        private ObservableCollection<EditableExtraPlayerInfo> _definedExtraPlayerInfo = new ObservableCollection<EditableExtraPlayerInfo>();
-        public ObservableCollection<EditableExtraPlayerInfo> DefinedExtraPlayerInfo
+        private ObservableCollection<EditableSubcategory> _definedSubcategory = new ObservableCollection<EditableSubcategory>();
+        public ObservableCollection<EditableSubcategory> DefinedSubcategory
         {
-            get { return _definedExtraPlayerInfo; }
-            set { SetProperty(ref _definedExtraPlayerInfo, value); }
+            get { return _definedSubcategory; }
+            set { SetProperty(ref _definedSubcategory, value); }
         }
 
         private ObservableCollection<EditableAgeCategory> _definedAgeCategories = new ObservableCollection<EditableAgeCategory>();
@@ -170,9 +170,9 @@ namespace ViewCore
             await DownloadPlayersInfo(selectedCompeititon);
 
             _playersManager = _dependencyContainer.PlayerManagerFactory.CreateInstance(_currentCompetition, DefinedDistances,
-                DefinedExtraPlayerInfo, RecordsRangeInfo, _dependencyContainer.User, _dependencyContainer.ConnectionInfo);
+                DefinedSubcategory, RecordsRangeInfo, _dependencyContainer.User, _dependencyContainer.ConnectionInfo);
             //DistanceSortCriteria = new EditableDistance(_currentCompetition);
-            //ExtraPlayerInfoSortCriteria = new EditableExtraPlayerInfo(_currentCompetition);
+            //SubcategorySortCriteria = new EditableSubcategory(_currentCompetition);
             await _playersManager.AddPlayersFromDatabase(removeAllDisplayedBefore: true);
 
             Players = _playersManager.GetPlayersToDisplay();
@@ -189,8 +189,8 @@ namespace ViewCore
             _distancesManager = _dependencyContainer.DistanceManagerFactory.CreateInstance(_currentCompetition, _dependencyContainer.User, _dependencyContainer.ConnectionInfo);
             DefinedDistances = await _distancesManager.DownloadDistancesAsync();
 
-            _extraPlayerInfosManager = _dependencyContainer.ExtraPlayerInfoManagerFactory.CreateInstance(_currentCompetition, _dependencyContainer.User, _dependencyContainer.ConnectionInfo);
-            DefinedExtraPlayerInfo = await _extraPlayerInfosManager.DownloadExtraPlayerInfoAsync();
+            _subcategoriesManager = _dependencyContainer.SubcategoriesManagerFactory.CreateInstance(_currentCompetition, _dependencyContainer.User, _dependencyContainer.ConnectionInfo);
+            DefinedSubcategory = await _subcategoriesManager.DownloadSubcategoryAsync();
 
             _ageCategoryManager = _dependencyContainer.AgeCategoryManagerFactory.CreateInstance(_currentCompetition, _dependencyContainer.User, _dependencyContainer.ConnectionInfo);
             DefinedAgeCategories = await _ageCategoryManager.DownloadAgeCategoriesAsync();
@@ -245,7 +245,7 @@ namespace ViewCore
             if (_currentCompetition != null && _playersManager != null)
             {
                 _playersManager.UpdateFilterInfo(pageNumber: 1, query: FilterGeneral, sortOrder: SortOrder, sortCriteria: SortCriteria,
-                                                        distanceSortCriteria: DistanceSortCriteria, extraPlayerInfoSortCriteria: ExtraPlayerInfoSortCriteria,
+                                                        distanceSortCriteria: DistanceSortCriteria, subcategorySortCriteria: SubcategorySortCriteria,
                                                         ageCategorySortCriteria: AgeCategorySortCriteria);
                 Players = _playersManager.GetPlayersToDisplay();
                 UpdateRecordsRangeInfo(_playersManager.GetRecordsRangeInfo());

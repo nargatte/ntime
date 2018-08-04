@@ -15,7 +15,7 @@ namespace ViewCore.ManagersInterfaces
         Task NavToNextPageAsync();
         Task NavToPreviousPageAsync();
         Task<bool> TryAddPlayerAsync(EditablePlayer newPlayer);
-        Task UpdateFilterInfo(int pageNumber, string query, SortOrderEnum? sortOrder, PlayerSort? sortCriteria, EditableDistance distanceSortCriteria, EditableExtraPlayerInfo extraPlayerInfoSortCriteria, EditableAgeCategory ageCategorySortCriteria);
+        Task UpdateFilterInfo(int pageNumber, string query, SortOrderEnum? sortOrder, PlayerSort? sortCriteria, EditableDistance distanceSortCriteria, EditableSubcategory subcategorySortCriteria, EditableAgeCategory ageCategorySortCriteria);
         Task AddPlayersFromCsvToDatabase();
         Task DeleteAllPlayersFromDatabaseAsync();
         Task<EditablePlayer> GetFullRegisteredPlayerFromCompetition(Competition competition, PlayerAccount playerAccount);

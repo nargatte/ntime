@@ -18,7 +18,7 @@ namespace ViewCore.ManagersHttp
     public class PlayerManagerHttp : ManagerHttp, IPlayerManager
     {
         private ObservableCollection<EditableDistance> _definedDistances;
-        private ObservableCollection<EditableExtraPlayerInfo> _definedExtraPlayerInfos;
+        private ObservableCollection<EditableSubcategory> _definedSubcategories;
         private PlayerFilterOptions _playerFilter = new PlayerFilterOptions();
         private RangeInfo _recordsRangeInfo;
         private ObservableCollection<EditablePlayer> _players = new ObservableCollection<EditablePlayer>();
@@ -26,13 +26,13 @@ namespace ViewCore.ManagersHttp
         private HttpPlayerClient _client;
 
         public PlayerManagerHttp(IEditableCompetition currentCompetition, ObservableCollection<EditableDistance> definedDistances,
-                                    ObservableCollection<EditableExtraPlayerInfo> definedExtraPlayerInfos, RangeInfo recordsRangeInfo,
+                                    ObservableCollection<EditableSubcategory> definedSubcategories, RangeInfo recordsRangeInfo,
                                     AccountInfo accountInfo, ConnectionInfo connectionInfo)
                                     : base(accountInfo, connectionInfo)
         {
             _currentCompetition = currentCompetition;
             _definedDistances = definedDistances;
-            _definedExtraPlayerInfos = definedExtraPlayerInfos;
+            _definedSubcategories = definedSubcategories;
             _recordsRangeInfo = recordsRangeInfo;
             _client = new HttpPlayerClient(accountInfo, connectionInfo, "Player");
         }
@@ -41,7 +41,7 @@ namespace ViewCore.ManagersHttp
         public RangeInfo GetRecordsRangeInfo() => _recordsRangeInfo;
 
         public async Task UpdateFilterInfo(int pageNumber, string query, SortOrderEnum? sortOrder, PlayerSort? sortCriteria,
-            EditableDistance distanceSortCriteria, EditableExtraPlayerInfo extraPlayerInfoSortCriteria, EditableAgeCategory ageCategorySortCriteria)
+            EditableDistance distanceSortCriteria, EditableSubcategory subcategorySortCriteria, EditableAgeCategory ageCategorySortCriteria)
         {
             _recordsRangeInfo.PageNumber = pageNumber;
             _playerFilter.Query = query;
@@ -49,8 +49,8 @@ namespace ViewCore.ManagersHttp
                 _playerFilter.Distance = distanceSortCriteria.DbEntity;
             else
                 _playerFilter.Distance = null;
-            if (!String.IsNullOrWhiteSpace(extraPlayerInfoSortCriteria?.DbEntity.Name))
-                _playerFilter.Subcategory = extraPlayerInfoSortCriteria.DbEntity;
+            if (!String.IsNullOrWhiteSpace(subcategorySortCriteria?.DbEntity.Name))
+                _playerFilter.Subcategory = subcategorySortCriteria.DbEntity;
             else
                 _playerFilter.Subcategory = null;
             if (!String.IsNullOrWhiteSpace(ageCategorySortCriteria?.DbEntity.Name))
@@ -86,7 +86,7 @@ namespace ViewCore.ManagersHttp
                     DbEntity = (await _client.GetFullRegisteredPlayerFromCompetition(competition, playerAccount)).CopyDataFromDto(new Player())
                 };
                 player.Distance = _definedDistances.FirstOrDefault(defined => defined.DbEntity.Id == player.DbEntity.DistanceId);
-                player.ExtraPlayerInfo = _definedExtraPlayerInfos.FirstOrDefault(defined => defined.DbEntity.Id == player.DbEntity.SubcategoryId);
+                player.Subcategories = _definedSubcategories.FirstOrDefault(defined => defined.DbEntity.Id == player.DbEntity.SubcategoryId);
             });
             if (player.DbEntity != null)
             {
@@ -105,14 +105,14 @@ namespace ViewCore.ManagersHttp
                 newPlayer.IsMale = GetSexForPlayer(newPlayer);
                 var playerToAdd = newPlayer.Clone() as EditablePlayer;
                 var tempDistance = playerToAdd.DbEntity.Distance;
-                var tempExtraPlayerInfo = playerToAdd.DbEntity.Subcategory;
+                var tempSubcategory = playerToAdd.DbEntity.Subcategory;
                 await TryCallApi(async () =>
                     {
                         playerToAdd.CompetitionId = _currentCompetition.DbEntity.Id;
                         await _client.AddRegisteredPlayer(_currentCompetition.DbEntity.Id, playerToAdd.DbEntity);
                     }, "Zapis na zawody przebiegł poprawnie");
                 playerToAdd.DbEntity.Distance = tempDistance;
-                playerToAdd.DbEntity.Subcategory = tempExtraPlayerInfo;
+                playerToAdd.DbEntity.Subcategory = tempSubcategory;
                 playerToAdd.UpdateRequested += Player_UpdateRequested;
                 _players.Add(playerToAdd);
                 //_recordsRangeInfo.TotalItemsCount++;
@@ -145,7 +145,7 @@ namespace ViewCore.ManagersHttp
                 message = "Nie przypisano żadnego dystansu";
                 return false;
             }
-            if (newPlayer.ExtraPlayerInfo == null || String.IsNullOrWhiteSpace(newPlayer.ExtraPlayerInfo.Name))
+            if (newPlayer.Subcategories == null || String.IsNullOrWhiteSpace(newPlayer.Subcategories.Name))
             {
                 message = "Nie przypisano Dodatkowych informacji";
                 return false;
@@ -197,7 +197,7 @@ namespace ViewCore.ManagersHttp
             var dbPlayers = await DownloadPlayersFromDataBase(_playerFilter, _recordsRangeInfo.ItemsPerPage, _recordsRangeInfo.PageNumber - 1);
             foreach (var dbPlayer in dbPlayers)
             {
-                EditablePlayer playerToAdd = new EditablePlayer(_currentCompetition, _definedDistances, _definedExtraPlayerInfos, dbPlayer);
+                EditablePlayer playerToAdd = new EditablePlayer(_currentCompetition, _definedDistances, _definedSubcategories, dbPlayer);
                 playerToAdd.UpdateRequested += Player_UpdateRequested;
                 _players.Add(playerToAdd);
             }

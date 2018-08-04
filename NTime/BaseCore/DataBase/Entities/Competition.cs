@@ -32,7 +32,7 @@ namespace BaseCore.DataBase
 
         public string Description { get; set; }
 
-        public string ExtraDataHeders { get; set; }
+        public string ExtraDataHeaders { get; set; }
 
         public string SubcategoryAlternativeName { get; set; }
 

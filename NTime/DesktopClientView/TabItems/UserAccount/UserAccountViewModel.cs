@@ -12,7 +12,7 @@ using ViewCore.Entities;
 using ViewCore.Factories;
 using ViewCore.Factories.AgeCategories;
 using ViewCore.Factories.Distances;
-using ViewCore.Factories.ExtraPlayerInfos;
+using ViewCore.Factories.Subcategories;
 using ViewCore.Factories.Players;
 using ViewCore.ManagersInterfaces;
 
@@ -98,7 +98,7 @@ namespace DesktopClientView.TabItems.UserAccount
 
                 await DownloadPlayersInfo(CompetitionData.SelectedCompetition);
                 _playersManager = _dependencyContainer.PlayerManagerFactory.CreateInstance(CompetitionData.SelectedCompetition,
-                    DefinedDistances, DefinedExtraPlayerInfo, null, _dependencyContainer.User, _dependencyContainer.ConnectionInfo);
+                    DefinedDistances, DefinedSubcategory, null, _dependencyContainer.User, _dependencyContainer.ConnectionInfo);
                 //await _playersManager.AddPlayersFromDatabase(removeAllDisplayedBefore: true);
                 //var players = _playersManager.GetPlayersToDisplay();
                 //FromCompetitonPlayer = players.FirstOrDefault(p => p.)
@@ -118,9 +118,9 @@ namespace DesktopClientView.TabItems.UserAccount
         private void DisplayPlayerData()
         {
             FromCompetitonPlayer.DefinedDistances = DefinedDistances;
-            FromCompetitonPlayer.DefinedExtraPlayerInfo = DefinedExtraPlayerInfo;
+            FromCompetitonPlayer.DefinedSubcategory = DefinedSubcategory;
             FromCompetitonPlayer.Distance = DefinedDistances.FirstOrDefault(defined => defined.DbEntity.Id == FromCompetitonPlayer.DbEntity.DistanceId);
-            FromCompetitonPlayer.ExtraPlayerInfo = DefinedExtraPlayerInfo.FirstOrDefault(defined => defined.DbEntity.Id == FromCompetitonPlayer.DbEntity.SubcategoryId);
+            FromCompetitonPlayer.Subcategories = DefinedSubcategory.FirstOrDefault(defined => defined.DbEntity.Id == FromCompetitonPlayer.DbEntity.SubcategoryId);
         }
 
         private void ClearNewPlayer()
@@ -128,9 +128,9 @@ namespace DesktopClientView.TabItems.UserAccount
             FromCompetitonPlayer = new EditablePlayer(new EditableCompetition())
             {
                 Distance = new EditableDistance(new EditableCompetition()),
-                ExtraPlayerInfo = new EditableExtraPlayerInfo(new EditableCompetition()),
+                Subcategories = new EditableSubcategory(new EditableCompetition()),
                 DefinedDistances = new ObservableCollection<EditableDistance>(),
-                DefinedExtraPlayerInfo = new ObservableCollection<EditableExtraPlayerInfo>()
+                DefinedSubcategory = new ObservableCollection<EditableSubcategory>()
             };
         }
 

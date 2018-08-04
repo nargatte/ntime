@@ -268,7 +268,7 @@ namespace BaseCore.DataBase
             await ContextProvider.DoAsync(async ctx =>
             {
                 AgeCategory[] ageCategories = await ctx.AgeCategories.Where(a => a.CompetitionId == Competition.Id).AsNoTracking().ToArrayAsync();
-                Subcategory[] playerInfos = await ctx.Subcategory.Where(a => a.CompetitionId == Competition.Id).AsNoTracking().ToArrayAsync();
+                Subcategory[] subcategories = await ctx.Subcategory.Where(a => a.CompetitionId == Competition.Id).AsNoTracking().ToArrayAsync();
                 Distance[] distances = await ctx.Distances.Where(a => a.CompetitionId == Competition.Id).AsNoTracking().ToArrayAsync();
 
                 PlayerFilterOptions filterOptions = new PlayerFilterOptions()
@@ -291,12 +291,12 @@ namespace BaseCore.DataBase
                         filterOptions.Subcategory = null;
                         OrderSet(GetFilteredQuery(ctx.Players.Where(i => i.CompetitionId == Competition.Id),
                             filterOptions), (i, player) => player.DistancePlaceNumber = i + 1);
-                        foreach (Subcategory extraPlayerInfo in playerInfos)
+                        foreach (Subcategory subcategory in subcategories)
                         {
                             foreach (AgeCategory ageCategory in ageCategories)
                             {
                                 filterOptions.AgeCategory = ageCategory;
-                                filterOptions.Subcategory = extraPlayerInfo;
+                                filterOptions.Subcategory = subcategory;
                                 OrderSet(GetFilteredQuery(ctx.Players.Where(i => i.CompetitionId == Competition.Id),
                                     filterOptions), (i, player) => player.CategoryPlaceNumber = i + 1);
                             }
@@ -419,7 +419,7 @@ namespace BaseCore.DataBase
             });
 
             Dictionary<string, Distance> distancesDictionary = new Dictionary<string, Distance>();
-            Dictionary<string, Subcategory> extraPlayerInfosDictionary = new Dictionary<string, Subcategory>();
+            Dictionary<string, Subcategory> subcategoriesDictionary = new Dictionary<string, Subcategory>();
             Dictionary<int, AgeCategory> ageCategoriesDictionary = new Dictionary<int, AgeCategory>();
 
             foreach (Distance distance in distances)
@@ -427,9 +427,9 @@ namespace BaseCore.DataBase
                 distancesDictionary.Add(distance.Name, distance);
             }
 
-            foreach (Subcategory extraPlayerInfo in subcategories)
+            foreach (Subcategory subcategory in subcategories)
             {
-                extraPlayerInfosDictionary.Add(extraPlayerInfo.Name, extraPlayerInfo);
+                subcategoriesDictionary.Add(subcategory.Name, subcategory);
             }
 
             List<Player> players = new List<Player>();
@@ -445,7 +445,7 @@ namespace BaseCore.DataBase
                 distancesDictionary.TryGetValue(record.StringDistance, out distance);
 
                 Subcategory subcategory;
-                extraPlayerInfosDictionary.TryGetValue(record.StringAditionalInfo, out subcategory);
+                subcategoriesDictionary.TryGetValue(record.StringAditionalInfo, out subcategory);
 
                 AgeCategory ageCategory;
                 if (!ageCategoriesDictionary.TryGetValue(record.BirthDate.Year, out ageCategory))
@@ -530,7 +530,7 @@ namespace BaseCore.DataBase
             return player;
         }
 
-        public Task ExtraDataModyfication(int[] permutation)
+        public Task ExtraDataModification(int[] permutation)
         {
             return ContextProvider.DoAsync(async ctx =>
             {

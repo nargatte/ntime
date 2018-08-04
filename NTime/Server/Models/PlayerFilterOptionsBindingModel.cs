@@ -15,7 +15,7 @@ namespace Server.Models
         public bool? HasVoid { get; set; }
         public int? Distance { get; set; }
         public int? AgeCategory { get; set; }
-        public int? ExtraPlayerInfo { get; set; }
+        public int? Subcategory { get; set; }
 
         public PlayerFilterOptionsBindingModel()
         {
@@ -37,7 +37,7 @@ namespace Server.Models
             if (filterOptions.AgeCategory != null)
                 AgeCategory = filterOptions.AgeCategory.Id;
             if (filterOptions.Subcategory != null)
-                ExtraPlayerInfo = filterOptions.Subcategory.Id;
+                Subcategory = filterOptions.Subcategory.Id;
         }
 
         public PlayerFilterOptions CreatePlayerFilterOptions()
@@ -55,8 +55,8 @@ namespace Server.Models
                 filterOptions.Distance = new Distance() { Id = Distance.Value };
             if (AgeCategory != null)
                 filterOptions.AgeCategory = new AgeCategory() { Id = AgeCategory.Value };
-            if (ExtraPlayerInfo != null)
-                filterOptions.Subcategory = new Subcategory() { Id = ExtraPlayerInfo.Value };
+            if (Subcategory != null)
+                filterOptions.Subcategory = new Subcategory() { Id = Subcategory.Value };
             return filterOptions;
         }
     }

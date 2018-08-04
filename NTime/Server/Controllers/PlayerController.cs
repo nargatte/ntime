@@ -345,10 +345,10 @@ namespace Server.Controllers
             return Created(Url.Content("~/player/register/" + competitionRegisterDto.Id), competitionRegisterDto);
         }
 
-        // GET api/Player/ExtortFromCompetition/1
+        // GET api/Player/ExportFromCompetition/1
         [System.Web.Http.Authorize(Roles = "Administrator,Organizer,Moderator")]
-        [System.Web.Http.Route("ExtortFromCompetition/{id:int:min(1)}")]
-        public async Task<HttpResponseMessage> GetExtortFromCompetition(int id)
+        [System.Web.Http.Route("ExportFromCompetition/{id:int:min(1)}")]
+        public async Task<HttpResponseMessage> GetExportFromCompetition(int id)
         {
             if (await InitCompetitionById(id) == false)
                 throw new Exception("Invalid competition id");

@@ -17,17 +17,17 @@ namespace ViewCore.ManagersDesktop
     {
         private PlayerRepository _playerRepository;
         private ObservableCollection<EditableDistance> _definedDistances;
-        private ObservableCollection<EditableExtraPlayerInfo> _definedExtraPlayerInfos;
+        private ObservableCollection<EditableSubcategory> _definedSubcategories;
         private PlayerFilterOptions _playerFilter = new PlayerFilterOptions();
         private RangeInfo _recordsRangeInfo;
         private ObservableCollection<EditablePlayer> _players = new ObservableCollection<EditablePlayer>();
 
         public PlayerManagerDesktop(IEditableCompetition currentCompetition, ObservableCollection<EditableDistance> definedDistances,
-            ObservableCollection<EditableExtraPlayerInfo> definedExtraPlayerInfos, RangeInfo recordsRangeInfo) : base(currentCompetition)
+            ObservableCollection<EditableSubcategory> definedSubcategories, RangeInfo recordsRangeInfo) : base(currentCompetition)
         {
             _playerRepository = new PlayerRepository(new ContextProvider(), _currentCompetition.DbEntity);
             _definedDistances = definedDistances;
-            _definedExtraPlayerInfos = definedExtraPlayerInfos;
+            _definedSubcategories = definedSubcategories;
             _recordsRangeInfo = recordsRangeInfo;
         }
 
@@ -36,7 +36,7 @@ namespace ViewCore.ManagersDesktop
 
 
         public async Task UpdateFilterInfo(int pageNumber, string query, SortOrderEnum? sortOrder, PlayerSort? sortCriteria,
-            EditableDistance distanceSortCriteria, EditableExtraPlayerInfo extraPlayerInfoSortCriteria,
+            EditableDistance distanceSortCriteria, EditableSubcategory subcategorySortCriteria,
             EditableAgeCategory ageCategorySortCriteria)
         {
             _recordsRangeInfo.PageNumber = pageNumber;
@@ -45,8 +45,8 @@ namespace ViewCore.ManagersDesktop
                 _playerFilter.Distance = distanceSortCriteria.DbEntity;
             else
                 _playerFilter.Distance = null;
-            if (!String.IsNullOrWhiteSpace(extraPlayerInfoSortCriteria?.DbEntity.Name))
-                _playerFilter.Subcategory = extraPlayerInfoSortCriteria.DbEntity;
+            if (!String.IsNullOrWhiteSpace(subcategorySortCriteria?.DbEntity.Name))
+                _playerFilter.Subcategory = subcategorySortCriteria.DbEntity;
             else
                 _playerFilter.Subcategory = null;
             if (!String.IsNullOrWhiteSpace(ageCategorySortCriteria?.DbEntity.Name))
@@ -97,10 +97,10 @@ namespace ViewCore.ManagersDesktop
                 newPlayer.IsMale = GetSexForPlayer(newPlayer);
                 var playerToAdd = newPlayer.Clone() as EditablePlayer;
                 var tempDistance = playerToAdd.DbEntity.Distance;
-                var tempExtraPlayerInfo = playerToAdd.DbEntity.Subcategory;
+                var tempSubcategory = playerToAdd.DbEntity.Subcategory;
                 await _playerRepository.AddAsync(playerToAdd.DbEntity, playerToAdd.DbEntity.AgeCategory, playerToAdd.DbEntity.Distance, playerToAdd.DbEntity.Subcategory);
                 playerToAdd.DbEntity.Distance = tempDistance;
-                playerToAdd.DbEntity.Subcategory = tempExtraPlayerInfo;
+                playerToAdd.DbEntity.Subcategory = tempSubcategory;
                 playerToAdd.UpdateRequested += Player_UpdateRequested;
                 _players.Add(playerToAdd);
                 _recordsRangeInfo.TotalItemsCount++;
@@ -132,7 +132,7 @@ namespace ViewCore.ManagersDesktop
                 message = "Nie przypisano żadnego dystansu";
                 return false;
             }
-            if (newPlayer.ExtraPlayerInfo == null || String.IsNullOrWhiteSpace(newPlayer.ExtraPlayerInfo.Name))
+            if (newPlayer.Subcategories == null || String.IsNullOrWhiteSpace(newPlayer.Subcategories.Name))
             {
                 message = "Nie przypisano Dodatkowych informacji";
                 return false;
@@ -202,7 +202,7 @@ namespace ViewCore.ManagersDesktop
             var dbPlayers = await DownloadPlayersFromDataBase(_playerFilter, _recordsRangeInfo.PageNumber - 1, _recordsRangeInfo.ItemsPerPage);
             foreach (var dbPlayer in dbPlayers)
             {
-                EditablePlayer playerToAdd = new EditablePlayer(_currentCompetition, _definedDistances, _definedExtraPlayerInfos, dbPlayer);
+                EditablePlayer playerToAdd = new EditablePlayer(_currentCompetition, _definedDistances, _definedSubcategories, dbPlayer);
                 playerToAdd.UpdateRequested += Player_UpdateRequested;
                 _players.Add(playerToAdd);
             }

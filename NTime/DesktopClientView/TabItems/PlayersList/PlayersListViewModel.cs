@@ -10,7 +10,7 @@ using ViewCore.Entities;
 using ViewCore.Factories;
 using ViewCore.Factories.AgeCategories;
 using ViewCore.Factories.Distances;
-using ViewCore.Factories.ExtraPlayerInfos;
+using ViewCore.Factories.Subcategories;
 using ViewCore.Factories.Players;
 
 namespace DesktopClientView.TabItems.PlayersList
