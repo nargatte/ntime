@@ -25,7 +25,7 @@ namespace Server.Controllers
         protected virtual async Task<bool> InitCompetitionByRelatedEntitieId<T>(int id)
             where T: class, ICompetitionId, IEntityId
         {
-            Competition = await CompetitionRepository.GetByRelatedEntitieId<T>(id);
+            Competition = await CompetitionRepository.GetByRelatedEntityId<T>(id);
             if (Competition == null)
                 return false;
             return true;

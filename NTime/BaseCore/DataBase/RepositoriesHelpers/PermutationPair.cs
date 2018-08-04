@@ -1,6 +1,6 @@
 ﻿namespace BaseCore.Models
 {
-    public class PermutationPair
+    public class HeaderPermutationPair
     {
         public int PermutationElement { get; set; }
         public string HeaderName { get; set; }

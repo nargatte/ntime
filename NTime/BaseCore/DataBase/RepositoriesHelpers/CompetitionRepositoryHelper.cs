@@ -9,7 +9,7 @@ namespace BaseCore.DataBase.RepositoriesHelpers
 {
     public static class CompetitionRepositoryHelper
     {
-        public static async Task ModifyExtraDataHeaders(PermutationPair[] permutationPairs, Competition competition)
+        public static async Task ModifyExtraDataHeaders(HeaderPermutationPair[] permutationPairs, Competition competition)
         {
             var playerRepository = new PlayerRepository(new ContextProvider(), competition);
             var competitionRepository = new CompetitionRepository(new ContextProvider());

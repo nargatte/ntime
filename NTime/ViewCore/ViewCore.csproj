@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConnectionInfo.cs" />
+    <Compile Include="Entities\EditableHeaderPermutationPair.cs" />
     <Compile Include="Factories\AgeCategories\AgeCategoryManagerFactoryDesktop.cs" />
     <Compile Include="Factories\AgeCategories\AgeCategoryManagerFactoryHttp.cs" />
     <Compile Include="Factories\AgeCategories\IAgeCategoryManagerFactory.cs" />
@@ -60,9 +61,9 @@
     <Compile Include="Factories\Distances\DistanceManagerFactoryDesktop.cs" />
     <Compile Include="Factories\Distances\DistanceManagerFactoryHttp.cs" />
     <Compile Include="Factories\Distances\IDistanceManagerFactory.cs" />
-    <Compile Include="Factories\ExtraPlayerInfos\ExtraPlayerInfoManagerFactoryDesktop.cs" />
-    <Compile Include="Factories\ExtraPlayerInfos\ExtraPlayerInfoManagerFactoryHttp.cs" />
-    <Compile Include="Factories\ExtraPlayerInfos\IExtraPlayerInfoManagerFactory.cs" />
+    <Compile Include="Factories\Subcategories\SubcategoryManagerFactoryDesktop.cs" />
+    <Compile Include="Factories\Subcategories\SubcategoryManagerFactoryHttp.cs" />
+    <Compile Include="Factories\Subcategories\SubcategoryManagerFactory.cs" />
     <Compile Include="Factories\PlayerAccounts\IPlayerAccountManagerFactory.cs" />
     <Compile Include="Factories\PlayerAccounts\PlayerAccountManagerFactoryHttp.cs" />
     <Compile Include="Factories\Players\IPlayerManagerFactory.cs" />
@@ -73,7 +74,7 @@
     <Compile Include="HttpClients\CustomHttpRequestException.cs" />
     <Compile Include="HttpClients\HttpCompetitionClient.cs" />
     <Compile Include="HttpClients\HttpDistanceClient.cs" />
-    <Compile Include="HttpClients\HttpExtraPlayerInfoClient.cs" />
+    <Compile Include="HttpClients\HttpSubcategoryClient.cs" />
     <Compile Include="HttpClients\HttpForSpecificCompetitionClient.cs" />
     <Compile Include="HttpClients\HttpPlayerAccountClient.cs" />
     <Compile Include="HttpClients\HttpPlayerClient.cs" />
@@ -94,15 +95,15 @@
     <Compile Include="ManagersDesktop\ColorLegendManagerDesktop.cs" />
     <Compile Include="ManagersDesktop\CompetitionManagerDesktop.cs" />
     <Compile Include="ManagersDesktop\DistanceManagerDesktop.cs" />
-    <Compile Include="ManagersDesktop\ExtraPlayerInfoManagerDesktop.cs" />
+    <Compile Include="ManagersDesktop\SubcategoryManagerDesktop.cs" />
     <Compile Include="ManagersHttp\AgeCategoryManagerHttp.cs" />
     <Compile Include="ManagersHttp\CompetitionManagerHttp.cs" />
     <Compile Include="ManagersHttp\DistanceManagerHttp.cs" />
-    <Compile Include="ManagersHttp\ExtraPlayerInfoManagerHttp.cs" />
+    <Compile Include="ManagersHttp\SubcategoryManagerHttp.cs" />
     <Compile Include="ManagersHttp\PlayerManagerHttp.cs" />
     <Compile Include="ManagersInterfaces\IAgeCategoryManager.cs" />
     <Compile Include="ManagersInterfaces\IDistanceManager.cs" />
-    <Compile Include="ManagersInterfaces\IExtraPlayerInfoManager.cs" />
+    <Compile Include="ManagersInterfaces\ISubcategoryManager.cs" />
     <Compile Include="ManagersInterfaces\IPlayerManager.cs" />
     <Compile Include="ManagersInterfaces\ICompetitionManager.cs" />
     <Compile Include="ManagersDesktop\PlayerManagerDesktop.cs" />
@@ -114,7 +115,7 @@
     <Compile Include="Entities\EditableAgeCategory.cs" />
     <Compile Include="Entities\EditableCompetition.cs" />
     <Compile Include="Entities\EditableDistance.cs" />
-    <Compile Include="Entities\EditableExtraPlayerInfo.cs" />
+    <Compile Include="Entities\EditableSubcategory.cs" />
     <Compile Include="Entities\EditableGate.cs" />
     <Compile Include="Entities\EditableGatesOrderItem.cs" />
     <Compile Include="Entities\EditablePlayer.cs" />

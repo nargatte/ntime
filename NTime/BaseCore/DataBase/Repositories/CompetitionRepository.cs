@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
@@ -16,13 +17,13 @@ namespace BaseCore.DataBase
         protected override IQueryable<Competition> GetSortQuery(IQueryable<Competition> items) =>
             items.OrderByDescending(e => e.EventDate);
 
-        public async Task<Competition> GetByRelatedEntitieId<T>(int relatedEntitieId)
-            where T: class, ICompetitionId, IEntityId
+        public async Task<Competition> GetByRelatedEntityId<T>(int relatedEntityId)
+            where T : class, ICompetitionId, IEntityId
         {
             Competition competition = null;
             await ContextProvider.DoAsync(async ctx =>
             {
-                competition = (await ctx.Set<T>().FirstOrDefaultAsync(i => i.Id == relatedEntitieId))?.Competition;
+                competition = (await ctx.Set<T>().FirstOrDefaultAsync(i => i.Id == relatedEntityId))?.Competition;
             });
             return competition;
         }
@@ -64,5 +65,20 @@ namespace BaseCore.DataBase
             PageBindingModel pageBindingModel) =>
             PageTemplate<Competition>(pageBindingModel,
                 e => GetSortQuery(e.Where(c => c.Players.Any(p => p.PlayerAccountId == playerAccount.Id))));
+
+
+        public async Task<IEnumerable<HeaderPermutationPair>> GetHeaderPermutationPairsAsync(int competitionId)
+        {
+            var competition = await GetById(competitionId);
+            return competition == null ? null : GetHeaderPermutationPairs(competition.ExtraDataHeaders);
+        }
+        public IEnumerable<HeaderPermutationPair> GetHeaderPermutationPairs(string extraData)
+        {
+            if (String.IsNullOrWhiteSpace(extraData))
+                return new List<HeaderPermutationPair>();
+            var iterator = 0;
+            return extraData.Split(';').Select(headerName =>
+                new HeaderPermutationPair { PermutationElement = iterator++, HeaderName = headerName });
+        }
     }
 }
