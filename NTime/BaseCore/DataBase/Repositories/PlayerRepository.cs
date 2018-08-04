@@ -538,15 +538,20 @@ namespace BaseCore.DataBase
 
                 foreach (Player player in players)
                 {
-                    string[] extraData = player.ExtraData.Split(new[] {';'}, StringSplitOptions.None);
-                    string[] newExtraData = new string[permutations.Length];
-                    for (int x = 0; x < newExtraData.Length; x++)
+                    if (player.ExtraData == null)
+                        player.ExtraData = String.Concat(Enumerable.Repeat(";", permutations.Length - 1).ToArray());
+                    else
                     {
-                        if (permutations[x] >= 0 && permutations[x] < extraData.Length)
-                            newExtraData[x] = extraData[permutations[x]];
-                    }
+                        string[] extraData = player.ExtraData.Split(new[] { ';' }, StringSplitOptions.None);
+                        string[] newExtraData = new string[permutations.Length];
+                        for (int x = 0; x < newExtraData.Length; x++)
+                        {
+                            if (permutations[x] >= 0 && permutations[x] < extraData.Length)
+                                newExtraData[x] = extraData[permutations[x]];
+                        }
 
-                    player.ExtraData = String.Join(";", newExtraData);
+                        player.ExtraData = String.Join(";", newExtraData);
+                    }
                 }
 
                 await ctx.SaveChangesAsync();
