@@ -11,7 +11,7 @@ export class PlayerFilterOptions {
   HasVoid?: boolean;
   Distance?: number;
   AgeCategory?: number;
-  ExtraPlayerInfo?: number;
+  Subcategory?: number;
 }
 
 

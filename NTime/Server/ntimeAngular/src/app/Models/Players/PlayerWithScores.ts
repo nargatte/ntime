@@ -18,7 +18,7 @@ export class PlayersWithScores {
     DistancePlaceNumber: number;
     CategoryPlaceNumber: number;
     CompetitionCompleted: boolean;
-    ExtraPlayerInfoId: number;
+    SubcategoryId: number;
     DistanceId: number;
     AgeCategoryId: number;
     PlayerAccountId: number;

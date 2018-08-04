@@ -5,12 +5,12 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 
 import { MessageService } from './message.service';
-import { Subcategory } from '../Models/ExtraPlayerInfo';
+import { Subcategory } from '../Models/Subcategory';
 
 @Injectable()
 export class SubcategoryService {
-  private baseExtraPlayerInfoUrl = '/api/ExtraPlayerInfos';
-  private getExtraPlayerInfoFromCompetitionUrl = this.baseExtraPlayerInfoUrl + '/FromCompetition/';
+  private baseSubcategoryUrl = '/api/Subcategory';
+  private getSubcategoryFromCompetitionUrl = this.baseSubcategoryUrl + '/FromCompetition/';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -19,10 +19,10 @@ export class SubcategoryService {
   constructor(private http: HttpClient, private messageService: MessageService) { }
 
   getSubcategoryFromCompetition(competitionId: number): Observable<Subcategory[] | {}> {
-    return this.http.get<Subcategory[]>(this.getExtraPlayerInfoFromCompetitionUrl + competitionId).pipe(
-      tap((extraPlayerInfo) => {
-        this.log(`Distance for competition with id:${extraPlayerInfo} fetched`);
-        this.messageService.addObject(extraPlayerInfo);
+    return this.http.get<Subcategory[]>(this.getSubcategoryFromCompetitionUrl + competitionId).pipe(
+      tap((subcategory) => {
+        this.log(`Distance for competition with id:${subcategory} fetched`);
+        this.messageService.addObject(subcategory);
       }),
       catchError(this.handleError)
     );

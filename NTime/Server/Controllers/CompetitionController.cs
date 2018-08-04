@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Security;
 using BaseCore.DataBase;
+using BaseCore.DataBase.RepositoriesHelpers;
 using BaseCore.Models;
 using BaseCoreTests;
 using Microsoft.AspNet.Identity;
@@ -133,10 +134,7 @@ namespace Server.Controllers
             if (await CanOrganizerAccess() == false)
                 throw new Exception("Unauthorized");
 
-            PlayerRepository playerRepository = new PlayerRepository(new ContextProvider(), Competition);
-
-            await playerRepository.ExtraDataModification(permutationPairs.Select(pp => pp.PermutationElement).ToArray());
-            Competition.ExtraDataHeaders = String.Join(";", permutationPairs.Select(pp => pp.HeaderName).ToArray());
+            await CompetitionRepositoryHelper.ModifyExtraDataHeaders(permutationPairs, Competition);
 
             return Ok();
         }

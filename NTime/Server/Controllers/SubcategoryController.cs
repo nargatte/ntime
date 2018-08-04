@@ -5,7 +5,7 @@ using Server.Dtos;
 
 namespace Server.Controllers
 {
-    [RoutePrefix("api/Subcategories")]
+    [RoutePrefix("api/Subcategory")]
     public class SubcategoryController : ControllerCompetitionIdBase<SubcategoryRepository, Subcategory, SubcategoryDto>
     {
         protected override SubcategoryRepository CreateRepository() =>
@@ -15,7 +15,7 @@ namespace Server.Controllers
             new SubcategoryDto(entity);
 
         protected override string CreatedAdress =>
-            "extraplayerinfos";
+            "subcategory";
 
         // GET api/Subcategories/FromCompetition/1
         [Route("FromCompetition/{id:int:min(1)}")]

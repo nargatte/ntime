@@ -5,7 +5,7 @@ import { MaterialCustomModule } from '../../Modules/material-custom.module';
 import { AppModule } from '../../app.module';
 import { Competition } from '../../Models/Competition';
 import { Distance } from '../../Models/Distance';
-import { Subcategory } from '../../Models/ExtraPlayerInfo';
+import { Subcategory } from '../../Models/Subcategory';
 import { MockCompetitions } from '../../MockData/mockCompetitions';
 
 describe('RegistrationTabComponent', () => {
@@ -24,7 +24,7 @@ describe('RegistrationTabComponent', () => {
     component = fixture.componentInstance;
     component.competition = MockCompetitions[0];
     component.distances = [new Distance()];
-    component.extraPlayerInfos = [new Subcategory()];
+    component.subcategories = [new Subcategory()];
     fixture.detectChanges();
   });
 

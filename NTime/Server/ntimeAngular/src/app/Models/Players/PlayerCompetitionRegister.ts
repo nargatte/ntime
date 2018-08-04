@@ -8,7 +8,7 @@
     PhoneNumber: string;
     City: string;
     Email: string;
-    ExtraPlayerInfoId: number;
+    SubcategoryId: number;
     DistanceId: number;
     CompetitionId: number;
     ReCaptchaToken: string;

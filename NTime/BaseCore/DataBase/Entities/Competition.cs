@@ -34,7 +34,6 @@ namespace BaseCore.DataBase
 
         public string ExtraDataHeaders { get; set; }
 
-        public string SubcategoryAlternativeName { get; set; }
 
         [StringLength(2000)]
         public string Link { get; set; }

@@ -57,8 +57,8 @@
                 <StackPanel Orientation="Vertical">
                     <TextBlock Text="Dodatkowe inf."
                                VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
-                    <ComboBox ItemsSource="{Binding DefinedExtraPlayerInfo, UpdateSourceTrigger=PropertyChanged}" Width="100" Margin="5" Height="30"
-                                  SelectedItem="{Binding ExtraPlayerInfo, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name">
+                    <ComboBox ItemsSource="{Binding DefinedSubcategory, UpdateSourceTrigger=PropertyChanged}" Width="100" Margin="5" Height="30"
+                                  SelectedItem="{Binding Subcategory, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name">
                     </ComboBox>
 
                 </StackPanel>

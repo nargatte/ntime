@@ -4,10 +4,10 @@ import { SubcategoryService } from './subcategory.service';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { MessageService } from './message.service';
 import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
-import { Subcategory } from '../Models/ExtraPlayerInfo';
+import { Subcategory } from '../Models/Subcategory';
 import { Distance } from '../Models/Distance';
 
-describe('ExtraPlayerInfoService', () => {
+describe('SubcategoryService', () => {
   let subcategoryService: SubcategoryService;
   let httpMock: HttpTestingController;
 
@@ -32,7 +32,7 @@ describe('ExtraPlayerInfoService', () => {
       done();
     });
     const subcategory = [new Subcategory()];
-    const subcategoryRequest = httpMock.expectOne('/api/ExtraPlayerInfos/FromCompetition/0');
+    const subcategoryRequest = httpMock.expectOne('/api/Subcategory/FromCompetition/0');
     subcategoryRequest.flush(subcategory);
 
     httpMock.verify();

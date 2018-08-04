@@ -1,4 +1,4 @@
-﻿namespace Server.Models
+﻿namespace BaseCore.Models
 {
     public class PermutationPair
     {

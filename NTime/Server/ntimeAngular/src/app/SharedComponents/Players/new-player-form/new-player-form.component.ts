@@ -4,7 +4,7 @@ import { CompetitionService } from '../../../Services/competition.service';
 import { MessageService } from '../../../Services/message.service';
 import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { PlayerCompetitionRegister } from '../../../Models/Players/PlayerCompetitionRegister';
-import { Subcategory } from '../../../Models/ExtraPlayerInfo';
+import { Subcategory } from '../../../Models/Subcategory';
 import { Distance } from '../../../Models/Distance';
 import { PlayerService } from '../../../Services/player.service';
 import { ActivatedRoute } from '@angular/router';
@@ -24,7 +24,7 @@ import { MockPlayersCompetitionRegister } from '../../../MockData/MockPlayers';
 export class NewPlayerFormComponent implements OnInit, AfterViewInit {
   @Input() competition: Competition;
   @Input() distances: Distance[];
-  @Input() extraPlayerInfos: Subcategory[];
+  @Input() subcategories: Subcategory[];
 
   public todayDate: Date;
   public newPlayer: PlayerCompetitionRegister = new PlayerCompetitionRegister();
@@ -65,8 +65,8 @@ export class NewPlayerFormComponent implements OnInit, AfterViewInit {
   // }
 
   public addPlayer(reCaptchaToken: string) {
-    if (this.extraPlayerInfos.length === 1) {
-      this.newPlayer.ExtraPlayerInfoId = this.extraPlayerInfos[0].Id;
+    if (this.subcategories.length === 1) {
+      this.newPlayer.SubcategoryId = this.subcategories[0].Id;
     }
 
     this.newPlayer.ReCaptchaToken = reCaptchaToken;

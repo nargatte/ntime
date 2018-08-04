@@ -67,14 +67,14 @@
             </div>
           </mat-form-field>
 
-          <mat-form-field *ngIf="extraPlayerInfos.length>1">
-            <mat-select placeholder="Podkategoria" name="extraPlayerInfo" required [(ngModel)]="newPlayer.ExtraPlayerInfoId" #extraPlayerInfo="ngModel">
-              <mat-option *ngFor="let info of extraPlayerInfos" [(value)]="info.Id">
+          <mat-form-field *ngIf="subcategories.length>1">
+            <mat-select placeholder="Podkategoria" name="subcategory" required [(ngModel)]="newPlayer.SubcategoryId" #subcategory="ngModel">
+              <mat-option *ngFor="let info of subcategories" [(value)]="info.Id">
                 {{info.Name}}
               </mat-option>
             </mat-select>
-            <div *ngIf="extraPlayerInfo.invalid && (extraPlayerInfo.dirty || extraPlayerInfo.touched)" class="alert alert-danger">
-              <div *ngIf="extraPlayerInfo.errors.required">
+            <div *ngIf="subcategory.invalid && (subcategory.dirty || subcategory.touched)" class="alert alert-danger">
+              <div *ngIf="subcategory.errors.required">
                 Podkategoria jest wymagana
               </div>
             </div>

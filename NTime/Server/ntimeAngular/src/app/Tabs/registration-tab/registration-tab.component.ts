@@ -6,7 +6,7 @@ import { CompetitionService } from '../../Services/competition.service';
 import { DistanceService } from '../../Services/distance.service';
 import { SubcategoryService } from '../../Services/subcategory.service';
 import { Distance } from '../../Models/Distance';
-import { Subcategory } from '../../Models/ExtraPlayerInfo';
+import { Subcategory } from '../../Models/Subcategory';
 import { MessageService } from '../../Services/message.service';
 
 @Component({
@@ -18,14 +18,14 @@ export class RegistrationTabComponent implements OnInit {
   public competitionId: number;
   public competition: Competition = MockCompetitions[0];
   public distances: Distance[];
-  public extraPlayerInfos: Subcategory[];
+  public subcategories: Subcategory[];
   public todayDate: Date;
 
   constructor(
     private route: ActivatedRoute,
     private competitionService: CompetitionService,
     private distanceService: DistanceService,
-    private extraPlayerInfoService: SubcategoryService,
+    private subcategoryService: SubcategoryService,
     private messageService: MessageService
   ) {
     this.todayDate = new Date(Date.now());
@@ -34,7 +34,7 @@ export class RegistrationTabComponent implements OnInit {
   ngOnInit() {
     this.competitionId = +this.route.snapshot.paramMap.get('id');
     this.getCompetition(this.competitionId);
-    setTimeout(() => this.getExtraPlayerInfoFromCompetition(this.competitionId), 20);
+    setTimeout(() => this.getSubcategoriesFromCompetition(this.competitionId), 20);
     setTimeout(() => this.getDistanceFromCompetition(this.competitionId), 50);
   }
 
@@ -57,11 +57,11 @@ export class RegistrationTabComponent implements OnInit {
     );
   }
 
-  getExtraPlayerInfoFromCompetition(competitionId: number): void {
-    this.extraPlayerInfoService.getSubcategoryFromCompetition(competitionId).subscribe(
-      (extraPlayerInfo: Subcategory[]) => {
-        this.messageService.addLog(`ExtraPlayerInfo received ${extraPlayerInfo}`);
-        this.extraPlayerInfos = extraPlayerInfo;
+  getSubcategoriesFromCompetition(competitionId: number): void {
+    this.subcategoryService.getSubcategoryFromCompetition(competitionId).subscribe(
+      (subcategory: Subcategory[]) => {
+        this.messageService.addLog(`Subcategory received ${subcategory}`);
+        this.subcategories = subcategory;
       },
       error => this.messageService.addError(error), // Errors
     );

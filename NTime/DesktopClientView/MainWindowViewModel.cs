@@ -44,7 +44,7 @@ namespace DesktopClientView
 
             //var playerManagerFactory = new PlayerManagerFactoryDesktop();
             //var distanceManagerFactory = new DistanceManagerFactoryDesktop();
-            //var extraPlayerInfoManagerFactory = new ExtraPlayerInfoManagerFactoryDesktop();
+            //var subcategoryManagerFactory = new SubcategoryManagerFactoryDesktop();
             //var ageCategoryManagerFactory = new AgeCategoryManagerFactoryDesktop();
             //var competitionManagerFactory = new CompetitionManagerFactoryDesktop();
             //var playerAccountManagerFactory = new PlayerAccountManagerFactoryHttp();

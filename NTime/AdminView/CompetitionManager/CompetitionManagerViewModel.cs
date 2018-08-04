@@ -36,11 +36,11 @@ namespace AdminView.CompetitionManager
         //    TabItems = new ObservableCollection<ITabItemViewModel>()
         //    {
         //        new SettingsViewModel(_currentCompetition),
-        //        new PlayersViewModel(_currentCompetition, _playerManagerFactory, _distanceManagerFactory, _extraPlayerInfoManagerFactory, _ageCategoryManagerFactory),
+        //        new PlayersViewModel(_currentCompetition, _playerManagerFactory, _distanceManagerFactory, _subcategoryManagerFactory, _ageCategoryManagerFactory),
         //        new DistancesViewModel(_currentCompetition),
         //        new CategoriesViewModel(_currentCompetition),
         //        new LogsViewModel(_currentCompetition),
-        //        new ScoresViewModel(_currentCompetition, _playerManagerFactory, _distanceManagerFactory, _extraPlayerInfoManagerFactory, _ageCategoryManagerFactory)
+        //        new ScoresViewModel(_currentCompetition, _playerManagerFactory, _distanceManagerFactory, _subcategoryManagerFactory, _ageCategoryManagerFactory)
         //    };
         //}
 

@@ -99,6 +99,8 @@
     <Compile Include="DataBase\Enums\EnumHelper.cs" />
     <Compile Include="DataBase\Enums\SexEnum.cs" />
     <Compile Include="DataBase\Enums\SortOrderEnum.cs" />
+    <Compile Include="DataBase\RepositoriesHelpers\CompetitionRepositoryHelper.cs" />
+    <Compile Include="DataBase\RepositoriesHelpers\PermutationPair.cs" />
     <Compile Include="DataBase\Repositories\GateRepository.cs" />
     <Compile Include="DataBase\Repositories\OrganizerAccountRepository.cs" />
     <Compile Include="DataBase\Repositories\PlayerAccountRepository.cs" />

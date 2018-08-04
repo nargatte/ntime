@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NewPlayerFormComponent } from './new-player-form.component';
 import { AppModule } from '../../../app.module';
-import { Subcategory } from '../../../Models/ExtraPlayerInfo';
+import { Subcategory } from '../../../Models/Subcategory';
 import { Distance } from '../../../Models/Distance';
 import { Competition } from '../../../Models/Competition';
 
@@ -20,7 +20,7 @@ describe('NewPlayerFormComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(NewPlayerFormComponent);
     component = fixture.componentInstance;
-    component.extraPlayerInfos = [new Subcategory()];
+    component.subcategories = [new Subcategory()];
     component.distances = [new Distance()];
     component.competition = new Competition(1, 'Kolumna', new Date(Date.now()), new Date(Date.now()));
 

@@ -76,7 +76,7 @@
                             </StackPanel>
                             <StackPanel Orientation="Vertical" Margin="5">
                                 <TextBlock Text="Dodatkowe inf." HorizontalAlignment="Center"/>
-                                <ComboBox ItemsSource="{Binding DefinedExtraPlayerInfo}" DisplayMemberPath="Name" SelectedItem="{Binding ExtraPlayerInfoSortCriteria, UpdateSourceTrigger=PropertyChanged}"/>
+                                <ComboBox ItemsSource="{Binding DefinedSubcategory}" DisplayMemberPath="Name" SelectedItem="{Binding SubcategorySortCriteria, UpdateSourceTrigger=PropertyChanged}"/>
                             </StackPanel>
                             <StackPanel Orientation="Vertical" Margin="5">
                                 <TextBlock Text="Kat. wiek." HorizontalAlignment="Center"/>
@@ -121,7 +121,7 @@
                 <DataGridTextColumn x:Name="lastNameColumn" Header="Nazwisko" Binding="{Binding LastName}" IsReadOnly="True"/>
                 <!--<DataGridTextColumn x:Name="distancedColumn"  Header="Dystans" Binding="{Binding Distance.Name}" IsReadOnly="True"/>-->
                 <DataGridTextColumn x:Name="startTimeColumn" Header="Czas startu" Binding="{Binding StartTime}" IsReadOnly="True"/>
-                <!--<DataGridTextColumn x:Name="extraPlayerInfoColumn"  Header="Dodatkowe info" Binding="{Binding ExtraPlayerInfo.Name}" IsReadOnly="True"/>-->
+                <!--<DataGridTextColumn x:Name="subcategoryColumn"  Header="Dodatkowe info" Binding="{Binding Subcategory.Name}" IsReadOnly="True"/>-->
                 <DataGridTextColumn x:Name="teamColumn"  Header="Klub" Binding="{Binding Team}" IsReadOnly="True"/>
                 <!--<DataGridTemplateColumn x:Name="birthDateColumn"  Header="Data urodzenia" IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
