@@ -82,7 +82,7 @@ namespace AdminView.Players
 
         private void ClearNewPlayer()
         {
-            NewPlayer = new EditablePlayer(_currentCompetition, DefinedDistances, DefinedSubcategory, new Player()
+            NewPlayer = new EditablePlayer(_currentCompetition, DefinedDistances, DefinedSubcategories, new Player()
             {
                 Distance = new Distance(),
                 Subcategory = new Subcategory(),

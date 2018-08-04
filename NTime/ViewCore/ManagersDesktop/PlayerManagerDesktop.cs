@@ -132,7 +132,7 @@ namespace ViewCore.ManagersDesktop
                 message = "Nie przypisano żadnego dystansu";
                 return false;
             }
-            if (newPlayer.Subcategories == null || String.IsNullOrWhiteSpace(newPlayer.Subcategories.Name))
+            if (newPlayer.Subcategory == null || String.IsNullOrWhiteSpace(newPlayer.Subcategory.Name))
             {
                 message = "Nie przypisano Dodatkowych informacji";
                 return false;

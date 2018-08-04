@@ -77,7 +77,7 @@ namespace DesktopClientView.TabItems.Registration
 
                 await DownloadPlayersInfo(CompetitionData.SelectedCompetition);
                 _playersManager = _dependencyContainer.PlayerManagerFactory.CreateInstance(CompetitionData.SelectedCompetition,
-                    DefinedDistances, DefinedSubcategory, null, _dependencyContainer.User, _dependencyContainer.ConnectionInfo);
+                    DefinedDistances, DefinedSubcategories, null, _dependencyContainer.User, _dependencyContainer.ConnectionInfo);
                 DisplayPlayerData();
             }
             else
@@ -94,7 +94,7 @@ namespace DesktopClientView.TabItems.Registration
         private void DisplayPlayerData()
         {
             NewPlayer.DefinedDistances = DefinedDistances;
-            NewPlayer.DefinedSubcategory = DefinedSubcategory;
+            NewPlayer.DefinedSubcategories = DefinedSubcategories;
         }
 
         private void ClearNewPlayer()
@@ -102,9 +102,9 @@ namespace DesktopClientView.TabItems.Registration
             NewPlayer = new EditablePlayer(new EditableCompetition())
             {
                 Distance = new EditableDistance(new EditableCompetition()),
-                Subcategories = new EditableSubcategory(new EditableCompetition()),
+                Subcategory = new EditableSubcategory(new EditableCompetition()),
                 DefinedDistances = new ObservableCollection<EditableDistance>(),
-                DefinedSubcategory = new ObservableCollection<EditableSubcategory>()
+                DefinedSubcategories = new ObservableCollection<EditableSubcategory>()
             };
         }
 

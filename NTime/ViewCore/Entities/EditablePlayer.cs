@@ -26,7 +26,7 @@ namespace ViewCore.Entities
             if (BirthDate == null || BirthDate < new DateTime(2000, 1, 1))
                 BirthDate = DateTime.Today;
             DefinedDistances = new ObservableCollection<EditableDistance>();
-            DefinedSubcategory = new ObservableCollection<EditableSubcategory>();
+            DefinedSubcategories = new ObservableCollection<EditableSubcategory>();
         }
 
         public EditablePlayer(IEditableCompetition currentComptetition, ICollection<EditableDistance> distances,
@@ -34,7 +34,7 @@ namespace ViewCore.Entities
         {
             DbEntity = dbPlayer;
             DefinedDistances = new ObservableCollection<EditableDistance>(distances);
-            DefinedSubcategory = new ObservableCollection<EditableSubcategory>(subcategories);
+            DefinedSubcategories = new ObservableCollection<EditableSubcategory>(subcategories);
         }
 
         public int StartNumber
@@ -98,11 +98,11 @@ namespace ViewCore.Entities
             }
         }
 
-        public EditableSubcategory Subcategories
+        public EditableSubcategory Subcategory
         {
             get
             {
-                var temp = DefinedSubcategory.FirstOrDefault(info => Equals(info.DbEntity, DbEntity.Subcategory));
+                var temp = DefinedSubcategories.FirstOrDefault(info => Equals(info.DbEntity, DbEntity.Subcategory));
                 return temp;
             }
             set
@@ -232,11 +232,11 @@ namespace ViewCore.Entities
         }
 
 
-        private ObservableCollection<EditableSubcategory> _definedSubcategory;
-        public ObservableCollection<EditableSubcategory> DefinedSubcategory
+        private ObservableCollection<EditableSubcategory> _definedSubcategories;
+        public ObservableCollection<EditableSubcategory> DefinedSubcategories
         {
-            get { return _definedSubcategory; }
-            set { SetProperty(ref _definedSubcategory, value); }
+            get { return _definedSubcategories; }
+            set { SetProperty(ref _definedSubcategories, value); }
         }
 
         public object Clone()

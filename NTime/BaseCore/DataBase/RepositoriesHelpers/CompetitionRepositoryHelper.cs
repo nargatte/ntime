@@ -14,7 +14,7 @@ namespace BaseCore.DataBase.RepositoriesHelpers
             var playerRepository = new PlayerRepository(new ContextProvider(), competition);
             var competitionRepository = new CompetitionRepository(new ContextProvider());
 
-            await playerRepository.ExtraDataModification(permutationPairs.Select(pp => pp.PermutationElement).ToArray());
+            await playerRepository.ModifyExtraData(permutationPairs.Select(pp => pp.PermutationElement).ToArray());
 
             competition.ExtraDataHeaders = String.Join(";", permutationPairs.Select(pp => pp.HeaderName).ToArray());
             await competitionRepository.UpdateAsync(competition);

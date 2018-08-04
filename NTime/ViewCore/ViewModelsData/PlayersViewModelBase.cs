@@ -144,7 +144,7 @@ namespace ViewCore
 
 
         private ObservableCollection<EditableSubcategory> _definedSubcategory = new ObservableCollection<EditableSubcategory>();
-        public ObservableCollection<EditableSubcategory> DefinedSubcategory
+        public ObservableCollection<EditableSubcategory> DefinedSubcategories
         {
             get { return _definedSubcategory; }
             set { SetProperty(ref _definedSubcategory, value); }
@@ -170,7 +170,7 @@ namespace ViewCore
             await DownloadPlayersInfo(selectedCompeititon);
 
             _playersManager = _dependencyContainer.PlayerManagerFactory.CreateInstance(_currentCompetition, DefinedDistances,
-                DefinedSubcategory, RecordsRangeInfo, _dependencyContainer.User, _dependencyContainer.ConnectionInfo);
+                DefinedSubcategories, RecordsRangeInfo, _dependencyContainer.User, _dependencyContainer.ConnectionInfo);
             //DistanceSortCriteria = new EditableDistance(_currentCompetition);
             //SubcategorySortCriteria = new EditableSubcategory(_currentCompetition);
             await _playersManager.AddPlayersFromDatabase(removeAllDisplayedBefore: true);
@@ -190,7 +190,7 @@ namespace ViewCore
             DefinedDistances = await _distancesManager.DownloadDistancesAsync();
 
             _subcategoriesManager = _dependencyContainer.SubcategoriesManagerFactory.CreateInstance(_currentCompetition, _dependencyContainer.User, _dependencyContainer.ConnectionInfo);
-            DefinedSubcategory = await _subcategoriesManager.DownloadSubcategoryAsync();
+            DefinedSubcategories = await _subcategoriesManager.DownloadSubcategoryAsync();
 
             _ageCategoryManager = _dependencyContainer.AgeCategoryManagerFactory.CreateInstance(_currentCompetition, _dependencyContainer.User, _dependencyContainer.ConnectionInfo);
             DefinedAgeCategories = await _ageCategoryManager.DownloadAgeCategoriesAsync();

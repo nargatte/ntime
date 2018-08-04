@@ -530,7 +530,7 @@ namespace BaseCore.DataBase
             return player;
         }
 
-        public Task ExtraDataModification(int[] permutation)
+        public Task ModifyExtraData(int[] permutations)
         {
             return ContextProvider.DoAsync(async ctx =>
             {
@@ -539,11 +539,11 @@ namespace BaseCore.DataBase
                 foreach (Player player in players)
                 {
                     string[] extraData = player.ExtraData.Split(new[] {';'}, StringSplitOptions.None);
-                    string[] newExtraData = new string[permutation.Length];
+                    string[] newExtraData = new string[permutations.Length];
                     for (int x = 0; x < newExtraData.Length; x++)
                     {
-                        if (permutation[x] >= 0 && permutation[x] < extraData.Length)
-                            newExtraData[x] = extraData[permutation[x]];
+                        if (permutations[x] >= 0 && permutations[x] < extraData.Length)
+                            newExtraData[x] = extraData[permutations[x]];
                     }
 
                     player.ExtraData = String.Join(";", newExtraData);

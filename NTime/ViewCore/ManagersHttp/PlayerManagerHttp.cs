@@ -86,7 +86,7 @@ namespace ViewCore.ManagersHttp
                     DbEntity = (await _client.GetFullRegisteredPlayerFromCompetition(competition, playerAccount)).CopyDataFromDto(new Player())
                 };
                 player.Distance = _definedDistances.FirstOrDefault(defined => defined.DbEntity.Id == player.DbEntity.DistanceId);
-                player.Subcategories = _definedSubcategories.FirstOrDefault(defined => defined.DbEntity.Id == player.DbEntity.SubcategoryId);
+                player.Subcategory = _definedSubcategories.FirstOrDefault(defined => defined.DbEntity.Id == player.DbEntity.SubcategoryId);
             });
             if (player.DbEntity != null)
             {
@@ -145,7 +145,7 @@ namespace ViewCore.ManagersHttp
                 message = "Nie przypisano żadnego dystansu";
                 return false;
             }
-            if (newPlayer.Subcategories == null || String.IsNullOrWhiteSpace(newPlayer.Subcategories.Name))
+            if (newPlayer.Subcategory == null || String.IsNullOrWhiteSpace(newPlayer.Subcategory.Name))
             {
                 message = "Nie przypisano Dodatkowych informacji";
                 return false;
