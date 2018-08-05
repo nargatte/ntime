@@ -38,6 +38,7 @@ namespace BaseCore.DataBase
 
         public async Task<Tuple<Player[], int>> GetAllByFilterAsync(PlayerFilterOptions filterOptions, int pageNumber, int numberItemsOnPage)
         {
+            var competitionRepository = new CompetitionRepository(new ContextProvider());
             Player[] players = null;
             int totalItemsNumber = 0;
 
@@ -46,6 +47,7 @@ namespace BaseCore.DataBase
                 filterOptions.PlayerSort = PlayerSort.ByFirstName;
                 pageNumber = 0;
                 numberItemsOnPage = int.MaxValue;
+                char delimiter = competitionRepository.DelimiterForExtraData;
 
                 await ContextProvider.DoAsync(async ctx =>
                 {
@@ -59,12 +61,12 @@ namespace BaseCore.DataBase
                 {
                     if (filterOptions.DescendingSort)
                         players = players.OrderByDescending(p =>
-                            (p.ExtraData ?? String.Empty).Split(new[] { ';' }, StringSplitOptions.None)[filterOptions.ExtraDataSortIndex]).Skip(pageNumber * numberItemsOnPage).Take(numberItemsOnPage).ToArray();
+                            (p.ExtraData ?? String.Empty).Split(new[] { delimiter }, StringSplitOptions.None)[filterOptions.ExtraDataSortIndex]).Skip(pageNumber * numberItemsOnPage).Take(numberItemsOnPage).ToArray();
                     else
                         players = players.OrderBy(p =>
-                            (p.ExtraData ?? String.Empty).Split(new[] { ';' }, StringSplitOptions.None)[filterOptions.ExtraDataSortIndex]).Skip(pageNumber * numberItemsOnPage).Take(numberItemsOnPage).ToArray();
+                            (p.ExtraData ?? String.Empty).Split(new[] { delimiter }, StringSplitOptions.None)[filterOptions.ExtraDataSortIndex]).Skip(pageNumber * numberItemsOnPage).Take(numberItemsOnPage).ToArray();
                 }
-                catch(IndexOutOfRangeException)
+                catch (IndexOutOfRangeException)
                 {
                     throw new ArgumentException("Podana kolumna sortowania jest nieprawidłowa");
                 }
@@ -564,7 +566,7 @@ namespace BaseCore.DataBase
             return player;
         }
 
-        public Task ModifyExtraData(int[] permutations)
+        public Task ModifyExtraData(int[] permutations, char delimiter)
         {
             return ContextProvider.DoAsync(async ctx =>
             {
@@ -573,10 +575,10 @@ namespace BaseCore.DataBase
                 foreach (Player player in players)
                 {
                     if (player.ExtraData == null)
-                        player.ExtraData = String.Concat(Enumerable.Repeat(";", permutations.Length - 1).ToArray());
+                        player.ExtraData = String.Concat(Enumerable.Repeat(delimiter, permutations.Length - 1).ToArray());
                     else
                     {
-                        string[] extraData = player.ExtraData.Split(new[] { ';' }, StringSplitOptions.None);
+                        string[] extraData = player.ExtraData.Split(new[] { delimiter }, StringSplitOptions.None);
                         string[] newExtraData = new string[permutations.Length];
                         for (int x = 0; x < newExtraData.Length; x++)
                         {
@@ -584,7 +586,7 @@ namespace BaseCore.DataBase
                                 newExtraData[x] = extraData[permutations[x]];
                         }
 
-                        player.ExtraData = String.Join(";", newExtraData);
+                        player.ExtraData = String.Join(delimiter.ToString(), newExtraData);
                     }
                 }
 

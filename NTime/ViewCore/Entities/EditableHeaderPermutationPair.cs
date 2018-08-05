@@ -13,6 +13,8 @@ namespace ViewCore.Entities
         public EditableHeaderPermutationPair(IEditableCompetition currentComptetition) : base(currentComptetition)
         {
             DeleteExtraHeaderCmd = new RelayCommand(OnDeleteExtraHeader);
+            MoveUpExtraHeaderCmd = new RelayCommand(OnMoveUpRequested);
+            MoveDownExtraHeaderCmd = new RelayCommand(OnMoveDownRequested);
         }
 
 
@@ -36,18 +38,27 @@ namespace ViewCore.Entities
             }
         }
 
+
+        public RelayCommand DeleteExtraHeaderCmd { get; private set; }
+        public RelayCommand MoveUpExtraHeaderCmd { get; private set; }
+        public RelayCommand MoveDownExtraHeaderCmd { get; private set; }
+        public event EventHandler DeleteRequested = delegate { };
+        public event EventHandler MoveUpRequested = delegate { };
+        public event EventHandler MoveDownRequested = delegate { };
+
         private void OnDeleteExtraHeader()
         {
             DeleteRequested(this, EventArgs.Empty);
         }
 
-        public RelayCommand DeleteExtraHeaderCmd { get; private set; }
-        public event EventHandler DeleteRequested = delegate { };
-        public event EventHandler UpdateRequested = delegate { };
-
-        protected void OnUpdateRequested()
+        protected void OnMoveUpRequested()
         {
-            UpdateRequested?.Invoke(this, EventArgs.Empty);
+            MoveUpRequested?.Invoke(this, EventArgs.Empty);
+        }
+
+        protected void OnMoveDownRequested()
+        {
+            MoveDownRequested?.Invoke(this, EventArgs.Empty);
         }
     }
 }

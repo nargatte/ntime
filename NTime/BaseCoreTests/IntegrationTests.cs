@@ -52,7 +52,8 @@ namespace BaseCoreTests
 
             var cp = new ContextProvider();
             var cr = new CompetitionRepository(cp);
-            var com = await cr.AddAsync(new Competition("Zawody Integracyjne", DateTime.Now, "Integration City", null, null, null));
+            var com = await cr.AddAsync(new Competition("Zawody Integracyjne", DateTime.Now, "Integration City", null, null, null)
+                { ExtraDataHeaders = "Pierwsza|Druga"} );
             var pr = new PlayerRepository(cp, com);
             var eifr = new SubcategoryRepository(cp, com);
             var dr = new DistanceRepository(cp, com);

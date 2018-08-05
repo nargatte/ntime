@@ -13,10 +13,11 @@ namespace BaseCore.DataBase.RepositoriesHelpers
         {
             var playerRepository = new PlayerRepository(new ContextProvider(), competition);
             var competitionRepository = new CompetitionRepository(new ContextProvider());
+            char delimiter = competitionRepository.DelimiterForExtraData;
 
-            await playerRepository.ModifyExtraData(permutationPairs.Select(pp => pp.PermutationElement).ToArray());
+            await playerRepository.ModifyExtraData(permutationPairs.Select(pp => pp.PermutationElement).ToArray(), delimiter);
 
-            competition.ExtraDataHeaders = String.Join(";", permutationPairs.Select(pp => pp.HeaderName).ToArray());
+            competition.ExtraDataHeaders = String.Join(delimiter.ToString(), permutationPairs.Select(pp => pp.HeaderName).ToArray());
             await competitionRepository.UpdateAsync(competition);
         }
     }

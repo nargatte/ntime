@@ -14,6 +14,8 @@ namespace BaseCore.DataBase
         {
         }
 
+        public char DelimiterForExtraData { get; set; } = '|';
+
         protected override IQueryable<Competition> GetSortQuery(IQueryable<Competition> items) =>
             items.OrderByDescending(e => e.EventDate);
 
@@ -77,7 +79,7 @@ namespace BaseCore.DataBase
             if (String.IsNullOrWhiteSpace(extraData))
                 return new List<HeaderPermutationPair>();
             var iterator = 0;
-            return extraData.Split(';').Select(headerName =>
+            return extraData.Split(DelimiterForExtraData).Select(headerName =>
                 new HeaderPermutationPair { PermutationElement = iterator++, HeaderName = headerName });
         }
     }

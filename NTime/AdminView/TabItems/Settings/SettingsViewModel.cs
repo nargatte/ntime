@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using BaseCore.DataBase;
 using BaseCore.DataBase.RepositoriesHelpers;
+using BaseCore.Models;
 using MvvmHelper;
 using ViewCore;
 using ViewCore.Entities;
@@ -25,6 +26,8 @@ namespace AdminView.Settings
             AddExtraHeaderCmd = new RelayCommand(OnAddExtraHeader);
             _newExtraHeader = new EditableHeaderPermutationPair(currentCompetition);
         }
+
+        public int MaxPermutationValue { get; set; } = -1;
 
         public ViewCore.Entities.IEditableCompetition CurrentCompetition
         {
@@ -58,14 +61,24 @@ namespace AdminView.Settings
         {
             ExtraHeaders.Clear();
             var downloadedExtraHeaders = _competitionRepository.GetHeaderPermutationPairs(CurrentCompetition.DbEntity.ExtraDataHeaders).ToList();
-            downloadedExtraHeaders.ForEach(item => ExtraHeaders.Add(new EditableHeaderPermutationPair(CurrentCompetition) { DbEntity = item }));
+            foreach (var header in downloadedExtraHeaders)
+            {
+                ExtraHeaders.Add(PrepareNewExtraHeader(header));
+            }
         }
+
 
         private async void OnSaveChangesAsync()
         {
+            if(ExtraHeaders.Any(header => !IsHeaderInputCorrect(header)))
+            {
+                MessageBox.Show("Nazwy kolumn nie mogą być puste");
+                return;
+            }
             await CompetitionRepositoryHelper.ModifyExtraDataHeaders(
                 ExtraHeaders.Select(extraHeader => extraHeader.DbEntity).ToArray(), CurrentCompetition.DbEntity
             ).ContinueWith(t => MessageBox.Show("Zmiany zostały zapisane"));
+
             //await repository.UpdateAsync(_currentCompetition.DbEntity).ContinueWith(t =>
             //    MessageBox.Show("Zmiany zostały zapisane")
             //);
@@ -73,8 +86,22 @@ namespace AdminView.Settings
 
         private void OnAddExtraHeader()
         {
-            ExtraHeaders.Add(NewExtraHeader);
+            if (!IsHeaderInputCorrect(NewExtraHeader))
+            {
+                MessageBox.Show("Nagłówek nie może być pusty");
+                return;
+            }
+            ExtraHeaders.Add(PrepareNewExtraHeader(NewExtraHeader.DbEntity));
             ClearNewExtraHeader();
+        }
+
+
+        private bool IsHeaderInputCorrect(EditableHeaderPermutationPair editableHeader)
+        {
+            if (String.IsNullOrWhiteSpace(editableHeader.HeaderName))
+                return false;
+            else
+                return true;
         }
 
         private void ClearNewExtraHeader()
@@ -94,6 +121,41 @@ namespace AdminView.Settings
                 CompetitionRemoved?.Invoke();
             }
         }
+
+        private EditableHeaderPermutationPair PrepareNewExtraHeader(HeaderPermutationPair dbEntity)
+        {
+            var editableHeader = new EditableHeaderPermutationPair(CurrentCompetition) { DbEntity = dbEntity };
+            editableHeader.DeleteRequested += EditableHeader_DeleteRequested;
+            editableHeader.MoveUpRequested += EditableHeader_MoveUpRequested;
+            editableHeader.MoveDownRequested += EditableHeader_MoveDownRequested;
+            editableHeader.PermutationElement = ++MaxPermutationValue;
+            return editableHeader;
+        }
+
+        private void EditableHeader_DeleteRequested(object sender, EventArgs e)
+        {
+            var editableHeader = sender as EditableHeaderPermutationPair;
+            ExtraHeaders.Remove(editableHeader);
+        }
+
+        private void EditableHeader_MoveUpRequested(object sender, EventArgs e)
+        {
+            var editableHeader = sender as EditableHeaderPermutationPair;
+            if (editableHeader == ExtraHeaders.First())
+                return;
+            int currentIndex = ExtraHeaders.IndexOf(editableHeader);
+            ExtraHeaders.Move(currentIndex, currentIndex - 1);
+        }
+
+        private void EditableHeader_MoveDownRequested(object sender, EventArgs e)
+        {
+            var editableHeader = sender as EditableHeaderPermutationPair;
+            if (editableHeader == ExtraHeaders.Last() )
+                return;
+            int currentIndex = ExtraHeaders.IndexOf(editableHeader);
+            ExtraHeaders.Move(currentIndex, currentIndex + 1);
+        }
+
 
         public RelayCommand SaveChangesCmd { get; private set; }
         public RelayCommand RemoveCompetitionCmd { get; private set; }
