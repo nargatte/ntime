@@ -35,9 +35,6 @@ namespace BaseCore.Migrations
             AddColumn("dbo.Players", "IsCategoryFixed", c => c.Boolean(nullable: false));
             AddColumn("dbo.Players", "ExtraData", c => c.String());
             AddColumn("dbo.AgeCategoryTemplates", "Male", c => c.Boolean(nullable: false));
-            //Adding columns for Identity Server
-            //AddColumn("dbo.AspNetUsers", "FirstName", c => c.String());
-            //AddColumn("dbo.AspNetUsers", "LastName", c => c.String());
             CreateIndex("dbo.AgeCategories", "AgeCategory_Id");
             AddForeignKey("dbo.AgeCategories", "AgeCategory_Id", "dbo.AgeCategories", "Id");
             DropColumn("dbo.PlayerAccounts", "FirstName");
@@ -68,9 +65,6 @@ namespace BaseCore.Migrations
             DropIndex("dbo.AgeCategoryDistances", new[] { "AgeCategoryId" });
             DropIndex("dbo.AgeCategoryDistances", new[] { "CompetitionId" });
             DropIndex("dbo.AgeCategories", new[] { "AgeCategory_Id" });
-            // Dropping columns for Identity Server
-            //DropColumn("dbo.AspNetUsers", "FirstName");
-            //DropColumn("dbo.AspNetUsers", "LastName");
             DropColumn("dbo.AgeCategoryTemplates", "Male");
             DropColumn("dbo.Players", "ExtraData");
             DropColumn("dbo.Players", "IsCategoryFixed");
