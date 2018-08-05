@@ -20,6 +20,7 @@ namespace BaseCore.Csv
             Map(m => m.StringAditionalInfo).Name("rower");
             Map(m => m.StartTime).Name("czas_startu");
             Map(m => m.StringDistance).Name("nazwa_dystansu");
+            Map(m => m.ExtraData).Name("kolumny_dodatkowe");
         }
 
         private bool IsMaleConverter(IReaderRow row)

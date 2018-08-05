@@ -475,7 +475,7 @@ namespace BaseCore.DataBase
                 if (record.StartNumber == -1) continue;
                 Player p = new Player(record.FirstName, record.LastName, record.BirthDate, record.IsMale, record.Team,
                     record.StartNumber)
-                { StartTime = record.StartTime };
+                { StartTime = record.StartTime, ExtraData = record.ExtraData };
 
                 Distance distance;
                 distancesDictionary.TryGetValue(record.StringDistance, out distance);

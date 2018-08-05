@@ -14,5 +14,6 @@ namespace BaseCore.Csv
         public string StringAditionalInfo { get; set; }
         public DateTime StartTime { get; set; }
         public string StringDistance { get; set; }
+        public string ExtraData { get; set; }
     }
 }
