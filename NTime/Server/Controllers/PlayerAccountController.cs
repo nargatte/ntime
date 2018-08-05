@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using BaseCore.DataBase;
 using BaseCore.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 using Server.Dtos;
 using Server.Models;
 
@@ -50,7 +54,10 @@ namespace Server.Controllers
             if (CanPlayerAccess(playerAccount) == false)
                 return Unauthorized();
 
-            return Ok(new PlayerAccountDto(playerAccount));
+            var accountRepository = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var userAccount = await accountRepository.FindByIdAsync(User.Identity.GetUserId());
+
+            return Ok(new PlayerAccountDto(playerAccount, userAccount));
         }
 
         // GET api/PlayerAccount/1
@@ -66,7 +73,10 @@ namespace Server.Controllers
             if (CanPlayerAccess(playerAccount) == false)
                 return Unauthorized();
 
-            return Ok(new PlayerAccountDto(playerAccount));
+            var accountRepository = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var userAccount = await accountRepository.FindByIdAsync(playerAccount.AccountId);
+
+            return Ok(new PlayerAccountDto(playerAccount, userAccount));
         }
 
         // GET api/PlayerAccount/FromCompetition/1?ItemsOnPage=10&PageNumber=0
@@ -77,11 +87,20 @@ namespace Server.Controllers
             if (await InitCompetitionById(id) == false)
                 return NotFound();
 
+            var accountRepository = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+
             PageViewModel<PlayerAccount> viewModel =
                 await _playerAccountRepository.GetPlayersAccountsByCompetition(Competition, pageBindingModel);
+
+            var playerAccounts = new List<PlayerAccountDto>();
+            foreach (var pa in viewModel.Items)
+            {
+                var userAccount = await accountRepository.FindByIdAsync(pa.AccountId);
+                playerAccounts.Add(new PlayerAccountDto(pa, userAccount));
+            }
             PageViewModel<PlayerAccountDto> viewModelDto = new PageViewModel<PlayerAccountDto>
             {
-                Items = viewModel.Items.Select(pa => new PlayerAccountDto(pa)).ToArray(),
+                Items = playerAccounts.ToArray(),
                 TotalCount = viewModel.TotalCount
             };
             return Ok(viewModelDto);

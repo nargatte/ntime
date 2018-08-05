@@ -6,6 +6,7 @@
     IsMale: boolean;
     Team: string;
     PhoneNumber: string;
+    ExtraData: string;
     City: string;
     Email: string;
     SubcategoryId: number;

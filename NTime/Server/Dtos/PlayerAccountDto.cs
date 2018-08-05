@@ -33,7 +33,7 @@ namespace Server.Dtos
         {
             FirstName = applicationUser.FirstName;
             LastName = applicationUser.LastName;
-            EMail = applicationUser.Email;
+            Email = applicationUser.Email;
             PhoneNumber = applicationUser.PhoneNumber;
         }
 
@@ -67,7 +67,7 @@ namespace Server.Dtos
         public string PhoneNumber { get; set; }
 
         [EmailAddress]
-        public string EMail { get; set; }
+        public string Email { get; set; }
 
         public string City { get; set; }
     }

@@ -11,7 +11,7 @@ namespace BaseCore.PlayerFilter
         public bool? Men { get; set; }
         public bool? WithoutStartTime { get; set; }
         public bool? Invalid { get; set; }
-        public bool? CompleatedCompetition { get; set; }
+        public bool? CompletedCompetition { get; set; }
         public bool? HasVoid { get; set; }
         public bool? IsPaidUp { get; set; }
         public Distance Distance { get; set; }

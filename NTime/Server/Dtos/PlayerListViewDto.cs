@@ -20,13 +20,13 @@ namespace Server.Dtos
             FirstName = player.FirstName;
             LastName = player.LastName;
             IsMale = player.IsMale;
+            ExtraData = player.ExtraData;
             Team = player.Team;
             StartNumber = player.StartNumber;
             StartTime = player.StartTime;
             FullCategory = player.FullCategory;
             City = player.City;
             IsPaidUp = player.IsPaidUp;
-            ExtraData = player.ExtraData;
         }
 
         public Player CopyDataFromDto(Player player)
@@ -35,13 +35,13 @@ namespace Server.Dtos
             player.FirstName = FirstName;
             player.LastName = LastName;
             player.IsMale = IsMale;
+            player.ExtraData = ExtraData;
             player.Team = Team;
             player.StartNumber = StartNumber;
             player.StartTime = StartTime;
             player.FullCategory = FullCategory;
             player.City = City;
             player.IsPaidUp = IsPaidUp;
-            player.ExtraData = ExtraData;
             return player;
         }
 
@@ -54,6 +54,8 @@ namespace Server.Dtos
         public string LastName { get; set; }
 
         public bool IsMale { get; set; }
+
+        public string ExtraData { get; set; }
 
         [StringLength(255)]
         public string Team { get; set; }
@@ -69,6 +71,5 @@ namespace Server.Dtos
 
         public bool IsPaidUp { get; set; }
 
-        public string ExtraData { get; set; }
     }
 }

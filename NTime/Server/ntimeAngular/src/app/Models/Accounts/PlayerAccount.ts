@@ -7,7 +7,7 @@ export class PlayerAccount {
         public IsMale: Boolean,
         public Team: string,
         public PhoneNumber: string,
-        public EMail: string,
+        public Email: string,
         public City: string
     ) {}
 }

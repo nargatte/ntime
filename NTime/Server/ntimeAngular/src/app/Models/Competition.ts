@@ -5,7 +5,9 @@
 
     }
     Name: string;
+    ExtraDataHeaders: string;
     Link: string;
+    LinkDisplayedName: string;
     Organizer: string;
     OrganizerEditLock: boolean;
 

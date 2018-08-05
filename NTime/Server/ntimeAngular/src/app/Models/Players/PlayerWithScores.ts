@@ -5,6 +5,7 @@ export class PlayersWithScores {
     BirthDate: Date;
     IsMale: boolean;
     PhoneNumber: string;
+    ExtraData: string;
     Team: string;
     StartNumber: number;
     StartTime: Date;

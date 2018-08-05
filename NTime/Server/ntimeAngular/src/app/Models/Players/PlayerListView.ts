@@ -2,6 +2,7 @@ export class PlayerListView {
     Id: number;
     FirstName: string;
     LastName: string;
+    ExtraData: string;
     IsMale: boolean;
     Team: string;
     StartNumber: number;

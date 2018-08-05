@@ -116,7 +116,7 @@ namespace Server.Controllers
             OrganizerAccount account = new OrganizerAccount();
             accountDto.CopyDataFromDto(account);
 
-            var user = new ApplicationUser() { UserName = accountDto.EMail, Email = accountDto.EMail };
+            var user = new ApplicationUser() { UserName = accountDto.Email, Email = accountDto.Email };
 
             string pass = PasswordGenerator();
 

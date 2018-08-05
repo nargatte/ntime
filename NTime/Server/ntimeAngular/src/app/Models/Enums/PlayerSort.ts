@@ -6,5 +6,6 @@ export enum PlayerSort {
   ByStartTime,
   ByFullCategory,
   ByBirthDate,
-  ByRank
+  ByRank,
+  ByExtraData,
 }

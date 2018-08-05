@@ -30,7 +30,7 @@ namespace Server.Models
             Men = filterOptions.Men;
             WithoutStartTime = filterOptions.WithoutStartTime;
             Invalid = filterOptions.Invalid;
-            CompleatedCompetition = filterOptions.CompleatedCompetition;
+            CompleatedCompetition = filterOptions.CompletedCompetition;
             HasVoid = filterOptions.HasVoid;
             if (filterOptions.Distance != null)
                 Distance = filterOptions.Distance.Id;
@@ -49,7 +49,7 @@ namespace Server.Models
             filterOptions.Men = Men;
             filterOptions.WithoutStartTime = WithoutStartTime;
             filterOptions.Invalid = Invalid;
-            filterOptions.CompleatedCompetition = CompleatedCompetition;
+            filterOptions.CompletedCompetition = CompleatedCompetition;
             filterOptions.HasVoid = HasVoid;
             if (Distance != null)
                 filterOptions.Distance = new Distance() { Id = Distance.Value };

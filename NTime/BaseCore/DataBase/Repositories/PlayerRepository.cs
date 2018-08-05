@@ -119,8 +119,8 @@ namespace BaseCore.DataBase
                 items = items.Where(i => (i.AgeCategoryId == null || i.DistanceId == null ||
                                          i.SubcategoryId == null) ^ !filterOptions.Invalid.Value);
 
-            if (filterOptions.CompleatedCompetition != null)
-                items = items.Where(i => i.CompetitionCompleted == filterOptions.CompleatedCompetition);
+            if (filterOptions.CompletedCompetition != null)
+                items = items.Where(i => i.CompetitionCompleted == filterOptions.CompletedCompetition);
 
             if (filterOptions.HasVoid != null)
                 items = items.Where(i => i.TimeReads.All(t => t.TimeReadTypeId != (int)TimeReadTypeEnum.Void) !=
@@ -311,7 +311,7 @@ namespace BaseCore.DataBase
                     WithoutStartTime = false,
                     Invalid = false,
                     HasVoid = false,
-                    CompleatedCompetition = true,
+                    CompletedCompetition = true,
                     DescendingSort = false
                 };
 

@@ -26,7 +26,7 @@ namespace Server.Dtos
             FirstName = applicationUser.FirstName;
             LastName = applicationUser.LastName;
             PhoneNumber = applicationUser.PhoneNumber;
-            EMail = applicationUser.Email;
+            Email = applicationUser.Email;
         }
 
         public OrganizerAccount CopyDataFromDto(OrganizerAccount organizerAccount)
@@ -47,7 +47,7 @@ namespace Server.Dtos
         public string PhoneNumber { get; set; }
 
         [EmailAddress]
-        public string EMail { get; set; }
+        public string Email { get; set; }
 
         public CompetitionDto[] CompetitionDtos { get; set; }
     }
