@@ -17,9 +17,10 @@ namespace ViewCore.Entities
                 DbEntity = new Competition();
         }
 
-        public EditableCompetition(string name, DateTime eventDate, string description, string link, string organiser, string city)
+        public EditableCompetition(string name, DateTime eventDate, string description, string link, string organiser
+            , string city, string linkDisplayedName = "Link")
         {
-            DbEntity = new Competition(name, eventDate, description, link, organiser, city);
+            DbEntity = new Competition(name, eventDate, description, link, organiser, city, linkDisplayedName);
         }
         public string Name
         {
@@ -57,6 +58,13 @@ namespace ViewCore.Entities
         {
             get { return DbEntity.Link; }
             set { DbEntity.Link = SetProperty(DbEntity.Link, value); }
+        }
+
+
+        public string LinkDisplayedName
+        {
+            get { return DbEntity.LinkDisplayedName; }
+            set { DbEntity.LinkDisplayedName = SetProperty(DbEntity.LinkDisplayedName, value); }
         }
 
         public DateTime? SignUpEndDate

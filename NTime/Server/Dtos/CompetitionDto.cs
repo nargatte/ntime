@@ -21,6 +21,7 @@ namespace Server.Dtos
             Description = competition.Description;
             ExtraDataHeaders = competition.ExtraDataHeaders;
             Link = competition.Link;
+            LinkDisplayedName = competition.LinkDisplayedName;
             Organizer = competition.Organizer;
             City = competition.City;
             OrganizerEditLock = competition.OrganizerEditLock;
@@ -35,6 +36,7 @@ namespace Server.Dtos
             competition.Description = Description;
             competition.ExtraDataHeaders = ExtraDataHeaders;
             competition.Link = Link;
+            competition.LinkDisplayedName = LinkDisplayedName;
             competition.Organizer = Organizer;
             competition.City = City;
             return competition;
@@ -57,6 +59,9 @@ namespace Server.Dtos
 
         [StringLength(2000)]
         public string Link { get; set; }
+
+        [StringLength(255)]
+        public string LinkDisplayedName { get; set; }
 
         [StringLength(255)]
         public string Organizer { get; set; }

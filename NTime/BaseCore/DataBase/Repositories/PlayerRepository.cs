@@ -41,7 +41,7 @@ namespace BaseCore.DataBase
             Player[] players = null;
             int totalItemsNumber = 0;
 
-            if(filterOptions.PlayerSort == PlayerSort.ByExtraData)
+            if (filterOptions.PlayerSort == PlayerSort.ByExtraData)
             {
                 filterOptions.PlayerSort = PlayerSort.ByFirstName;
                 pageNumber = 0;
@@ -55,13 +55,19 @@ namespace BaseCore.DataBase
                     totalItemsNumber = await GetFilteredQuery(ctx.Players.Where(i => i.CompetitionId == Competition.Id),
                         filterOptions).CountAsync();
                 });
-
-                if (filterOptions.DescendingSort)
-                    players = players.OrderByDescending(p =>
-                        p.ExtraData.Split(new[] { ';' }, StringSplitOptions.None)[filterOptions.ExtraDataSortIndex]).Skip(pageNumber * numberItemsOnPage).Take(numberItemsOnPage).ToArray();
-                else
-                    players = players.OrderBy(p =>
-                        p.ExtraData.Split(new[] { ';' }, StringSplitOptions.None)[filterOptions.ExtraDataSortIndex]).Skip(pageNumber * numberItemsOnPage).Take(numberItemsOnPage).ToArray();
+                try
+                {
+                    if (filterOptions.DescendingSort)
+                        players = players.OrderByDescending(p =>
+                            (p.ExtraData ?? String.Empty).Split(new[] { ';' }, StringSplitOptions.None)[filterOptions.ExtraDataSortIndex]).Skip(pageNumber * numberItemsOnPage).Take(numberItemsOnPage).ToArray();
+                    else
+                        players = players.OrderBy(p =>
+                            (p.ExtraData ?? String.Empty).Split(new[] { ';' }, StringSplitOptions.None)[filterOptions.ExtraDataSortIndex]).Skip(pageNumber * numberItemsOnPage).Take(numberItemsOnPage).ToArray();
+                }
+                catch(IndexOutOfRangeException)
+                {
+                    throw new ArgumentException("Podana kolumna sortowania jest nieprawidłowa");
+                }
             }
             else
             {

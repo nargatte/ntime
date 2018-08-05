@@ -15,16 +15,35 @@ namespace BaseCoreTests
     public class IntegrationTests
     {
         [Test]
-        public async Task Sort()
+        public void Sort()
         {
             var cp = new ContextProvider();
             var cr = new CompetitionRepository(cp);
-            var pr = new PlayerRepository(cp, new Competition(){Id = 1});
+            var pr = new PlayerRepository(cp, new Competition() { Id = 1 });
 
-            var ps = await pr.GetAllByFilterAsync(
-                new PlayerFilterOptions() {Query = "", ExtraDataSortIndex = 1, PlayerSort = PlayerSort.ByExtraData, DescendingSort = true}, 0,
-                1000);
-            ;
+
+            bool argumentExceptionThrown = false;
+            var thrownException = Assert.Throws<AggregateException>(() =>
+            {
+                var result = pr.GetAllByFilterAsync(
+                new PlayerFilterOptions() { Query = "", ExtraDataSortIndex = 1, PlayerSort = PlayerSort.ByExtraData, DescendingSort = true }, 0,
+                1000).Result;
+            });
+            thrownException.Handle((ex) =>
+            {
+                if(ex is ArgumentException)
+                {
+                    argumentExceptionThrown = true;
+                    return true;
+                }
+                else
+                {
+                    argumentExceptionThrown = false;
+                    return false;
+                }
+            });
+
+            Assert.AreEqual(true, argumentExceptionThrown);
         }
 
         [Test]

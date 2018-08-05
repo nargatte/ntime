@@ -111,9 +111,9 @@
     <Compile Include="Migrations\201804121401166_InitialCreate.Designer.cs">
       <DependentUpon>201804121401166_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201808041329194_AddedExtraHeaders.cs" />
-    <Compile Include="Migrations\201808041329194_AddedExtraHeaders.Designer.cs">
-      <DependentUpon>201808041329194_AddedExtraHeaders.cs</DependentUpon>
+    <Compile Include="Migrations\201808050750526_ExtraHeadersAdded.cs" />
+    <Compile Include="Migrations\201808050750526_ExtraHeadersAdded.Designer.cs">
+      <DependentUpon>201808050750526_ExtraHeadersAdded.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\PageBindingModel.cs" />
@@ -148,8 +148,8 @@
     <EmbeddedResource Include="Migrations\201804121401166_InitialCreate.resx">
       <DependentUpon>201804121401166_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808041329194_AddedExtraHeaders.resx">
-      <DependentUpon>201808041329194_AddedExtraHeaders.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201808050750526_ExtraHeadersAdded.resx">
+      <DependentUpon>201808050750526_ExtraHeadersAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

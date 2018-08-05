@@ -2,8 +2,8 @@ namespace BaseCore.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
-    
-    public partial class AddedExtraHeaders : DbMigration
+
+    public partial class ExtraHeadersAdded : DbMigration
     {
         public override void Up()
         {
@@ -13,12 +13,12 @@ namespace BaseCore.Migrations
             CreateTable(
                 "dbo.AgeCategoryDistances",
                 c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        CompetitionId = c.Int(nullable: false),
-                        AgeCategoryId = c.Int(),
-                        DistanceId = c.Int(),
-                    })
+                {
+                    Id = c.Int(nullable: false, identity: true),
+                    CompetitionId = c.Int(nullable: false),
+                    AgeCategoryId = c.Int(),
+                    DistanceId = c.Int(),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.AgeCategories", t => t.AgeCategoryId)
                 .ForeignKey("dbo.Competitions", t => t.CompetitionId, cascadeDelete: true)
@@ -26,14 +26,18 @@ namespace BaseCore.Migrations
                 .Index(t => t.CompetitionId)
                 .Index(t => t.AgeCategoryId)
                 .Index(t => t.DistanceId);
-            
+
             AddColumn("dbo.AgeCategories", "Male", c => c.Boolean(nullable: false));
             AddColumn("dbo.AgeCategories", "AgeCategory_Id", c => c.Int());
             AddColumn("dbo.Competitions", "ExtraDataHeaders", c => c.String());
+            AddColumn("dbo.Competitions", "LinkDisplayedName", c => c.String());
             AddColumn("dbo.Players", "RegistrationDate", c => c.DateTime(nullable: false));
             AddColumn("dbo.Players", "IsCategoryFixed", c => c.Boolean(nullable: false));
             AddColumn("dbo.Players", "ExtraData", c => c.String());
             AddColumn("dbo.AgeCategoryTemplates", "Male", c => c.Boolean(nullable: false));
+            //Adding columns for Identity Server
+            //AddColumn("dbo.AspNetUsers", "FirstName", c => c.String());
+            //AddColumn("dbo.AspNetUsers", "LastName", c => c.String());
             CreateIndex("dbo.AgeCategories", "AgeCategory_Id");
             AddForeignKey("dbo.AgeCategories", "AgeCategory_Id", "dbo.AgeCategories", "Id");
             DropColumn("dbo.PlayerAccounts", "FirstName");
@@ -45,7 +49,7 @@ namespace BaseCore.Migrations
             DropColumn("dbo.OrganizerAccounts", "PhoneNumber");
             DropColumn("dbo.OrganizerAccounts", "EMail");
         }
-        
+
         public override void Down()
         {
             AddColumn("dbo.OrganizerAccounts", "EMail", c => c.String());
@@ -64,10 +68,14 @@ namespace BaseCore.Migrations
             DropIndex("dbo.AgeCategoryDistances", new[] { "AgeCategoryId" });
             DropIndex("dbo.AgeCategoryDistances", new[] { "CompetitionId" });
             DropIndex("dbo.AgeCategories", new[] { "AgeCategory_Id" });
+            // Dropping columns for Identity Server
+            //DropColumn("dbo.AspNetUsers", "FirstName");
+            //DropColumn("dbo.AspNetUsers", "LastName");
             DropColumn("dbo.AgeCategoryTemplates", "Male");
             DropColumn("dbo.Players", "ExtraData");
             DropColumn("dbo.Players", "IsCategoryFixed");
             DropColumn("dbo.Players", "RegistrationDate");
+            DropColumn("dbo.Competitions", "LinkDisplayedName");
             DropColumn("dbo.Competitions", "ExtraDataHeaders");
             DropColumn("dbo.AgeCategories", "AgeCategory_Id");
             DropColumn("dbo.AgeCategories", "Male");

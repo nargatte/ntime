@@ -7,13 +7,13 @@ namespace BaseCore.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class AddedExtraHeaders : IMigrationMetadata
+    public sealed partial class ExtraHeadersAdded : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddedExtraHeaders));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ExtraHeadersAdded));
         
         string IMigrationMetadata.Id
         {
-            get { return "201808041329194_AddedExtraHeaders"; }
+            get { return "201808050750526_ExtraHeadersAdded"; }
         }
         
         string IMigrationMetadata.Source
