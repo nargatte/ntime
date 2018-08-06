@@ -1,5 +1,5 @@
 <app-players-tab-header-unauthorized [competition]="competition"></app-players-tab-header-unauthorized>
-<app-players-list [competition]="competition"></app-players-list>
+<app-players-list *ngIf="competition" [competition]="competition"></app-players-list>
 
 
 <!-- <app-players-list [competition]="competition"></app-players-list> -->

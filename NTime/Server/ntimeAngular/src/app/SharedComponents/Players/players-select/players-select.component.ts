@@ -4,8 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MatPaginator, MatTableDataSource, MatTable, PageEvent, MatDialog, Sort } from '@angular/material';
 import { DataSource } from '@angular/cdk/table';
 import { BehaviorSubject ,  Observable } from 'rxjs';
-
-
+import { String, StringBuilder } from 'typescript-string-operations';
 
 import { PlayerService } from '../../../Services/player.service';
 import { MessageService } from '../../../Services/message.service';
@@ -20,6 +19,7 @@ import { FailedActionDialogComponent } from '../../Dialogs/failed-action-dialog/
 import { PlayersWithScores } from '../../../Models/Players/PlayerWithScores';
 import { PlayerSort } from '../../../Models/Enums/PlayerSort';
 import { SortHelper } from '../../../Helpers/SortHelper';
+import { ExtraColumnDefinition } from '../../../Models/CDK/ExtraColumnDefinition';
 
 @Component({
   selector: 'app-players-select',
@@ -35,9 +35,11 @@ export class PlayersSelectComponent implements AfterViewInit {
   private players: PlayersWithScores[] = [];
   public todayDate: Date;
   private filter: PlayerFilterOptions = new PlayerFilterOptions();
+  private delimiter = '|';
 
   @ViewChild(MatTable) table: MatTable<PlayerListView>;
   displayedColumns = ['select', 'firstName', 'lastName', 'city', 'team', 'fullCategory', 'isPaidUp'];
+  extraColumns: ExtraColumnDefinition[] = [];
   dataSource: MatTableDataSource<PlayersWithScores> = new MatTableDataSource<PlayersWithScores>(this.players);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -164,5 +166,26 @@ export class PlayersSelectComponent implements AfterViewInit {
         });
       }
     );
+  }
+
+  prepareExtraColumns(): void {
+    this.messageService.addObject(this.competition);
+    this.messageService.addLog(`ExtraDataHeaders: ${this.competition.ExtraDataHeaders}`);
+    if (String.IsNullOrWhiteSpace(this.competition.ExtraDataHeaders)) {
+      return;
+    }
+
+    const splitColumns = this.competition.ExtraDataHeaders.split(this.delimiter);
+    let iterator = 0;
+    splitColumns.forEach(columnString => {
+      this.extraColumns.push(
+        new ExtraColumnDefinition(iterator.toString(), columnString, iterator, this.delimiter)
+      );
+      iterator++;
+    });
+
+    this.extraColumns
+      .map(x => x.columnDef)
+      .forEach(c => this.displayedColumns.push(c));
   }
 }

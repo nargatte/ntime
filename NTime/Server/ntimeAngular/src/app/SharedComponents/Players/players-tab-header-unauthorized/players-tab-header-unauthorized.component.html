@@ -1,5 +1,5 @@
 <mat-card class="example-card">
-    <mat-card-content>
+    <mat-card-content *ngIf="competition">
         <p>
             Lista zawodników
             <br/> {{competition.Name}} {{competition.EventDate.toLocaleDateString("pl-pl")}}
@@ -8,7 +8,7 @@
     <!-- <mat-card-actions> -->
     <ng-container>
         <a mat-raised-button color="primary" routerLink="/zawody">Wszystkie zawody</a>
-        <a *ngIf="competition.SignUpEndDate > todayDate" mat-raised-button color="primary" routerLink="/zapisy/{{competition.Id}}">
+        <a *ngIf="competition && competition.SignUpEndDate > todayDate" mat-raised-button color="primary" routerLink="/zapisy/{{competition.Id}}">
             Zarejestruj się
         </a>
     </ng-container>

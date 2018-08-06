@@ -18,6 +18,7 @@ import {
 } from '@angular/material';
 import { DataSource } from '@angular/cdk/table';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { String, StringBuilder } from 'typescript-string-operations';
 
 import { PlayerService } from '../../../Services/player.service';
 import { MessageService } from '../../../Services/message.service';
@@ -29,7 +30,8 @@ import { ActivatedRoute } from '@angular/router';
 import { MockPlayersListView } from '../../../MockData/MockPlayers';
 import { PlayerSort } from '../../../Models/Enums/PlayerSort';
 import { SortHelper } from '../../../Helpers/SortHelper';
-import { ColumnDefinition } from '../../../Models/CDK/ColumnDefinition';
+import { ExtraColumnDefinition } from '../../../Models/CDK/ExtraColumnDefinition';
+
 
 @Component({
   selector: 'app-players-list',
@@ -42,17 +44,11 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
   private players: PlayerListView[] = [];
   public todayDate: Date;
   private filter: PlayerFilterOptions = new PlayerFilterOptions();
+  private delimiter = '|';
 
   @ViewChild(MatTable) table: MatTable<PlayerListView>;
-  displayedColumns = [
-    'firstName',
-    'lastName',
-    'city',
-    'team',
-    'fullCategory',
-    'isPaidUp'
-  ];
-  extraColumns: ColumnDefinition[] = [];
+  displayedColumns = ['firstName', 'lastName', 'city', 'team', 'fullCategory', 'isPaidUp'];
+  extraColumns: ExtraColumnDefinition[] = [];
   dataSource: MatTableDataSource<PlayerListView>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -64,18 +60,20 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
   constructor(
     private playerService: PlayerService,
     private messageService: MessageService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {
+    // this.setDataSource();
     this.todayDate = new Date(Date.now());
     this.competitionId = +this.route.snapshot.paramMap.get('id');
+  }
+
+  ngOnInit(): void {
+    this.setDefaultSorting();
+    this.getFilteredPlayers();
     this.prepareExtraColumns();
   }
 
-  ngOnInit(): void {}
-
   ngAfterViewInit() {
-    this.setDefaultSorting();
-    this.getFilteredPlayers();
   }
 
   getPlayers(
@@ -85,11 +83,7 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
     pageNumber: number
   ): void {
     this.playerService
-      .getPlayerListView(
-        competitionId,
-        playerFilterOptions,
-        pageSize,
-        pageNumber
+      .getPlayerListView(competitionId, playerFilterOptions, pageSize, pageNumber
       )
       .subscribe(
         (page: PageViewModel<PlayerListView>) => {
@@ -145,11 +139,23 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
   }
 
   prepareExtraColumns(): void {
-    this.extraColumns.push(
-      new ColumnDefinition('userId', 'ID'),
-      new ColumnDefinition('userName', 'Name'),
-      new ColumnDefinition('progress', 'Progress')
-    );
-    this.extraColumns.map(x => x.columnDef).forEach(c => this.displayedColumns.push(c));
+    this.messageService.addObject(this.competition);
+    this.messageService.addLog(`ExtraDataHeaders: ${this.competition.ExtraDataHeaders}`);
+    if (String.IsNullOrWhiteSpace(this.competition.ExtraDataHeaders)) {
+      return;
+    }
+
+    const splitColumns = this.competition.ExtraDataHeaders.split(this.delimiter);
+    let iterator = 0;
+    splitColumns.forEach(columnString => {
+      this.extraColumns.push(
+        new ExtraColumnDefinition(iterator.toString(), columnString, iterator, this.delimiter)
+      );
+      iterator++;
+    });
+
+    this.extraColumns
+      .map(x => x.columnDef)
+      .forEach(c => this.displayedColumns.push(c));
   }
 }
