@@ -50,7 +50,7 @@
         <ng-container matColumnDef="link">
             <mat-header-cell *matHeaderCellDef> Link do strony </mat-header-cell>
             <mat-cell *matCellDef="let competition">
-                    <span class="mobile-label">Link:</span>
+                <span class="mobile-label">Link:</span>
                 <a target="_blank" href="http://{{competition.Link}}">{{competition.Link}}</a>
             </mat-cell>
         </ng-container>
@@ -58,15 +58,17 @@
         <ng-container matColumnDef="actions">
             <mat-header-cell *matHeaderCellDef> </mat-header-cell>
             <mat-cell *matCellDef="let competition">
-                    <!-- <span class="mobile-label">Imię:</span> -->
-                <a mat-raised-button color="primary" routerLink="/lista-zawodnikow/{{competition.Id}}">
-                    Lista zawodników
-                </a>
-                <div *ngIf="competition.SignUpEndDate > todayDate">
-                    <a mat-raised-button color="primary" routerLink="/zapisy/{{competition.Id}}">
-                        Zarejestruj się
+                <!-- <span class="mobile-label">Imię:</span> -->
+                <div>
+                    <a mat-raised-button color="primary" routerLink="/lista-zawodnikow/{{competition.Id}}">
+                        Lista zawodników
                     </a>
-                </div>
+                    <div *ngIf="competition.SignUpEndDate > todayDate">
+                        <a mat-raised-button color="primary" routerLink="/zapisy/{{competition.Id}}">
+                            Zarejestruj się
+                        </a>
+                    </div>
+                </div> 
             </mat-cell>
         </ng-container>
 

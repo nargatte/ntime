@@ -5,10 +5,12 @@
             <br/> {{competition.Name}} {{competition.EventDate.toLocaleDateString("pl-pl")}}
         </p>
     </mat-card-content>
-    <mat-card-actions>
+    <!-- <mat-card-actions> -->
+    <ng-container>
         <a mat-raised-button color="primary" routerLink="/zawody">Wszystkie zawody</a>
         <a *ngIf="competition.SignUpEndDate > todayDate" mat-raised-button color="primary" routerLink="/zapisy/{{competition.Id}}">
             Zarejestruj się
         </a>
-    </mat-card-actions>
+    </ng-container>
+    <!-- </mat-card-actions> -->
 </mat-card>

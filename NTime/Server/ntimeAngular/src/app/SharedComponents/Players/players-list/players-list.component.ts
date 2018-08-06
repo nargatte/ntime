@@ -1,11 +1,23 @@
-import { Component, OnInit, ViewChild, AfterViewInit, Input, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  AfterViewInit,
+  Input,
+  EventEmitter
+} from '@angular/core';
 import { FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { MatPaginator, MatTableDataSource, MatTable, PageEvent, MatSort, Sort } from '@angular/material';
+import {
+  MatPaginator,
+  MatTableDataSource,
+  MatTable,
+  PageEvent,
+  MatSort,
+  Sort
+} from '@angular/material';
 import { DataSource } from '@angular/cdk/table';
 import { BehaviorSubject, Observable } from 'rxjs';
-
-
 
 import { PlayerService } from '../../../Services/player.service';
 import { MessageService } from '../../../Services/message.service';
@@ -24,7 +36,6 @@ import { SortHelper } from '../../../Helpers/SortHelper';
   styleUrls: ['./players-list.component.css']
 })
 export class PlayersListComponent implements AfterViewInit, OnInit {
-
   @Input() competition: Competition;
   private competitionId: number;
   private players: PlayerListView[] = [];
@@ -32,7 +43,27 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
   private filter: PlayerFilterOptions = new PlayerFilterOptions();
 
   @ViewChild(MatTable) table: MatTable<PlayerListView>;
-  displayedColumns = ['firstName', 'lastName', 'city', 'team', 'fullCategory', 'isPaidUp'];
+  displayedColumns = [
+    'firstName',
+    'lastName',
+    'city',
+    'team',
+    'fullCategory',
+    'isPaidUp'
+  ];
+  columns = [
+    { columnDef: 'userId', header: 'ID', cell: (row: UserData) => `${row.id}` },
+    {
+      columnDef: 'userName',
+      header: 'Name',
+      cell: (row: UserData) => `${row.name}`
+    },
+    {
+      columnDef: 'progress',
+      header: 'Progress',
+      cell: (row: UserData) => `${row.progress}%`
+    }
+  ];
   dataSource: MatTableDataSource<PlayerListView>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -48,31 +79,48 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
   ) {
     this.todayDate = new Date(Date.now());
     this.competitionId = +this.route.snapshot.paramMap.get('id');
+    this.columns.map(x => x.columnDef).forEach(c => this.displayedColumns.push(c));
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit() {
     this.setDefaultSorting();
     this.getFilteredPlayers();
   }
 
-  getPlayers(competitionId: number, playerFilterOptions: PlayerFilterOptions, pageSize: number, pageNumber: number): void {
-    this.playerService.getPlayerListView(competitionId, playerFilterOptions, pageSize, pageNumber).subscribe(
-      (page: PageViewModel<PlayerListView>) => {
-        this.log(`Items: ${page.TotalCount}`);
-        this.players = page.Items;
-        this.playersCount = page.TotalCount;
-      },
-      error => this.log(error), // Errors
-      () => this.setDataSource()
-      // () => this.setDataSource() // Success
-    );
+  getPlayers(
+    competitionId: number,
+    playerFilterOptions: PlayerFilterOptions,
+    pageSize: number,
+    pageNumber: number
+  ): void {
+    this.playerService
+      .getPlayerListView(
+        competitionId,
+        playerFilterOptions,
+        pageSize,
+        pageNumber
+      )
+      .subscribe(
+        (page: PageViewModel<PlayerListView>) => {
+          this.log(`Items: ${page.TotalCount}`);
+          this.players = page.Items;
+          this.playersCount = page.TotalCount;
+        },
+        error => this.log(error), // Errors
+        () => this.setDataSource()
+        // () => this.setDataSource() // Success
+      );
   }
 
   getFilteredPlayers(): void {
-    this.getPlayers(this.competitionId, this.filter, this.pageSize, this.pageNumber);
+    this.getPlayers(
+      this.competitionId,
+      this.filter,
+      this.pageSize,
+      this.pageNumber
+    );
   }
 
   log(message: string): void {
@@ -106,4 +154,10 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
     this.filter.PlayerSort = PlayerSort.ByLastName;
     this.filter.DescendingSort = false;
   }
+}
+
+export interface UserData {
+  id: number;
+  name: string;
+  progress: number;
 }

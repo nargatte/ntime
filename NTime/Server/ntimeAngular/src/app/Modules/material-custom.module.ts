@@ -15,6 +15,7 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { PolishPaginatorIntl } from '../Helpers/polish-paginator-intl';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { CdkTableModule } from '../../../node_modules/@angular/cdk/table';
 
 @NgModule({
   imports: [
@@ -23,7 +24,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatMomentDateModule, MatDatepickerModule, MatDialogModule,
     MatFormFieldModule, MatIconModule, MatInputModule,
     MatPaginatorModule, MatSelectModule, MatSidenavModule, MatSortModule,
-    MatTableModule, MatTabsModule, MatToolbarModule,
+    MatTableModule, MatTabsModule, MatToolbarModule, CdkTableModule,
   ],
   exports: [
     FlexLayoutModule,
@@ -31,7 +32,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatMomentDateModule, MatDatepickerModule, MatDialogModule,
     MatFormFieldModule, MatIconModule, MatInputModule,
     MatPaginatorModule, MatSelectModule, MatSidenavModule, MatSortModule,
-    MatTableModule, MatTabsModule, MatToolbarModule,
+    MatTableModule, MatTabsModule, MatToolbarModule, CdkTableModule,
   ],
   providers: [
     { provide: MatPaginatorIntl, useClass: PolishPaginatorIntl },

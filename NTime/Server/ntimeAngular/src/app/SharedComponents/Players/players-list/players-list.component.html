@@ -1,5 +1,5 @@
 <div class="example-container mat-elevation-z8">
-  <mat-table #table [dataSource]="dataSource"  matSort (matSortChange)="onSortEvent($event)">
+  <mat-table #table [dataSource]="dataSource" matSort (matSortChange)="onSortEvent($event)">
     <!-- [class.isMobile]="isMobile" -->
     <ng-container matColumnDef="firstName">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Imię </mat-header-cell>
@@ -64,6 +64,11 @@
           Nie
         </ng-template>
       </mat-cell>
+    </ng-container>
+
+    <ng-container *ngFor="let column of columns" [cdkColumnDef]="column.columnDef">
+      <mat-header-cell *cdkHeaderCellDef>{{ column.header }}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row">{{ column.cell(row) }}</mat-cell>
     </ng-container>
 
 

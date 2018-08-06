@@ -9,16 +9,16 @@
     overflow: auto;
   } */
 
-button {
-  margin: 2%;
+/* button {
   white-space: normal;
-  /* padding: 1em; */
-}
+  padding: 1em;
+} */
 
 a {
   text-decoration: none;
-  margin: 1%;
-  white-space: normal;
+  margin: 0.3em;
+  white-space: pre;
+  width: 11em;
   /* margin: 
     font-weight: 600; */
 }
