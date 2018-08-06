@@ -66,8 +66,8 @@
       </mat-cell>
     </ng-container>
 
-    <ng-container *ngFor="let column of columns" [cdkColumnDef]="column.columnDef">
-      <mat-header-cell *cdkHeaderCellDef>{{ column.header }}</mat-header-cell>
+    <ng-container *ngFor="let column of extraColumns" [cdkColumnDef]="column.columnDef">
+      <mat-header-cell *cdkHeaderCellDef mat-sort-header>{{ column.header }}</mat-header-cell>
       <mat-cell *cdkCellDef="let row">{{ column.cell(row) }}</mat-cell>
     </ng-container>
 

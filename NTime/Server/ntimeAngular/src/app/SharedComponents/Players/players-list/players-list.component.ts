@@ -29,6 +29,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MockPlayersListView } from '../../../MockData/MockPlayers';
 import { PlayerSort } from '../../../Models/Enums/PlayerSort';
 import { SortHelper } from '../../../Helpers/SortHelper';
+import { ColumnDefinition } from '../../../Models/CDK/ColumnDefinition';
 
 @Component({
   selector: 'app-players-list',
@@ -51,19 +52,7 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
     'fullCategory',
     'isPaidUp'
   ];
-  columns = [
-    { columnDef: 'userId', header: 'ID', cell: (row: UserData) => `${row.id}` },
-    {
-      columnDef: 'userName',
-      header: 'Name',
-      cell: (row: UserData) => `${row.name}`
-    },
-    {
-      columnDef: 'progress',
-      header: 'Progress',
-      cell: (row: UserData) => `${row.progress}%`
-    }
-  ];
+  extraColumns: ColumnDefinition[] = [];
   dataSource: MatTableDataSource<PlayerListView>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -79,7 +68,7 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
   ) {
     this.todayDate = new Date(Date.now());
     this.competitionId = +this.route.snapshot.paramMap.get('id');
-    this.columns.map(x => x.columnDef).forEach(c => this.displayedColumns.push(c));
+    this.prepareExtraColumns();
   }
 
   ngOnInit(): void {}
@@ -154,10 +143,13 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
     this.filter.PlayerSort = PlayerSort.ByLastName;
     this.filter.DescendingSort = false;
   }
-}
 
-export interface UserData {
-  id: number;
-  name: string;
-  progress: number;
+  prepareExtraColumns(): void {
+    this.extraColumns.push(
+      new ColumnDefinition('userId', 'ID'),
+      new ColumnDefinition('userName', 'Name'),
+      new ColumnDefinition('progress', 'Progress')
+    );
+    this.extraColumns.map(x => x.columnDef).forEach(c => this.displayedColumns.push(c));
+  }
 }
