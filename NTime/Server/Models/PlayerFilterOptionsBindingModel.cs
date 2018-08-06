@@ -7,6 +7,7 @@ namespace Server.Models
     {
         public int PlayerSort { get; set; }
         public bool DescendingSort { get; set; }
+        public int ExtraDataSortIndex { get; set; }
         public string Query { get; set; }
         public bool? Men { get; set; }
         public bool? WithoutStartTime { get; set; }
@@ -26,6 +27,7 @@ namespace Server.Models
         {
             PlayerSort = (int)filterOptions.PlayerSort;
             DescendingSort = filterOptions.DescendingSort;
+            ExtraDataSortIndex = filterOptions.ExtraDataSortIndex;
             Query = filterOptions.Query;
             Men = filterOptions.Men;
             WithoutStartTime = filterOptions.WithoutStartTime;
@@ -45,6 +47,7 @@ namespace Server.Models
             PlayerFilterOptions filterOptions = new PlayerFilterOptions();
             filterOptions.PlayerSort = (PlayerSort)PlayerSort;
             filterOptions.DescendingSort = DescendingSort;
+            filterOptions.ExtraDataSortIndex = ExtraDataSortIndex;
             filterOptions.Query = Query;
             filterOptions.Men = Men;
             filterOptions.WithoutStartTime = WithoutStartTime;
