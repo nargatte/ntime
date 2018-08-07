@@ -3,7 +3,7 @@ import { FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MatPaginator, MatTableDataSource, MatTable, PageEvent } from '@angular/material';
 import { DataSource } from '@angular/cdk/table';
-import { BehaviorSubject ,  Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { PageViewModel } from '../../../Models/PageViewModel';
 
 
@@ -24,12 +24,16 @@ import { OrganizerAccount } from '../../../Models/OrganizerAccount';
 })
 export class CompetitionsSelectComponent implements AfterViewInit {
     public todayDate: Date;
+    public isRegistrationAvailable = true;
 
     constructor(
         private competitionService: CompetitionService,
         private messageService: MessageService,
         private authenticatedUserService: AuthenticatedUserService,
         private organizerAccountService: OrganizerAccountService) {
+        if (this.authenticatedUserService.IsAuthenticated === true && this.authenticatedUserService.User.Role !== RoleEnum.Player) {
+            this.isRegistrationAvailable = false;
+        }
         this.todayDate = new Date(Date.now());
     }
 
@@ -53,7 +57,7 @@ export class CompetitionsSelectComponent implements AfterViewInit {
     }
 
     getCompetitions(pageSize: number, pageNumber: number): void {
-        if ( this.authenticatedUserService.IsAuthenticated === true && this.authenticatedUserService.User.Role === RoleEnum.Organizer ) {
+        if (this.authenticatedUserService.IsAuthenticated === true && this.authenticatedUserService.User.Role === RoleEnum.Organizer) {
             this.organizerAccountService.getMyInfo().subscribe(
                 (organizer: OrganizerAccount) => {
                     this.messageService.addLog(`Items: ${organizer.CompetitionDtos.length}`);
@@ -89,5 +93,5 @@ export class CompetitionsSelectComponent implements AfterViewInit {
 
     onPageEvent(event: PageEvent) {
         this.getCompetitions(event.pageSize, event.pageIndex);
-      }
+    }
 }

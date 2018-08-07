@@ -1,5 +1,5 @@
 <mat-card class="example-card">
-    <mat-card-content>
+    <mat-card-content *ngIf="competition">
         <p>
             Lista zawodników
             <br/> {{competition.Name}} {{competition.EventDate.toLocaleDateString("pl-pl")}}

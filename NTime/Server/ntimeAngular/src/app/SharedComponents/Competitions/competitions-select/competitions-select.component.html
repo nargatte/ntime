@@ -63,7 +63,7 @@
                     <a mat-raised-button color="primary" routerLink="/lista-zawodnikow/{{competition.Id}}">
                         Lista zawodników
                     </a>
-                    <div *ngIf="competition.SignUpEndDate > todayDate">
+                    <div *ngIf="competition.SignUpEndDate > todayDate && isRegistrationAvailable">
                         <a mat-raised-button color="primary" routerLink="/zapisy/{{competition.Id}}">
                             Zarejestruj się
                         </a>

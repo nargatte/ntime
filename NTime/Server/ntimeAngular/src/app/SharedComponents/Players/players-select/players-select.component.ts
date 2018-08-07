@@ -3,7 +3,7 @@ import { FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MatPaginator, MatTableDataSource, MatTable, PageEvent, MatDialog, Sort } from '@angular/material';
 import { DataSource } from '@angular/cdk/table';
-import { BehaviorSubject ,  Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { String, StringBuilder } from 'typescript-string-operations';
 
 import { PlayerService } from '../../../Services/player.service';
@@ -26,7 +26,7 @@ import { ExtraColumnDefinition } from '../../../Models/CDK/ExtraColumnDefinition
   templateUrl: './players-select.component.html',
   styleUrls: ['./players-select.component.css']
 })
-export class PlayersSelectComponent implements AfterViewInit {
+export class PlayersSelectComponent implements OnInit, AfterViewInit {
 
   selection = new SelectionModel<PlayersWithScores>(true, []);
 
@@ -58,9 +58,13 @@ export class PlayersSelectComponent implements AfterViewInit {
     this.competitionId = +this.route.snapshot.paramMap.get('id');
   }
 
-  ngAfterViewInit() {
+  ngOnInit() {
     this.setDefaultSorting();
     this.getFullFilteredPlayers();
+    this.prepareExtraColumns();
+  }
+
+  ngAfterViewInit() {
   }
 
   isAllSelected() {

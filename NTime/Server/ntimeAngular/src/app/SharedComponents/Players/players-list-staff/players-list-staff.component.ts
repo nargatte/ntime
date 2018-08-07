@@ -14,7 +14,7 @@ import { MessageService } from '../../../Services/message.service';
 export class PlayersListStaffComponent implements OnInit {
 
   public competitionId: number;
-  public competition: Competition = MockCompetitions[0];
+  public competition: Competition;
 
 
   constructor(
