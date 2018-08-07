@@ -80,10 +80,14 @@ namespace BaseCoreTests
 
             await akr.AddRangeAsync(new[]
             {
-                new AgeCategory("Młodziki", 2001, 2005, false),
-                new AgeCategory("Starsi", 1996, 2000, false),
-                new AgeCategory("Starszaki", 1986, 1995, false),
-                new AgeCategory("inny", 1900, 1985, false)
+                new AgeCategory("Młodzik", 2001, DateTime.Today.Year, false),
+                new AgeCategory("Junior", 1996, 2000, false),
+                new AgeCategory("Starszak", 1986, 1995, false),
+                new AgeCategory("Sernior", 1900, 1985, false),
+                new AgeCategory("Młodziczka", 2001, DateTime.Today.Year, true),
+                new AgeCategory("Juniorka", 1996, 2000, true),
+                new AgeCategory("Starszaczka", 1986, 1995, true),
+                new AgeCategory("Seniorka", 1900, 1985, true),
             });
 
             var g1 = await gr.AddAsync(new Gate("Pierwszy", 1));
