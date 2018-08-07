@@ -1,3 +1,9 @@
+<ng-container>
+  <mat-form-field  id="search-box">
+    <input matInput placeholder="Filtr" name="filter" #searchBox (keyup)="search(searchBox.value)">
+  </mat-form-field>
+</ng-container>
+
 <div class="example-container mat-elevation-z8">
   <mat-table #table [dataSource]="dataSource" matSort (matSortChange)="onSortEvent($event)">
     <!-- [class.isMobile]="isMobile" -->

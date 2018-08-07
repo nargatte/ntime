@@ -17,7 +17,7 @@ import {
   Sort
 } from '@angular/material';
 import { DataSource } from '@angular/cdk/table';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { String, StringBuilder } from 'typescript-string-operations';
 
 import { PlayerService } from '../../../Services/player.service';
@@ -31,6 +31,7 @@ import { MockPlayersListView } from '../../../MockData/MockPlayers';
 import { PlayerSort } from '../../../Models/Enums/PlayerSort';
 import { SortHelper } from '../../../Helpers/SortHelper';
 import { ExtraColumnDefinition } from '../../../Models/CDK/ExtraColumnDefinition';
+import { debounceTime, distinctUntilChanged, switchMap } from '../../../../../node_modules/rxjs/operators';
 
 
 @Component({
@@ -45,6 +46,7 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
   public todayDate: Date;
   private filter: PlayerFilterOptions = new PlayerFilterOptions();
   private delimiter = '|';
+  private searchTerms = new Subject<string>();
 
   @ViewChild(MatTable) table: MatTable<PlayerListView>;
   displayedColumns = ['firstName', 'lastName', 'city', 'team', 'fullCategory', 'isPaidUp'];
@@ -74,6 +76,7 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit() {
+
   }
 
   getPlayers(
@@ -119,6 +122,7 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
     this.pageSize = event.pageSize;
     this.pageNumber = event.pageIndex;
     this.getFilteredPlayers();
+
   }
 
   onSortEvent(event: Sort) {
@@ -162,5 +166,12 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
     this.extraColumns
       .map(x => x.columnDef)
       .forEach(c => this.displayedColumns.push(c));
+  }
+
+  search(term: string): void {
+    debounceTime(300);
+    distinctUntilChanged();
+    this.filter.Query = term;
+    this.getFilteredPlayers();
   }
 }
