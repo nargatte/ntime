@@ -130,6 +130,9 @@ export class PlayersSelectComponent implements OnInit, AfterViewInit {
     } else {
       this.filter.DescendingSort = sortOrder;
       this.filter.PlayerSort = SortHelper.getPlayerSort(event.active);
+      if (this.filter.PlayerSort === PlayerSort.ByExtraData) {
+        this.filter.ExtraDataSortIndex = Number.parseInt(event.active);
+      }
     }
 
     this.getFullFilteredPlayers();

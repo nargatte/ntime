@@ -18,7 +18,12 @@ export class SortHelper {
                 return PlayerSort.ByFullCategory;
             }
             default: {
-                return PlayerSort.ByLastName;
+                const columnIndex = Number.parseInt(sortId);
+                if (columnIndex || columnIndex === 0) {
+                    return PlayerSort.ByExtraData;
+                } else {
+                    return PlayerSort.ByLastName;
+                }
             }
         }
     }

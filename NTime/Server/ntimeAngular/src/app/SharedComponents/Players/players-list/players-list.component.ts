@@ -122,12 +122,17 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
   }
 
   onSortEvent(event: Sort) {
+    this.messageService.addLog('Requested sorting');
+    this.messageService.addObject(event);
     const sortOrder = SortHelper.isSortDescending(event.direction);
     if (sortOrder === null) {
       this.setDefaultSorting();
     } else {
       this.filter.DescendingSort = sortOrder;
       this.filter.PlayerSort = SortHelper.getPlayerSort(event.active);
+      if (this.filter.PlayerSort === PlayerSort.ByExtraData) {
+        this.filter.ExtraDataSortIndex = Number.parseInt(event.active);
+      }
     }
 
     this.getFilteredPlayers();
