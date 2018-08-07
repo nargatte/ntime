@@ -16,7 +16,7 @@ import { MessageService } from '../../Services/message.service';
 })
 export class RegistrationTabComponent implements OnInit {
   public competitionId: number;
-  public competition: Competition = MockCompetitions[0];
+  public competition: Competition;
   public distances: Distance[];
   public subcategories: Subcategory[];
   public todayDate: Date;
@@ -29,13 +29,13 @@ export class RegistrationTabComponent implements OnInit {
     private messageService: MessageService
   ) {
     this.todayDate = new Date(Date.now());
-  }
-
-  ngOnInit() {
     this.competitionId = +this.route.snapshot.paramMap.get('id');
     this.getCompetition(this.competitionId);
     setTimeout(() => this.getSubcategoriesFromCompetition(this.competitionId), 20);
     setTimeout(() => this.getDistanceFromCompetition(this.competitionId), 50);
+  }
+
+  ngOnInit() {
   }
 
   getCompetition(id: number): void {

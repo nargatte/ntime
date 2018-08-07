@@ -19,5 +19,5 @@
     </button>
   </mat-card-actions>
 </mat-card>
-<app-new-player-form [competition]="competition" [distances]="distances"
+<app-new-player-form *ngIf="competition && distances && subcategories" [competition]="competition" [distances]="distances"
 [subcategories]="subcategories"></app-new-player-form>

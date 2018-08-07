@@ -12,13 +12,16 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { PlayerAddedDialogComponent } from '../../Dialogs/player-added-dialog/player-added-dialog.component';
 import { SingUpEndDateErrorDialogComponent } from '../../Dialogs/sing-up-end-date-error-dialog/sing-up-end-date-error-dialog.component';
 import { MockPlayersCompetitionRegister } from '../../../MockData/MockPlayers';
+import { FailedActionDialogComponent } from '../../Dialogs/failed-action-dialog/failed-action-dialog.component';
+import { ExtraFieldDefinition } from '../../../Models/CDK/ExtraFieldDefinition';
+import { String, StringBuilder } from 'typescript-string-operations';
 
 @Component({
   selector: 'app-new-player-form',
   templateUrl: './new-player-form.component.html',
   styleUrls: ['./new-player-form.component.css'],
   entryComponents: [
-    PlayerAddedDialogComponent
+    PlayerAddedDialogComponent, FailedActionDialogComponent
   ]
 })
 export class NewPlayerFormComponent implements OnInit, AfterViewInit {
@@ -30,6 +33,9 @@ export class NewPlayerFormComponent implements OnInit, AfterViewInit {
   public newPlayer: PlayerCompetitionRegister = new PlayerCompetitionRegister();
   private competitionId: number;
   private recaptchaId: number;
+  extraFields: ExtraFieldDefinition[] = [];
+  private delimiter = '|';
+  newPlayerExtraData: string[] = [];
 
   public checkboxes: boolean[] = [false, false, false];
 
@@ -44,16 +50,17 @@ export class NewPlayerFormComponent implements OnInit, AfterViewInit {
   ) {
     this.competitionId = +this.route.snapshot.paramMap.get('id');
     this.todayDate = new Date(Date.now());
-
     window['NewPlayerFormComponentReCaptcha'] = (token => this.InvokeRecapcha(token));
   }
 
-  ngAfterViewInit() {
-      this.recaptchaId = window['grecaptcha'].render('NewPlayerFormComponentButton');
+  ngOnInit() {
+    this.prepareExtraFields();
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
+    this.recaptchaId = window['grecaptcha'].render('NewPlayerFormComponentButton');
   }
+
 
   log(message: string): void {
     this.messageService.addLog(message);
@@ -65,6 +72,8 @@ export class NewPlayerFormComponent implements OnInit, AfterViewInit {
   // }
 
   public addPlayer(reCaptchaToken: string) {
+    this.newPlayer.ExtraData = String.Join(this.delimiter, this.newPlayerExtraData);
+    this.messageService.addLog(`Set ExtraData: ${this.newPlayer.ExtraData}`);
     if (this.subcategories.length === 1) {
       this.newPlayer.SubcategoryId = this.subcategories[0].Id;
     }
@@ -75,7 +84,10 @@ export class NewPlayerFormComponent implements OnInit, AfterViewInit {
     if (this.competition.SignUpEndDate > this.todayDate) {
       this.playerService.addPlayer(this.newPlayer, this.competitionId).subscribe(
         player => this.onSuccessfulAddPlayer(player),
-        error => this.log(`Wystąpił problem podczas dodawania zawodnika: ${error}`)
+        error => {
+          this.log(`Wystąpił problem podczas dodawania zawodnika: ${error}`);
+          this.failedModalUp();
+        }
       );
     } else {
       this.dialog.open(SingUpEndDateErrorDialogComponent);
@@ -100,6 +112,30 @@ export class NewPlayerFormComponent implements OnInit, AfterViewInit {
   public modalUp() {
     this.dialog.open(PlayerAddedDialogComponent, {
       data: { competitionId: this.competitionId }
+    });
+  }
+
+  public failedModalUp() {
+    this.dialog.open(FailedActionDialogComponent, {
+      data: { text: 'Wystąpił błąd podczas rejestracji' }
+    });
+  }
+
+  private prepareExtraFields() {
+    this.messageService.addObject(this.competition);
+    this.messageService.addLog(`ExtraDataHeaders: ${this.competition.ExtraDataHeaders}`);
+    if (String.IsNullOrWhiteSpace(this.competition.ExtraDataHeaders)) {
+      return;
+    }
+
+    const splitFields = this.competition.ExtraDataHeaders.split(this.delimiter);
+    let iterator = 0;
+    splitFields.forEach(fieldString => {
+      this.extraFields.push(
+        new ExtraFieldDefinition(iterator.toString(), fieldString, iterator, this.delimiter)
+      );
+      this.newPlayerExtraData.push(String.Empty);
+      iterator++;
     });
   }
 }
