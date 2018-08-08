@@ -8,7 +8,7 @@ import { PageViewModel } from '../../../Models/PageViewModel';
 
 
 
-import { Competition } from '../../../Models/Competition';
+import { Competition } from '../../../Models/Competitions/Competition';
 import { CompetitionService } from '../../../Services/competition.service';
 import { MessageService } from '../../../Services/message.service';
 import { AuthenticatedUserService } from '../../../Services/authenticated-user.service';

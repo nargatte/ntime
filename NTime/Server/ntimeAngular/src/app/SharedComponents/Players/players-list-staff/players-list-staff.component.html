@@ -1,2 +1,2 @@
-<app-players-tab-header-staff [competition]="competition"></app-players-tab-header-staff>
+<app-players-tab-header-staff *ngIf="competition" [competition]="competition"></app-players-tab-header-staff>
 <app-players-select *ngIf="competition" [competition]="competition"></app-players-select>

@@ -64,7 +64,8 @@ import { CompetitionDetailsComponent } from './SharedComponents/Competitions/com
         PlayersListComponent, PlayersListTabComponent, PlayersListUnauthorizedComponent,
         PlayersSelectComponent, PlayersTabHeaderStaffComponent, PlayersTabHeaderUnauthorizedComponent,
         RegisterConfirmationComponent, RegistrationTabComponent, ScoresTabComponent,
-        SingUpEndDateErrorDialogComponent, SuccessfullActionDialogComponent, UserRegisteredDialogComponent, EditPlayerComponent, EditPlayerTabComponent, CompetitionDetailsComponent
+        SingUpEndDateErrorDialogComponent, SuccessfullActionDialogComponent, UserRegisteredDialogComponent,
+        EditPlayerComponent, EditPlayerTabComponent, CompetitionDetailsComponent
     ],
     providers: [
         AuthenticatedUserService, AuthenticationService, CompetitionService, DistanceService,

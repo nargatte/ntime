@@ -1,4 +1,4 @@
-﻿import { Competition } from '../Models/Competition';
+﻿import { Competition } from '../Models/Competitions/Competition';
 import { PageViewModel } from '../Models/PageViewModel';
 
 export const MockCompetitions: Competition[] = [

@@ -6,7 +6,7 @@ import { AuthenticatedUserService } from './authenticated-user.service';
 import { MessageService } from './message.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { PageViewModel } from '../Models/PageViewModel';
-import { Competition } from '../Models/Competition';
+import { Competition } from '../Models/Competitions/Competition';
 import { MockCompetitions } from '../MockData/mockCompetitions';
 
 describe('CompetitionService', () => {

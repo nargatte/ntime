@@ -1,10 +1,5 @@
 <mat-card class="example-card">
-    <mat-card-content *ngIf="competition">
-        <p>
-            Lista zawodników
-            <br/> {{competition.Name}} {{competition.EventDate.toLocaleDateString("pl-pl")}}
-        </p>
-    </mat-card-content>
+    <app-competition-details *ngIf="competition" [competition]="competition"></app-competition-details>
     <!-- <mat-card-actions> -->
     <ng-container>
         <a mat-raised-button color="primary" routerLink="/zawody">Wszystkie zawody</a>

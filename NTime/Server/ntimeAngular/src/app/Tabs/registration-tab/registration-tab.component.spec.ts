@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RegistrationTabComponent } from './registration-tab.component';
 import { MaterialCustomModule } from '../../Modules/material-custom.module';
 import { AppModule } from '../../app.module';
-import { Competition } from '../../Models/Competition';
+import { Competition } from '../../Models/Competitions/Competition';
 import { Distance } from '../../Models/Distance';
 import { Subcategory } from '../../Models/Subcategory';
 import { MockCompetitions } from '../../MockData/mockCompetitions';

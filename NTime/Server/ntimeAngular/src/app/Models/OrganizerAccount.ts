@@ -1,4 +1,4 @@
-import { Competition } from './Competition';
+import { Competition } from './Competitions/Competition';
 
 
 export class OrganizerAccount {

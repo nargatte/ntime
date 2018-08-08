@@ -1,11 +1,12 @@
 <mat-card class="example-card">
   <mat-card-content>
     <ng-container *ngIf="competition; else elseTemplate">
-        <p>
-            Zapisy<br/>
-            {{competition.Name}}
-          </p>
-    </ng-container>   
+      <p>
+        Zapisy
+        <br/>
+      </p>
+      <app-competition-details *ngIf="competition" [competition]="competition"></app-competition-details>
+    </ng-container>
     <ng-template #elseTemplate>
       <p>
         Pobieranie zawodów
@@ -20,4 +21,4 @@
   </mat-card-actions>
 </mat-card>
 <app-new-player-form *ngIf="competition && distances && subcategories" [competition]="competition" [distances]="distances"
-[subcategories]="subcategories"></app-new-player-form>
+  [subcategories]="subcategories"></app-new-player-form>

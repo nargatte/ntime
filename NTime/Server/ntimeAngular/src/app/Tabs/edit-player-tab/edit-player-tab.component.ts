@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Competition } from '../../Models/Competition';
+import { Competition } from '../../Models/Competitions/Competition';
 import { MockCompetitions } from '../../MockData/mockCompetitions';
 import { CompetitionService } from '../../Services/competition.service';
 import { DistanceService } from '../../Services/distance.service';

@@ -4,7 +4,7 @@ import { NewPlayerFormComponent } from './new-player-form.component';
 import { AppModule } from '../../../app.module';
 import { Subcategory } from '../../../Models/Subcategory';
 import { Distance } from '../../../Models/Distance';
-import { Competition } from '../../../Models/Competition';
+import { Competition } from '../../../Models/Competitions/Competition';
 
 describe('NewPlayerFormComponent', () => {
   let component: NewPlayerFormComponent;

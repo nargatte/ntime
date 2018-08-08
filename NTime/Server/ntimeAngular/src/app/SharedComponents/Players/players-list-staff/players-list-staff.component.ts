@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PageViewModel } from '../../../Models/PageViewModel';
 import { MockCompetitions } from '../../../MockData/mockCompetitions';
-import { Competition } from '../../../Models/Competition';
+import { Competition } from '../../../Models/Competitions/Competition';
 import { CompetitionService } from '../../../Services/competition.service';
 import { MessageService } from '../../../Services/message.service';
 

@@ -24,7 +24,7 @@ import { PlayerService } from '../../../Services/player.service';
 import { MessageService } from '../../../Services/message.service';
 import { PageViewModel } from '../../../Models/PageViewModel';
 import { PlayerListView } from '../../../Models/Players/PlayerListView';
-import { Competition } from '../../../Models/Competition';
+import { Competition } from '../../../Models/Competitions/Competition';
 import { PlayerFilterOptions } from '../../../Models/Players/PlayerFilterOptions';
 import { ActivatedRoute } from '@angular/router';
 import { MockPlayersListView } from '../../../MockData/MockPlayers';

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Competition } from '../../../Models/Competition';
+import { Competition } from '../../../Models/Competitions/Competition';
 
 @Component({
   selector: 'app-players-tab-header-unauthorized',

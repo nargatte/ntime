@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient} from '@angular/common/http';
 
-import { Competition } from '../Models/Competition';
+import { Competition } from '../Models/Competitions/Competition';
 import { MessageService } from './message.service';
 import { PageViewModel } from '../Models/PageViewModel';
 import { BaseHttpService } from './base-http.service';

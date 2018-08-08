@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild, Inject, AfterViewInit } from '@angular/core';
-import { Competition } from '../../../Models/Competition';
+import { Competition } from '../../../Models/Competitions/Competition';
 import { CompetitionService } from '../../../Services/competition.service';
 import { MessageService } from '../../../Services/message.service';
 import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
