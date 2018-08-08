@@ -21,9 +21,12 @@
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort>44317</IISExpressSSLPort>
-    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
-    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
+    <IISExpressAnonymousAuthentication>
+    </IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>
+    </IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>
+    </IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -252,6 +255,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdministratorAccountController.cs" />
     <Compile Include="Controllers\AgeCategoryController.cs" />
+    <Compile Include="Controllers\AgeCategoryDistanceController.cs" />
     <Compile Include="Controllers\CompetitionController.cs" />
     <Compile Include="Controllers\ControllerCompetitionIdBase.cs" />
     <Compile Include="Controllers\ControllerNTimeBase.cs" />
@@ -262,8 +266,10 @@
     <Compile Include="Controllers\OrganizerAccountController.cs" />
     <Compile Include="Controllers\PlayerAccountController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
+    <Compile Include="Dtos\AgeCategoryDistanceDto.cs" />
     <Compile Include="Dtos\AgeCategoryDto.cs" />
     <Compile Include="Dtos\CompetitionDto.cs" />
+    <Compile Include="Dtos\CompetitionWithDetailsDto.cs" />
     <Compile Include="Dtos\DistanceDto.cs" />
     <Compile Include="Dtos\DistanceSimpleDto.cs" />
     <Compile Include="Dtos\SubcategoryDto.cs" />

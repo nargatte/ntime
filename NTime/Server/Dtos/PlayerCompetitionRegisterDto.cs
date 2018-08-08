@@ -63,12 +63,24 @@ namespace Server.Dtos
             player.Distance = await distanceRepository.GetById(DistanceId);
             player.AgeCategory = await ageCategoryRepository.GetById(AgeCategoryId);
 
-            if (player.Subcategory == null || player.Distance == null || player.AgeCategory == null)
-                return null;
+            if (player.Subcategory == null)
+                throw new Exception($"Nie ma podkategorii o id {SubcategoryId} skorelowanego z zawodami o id {CompetitionId}.");
 
-            if (player.AgeCategory.Male != player.IsMale) return null;
+            if(player.Distance == null)
+                throw new Exception($"Nie ma dystansu o id {DistanceId} skorelowanego z zawodami o id {CompetitionId}.");
+
+            if (player.AgeCategory == null)
+                throw new Exception($"Nie ma kategorii wiekowej o id {AgeCategoryId} skorelowanego z zawodami o id {CompetitionId}.");
+
+            if (player.AgeCategory.Male != player.IsMale) 
+                throw new Exception("Płeć zawodnika nie zgadza się z płcią kategorii wiekowej.");
+
             if (!(await ageCategoryRepository.IsAgeCategoryAndDistanceMatch(player.AgeCategory, player.Distance)))
-                return null;
+                throw new Exception($"Kategoria wiekowa o id {AgeCategoryId} i dystans o id {DistanceId} nie są ze sobą skorelowane.");
+
+            if ((await ageCategoryRepository.GetFittingAsync(player)).All(ac => ac.Id != player.AgeCategory.Id))
+                throw new Exception(
+                    $"Wybrana kategoria wiekowa o id {AgeCategoryId} nie pasuje wieku zawodnika {player.BirthDate:d}, wiek powinien się zawierać w przedziale od {player.AgeCategory.YearFrom} do {player.AgeCategory.YearTo}");
 
             return player;
         }

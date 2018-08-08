@@ -53,15 +53,16 @@ namespace BaseCoreTests
             var cp = new ContextProvider();
             var cr = new CompetitionRepository(cp);
             bool addExtraColumns = true;
-            var sampleCompetition = new Competition("Zawody Integracyjne", DateTime.Now, "Integration City", null, null, null);
+            var sampleCompetition = new Competition($"Zawody Integracyjne {DateTime.Now:g}", DateTime.Now, "Integration City", null, null, null);
             if (addExtraColumns)
-                sampleCompetition.ExtraDataHeaders = "Pierwsza|Druga";
+                sampleCompetition.ExtraDataHeaders = "Pierwsza|Druga|Trzecia";
             var com = await cr.AddAsync(sampleCompetition);
             var pr = new PlayerRepository(cp, com);
             var eifr = new SubcategoryRepository(cp, com);
             var dr = new DistanceRepository(cp, com);
             var akr = new AgeCategoryRepository(cp, com);
             var gr = new GateRepository(cp, com);
+            var acdr = new AgeCategoryDistanceRepository(cp, com);
 
             await eifr.AddRangeAsync(new[]
             {
@@ -77,18 +78,34 @@ namespace BaseCoreTests
                 new Distance("RODZINNY", 0, DistanceTypeEnum.DeterminedLaps) {LapsCount = 1},
                 new Distance("GIGA", 0, DistanceTypeEnum.DeterminedDistance) {LapsCount = 3}
             });
+            var ds = await dr.GetAllAsync();
 
             await akr.AddRangeAsync(new[]
             {
-                new AgeCategory("Młodzik", 2001, DateTime.Today.Year, false),
-                new AgeCategory("Junior", 1996, 2000, false),
-                new AgeCategory("Starszak", 1986, 1995, false),
-                new AgeCategory("Sernior", 1900, 1985, false),
-                new AgeCategory("Młodziczka", 2001, DateTime.Today.Year, true),
-                new AgeCategory("Juniorka", 1996, 2000, true),
-                new AgeCategory("Starszaczka", 1986, 1995, true),
-                new AgeCategory("Seniorka", 1900, 1985, true),
+                new AgeCategory("Młodzik", 2001, DateTime.Today.Year, true),
+                new AgeCategory("Junior", 1996, 2000, true),
+                new AgeCategory("Starszak", 1986, 1995, true),
+                new AgeCategory("Sernior", 1900, 1985, true),
+                new AgeCategory("Młodziczka", 2001, DateTime.Today.Year, false),
+                new AgeCategory("Juniorka", 1996, 2000, false),
+                new AgeCategory("Starszaczka", 1986, 1995, false),
+                new AgeCategory("Seniorka", 1900, 1985, false),
+                new AgeCategory("Inna kategoria M", 0, int.MaxValue, true), 
+                new AgeCategory("Inna kategoria K", 0, int.MaxValue, false),
             });
+            var ags = await akr.GetAllAsync();
+
+            bool b = true;
+            foreach (Distance distance in ds)
+            {
+                foreach (AgeCategory ageCategory in ags)
+                {
+                    b = !b;
+                    if (b) continue;
+                    await acdr.AddAsync(new AgeCategoryDistance() {AgeCategoryId = ageCategory.Id, DistanceId = distance.Id});
+                }
+            }
+            
 
             var g1 = await gr.AddAsync(new Gate("Pierwszy", 1));
             var lir1 = new TimeReadsLogInfoRepository(cp, g1);

@@ -326,10 +326,9 @@ namespace Server.Controllers
                 return Conflict();
 
             Player player = new Player();
-            if (await competitionRegisterDto.CopyDataFromDto(player, ContextProvider, Competition) == null)
-                return NotFound();
+            await competitionRegisterDto.CopyDataFromDto(player, ContextProvider, Competition);
 
-            await CheckReCaptcha(RegisterPrivateKey, competitionRegisterDto.ReCaptchaToken);
+            //await CheckReCaptcha(RegisterPrivateKey, competitionRegisterDto.ReCaptchaToken);
 
             if (AmIPlayer())
             {

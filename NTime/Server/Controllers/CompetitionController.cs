@@ -38,7 +38,9 @@ namespace Server.Controllers
         {
             if (await InitCompetitionById(id) == false)
                 return NotFound();
-            CompetitionDto competitionDto = new CompetitionDto(Competition);
+
+            CompetitionWithDetailsDto competitionDto = new CompetitionWithDetailsDto(Competition);
+            await competitionDto.SetDetails(Competition, new ContextProvider());
            
             return Ok(competitionDto);
         }
