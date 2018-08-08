@@ -54,7 +54,7 @@ export abstract class BaseHttpService {
   }
 
   /** Creates get request to the following url: ${baseAddress}/api/${controllerName}/id */
-  protected getById<TResponse>(id: number): Observable<TResponse | {}> {
+  protected getById<TResponse>(id: number): Observable<TResponse> {
     this.updateAuthorizedUser();
     return this.http.get<TResponse>(
       new UrlBuilder()
@@ -121,10 +121,34 @@ export abstract class BaseHttpService {
     );
   }
 
-  protected put<TResponse, TContent>(requestUrl: string, content: TContent): Observable<TResponse | {}> {
+  protected putArray<TResponse, TContent>(requestUrl: string, content: TContent): Observable<TResponse | {}> {
     this.updateAuthorizedUser();
     this.log('Preparing put request');
     return this.http.put<TResponse>(requestUrl, content, this.httpOptions).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  protected put<TResponse, TContent>(requestUrl: string, content: TContent): Observable<TResponse> {
+    this.updateAuthorizedUser();
+    this.log('Preparing put request');
+    return this.http.put<TResponse>(requestUrl, content, this.httpOptions).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  protected putById<TContent> (id: number, content: TContent): Observable<TContent> {
+    this.updateAuthorizedUser();
+    return this.http.put<TContent>(
+      new UrlBuilder()
+        .addControllerName(this.controllerName)
+        .addId(id)
+        .toString(),
+      this.httpOptions
+    ).pipe(
+      tap((item) => {
+        this.log(`Item with id:${id} fetched`);
+      }),
       catchError(this.handleError)
     );
   }

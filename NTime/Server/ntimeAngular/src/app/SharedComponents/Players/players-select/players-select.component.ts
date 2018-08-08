@@ -62,6 +62,7 @@ export class PlayersSelectComponent implements OnInit, AfterViewInit {
     this.setDefaultSorting();
     this.getFullFilteredPlayers();
     this.prepareExtraColumns();
+    this.addActionsColumn();
   }
 
   ngAfterViewInit() {
@@ -194,5 +195,9 @@ export class PlayersSelectComponent implements OnInit, AfterViewInit {
     this.extraColumns
       .map(x => x.columnDef)
       .forEach(c => this.displayedColumns.push(c));
+  }
+
+  private addActionsColumn(): void {
+    this.displayedColumns.push('actions');
   }
 }

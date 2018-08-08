@@ -21,7 +21,7 @@ import { String, StringBuilder } from 'typescript-string-operations';
   templateUrl: './new-player-form.component.html',
   styleUrls: ['./new-player-form.component.css'],
   entryComponents: [
-    PlayerAddedDialogComponent, FailedActionDialogComponent
+    PlayerAddedDialogComponent, FailedActionDialogComponent, SingUpEndDateErrorDialogComponent
   ]
 })
 export class NewPlayerFormComponent implements OnInit, AfterViewInit {
@@ -43,7 +43,6 @@ export class NewPlayerFormComponent implements OnInit, AfterViewInit {
 
   constructor(
     private route: ActivatedRoute,
-    private competitionService: CompetitionService,
     private messageService: MessageService,
     private playerService: PlayerService,
     private dialog: MatDialog
@@ -96,7 +95,7 @@ export class NewPlayerFormComponent implements OnInit, AfterViewInit {
 
   private onSuccessfulAddPlayer(player: PlayerCompetitionRegister): void {
     this.log(`Dodano zawodnika ${player}`);
-    this.modalUp();
+    this.successModalUp();
   }
 
   public ButtonClick() {
@@ -109,7 +108,7 @@ export class NewPlayerFormComponent implements OnInit, AfterViewInit {
     this.newPlayerForm.reset();
   }
 
-  public modalUp() {
+  public successModalUp() {
     this.dialog.open(PlayerAddedDialogComponent, {
       data: { competitionId: this.competitionId }
     });

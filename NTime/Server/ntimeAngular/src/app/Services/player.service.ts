@@ -40,16 +40,20 @@ export class PlayerService extends BaseHttpService {
   }
 
   public getPlayersWithScores(competitionId: number, playerFilterOptions: PlayerFilterOptions, pageSize: number, pageNumber: number):
-  Observable<PageViewModel<PlayersWithScores> | {}> {
-  return super.post<PageViewModel<PlayersWithScores>, PlayerFilterOptions>(
-    new UrlBuilder()
-      .addControllerName(this.controllerName)
-      .addCustomUrlPart(this.fullListUrl)
-      .addId(competitionId)
-      .addPageRequest(pageSize, pageNumber)
-      .toString(),
-    playerFilterOptions
-  );
+    Observable<PageViewModel<PlayersWithScores>> {
+    return super.post<PageViewModel<PlayersWithScores>, PlayerFilterOptions>(
+      new UrlBuilder()
+        .addControllerName(this.controllerName)
+        .addCustomUrlPart(this.fullListUrl)
+        .addId(competitionId)
+        .addPageRequest(pageSize, pageNumber)
+        .toString(),
+      playerFilterOptions
+    );
+  }
+
+  public getPlayer(id: number): Observable<PlayersWithScores> {
+    return super.getById<PlayersWithScores>(id);
 }
 
   public addPlayer(player: PlayerCompetitionRegister, competitionId: number): Observable<PlayerCompetitionRegister> {
@@ -63,8 +67,14 @@ export class PlayerService extends BaseHttpService {
     );
   }
 
+  public editPlayer(player: PlayersWithScores, competitionId: number): Observable<PlayersWithScores> {
+    return super.putById<PlayersWithScores>(
+      competitionId, player
+    );
+  }
+
   public updateMulitplePlayers(players: PlayersWithScores[]): Observable<PlayersWithScores[] | {}> {
-    return super.put<PlayersWithScores[], PlayersWithScores[]>(
+    return super.putArray<PlayersWithScores[], PlayersWithScores[]>(
       new UrlBuilder()
         .addControllerName(this.controllerName)
         .toString(),

@@ -1,0 +1,23 @@
+<mat-card class="example-card">
+    <mat-card-content>
+      <ng-container *ngIf="competition; else elseTemplate">
+          <p>
+              Edycja zawodnika dla zawodów:<br/>
+              {{competition.Name}}
+            </p>
+      </ng-container>   
+      <ng-template #elseTemplate>
+        <p>
+          Pobieranie zawodów
+        </p>
+      </ng-template>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" routerLink="/zawody">Wszystkie zawody</button>
+      <button mat-raised-button color="primary" routerLink="/lista-zawodnikow/{{competitionId}}">
+        Lista zawodników
+      </button>
+    </mat-card-actions>
+  </mat-card>
+  <app-new-player-form *ngIf="competition && distances && subcategories" [competition]="competition" [distances]="distances"
+  [subcategories]="subcategories"></app-new-player-form>
