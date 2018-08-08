@@ -27,7 +27,7 @@ namespace Server.Dtos
             OrganizerEditLock = competition.OrganizerEditLock;
         }
 
-        public Competition CopyDataFromDto(Competition competition)
+        public virtual Competition CopyDataFromDto(Competition competition)
         {
             competition.Id = Id;
             competition.Name = Name;
