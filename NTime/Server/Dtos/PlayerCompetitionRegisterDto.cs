@@ -73,14 +73,14 @@ namespace Server.Dtos
                 throw new Exception($"Nie ma kategorii wiekowej o id {AgeCategoryId} skorelowanego z zawodami o id {CompetitionId}.");
 
             if (player.AgeCategory.Male != player.IsMale) 
-                throw new Exception("Płeć zawodnika nie zgadza się z płcią kategorii wiekowej.");
+                throw new Exception($"Płeć zawodnika nie zgadza się z płcią kategorii wiekowej {player.AgeCategory.Name}.");
 
             if (!(await ageCategoryRepository.IsAgeCategoryAndDistanceMatch(player.AgeCategory, player.Distance)))
-                throw new Exception($"Kategoria wiekowa o id {AgeCategoryId} i dystans o id {DistanceId} nie są ze sobą skorelowane.");
+                throw new Exception($"Kategoria wiekowa {player.AgeCategory.Name} i dystans {player.Distance.Name} nie są ze sobą skorelowane.");
 
             if ((await ageCategoryRepository.GetFittingAsync(player)).All(ac => ac.Id != player.AgeCategory.Id))
                 throw new Exception(
-                    $"Wybrana kategoria wiekowa o id {AgeCategoryId} nie pasuje wieku zawodnika {player.BirthDate:d}, wiek powinien się zawierać w przedziale od {player.AgeCategory.YearFrom} do {player.AgeCategory.YearTo}");
+                    $"Wybrana kategoria wiekowa {player.AgeCategory.Name} nie zawiera wieku zawodnika {player.BirthDate:d}, wiek powinien się zawierać w przedziale od {player.AgeCategory.YearFrom} do {player.AgeCategory.YearTo}");
 
             return player;
         }

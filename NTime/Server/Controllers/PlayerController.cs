@@ -299,8 +299,7 @@ namespace Server.Controllers
             if (await CanPlayerAccess(player) == false)
                 return Unauthorized();
 
-            if (await competitionRegisterDto.CopyDataFromDto(player, ContextProvider, Competition) == null)
-                return NotFound();
+            await competitionRegisterDto.CopyDataFromDto(player, ContextProvider, Competition);
 
             await _playerRepository.UpdateAsync(player, player.AgeCategory, player.Distance, player.Subcategory);
 
@@ -328,7 +327,7 @@ namespace Server.Controllers
             Player player = new Player();
             await competitionRegisterDto.CopyDataFromDto(player, ContextProvider, Competition);
 
-            //await CheckReCaptcha(RegisterPrivateKey, competitionRegisterDto.ReCaptchaToken);
+            await CheckReCaptcha(RegisterPrivateKey, competitionRegisterDto.ReCaptchaToken);
 
             if (AmIPlayer())
             {
