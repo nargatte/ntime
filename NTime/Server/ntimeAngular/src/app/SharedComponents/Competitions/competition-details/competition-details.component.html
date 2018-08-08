@@ -1,0 +1,43 @@
+<div>
+  <tr>
+    <td> Nazwa: </td>
+    <td> {{competition.Name}} </td>
+  </tr>
+  <tr>
+    <td> Organizator: </td>
+    <td> {{competition.Organizer}} </td>
+  </tr>
+  <tr>
+    <td> Link: </td>
+    <td>
+      <a target="_blank" href="http://{{competition.Link}}">{{competition.LinkDisplayedName}}</a>
+    </td>
+  </tr>
+  <div>
+    <p>Dystanse: </p>
+    <ng-container *ngFor="let distance of distances">
+      <tr>
+        <td> {{distance.Name}} </td>
+        <td> {{distance.Length}}km </td>
+      </tr>
+    </ng-container>
+  </div>
+  <div *ngIf="subcategories && subcategories.length > 1">
+    <p>Podkategorie: </p>
+    <ng-container *ngFor="let subcategory of subcategories">
+      <tr>
+        <td> Nazwa: {{subcategory.Name}} </td>
+        <td> Skrót: {{subcategory.ShortName}}km </td>
+      </tr>
+    </ng-container>
+  </div>
+  <div>
+    <p>Kategorie wiekowe: </p>
+    <ng-container *ngFor="let ageCategory of ageCategories">
+      <tr>
+        <td> Nazwa: {{ageCategory.Name}} </td>
+        <td> Zakres roczników: {{ageCategory.YearFrom}}-{{ageCategory.YearTo}} </td>
+      </tr>
+    </ng-container>
+  </div>
+</div>

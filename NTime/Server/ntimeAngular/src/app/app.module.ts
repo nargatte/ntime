@@ -49,6 +49,7 @@ import { PlayersTabHeaderStaffComponent } from './SharedComponents/Players/playe
 import { OrganizerAccountService } from './Services/organizer-account.service';
 import { EditPlayerComponent } from './SharedComponents/Players/edit-player/edit-player.component';
 import { EditPlayerTabComponent } from './Tabs/edit-player-tab/edit-player-tab.component';
+import { CompetitionDetailsComponent } from './SharedComponents/Competitions/competition-details/competition-details.component';
 
 
 @NgModule({
@@ -63,7 +64,7 @@ import { EditPlayerTabComponent } from './Tabs/edit-player-tab/edit-player-tab.c
         PlayersListComponent, PlayersListTabComponent, PlayersListUnauthorizedComponent,
         PlayersSelectComponent, PlayersTabHeaderStaffComponent, PlayersTabHeaderUnauthorizedComponent,
         RegisterConfirmationComponent, RegistrationTabComponent, ScoresTabComponent,
-        SingUpEndDateErrorDialogComponent, SuccessfullActionDialogComponent, UserRegisteredDialogComponent, EditPlayerComponent, EditPlayerTabComponent
+        SingUpEndDateErrorDialogComponent, SuccessfullActionDialogComponent, UserRegisteredDialogComponent, EditPlayerComponent, EditPlayerTabComponent, CompetitionDetailsComponent
     ],
     providers: [
         AuthenticatedUserService, AuthenticationService, CompetitionService, DistanceService,

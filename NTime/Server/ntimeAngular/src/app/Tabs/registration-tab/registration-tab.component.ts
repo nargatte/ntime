@@ -8,6 +8,7 @@ import { SubcategoryService } from '../../Services/subcategory.service';
 import { Distance } from '../../Models/Distance';
 import { Subcategory } from '../../Models/Subcategory';
 import { MessageService } from '../../Services/message.service';
+import { MatProgressSpinner } from '../../../../node_modules/@angular/material';
 
 @Component({
   selector: 'app-registration-tab',
@@ -20,6 +21,7 @@ export class RegistrationTabComponent implements OnInit {
   public distances: Distance[];
   public subcategories: Subcategory[];
   public todayDate: Date;
+  public spinner: MatProgressSpinner;
 
   constructor(
     private route: ActivatedRoute,
