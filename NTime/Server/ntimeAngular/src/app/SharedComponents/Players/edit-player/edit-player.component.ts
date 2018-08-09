@@ -105,6 +105,8 @@ export class EditPlayerComponent implements OnInit, AfterViewInit {
     this.playerService.getPlayer(this.playerId).subscribe(
       (player: PlayersWithScores) => {
         this.editedPlayer = player; // TODO: Try to make not static
+        this.messageService.addLog('Displaying downloaded player');
+        this.messageService.addObject(this.editedPlayer);
       },
       error => this.failedToLoadPlayer(error), // Errors
     );
