@@ -126,7 +126,7 @@ export class EditPlayerComponent implements OnInit, AfterViewInit {
     }
 
     this.log('Trying to edit Player');
-    this.playerService.editPlayer(this.editedPlayer, this.competitionId).subscribe(
+    this.playerService.editPlayer(this.editedPlayer, this.playerId).subscribe(
       player => this.onSuccessfulEditPlayer(player),
       error => {
         this.log(`Wystąpił problem podczas edytowania zawodnika zawodnika: ${error}`);
