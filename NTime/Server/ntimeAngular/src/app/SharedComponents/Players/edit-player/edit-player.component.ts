@@ -18,6 +18,9 @@ import { SuccessfullActionDialogComponent } from '../../Dialogs/successfull-acti
 import { AuthenticatedUserService } from '../../../Services/authenticated-user.service';
 import { RoleEnum } from '../../../Models/Enums/RoleEnum';
 import { PlayersWithScores } from '../../../Models/Players/PlayerWithScores';
+import { CompetitionWithDetails } from '../../../Models/Competitions/CompetitionWithDetails';
+import { AgeCategory } from '../../../Models/AgeCategory';
+import { AgeCategoryDistance } from '../../../Models/AgeCategoryDistance';
 
 @Component({
   selector: 'app-edit-player',
@@ -28,10 +31,12 @@ import { PlayersWithScores } from '../../../Models/Players/PlayerWithScores';
   ]
 })
 export class EditPlayerComponent implements OnInit, AfterViewInit {
+  @Input() competition: CompetitionWithDetails;
 
-  @Input() competition: Competition;
-  @Input() distances: Distance[];
-  @Input() subcategories: Subcategory[];
+  public distances: Distance[];
+  public subcategories: Subcategory[];
+  public ageCategories: AgeCategory[];
+  public ageCategoryDistances: AgeCategoryDistance[];
 
   public todayDate: Date;
   public editedPlayer: PlayersWithScores;
@@ -54,14 +59,24 @@ export class EditPlayerComponent implements OnInit, AfterViewInit {
     private dialog: MatDialog,
     private authenticatedUserService: AuthenticatedUserService
   ) {
-    this.playerId = +this.route.snapshot.paramMap.get('id');
+    this.playerId = +this.route.snapshot.paramMap.get('player-id');
     this.todayDate = new Date(Date.now());
     this.authorizeEdit();
   }
 
   ngOnInit() {
     this.getPlayerData();
+    this.assignCompetitionParts();
     this.prepareExtraFields();
+  }
+
+  private assignCompetitionParts(): void {
+    this.messageService.addLog('Assinging proper distances etc.');
+    this.messageService.addObject(this.competition);
+    this.distances = this.competition.Distances;
+    this.subcategories = this.competition.Subcategories;
+    this.ageCategories = this.competition.AgeCategories;
+    this.ageCategoryDistances = this.competition.AgeCategoryDistances;
   }
 
   // Here might be a problem with the button being disabled

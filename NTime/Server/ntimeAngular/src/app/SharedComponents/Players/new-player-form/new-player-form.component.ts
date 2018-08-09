@@ -15,6 +15,9 @@ import { MockPlayersCompetitionRegister } from '../../../MockData/MockPlayers';
 import { FailedActionDialogComponent } from '../../Dialogs/failed-action-dialog/failed-action-dialog.component';
 import { ExtraFieldDefinition } from '../../../Models/CDK/ExtraFieldDefinition';
 import { String, StringBuilder } from 'typescript-string-operations';
+import { AgeCategory } from '../../../Models/AgeCategory';
+import { AgeCategoryDistance } from '../../../Models/AgeCategoryDistance';
+import { CompetitionWithDetails } from '../../../Models/Competitions/CompetitionWithDetails';
 
 @Component({
   selector: 'app-new-player-form',
@@ -25,9 +28,12 @@ import { String, StringBuilder } from 'typescript-string-operations';
   ]
 })
 export class NewPlayerFormComponent implements OnInit, AfterViewInit {
-  @Input() competition: Competition;
-  @Input() distances: Distance[];
-  @Input() subcategories: Subcategory[];
+  @Input() competition: CompetitionWithDetails;
+
+  public distances: Distance[];
+  public subcategories: Subcategory[];
+  public ageCategories: AgeCategory[];
+  public ageCategoryDistances: AgeCategoryDistance[];
 
   public todayDate: Date;
   public newPlayer: PlayerCompetitionRegister = new PlayerCompetitionRegister();
@@ -53,11 +59,19 @@ export class NewPlayerFormComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    this.assignCompetitionParts();
     this.prepareExtraFields();
   }
 
   ngAfterViewInit() {
     this.recaptchaId = window['grecaptcha'].render('NewPlayerFormComponentButton');
+  }
+
+  private assignCompetitionParts(): void {
+    this.distances = this.competition.Distances;
+    this.subcategories = this.competition.Subcategories;
+    this.ageCategories = this.competition.AgeCategories;
+    this.ageCategoryDistances = this.competition.AgeCategoryDistances;
   }
 
 

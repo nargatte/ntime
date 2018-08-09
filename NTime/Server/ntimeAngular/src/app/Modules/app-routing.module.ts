@@ -25,7 +25,7 @@ const routes: Routes = [
     { path: 'zapisy/:id', component: RegistrationTabComponent },
     { path: 'lista-zawodnikow/:id', component: PlayersListTabComponent },
     { path: 'potwierdzenie-rejestracji', component: RegisterConfirmationComponent },
-    { path: 'zawodnik/:id', component: EditPlayerTabComponent },
+    { path: 'zawodnik/:competition-id/:player-id', component: EditPlayerTabComponent },
     { path: '**', redirectTo: '/zawody', pathMatch: 'full' },
     // { path: 'wyniki', component: ScoresTabComponent, data: { name: 'scores' } },
 ];

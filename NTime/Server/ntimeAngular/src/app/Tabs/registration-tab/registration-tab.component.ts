@@ -9,6 +9,9 @@ import { Distance } from '../../Models/Distance';
 import { Subcategory } from '../../Models/Subcategory';
 import { MessageService } from '../../Services/message.service';
 import { MatProgressSpinner } from '../../../../node_modules/@angular/material';
+import { AgeCategoryDistance } from '../../Models/AgeCategoryDistance';
+import { AgeCategory } from '../../Models/AgeCategory';
+import { CompetitionWithDetails } from '../../Models/Competitions/CompetitionWithDetails';
 
 @Component({
   selector: 'app-registration-tab',
@@ -17,53 +20,28 @@ import { MatProgressSpinner } from '../../../../node_modules/@angular/material';
 })
 export class RegistrationTabComponent implements OnInit {
   public competitionId: number;
-  public competition: Competition;
-  public distances: Distance[];
-  public subcategories: Subcategory[];
+  public competition: CompetitionWithDetails;
   public todayDate: Date;
   public spinner: MatProgressSpinner;
 
   constructor(
     private route: ActivatedRoute,
     private competitionService: CompetitionService,
-    private distanceService: DistanceService,
-    private subcategoryService: SubcategoryService,
     private messageService: MessageService
   ) {
     this.todayDate = new Date(Date.now());
     this.competitionId = +this.route.snapshot.paramMap.get('id');
     this.getCompetition(this.competitionId);
-    setTimeout(() => this.getSubcategoriesFromCompetition(this.competitionId), 20);
-    setTimeout(() => this.getDistanceFromCompetition(this.competitionId), 50);
   }
 
   ngOnInit() {
   }
 
+
   getCompetition(id: number): void {
     this.competitionService.getCompetition(id).subscribe(
-      (competition: Competition) => {
-        this.competition = Competition.convertDates(competition); // TODO: Try to make it unmutabel
-      },
-      error => this.messageService.addError(error), // Errors
-    );
-  }
-
-  getDistanceFromCompetition(competitionId: number): void {
-    this.distanceService.getDistanceFromCompetition(competitionId).subscribe(
-      (distance: Distance[]) => {
-        this.messageService.addLog(`Distance received ${distance}`);
-        this.distances = distance;
-      },
-      error => this.messageService.addError(error), // Errors
-    );
-  }
-
-  getSubcategoriesFromCompetition(competitionId: number): void {
-    this.subcategoryService.getSubcategoryFromCompetition(competitionId).subscribe(
-      (subcategory: Subcategory[]) => {
-        this.messageService.addLog(`Subcategory received ${subcategory}`);
-        this.subcategories = subcategory;
+      (competition: CompetitionWithDetails) => {
+        this.competition = CompetitionWithDetails.convertDates(competition); // TODO: Try to make it unmutabel
       },
       error => this.messageService.addError(error), // Errors
     );

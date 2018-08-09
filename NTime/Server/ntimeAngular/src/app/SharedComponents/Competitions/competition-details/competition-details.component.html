@@ -7,9 +7,9 @@
     <td> Organizator: </td>
     <td> {{competition.Organizer}} </td>
   </tr>
-  <tr>
+  <tr >
     <td> Link: </td>
-    <td>
+    <td *ngIf="competition.Link">
       <a target="_blank" href="http://{{competition.Link}}">{{competition.LinkDisplayedName}}</a>
     </td>
   </tr>
@@ -35,8 +35,8 @@
     <p>Kategorie wiekowe: </p>
     <ng-container *ngFor="let ageCategory of ageCategories">
       <tr>
-        <td> Nazwa: {{ageCategory.Name}} </td>
-        <td> Zakres roczników: {{ageCategory.YearFrom}}-{{ageCategory.YearTo}} </td>
+        <td> {{ageCategory.Name}} </td>
+        <td>    Roczniki: {{ageCategory.YearFrom}}-{{ageCategory.YearTo}} </td>
       </tr>
     </ng-container>
   </div>

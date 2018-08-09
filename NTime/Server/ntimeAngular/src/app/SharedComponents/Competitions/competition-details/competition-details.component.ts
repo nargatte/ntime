@@ -15,7 +15,7 @@ export class CompetitionDetailsComponent implements OnInit {
   public distances: Distance[];
   public subcategories: Subcategory[];
   public ageCategories: AgeCategory[];
-  public AgeCategoryDistances: AgeCategoryDistance[];
+  public ageCategoryDistances: AgeCategoryDistance[];
 
   constructor() {
   }
@@ -28,7 +28,7 @@ export class CompetitionDetailsComponent implements OnInit {
     this.distances = this.competition.Distances;
     this.subcategories = this.competition.Subcategories;
     this.ageCategories = this.competition.AgeCategories;
-    this.AgeCategoryDistances = this.competition.AgeCategoryDistances;
+    this.ageCategoryDistances = this.competition.AgeCategoryDistances;
   }
 
 }

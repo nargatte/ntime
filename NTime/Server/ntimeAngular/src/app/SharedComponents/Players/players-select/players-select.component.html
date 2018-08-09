@@ -92,7 +92,7 @@
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef> </mat-header-cell>
       <mat-cell *matCellDef="let player">
-        <a mat-raised-button color="primary" routerLink="/zawodnik/{{player.Id}}">
+        <a mat-raised-button color="primary" routerLink="/zawodnik/{{competitionId}}/{{player.Id}}">
           Edytuj
         </a>
       </mat-cell>
