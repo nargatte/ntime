@@ -45,8 +45,8 @@ export class EditPlayerComponent implements OnInit, AfterViewInit {
   private recaptchaId: number;
   public extraFields: ExtraFieldDefinition[] = [];
   private delimiter = '|';
-  public newPlayerExtraData: string[] = [];
   public canOrganizerEdit = false;
+  public editedPlayerExtraData: string[] = [];
 
   public checkboxes: boolean[] = [false, false, false];
 
@@ -105,6 +105,7 @@ export class EditPlayerComponent implements OnInit, AfterViewInit {
     this.playerService.getPlayer(this.playerId).subscribe(
       (player: PlayersWithScores) => {
         this.editedPlayer = player; // TODO: Try to make not static
+        this.editedPlayerExtraData = this.editedPlayer.ExtraData.split(this.delimiter);
         this.messageService.addLog('Displaying downloaded player');
         this.messageService.addObject(this.editedPlayer);
       },
@@ -118,7 +119,7 @@ export class EditPlayerComponent implements OnInit, AfterViewInit {
   }
 
   public editPlayer() {
-    this.editedPlayer.ExtraData = String.Join(this.delimiter, this.newPlayerExtraData);
+    this.editedPlayer.ExtraData = String.Join(this.delimiter, this.editedPlayerExtraData);
     this.messageService.addLog(`Set ExtraData: ${this.editedPlayer.ExtraData}`);
     if (this.subcategories.length === 1) {
       this.editedPlayer.SubcategoryId = this.subcategories[0].Id;
@@ -174,7 +175,7 @@ export class EditPlayerComponent implements OnInit, AfterViewInit {
       this.extraFields.push(
         new ExtraFieldDefinition(iterator.toString(), fieldString, iterator, this.delimiter)
       );
-      this.newPlayerExtraData.push(String.Empty);
+      this.editedPlayerExtraData.push(String.Empty);
       iterator++;
     });
   }

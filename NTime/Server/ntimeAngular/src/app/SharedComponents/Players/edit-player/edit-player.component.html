@@ -58,7 +58,7 @@
             </div>
           </mat-form-field>
 
-          <!-- <div *ngIf="extraFields.length > 0">
+          <div *ngIf="extraFields.length > 0">
             <ng-container *ngFor="let field of extraFields">
               <mat-form-field>
                 <input matInput type="text" placeholder="{{ field.placeholder}}" name="{{field.fieldName}}" required [(ngModel)]="editedPlayerExtraData[field.fieldIndex]"
@@ -70,7 +70,7 @@
                 </div>
               </mat-form-field>
             </ng-container>
-          </div> -->
+          </div>
 
           <mat-form-field>
             <mat-select placeholder="Dystans" name="distance" required [(ngModel)]="editedPlayer.DistanceId" #distance="ngModel">
