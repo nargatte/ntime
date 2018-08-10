@@ -392,7 +392,7 @@ namespace BaseCore.DataBase
         protected virtual string GetFullCategory(Distance distance, Subcategory subcategory, AgeCategory ageCategory,
             bool male) =>
             (distance == null || subcategory == null || ageCategory == null) ? null :
-            distance.Name.Substring(0, Math.Min(4, distance.Name.Length)) + " " + (male ? "M" : "K") + ageCategory.Name + (subcategory.ShortName == "*" ? "" : subcategory.ShortName);
+            distance.Name.Substring(0, Math.Min(4, distance.Name.Length)) + " " + ageCategory.Name + (subcategory.ShortName == "*" ? "" : subcategory.ShortName);
 
         public async Task<Tuple<int, int>> ImportTimeReadsAsync(string fileName, Gate gate)
         {
