@@ -10,7 +10,6 @@ import { PlayerService } from '../../../Services/player.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { SingUpEndDateErrorDialogComponent } from '../../Dialogs/sing-up-end-date-error-dialog/sing-up-end-date-error-dialog.component';
-import { MockPlayersCompetitionRegister } from '../../../MockData/MockPlayers';
 import { FailedActionDialogComponent } from '../../Dialogs/failed-action-dialog/failed-action-dialog.component';
 import { ExtraFieldDefinition } from '../../../Models/CDK/ExtraFieldDefinition';
 import { String, StringBuilder } from 'typescript-string-operations';

@@ -1,17 +1,9 @@
-export class PlayersWithScores {
-    Id: number;
-    FirstName: string;
-    LastName: string;
-    BirthDate: Date;
-    IsMale: boolean;
-    PhoneNumber: string;
-    ExtraData: string;
-    Team: string;
+import { PlayerCompetitionRegister, BasicPlayerArguments } from './PlayerCompetitionRegister';
+
+export class PlayersWithScores extends PlayerCompetitionRegister {
     StartNumber: number;
     StartTime: Date;
-    City: string;
     IsPaidUp: boolean;
-    Email: string;
     IsStartTimeFromReader: boolean;
     FullCategory: string;
     LapsCount: number;
@@ -19,14 +11,9 @@ export class PlayersWithScores {
     DistancePlaceNumber: number;
     CategoryPlaceNumber: number;
     CompetitionCompleted: boolean;
-    SubcategoryId: number;
-    DistanceId: number;
-    AgeCategoryId: number;
     PlayerAccountId: number;
 
-    constructor(id: number, firstName: string, lastName: string) {
-        this.Id = id;
-        this.FirstName = firstName;
-        this.LastName = lastName;
+    constructor(args?: BasicPlayerArguments) {
+        super(args);
     }
 }

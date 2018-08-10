@@ -11,7 +11,6 @@ import { ActivatedRoute } from '@angular/router';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { PlayerAddedDialogComponent } from '../../Dialogs/player-added-dialog/player-added-dialog.component';
 import { SingUpEndDateErrorDialogComponent } from '../../Dialogs/sing-up-end-date-error-dialog/sing-up-end-date-error-dialog.component';
-import { MockPlayersCompetitionRegister } from '../../../MockData/MockPlayers';
 import { FailedActionDialogComponent } from '../../Dialogs/failed-action-dialog/failed-action-dialog.component';
 import { ExtraFieldDefinition } from '../../../Models/CDK/ExtraFieldDefinition';
 import { String, StringBuilder } from 'typescript-string-operations';
@@ -90,6 +89,10 @@ export class NewPlayerFormComponent implements OnInit, AfterViewInit {
     if (this.subcategories.length === 1) {
       this.newPlayer.SubcategoryId = this.subcategories[0].Id;
     }
+
+    const resolvedAgeCategory = this.newPlayer.resolveAgeCategory(this.ageCategories);
+    this.messageService.addLog('Resolved ageCategory');
+    this.messageService.addObject(resolvedAgeCategory);
 
     this.newPlayer.ReCaptchaToken = reCaptchaToken;
 
