@@ -1,43 +1,48 @@
 <div>
-  <tr>
-    <td> Nazwa: </td>
-    <td> {{competition.Name}} </td>
-  </tr>
-  <tr>
-    <td> Organizator: </td>
-    <td> {{competition.Organizer}} </td>
-  </tr>
-  <tr >
-    <td> Link: </td>
-    <td *ngIf="competition.Link">
-      <a target="_blank" href="http://{{competition.Link}}">{{competition.LinkDisplayedName}}</a>
-    </td>
-  </tr>
-  <div>
-    <p>Dystanse: </p>
-    <ng-container *ngFor="let distance of distances">
-      <tr>
-        <td> {{distance.Name}} </td>
-        <td> {{distance.Length}}km </td>
-      </tr>
-    </ng-container>
-  </div>
-  <div *ngIf="subcategories && subcategories.length > 1">
-    <p>Podkategorie: </p>
-    <ng-container *ngFor="let subcategory of subcategories">
-      <tr>
-        <td> Nazwa: {{subcategory.Name}} </td>
-        <td> Skrót: {{subcategory.ShortName}} </td>
-      </tr>
-    </ng-container>
-  </div>
-  <div>
-    <p>Kategorie wiekowe: </p>
-    <ng-container *ngFor="let ageCategory of ageCategories">
-      <tr>
-        <td> {{ageCategory.Name}} </td>
-        <td>    Roczniki: {{ageCategory.YearFrom}}-{{ageCategory.YearTo}} </td>
-      </tr>
-    </ng-container>
+  <!-- <div class="rows"> -->
+    <tr>
+      <td> Nazwa: </td>
+      <td> {{competition.Name}} </td>
+    </tr>
+    <tr>
+      <td> Organizator: </td>
+      <td> {{competition.Organizer}} </td>
+    </tr>
+    <tr>
+      <td> Link: </td>
+      <td *ngIf="competition.Link">
+        <a target="_blank" href="http://{{competition.Link}}">{{competition.LinkDisplayedName}}</a>
+      </td>
+    </tr>
+  <!-- </div> -->
+  <br/>
+  <div class="details">
+    <mat-card mat-card class="details-element">
+      <p>Dystanse: </p>
+      <ng-container *ngFor="let distance of distances">
+        <tr>
+          <td> {{distance.Name}} </td>
+          <td> {{distance.Length}}km </td>
+        </tr>
+      </ng-container>
+    </mat-card>
+    <mat-card class="details-element" *ngIf="subcategories && subcategories.length > 1">
+      <p>Podkategorie: </p>
+      <ng-container *ngFor="let subcategory of subcategories">
+        <tr>
+          <td> Nazwa: {{subcategory.Name}} </td>
+          <td> Skrót: {{subcategory.ShortName}} </td>
+        </tr>
+      </ng-container>
+    </mat-card>
+    <mat-card class="details-element">
+      <p>Kategorie wiekowe: </p>
+      <ng-container *ngFor="let ageCategory of ageCategories">
+        <tr>
+          <td> {{ageCategory.Name}} </td>
+          <td> Roczniki: {{ageCategory.YearFrom}}-{{ageCategory.YearTo}} </td>
+        </tr>
+      </ng-container>
+    </mat-card>
   </div>
 </div>
