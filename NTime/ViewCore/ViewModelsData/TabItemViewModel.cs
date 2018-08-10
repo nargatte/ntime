@@ -13,9 +13,10 @@ namespace ViewCore
     {
         protected AgeCategoryRepository _ageCategoryRepository { get; set; }
         protected DistanceRepository _distanceRepository { get; set; }
-        protected SubcategoryRepository SubcategoryRepository { get; set; }
+        protected SubcategoryRepository _subcategoryRepository { get; set; }
         protected GateRepository _gateRepository { get; set; }
         protected PlayerRepository _playerRepository { get; set; }
+        protected AgeCategoryDistanceRepository _ageCategoryDistanceRepository { get; set; }
 
         //public TabItemViewModel()
         //{
@@ -38,9 +39,10 @@ namespace ViewCore
             ContextProvider contextProvider = new ContextProvider();
             _ageCategoryRepository = new AgeCategoryRepository(contextProvider, _currentCompetition.DbEntity);
             _distanceRepository = new DistanceRepository(contextProvider, _currentCompetition.DbEntity);
-            SubcategoryRepository = new SubcategoryRepository(contextProvider, _currentCompetition.DbEntity);
+            _subcategoryRepository = new SubcategoryRepository(contextProvider, _currentCompetition.DbEntity);
             _gateRepository = new GateRepository(contextProvider, _currentCompetition.DbEntity);
             _playerRepository = new PlayerRepository(contextProvider, _currentCompetition.DbEntity);
+            _ageCategoryDistanceRepository = new AgeCategoryDistanceRepository(contextProvider, _currentCompetition.DbEntity);
             //_gateOrderItemRepository = new GateOrderItemRepository(contextProvider, );
             //_timeReadRepository = new TimeReadRepository()
             //_timeReadsLogInofRepository = new TimeReadsLogInofRepository()

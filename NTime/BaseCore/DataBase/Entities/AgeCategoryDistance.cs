@@ -6,6 +6,13 @@
         {
         }
 
+        public AgeCategoryDistance(int competitionId, int ageCategoryId, int distanceId)
+        {
+            this.CompetitionId = competitionId;
+            this.AgeCategoryId = ageCategoryId;
+            this.DistanceId = distanceId;
+        }
+
         public int Id { get; set; }
         public int CompetitionId { get; set; }
         public virtual Competition Competition { get; set; }

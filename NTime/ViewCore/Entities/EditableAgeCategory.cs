@@ -13,6 +13,19 @@ namespace ViewCore.Entities
         public EditableAgeCategory(IEditableCompetition currentComptetition) : base(currentComptetition)
         {
             DeleteCategoryCmd = new RelayCommand(OnDeleteCategory);
+            Male = true;
+        }
+
+        public EditableAgeCategory(EditableAgeCategory editableAgeCategory) : base(editableAgeCategory._currentCompetition) 
+        {
+            Name = editableAgeCategory.Name;
+            YearFrom = editableAgeCategory.YearFrom;
+            YearTo = editableAgeCategory.YearTo;
+            Male = editableAgeCategory.Male;
+            DbEntity.CompetitionId = editableAgeCategory.DbEntity.CompetitionId;
+            //DeleteCategoryCmd = editableAgeCategory.DeleteCategoryCmd;
+            //DeleteRequested = editableAgeCategory.DeleteRequested;
+            //UpdateRequested = editableAgeCategory.UpdateRequested;
         }
 
         public string Name
@@ -20,7 +33,7 @@ namespace ViewCore.Entities
             get { return DbEntity.Name; }
             set
             {
-               DbEntity.Name = SetProperty(DbEntity.Name, value);
+                DbEntity.Name = SetProperty(DbEntity.Name, value);
                 OnUpdateRequested();
             }
         }
@@ -42,6 +55,17 @@ namespace ViewCore.Entities
             set
             {
                 DbEntity.YearTo = SetProperty(DbEntity.YearTo, value);
+                OnUpdateRequested();
+            }
+        }
+
+
+        public bool Male
+        {
+            get { return DbEntity.Male; }
+            set
+            {
+                DbEntity.Male = SetProperty(DbEntity.Male, value);
                 OnUpdateRequested();
             }
         }

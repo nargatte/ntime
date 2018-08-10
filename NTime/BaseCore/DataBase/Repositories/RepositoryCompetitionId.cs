@@ -11,9 +11,16 @@ namespace BaseCore.DataBase
 
         protected Competition Competition { get; }
 
+
         protected RepositoryCompetitionId(IContextProvider contextProvider, Competition competition) :
             base(contextProvider) =>
             Competition = competition;
+
+        public async Task<IEnumerable<T>>  GetAllForCompetitionAsync()
+        {
+            var allItems = await base.GetAllAsync();
+            return allItems.Where(item => item.CompetitionId == Competition.Id);
+        }
 
         protected override IQueryable<T> GetAllQuery(IQueryable<T> items) => 
             items.Where(e => e.CompetitionId == Competition.Id);
