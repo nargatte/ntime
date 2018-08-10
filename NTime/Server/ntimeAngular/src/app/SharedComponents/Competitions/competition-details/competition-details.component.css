@@ -4,12 +4,12 @@
 }
 
 
-.details {
-    /* float: none; */
+/* .details {
+    float: none; */
     /* float:left; */
     /* width: 100%; */
-    /* flex-flow: wrap; */
-}
+    /* flex-flow: wrap;
+} */
 .details-element{
     margin: 1em;
     /* height: 100%; */

@@ -193,6 +193,8 @@ namespace AdminView.Categories
         #region Distances
         private async Task DownloadDistancesFromDatabase(bool clearDisplayedCategoriesBefore = true)
         {
+            if (clearDisplayedCategoriesBefore)
+                Distances.Clear();
             var dbDistances = await _distanceRepository.GetAllAsync();
             foreach (var dbDistance in dbDistances)
             {
@@ -209,6 +211,8 @@ namespace AdminView.Categories
         #region AgeCategoryDistances
         private async Task DownloadAgeCategoryDistancesFromDatabase(bool clearDisplayedCategoriesBefore = true)
         {
+            if (clearDisplayedCategoriesBefore)
+                AgeCategoryDistances.Clear();
             var dbAgeCategoryDistances = await _ageCategoryDistanceRepository.GetAllAsync();
             foreach (var ageCategoryDistance in dbAgeCategoryDistances)
             {

@@ -61,7 +61,6 @@ export class PlayerCompetitionRegister {
         //     console.log(resolvedAgeCategories);
         // }
         if (resolvedAgeCategories === null || resolvedAgeCategories.length === 0) {
-            this.AgeCategoryId = 20;
             return null;
         } else {
             this.AgeCategoryId = resolvedAgeCategories[0].Id;
