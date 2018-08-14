@@ -124,9 +124,9 @@ export class EditPlayerComponent implements OnInit, AfterViewInit {
       this.editedPlayer.SubcategoryId = this.subcategories[0].Id;
     }
 
-    const resolvedAgeCategory = this.editedPlayer.resolveAgeCategory(this.ageCategories);
-    this.messageService.addLog('Resolved ageCategory');
-    this.messageService.addObject(resolvedAgeCategory);
+    // const resolvedAgeCategory = this.editedPlayer.resolveAgeCategory(this.ageCategories);
+    // this.messageService.addLog('Resolved ageCategory');
+    // this.messageService.addObject(resolvedAgeCategory);
 
     this.log('Trying to edit Player');
     this.playerService.editPlayer(this.editedPlayer, this.playerId).subscribe(

@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { Observable ,  of ,  from, throwError } from 'rxjs';
+import { Observable, of, from, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
@@ -29,9 +29,9 @@ export abstract class BaseHttpService {
     const authorizationHeaderName = 'Authorization';
     if (this.authenticatedUserService.IsAuthenticated) {
       this.httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-      this.httpOptionsUrlEncoded = { headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }) };
       this.httpOptions.headers = this.httpOptions.headers.append(
         authorizationHeaderName, `Bearer ${this.authenticatedUserService.Token}`);
+      this.httpOptionsUrlEncoded = { headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }) };
       this.httpOptionsUrlEncoded.headers = this.httpOptions.headers.append(
         authorizationHeaderName, `Bearer ${this.authenticatedUserService.Token}`);
     }
@@ -137,13 +137,14 @@ export abstract class BaseHttpService {
     );
   }
 
-  protected putById<TContent> (id: number, content: TContent): Observable<TContent> {
+  protected putById<TContent>(id: number, content: TContent): Observable<TContent> {
     this.updateAuthorizedUser();
     return this.http.put<TContent>(
       new UrlBuilder()
         .addControllerName(this.controllerName)
         .addId(id)
         .toString(),
+        content,
       this.httpOptions
     ).pipe(
       tap((item) => {
