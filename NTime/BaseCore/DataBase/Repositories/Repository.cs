@@ -99,10 +99,10 @@ namespace BaseCore.DataBase
                 CheckNull(item);
                 CheckItem(item);
             }
-
             return ContextProvider.DoAsync(async ctx =>
             {
-                ctx.Set<T>().RemoveRange(items);
+                var itemsEntities = ctx.Set<T>().Where(i => items.Contains(i));
+                ctx.Set<T>().RemoveRange(itemsEntities);
                 await ctx.SaveChangesAsync();
             });
         }
