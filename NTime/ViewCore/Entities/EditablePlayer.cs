@@ -157,6 +157,17 @@ namespace ViewCore.Entities
         }
 
 
+        public string ExtraData
+        {
+            get { return DbEntity.ExtraData; }
+            set
+            {
+                DbEntity.ExtraData = SetProperty(DbEntity.ExtraData, value);
+                OnUpdateRequested();
+            }
+        }
+
+
 
         public string PhoneNumber
         {

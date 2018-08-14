@@ -574,7 +574,7 @@ namespace BaseCore.DataBase
 
                 foreach (Player player in players)
                 {
-                    if (player.ExtraData == null)
+                    if (string.IsNullOrWhiteSpace(player.ExtraData))
                         player.ExtraData = String.Concat(Enumerable.Repeat(delimiter, permutations.Length - 1).ToArray());
                     else
                     {
@@ -584,6 +584,8 @@ namespace BaseCore.DataBase
                         {
                             if (permutations[x] >= 0 && permutations[x] < extraData.Length)
                                 newExtraData[x] = extraData[permutations[x]];
+                            else
+                                newExtraData[x] = String.Empty;
                         }
 
                         player.ExtraData = String.Join(delimiter.ToString(), newExtraData);

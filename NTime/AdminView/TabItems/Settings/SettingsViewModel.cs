@@ -24,10 +24,8 @@ namespace AdminView.Settings
             SaveChangesCmd = new RelayCommand(OnSaveChangesAsync);
             RemoveCompetitionCmd = new RelayCommand(OnRemoveCompetition);
             AddExtraHeaderCmd = new RelayCommand(OnAddExtraHeader);
-            _newExtraHeader = new EditableHeaderPermutationPair(currentCompetition);
+            PrepareNewExtraHeader();
         }
-
-        public int MaxPermutationValue { get; set; } = -1;
 
         public ViewCore.Entities.IEditableCompetition CurrentCompetition
         {
@@ -77,7 +75,9 @@ namespace AdminView.Settings
             }
             await CompetitionRepositoryHelper.ModifyExtraDataHeaders(
                 ExtraHeaders.Select(extraHeader => extraHeader.DbEntity).ToArray(), CurrentCompetition.DbEntity
-            ).ContinueWith(t => MessageBox.Show("Zmiany zostały zapisane"));
+            );
+            MessageBox.Show("Zmiany zostały zapisane");
+            DownloadExtraHeaders();
 
             //await repository.UpdateAsync(_currentCompetition.DbEntity).ContinueWith(t =>
             //    MessageBox.Show("Zmiany zostały zapisane")
@@ -92,7 +92,7 @@ namespace AdminView.Settings
                 return;
             }
             ExtraHeaders.Add(PrepareNewExtraHeader(NewExtraHeader.DbEntity));
-            ClearNewExtraHeader();
+            PrepareNewExtraHeader();
         }
 
 
@@ -104,9 +104,10 @@ namespace AdminView.Settings
                 return true;
         }
 
-        private void ClearNewExtraHeader()
+        private void PrepareNewExtraHeader()
         {
             NewExtraHeader = new EditableHeaderPermutationPair(CurrentCompetition);
+            NewExtraHeader.PermutationElement = -1;
         }
 
         private void OnRemoveCompetition()
@@ -128,7 +129,6 @@ namespace AdminView.Settings
             editableHeader.DeleteRequested += EditableHeader_DeleteRequested;
             editableHeader.MoveUpRequested += EditableHeader_MoveUpRequested;
             editableHeader.MoveDownRequested += EditableHeader_MoveDownRequested;
-            editableHeader.PermutationElement = ++MaxPermutationValue;
             return editableHeader;
         }
 

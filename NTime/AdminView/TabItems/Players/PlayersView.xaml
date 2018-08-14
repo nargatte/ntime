@@ -243,6 +243,7 @@
                 </DataGridTemplateColumn>
                 <DataGridTextColumn x:Name="fullCategoryColumn" Header="kategoria" Binding="{Binding FullCategory, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="True"/>
                 <DataGridTextColumn x:Name="teamColumn"  Header="Klub" Binding="{Binding Team}"/>
+                <DataGridTextColumn x:Name="extraDataColumn"  Header="Dodatkowe" Binding="{Binding ExtraData}"/>
                 <DataGridTemplateColumn x:Name="birthDateColumn"  Header="Data urodzenia">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
