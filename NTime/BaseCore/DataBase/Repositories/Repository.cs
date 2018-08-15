@@ -101,7 +101,8 @@ namespace BaseCore.DataBase
             }
             return ContextProvider.DoAsync(async ctx =>
             {
-                var itemsEntities = ctx.Set<T>().Where(i => items.Contains(i));
+                var itemsIds = items.Select(i => i.Id);
+                var itemsEntities = ctx.Set<T>().Where(i => itemsIds.Contains(i.Id));
                 ctx.Set<T>().RemoveRange(itemsEntities);
                 await ctx.SaveChangesAsync();
             });
