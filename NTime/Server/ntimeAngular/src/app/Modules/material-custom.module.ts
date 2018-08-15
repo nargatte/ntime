@@ -9,29 +9,30 @@ import {
   // MatDialogModule,
   MatPaginatorIntl,
   MatSortModule,
+  MatExpansionModule,
+  MatProgressSpinnerModule,
 } from '@angular/material';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { PolishPaginatorIntl } from '../Helpers/polish-paginator-intl';
-import { SelectionModel } from '@angular/cdk/collections';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { CdkTableModule } from '../../../node_modules/@angular/cdk/table';
 
 @NgModule({
   imports: [
     CommonModule, FlexLayoutModule,
-    MatButtonModule, MatCardModule, MatCheckboxModule,
+    MatButtonModule, MatCardModule, MatCheckboxModule, MatExpansionModule,
     MatMomentDateModule, MatDatepickerModule, MatDialogModule,
-    MatFormFieldModule, MatIconModule, MatInputModule,
-    MatPaginatorModule, MatSelectModule, MatSidenavModule, MatSortModule,
+    MatFormFieldModule, MatIconModule, MatInputModule, MatPaginatorModule,
+    MatProgressSpinnerModule, MatSelectModule, MatSidenavModule, MatSortModule,
     MatTableModule, MatTabsModule, MatToolbarModule, CdkTableModule,
   ],
   exports: [
     FlexLayoutModule,
-    MatButtonModule, MatCardModule, MatCheckboxModule,
+    MatButtonModule, MatCardModule, MatCheckboxModule, MatExpansionModule,
     MatMomentDateModule, MatDatepickerModule, MatDialogModule,
-    MatFormFieldModule, MatIconModule, MatInputModule,
-    MatPaginatorModule, MatSelectModule, MatSidenavModule, MatSortModule,
+    MatFormFieldModule, MatIconModule, MatInputModule, MatPaginatorModule,
+    MatProgressSpinnerModule, MatSelectModule, MatSidenavModule, MatSortModule,
     MatTableModule, MatTabsModule, MatToolbarModule, CdkTableModule,
   ],
   providers: [

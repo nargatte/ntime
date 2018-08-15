@@ -18,3 +18,12 @@ a{
     text-decoration: none;
 }
 
+.mat-spinner {
+    left:50%;
+    right:50%;
+    position: fixed;
+    z-index: 999;
+    margin: auto;
+    size: 1000%;
+  }
+

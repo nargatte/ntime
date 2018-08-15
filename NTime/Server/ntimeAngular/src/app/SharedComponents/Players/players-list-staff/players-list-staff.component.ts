@@ -9,12 +9,13 @@ import { MessageService } from '../../../Services/message.service';
 @Component({
   selector: 'app-players-list-staff',
   templateUrl: './players-list-staff.component.html',
-  styleUrls: ['./players-list-staff.component.css']
+  styleUrls: ['./players-list-staff.component.css', '../../../app.component.css']
 })
 export class PlayersListStaffComponent implements OnInit {
 
   public competitionId: number;
   public competition: Competition;
+  public dataLoaded = false;
 
 
   constructor(
@@ -29,11 +30,18 @@ export class PlayersListStaffComponent implements OnInit {
   }
 
   getCompetition(id: number): void {
+    this.dataLoaded = false;
     this.competitionService.getCompetition(id).subscribe(
       (competition: Competition) => {
+        this.dataLoaded = true;
         this.competition = Competition.convertDates(competition); // TODO: Try to make not static
       },
-      error => this.messageService.addError(error), // Errors
+      error => this.onError(error), // Errors
     );
+  }
+
+  onError(message: any) {
+    this.dataLoaded = true;
+    this.messageService.addError(message);
   }
 }

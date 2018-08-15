@@ -9,13 +9,12 @@ import { MessageService } from '../../../Services/message.service';
 @Component({
   selector: 'app-players-list-unauthorized',
   templateUrl: './players-list-unauthorized.component.html',
-  styleUrls: ['./players-list-unauthorized.component.css']
+  styleUrls: ['./players-list-unauthorized.component.css', '../../../app.component.css']
 })
 export class PlayersListUnauthorizedComponent implements OnInit, OnChanges {
-
   public competitionId: number;
   public competition: Competition;
-
+  public dataLoaded = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -32,11 +31,18 @@ export class PlayersListUnauthorizedComponent implements OnInit, OnChanges {
   }
 
   getCompetition(id: number): void {
+    this.dataLoaded = false;
     this.competitionService.getCompetition(id).subscribe(
       (competition: Competition) => {
         this.competition = Competition.convertDates(competition); // TODO: Try to make not static
       },
-      error => this.messageService.addError(error), // Errors
+      error => this.onError(error),
+      () => this.dataLoaded = true// Errors
     );
+  }
+
+  onError(message: any) {
+    this.dataLoaded = true;
+    this.messageService.addError(message);
   }
 }

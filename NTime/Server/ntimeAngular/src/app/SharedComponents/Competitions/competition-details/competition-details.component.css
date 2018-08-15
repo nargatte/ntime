@@ -1,18 +1,11 @@
-.rows{
-    /* float: left; */
+/* .rows {
     display: inline;
 }
 
-
-/* .details {
-    float: none; */
-    /* float:left; */
-    /* width: 100%; */
-    /* flex-flow: wrap;
-} */
-.details-element{
+.details-element {
     margin: 1em;
-    /* height: 100%; */
-    float:left;
-    /* flex-flow: wrap; */
+    float: left;
+} */
+.mat-accordion {
+    margin: 2em;
 }

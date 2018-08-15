@@ -14,7 +14,7 @@ import { RoleHelpers } from '../../../Helpers/role-helpers';
 @Component({
   selector: 'app-register-form',
   templateUrl: './register-form.component.html',
-  styleUrls: ['./register-form.component.css'],
+  styleUrls: ['./register-form.component.css', '../../../app.component.css'],
   entryComponents: [
     UserRegisteredDialogComponent
   ]
@@ -22,7 +22,7 @@ import { RoleHelpers } from '../../../Helpers/role-helpers';
 export class RegisterFormComponent implements OnInit {
 
   public registerData: RegisterBindingModel = new RegisterBindingModel();
-
+  public dataLoaded = true;
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -35,6 +35,7 @@ export class RegisterFormComponent implements OnInit {
   }
 
   public registerButtonClick() {
+    this.dataLoaded = false;
     let roleString = 'player';
     this.activatedRoute.queryParams.subscribe((params: Params) => {
       if (params['role']) {
@@ -62,12 +63,14 @@ export class RegisterFormComponent implements OnInit {
   }
 
   private successModalUp() {
+    this.dataLoaded = true;
     this.dialog.open(SuccessfullActionDialogComponent, {
       data: { text: 'Rejestracja przebiegła prawidłowo' }
     });
   }
 
   public failedModalUp() {
+    this.dataLoaded = true;
     this.dialog.open(FailedActionDialogComponent, {
       data: { text: 'Wystąpił błąd podczas rejestracji' }
     });

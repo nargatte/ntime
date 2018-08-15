@@ -16,7 +16,7 @@ import { RoleHelpers } from '../../../Helpers/role-helpers';
 @Component({
   selector: 'app-log-in-form',
   templateUrl: './log-in-form.component.html',
-  styleUrls: ['./log-in-form.component.css'],
+  styleUrls: ['./log-in-form.component.css', '../../../app.component.css'],
   entryComponents: [
     SuccessfullActionDialogComponent, FailedActionDialogComponent
   ]
@@ -24,6 +24,7 @@ import { RoleHelpers } from '../../../Helpers/role-helpers';
 export class LogInFormComponent implements OnInit {
 
   public loginData: LoginData = new LoginData();
+  public dataLoaded = true;
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -37,6 +38,7 @@ export class LogInFormComponent implements OnInit {
 
   // Something like this might be extracted to a compleetely different class
   public loginButtonClick() {
+    this.dataLoaded = false;
     const body = new URLSearchParams();
     body.set('username', this.loginData.username);
     body.set('password', this.loginData.password);
@@ -50,6 +52,7 @@ export class LogInFormComponent implements OnInit {
   }
 
   private onSuccessfullLogin(loggedUser: TokenInfo) {
+    this.dataLoaded = true;
     this.messageService.addLog('Logowanie przebiegło prawidło');
     this.messageService.addObject(loggedUser);
     this.authenticatedUserService.setUser(new AuthenticatedUser(
@@ -63,6 +66,7 @@ export class LogInFormComponent implements OnInit {
   }
 
   private onSuccessfullRoleImport(loggedUser: TokenInfo, roleViewModel: RoleViewModel) {
+    this.dataLoaded = true;
     const role = RoleHelpers.ConvertStringToRoleEnum(roleViewModel.Role);
     this.authenticatedUserService.User.Role =  role;
     this.messageService.addLog(`Role downloaed ${this.authenticatedUserService.User.Role}`);
@@ -72,6 +76,7 @@ export class LogInFormComponent implements OnInit {
   }
 
   private onFailedLogin(errorResponse: HttpErrorResponse) {
+    this.dataLoaded = true;
     this.messageService.addError('Logowanie nieprawidłowe');
     this.messageService.addError(errorResponse.message);
     this.messageService.addObject(errorResponse);
@@ -79,12 +84,14 @@ export class LogInFormComponent implements OnInit {
   }
 
   public successModalUp() {
+    this.dataLoaded = true;
     this.dialog.open(SuccessfullActionDialogComponent, {
       data: { text: 'Logowanie zakończone sukcesem' }
     });
   }
 
   public failedModalUp() {
+    this.dataLoaded = true;
     this.dialog.open(FailedActionDialogComponent, {
       data: { text: 'Wystąpił błąd podczas logowania'}
     });

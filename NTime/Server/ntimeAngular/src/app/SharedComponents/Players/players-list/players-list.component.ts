@@ -37,16 +37,18 @@ import { debounceTime, distinctUntilChanged, switchMap } from '../../../../../no
 @Component({
   selector: 'app-players-list',
   templateUrl: './players-list.component.html',
-  styleUrls: ['./players-list.component.css']
+  styleUrls: ['./players-list.component.css', '../../../app.component.css']
 })
 export class PlayersListComponent implements AfterViewInit, OnInit {
   @Input() competition: Competition;
+  public todayDate: Date;
+  public dataLoaded = false;
   private competitionId: number;
   private players: PlayerListView[] = [];
-  public todayDate: Date;
   private filter: PlayerFilterOptions = new PlayerFilterOptions();
   private delimiter = '|';
   private searchTerms = new Subject<string>();
+
 
   @ViewChild(MatTable) table: MatTable<PlayerListView>;
   displayedColumns = ['firstName', 'lastName', 'city', 'team', 'fullCategory', 'isPaidUp'];
@@ -85,6 +87,7 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
     pageSize: number,
     pageNumber: number
   ): void {
+    this.dataLoaded = false;
     this.playerService
       .getPlayerListView(competitionId, playerFilterOptions, pageSize, pageNumber
       )
@@ -94,13 +97,19 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
           this.players = page.Items;
           this.playersCount = page.TotalCount;
         },
-        error => this.log(error), // Errors
+        error => this.onError(error), // Errors
         () => this.setDataSource()
         // () => this.setDataSource() // Success
       );
   }
 
+  onError(message: any) {
+    this.dataLoaded = true;
+    this.messageService.addError(message);
+  }
+
   getFilteredPlayers(): void {
+    this.dataLoaded = false;
     this.getPlayers(
       this.competitionId,
       this.filter,
@@ -115,6 +124,7 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
 
   setDataSource() {
     this.dataSource = new MatTableDataSource<PlayerListView>(this.players);
+    this.dataLoaded = true;
     // this.table.renderRows();
   }
 

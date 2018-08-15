@@ -5,6 +5,11 @@
   margin: 10px;
 }
 
+.mat-spinner {
+  margin: auto;
+  size: 1000%;
+}
+
 /* .mat-table {
     overflow: auto;
   } */

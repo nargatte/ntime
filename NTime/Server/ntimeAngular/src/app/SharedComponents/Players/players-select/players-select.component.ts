@@ -24,7 +24,7 @@ import { ExtraColumnDefinition } from '../../../Models/CDK/ExtraColumnDefinition
 @Component({
   selector: 'app-players-select',
   templateUrl: './players-select.component.html',
-  styleUrls: ['./players-select.component.css']
+  styleUrls: ['./players-select.component.css', '../../../app.component.css']
 })
 export class PlayersSelectComponent implements OnInit, AfterViewInit {
 
@@ -36,6 +36,7 @@ export class PlayersSelectComponent implements OnInit, AfterViewInit {
   public todayDate: Date;
   private filter: PlayerFilterOptions = new PlayerFilterOptions();
   private delimiter = '|';
+  public dataLoaded = false;
 
   @ViewChild(MatTable) table: MatTable<PlayerListView>;
   displayedColumns = ['select', 'firstName', 'lastName', 'city', 'team', 'fullCategory', 'isPaidUp'];
@@ -94,6 +95,7 @@ export class PlayersSelectComponent implements OnInit, AfterViewInit {
   // }
 
   getFullPlayers(competitionId: number, playerFilterOptions: PlayerFilterOptions, pageSize: number, pageNumber: number): void {
+    this.dataLoaded = false;
     this.playerService.getPlayersWithScores(competitionId, playerFilterOptions, pageSize, pageNumber).subscribe(
       (page: PageViewModel<PlayersWithScores>) => {
         this.log(page.toString());
@@ -101,7 +103,7 @@ export class PlayersSelectComponent implements OnInit, AfterViewInit {
         this.players = page.Items;
         this.playersCount = page.TotalCount;
       },
-      error => this.log(error), // Errors
+      error => this.onError(error), // Errors
       () => this.setDataSource() // Success
     );
   }
@@ -110,11 +112,17 @@ export class PlayersSelectComponent implements OnInit, AfterViewInit {
     this.getFullPlayers(this.competitionId, this.filter, this.pageSize, this.pageNumber);
   }
 
+  onError(message: any) {
+    this.dataLoaded = true;
+    this.messageService.addError(message);
+  }
+
   log(message: string): void {
     this.messageService.addLog(message);
   }
 
   setDataSource() {
+    this.dataLoaded = true;
     this.dataSource = new MatTableDataSource<PlayersWithScores>(this.players);
   }
 
@@ -154,6 +162,7 @@ export class PlayersSelectComponent implements OnInit, AfterViewInit {
   }
 
   private saveSelectedPlayersPaid(isPaid: boolean) {
+    this.dataLoaded = false;
     const selectedPlayers = this.selection.selected;
     selectedPlayers.forEach(player => {
       player.IsPaidUp = isPaid;
@@ -162,18 +171,28 @@ export class PlayersSelectComponent implements OnInit, AfterViewInit {
       result => {
         this.selection.clear();
         this.getFullPlayers(this.competition.Id, this.filter, this.pageSize, this.pageNumber);
-        this.dialog.open(SuccessfullActionDialogComponent, {
-          data: { text: 'Zmiany zostały zapisane' }
-        });
+        this.onSuccessDialog('Zmiany zostały zapisane');
       },
       error => {
         this.messageService.addError(`Could not save changes`);
         this.messageService.addObject(error);
-        this.dialog.open(FailedActionDialogComponent, {
-          data: { text: 'Nie udało się zapisać zmian' }
-        });
+        this.onFailureDialog('Nie udało się zapisać zmian');
       }
     );
+  }
+
+  onSuccessDialog(message: string) {
+    this.dataLoaded = true;
+    this.dialog.open(SuccessfullActionDialogComponent, {
+      data: { text: message }
+    });
+  }
+
+  onFailureDialog(message: string) {
+    this.dataLoaded = true;
+    this.dialog.open(FailedActionDialogComponent, {
+      data: { text: message }
+    });
   }
 
   prepareExtraColumns(): void {

@@ -20,11 +20,12 @@ import { OrganizerAccount } from '../../../Models/OrganizerAccount';
 @Component({
     selector: 'app-competitions-select',
     templateUrl: './competitions-select.component.html',
-    styleUrls: ['./competitions-select.component.css']
+    styleUrls: ['./competitions-select.component.css', '../../../app.component.css']
 })
 export class CompetitionsSelectComponent implements AfterViewInit {
     public todayDate: Date;
     public isRegistrationAvailable = true;
+    public dataLoaded = false;
 
     constructor(
         private competitionService: CompetitionService,
@@ -89,6 +90,7 @@ export class CompetitionsSelectComponent implements AfterViewInit {
     private setDataSource() {
         this.dataSource = new MatTableDataSource<Competition>(this.competitions);
         this.messageService.addLog('Datasource set');
+        this.dataLoaded = true;
     }
 
     onPageEvent(event: PageEvent) {

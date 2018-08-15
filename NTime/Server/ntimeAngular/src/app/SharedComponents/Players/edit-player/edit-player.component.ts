@@ -24,7 +24,7 @@ import { AgeCategoryDistance } from '../../../Models/AgeCategoryDistance';
 @Component({
   selector: 'app-edit-player',
   templateUrl: './edit-player.component.html',
-  styleUrls: ['./edit-player.component.css'],
+  styleUrls: ['./edit-player.component.css', '../../../app.component.css'],
   entryComponents: [
     SuccessfullActionDialogComponent, FailedActionDialogComponent, SingUpEndDateErrorDialogComponent
   ]
@@ -37,6 +37,7 @@ export class EditPlayerComponent implements OnInit, AfterViewInit {
   public ageCategories: AgeCategory[];
   public ageCategoryDistances: AgeCategoryDistance[];
 
+  public dataLoaded = false;
   public todayDate: Date;
   public editedPlayer: PlayersWithScores;
   private competitionId: number;
@@ -101,6 +102,7 @@ export class EditPlayerComponent implements OnInit, AfterViewInit {
   }
 
   public getPlayerData(): void {
+    this.dataLoaded = false;
     this.playerService.getPlayer(this.playerId).subscribe(
       (player: PlayersWithScores) => {
         this.editedPlayer = player; // TODO: Try to make not static
@@ -108,16 +110,19 @@ export class EditPlayerComponent implements OnInit, AfterViewInit {
         this.messageService.addLog('Displaying downloaded player');
         this.messageService.addObject(this.editedPlayer);
       },
-      error => this.failedToLoadPlayer(error), // Errors
+      error => this.failedToLoadPlayer(error),
+      () => this.dataLoaded = true // Errors
     );
   }
 
   private failedToLoadPlayer(error: any): void {
+    this.dataLoaded = true;
     this.failedModalUp('Nie udało się pobrać danych zawodnika');
     this.messageService.addError(error);
   }
 
   public editPlayer() {
+    this.dataLoaded = false;
     this.editedPlayer.ExtraData = String.Join(this.delimiter, this.editedPlayerExtraData);
     this.messageService.addLog(`Set ExtraData: ${this.editedPlayer.ExtraData}`);
     if (this.subcategories.length === 1) {
@@ -141,6 +146,7 @@ export class EditPlayerComponent implements OnInit, AfterViewInit {
   private onSuccessfulEditPlayer(player: PlayersWithScores): void {
     this.log(`Zawodnik został edytowany ${player}`);
     this.successModalUp();
+    this.dataLoaded = true;
   }
 
   public ButtonClick() {
@@ -154,12 +160,14 @@ export class EditPlayerComponent implements OnInit, AfterViewInit {
   // }
 
   public successModalUp() {
+    this.dataLoaded = true;
     this.dialog.open(SuccessfullActionDialogComponent, {
       data: { text: 'Dane zawodnika zostały zmienione' }
     });
   }
 
   public failedModalUp(displayedText: string) {
+    this.dataLoaded = true;
     this.dialog.open(FailedActionDialogComponent, {
       data: { text: displayedText }
     });

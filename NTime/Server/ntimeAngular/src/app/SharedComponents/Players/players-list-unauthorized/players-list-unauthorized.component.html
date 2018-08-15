@@ -1,3 +1,5 @@
+<mat-spinner *ngIf="dataLoaded === false"></mat-spinner>
+
 <app-players-tab-header-unauthorized *ngIf="competition" [competition]="competition"></app-players-tab-header-unauthorized>
 <app-players-list *ngIf="competition" [competition]="competition"></app-players-list>
 

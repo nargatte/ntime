@@ -1,27 +1,27 @@
 table {
-    width: 100%;
-  }
-  
-  .form-container {
-      display: flex;
-      flex-direction: column;
-      max-width: 20em;
-    }
-    
-    .form-container > * {
-      /* max-width: 20em; */
-      width: 100%;
-    }
-  
-  .alert{
-    color: red;
-  }
-  
-  a{
-    text-decoration: none;
-    font-weight: 600;
-  }
-  
-  .italian{
-    font-style: italic;
-  }
+  width: 100%;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 20em;
+}
+
+.form-container>* {
+  /* max-width: 20em; */
+  width: 100%;
+}
+
+.alert {
+  color: red;
+}
+
+a {
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.italian {
+  font-style: italic;
+}

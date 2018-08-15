@@ -3,25 +3,25 @@ table {
 }
 
 .form-container {
-    display: flex;
-    flex-direction: column;
-    max-width: 20em;
-  }
-  
-  .form-container > * {
-    /* max-width: 20em; */
-    width: 100%;
-  }
+  display: flex;
+  flex-direction: column;
+  max-width: 20em;
+}
 
-.alert{
+.form-container>* {
+  /* max-width: 20em; */
+  width: 100%;
+}
+
+.alert {
   color: red;
 }
 
-a{
+a {
   text-decoration: none;
   font-weight: 600;
 }
 
-.italian{
+.italian {
   font-style: italic;
 }

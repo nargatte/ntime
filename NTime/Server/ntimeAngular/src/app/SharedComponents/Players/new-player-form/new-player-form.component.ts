@@ -21,7 +21,7 @@ import { CompetitionWithDetails } from '../../../Models/Competitions/Competition
 @Component({
   selector: 'app-new-player-form',
   templateUrl: './new-player-form.component.html',
-  styleUrls: ['./new-player-form.component.css'],
+  styleUrls: ['./new-player-form.component.css', '../../../app.component.css'],
   entryComponents: [
     PlayerAddedDialogComponent, FailedActionDialogComponent, SingUpEndDateErrorDialogComponent
   ]
@@ -34,6 +34,7 @@ export class NewPlayerFormComponent implements OnInit, AfterViewInit {
   public ageCategories: AgeCategory[];
   public ageCategoryDistances: AgeCategoryDistance[];
 
+  public dataLoaded = true;
   public todayDate: Date;
   public newPlayer: PlayerCompetitionRegister = new PlayerCompetitionRegister();
   private competitionId: number;
@@ -84,6 +85,7 @@ export class NewPlayerFormComponent implements OnInit, AfterViewInit {
   // }
 
   public addPlayer(reCaptchaToken: string) {
+    this.dataLoaded = false;
     this.newPlayer.ExtraData = String.Join(this.delimiter, this.newPlayerExtraData);
     this.messageService.addLog(`Set ExtraData: ${this.newPlayer.ExtraData}`);
     if (this.subcategories.length === 1) {
@@ -106,6 +108,7 @@ export class NewPlayerFormComponent implements OnInit, AfterViewInit {
         }
       );
     } else {
+      this.dataLoaded = true;
       this.dialog.open(SingUpEndDateErrorDialogComponent);
     }
   }
@@ -113,9 +116,11 @@ export class NewPlayerFormComponent implements OnInit, AfterViewInit {
   private onSuccessfulAddPlayer(player: PlayerCompetitionRegister): void {
     this.log(`Dodano zawodnika ${player}`);
     this.successModalUp();
+    this.dataLoaded = true;
   }
 
   public ButtonClick() {
+    this.dataLoaded = false;
     window['grecaptcha'].execute();
   }
 
@@ -126,12 +131,14 @@ export class NewPlayerFormComponent implements OnInit, AfterViewInit {
   }
 
   public successModalUp() {
+    this.dataLoaded = true;
     this.dialog.open(PlayerAddedDialogComponent, {
       data: { competitionId: this.competitionId }
     });
   }
 
   public failedModalUp() {
+    this.dataLoaded = true;
     this.dialog.open(FailedActionDialogComponent, {
       data: { text: 'Wystąpił błąd podczas rejestracji' }
     });

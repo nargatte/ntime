@@ -1,31 +1,74 @@
 <div>
   <!-- <div class="rows"> -->
-    <tr>
-      <td> Nazwa: </td>
-      <td> {{competition.Name}} </td>
-    </tr>
-    <tr>
-      <td> Organizator: </td>
-      <td> {{competition.Organizer}} </td>
-    </tr>
-    <tr>
-      <td> Link: </td>
-      <td *ngIf="competition.Link">
-        <a target="_blank" href="http://{{competition.Link}}">{{competition.LinkDisplayedName}}</a>
-      </td>
-    </tr>
+  <tr>
+    <td> Nazwa: </td>
+    <td> {{competition.Name}} </td>
+  </tr>
+  <tr>
+    <td> Organizator: </td>
+    <td> {{competition.Organizer}} </td>
+  </tr>
+  <tr>
+    <td> Link: </td>
+    <td *ngIf="competition.Link">
+      <a target="_blank" href="http://{{competition.Link}}">{{competition.LinkDisplayedName}}</a>
+    </td>
+  </tr>
   <!-- </div> -->
   <br/>
-  <div class="details">
-    <mat-card mat-card class="details-element">
-      <p>Dystanse: </p>
-      <ng-container *ngFor="let distance of distances">
-        <tr>
-          <td> {{distance.Name}} </td>
-          <td> {{distance.Length}}km </td>
-        </tr>
-      </ng-container>
-    </mat-card>
+
+  <mat-accordion id="elem">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Dystanse
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+        <!-- <mat-card mat-card class="details-element"> -->
+          <ng-container *ngFor="let distance of distances">
+            <tr>
+              <td> {{distance.Name}} </td>
+              <td> {{distance.Length}}km </td>
+            </tr>
+          </ng-container>
+        <!-- </mat-card> -->
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Kategorie
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+        <!-- <mat-card mat-card class="details-element"> -->
+          <ng-container *ngFor="let ageCategory of ageCategories">
+            <tr>
+              <td> {{ageCategory.Name}} </td>
+              <td> Roczniki: {{ageCategory.YearFrom}}-{{ageCategory.YearTo}} </td>
+            </tr>
+          </ng-container>
+        <!-- </mat-card> -->
+    </mat-expansion-panel>
+
+    <mat-expansion-panel *ngIf="subcategories && subcategories.length > 1">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Podkategorie
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+        <!-- <mat-card mat-card class="details-element"> -->
+          <ng-container *ngFor="let subcategory of subcategories">
+            <tr>
+              <td> Nazwa: {{subcategory.Name}} </td>
+              <td> Skrót: {{subcategory.ShortName}} </td>
+            </tr>
+          </ng-container>
+        <!-- </mat-card> -->
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <!-- <div class="details">
+
     <mat-card class="details-element" *ngIf="subcategories && subcategories.length > 1">
       <p>Podkategorie: </p>
       <ng-container *ngFor="let subcategory of subcategories">
@@ -44,5 +87,5 @@
         </tr>
       </ng-container>
     </mat-card>
-  </div>
+  </div> -->
 </div>
