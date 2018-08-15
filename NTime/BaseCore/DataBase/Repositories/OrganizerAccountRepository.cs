@@ -8,7 +8,15 @@ namespace BaseCore.DataBase
     {
         public OrganizerAccountRepository(IContextProvider contextProvider) : base(contextProvider)
         {
+
         }
+
+        protected override IQueryable<OrganizerAccount> GetSortQuery(IQueryable<OrganizerAccount> items) => items.OrderBy(item => item.AccountId);
+
+        //protected override IQueryable<OrganizerAccount> GetIncludeQuery(IQueryable<OrganizerAccount> items)
+        //{
+        //    return items.Include(account => account.);
+        //}
 
         public async Task<OrganizerAccount[]> GetOrganizersByCompetition(Competition competition)
         {

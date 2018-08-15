@@ -12,6 +12,22 @@ namespace BaseCore.DataBase
         {
         }
 
+
+        //protected override IQueryable<T> GetSortQuery(IQueryable<T> items) =>
+        //    items.OrderBy(e => e.AccountId);
+
+        public async Task<PageViewModel<T>> GetByQuery(string query, PageBindingModel pageBindingModel)
+        {
+
+            if (query == null)
+                return await GetAllAsync(pageBindingModel);
+
+            PageViewModel<T> pageViewModel = await PageTemplate<T>(pageBindingModel,
+                a => GetSortQuery(a.OrderBy(aa => aa.AccountId)));
+
+            return pageViewModel;
+        }
+
         public async Task<T> GetByAccountId(string accountId)
         {
             T entity = null;

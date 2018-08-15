@@ -31,14 +31,13 @@ namespace Server.Controllers
         [Authorize(Roles = "Administrator")]
         public async Task<PageViewModel<OrganizerAccountDto>> GetSearch([FromUri] PageBindingModel pageBindingModel, string query = null)
         {
-            //PageViewModel<OrganizerAccount> viewModel = await _organizerAccountRepository.GetByQuery(query, pageBindingModel);
-            //PageViewModel<OrganizerAccountDto> viewModelDto = new PageViewModel<OrganizerAccountDto>
-            //{
-            //    Items = viewModel.Items.Select(pa => new OrganizerAccountDto(pa)).ToArray(),
-            //    TotalCount = viewModel.TotalCount
-            //};
-            //return viewModelDto;
-            throw new NotImplementedException();
+            PageViewModel<OrganizerAccount> viewModel = await _organizerAccountRepository.GetByQuery(query, pageBindingModel);
+            PageViewModel<OrganizerAccountDto> viewModelDto = new PageViewModel<OrganizerAccountDto>
+            {
+                Items = viewModel.Items.Select(pa => new OrganizerAccountDto(pa)).ToArray(),
+                TotalCount = viewModel.TotalCount
+            };
+            return viewModelDto;
         }
 
         // GET api/OrganizerAccount/ByCompetition/1
