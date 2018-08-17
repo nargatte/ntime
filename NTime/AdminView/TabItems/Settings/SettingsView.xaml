@@ -113,7 +113,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
 
-                <Button Command="{Binding SaveChangesCmd}" Height="30" Grid.Row="6" Width="80" Grid.ColumnSpan="2" Margin="0, 30">Zapisz zmiany</Button>
+                <Button Command="{Binding SaveChangesCmd}" Height="30" Grid.Row="6" Width="80" Grid.ColumnSpan="2" Margin="0, 20">Zapisz zmiany w kolumnach</Button>
                 <Button Command="{Binding RemoveCompetitionCmd}" Height="30" Width="100" Margin="0,50">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="pack://application:,,,/AdminView;component/Images/Remove.png" Height="30" Width="20"/>

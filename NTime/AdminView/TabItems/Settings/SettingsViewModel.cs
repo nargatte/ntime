@@ -41,6 +41,8 @@ namespace AdminView.Settings
             set { SetProperty(ref _extraHeaders, value); }
         }
 
+        public List<EditableHeaderPermutationPair> OriginalExtraHeaders { get; set; } = new List<EditableHeaderPermutationPair>();
+
 
 
         private EditableHeaderPermutationPair _newExtraHeader;
@@ -63,25 +65,48 @@ namespace AdminView.Settings
             {
                 ExtraHeaders.Add(PrepareNewExtraHeader(header));
             }
+            OriginalExtraHeaders = new List<EditableHeaderPermutationPair>(ExtraHeaders);
         }
 
 
         private async void OnSaveChangesAsync()
         {
-            if(ExtraHeaders.Any(header => !IsHeaderInputCorrect(header)))
+            if (ExtraHeaders.Any(header => !IsHeaderInputCorrect(header)))
             {
                 MessageBox.Show("Nazwy kolumn nie mogą być puste");
                 return;
             }
-            await CompetitionRepositoryHelper.ModifyExtraDataHeaders(
-                ExtraHeaders.Select(extraHeader => extraHeader.DbEntity).ToArray(), CurrentCompetition.DbEntity
-            );
+            if (ExtraHeadersChanged())
+                await CompetitionRepositoryHelper.ModifyExtraDataHeaders(
+                    ExtraHeaders.Select(extraHeader => extraHeader.DbEntity).ToArray(), CurrentCompetition.DbEntity
+                );
+            else
+                await _competitionRepository.UpdateAsync(CurrentCompetition.DbEntity);
             MessageBox.Show("Zmiany zostały zapisane");
             DownloadExtraHeaders();
 
             //await repository.UpdateAsync(_currentCompetition.DbEntity).ContinueWith(t =>
             //    MessageBox.Show("Zmiany zostały zapisane")
             //);
+        }
+
+        private bool ExtraHeadersChanged()
+        {
+            if (OriginalExtraHeaders.Count != ExtraHeaders.Count)
+                return true;
+            var originalEnumerator = OriginalExtraHeaders.GetEnumerator();
+            bool headersChanged = false;
+            foreach (var header in ExtraHeaders)
+            {
+                var original = originalEnumerator.Current;
+                if(original.PermutationElement != header.PermutationElement)
+                {
+                    headersChanged = true;
+                    break;
+                }
+                originalEnumerator.MoveNext();
+            }
+            return headersChanged;
         }
 
         private void OnAddExtraHeader()
@@ -150,7 +175,7 @@ namespace AdminView.Settings
         private void EditableHeader_MoveDownRequested(object sender, EventArgs e)
         {
             var editableHeader = sender as EditableHeaderPermutationPair;
-            if (editableHeader == ExtraHeaders.Last() )
+            if (editableHeader == ExtraHeaders.Last())
                 return;
             int currentIndex = ExtraHeaders.IndexOf(editableHeader);
             ExtraHeaders.Move(currentIndex, currentIndex + 1);
