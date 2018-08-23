@@ -98,13 +98,14 @@ namespace AdminView.Settings
             bool headersChanged = false;
             foreach (var header in ExtraHeaders)
             {
+                if (!originalEnumerator.MoveNext())
+                    break;
                 var original = originalEnumerator.Current;
                 if(original.PermutationElement != header.PermutationElement)
                 {
                     headersChanged = true;
                     break;
                 }
-                originalEnumerator.MoveNext();
             }
             return headersChanged;
         }
