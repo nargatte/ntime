@@ -28,3 +28,9 @@ color: black;
 .mobile-label {
   display: none;
 }
+
+#search-box {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
