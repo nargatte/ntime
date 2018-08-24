@@ -103,9 +103,10 @@ export class EditPlayerComponent implements OnInit, AfterViewInit {
 
   public getPlayerData(): void {
     this.dataLoaded = false;
+    this.editedPlayer = new PlayersWithScores();
     this.playerService.getPlayer(this.playerId).subscribe(
-      (player: PlayersWithScores) => {
-        this.editedPlayer = player; // TODO: Try to make not static
+      (player: PlayerWithScoresDto) => {
+        this.editedPlayer.copyDataFromFullDto(player); // TODO: Try to make not static
         this.editedPlayerExtraData = this.editedPlayer.ExtraData.split(this.delimiter);
         this.messageService.addLog('Displaying downloaded player');
         this.messageService.addObject(this.editedPlayer);
@@ -129,9 +130,9 @@ export class EditPlayerComponent implements OnInit, AfterViewInit {
       this.editedPlayer.SubcategoryId = this.subcategories[0].Id;
     }
 
-    // const resolvedAgeCategory = this.editedPlayer.resolveAgeCategory(this.ageCategories);
-    // this.messageService.addLog('Resolved ageCategory');
-    // this.messageService.addObject(resolvedAgeCategory);
+    const resolvedAgeCategory = this.editedPlayer.resolveAgeCategory(this.ageCategories);
+    this.messageService.addLog('Resolved ageCategory');
+    this.messageService.addObject(resolvedAgeCategory);
 
     this.log('Trying to edit Player');
     this.playerService.editPlayer(this.editedPlayer, this.playerId).subscribe(

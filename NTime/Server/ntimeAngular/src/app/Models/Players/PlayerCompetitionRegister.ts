@@ -34,32 +34,13 @@ export class PlayerCompetitionRegister {
     }
 
     public resolveAgeCategory(availableAgeCategories: AgeCategory[]): AgeCategory {
-        // if (isDevMode()) {
-        //     console.log('Displaying player2:');
-        //     console.log(this);
-        //     console.log('Available age categories:');
-        //     console.log(availableAgeCategories);
-        // }
         const categoriesAfterSexFilter = availableAgeCategories
             .filter((ageCategory2) => new Date(this.BirthDate).getFullYear() >= ageCategory2.YearFrom
                 && new Date(this.BirthDate).getFullYear() <= ageCategory2.YearTo);
 
-        // if (isDevMode()) {
-        //     console.log('Categories after sex filter::');
-        //     console.log(categoriesAfterSexFilter);
-        //     console.log(`Player's sex: ${this.IsMale}`);
-        //     console.log(`Player's birthDate: ${new Date(this.BirthDate)}`);
-        //     console.log(`Player's birthYear: ${new Date(this.BirthDate).getFullYear()}`);
-        //     console.log(`Value of category sex ${String(categoriesAfterSexFilter[0].Male)}`);
-        //     console.log(`Value of player sex ${String(this.IsMale)}`);
-        // }
         const resolvedAgeCategories = categoriesAfterSexFilter
             .filter((ageCategory) => String(ageCategory.Male) === String(this.IsMale));
 
-        // if (isDevMode()) {
-        //     console.log('Resolved age categories:');
-        //     console.log(resolvedAgeCategories);
-        // }
         if (resolvedAgeCategories === null || resolvedAgeCategories.length === 0) {
             return null;
         } else {
@@ -67,17 +48,24 @@ export class PlayerCompetitionRegister {
             return resolvedAgeCategories[0];
         }
     }
-    // constructor(id?: number, firstName?: string, lastName?: string) {
-    //     this.Id = id || 0;
-    //     this.FirstName = firstName || '';
-    //     this.LastName = lastName || '';
-    // }
 
-    // static fromSampleData(id?: number, firstName?: string, lastName?: string) {
-    //     this.Id = id;
-    //     this.FirstName = firstName || '';
-    //     this.LastName = lastName || '';
-    // }
+    copyDataFromDto(playerDto: PlayerCompetitionRegisterDto) {
+        this.Id = playerDto.Id;
+        this.FirstName = playerDto.FirstName;
+        this.LastName = playerDto.LastName;
+        this.BirthDate = playerDto.BirthDate;
+        this.IsMale = playerDto.IsMale;
+        this.Team = playerDto.Team;
+        this.PhoneNumber = playerDto.PhoneNumber;
+        this.ExtraData = playerDto.ExtraData;
+        this.City = playerDto.City;
+        this.Email = playerDto.Email;
+        this.SubcategoryId = playerDto.SubcategoryId;
+        this.DistanceId = playerDto.DistanceId;
+        this.AgeCategoryId = playerDto.AgeCategoryId;
+        this.CompetitionId = playerDto.CompetitionId;
+        this.ReCaptchaToken = playerDto.ReCaptchaToken;
+    }
 }
 
 export class BasicPlayerArguments {
