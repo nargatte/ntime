@@ -20,6 +20,7 @@ import { PlayersWithScores } from '../../../Models/Players/PlayerWithScores';
 import { PlayerSort } from '../../../Models/Enums/PlayerSort';
 import { SortHelper } from '../../../Helpers/SortHelper';
 import { ExtraColumnDefinition } from '../../../Models/CDK/ExtraColumnDefinition';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-players-select',
@@ -109,6 +110,7 @@ export class PlayersSelectComponent implements OnInit, AfterViewInit {
   }
 
   getFullFilteredPlayers(): void {
+    this.dataLoaded = false;
     this.getFullPlayers(this.competitionId, this.filter, this.pageSize, this.pageNumber);
   }
 
@@ -218,5 +220,13 @@ export class PlayersSelectComponent implements OnInit, AfterViewInit {
 
   private addActionsColumn(): void {
     this.displayedColumns.push('actions');
+  }
+
+  search(term: string): void {
+    this.pageNumber = 0;
+    debounceTime(300);
+    distinctUntilChanged();
+    this.filter.Query = term;
+    this.getFullFilteredPlayers();
   }
 }

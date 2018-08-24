@@ -39,9 +39,9 @@ namespace Server.Dtos
             DistancePlaceNumber = player.DistancePlaceNumber;
             CategoryPlaceNumber = player.CategoryPlaceNumber;
             CompetitionCompleted = player.CompetitionCompleted;
-            SubcategoryId = player.Subcategory.Id;
-            DistanceId = player.Distance.Id;
-            AgeCategoryId = player.AgeCategory.Id;
+            SubcategoryId = player.Subcategory == null ? -1 : player.Subcategory.Id;
+            DistanceId = player.Distance == null ? -1 : player.Distance.Id;
+            AgeCategoryId = player.AgeCategory == null ? -1 : player.AgeCategory.Id;
             PlayerAccountId = player.PlayerAccountId;
         }
 
