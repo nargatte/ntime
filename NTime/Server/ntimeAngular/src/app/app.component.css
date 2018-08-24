@@ -27,3 +27,7 @@ a{
     size: 1000%;
   }
 
+  .mat-row {
+      padding: 5px 0px;
+  }
+

@@ -11,9 +11,17 @@
     .mat-header-row {
         display: none;
     }
+    .mat-cell:first-child {
+        padding-left: 0px;
+    }
     .mat-row {
+        min-height: 30px;
         flex-direction: column;
         align-items: start;
         padding: 8px 24px;
+    }
+
+    .mat-row::after {
+        min-height: 0%;
     }
 }
