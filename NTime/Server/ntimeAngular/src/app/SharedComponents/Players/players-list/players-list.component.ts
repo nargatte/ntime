@@ -37,7 +37,7 @@ import { debounceTime, distinctUntilChanged, switchMap } from '../../../../../no
 @Component({
   selector: 'app-players-list',
   templateUrl: './players-list.component.html',
-  styleUrls: ['./players-list.component.css', '../../../app.component.css']
+  styleUrls: ['./players-list.component.css', '../../../app.component.css', '../../../Styles/mobile-style.css']
 })
 export class PlayersListComponent implements AfterViewInit, OnInit {
   @Input() competition: Competition;

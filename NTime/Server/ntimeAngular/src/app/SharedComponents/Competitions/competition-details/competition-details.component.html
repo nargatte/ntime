@@ -9,6 +9,14 @@
     <td> {{competition.Organizer}} </td>
   </tr>
   <tr>
+    <td> Data zawodów: </td>
+    <td> {{competition.EventDate.toLocaleDateString("pl-pl")}} </td>
+  </tr>
+  <tr>
+    <td> Data końca zapisów: </td>
+    <td> {{competition.SignUpEndDate.toLocaleDateString("pl-pl")}} </td>
+  </tr>
+  <tr>
     <td> Link: </td>
     <td *ngIf="competition.Link">
       <a target="_blank" href="http://{{competition.Link}}">{{competition.LinkDisplayedName}}</a>

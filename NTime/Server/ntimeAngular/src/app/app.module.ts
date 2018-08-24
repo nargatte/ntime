@@ -19,7 +19,7 @@ import { CompetitionTabComponent } from './Tabs/competition-tab/competition-tab.
 import { OfferTabComponent } from './Tabs/offer-tab/offer-tab.component';
 import { ContactTabComponent } from './Tabs/contact-tab/contact-tab.component';
 import { AboutUsTabComponent } from './Tabs/about-us-tab/about-us-tab.component';
-import { NavbarComponent } from './SharedComponents/navbar/navbar.component';
+import { NavbarComponent } from './SharedComponents/Navbar/navbar.component';
 import { CompetitionsSelectComponent } from './SharedComponents/Competitions/competitions-select/competitions-select.component';
 import { CompetitionService } from './Services/competition.service';
 import { MessageService } from './Services/message.service';

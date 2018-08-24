@@ -20,7 +20,7 @@ import { LogInFormComponent } from '../log-in-form/log-in-form.component';
 import { RegisterFormComponent } from '../register-form/register-form.component';
 import { UserRegisteredDialogComponent } from '../../Dialogs/user-registered-dialog/user-registered-dialog.component';
 import { AppComponent } from '../../../app.component';
-import { NavbarComponent } from '../../navbar/navbar.component';
+import { NavbarComponent } from '../../Navbar/navbar.component';
 import { CompetitionsSelectComponent } from '../../Competitions/competitions-select/competitions-select.component';
 import { NewPlayerFormComponent } from '../../Players/new-player-form/new-player-form.component';
 import { PlayersListComponent } from '../../Players/players-list/players-list.component';

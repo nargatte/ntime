@@ -1,9 +1,5 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MatPaginator, MatTableDataSource, MatTable, PageEvent } from '@angular/material';
-import { DataSource } from '@angular/cdk/table';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { PageViewModel } from '../../../Models/PageViewModel';
 
 
@@ -20,7 +16,7 @@ import { OrganizerAccount } from '../../../Models/OrganizerAccount';
 @Component({
     selector: 'app-competitions-select',
     templateUrl: './competitions-select.component.html',
-    styleUrls: ['./competitions-select.component.css', '../../../app.component.css']
+    styleUrls: ['./competitions-select.component.css', '../../../app.component.css', '../../../Styles/mobile-style.css']
 })
 export class CompetitionsSelectComponent implements AfterViewInit {
     public todayDate: Date;

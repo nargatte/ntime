@@ -24,7 +24,7 @@ import { ExtraColumnDefinition } from '../../../Models/CDK/ExtraColumnDefinition
 @Component({
   selector: 'app-players-select',
   templateUrl: './players-select.component.html',
-  styleUrls: ['./players-select.component.css', '../../../app.component.css']
+  styleUrls: ['./players-select.component.css', '../../../app.component.css', '../../../Styles/mobile-style.css']
 })
 export class PlayersSelectComponent implements OnInit, AfterViewInit {
 
