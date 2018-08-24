@@ -179,6 +179,7 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
   }
 
   search(term: string): void {
+    this.pageNumber = 0;
     debounceTime(300);
     distinctUntilChanged();
     this.filter.Query = term;
