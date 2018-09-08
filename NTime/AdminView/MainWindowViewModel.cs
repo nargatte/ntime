@@ -21,6 +21,10 @@ using System.Windows;
 using BaseCore.Csv.CompetitionSeries;
 using System.IO;
 using BaseCore.Csv;
+using Microsoft.Win32;
+using System.Windows.Forms;
+using OpenFileDialog = System.Windows.Forms.OpenFileDialog;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace AdminView
 {
@@ -73,14 +77,37 @@ namespace AdminView
                 throw new ArgumentException();
 
             var resourceLoader = new ResourceLoader();
-            var competitionPaths = resourceLoader.LoadFilesToTemp(filesDictionary.Skip(1).ToDictionary(x => x.Key, x => x.Value), Path.GetTempPath());
-            var seriesStandings = new SeriesStandings(competitionNamesDict);
-            await seriesStandings.ImportScoresFromCsv(competitionPaths);
+            var competitionPaths = new List<string>();
+            //competitionPaths.AddRange(resourceLoader.LoadFilesToTemp(filesDictionary.Skip(1).ToDictionary(x => x.Key, x => x.Value), Path.GetTempPath()));
+            var dialog = new OpenFileDialog();
+            dialog.Filter = "csv files (*.csv)|*.csv";
+            dialog.RestoreDirectory = true;
+            dialog.Title = "Wybierz w dobrej kolejności wyniki dla cyklu";
+            dialog.Multiselect = true;
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    competitionPaths = dialog.FileNames.ToList();
+                    var seriesStandings = new SeriesStandings(competitionNamesDict);
+                    await seriesStandings.ImportScoresFromCsv(competitionPaths);
 
-            var pointsPath = resourceLoader.LoadFilesToTemp(filesDictionary.Take(1).ToDictionary(x => x.Key, x => x.Value), Path.GetTempPath());
-            await seriesStandings.ImportPointsTableFromCsv(pointsPath.First());
+                    var pointsPath = resourceLoader.LoadFilesToTemp(filesDictionary.Take(1).ToDictionary(x => x.Key, x => x.Value), Path.GetTempPath());
+                    await seriesStandings.ImportPointsTableFromCsv(pointsPath.First());
 
-            seriesStandings.CalculateResults();
+                    seriesStandings.CalculateResults();
+
+                    MessageBox.Show("Wyniki rankingu zostały przeliczone");
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Nie udało sie przeliczyć wyników. Błąd: " + e.Message);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Nie wybrano żadnych zawodów");
+            }
         }
 
         private void NavToCompetitionChoiceView()
