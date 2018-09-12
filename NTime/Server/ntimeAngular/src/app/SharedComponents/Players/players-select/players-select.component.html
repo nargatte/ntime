@@ -96,13 +96,21 @@
       </mat-cell>
     </ng-container>
 
-
-    <ng-container matColumnDef="actions">
+    <ng-container matColumnDef="editPlayer">
       <mat-header-cell *matHeaderCellDef> </mat-header-cell>
       <mat-cell *matCellDef="let player">
         <a mat-raised-button color="primary" routerLink="/zawodnik/{{competitionId}}/{{player.Id}}">
           Edytuj
         </a>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="deletePlayer">
+      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+      <mat-cell *matCellDef="let player">
+        <button mat-raised-button color="primary" (click)="onDeletePlayerClicked(player)">
+          Usuń
+        </button>
       </mat-cell>
     </ng-container>
 

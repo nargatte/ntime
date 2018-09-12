@@ -66,15 +66,10 @@ namespace AdminView
         {
             var filesDictionary = new Dictionary<string, string>();
             filesDictionary.Add("klasyki_punkty.csv", Properties.Resources.klasyki_punkty);
-            filesDictionary.Add("Aleksandrow.csv", Properties.Resources.Aleksandrow);
-            filesDictionary.Add("Zdunska.csv", Properties.Resources.Zdunska);
-            filesDictionary.Add("Pabianice1.csv", Properties.Resources.Pabianice1);
-            var competitionNames = new List<string> { "Aleksandrow", "Zdunska", "Pabianice1" };
+            var competitionNames = new List<string> { "Aleksandrow", "Zdunska", "Pabianice1", "Buczek", "Pabianice2" };
             var competitionNamesDict = new Dictionary<int, string>();
             int iter = 0;
             competitionNames.ForEach(name => competitionNamesDict.Add(iter++, name));
-            if (filesDictionary.Count - 1 != competitionNamesDict.Count)
-                throw new ArgumentException();
 
             var resourceLoader = new ResourceLoader();
             var competitionPaths = new List<string>();

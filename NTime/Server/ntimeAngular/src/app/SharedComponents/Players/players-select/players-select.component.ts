@@ -21,6 +21,7 @@ import { PlayerSort } from '../../../Models/Enums/PlayerSort';
 import { SortHelper } from '../../../Helpers/SortHelper';
 import { ExtraColumnDefinition } from '../../../Models/CDK/ExtraColumnDefinition';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { ConfirmActionDialogComponent } from '../../Dialogs/confirm-action-dialog/confirm-action-dialog.component';
 
 @Component({
   selector: 'app-players-select',
@@ -64,7 +65,7 @@ export class PlayersSelectComponent implements OnInit, AfterViewInit {
     this.setDefaultSorting();
     this.getFullFilteredPlayers();
     this.prepareExtraColumns();
-    this.addActionsColumn();
+    this.addActionsColumns();
   }
 
   ngAfterViewInit() {
@@ -183,18 +184,27 @@ export class PlayersSelectComponent implements OnInit, AfterViewInit {
     );
   }
 
-  onSuccessDialog(message: string) {
+  private onSuccessDialog(message: string) {
     this.dataLoaded = true;
     this.dialog.open(SuccessfullActionDialogComponent, {
       data: { text: message }
     });
   }
 
-  onFailureDialog(message: string) {
+  private onFailureDialog(message: string) {
     this.dataLoaded = true;
     this.dialog.open(FailedActionDialogComponent, {
       data: { text: message }
     });
+  }
+
+  private onConfirmDialog(message: string): Observable<boolean> {
+    // let result: boolean;
+    const dialogRef = this.dialog.open(ConfirmActionDialogComponent, {
+      data: { text: message }
+    });
+
+    return dialogRef.afterClosed();
   }
 
   prepareExtraColumns(): void {
@@ -218,15 +228,39 @@ export class PlayersSelectComponent implements OnInit, AfterViewInit {
       .forEach(c => this.displayedColumns.push(c));
   }
 
-  private addActionsColumn(): void {
-    this.displayedColumns.push('actions');
+  private addActionsColumns(): void {
+    this.displayedColumns.push('editPlayer');
+    this.displayedColumns.push('deletePlayer');
   }
 
-  search(term: string): void {
+  public search(term: string): void {
     this.pageNumber = 0;
     debounceTime(300);
     distinctUntilChanged();
     this.filter.Query = term;
     this.getFullFilteredPlayers();
+  }
+
+  public onDeletePlayerClicked(playerToDelete: PlayersWithScores): void {
+    this.onConfirmDialog('Czy na pewno chcesz usunąć tego zawodnika? Zmiana jest nieodwracalna.')
+      .subscribe(dialogResult => {
+        this.messageService.addLog(`Dialog result: ${dialogResult}`);
+        if (dialogResult === true) {
+          this.deletePlayer(playerToDelete);
+        }
+      });
+  }
+
+  public deletePlayer(playerToDelete: PlayersWithScores): void {
+    this.messageService.addLog(`Player with id: ${playerToDelete.Id} to delete`);
+    this.dataLoaded = false;
+    this.playerService.deletePlayer(playerToDelete.Id).subscribe(
+      (player: PlayersWithScores) => {
+        this.onSuccessDialog('Zawodnik został usunięty');
+        this.getFullFilteredPlayers();
+      },
+      (error: Error) => this.onFailureDialog(`Nie udało się usunąć zawodnika: ${error.message}`),
+      () => this.dataLoaded = true
+    );
   }
 }

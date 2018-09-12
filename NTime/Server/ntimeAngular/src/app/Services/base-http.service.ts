@@ -144,7 +144,7 @@ export abstract class BaseHttpService {
         .addControllerName(this.controllerName)
         .addId(id)
         .toString(),
-        content,
+      content,
       this.httpOptions
     ).pipe(
       tap((item) => {
@@ -154,11 +154,20 @@ export abstract class BaseHttpService {
     );
   }
 
-  protected delete(requestUrl: string) {
+  protected delete<TResponse>(requestUrl: string): Observable<TResponse> {
     this.updateAuthorizedUser();
     this.log('Preparing delete request');
-    return this.http.delete(requestUrl, this.httpOptions).pipe(
+    return this.http.delete<TResponse>(requestUrl, this.httpOptions).pipe(
       catchError(this.handleError)
+    );
+  }
+
+  protected deleteById<TResponse>(id: number): Observable<TResponse> {
+    return this.delete<TResponse>(
+      new UrlBuilder()
+        .addControllerName(this.controllerName)
+        .addId(id)
+        .toString()
     );
   }
 

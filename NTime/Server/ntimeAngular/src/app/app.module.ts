@@ -50,6 +50,7 @@ import { OrganizerAccountService } from './Services/organizer-account.service';
 import { EditPlayerComponent } from './SharedComponents/Players/edit-player/edit-player.component';
 import { EditPlayerTabComponent } from './Tabs/edit-player-tab/edit-player-tab.component';
 import { CompetitionDetailsComponent } from './SharedComponents/Competitions/competition-details/competition-details.component';
+import { ConfirmActionDialogComponent } from './SharedComponents/Dialogs/confirm-action-dialog/confirm-action-dialog.component';
 
 
 @NgModule({
@@ -65,7 +66,7 @@ import { CompetitionDetailsComponent } from './SharedComponents/Competitions/com
         PlayersSelectComponent, PlayersTabHeaderStaffComponent, PlayersTabHeaderUnauthorizedComponent,
         RegisterConfirmationComponent, RegistrationTabComponent, ScoresTabComponent,
         SingUpEndDateErrorDialogComponent, SuccessfullActionDialogComponent, UserRegisteredDialogComponent,
-        EditPlayerComponent, EditPlayerTabComponent, CompetitionDetailsComponent
+        EditPlayerComponent, EditPlayerTabComponent, CompetitionDetailsComponent, ConfirmActionDialogComponent
     ],
     providers: [
         AuthenticatedUserService, AuthenticationService, CompetitionService, DistanceService,
@@ -74,7 +75,7 @@ import { CompetitionDetailsComponent } from './SharedComponents/Competitions/com
     ],
     entryComponents: [
         FailedActionDialogComponent, PlayerAddedDialogComponent, SingUpEndDateErrorDialogComponent,
-        SuccessfullActionDialogComponent, UserRegisteredDialogComponent
+        SuccessfullActionDialogComponent, UserRegisteredDialogComponent, ConfirmActionDialogComponent
     ],
     bootstrap: [AppComponent]
 })

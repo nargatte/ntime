@@ -54,7 +54,7 @@ export class PlayerService extends BaseHttpService {
 
   public getPlayer(id: number): Observable<PlayersWithScores> {
     return super.getById<PlayersWithScores>(id);
-}
+  }
 
   public addPlayer(player: PlayerCompetitionRegister, competitionId: number): Observable<PlayerCompetitionRegister> {
     return super.post<PlayerCompetitionRegister, PlayerCompetitionRegister>(
@@ -80,5 +80,8 @@ export class PlayerService extends BaseHttpService {
         .toString(),
       players
     );
+  }
+  public deletePlayer(playerId: number): Observable<PlayersWithScores> {
+    return super.deleteById<PlayersWithScores>(playerId);
   }
 }

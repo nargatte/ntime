@@ -1,0 +1,6 @@
+<h1 mat-dialog-title>Potwierdzenie</h1>
+<p>{{data.text}}</p>
+<div mat-dialog-actions>
+  <button mat-raised-button color="primary" [mat-dialog-close] (click)="onYesClicked()">Tak</button>
+  <button mat-raised-button color="primary" [mat-dialog-close] (click)="onNoClicked()">Nie</button>
+</div>
