@@ -348,6 +348,9 @@ namespace Server.Controllers
         [System.Web.Http.Route("ExportFromCompetition/{id:int:min(1)}")]
         public async Task<HttpResponseMessage> GetExportFromCompetition(int id)
         {
+            char initialSeparator = '|';
+            char targetSeperator = ';';
+
             if (await InitCompetitionById(id) == false)
                 throw new Exception("Invalid competition id");
 
@@ -355,20 +358,31 @@ namespace Server.Controllers
                 throw new Exception("Unauthorized");
 
             Player[] players = await _playerRepository.GetAllAsync();
-
+            
             StringBuilder builder = new StringBuilder();
-
-            builder.AppendLine(
-                @"nr_startowy;imie;nazwisko;miejscowosc;klub;data_urodzenia;plec;telefon;pay;czas_startu;kategoria;kat_wiek;nazwa_dystansu;dlugosc");
+            var csvHeaders = @"nr_startowy;imie;nazwisko;miejscowosc;klub;data_urodzenia;plec;telefon;pay;czas_startu;kategoria;kat_wiek;nazwa_dystansu";
+            if(!String.IsNullOrWhiteSpace(Competition.ExtraDataHeaders))
+            {
+                var extraHeaders = Competition.ExtraDataHeaders.Split(initialSeparator);
+                var extraHeadersToCsv = String.Join(targetSeperator.ToString(), extraHeaders);
+                csvHeaders += $"{targetSeperator}{extraHeadersToCsv}";
+            }
+            builder.AppendLine(csvHeaders);
 
             foreach (Player p in players)
             {
                 string birthDate = p.BirthDate.ToString("yyyy-MM-dd");
                 string sex = p.IsMale ? "M" : "K";
                 string pay = p.IsPaidUp ? "1" : "";
-
-                builder.AppendLine(
-                    $"{p.StartNumber};{p.FirstName};{p.LastName};{p.City??""};{p.Team??""};{birthDate};{sex};{p.PhoneNumber??""};{pay};{p.StartTime?.ToString("T") ?? ""};{p.FullCategory ?? ""};{p.AgeCategory?.Name ?? ""};{p.Distance?.Name??""};");
+                
+                var csvPlayerData = $"{p.StartNumber};{p.FirstName};{p.LastName};{p.City ?? ""};{p.Team ?? ""};{birthDate};{sex};{p.PhoneNumber ?? ""};{pay};{p.StartTime?.ToString("T") ?? ""};{p.FullCategory ?? ""};{p.AgeCategory?.Name ?? ""};{p.Distance?.Name ?? ""}";
+                if(!String.IsNullOrWhiteSpace(p.ExtraData))
+                {
+                    var extraData = p.ExtraData.Split(initialSeparator);
+                    var extraDataToCsv = String.Join(targetSeperator.ToString(), extraData);
+                    csvPlayerData += $"{targetSeperator}{extraDataToCsv}";
+                }
+                builder.AppendLine(csvPlayerData);
             }
 
             var stream = new MemoryStream();

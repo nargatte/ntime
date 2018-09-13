@@ -229,6 +229,7 @@ namespace AdminView.Categories
                     AgeCategoryDistances.Add(new AgeCategoryDistance(_currentCompetition.DbEntity.Id, ageCategory.DbEntity.Id, distance.DbEntity.Id));
                 }
             }
+            MessageBox.Show("Wszystkie dystanse zostały połączone z kategoriami");
         }
 
         #endregion
