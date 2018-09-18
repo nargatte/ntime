@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
+using Application = System.Windows.Forms.Application;
 using MessageBox = System.Windows.MessageBox;
 
 namespace AdminView.CalculateStandings
@@ -42,10 +43,6 @@ namespace AdminView.CalculateStandings
 
         private void OnAddFiles()
         {
-            var competitionNames = new List<string> { "Aleksandrow", "Zdunska", "Pabianice1", "Buczek", "Pabianice2" };
-            this.competitionNamesDict = new Dictionary<int, string>();
-            int iter = 0;
-            competitionNames.ForEach(name => competitionNamesDict.Add(iter++, name));
 
             this.competitionPaths = new List<string>();
             //competitionPaths.AddRange(resourceLoader.LoadFilesToTemp(filesDictionary.Skip(1).ToDictionary(x => x.Key, x => x.Value), Path.GetTempPath()));
@@ -76,11 +73,23 @@ namespace AdminView.CalculateStandings
 
         private async void OnCalculateStandings()
         {
+            var competitionNames = CompetitionFiles.Select(file => file.Title).ToList();
+            this.competitionNamesDict = new Dictionary<int, string>();
+            int iter = 0;
+            competitionNames.ForEach(name => competitionNamesDict.Add(iter++, name));
+
             this.competitionPaths = CompetitionFiles.Select(file => file.FullPath).ToList();
             if (competitionPaths == null || competitionPaths.Count == 0)
+            {
                 MessageBox.Show("Nie podano żadnych ścieżek do plików z zawodami");
+                return;
+            }
+
             if (competitionNamesDict == null || competitionNamesDict.Count == 0)
+            {
                 MessageBox.Show("Nie podano nazw dla zawodów");
+                return;
+            }
 
             var resourceLoader = new ResourceLoader();
             var filesDictionary = new Dictionary<string, string>();
@@ -101,6 +110,7 @@ namespace AdminView.CalculateStandings
             catch (Exception e)
             {
                 MessageBox.Show("Nie udało sie przeliczyć wyników. Błąd: " + e.Message);
+                Application.Restart();
             }
         }
 

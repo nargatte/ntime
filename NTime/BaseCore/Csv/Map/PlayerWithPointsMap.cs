@@ -1,4 +1,5 @@
 ﻿using BaseCore.Csv.Records;
+using CsvHelper;
 using CsvHelper.Configuration;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace BaseCore.Csv.Map
 {
     public class PlayerWithPointsMap : ClassMap<PlayerWithPoints> 
     {
-        public PlayerWithPointsMap()
+        public PlayerWithPointsMap(string[] competitionNames, char delimiter)
         {
             Map(m => m.CategoryStandingPlace).Name("miejsce_ranking");
             Map(m => m.FirstName).Name("imie");
@@ -18,8 +19,14 @@ namespace BaseCore.Csv.Map
             Map(m => m.BirthDate).Name("data_urodzenia").ConvertUsing(date => date.BirthDate.Year.ToString());
             Map(m => m.AgeCategory).Name("kat_wiek");
             Map(m => m.Points).Name("punkty");
-            Map(m => m.CompetitionsPointsExport).Name("punkty_zawody");
-            //Map().
+            var otherDelimiter = delimiter == ';' ? ',' : ';';
+            var joinedCompetitionNames = String.Join(otherDelimiter.ToString(), competitionNames);
+            Map(m => m.CompetitionsPointsExport).Name(joinedCompetitionNames);
+        }
+
+        private void CompetitionNameConverter(IWriterRow row)
+        {
+            row.WriteField<string>("kategoria");
         }
     }
 }

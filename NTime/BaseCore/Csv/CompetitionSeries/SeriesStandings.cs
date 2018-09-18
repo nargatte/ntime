@@ -18,6 +18,7 @@ namespace BaseCore.Csv.CompetitionSeries
         private HashSet<string> _categories = new HashSet<string>();
         private Dictionary<PlayerWithPoints, PlayerWithPoints> _uniquePlayers = new Dictionary<PlayerWithPoints, PlayerWithPoints>(new PlayerWithPointsEqualityComparer());
         private Dictionary<int, string> _competitionsNames;
+        private char _delimiter = ';';
 
         public SeriesStandings(Dictionary<int, string> competitionsNames)
         {
@@ -52,7 +53,7 @@ namespace BaseCore.Csv.CompetitionSeries
             GetUniqueCategories();
             GiveOutPoints();
             var exportableScores = PrepareAndPrintStandings();
-            bool exportedCorrectly = await ExportStandingsToCsv(exportableScores);
+            bool exportedCorrectly = await ExportStandingsToCsv(exportableScores, _competitionsNames.Select(pair => pair.Value));
             Debug.WriteLine($"Exported correctly: {exportedCorrectly}");
         }
 
@@ -130,15 +131,15 @@ namespace BaseCore.Csv.CompetitionSeries
             return exportableScores;
         }
 
-        public async Task<bool> ExportStandingsToCsv(IEnumerable<PlayerWithPoints> standingPlayers)
+        public async Task<bool> ExportStandingsToCsv(IEnumerable<PlayerWithPoints> standingPlayers, IEnumerable<string> competitionNames)
         {
             foreach (var player in standingPlayers)
             {
                 player.SetPointsForCompetitions();
             }
             string exportFileName = "results.csv";
-            var exporter = new CsvExporter<PlayerWithPoints, PlayerWithPointsMap>(exportFileName);
-            return await exporter.SaveAllRecordsAsync(standingPlayers);
+            var exporter = new CsvExporter<PlayerWithPoints, PlayerWithPointsMap>(exportFileName, _delimiter);
+            return await exporter.SaveAllRecordsAsync(standingPlayers, new PlayerWithPointsMap(competitionNames.ToArray(), _delimiter));
         }
     }
 }

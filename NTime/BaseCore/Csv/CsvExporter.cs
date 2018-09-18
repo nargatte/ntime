@@ -24,21 +24,24 @@ namespace BaseCore.Csv
             _delimiter = delimiter;
         }
 
-        public Task<bool> SaveAllRecordsAsync(IEnumerable<T> records) =>
+        public Task<bool> SaveAllRecordsAsync(IEnumerable<T> records, ClassMap classMapInstance = null) =>
         Task.Factory.StartNew(() =>
         {
             bool writeSuccessfull = false;
             using (TextWriter textWriter = File.CreateText(_fileName))
             {
-                writeSuccessfull = SaveAllRecordsFromStream(textWriter, records);
+                writeSuccessfull = SaveAllRecordsFromStream(textWriter, records, classMapInstance);
             }
             return writeSuccessfull;
         });
 
-        public bool SaveAllRecordsFromStream(TextWriter textWriter, IEnumerable<T> records)
+        public bool SaveAllRecordsFromStream(TextWriter textWriter, IEnumerable<T> records, ClassMap classMapInstance = null)
         {
             var csv = new CsvWriter(textWriter);
-            csv.Configuration.RegisterClassMap<TM>();
+            if (classMapInstance == null)
+                csv.Configuration.RegisterClassMap<TM>();
+            else
+                csv.Configuration.RegisterClassMap(classMapInstance);
             csv.Configuration.Delimiter = _delimiter.ToString();
             try
             {
