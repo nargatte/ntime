@@ -1,9 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using AdminView.AddCompetition;
+using AdminView.CalculateStandings;
+using BaseCore.Csv;
+using BaseCore.Csv.CompetitionSeries;
 using BaseCore.DataBase;
 using MvvmHelper;
 using ViewCore;
@@ -30,7 +36,9 @@ namespace AdminView.CompetitionChoice
             CompetitionData.CompetitionSelected += CompetitionChoiceBase_CompetitionSelected;
             DisplayAddCompetitionViewCmd = new RelayCommand(OnDisplayAddCompetitionView, CanDisplayAddCompetition);
             AddCompetitionViewRequested += NavToAddCompetitionView;
+            CalculateStandingsViewRequested += NavToCalculateStandingsView;
             GoToCompetitionCmd = new RelayCommand(OnGoToCompetition, CanGoToCompetition);
+            CalculateStandingsCmd = new RelayCommand(OnDisplayCalculateStandingsView);
             //ViewLoadedCmd = new RelayCommand(OnViewLoaded);
             OnViewLoaded();
         }
@@ -47,9 +55,15 @@ namespace AdminView.CompetitionChoice
 
         private void NavToAddCompetitionView()
         {
-            AddCompetition.AddCompetitionViewModel addCompetitionViewModel = new AddCompetition.AddCompetitionViewModel();
+            var addCompetitionViewModel = new AddCompetitionViewModel();
             addCompetitionViewModel.AddCompetitionRequested += OnCompetitionAddedAsync;
-            addCompetitionViewModel.ShowWindow();
+            addCompetitionViewModel.ShowWindowDialog();
+        }
+
+        private void NavToCalculateStandingsView()
+        {
+            var calculateStandingsViewModel = new CalculateStandingsViewModel();
+            calculateStandingsViewModel.ShowWindowDialog();
         }
 
         private async void OnCompetitionAddedAsync(object sender, EventArgs e)
@@ -61,6 +75,8 @@ namespace AdminView.CompetitionChoice
         }
 
         private void OnDisplayAddCompetitionView() => AddCompetitionViewRequested();
+
+        private void OnDisplayCalculateStandingsView() => CalculateStandingsViewRequested();
 
         private bool CanDisplayAddCompetition() => true;
 
@@ -78,12 +94,14 @@ namespace AdminView.CompetitionChoice
         }
 
         public event Action AddCompetitionViewRequested = delegate { };
+        public event Action CalculateStandingsViewRequested = delegate { };
         public event Action CompetitonViewRequested = delegate { };
         public event Action CompetitionManagerRequested = delegate { };
 
         public RelayCommand DisplayAddCompetitionViewCmd { get; private set; }
         public RelayCommand GoToCompetitionCmd { get; private set; }
         public RelayCommand ViewLoadedCmd { get; private set; }
+        public RelayCommand CalculateStandingsCmd { get; private set; }
 
         #endregion
     }

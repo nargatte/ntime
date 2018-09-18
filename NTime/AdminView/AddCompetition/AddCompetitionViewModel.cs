@@ -13,11 +13,11 @@ namespace AdminView.AddCompetition
 {
     class AddCompetitionViewModel : BindableBase, ViewCore.Entities.ISwitchableViewModel
     {
-        AddCompetitionView view;
+        Window view;
         public AddCompetitionViewModel()
         {
             AddCompetitionCmd = new RelayCommand(OnAddCompetition);
-            CancelAddingCmd = new RelayCommand(OnCancelAdding);
+            CancelCmd = new RelayCommand(OnCancel);
             NewCompetition = new EditableCompetition()
             {
                 DbEntity = new BaseCore.DataBase.Competition(),
@@ -32,7 +32,7 @@ namespace AdminView.AddCompetition
             set { SetProperty(ref _newCompetition, value); }
         }
 
-        public void ShowWindow()
+        public void ShowWindowDialog()
         {
             view = new AddCompetitionView() { DataContext = this };
             view.ShowDialog();
@@ -49,7 +49,7 @@ namespace AdminView.AddCompetition
             view.Close();
         }
 
-        private void OnCancelAdding()
+        private void OnCancel()
         {
             view.Close();
         }
@@ -72,7 +72,7 @@ namespace AdminView.AddCompetition
         }
 
         public RelayCommand AddCompetitionCmd { get; private set; }
-        public RelayCommand CancelAddingCmd { get; private set; }
+        public RelayCommand CancelCmd { get; private set; }
         public event EventHandler AddCompetitionRequested = delegate { };
         public event Action CancelAddingRequested = delegate { };
     }

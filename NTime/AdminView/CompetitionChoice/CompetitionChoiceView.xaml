@@ -34,7 +34,10 @@
             <TextBlock Text="Pomożemy Ci szybko i sprawnie przeprowadzić zawody" TextWrapping="Wrap" FontSize="16" TextAlignment="Center"/>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Row="1">
-            <Button Margin="0, 10, 0, 20"  HorizontalAlignment="Center" MaxWidth="150" Height="40" VerticalAlignment="Bottom" Command="{Binding DisplayAddCompetitionViewCmd}">
+            <Button Command="{Binding CalculateStandingsCmd}" Height="40" Width="100" Grid.Column="2" FontWeight="Bold" VerticalAlignment="Top" Margin="0, 0, 0, 50">
+                Przelicz ranking
+            </Button>
+            <Button  HorizontalAlignment="Center" MaxWidth="150" Height="40" VerticalAlignment="Bottom" Command="{Binding DisplayAddCompetitionViewCmd}">
                 <TextBlock Text="Stwórz nowe zawody" TextWrapping="Wrap" TextAlignment="Center" FontWeight="Bold"/>
             </Button>
             <TextBlock Margin="10" Text="Wybierz istniejące zawody" HorizontalAlignment="Center" FontSize="16"/>
@@ -45,7 +48,7 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <Button Margin="0, 40" HorizontalAlignment="Center" MaxWidth="150" Height="40" VerticalAlignment="Bottom" Command="{Binding GoToCompetitionCmd}">
+            <Button Margin="0, 30" HorizontalAlignment="Center" MaxWidth="150" Height="40" VerticalAlignment="Bottom" Command="{Binding GoToCompetitionCmd}">
                 <TextBlock Text="Przejdź do wybranych zawodów" TextWrapping="Wrap" TextAlignment="Center" FontWeight="Bold"/>
             </Button>
         </StackPanel>

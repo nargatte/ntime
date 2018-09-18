@@ -90,7 +90,7 @@
                 </Button.Style>
             </Button>
             <Button Grid.Column="1" Height="30" MinWidth="30" MaxWidth="100" Margin="15"
-                    VerticalAlignment="Bottom" HorizontalAlignment="Center" Command="{Binding CancelAddingCmd}">
+                    VerticalAlignment="Bottom" HorizontalAlignment="Center" Command="{Binding CancelCmd}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="pack://application:,,,/AdminView;component/Images/delete.png" Height="30" Width="20"/>
                     <TextBlock Text="Anuluj" Height="20"/>

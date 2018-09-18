@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConnectionInfo.cs" />
+    <Compile Include="Entities\EditableCompetitionFile.cs" />
     <Compile Include="Entities\EditableHeaderPermutationPair.cs" />
     <Compile Include="Factories\AgeCategories\AgeCategoryManagerFactoryDesktop.cs" />
     <Compile Include="Factories\AgeCategories\AgeCategoryManagerFactoryHttp.cs" />

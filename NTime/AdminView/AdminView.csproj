@@ -126,6 +126,10 @@
       <DependentUpon>AuthorizationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Authorization\AuthorizationViewModel.cs" />
+    <Compile Include="CalculateStandings\CalculateStandingsView.xaml.cs">
+      <DependentUpon>CalculateStandingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CalculateStandings\CalculateStandingsViewModel.cs" />
     <Compile Include="TabItems\Categories\CategoriesView.xaml.cs">
       <DependentUpon>CategoriesView.xaml</DependentUpon>
     </Compile>
@@ -221,6 +225,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Authorization\AuthorizationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CalculateStandings\CalculateStandingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
