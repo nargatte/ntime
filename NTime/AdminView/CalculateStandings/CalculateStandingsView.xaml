@@ -66,14 +66,14 @@
                 <GroupBox>
                     <StackPanel Orientation="Horizontal">
                         <CheckBox IsChecked="{Binding SortByStartsCountFirst}"/>
-                        <TextBlock Text="Minimalna liczba startów"/>
+                        <TextBlock Text="Sortuj najpierw po liczbie startów"/>
                     </StackPanel>
                 </GroupBox>
                 <GroupBox>
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal">
                             <CheckBox Name="bestScoresCount" IsChecked="{Binding BestScoresEnabled}"/>
-                            <TextBlock Text="Minimalna liczba startów"/>
+                            <TextBlock Text="Wybierz najlepsze wyniki"/>
                         </StackPanel>
                         <toolkit:IntegerUpDown IsEnabled="{Binding ElementName=bestScoresCount, Path=IsChecked}" Width="70" HorizontalAlignment="Left"
                                                Value="{Binding BestCompetitionsCount}"/>

@@ -17,7 +17,7 @@ namespace BaseCore.Csv.CompetitionSeries
         private IEnumerable<PlayerScoreRecord> _scores = new List<PlayerScoreRecord>();
         private IEnumerable<PlayerScoreRecord> _dnfs = new List<PlayerScoreRecord>();
         private HashSet<string> _categories = new HashSet<string>();
-        private Dictionary<PlayerWithPoints, PlayerWithPoints> _uniquePlayers = new Dictionary<PlayerWithPoints, PlayerWithPoints>(new PlayerWithPointsEqualityComparer());
+        private IEnumerable<PlayerWithPoints> _standingsPlayers = new List<PlayerWithPoints>();
         private Dictionary<int, string> _competitionsNames;
         private SeriesStandingsParameters _standingsParamters;
         private char _delimiter = ';';
@@ -55,7 +55,7 @@ namespace BaseCore.Csv.CompetitionSeries
             FilterScores();
             GetUniqueCategories();
             GiveOutPoints();
-            var exportableScores = PrepareAndPrintStandings();
+            var exportableScores = PrepareStandings();
             bool exportedCorrectly = await ExportStandingsToCsv(exportableScores, _competitionsNames.Select(pair => pair.Value));
             Debug.WriteLine($"Exported correctly: {exportedCorrectly}");
         }
@@ -83,6 +83,7 @@ namespace BaseCore.Csv.CompetitionSeries
 
         private void GiveOutPoints()
         {
+            var uniquePlayers = new Dictionary<PlayerWithPoints, PlayerWithPoints>(new PlayerWithPointsEqualityComparer());
             _scores.ToList().ForEach(player =>
             {
                 bool pointsPlaceExists = _points.TryGetValue(player.CategoryPlaceNumber, out double competitionPoints);
@@ -94,7 +95,7 @@ namespace BaseCore.Csv.CompetitionSeries
                         Points = competitionPoints,
                         CompetitionsStarted = 1,
                     };
-                    bool addedBefore = _uniquePlayers.TryGetValue(newPlayer, out PlayerWithPoints playerFound);
+                    bool addedBefore = uniquePlayers.TryGetValue(newPlayer, out PlayerWithPoints playerFound);
                     var competitionPointsPair = new KeyValuePair<int, double>(player.CompetitionId, player.IsDNF() ? -1 : newPlayer.Points);
                     if (addedBefore)
                     {
@@ -105,31 +106,38 @@ namespace BaseCore.Csv.CompetitionSeries
                     else
                     {
                         newPlayer.CompetitionsPoints.Add(competitionPointsPair.Key, competitionPointsPair.Value);
-                        _uniquePlayers.Add(newPlayer, newPlayer);
+                        uniquePlayers.Add(newPlayer, newPlayer);
                     }
                 }
             });
+            _standingsPlayers = uniquePlayers.Select(pair => pair.Value);
         }
 
-        private IEnumerable<PlayerWithPoints> PrepareAndPrintStandings()
+        private IEnumerable<PlayerWithPoints> PrepareStandings(bool verbose = true)
         {
+            // Why is categoriesStandings a dictionary???????
             var categoriesStandings = _categories.ToDictionary(x => x, y => new List<PlayerWithPoints>());
-            _uniquePlayers.ToList().ForEach(player => categoriesStandings[player.Value.AgeCategory].Add(player.Value));
+            if (_standingsParamters.MinStartsEnabled)
+                _standingsPlayers = _standingsPlayers.Where(player => player.CompetitionsStarted >= _standingsParamters.MinStartsCount);
+            _standingsPlayers.ToList().ForEach(player => categoriesStandings[player.AgeCategory].Add(player));
             var exportableScores = new List<PlayerWithPoints>();
 
             foreach (var item in categoriesStandings.OrderBy(pair => pair.Key))
             {
                 int iter = 1;
-                Debug.WriteLine($"Category {item.Key}");
+                if (verbose)
+                    Debug.WriteLine($"Category {item.Key}");
                 item.Value.OrderByDescending(player => player.Points).ToList()
                     .ForEach(player =>
                     {
-                        Debug.WriteLine($"{iter,-2} {player}");
+                        if (verbose)
+                            Debug.WriteLine($"{iter,-2} {player}");
                         player.CategoryStandingPlace = iter;
                         exportableScores.Add(player);
                         iter++;
                     });
-                Debug.WriteLine("");
+                if (verbose)
+                    Debug.WriteLine("");
             }
             return exportableScores;
         }

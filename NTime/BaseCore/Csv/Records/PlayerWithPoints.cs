@@ -8,6 +8,21 @@ namespace BaseCore.Csv.Records
 {
     public class PlayerWithPoints
     {
+
+        public int CategoryStandingPlace { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string City { get; set; }
+        public DateTime BirthDate { get; set; }
+        public string AgeCategory { get; set; }
+        public double Points { get; set; }
+        public int DNFsCount { get; set; }
+        public int SeriesCategoryPlace { get; set; }
+        public int CompetitionsStarted { get; set; }
+        public Dictionary<int, double> CompetitionsPoints { get; set; } = new Dictionary<int, double>();
+        public Dictionary<int, string> AllCompetitions { get; private set; }
+        public List<string> CompetitionsPointsExport { get; set; } = new List<string>();
+
         public PlayerWithPoints(PlayerScoreRecord player, Dictionary<int, string> allCompetitions)
         {
             var firstNameSplit = player.FirstName.Split(' ');
@@ -28,19 +43,6 @@ namespace BaseCore.Csv.Records
             SeriesCategoryPlace = seriesCategoryPlace;
         }
 
-        public int CategoryStandingPlace { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string City { get; set; }
-        public DateTime BirthDate { get; set; }
-        public string AgeCategory { get; set; }
-        public double Points { get; set; }
-        public int DNFsCount { get; set; }
-        public int SeriesCategoryPlace { get; set; }
-        public int CompetitionsStarted { get; set; }
-        public Dictionary<int, double> CompetitionsPoints { get; set; } = new Dictionary<int, double>();
-        public Dictionary<int, string> AllCompetitions { get; private set; }
-        public List<string> CompetitionsPointsExport { get; set; } = new List<string>();
 
         public override string ToString()
         {

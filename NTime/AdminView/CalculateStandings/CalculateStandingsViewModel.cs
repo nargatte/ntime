@@ -18,9 +18,9 @@ namespace AdminView.CalculateStandings
 {
     public class CalculateStandingsViewModel : BindableBase
     {
-        private Window view;
-        private Dictionary<int, string> competitionNamesDict = new Dictionary<int, string>();
-        private List<string> competitionPaths = new List<string>();
+        private Window _view;
+        private Dictionary<int, string> _competitionNamesDict = new Dictionary<int, string>();
+        private List<string> _competitionPaths = new List<string>();
 
         public CalculateStandingsViewModel()
         {
@@ -45,15 +45,15 @@ namespace AdminView.CalculateStandings
 
         public void ShowWindowDialog()
         {
-            view = new CalculateStandingsView() { DataContext = this };
-            view.ShowDialog();
+            _view = new CalculateStandingsView() { DataContext = this };
+            _view.ShowDialog();
         }
 
 
         private void OnAddFiles()
         {
 
-            this.competitionPaths = new List<string>();
+            this._competitionPaths = new List<string>();
             //competitionPaths.AddRange(resourceLoader.LoadFilesToTemp(filesDictionary.Skip(1).ToDictionary(x => x.Key, x => x.Value), Path.GetTempPath()));
             var dialog = new OpenFileDialog();
             dialog.Filter = "csv files (*.csv)|*.csv";
@@ -83,18 +83,18 @@ namespace AdminView.CalculateStandings
         private async void OnCalculateStandings()
         {
             var competitionNames = CompetitionFiles.Select(file => file.Title).ToList();
-            this.competitionNamesDict = new Dictionary<int, string>();
+            this._competitionNamesDict = new Dictionary<int, string>();
             int iter = 0;
-            competitionNames.ForEach(name => competitionNamesDict.Add(iter++, name));
+            competitionNames.ForEach(name => _competitionNamesDict.Add(iter++, name));
 
-            this.competitionPaths = CompetitionFiles.Select(file => file.FullPath).ToList();
-            if (competitionPaths == null || competitionPaths.Count == 0)
+            this._competitionPaths = CompetitionFiles.Select(file => file.FullPath).ToList();
+            if (_competitionPaths == null || _competitionPaths.Count == 0)
             {
                 MessageBox.Show("Nie podano żadnych ścieżek do plików z zawodami");
                 return;
             }
 
-            if (competitionNamesDict == null || competitionNamesDict.Count == 0)
+            if (_competitionNamesDict == null || _competitionNamesDict.Count == 0)
             {
                 MessageBox.Show("Nie podano nazw dla zawodów");
                 return;
@@ -106,8 +106,8 @@ namespace AdminView.CalculateStandings
 
             try
             {
-                var seriesStandings = new SeriesStandings(this.competitionNamesDict, SeriesStandingsParameters.DbEntity);
-                await seriesStandings.ImportScoresFromCsv(this.competitionPaths);
+                var seriesStandings = new SeriesStandings(_competitionNamesDict, SeriesStandingsParameters.DbEntity);
+                await seriesStandings.ImportScoresFromCsv(_competitionPaths);
 
                 var pointsPath = resourceLoader.LoadFilesToTemp(filesDictionary.Take(1).ToDictionary(x => x.Key, x => x.Value), Path.GetTempPath());
                 await seriesStandings.ImportPointsTableFromCsv(pointsPath.First());
@@ -155,7 +155,7 @@ namespace AdminView.CalculateStandings
 
         private void OnCancel()
         {
-            view.Close();
+            _view.Close();
         }
 
         public RelayCommand CalculateStandingsCmd { get; private set; }
