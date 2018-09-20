@@ -1,6 +1,7 @@
 ﻿using BaseCore.Csv.Map;
 using BaseCore.Csv.Records;
 using BaseCore.DataBase;
+using BaseCore.DataBase.Entities;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -18,11 +19,13 @@ namespace BaseCore.Csv.CompetitionSeries
         private HashSet<string> _categories = new HashSet<string>();
         private Dictionary<PlayerWithPoints, PlayerWithPoints> _uniquePlayers = new Dictionary<PlayerWithPoints, PlayerWithPoints>(new PlayerWithPointsEqualityComparer());
         private Dictionary<int, string> _competitionsNames;
+        private SeriesStandingsParameters _standingsParamters;
         private char _delimiter = ';';
 
-        public SeriesStandings(Dictionary<int, string> competitionsNames)
+        public SeriesStandings(Dictionary<int, string> competitionsNames, SeriesStandingsParameters standingsParameters)
         {
             _competitionsNames = competitionsNames;
+            _standingsParamters = standingsParameters;
         }
 
         public async Task ImportScoresFromCsv(IEnumerable<string> paths)

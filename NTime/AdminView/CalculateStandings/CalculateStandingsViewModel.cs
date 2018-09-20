@@ -10,12 +10,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
+using ViewCore.Entities;
 using Application = System.Windows.Forms.Application;
 using MessageBox = System.Windows.MessageBox;
 
 namespace AdminView.CalculateStandings
 {
-    public class CalculateStandingsViewModel
+    public class CalculateStandingsViewModel : BindableBase
     {
         private Window view;
         private Dictionary<int, string> competitionNamesDict = new Dictionary<int, string>();
@@ -31,6 +32,14 @@ namespace AdminView.CalculateStandings
         #region Properties
 
         public ObservableCollection<EditableCompetitionFile> CompetitionFiles { get; set; } = new ObservableCollection<EditableCompetitionFile>();
+
+
+        private EditableSeriesStandingsParameters _seriesStandingsParameters = new EditableSeriesStandingsParameters();
+        public EditableSeriesStandingsParameters SeriesStandingsParameters
+        {
+            get { return _seriesStandingsParameters; }
+            set { SetProperty(ref _seriesStandingsParameters, value); }
+        } 
 
         #endregion
 
@@ -97,7 +106,7 @@ namespace AdminView.CalculateStandings
 
             try
             {
-                var seriesStandings = new SeriesStandings(this.competitionNamesDict);
+                var seriesStandings = new SeriesStandings(this.competitionNamesDict, SeriesStandingsParameters.DbEntity);
                 await seriesStandings.ImportScoresFromCsv(this.competitionPaths);
 
                 var pointsPath = resourceLoader.LoadFilesToTemp(filesDictionary.Take(1).ToDictionary(x => x.Key, x => x.Value), Path.GetTempPath());

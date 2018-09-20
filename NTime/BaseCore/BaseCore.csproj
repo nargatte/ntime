@@ -78,6 +78,7 @@
     <Compile Include="DataBase\Entities\DistanceType.cs" />
     <Compile Include="DataBase\Entities\Distance.cs" />
     <Compile Include="DataBase\Entities\EnumTable.cs" />
+    <Compile Include="DataBase\Entities\SeriesStandingsParameters.cs" />
     <Compile Include="DataBase\Entities\Subcategory.cs" />
     <Compile Include="DataBase\Entities\Gate.cs" />
     <Compile Include="DataBase\Entities\GateOrderItem.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="DataBase\Entities\TimeReadsLogInfo.cs" />
     <Compile Include="DataBase\Entities\TimeReadType.cs" />
     <Compile Include="DataBase\Enums\ColorAttribute.cs" />
+    <Compile Include="DataBase\Enums\CompetitionStandingsType.cs" />
     <Compile Include="DataBase\Enums\DistanceTypeEnum.cs" />
     <Compile Include="DataBase\EnumHelpers\EnumBindingSourceExtension.cs" />
     <Compile Include="DataBase\EnumHelpers\EnumDescriptionTypeConverter.cs" />

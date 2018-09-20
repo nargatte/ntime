@@ -3,35 +3,86 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:validation="clr-namespace:AdminView.Validation;assembly=ViewCore"
         xmlns:local="clr-namespace:AdminView.CalculateStandings"
+        xmlns:converters="clr-namespace:ViewCore.XamlConverters;assembly=ViewCore"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        Title="CalculateStandingsView" Height="450" Width="400">
+        Title="CalculateStandingsView" Height="500" Width="400">
+    <Window.Resources>
+        <converters:EnumToBoolConverterClass x:Key="EnumToBoolConverter"/>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="4*"/>
+            <RowDefinition Height="6*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Text="Przeliczanie rankingu" HorizontalAlignment="Center" TextBlock.FontSize="20" TextBlock.FontWeight="Bold" Margin="10"/>
         <StackPanel Orientation="Vertical" Grid.Row="1">
-            <Button Command="{Binding AddFilesCmd}" > Dodaj pliki zawodów</Button>
-            <ListView ItemsSource="{Binding CompetitionFiles}" Grid.Row="1">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
+            <StackPanel Name="Files" Orientation="Vertical">
+                <Button Command="{Binding AddFilesCmd}" Width="150" >Dodaj pliki zawodów</Button>
+                <Border Height="150">
+                    <ScrollViewer>
+                        <ListView ItemsSource="{Binding CompetitionFiles}" Grid.Row="1">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <StackPanel Orientation="Vertical">
+                                            <Button Command="{Binding MoveUpExtraHeaderCmd}" FontFamily="Marlett" Height="15" FontSize="15" Content="5"/>
+                                            <Button Command="{Binding MoveDownExtraHeaderCmd}" FontFamily="Marlett" Height="15" FontSize="15" Content="6"/>
+                                        </StackPanel>
+                                        <TextBlock Text="{Binding FileName}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </ScrollViewer>
+                </Border>
+            </StackPanel>
+
+            <StackPanel DataContext="{Binding SeriesStandingsParameters}" Name="Configuration" Orientation="Vertical">
+                <GroupBox>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock >Wybierz rodzaj klasyfikacji</TextBlock>
+                        <RadioButton Content="Miejsca przeliczane na punkty" IsChecked="{Binding StandingsType,
+                            Converter={StaticResource EnumToBoolConverter}, ConverterParameter=PlacesToPoints}"/>
+                        <RadioButton Content="Suma czasów" IsChecked="{Binding StandingsType,
+                            Converter={StaticResource EnumToBoolConverter}, ConverterParameter=TimeSum}"/>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox>
+                    <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal">
-                            <StackPanel Orientation="Vertical">
-                                <Button Command="{Binding MoveUpExtraHeaderCmd}" FontFamily="Marlett" Height="15" FontSize="15" Content="5"/>
-                                <Button Command="{Binding MoveDownExtraHeaderCmd}" FontFamily="Marlett" Height="15" FontSize="15" Content="6"/>
-                            </StackPanel>
-                            <TextBlock Text="{Binding FileName}"/>
+                            <CheckBox Name="minStarts" IsChecked="{Binding MinStartsEnabled}"/>
+                            <TextBlock Text="Minimalna liczba startów"/>
                         </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                        <toolkit:IntegerUpDown IsEnabled="{Binding ElementName=minStarts, Path=IsChecked}" Width="70" HorizontalAlignment="Left" 
+                                               Value="{Binding MinStartsCount}"/>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox>
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox IsChecked="{Binding SortByStartsCountFirst}"/>
+                        <TextBlock Text="Minimalna liczba startów"/>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox>
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox Name="bestScoresCount" IsChecked="{Binding BestScoresEnabled}"/>
+                            <TextBlock Text="Minimalna liczba startów"/>
+                        </StackPanel>
+                        <toolkit:IntegerUpDown IsEnabled="{Binding ElementName=bestScoresCount, Path=IsChecked}" Width="70" HorizontalAlignment="Left"
+                                               Value="{Binding BestCompetitionsCount}"/>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+
         </StackPanel>
+
 
         <!--<Grid x:Name="grid1" Grid.Row="1" VerticalAlignment="Top"  HorizontalAlignment="Center" DataContext="{Binding NewCompetition}">
             -->
