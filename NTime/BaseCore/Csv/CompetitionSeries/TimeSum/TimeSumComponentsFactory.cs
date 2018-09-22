@@ -11,12 +11,12 @@ namespace BaseCore.Csv.CompetitionSeries.TimeSum
     {
         public IScoreTypeAssigner CreateScoreTypeAssigner()
         {
-            throw new NotImplementedException();
+            return new TimeAssigner();
         }
 
         public IStandingsSorter CreateStandingsSorter()
         {
-            throw new NotImplementedException();
+            return new TimeSumStandingsSorter();
         }
     }
 }
