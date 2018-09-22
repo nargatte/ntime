@@ -163,12 +163,12 @@ namespace BaseCoreTests.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to id_z;nr_startowy;imie;nazwisko;miejscowosc;klub;data_urodzenia;plec;rower;distanceId;czas_startu;kategoria;kat_wiek;nr_grupy;nazwa_dystansu;dlugosc
-        ///0;214;Jacek;Lipowski;Pabianice;;1965-07-01;M;inny;;10:58:00;MINI M5i;M5;;MINI;73
-        ///0;523;LENA;ŚNIEG;ŁASK;;1966-05-22;K;inny;;11:46:00;+ROD K5i;K5;;+RODZINNY;36
-        ///0;450;Krzysztof;Czuba;Śliwniki;;1971-04-14;M;szosowy;;11:42:00;MINI M4s;M4;;MINI;73
-        ///0;519;LESZEK;ROJEWSKI;ŁASK;;1967-06-23;M;inny;;11:46:00;+ROD M4i;M4;;+RODZINNY;36
-        ///0;531;Michał;Paluch;Łask;Amator;200 [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to id_z;nr_startowy;imie;nazwisko;miejscowosc;klub;data_urodzenia;plec;rower;distanceId;czas_startu;kategoria;kat_wiek;nr_grupy;nazwa_dystansu;dlugosc;kolumny_dodatkowe
+        ///0;214;Jacek;Lipowski;Pabianice;;1965-07-01;M;inny;;10:58:00;MINI M5i;M5;;MINI;73;a|1
+        ///0;523;LENA;ŚNIEG;ŁASK;;1966-05-22;K;inny;;11:46:00;+ROD K5i;K5;;+RODZINNY;36;b|2
+        ///0;450;Krzysztof;Czuba;Śliwniki;;1971-04-14;M;szosowy;;11:42:00;MINI M4s;M4;;MINI;73;c|3
+        ///0;519;LESZEK;ROJEWSKI;ŁASK;;1967-06-23;M;inny;;11:46:00;+ROD M4i;M4;;+RODZINNY;36;d|4
+        ///0 [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Zawodnicy {
             get {

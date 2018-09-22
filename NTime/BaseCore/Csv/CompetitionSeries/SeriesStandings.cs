@@ -22,7 +22,7 @@ namespace BaseCore.Csv.CompetitionSeries
         private IStandingsComponentsFactory _componentsFactory;
         private IEnumerable<string> _competitionsPaths;
         private IEnumerable<PlayerScoreRecord> _scores = new List<PlayerScoreRecord>();
-        private IEnumerable<PlayerScoreRecord> _dnfs = new List<PlayerScoreRecord>();
+        private IEnumerable<PlayerScoreRecord> dnfs = new List<PlayerScoreRecord>();
         private HashSet<string> _categories = new HashSet<string>();
         private IEnumerable<PlayerWithScores> _standingsPlayers = new List<PlayerWithScores>();
         private char _delimiter = ';';
@@ -87,18 +87,19 @@ namespace BaseCore.Csv.CompetitionSeries
             return pointsTable;
         }
 
-        private void FilterCorrectScores(IEnumerable<PlayerScoreRecord> scores)
+        private (string, string) FilterCorrectScores(IEnumerable<PlayerScoreRecord> scores)
         {
             int limit = 20000;
-            _dnfs = scores.Where(x => x.IsDNF());
-            foreach (var score in _dnfs)
+            var dnfs = scores.Where(x => x.IsDNF());
+            foreach (var score in dnfs)
             {
                 score.DistancePlaceNumber = 0;
                 score.CategoryPlaceNumber = 0;
             }
-            _scores = _scores.Where(x => x.DistancePlaceNumber > 0 && x.CategoryPlaceNumber > 0
+            var filteredScores = _scores.Where(x => x.DistancePlaceNumber > 0 && x.CategoryPlaceNumber > 0
                 && x.DistancePlaceNumber < limit && x.CategoryPlaceNumber < limit)
-                .Union(_dnfs);
+                .Union(dnfs);
+            return (filteredScores, dnfs);
         }
 
         private void GetUniqueCategories()
