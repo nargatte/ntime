@@ -112,25 +112,14 @@ namespace BaseCore.Csv.CompetitionSeries
         private IEnumerable<PlayerWithScores> AssignScores(IEnumerable<PlayerScoreRecord> scoreRecords, Dictionary<int, double> competitionPointsTable)
         {
             var scoreTypeAssigner = _componentsFactory.CreateScoreTypeAssigner();
-            return scoreTypeAssigner.AssignProperScoreType(_competitionsNames, scoreRecords, competitionPointsTable);
+            return scoreTypeAssigner.AssignProperScoreType(_standingsParamters, _competitionsNames, scoreRecords, competitionPointsTable);
         }
 
         private IEnumerable<PlayerWithScores> PrepareStandings(HashSet<string> categories, IEnumerable<PlayerWithScores> playersReadyForStandings,
             bool verbose = true)
         {
-            var categoriesStandings = categories.ToDictionary(x => x, y => new List<PlayerWithScores>());
-            if (_standingsParamters.MinStartsEnabled)
-                playersReadyForStandings = playersReadyForStandings.Where(player => player.CompetitionsStarted >= _standingsParamters.MinStartsCount);
-            //if(_standingsParamters.BestScoresEnabled)
-            //    foreach (var player in _standingsPlayers)
-            //    {
-            //        // Watch out for competitions points string. Name the Points like sum or something
-            //        player.Points
-            //    }
-            playersReadyForStandings.ToList().ForEach(player => categoriesStandings[player.AgeCategory].Add(player));
-
-            var standingsSorter = _componentsFactory.CreateStandingsSorter();
-            return standingsSorter.SortStandings(categoriesStandings, verbose);
+            var standingsCreator = new StandingsCreator();
+            return standingsCreator.CreateStandings(_componentsFactory, _standingsParamters, categories, playersReadyForStandings, verbose);
         }
 
         private async Task<bool> ExportStandingsToCsv(IEnumerable<PlayerWithScores> standingPlayers, IEnumerable<string> competitionNames)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BaseCore.Csv.CompetitionSeries.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,13 +16,13 @@ namespace BaseCore.Csv.Records
         public string City { get; set; }
         public DateTime BirthDate { get; set; }
         public string AgeCategory { get; set; }
-        public double Points { get; set; }
+        public IPlayerScore TotalScore { get; set; }
         public int DNFsCount { get; set; }
         public int SeriesCategoryPlace { get; set; }
         public int CompetitionsStarted { get; set; }
-        public Dictionary<int, double> CompetitionsPoints { get; set; } = new Dictionary<int, double>();
+        public Dictionary<int, IPlayerScore> CompetitionsScores { get; set; } = new Dictionary<int, IPlayerScore>();
         public Dictionary<int, string> AllCompetitions { get; private set; }
-        public List<string> CompetitionsPointsExport { get; set; } = new List<string>();
+        public List<string> CompetitionsScoreExport { get; set; } = new List<string>();
 
         public PlayerWithScores(PlayerScoreRecord player, Dictionary<int, string> allCompetitions)
         {
@@ -35,10 +36,10 @@ namespace BaseCore.Csv.Records
             AllCompetitions = allCompetitions;
         }
 
-        public PlayerWithScores(PlayerScoreRecord player, Dictionary<int, string> allCompetitions, int points, int dnfsCount, int seriesCategoryPlace)
+        public PlayerWithScores(PlayerScoreRecord player, Dictionary<int, string> allCompetitions, IPlayerScore points, int dnfsCount, int seriesCategoryPlace)
             : this(player, allCompetitions)
         {
-            Points = points;
+            TotalScore = points;
             DNFsCount = dnfsCount;
             SeriesCategoryPlace = seriesCategoryPlace;
         }
@@ -47,8 +48,8 @@ namespace BaseCore.Csv.Records
         public override string ToString()
         {
             SetPointsForCompetitions();
-            var str = $"{LastName,-12} {FirstName,-12} {BirthDate.Year,-5} {AgeCategory,-4} {CompetitionsStarted,-2} {Points,-2}   ";
-            CompetitionsPointsExport.ForEach(points => str += $"{points,-4} ");
+            var str = $"{LastName,-12} {FirstName,-12} {BirthDate.Year,-5} {AgeCategory,-4} {CompetitionsStarted,-2} {TotalScore,-2}   ";
+            CompetitionsScoreExport.ForEach(points => str += $"{points,-4} ");
             return str;
 
             //foreach (var competition in AllCompetitions)
@@ -60,24 +61,24 @@ namespace BaseCore.Csv.Records
 
         public void SetPointsForCompetitions()
         {
-            CompetitionsPointsExport.Clear();
+            CompetitionsScoreExport.Clear();
             foreach (var competition in AllCompetitions)
             {
-                string extraString = GetPointsForCompetition(competition);
-                CompetitionsPointsExport.Add(extraString);
+                string extraString = GetPointsForCompetition(competition.Key);
+                CompetitionsScoreExport.Add(extraString);
             }
         }
 
-        private string GetPointsForCompetition(KeyValuePair<int, string> competition)
+        private string GetPointsForCompetition(int competitionKey)
         {
-            bool competitionFound = CompetitionsPoints.TryGetValue(competition.Key, out double points);
+            bool competitionFound = CompetitionsScores.TryGetValue(competitionKey, out IPlayerScore score);
             var extraString = string.Empty;
             if (competitionFound)
             {
-                if (points == -1)
+                if (score.IsDnf)
                     extraString = "DNF";
                 else
-                    extraString = points.ToString();
+                    extraString = score.ScoreString;
             }
 
             return extraString;

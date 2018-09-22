@@ -1,5 +1,6 @@
 ﻿using BaseCore.Csv.CompetitionSeries.Interfaces;
 using BaseCore.Csv.Records;
+using BaseCore.DataBase.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,9 @@ namespace BaseCore.Csv.CompetitionSeries.PlacesAndPoints
 {
     public class PointsAssigner : IScoreTypeAssigner
     {
-        public IEnumerable<PlayerWithScores> AssignProperScoreType(Dictionary<int, string> competitionsNames,
-            IEnumerable<PlayerScoreRecord> scoreRecords, Dictionary<int, double> competitionPointsTable)
+        public IEnumerable<PlayerWithScores> AssignProperScoreType(SeriesStandingsParameters standingsParameters, 
+            Dictionary<int, string> competitionsNames, IEnumerable<PlayerScoreRecord> scoreRecords,
+            Dictionary<int, double> competitionPointsTable)
         {
             var uniquePlayers = new HashSet<PlayerWithScores>(new PlayerWithPointsEqualityComparer());
             scoreRecords.ToList().ForEach(player =>
@@ -21,25 +23,36 @@ namespace BaseCore.Csv.CompetitionSeries.PlacesAndPoints
                 {
                     var newPlayer = new PlayerWithScores(player, competitionsNames)
                     {
-                        //Points = _points[player.CategoryPlaceNumber],
-                        Points = competitionPoints,
                         CompetitionsStarted = 1,
                     };
                     bool addedBefore = uniquePlayers.TryGetValue(newPlayer, out PlayerWithScores foundPlayer);
-                    var competitionPointsPair = new KeyValuePair<int, double>(player.CompetitionId, player.IsDNF() ? -1 : newPlayer.Points);
+                    var competitionPointsPair = new KeyValuePair<int, IPlayerScore>(player.CompetitionId,
+                        new PointsScore(competitionPoints, player.IsDNF()));
                     if (addedBefore)
                     {
-                        foundPlayer.Points += newPlayer.Points;
                         foundPlayer.CompetitionsStarted += newPlayer.CompetitionsStarted;
-                        foundPlayer.CompetitionsPoints.Add(competitionPointsPair.Key, competitionPointsPair.Value);
+                        foundPlayer.CompetitionsScores.Add(competitionPointsPair.Key, competitionPointsPair.Value);
                     }
                     else
                     {
-                        newPlayer.CompetitionsPoints.Add(competitionPointsPair.Key, competitionPointsPair.Value);
+                        newPlayer.CompetitionsScores.Add(competitionPointsPair.Key, competitionPointsPair.Value);
                         uniquePlayers.Add(newPlayer);
                     }
                 }
             });
+
+            foreach (var player in uniquePlayers)
+            {
+                var allScores = player.CompetitionsScores.Select(pair => pair.Value);
+                if(standingsParameters.BestScoresEnabled)
+                {
+                    allScores = allScores.Where(score => score.NumberValue > 0).OrderByDescending(score => score).
+                                    Take(standingsParameters.BestCompetitionsCount);
+                }
+                var totalScore = new PointsScore(0, false);
+                allScores.ToList().ForEach(score => totalScore.AddValue(score));
+                player.TotalScore = totalScore;
+            }
             return uniquePlayers;
         }
     }

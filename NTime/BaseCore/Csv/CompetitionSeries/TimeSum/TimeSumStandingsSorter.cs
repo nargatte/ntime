@@ -1,5 +1,6 @@
 ﻿using BaseCore.Csv.CompetitionSeries.Interfaces;
 using BaseCore.Csv.Records;
+using BaseCore.DataBase.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,8 @@ namespace BaseCore.Csv.CompetitionSeries.TimeSum
 {
     public class TimeSumStandingsSorter : IStandingsSorter
     {
-        public List<PlayerWithScores> SortStandings(Dictionary<string, List<PlayerWithScores>> categorieStandings, bool verbose)
+        public IEnumerable<PlayerWithScores> SortStandings(SeriesStandingsParameters standingsParameters,
+            IEnumerable<PlayerWithScores> allCategoryPlayers)
         {
             throw new NotImplementedException();
         }

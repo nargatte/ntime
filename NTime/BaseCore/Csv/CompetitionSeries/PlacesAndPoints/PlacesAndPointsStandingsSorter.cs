@@ -1,5 +1,6 @@
 ﻿using BaseCore.Csv.CompetitionSeries.Interfaces;
 using BaseCore.Csv.Records;
+using BaseCore.DataBase.Entities;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,28 +12,13 @@ namespace BaseCore.Csv.CompetitionSeries.PlacesAndPoints
 {
     public class PlacesAndPointsStandingsSorter : IStandingsSorter
     {
-        public List<PlayerWithScores> SortStandings(Dictionary<string, List<PlayerWithScores>> categoriesStandings, bool verbose)
+        public IEnumerable<PlayerWithScores> SortStandings(SeriesStandingsParameters standingsParameters,
+            IEnumerable<PlayerWithScores> allCategoryPlayers)
         {
-            var exportableScores = new List<PlayerWithScores>();
-
-            foreach (var item in categoriesStandings.OrderBy(pair => pair.Key))
-            {
-                int iter = 1;
-                if (verbose)
-                    Debug.WriteLine($"Category {item.Key}");
-                item.Value.OrderByDescending(player => player.Points).ToList()
-                    .ForEach(player =>
-                    {
-                        if (verbose)
-                            Debug.WriteLine($"{iter,-2} {player}");
-                        player.CategoryStandingPlace = iter;
-                        exportableScores.Add(player);
-                        iter++;
-                    });
-                if (verbose)
-                    Debug.WriteLine("");
-            }
-            return exportableScores;
+            if (standingsParameters.SortByStartsCountFirst)
+                return allCategoryPlayers.OrderBy(player => player.CompetitionsStarted).ThenBy(player => player.TotalScore.NumberValue);
+            else
+                return allCategoryPlayers.OrderBy(player => player.TotalScore.NumberValue);
         }
     }
 }

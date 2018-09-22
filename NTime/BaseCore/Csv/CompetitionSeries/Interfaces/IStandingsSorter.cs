@@ -1,4 +1,5 @@
 ﻿using BaseCore.Csv.Records;
+using BaseCore.DataBase.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace BaseCore.Csv.CompetitionSeries.Interfaces
 {
     public interface IStandingsSorter
     {
-        List<PlayerWithScores> SortStandings(Dictionary<string, List<PlayerWithScores>> categorieStandings, bool verbose);   
+        IEnumerable<PlayerWithScores> SortStandings(SeriesStandingsParameters standingsParameters,
+            IEnumerable<PlayerWithScores> allCategoryPlayers);
     }
 }
