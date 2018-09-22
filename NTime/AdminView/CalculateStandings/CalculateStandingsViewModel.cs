@@ -39,7 +39,7 @@ namespace AdminView.CalculateStandings
         {
             get { return _seriesStandingsParameters; }
             set { SetProperty(ref _seriesStandingsParameters, value); }
-        } 
+        }
 
         #endregion
 
@@ -110,9 +110,11 @@ namespace AdminView.CalculateStandings
 
                 var pointsPath = resourceLoader.LoadFilesToTemp(filesDictionary.Take(1).ToDictionary(x => x.Key, x => x.Value), Path.GetTempPath());
 
-                seriesStandings.CalculateResults(pointsPath.First());
-
-                MessageBox.Show("Wyniki rankingu zostały przeliczone");
+                bool calculatedAndExportedCorrectly = await seriesStandings.CalculateResults(pointsPath.First());
+                if (calculatedAndExportedCorrectly)
+                    MessageBox.Show("Wyniki rankingu zostały przeliczone");
+                else
+                    MessageBox.Show("Błąd. Nie udało się przeliczyć wyników rankingu");
             }
             catch (Exception e)
             {

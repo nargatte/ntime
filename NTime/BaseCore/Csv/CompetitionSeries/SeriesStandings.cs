@@ -19,12 +19,8 @@ namespace BaseCore.Csv.CompetitionSeries
     {
         private Dictionary<int, string> _competitionsNames;
         private SeriesStandingsParameters _standingsParamters;
-        private IStandingsComponentsFactory _componentsFactory;
         private IEnumerable<string> _competitionsPaths;
-        private IEnumerable<PlayerScoreRecord> _scores = new List<PlayerScoreRecord>();
-        private IEnumerable<PlayerScoreRecord> dnfs = new List<PlayerScoreRecord>();
-        private HashSet<string> _categories = new HashSet<string>();
-        private IEnumerable<PlayerWithScores> _standingsPlayers = new List<PlayerWithScores>();
+        private IStandingsComponentsFactory _componentsFactory;
         private char _delimiter = ';';
 
         public SeriesStandings(Dictionary<int, string> competitionsNames, SeriesStandingsParameters standingsParameters,
@@ -49,16 +45,17 @@ namespace BaseCore.Csv.CompetitionSeries
             }
         }
 
-        public async void CalculateResults(string pointsTablePath)
+        public async Task<bool> CalculateResults(string pointsTablePath)
         {
-            _scores = await ImportScoresFromCsv(_competitionsPaths);
+            var downloadedScores = await ImportScoresFromCsv(_competitionsPaths);
             var competitionPointsTable = await ImportPointsTableFromCsv(pointsTablePath);
-            FilterCorrectScores();
-            GetUniqueCategories();
-            _standingsPlayers = AssignScores(_scores, competitionPointsTable);
-            var exportableScores = PrepareStandings(_categories, _standingsPlayers);
+            (var scores, var dnfs) = FilterCorrectScores(downloadedScores);
+            var categories = GetUniqueCategories(scores);
+            var playersReadyForStandings= AssignScores(scores, competitionPointsTable);
+            var exportableScores = PrepareStandings(categories, playersReadyForStandings);
             bool exportedCorrectly = await ExportStandingsToCsv(exportableScores, _competitionsNames.Select(pair => pair.Value));
             Debug.WriteLine($"Exported correctly: {exportedCorrectly}");
+            return exportedCorrectly;
         }
 
         private async Task<IEnumerable<PlayerScoreRecord>> ImportScoresFromCsv(IEnumerable<string> paths)
@@ -78,7 +75,7 @@ namespace BaseCore.Csv.CompetitionSeries
             return downloadedScores;
         }
 
-        private async Task<Dictionary<int,double>> ImportPointsTableFromCsv(string path)
+        private async Task<Dictionary<int, double>> ImportPointsTableFromCsv(string path)
         {
             var pointsTable = new Dictionary<int, double>();
             var csvImporter = new CsvImporter<PlacePointsRecord, PlacePointsMap>(path, ';');
@@ -87,7 +84,8 @@ namespace BaseCore.Csv.CompetitionSeries
             return pointsTable;
         }
 
-        private (string, string) FilterCorrectScores(IEnumerable<PlayerScoreRecord> scores)
+        private (IEnumerable<PlayerScoreRecord> filteredScores, IEnumerable<PlayerScoreRecord> dnfs) FilterCorrectScores(
+            IEnumerable<PlayerScoreRecord> scores)
         {
             int limit = 20000;
             var dnfs = scores.Where(x => x.IsDNF());
@@ -96,16 +94,18 @@ namespace BaseCore.Csv.CompetitionSeries
                 score.DistancePlaceNumber = 0;
                 score.CategoryPlaceNumber = 0;
             }
-            var filteredScores = _scores.Where(x => x.DistancePlaceNumber > 0 && x.CategoryPlaceNumber > 0
+            var filteredScores = scores.Where(x => x.DistancePlaceNumber > 0 && x.CategoryPlaceNumber > 0
                 && x.DistancePlaceNumber < limit && x.CategoryPlaceNumber < limit)
                 .Union(dnfs);
             return (filteredScores, dnfs);
         }
 
-        private void GetUniqueCategories()
+        private HashSet<string> GetUniqueCategories(IEnumerable<PlayerScoreRecord> scores)
         {
-            _scores.ToList().ForEach(x => _categories.Add(x.AgeCategory.ToUpper()));
-            _categories.ToList().ForEach(category => Debug.WriteLine($"Kategoria: {category}"));
+            var categories = new HashSet<string>();
+            scores.ToList().ForEach(x => categories.Add(x.AgeCategory.ToUpper()));
+            categories.ToList().ForEach(category => Debug.WriteLine($"Kategoria: {category}"));
+            return categories;
         }
 
 
@@ -115,19 +115,19 @@ namespace BaseCore.Csv.CompetitionSeries
             return scoreTypeAssigner.AssignProperScoreType(_competitionsNames, scoreRecords, competitionPointsTable);
         }
 
-        private IEnumerable<PlayerWithScores> PrepareStandings(HashSet<string> categories, IEnumerable<PlayerWithScores> playersWithScores,
+        private IEnumerable<PlayerWithScores> PrepareStandings(HashSet<string> categories, IEnumerable<PlayerWithScores> playersReadyForStandings,
             bool verbose = true)
         {
             var categoriesStandings = categories.ToDictionary(x => x, y => new List<PlayerWithScores>());
             if (_standingsParamters.MinStartsEnabled)
-                _standingsPlayers = _standingsPlayers.Where(player => player.CompetitionsStarted >= _standingsParamters.MinStartsCount);
+                playersReadyForStandings = playersReadyForStandings.Where(player => player.CompetitionsStarted >= _standingsParamters.MinStartsCount);
             //if(_standingsParamters.BestScoresEnabled)
             //    foreach (var player in _standingsPlayers)
             //    {
             //        // Watch out for competitions points string. Name the Points like sum or something
             //        player.Points
             //    }
-            _standingsPlayers.ToList().ForEach(player => categoriesStandings[player.AgeCategory].Add(player));
+            playersReadyForStandings.ToList().ForEach(player => categoriesStandings[player.AgeCategory].Add(player));
 
             var standingsSorter = _componentsFactory.CreateStandingsSorter();
             return standingsSorter.SortStandings(categoriesStandings, verbose);

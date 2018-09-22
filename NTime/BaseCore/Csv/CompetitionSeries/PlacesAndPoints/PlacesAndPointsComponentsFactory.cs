@@ -16,7 +16,7 @@ namespace BaseCore.Csv.CompetitionSeries.PlacesAndPoints
 
         public IStandingsSorter CreateStandingsSorter()
         {
-            throw new NotImplementedException();
+            return new PlacesAndPointsStandingsSorter();
         }
     }
 }
