@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BaseCore.Csv.Records
 {
-    class PlayerWithPointsEqualityComparer : IEqualityComparer<PlayerWithPoints>
+    class PlayerWithPointsEqualityComparer : IEqualityComparer<PlayerWithScores>
     {
-        public bool Equals(PlayerWithPoints x, PlayerWithPoints y)
+        public bool Equals(PlayerWithScores x, PlayerWithScores y)
         {
             if (x.FirstName.ToLower() == y.FirstName.ToLower()
                 && x.LastName.ToLower() == y.LastName.ToLower()
@@ -18,7 +18,7 @@ namespace BaseCore.Csv.Records
                 return false;
         }
 
-        public int GetHashCode(PlayerWithPoints obj)
+        public int GetHashCode(PlayerWithScores obj)
         {
             var first = obj.FirstName.ToLower();
             var last = obj.LastName.ToLower();

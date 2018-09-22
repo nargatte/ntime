@@ -1,7 +1,11 @@
-﻿using BaseCore.Csv.Map;
+﻿using BaseCore.Csv.CompetitionSeries.Interfaces;
+using BaseCore.Csv.CompetitionSeries.PlacesAndPoints;
+using BaseCore.Csv.CompetitionSeries.TimeSum;
+using BaseCore.Csv.Map;
 using BaseCore.Csv.Records;
 using BaseCore.DataBase;
 using BaseCore.DataBase.Entities;
+using BaseCore.DataBase.Enums;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,57 +17,80 @@ namespace BaseCore.Csv.CompetitionSeries
 {
     public class SeriesStandings
     {
-        private Dictionary<int, double> _points = new Dictionary<int, double>();
+        private Dictionary<int, string> _competitionsNames;
+        private SeriesStandingsParameters _standingsParamters;
+        private IStandingsComponentsFactory _componentsFactory;
+        private IEnumerable<string> _competitionsPaths;
         private IEnumerable<PlayerScoreRecord> _scores = new List<PlayerScoreRecord>();
         private IEnumerable<PlayerScoreRecord> _dnfs = new List<PlayerScoreRecord>();
         private HashSet<string> _categories = new HashSet<string>();
-        private IEnumerable<PlayerWithPoints> _standingsPlayers = new List<PlayerWithPoints>();
-        private Dictionary<int, string> _competitionsNames;
-        private SeriesStandingsParameters _standingsParamters;
+        private IEnumerable<PlayerWithScores> _standingsPlayers = new List<PlayerWithScores>();
         private char _delimiter = ';';
 
-        public SeriesStandings(Dictionary<int, string> competitionsNames, SeriesStandingsParameters standingsParameters)
+        public SeriesStandings(Dictionary<int, string> competitionsNames, SeriesStandingsParameters standingsParameters,
+            IEnumerable<string> competitionsPaths)
         {
             _competitionsNames = competitionsNames;
             _standingsParamters = standingsParameters;
+            _competitionsPaths = competitionsPaths;
+            _componentsFactory = ResolveStandingsComponenstFactory(standingsParameters.StandingsType);
         }
 
-        public async Task ImportScoresFromCsv(IEnumerable<string> paths)
+        private IStandingsComponentsFactory ResolveStandingsComponenstFactory(CompetitionStandingsType standingsType)
+        {
+            switch (standingsType)
+            {
+                case CompetitionStandingsType.PlacesAndPoints:
+                    return new PlacesAndPointsComponentsFactory();
+                case CompetitionStandingsType.TimeSum:
+                    return new TimeSumComponentsFactory();
+                default:
+                    return new PlacesAndPointsComponentsFactory();
+            }
+        }
+
+        public async void CalculateResults(string pointsTablePath)
+        {
+            _scores = await ImportScoresFromCsv(_competitionsPaths);
+            var competitionPointsTable = await ImportPointsTableFromCsv(pointsTablePath);
+            FilterCorrectScores();
+            GetUniqueCategories();
+            _standingsPlayers = AssignScores(_scores, competitionPointsTable);
+            var exportableScores = PrepareStandings(_categories, _standingsPlayers);
+            bool exportedCorrectly = await ExportStandingsToCsv(exportableScores, _competitionsNames.Select(pair => pair.Value));
+            Debug.WriteLine($"Exported correctly: {exportedCorrectly}");
+        }
+
+        private async Task<IEnumerable<PlayerScoreRecord>> ImportScoresFromCsv(IEnumerable<string> paths)
         {
             int iter = 0;
             var competitionsScores = new List<PlayerScoreRecord[]>();
+            IEnumerable<PlayerScoreRecord> downloadedScores = new List<PlayerScoreRecord>();
             foreach (var path in paths)
             {
                 var csvImporter = new CsvImporter<PlayerScoreRecord, PlayerScoreMap>(path, ',');
                 var scoresRecords = await csvImporter.GetAllRecordsAsync();
                 foreach (var score in scoresRecords)
                     score.CompetitionId = iter;
-                _scores = _scores.Union(scoresRecords);
+                downloadedScores = downloadedScores.Union(scoresRecords);
                 iter++;
             }
+            return downloadedScores;
         }
 
-        public async Task ImportPointsTableFromCsv(string path)
+        private async Task<Dictionary<int,double>> ImportPointsTableFromCsv(string path)
         {
+            var pointsTable = new Dictionary<int, double>();
             var csvImporter = new CsvImporter<PlacePointsRecord, PlacePointsMap>(path, ';');
             var pointsAndPlaces = await csvImporter.GetAllRecordsAsync();
-            pointsAndPlaces.ToList().ForEach(pair => _points.Add(pair.Place, pair.Points));
+            pointsAndPlaces.ToList().ForEach(pair => pointsTable.Add(pair.Place, pair.Points));
+            return pointsTable;
         }
 
-        public async void CalculateResults()
-        {
-            FilterScores();
-            GetUniqueCategories();
-            GiveOutPoints();
-            var exportableScores = PrepareStandings();
-            bool exportedCorrectly = await ExportStandingsToCsv(exportableScores, _competitionsNames.Select(pair => pair.Value));
-            Debug.WriteLine($"Exported correctly: {exportedCorrectly}");
-        }
-
-        private void FilterScores()
+        private void FilterCorrectScores(IEnumerable<PlayerScoreRecord> scores)
         {
             int limit = 20000;
-            _dnfs = _scores.Where(x => x.IsDNF());
+            _dnfs = scores.Where(x => x.IsDNF());
             foreach (var score in _dnfs)
             {
                 score.DistancePlaceNumber = 0;
@@ -81,75 +108,38 @@ namespace BaseCore.Csv.CompetitionSeries
         }
 
 
-        private void GiveOutPoints()
+        private IEnumerable<PlayerWithScores> AssignScores(IEnumerable<PlayerScoreRecord> scoreRecords, Dictionary<int, double> competitionPointsTable)
         {
-            var uniquePlayers = new Dictionary<PlayerWithPoints, PlayerWithPoints>(new PlayerWithPointsEqualityComparer());
-            _scores.ToList().ForEach(player =>
-            {
-                bool pointsPlaceExists = _points.TryGetValue(player.CategoryPlaceNumber, out double competitionPoints);
-                if (pointsPlaceExists)
-                {
-                    var newPlayer = new PlayerWithPoints(player, _competitionsNames)
-                    {
-                        //Points = _points[player.CategoryPlaceNumber],
-                        Points = competitionPoints,
-                        CompetitionsStarted = 1,
-                    };
-                    bool addedBefore = uniquePlayers.TryGetValue(newPlayer, out PlayerWithPoints playerFound);
-                    var competitionPointsPair = new KeyValuePair<int, double>(player.CompetitionId, player.IsDNF() ? -1 : newPlayer.Points);
-                    if (addedBefore)
-                    {
-                        playerFound.Points += newPlayer.Points;
-                        playerFound.CompetitionsStarted += newPlayer.CompetitionsStarted;
-                        playerFound.CompetitionsPoints.Add(competitionPointsPair.Key, competitionPointsPair.Value);
-                    }
-                    else
-                    {
-                        newPlayer.CompetitionsPoints.Add(competitionPointsPair.Key, competitionPointsPair.Value);
-                        uniquePlayers.Add(newPlayer, newPlayer);
-                    }
-                }
-            });
-            _standingsPlayers = uniquePlayers.Select(pair => pair.Value);
+            var scoreTypeAssigner = _componentsFactory.CreateScoreTypeAssigner();
+            return scoreTypeAssigner.AssignProperScoreType(_competitionsNames, scoreRecords, competitionPointsTable);
         }
 
-        private IEnumerable<PlayerWithPoints> PrepareStandings(bool verbose = true)
+        private IEnumerable<PlayerWithScores> PrepareStandings(HashSet<string> categories, IEnumerable<PlayerWithScores> playersWithScores,
+            bool verbose = true)
         {
-            // Why is categoriesStandings a dictionary???????
-            var categoriesStandings = _categories.ToDictionary(x => x, y => new List<PlayerWithPoints>());
+            var categoriesStandings = categories.ToDictionary(x => x, y => new List<PlayerWithScores>());
             if (_standingsParamters.MinStartsEnabled)
                 _standingsPlayers = _standingsPlayers.Where(player => player.CompetitionsStarted >= _standingsParamters.MinStartsCount);
+            //if(_standingsParamters.BestScoresEnabled)
+            //    foreach (var player in _standingsPlayers)
+            //    {
+            //        // Watch out for competitions points string. Name the Points like sum or something
+            //        player.Points
+            //    }
             _standingsPlayers.ToList().ForEach(player => categoriesStandings[player.AgeCategory].Add(player));
-            var exportableScores = new List<PlayerWithPoints>();
 
-            foreach (var item in categoriesStandings.OrderBy(pair => pair.Key))
-            {
-                int iter = 1;
-                if (verbose)
-                    Debug.WriteLine($"Category {item.Key}");
-                item.Value.OrderByDescending(player => player.Points).ToList()
-                    .ForEach(player =>
-                    {
-                        if (verbose)
-                            Debug.WriteLine($"{iter,-2} {player}");
-                        player.CategoryStandingPlace = iter;
-                        exportableScores.Add(player);
-                        iter++;
-                    });
-                if (verbose)
-                    Debug.WriteLine("");
-            }
-            return exportableScores;
+            var standingsSorter = _componentsFactory.CreateStandingsSorter();
+            return standingsSorter.SortStandings(categoriesStandings, verbose);
         }
 
-        public async Task<bool> ExportStandingsToCsv(IEnumerable<PlayerWithPoints> standingPlayers, IEnumerable<string> competitionNames)
+        private async Task<bool> ExportStandingsToCsv(IEnumerable<PlayerWithScores> standingPlayers, IEnumerable<string> competitionNames)
         {
             foreach (var player in standingPlayers)
             {
                 player.SetPointsForCompetitions();
             }
             string exportFileName = "results.csv";
-            var exporter = new CsvExporter<PlayerWithPoints, PlayerWithPointsMap>(exportFileName, _delimiter);
+            var exporter = new CsvExporter<PlayerWithScores, PlayerWithPointsMap>(exportFileName, _delimiter);
             return await exporter.SaveAllRecordsAsync(standingPlayers, new PlayerWithPointsMap(competitionNames.ToArray(), _delimiter));
         }
     }

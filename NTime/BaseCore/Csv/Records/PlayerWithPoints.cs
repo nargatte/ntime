@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BaseCore.Csv.Records
 {
-    public class PlayerWithPoints
+    public class PlayerWithScores
     {
 
         public int CategoryStandingPlace { get; set; }
@@ -23,7 +23,7 @@ namespace BaseCore.Csv.Records
         public Dictionary<int, string> AllCompetitions { get; private set; }
         public List<string> CompetitionsPointsExport { get; set; } = new List<string>();
 
-        public PlayerWithPoints(PlayerScoreRecord player, Dictionary<int, string> allCompetitions)
+        public PlayerWithScores(PlayerScoreRecord player, Dictionary<int, string> allCompetitions)
         {
             var firstNameSplit = player.FirstName.Split(' ');
             FirstName = firstNameSplit[0];
@@ -35,7 +35,7 @@ namespace BaseCore.Csv.Records
             AllCompetitions = allCompetitions;
         }
 
-        public PlayerWithPoints(PlayerScoreRecord player, Dictionary<int, string> allCompetitions, int points, int dnfsCount, int seriesCategoryPlace)
+        public PlayerWithScores(PlayerScoreRecord player, Dictionary<int, string> allCompetitions, int points, int dnfsCount, int seriesCategoryPlace)
             : this(player, allCompetitions)
         {
             Points = points;

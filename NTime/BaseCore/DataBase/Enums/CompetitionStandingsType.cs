@@ -8,6 +8,6 @@ namespace BaseCore.DataBase.Enums
 {
     public enum CompetitionStandingsType
     {
-        PlacesToPoints, TimeSum
+        PlacesAndPoints, TimeSum
     }
 }

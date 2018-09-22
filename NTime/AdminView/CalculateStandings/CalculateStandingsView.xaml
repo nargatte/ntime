@@ -48,7 +48,7 @@
                     <StackPanel Orientation="Vertical">
                         <TextBlock >Wybierz rodzaj klasyfikacji</TextBlock>
                         <RadioButton Content="Miejsca przeliczane na punkty" IsChecked="{Binding StandingsType,
-                            Converter={StaticResource EnumToBoolConverter}, ConverterParameter=PlacesToPoints}"/>
+                            Converter={StaticResource EnumToBoolConverter}, ConverterParameter=PlacesAndPoints}"/>
                         <RadioButton Content="Suma czasów" IsChecked="{Binding StandingsType,
                             Converter={StaticResource EnumToBoolConverter}, ConverterParameter=TimeSum}"/>
                     </StackPanel>

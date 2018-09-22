@@ -52,7 +52,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Csv\CompetitionSeries\Interfaces\IScoreTypeAssigner.cs" />
+    <Compile Include="Csv\CompetitionSeries\Interfaces\IStandingsComponentsFactory.cs" />
+    <Compile Include="Csv\CompetitionSeries\Interfaces\IStandingsSorter.cs" />
+    <Compile Include="Csv\CompetitionSeries\PlacesAndPoints\PlacesAndPointsComponentsFactory.cs" />
+    <Compile Include="Csv\CompetitionSeries\PlacesAndPoints\PlacesAndPointsStandingsSorter.cs" />
+    <Compile Include="Csv\CompetitionSeries\PlacesAndPoints\PointsAssigner.cs" />
     <Compile Include="Csv\CompetitionSeries\SeriesStandings.cs" />
+    <Compile Include="Csv\CompetitionSeries\TimeSum\TimeSumComponentsFactory.cs" />
     <Compile Include="Csv\Converters\CsvColumnConverters.cs" />
     <Compile Include="Csv\CsvExporter.cs" />
     <Compile Include="Csv\CsvImporter.cs" />
@@ -155,5 +162,6 @@
       <DependentUpon>201808050750526_ExtraHeadersAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

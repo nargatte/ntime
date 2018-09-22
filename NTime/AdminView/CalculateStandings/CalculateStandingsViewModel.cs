@@ -20,7 +20,7 @@ namespace AdminView.CalculateStandings
     {
         private Window _view;
         private Dictionary<int, string> _competitionNamesDict = new Dictionary<int, string>();
-        private List<string> _competitionPaths = new List<string>();
+        private List<string> _competitionsPaths = new List<string>();
 
         public CalculateStandingsViewModel()
         {
@@ -53,7 +53,7 @@ namespace AdminView.CalculateStandings
         private void OnAddFiles()
         {
 
-            this._competitionPaths = new List<string>();
+            this._competitionsPaths = new List<string>();
             //competitionPaths.AddRange(resourceLoader.LoadFilesToTemp(filesDictionary.Skip(1).ToDictionary(x => x.Key, x => x.Value), Path.GetTempPath()));
             var dialog = new OpenFileDialog();
             dialog.Filter = "csv files (*.csv)|*.csv";
@@ -87,8 +87,8 @@ namespace AdminView.CalculateStandings
             int iter = 0;
             competitionNames.ForEach(name => _competitionNamesDict.Add(iter++, name));
 
-            this._competitionPaths = CompetitionFiles.Select(file => file.FullPath).ToList();
-            if (_competitionPaths == null || _competitionPaths.Count == 0)
+            this._competitionsPaths = CompetitionFiles.Select(file => file.FullPath).ToList();
+            if (_competitionsPaths == null || _competitionsPaths.Count == 0)
             {
                 MessageBox.Show("Nie podano żadnych ścieżek do plików z zawodami");
                 return;
@@ -106,13 +106,11 @@ namespace AdminView.CalculateStandings
 
             try
             {
-                var seriesStandings = new SeriesStandings(_competitionNamesDict, SeriesStandingsParameters.DbEntity);
-                await seriesStandings.ImportScoresFromCsv(_competitionPaths);
+                var seriesStandings = new SeriesStandings(_competitionNamesDict, SeriesStandingsParameters.DbEntity, _competitionsPaths);
 
                 var pointsPath = resourceLoader.LoadFilesToTemp(filesDictionary.Take(1).ToDictionary(x => x.Key, x => x.Value), Path.GetTempPath());
-                await seriesStandings.ImportPointsTableFromCsv(pointsPath.First());
 
-                seriesStandings.CalculateResults();
+                seriesStandings.CalculateResults(pointsPath.First());
 
                 MessageBox.Show("Wyniki rankingu zostały przeliczone");
             }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BaseCore.Csv.Map
 {
-    public class PlayerWithPointsMap : ClassMap<PlayerWithPoints> 
+    public class PlayerWithPointsMap : ClassMap<PlayerWithScores> 
     {
         public PlayerWithPointsMap(string[] competitionNames, char delimiter)
         {
