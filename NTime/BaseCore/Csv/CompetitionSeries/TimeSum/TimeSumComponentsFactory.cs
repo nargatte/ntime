@@ -9,6 +9,11 @@ namespace BaseCore.Csv.CompetitionSeries.TimeSum
 {
     public class TimeSumComponentsFactory : IStandingsComponentsFactory
     {
+        public IPlayerScore CreateDefaultPlayerScore()
+        {
+            return new TimeScore(TimeSpan.FromMilliseconds(0), false);
+        }
+
         public IScoreTypeAssigner CreateScoreTypeAssigner()
         {
             return new TimeAssigner();

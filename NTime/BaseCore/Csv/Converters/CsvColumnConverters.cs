@@ -34,5 +34,14 @@ namespace BaseCore.Csv.Converters
             if (fieldString == "K") return false;
             throw new ArgumentException("Wrong SexString");
         }
+
+        public static TimeSpan ConvertStringToTimeSpan(string fieldString)
+        {
+            bool parsedCorrectly = TimeSpan.TryParse(fieldString, out TimeSpan time);
+            if (parsedCorrectly)
+                return time;
+            else
+                return TimeSpan.FromMilliseconds(0);
+        }
     }
 }

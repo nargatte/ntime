@@ -24,7 +24,10 @@ namespace BaseCore.Csv.CompetitionSeries.PlacesAndPoints
         public void AddValue(IPlayerScore score)
         {
             if (score is PointsScore)
-                _points += int.Parse(score.ScoreString);
+            {
+                if (!score.IsDnf)
+                    _points += score.NumberValue;
+            }
             else
                 throw new InvalidOperationException();
         }
@@ -37,7 +40,10 @@ namespace BaseCore.Csv.CompetitionSeries.PlacesAndPoints
         public void SubtractValue(IPlayerScore score)
         {
             if (score is PointsScore)
-                _points -= int.Parse(score.ScoreString);
+            {
+                if (!score.IsDnf)
+                    _points -= score.NumberValue;
+            }
             else
                 throw new InvalidOperationException();
         }

@@ -10,8 +10,8 @@ namespace BaseCore.Csv.CompetitionSeries.Interfaces
 {
     public interface IScoreTypeAssigner
     {
-        IEnumerable<PlayerWithScores> AssignProperScoreType(SeriesStandingsParameters standingsParameters,
-            Dictionary<int, string> competitionsNames, IEnumerable<PlayerScoreRecord> scoreRecords,
+        IEnumerable<PlayerWithScores> AssignProperScoreType(IStandingsComponentsFactory componentsFactory, 
+            SeriesStandingsParameters standingsParameters, Dictionary<int, string> competitionsNames, IEnumerable<PlayerScoreRecord> scoreRecords,
             Dictionary<int, double> competitionPointsTable);
     }
 }

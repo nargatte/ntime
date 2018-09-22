@@ -11,11 +11,35 @@ namespace BaseCore.Csv.CompetitionSeries.TimeSum
 {
     public class TimeAssigner : IScoreTypeAssigner
     {
-        public IEnumerable<PlayerWithScores> AssignProperScoreType(SeriesStandingsParameters standingsParameters,
-            Dictionary<int, string> competitionsNames, IEnumerable<PlayerScoreRecord> scoreRecords,
+        public IEnumerable<PlayerWithScores> AssignProperScoreType(IStandingsComponentsFactory componentsFactory,
+            SeriesStandingsParameters standingsParameters, Dictionary<int, string> competitionsNames, IEnumerable<PlayerScoreRecord> scoreRecords,
             Dictionary<int, double> competitionPointsTable)
         {
-            throw new NotImplementedException();
+            var uniquePlayers = new HashSet<PlayerWithScores>(new PlayerWithPointsEqualityComparer());
+            scoreRecords.ToList().ForEach(player =>
+            {
+                var time = player.RaceTime;
+                var newPlayer = new PlayerWithScores(player, competitionsNames)
+                {
+                    CompetitionsStarted = 1,
+                };
+                bool addedBefore = uniquePlayers.TryGetValue(newPlayer, out PlayerWithScores foundPlayer);
+                var competitionTimePair = new KeyValuePair<int, IPlayerScore>(player.CompetitionId,
+                    new TimeScore(time, player.IsDNF()));
+                if (addedBefore)
+                {
+                    foundPlayer.CompetitionsStarted += newPlayer.CompetitionsStarted;
+                    foundPlayer.CompetitionsScores.Add(competitionTimePair.Key, competitionTimePair.Value);
+                }
+                else
+                {
+                    newPlayer.CompetitionsScores.Add(competitionTimePair.Key, competitionTimePair.Value);
+                    uniquePlayers.Add(newPlayer);
+                }
+            });
+            var totalScoreAssigner = new TotalScoreAssigner();
+            uniquePlayers = totalScoreAssigner.CalculateAndAssignTotalScore(componentsFactory, standingsParameters, uniquePlayers);
+            return uniquePlayers;
         }
     }
 }

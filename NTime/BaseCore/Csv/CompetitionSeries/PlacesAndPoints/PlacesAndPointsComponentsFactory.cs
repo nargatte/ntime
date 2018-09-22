@@ -9,6 +9,11 @@ namespace BaseCore.Csv.CompetitionSeries.PlacesAndPoints
 {
     public class PlacesAndPointsComponentsFactory : IStandingsComponentsFactory
     {
+        public IPlayerScore CreateDefaultPlayerScore()
+        {
+            return new PointsScore(0, false);
+        }
+
         public IScoreTypeAssigner CreateScoreTypeAssigner()
         {
             return new PointsAssigner();

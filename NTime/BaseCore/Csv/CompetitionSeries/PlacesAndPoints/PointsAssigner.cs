@@ -11,8 +11,8 @@ namespace BaseCore.Csv.CompetitionSeries.PlacesAndPoints
 {
     public class PointsAssigner : IScoreTypeAssigner
     {
-        public IEnumerable<PlayerWithScores> AssignProperScoreType(SeriesStandingsParameters standingsParameters, 
-            Dictionary<int, string> competitionsNames, IEnumerable<PlayerScoreRecord> scoreRecords,
+        public IEnumerable<PlayerWithScores> AssignProperScoreType(IStandingsComponentsFactory componentsFactory,
+            SeriesStandingsParameters standingsParameters, Dictionary<int, string> competitionsNames, IEnumerable<PlayerScoreRecord> scoreRecords,
             Dictionary<int, double> competitionPointsTable)
         {
             var uniquePlayers = new HashSet<PlayerWithScores>(new PlayerWithPointsEqualityComparer());
@@ -40,20 +40,11 @@ namespace BaseCore.Csv.CompetitionSeries.PlacesAndPoints
                     }
                 }
             });
-
-            foreach (var player in uniquePlayers)
-            {
-                var allScores = player.CompetitionsScores.Select(pair => pair.Value);
-                if(standingsParameters.BestScoresEnabled)
-                {
-                    allScores = allScores.Where(score => score.NumberValue > 0).OrderByDescending(score => score).
-                                    Take(standingsParameters.BestCompetitionsCount);
-                }
-                var totalScore = new PointsScore(0, false);
-                allScores.ToList().ForEach(score => totalScore.AddValue(score));
-                player.TotalScore = totalScore;
-            }
+            var totalScoreAssigner = new TotalScoreAssigner();
+            uniquePlayers = totalScoreAssigner.CalculateAndAssignTotalScore(componentsFactory, standingsParameters, uniquePlayers);
             return uniquePlayers;
         }
+
+        
     }
 }

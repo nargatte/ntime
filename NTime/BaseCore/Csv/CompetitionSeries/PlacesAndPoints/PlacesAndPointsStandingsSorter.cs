@@ -16,9 +16,9 @@ namespace BaseCore.Csv.CompetitionSeries.PlacesAndPoints
             IEnumerable<PlayerWithScores> allCategoryPlayers)
         {
             if (standingsParameters.SortByStartsCountFirst)
-                return allCategoryPlayers.OrderBy(player => player.CompetitionsStarted).ThenBy(player => player.TotalScore.NumberValue);
+                return allCategoryPlayers.OrderByDescending(player => player.CompetitionsStarted).ThenByDescending(player => player.TotalScore.NumberValue);
             else
-                return allCategoryPlayers.OrderBy(player => player.TotalScore.NumberValue);
+                return allCategoryPlayers.OrderByDescending(player => player.TotalScore.NumberValue);
         }
     }
 }

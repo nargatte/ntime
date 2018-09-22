@@ -67,6 +67,7 @@
     <Compile Include="Csv\CompetitionSeries\TimeSum\TimeScore.cs" />
     <Compile Include="Csv\CompetitionSeries\TimeSum\TimeSumComponentsFactory.cs" />
     <Compile Include="Csv\CompetitionSeries\TimeSum\TimeSumStandingsSorter.cs" />
+    <Compile Include="Csv\CompetitionSeries\TotalScoreAssigner.cs" />
     <Compile Include="Csv\Converters\CsvColumnConverters.cs" />
     <Compile Include="Csv\CsvExporter.cs" />
     <Compile Include="Csv\CsvImporter.cs" />

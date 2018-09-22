@@ -112,7 +112,8 @@ namespace BaseCore.Csv.CompetitionSeries
         private IEnumerable<PlayerWithScores> AssignScores(IEnumerable<PlayerScoreRecord> scoreRecords, Dictionary<int, double> competitionPointsTable)
         {
             var scoreTypeAssigner = _componentsFactory.CreateScoreTypeAssigner();
-            return scoreTypeAssigner.AssignProperScoreType(_standingsParamters, _competitionsNames, scoreRecords, competitionPointsTable);
+            return scoreTypeAssigner.AssignProperScoreType(_componentsFactory, _standingsParamters, _competitionsNames,
+                scoreRecords, competitionPointsTable);
         }
 
         private IEnumerable<PlayerWithScores> PrepareStandings(HashSet<string> categories, IEnumerable<PlayerWithScores> playersReadyForStandings,
