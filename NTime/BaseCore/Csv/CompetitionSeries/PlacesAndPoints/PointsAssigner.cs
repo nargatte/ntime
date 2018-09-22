@@ -13,7 +13,7 @@ namespace BaseCore.Csv.CompetitionSeries.PlacesAndPoints
         public IEnumerable<PlayerWithScores> AssignProperScoreType(Dictionary<int, string> competitionsNames,
             IEnumerable<PlayerScoreRecord> scoreRecords, Dictionary<int, double> competitionPointsTable)
         {
-            var uniquePlayers = new Dictionary<PlayerWithScores, PlayerWithScores>(new PlayerWithPointsEqualityComparer());
+            var uniquePlayers = new HashSet<PlayerWithScores>(new PlayerWithPointsEqualityComparer());
             scoreRecords.ToList().ForEach(player =>
             {
                 bool pointsPlaceExists = competitionPointsTable.TryGetValue(player.CategoryPlaceNumber, out double competitionPoints);
@@ -25,22 +25,22 @@ namespace BaseCore.Csv.CompetitionSeries.PlacesAndPoints
                         Points = competitionPoints,
                         CompetitionsStarted = 1,
                     };
-                    bool addedBefore = uniquePlayers.TryGetValue(newPlayer, out PlayerWithScores playerFound);
+                    bool addedBefore = uniquePlayers.TryGetValue(newPlayer, out PlayerWithScores foundPlayer);
                     var competitionPointsPair = new KeyValuePair<int, double>(player.CompetitionId, player.IsDNF() ? -1 : newPlayer.Points);
                     if (addedBefore)
                     {
-                        playerFound.Points += newPlayer.Points;
-                        playerFound.CompetitionsStarted += newPlayer.CompetitionsStarted;
-                        playerFound.CompetitionsPoints.Add(competitionPointsPair.Key, competitionPointsPair.Value);
+                        foundPlayer.Points += newPlayer.Points;
+                        foundPlayer.CompetitionsStarted += newPlayer.CompetitionsStarted;
+                        foundPlayer.CompetitionsPoints.Add(competitionPointsPair.Key, competitionPointsPair.Value);
                     }
                     else
                     {
                         newPlayer.CompetitionsPoints.Add(competitionPointsPair.Key, competitionPointsPair.Value);
-                        uniquePlayers.Add(newPlayer, newPlayer);
+                        uniquePlayers.Add(newPlayer);
                     }
                 }
             });
-            return uniquePlayers.Select(pair => pair.Value);
+            return uniquePlayers;
         }
     }
 }
