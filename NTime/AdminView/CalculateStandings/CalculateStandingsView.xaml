@@ -10,7 +10,7 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        Title="CalculateStandingsView" Height="550" Width="450">
+        Title="CalculateStandingsView" Height="600" Width="450">
     <Window.Resources>
         <converters:EnumToBoolConverterClass x:Key="EnumToBoolConverter"/>
     </Window.Resources>
@@ -87,6 +87,16 @@
                         </StackPanel>
                         <toolkit:IntegerUpDown IsEnabled="{Binding ElementName=bestScoresCount, Path=IsChecked}" Width="70" HorizontalAlignment="Left"
                                                Value="{Binding BestCompetitionsCount}"/>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox>
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox Name="printBestOnly" IsChecked="{Binding PrintBestOnly}"/>
+                            <TextBlock Text="Liczba najlepszych zawodników wyświetlana w wynikach"/>
+                        </StackPanel>
+                        <toolkit:IntegerUpDown IsEnabled="{Binding ElementName=printBestOnly, Path=IsChecked}" Width="70" HorizontalAlignment="Left"
+                                               Value="{Binding PrintBestCount}"/>
                     </StackPanel>
                 </GroupBox>
             </StackPanel>

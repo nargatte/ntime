@@ -17,5 +17,7 @@ namespace BaseCore.DataBase.Entities
         public bool SortByStartsCountFirst { get; set; }
         public bool BestScoresEnabled { get; set; }
         public int BestCompetitionsCount { get; set; }
+        public bool PrintBestOnly { get; set; }
+        public int PrintBestCount { get; set; }
     }
 }

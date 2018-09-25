@@ -21,12 +21,19 @@ namespace BaseCore.Csv.CompetitionSeries
             playersReadyForStandings.ToList().ForEach(player => categoriesStandings[player.AgeCategory].Add(player));
 
             var standingsSorter = componentsFactory.CreateStandingsSorter();
-            var exportableScores = new List<PlayerWithScores>();
-            foreach (var item in categoriesStandings.OrderBy(pair => pair.Key))
+            categoriesStandings = AssignCategoryStandingPlaces(standingsParameters, categoriesStandings, standingsSorter);
+            if (verbose)
+                PrintStandingsInDebug(categoriesStandings);
+            var exportableScores = PrepareExportableScores(standingsParameters, categoriesStandings);
+            return exportableScores;
+        }
+
+        private Dictionary<string, List<PlayerWithScores>> AssignCategoryStandingPlaces(SeriesStandingsParameters standingsParameters, Dictionary<string, List<PlayerWithScores>> categoriesStandings, IStandingsSorter standingsSorter)
+        {
+            var sortedCategoriesStandings = new Dictionary<string, List<PlayerWithScores>>();
+            foreach (var pair in categoriesStandings.OrderBy(pair => pair.Key))
             {
-                if (verbose)
-                    Debug.WriteLine($"Category {item.Key}");
-                IEnumerable<PlayerWithScores> allCategoryPlayers = item.Value;
+                IEnumerable<PlayerWithScores> allCategoryPlayers = new List<PlayerWithScores>(pair.Value);
                 allCategoryPlayers = standingsSorter.SortStandings(standingsParameters, allCategoryPlayers);
                 int iter = 0;
                 double previousValue = double.MinValue;
@@ -42,12 +49,34 @@ namespace BaseCore.Csv.CompetitionSeries
                     }
                     previousValue = player.TotalScore.NumberValue;
                     player.CategoryStandingPlace = iter;
-                    if (verbose)
-                        Debug.WriteLine($"{iter,-2} {player}");
-                    exportableScores.Add(player);
                 });
-                if (verbose)
-                    Debug.WriteLine("");
+                sortedCategoriesStandings.Add(pair.Key, allCategoryPlayers.ToList());
+            }
+            return sortedCategoriesStandings;
+        }
+
+        private void PrintStandingsInDebug(Dictionary<string, List<PlayerWithScores>> categoriesStandings)
+        {
+            foreach (var pair in categoriesStandings.OrderBy(pair => pair.Key))
+            {
+                Debug.WriteLine($"Category {pair.Key}");
+                IEnumerable<PlayerWithScores> allCategoryPlayers = pair.Value;
+                foreach (var player in allCategoryPlayers) { Debug.WriteLine($"{player.CategoryStandingPlace,-2} {player}"); }
+                Debug.WriteLine("");
+            }
+        }
+
+        private IEnumerable<PlayerWithScores> PrepareExportableScores(SeriesStandingsParameters standingsParameters, Dictionary<string, List<PlayerWithScores>> categoriesStandings)
+        {
+            var exportableScores = new List<PlayerWithScores>();
+            foreach (var pair in categoriesStandings.OrderBy(pair => pair.Key))
+            {
+                IEnumerable<PlayerWithScores> allCategoryPlayers = pair.Value;
+                if(standingsParameters.PrintBestOnly)
+                {
+                    allCategoryPlayers = allCategoryPlayers.Take(standingsParameters.PrintBestCount);
+                }
+                foreach (var player in allCategoryPlayers) { exportableScores.Add(player); }
             }
             return exportableScores;
         }

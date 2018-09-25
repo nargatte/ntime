@@ -63,5 +63,19 @@ namespace ViewCore.Entities
             get { return DbEntity.BestCompetitionsCount; }
             set { DbEntity.BestCompetitionsCount = SetProperty(DbEntity.BestCompetitionsCount, value); }
         }
+
+
+        public bool PrintBestOnly
+        {
+            get { return DbEntity.PrintBestOnly; }
+            set { DbEntity.PrintBestOnly = SetProperty(DbEntity.PrintBestOnly, value); }
+        }
+
+
+        public int PrintBestCount
+        {
+            get { return DbEntity.PrintBestCount; }
+            set { DbEntity.PrintBestCount = SetProperty(DbEntity.PrintBestCount, value); }
+        }
     }
 }
