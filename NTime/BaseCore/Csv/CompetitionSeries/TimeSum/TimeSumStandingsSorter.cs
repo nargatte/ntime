@@ -17,7 +17,7 @@ namespace BaseCore.Csv.CompetitionSeries.TimeSum
             if (standingsParameters.SortByStartsCountFirst)
                 return allCategoryPlayers
                     .OrderByDescending(player => player.CompetitionsCompleted)
-                    .ThenByDescending(player => player.CompetitionsStarted)
+                    .ThenByDescending(player => player.ApproximateCompetitionsStarted)
                     .ThenBy(player => player.TotalScore.NumberValue);
             else
                 return allCategoryPlayers

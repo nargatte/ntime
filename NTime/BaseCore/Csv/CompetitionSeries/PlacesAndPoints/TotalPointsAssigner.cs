@@ -11,7 +11,8 @@ namespace BaseCore.Csv.CompetitionSeries.PlacesAndPoints
 {
     class TotalPointsAssigner : ITotalScoreAssigner
     {
-        public HashSet<PlayerWithScores> CalculateAndAssignTotalScore(IStandingsComponentsFactory componentsFactory, SeriesStandingsParameters standingsParameters, HashSet<PlayerWithScores> uniquePlayers)
+        public HashSet<PlayerWithScores> CalculateTotalScore(IStandingsComponentsFactory componentsFactory,
+            SeriesStandingsParameters standingsParameters, HashSet<PlayerWithScores> uniquePlayers)
         {
             foreach (var player in uniquePlayers)
             {
@@ -25,6 +26,18 @@ namespace BaseCore.Csv.CompetitionSeries.PlacesAndPoints
                 var totalScore = componentsFactory.CreateDefaultPlayerScore();
                 allScores.ToList().ForEach(score => totalScore.AddValue(score));
                 player.TotalScore = totalScore;
+            }
+            return uniquePlayers;
+        }
+
+        public HashSet<PlayerWithScores> CalculateApproximateCompetitonsStarted(SeriesStandingsParameters standingsParameters,
+            HashSet<PlayerWithScores> uniquePlayers)
+        {
+            foreach (var player in uniquePlayers)
+            {
+                player.ApproximateCompetitionsStarted = standingsParameters.MinStartsEnabled ?
+                    Math.Min(player.ExactCompetitionsStarted, standingsParameters.MinStartsCount) :
+                    player.ExactCompetitionsStarted;
             }
             return uniquePlayers;
         }

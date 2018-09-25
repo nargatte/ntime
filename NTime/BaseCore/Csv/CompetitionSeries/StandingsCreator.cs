@@ -16,8 +16,8 @@ namespace BaseCore.Csv.CompetitionSeries
             HashSet<string> categories, IEnumerable<PlayerWithScores> playersReadyForStandings, bool verbose = true)
         {
             var categoriesStandings = categories.ToDictionary(x => x, y => new List<PlayerWithScores>());
-            if (standingsParameters.MinStartsEnabled)
-                playersReadyForStandings = playersReadyForStandings.Where(player => player.CompetitionsStarted >= standingsParameters.MinStartsCount);
+            if (standingsParameters.StrictMinStartsEnabled)
+                playersReadyForStandings = playersReadyForStandings.Where(player => player.ExactCompetitionsStarted >= standingsParameters.StrictMinStartsCount);
             playersReadyForStandings.ToList().ForEach(player => categoriesStandings[player.AgeCategory].Add(player));
 
             var standingsSorter = componentsFactory.CreateStandingsSorter();

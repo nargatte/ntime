@@ -10,7 +10,7 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        Title="CalculateStandingsView" Height="500" Width="400">
+        Title="CalculateStandingsView" Height="550" Width="450">
     <Window.Resources>
         <converters:EnumToBoolConverterClass x:Key="EnumToBoolConverter"/>
     </Window.Resources>
@@ -56,8 +56,18 @@
                 <GroupBox>
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal">
+                            <CheckBox Name="strictMinStarts" IsChecked="{Binding StrictMinStartsEnabled}"/>
+                            <TextBlock Text="Wykreśl wszystkich zawodników, którzy mają mniejszą liczbę startów niż:"/>
+                        </StackPanel>
+                        <toolkit:IntegerUpDown IsEnabled="{Binding ElementName=strictMinStarts, Path=IsChecked}" Width="70" HorizontalAlignment="Left" 
+                                               Value="{Binding StrictMinStartsCount}"/>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox>
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
                             <CheckBox Name="minStarts" IsChecked="{Binding MinStartsEnabled}"/>
-                            <TextBlock Text="Minimalna liczba startów"/>
+                            <TextBlock Text="Minimalna liczba startów, od której klasyfikujemy zawodników najwyżej"/>
                         </StackPanel>
                         <toolkit:IntegerUpDown IsEnabled="{Binding ElementName=minStarts, Path=IsChecked}" Width="70" HorizontalAlignment="Left" 
                                                Value="{Binding MinStartsCount}"/>

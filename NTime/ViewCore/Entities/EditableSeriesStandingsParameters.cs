@@ -20,6 +20,19 @@ namespace ViewCore.Entities
             set { DbEntity.StandingsType = SetProperty(DbEntity.StandingsType, value); }
         }
 
+        public bool StrictMinStartsEnabled
+        {
+            get { return DbEntity.StrictMinStartsEnabled; }
+            set { DbEntity.StrictMinStartsEnabled = SetProperty(DbEntity.StrictMinStartsEnabled, value); }
+        }
+
+
+        public int StrictMinStartsCount
+        {
+            get { return DbEntity.StrictMinStartsCount; }
+            set { DbEntity.StrictMinStartsCount = SetProperty(DbEntity.StrictMinStartsCount, value); }
+        }
+
         public bool MinStartsEnabled
         {
             get { return DbEntity.MinStartsEnabled; }

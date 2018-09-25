@@ -10,7 +10,10 @@ namespace BaseCore.Csv.CompetitionSeries.Interfaces
 {
     public interface ITotalScoreAssigner
     {
-        HashSet<PlayerWithScores> CalculateAndAssignTotalScore(IStandingsComponentsFactory componentsFactory,
+        HashSet<PlayerWithScores> CalculateTotalScore(IStandingsComponentsFactory componentsFactory,
             SeriesStandingsParameters standingsParameters, HashSet<PlayerWithScores> uniquePlayers);
+
+        HashSet<PlayerWithScores> CalculateApproximateCompetitonsStarted(SeriesStandingsParameters standingsParameters,
+            HashSet<PlayerWithScores> uniquePlayers);
     }
 }

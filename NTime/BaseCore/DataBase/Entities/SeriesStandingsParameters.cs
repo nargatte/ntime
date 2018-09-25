@@ -10,6 +10,8 @@ namespace BaseCore.DataBase.Entities
     public class SeriesStandingsParameters
     {
         public CompetitionStandingsType StandingsType { get; set; }
+        public bool StrictMinStartsEnabled { get; set; }
+        public int StrictMinStartsCount { get; set; }
         public bool MinStartsEnabled { get; set; }
         public int MinStartsCount { get; set; }
         public bool SortByStartsCountFirst { get; set; }

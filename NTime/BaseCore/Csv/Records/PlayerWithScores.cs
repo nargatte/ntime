@@ -19,7 +19,8 @@ namespace BaseCore.Csv.Records
         public IPlayerScore TotalScore { get; set; }
         public int DNFsCount { get; set; }
         public int SeriesCategoryPlace { get; set; }
-        public int CompetitionsStarted { get; set; }
+        public int ExactCompetitionsStarted { get; set; }
+        public int ApproximateCompetitionsStarted { get; set; }
         public int CompetitionsCompleted => CompetitionsScores.Values.Count(score => score.CompetitionCompleted);
         public Dictionary<int, IPlayerScore> CompetitionsScores { get; set; } = new Dictionary<int, IPlayerScore>();
         public Dictionary<int, string> AllCompetitions { get; private set; }
@@ -49,7 +50,7 @@ namespace BaseCore.Csv.Records
         public override string ToString()
         {
             SetPointsForCompetitions();
-            var str = $"{LastName,-12} {FirstName,-12} {BirthDate.Year,-5} {AgeCategory,-4} {CompetitionsStarted,-2} {TotalScore,-2}   ";
+            var str = $"{LastName,-12} {FirstName,-12} {BirthDate.Year,-5} {AgeCategory,-4} {ExactCompetitionsStarted,-2} {TotalScore,-2}   ";
             CompetitionsScoreExport.ForEach(points => str += $"{points,-4} ");
             return str;
 

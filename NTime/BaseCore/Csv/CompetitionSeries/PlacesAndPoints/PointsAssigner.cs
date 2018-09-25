@@ -23,14 +23,14 @@ namespace BaseCore.Csv.CompetitionSeries.PlacesAndPoints
                 {
                     var newPlayer = new PlayerWithScores(player, competitionsNames)
                     {
-                        CompetitionsStarted = 1,
+                        ExactCompetitionsStarted = 1,
                     };
                     bool addedBefore = uniquePlayers.TryGetValue(newPlayer, out PlayerWithScores foundPlayer);
                     var competitionPointsPair = new KeyValuePair<int, IPlayerScore>(player.CompetitionId,
                         new PointsScore(competitionPoints, player.IsDNF(), startedInCompetition: true));
                     if (addedBefore)
                     {
-                        foundPlayer.CompetitionsStarted += newPlayer.CompetitionsStarted;
+                        foundPlayer.ExactCompetitionsStarted += newPlayer.ExactCompetitionsStarted;
                         foundPlayer.CompetitionsScores.Add(competitionPointsPair.Key, competitionPointsPair.Value);
                     }
                     else
@@ -41,7 +41,8 @@ namespace BaseCore.Csv.CompetitionSeries.PlacesAndPoints
                 }
             });
             var totalScoreAssigner = componentsFactory.CreateTotalScoreAssigner();
-            uniquePlayers = totalScoreAssigner.CalculateAndAssignTotalScore(componentsFactory, standingsParameters, uniquePlayers);
+            uniquePlayers = totalScoreAssigner.CalculateTotalScore(componentsFactory, standingsParameters, uniquePlayers);
+            uniquePlayers = totalScoreAssigner.CalculateApproximateCompetitonsStarted(standingsParameters, uniquePlayers);
             return uniquePlayers;
         }
 
