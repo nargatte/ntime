@@ -53,7 +53,7 @@ namespace BaseCore.Csv.CompetitionSeries
             var scoreFilter = _componentsFactory.CreateScoreFilter();
             (var scores, var dnfs) = scoreFilter.FilterCorrectScores(downloadedScores);
             var categories = GetUniqueCategories(scores);
-            var playersReadyForStandings= AssignScores(scores, competitionPointsTable);
+            var playersReadyForStandings = AssignScores(scores, competitionPointsTable);
             var exportableScores = PrepareStandings(categories, playersReadyForStandings);
             bool exportedCorrectly = await ExportStandingsToCsv(exportableScores, _competitionsNames.Select(pair => pair.Value));
             Debug.WriteLine($"Exported correctly: {exportedCorrectly}");

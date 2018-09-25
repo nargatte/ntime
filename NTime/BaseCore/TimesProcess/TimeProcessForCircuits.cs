@@ -9,7 +9,7 @@ namespace BaseCore.TimesProcess
         {
         }
 
-        protected override IEnumerable<GatesOrderItem> GatesOrderNumers()
+        protected override IEnumerable<GatesOrderItem> GatesOrderNumbers()
         {
             yield return GateOrderItem[0];
             while (Distance.LapsCount > Laps)

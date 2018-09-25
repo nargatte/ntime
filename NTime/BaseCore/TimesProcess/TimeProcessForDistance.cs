@@ -9,28 +9,17 @@ namespace BaseCore.TimesProcess
     internal class TimeProcessForDistance
     {
         protected Player Player;
-
         protected Distance Distance;
-
         protected GatesOrderItem[] GateOrderItem;
-
         protected HashSet<int> ReadersNumbers;
-
         protected TimeRead[] TimeReads;
-
-        protected HashSet<TimeRead> ExistVoids = new HashSet<TimeRead>();
-
+        protected HashSet<TimeRead> ExistingVoids = new HashSet<TimeRead>();
         protected decimal StartTime;
-
         protected TimeProcess TimeProcess;
-
         protected int Laps;
-
-        protected TimeRead LastSignificant;
-
+        protected TimeRead LastSignificant; // Last correct Read. If null - no correct reads detected yet
         protected IEnumerator<GatesOrderItem> ExpectedReader;
-
-        protected bool NonReadersRemain;
+        protected bool NoReadersRemaining;
 
         protected internal TimeProcessForDistance(Player player, Distance distance, GatesOrderItem[] readerOrderItem, HashSet<int> readersNumbers,  TimeProcess timeProcess)
         {
@@ -49,8 +38,8 @@ namespace BaseCore.TimesProcess
             if (!Array.TrueForAll(TimeReads, t => ReaderNumberExist(t.Gate.Number)))
                 return;
 
-            ExpectedReader = GatesOrderNumers().GetEnumerator();
-            NonReadersRemain = !ExpectedReader.MoveNext();
+            ExpectedReader = GatesOrderNumbers().GetEnumerator();
+            NoReadersRemaining = !ExpectedReader.MoveNext();
 
             int timeReadsIterator = 0;
             while (timeReadsIterator < TimeReads.Length)
@@ -68,16 +57,10 @@ namespace BaseCore.TimesProcess
             await Task.WhenAll(t1, t2, t3);
         }
 
-        private Task UpdateTimes()
-        {
-            TimeReadRepository timeReadRepository = new TimeReadRepository(new ContextProvider(),  Player);
-            return timeReadRepository.UpdateRangeAsync(TimeReads);
-        }
-
         private Task UpdateVoids()
         {
             TimeReadRepository readRepository = new TimeReadRepository(new ContextProvider(), Player);
-            return readRepository.AddRangeAsync(ExistVoids);
+            return readRepository.AddRangeAsync(ExistingVoids);
 
         }
 
@@ -86,8 +69,14 @@ namespace BaseCore.TimesProcess
             PlayerRepository playerRepository = new PlayerRepository(new ContextProvider(), TimeProcess.Competition);
             Player.LapsCount = Laps;
             Player.Time = LastSignificant.Time - StartTime;
-            Player.CompetitionCompleted = IsRankabe();
+            Player.CompetitionCompleted = IsRankable();
             return playerRepository.UpdateAsync(Player);
+        }
+
+        private Task UpdateTimes()
+        {
+            TimeReadRepository timeReadRepository = new TimeReadRepository(new ContextProvider(), Player);
+            return timeReadRepository.UpdateRangeAsync(TimeReads);
         }
 
         private async Task LoadTimeReads()
@@ -115,23 +104,23 @@ namespace BaseCore.TimesProcess
             return TimeReads.FirstOrDefault(i => i.Gate.Number == GateOrderItem[0].Gate.Number);
         }
 
-        protected virtual IEnumerable<GatesOrderItem> GatesOrderNumers() => GateOrderItem;
+        protected virtual IEnumerable<GatesOrderItem> GatesOrderNumbers() => GateOrderItem;
 
         protected bool IsNonsignificantBefore(TimeRead timeRead) => timeRead.Time < StartTime;
 
-        protected virtual bool IsNonsignificantAfter(TimeRead timeRead) => NonReadersRemain;
+        protected virtual bool IsNonsignificantAfter(TimeRead timeRead) => NoReadersRemaining;
 
-        protected virtual bool IsRankabe() => NonReadersRemain;
+        protected virtual bool IsRankable() => NoReadersRemaining;
 
-        protected bool IsRepeted(TimeRead timeRead)
+        protected bool IsRepeated(TimeRead timeRead)
         {
             if (LastSignificant == null)
                 return false;
             return timeRead.Time - LastSignificant.Time <
-                   TimeProcess.MinRepetSeconds;
+                   TimeProcess.MinRepeatSeconds;
         }
 
-        protected bool IsSkiped(TimeRead timeRead)
+        protected bool IsSkipped(TimeRead timeRead)
         {
             if (LastSignificant == null)
             {
@@ -147,27 +136,32 @@ namespace BaseCore.TimesProcess
             if(timeRead.TimeReadTypeEnum == TimeReadTypeEnum.Void) return true;
             if(IsNonsignificantBefore(timeRead)) timeRead.TimeReadTypeEnum = TimeReadTypeEnum.NonsignificantBefore;
             else if(IsNonsignificantAfter(timeRead)) timeRead.TimeReadTypeEnum = TimeReadTypeEnum.NonsignificantAfter;
-            else if(IsRepeted(timeRead)) timeRead.TimeReadTypeEnum = TimeReadTypeEnum.Repeated;
-            else if(IsSkiped(timeRead)) timeRead.TimeReadTypeEnum = TimeReadTypeEnum.Skipped;
+            else if(IsRepeated(timeRead)) timeRead.TimeReadTypeEnum = TimeReadTypeEnum.Repeated;
+            else if(IsSkipped(timeRead)) timeRead.TimeReadTypeEnum = TimeReadTypeEnum.Skipped;
             else if (IsSignificant(timeRead))
             {
                 timeRead.TimeReadTypeEnum = TimeReadTypeEnum.Significant;
                 LastSignificant = timeRead;
-                NonReadersRemain = !ExpectedReader.MoveNext();
+                NoReadersRemaining = !ExpectedReader.MoveNext();
             }
             else
             {
-                TimeRead tr = new TimeRead((LastSignificant?.Time ?? StartTime) + ExpectedReader.Current?.MinTimeBefore ?? 0)
-                {
-                    TimeReadTypeEnum = TimeReadTypeEnum.Void,
-                    GateId = ExpectedReader.Current?.GateId ?? -1
-                };
-                ExistVoids.Add(tr);
-                LastSignificant = tr;
-                NonReadersRemain = !ExpectedReader.MoveNext();
+                CreateVoidRead();
                 return false;
             }
             return true;
+        }
+
+        private void CreateVoidRead()
+        {
+            TimeRead tr = new TimeRead((LastSignificant?.Time ?? StartTime) + ExpectedReader.Current?.MinTimeBefore ?? 0)
+            {
+                TimeReadTypeEnum = TimeReadTypeEnum.Void,
+                GateId = ExpectedReader.Current?.GateId ?? -1
+            };
+            ExistingVoids.Add(tr);
+            LastSignificant = tr;
+            NoReadersRemaining = !ExpectedReader.MoveNext();
         }
 
         private async Task Initialize()

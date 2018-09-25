@@ -46,7 +46,7 @@ namespace AdminView.Logs
             set
             {
                 SetProperty(ref _onlySignificant, value);
-                OnReloadlogs().GetAwaiter().GetResult();
+                OnReloadlogs();
             }
         }
 
@@ -56,14 +56,14 @@ namespace AdminView.Logs
         public RelayCommand ViewLoadedCmd { get; set; }
 
 
-        private async void OnViewLoaded()
+        private void OnViewLoaded()
         {
             ColorLegendManagerDesktop colorLegendManager = new ColorLegendManagerDesktop();
             LegendItems = colorLegendManager.GetLegendItems();
-            await OnReloadlogs();
+            OnReloadlogs();
         }
 
-        private async Task OnReloadlogs()
+        private async void OnReloadlogs()
         {
             PlayerWithLogsManagerDesktop playerWithLogsManager = new PlayerWithLogsManagerDesktop(_currentCompetition, _playerRepository);
             PlayersWithLogs = await playerWithLogsManager.GetAllPlayers(OnlySignificant);
@@ -75,7 +75,7 @@ namespace AdminView.Logs
         {
             TimeProcess timeProcess = new TimeProcess(_currentCompetition.DbEntity);
             await timeProcess.ProcessAllAsync();
-            await OnReloadlogs();
+            OnReloadlogs();
             MessageBox.Show("Przeliczono logi");
         }
         #endregion

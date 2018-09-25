@@ -11,7 +11,7 @@ namespace BaseCore.TimesProcess
 
         private bool _afterCompetition;
 
-        protected override IEnumerable<GatesOrderItem> GatesOrderNumers()
+        protected override IEnumerable<GatesOrderItem> GatesOrderNumbers()
         {
             yield return GateOrderItem[0];
             while (true)
@@ -31,6 +31,6 @@ namespace BaseCore.TimesProcess
             return _afterCompetition;
         }
 
-        protected override bool IsRankabe() => _afterCompetition;
+        protected override bool IsRankable() => _afterCompetition;
     }
 }

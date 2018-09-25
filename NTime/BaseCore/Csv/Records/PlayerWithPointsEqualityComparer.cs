@@ -12,7 +12,8 @@ namespace BaseCore.Csv.Records
         {
             if (x.FirstName.ToLower() == y.FirstName.ToLower()
                 && x.LastName.ToLower() == y.LastName.ToLower()
-                && x.BirthDate.Year == y.BirthDate.Year)
+                && x.BirthDate.Year == y.BirthDate.Year
+                && x.AgeCategory == y.AgeCategory)
                 return true;
             else
                 return false;
@@ -23,10 +24,12 @@ namespace BaseCore.Csv.Records
             var first = obj.FirstName.ToLower();
             var last = obj.LastName.ToLower();
             var year = obj.BirthDate.Year;
+            var ageCategory = obj.AgeCategory;
             return first.Length * last.Length
-                * first[0] * first.Last()
-                * last[0] * last.Last()
-                * year * year;
+                * first.First() * first.Last()
+                * last.First() * last.Last()
+                * ageCategory.First() * ageCategory.Last()
+                + year * year;
         }
     }
 }

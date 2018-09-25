@@ -15,15 +15,9 @@ namespace ViewCore
 
         public ConnectionInfo(string remoteURL)
         {
-
+            this.ServerURL = remoteURL;
         }
 
-        private string _serverURL;
-
-        public string ServerURL
-        {
-            get { return _serverURL; }
-            set { _serverURL = value; }
-        }
+        public string ServerURL { get; set; }
     }
 }
