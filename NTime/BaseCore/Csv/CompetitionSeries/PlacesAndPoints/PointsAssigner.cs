@@ -27,7 +27,7 @@ namespace BaseCore.Csv.CompetitionSeries.PlacesAndPoints
                     };
                     bool addedBefore = uniquePlayers.TryGetValue(newPlayer, out PlayerWithScores foundPlayer);
                     var competitionPointsPair = new KeyValuePair<int, IPlayerScore>(player.CompetitionId,
-                        new PointsScore(competitionPoints, player.IsDNF()));
+                        new PointsScore(competitionPoints, player.IsDNF(), startedInCompetition: true));
                     if (addedBefore)
                     {
                         foundPlayer.CompetitionsStarted += newPlayer.CompetitionsStarted;
@@ -40,7 +40,7 @@ namespace BaseCore.Csv.CompetitionSeries.PlacesAndPoints
                     }
                 }
             });
-            var totalScoreAssigner = new TotalScoreAssigner();
+            var totalScoreAssigner = componentsFactory.CreateTotalScoreAssigner();
             uniquePlayers = totalScoreAssigner.CalculateAndAssignTotalScore(componentsFactory, standingsParameters, uniquePlayers);
             return uniquePlayers;
         }

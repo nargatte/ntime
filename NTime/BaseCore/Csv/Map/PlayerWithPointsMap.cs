@@ -16,9 +16,9 @@ namespace BaseCore.Csv.Map
             Map(m => m.CategoryStandingPlace).Name("miejsce_ranking");
             Map(m => m.FirstName).Name("imie");
             Map(m => m.LastName).Name("nazwisko");
-            Map(m => m.BirthDate).Name("data_urodzenia").ConvertUsing(date => date.BirthDate.Year.ToString());
+            Map(m => m.BirthDate).Name("data_urodzenia").ConvertUsing(player => player.BirthDate.Year.ToString());
             Map(m => m.AgeCategory).Name("kat_wiek");
-            Map(m => m.TotalScore.ScoreString).Name("punkty");
+            Map(m => m.TotalScore).Name("punkty").ConvertUsing(player => player.TotalScore.ScoreString);
             var otherDelimiter = delimiter == ';' ? ',' : ';';
             var joinedCompetitionNames = String.Join(otherDelimiter.ToString(), competitionNames);
             Map(m => m.CompetitionsScoreExport).Name(joinedCompetitionNames);

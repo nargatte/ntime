@@ -20,6 +20,7 @@ namespace BaseCore.Csv.Records
         public int DNFsCount { get; set; }
         public int SeriesCategoryPlace { get; set; }
         public int CompetitionsStarted { get; set; }
+        public int CompetitionsCompleted => CompetitionsScores.Values.Count(score => score.CompetitionCompleted);
         public Dictionary<int, IPlayerScore> CompetitionsScores { get; set; } = new Dictionary<int, IPlayerScore>();
         public Dictionary<int, string> AllCompetitions { get; private set; }
         public List<string> CompetitionsScoreExport { get; set; } = new List<string>();

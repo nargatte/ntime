@@ -16,6 +16,8 @@ namespace BaseCore.Csv.Records
         public string AgeCategory { get; set; }
         public Subcategory Subcategory { get; set; }
         public string Distance { get; set; }
+        public bool IsDnf { get; set; }
+        public bool StartedInCompetition { get; set; }
         public TimeSpan RaceTime { get; set; }
         public int DistancePlaceNumber { get; set; }
         public int CategoryPlaceNumber { get; set; }

@@ -41,7 +41,7 @@ namespace BaseCore.Csv.Converters
             if (parsedCorrectly)
                 return time;
             else
-                return TimeSpan.FromMilliseconds(0);
+                return TimeSpan.Zero;
         }
     }
 }

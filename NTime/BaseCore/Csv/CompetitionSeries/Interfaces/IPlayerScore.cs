@@ -14,5 +14,7 @@ namespace BaseCore.Csv.CompetitionSeries.Interfaces
         void SubtractValue(IPlayerScore score);
         void ResetValue();
         bool IsDnf { get; set; }
+        bool StartedInCompetition { get; set; }
+        bool CompetitionCompleted { get; }
     }
 }

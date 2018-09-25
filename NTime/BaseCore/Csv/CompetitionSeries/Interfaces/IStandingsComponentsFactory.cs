@@ -11,5 +11,7 @@ namespace BaseCore.Csv.CompetitionSeries.Interfaces
         IStandingsSorter CreateStandingsSorter();
         IScoreTypeAssigner CreateScoreTypeAssigner();
         IPlayerScore CreateDefaultPlayerScore();
+        ITotalScoreAssigner CreateTotalScoreAssigner();
+        IScoreFilter CreateScoreFilter();
     }
 }

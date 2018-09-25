@@ -15,10 +15,14 @@ namespace BaseCore.Csv.CompetitionSeries.PlacesAndPoints
 
         public double NumberValue => IsDnf ? -1 : _points;
 
-        public PointsScore(double points, bool isDnf)
+        public bool StartedInCompetition { get; set; }
+        public bool CompetitionCompleted => StartedInCompetition && !IsDnf;
+
+        public PointsScore(double points, bool isDnf, bool startedInCompetition)
         {
             _points = points;
             IsDnf = isDnf;
+            StartedInCompetition = startedInCompetition;
         }
 
         public void AddValue(IPlayerScore score)

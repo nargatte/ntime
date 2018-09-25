@@ -12,6 +12,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace BaseCore.Csv.CompetitionSeries
 {
@@ -49,7 +50,8 @@ namespace BaseCore.Csv.CompetitionSeries
         {
             var downloadedScores = await ImportScoresFromCsv(_competitionsPaths);
             var competitionPointsTable = await ImportPointsTableFromCsv(pointsTablePath);
-            (var scores, var dnfs) = FilterCorrectScores(downloadedScores);
+            var scoreFilter = _componentsFactory.CreateScoreFilter();
+            (var scores, var dnfs) = scoreFilter.FilterCorrectScores(downloadedScores);
             var categories = GetUniqueCategories(scores);
             var playersReadyForStandings= AssignScores(scores, competitionPointsTable);
             var exportableScores = PrepareStandings(categories, playersReadyForStandings);
@@ -84,22 +86,6 @@ namespace BaseCore.Csv.CompetitionSeries
             return pointsTable;
         }
 
-        private (IEnumerable<PlayerScoreRecord> filteredScores, IEnumerable<PlayerScoreRecord> dnfs) FilterCorrectScores(
-            IEnumerable<PlayerScoreRecord> scores)
-        {
-            int limit = 20000;
-            var dnfs = scores.Where(x => x.IsDNF());
-            foreach (var score in dnfs)
-            {
-                score.DistancePlaceNumber = 0;
-                score.CategoryPlaceNumber = 0;
-            }
-            var filteredScores = scores.Where(x => x.DistancePlaceNumber > 0 && x.CategoryPlaceNumber > 0
-                && x.DistancePlaceNumber < limit && x.CategoryPlaceNumber < limit)
-                .Union(dnfs);
-            return (filteredScores, dnfs);
-        }
-
         private HashSet<string> GetUniqueCategories(IEnumerable<PlayerScoreRecord> scores)
         {
             var categories = new HashSet<string>();
@@ -129,8 +115,20 @@ namespace BaseCore.Csv.CompetitionSeries
             {
                 player.SetPointsForCompetitions();
             }
-            string exportFileName = "results.csv";
-            var exporter = new CsvExporter<PlayerWithScores, PlayerWithPointsMap>(exportFileName, _delimiter);
+            var dialog = new SaveFileDialog();
+            var actualPath = "";
+            dialog.Filter = "csv files (*.csv)|*.csv";
+            dialog.RestoreDirectory = true;
+            dialog.Title = "Choose where to save the file";
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                if (!string.IsNullOrWhiteSpace(dialog.FileName))
+                {
+                    actualPath = dialog.FileName;
+                }
+                else return false;
+            }
+            var exporter = new CsvExporter<PlayerWithScores, PlayerWithPointsMap>(actualPath, _delimiter);
             return await exporter.SaveAllRecordsAsync(standingPlayers, new PlayerWithPointsMap(competitionNames.ToArray(), _delimiter));
         }
     }

@@ -11,7 +11,12 @@ namespace BaseCore.Csv.CompetitionSeries.TimeSum
     {
         public IPlayerScore CreateDefaultPlayerScore()
         {
-            return new TimeScore(TimeSpan.FromMilliseconds(0), false);
+            return new TimeScore(TimeSpan.FromMilliseconds(0), false, true);
+        }
+
+        public IScoreFilter CreateScoreFilter()
+        {
+            return new TimeSumScoreFilter();
         }
 
         public IScoreTypeAssigner CreateScoreTypeAssigner()
@@ -22,6 +27,11 @@ namespace BaseCore.Csv.CompetitionSeries.TimeSum
         public IStandingsSorter CreateStandingsSorter()
         {
             return new TimeSumStandingsSorter();
+        }
+
+        public ITotalScoreAssigner CreateTotalScoreAssigner()
+        {
+            return new TotalTimeAssigner();
         }
     }
 }

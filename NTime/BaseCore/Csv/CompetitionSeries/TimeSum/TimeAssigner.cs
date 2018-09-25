@@ -18,14 +18,14 @@ namespace BaseCore.Csv.CompetitionSeries.TimeSum
             var uniquePlayers = new HashSet<PlayerWithScores>(new PlayerWithPointsEqualityComparer());
             scoreRecords.ToList().ForEach(player =>
             {
-                var time = player.RaceTime;
+                var time = player.RaceTime > TimeSpan.Zero ? player.RaceTime : TimeSpan.Zero;
                 var newPlayer = new PlayerWithScores(player, competitionsNames)
                 {
                     CompetitionsStarted = 1,
                 };
                 bool addedBefore = uniquePlayers.TryGetValue(newPlayer, out PlayerWithScores foundPlayer);
                 var competitionTimePair = new KeyValuePair<int, IPlayerScore>(player.CompetitionId,
-                    new TimeScore(time, player.IsDNF()));
+                    new TimeScore(time, player.IsDNF(), startedInCompetition: true));
                 if (addedBefore)
                 {
                     foundPlayer.CompetitionsStarted += newPlayer.CompetitionsStarted;
@@ -37,7 +37,7 @@ namespace BaseCore.Csv.CompetitionSeries.TimeSum
                     uniquePlayers.Add(newPlayer);
                 }
             });
-            var totalScoreAssigner = new TotalScoreAssigner();
+            var totalScoreAssigner = componentsFactory.CreateTotalScoreAssigner();
             uniquePlayers = totalScoreAssigner.CalculateAndAssignTotalScore(componentsFactory, standingsParameters, uniquePlayers);
             return uniquePlayers;
         }

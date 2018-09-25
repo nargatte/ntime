@@ -44,6 +44,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -54,20 +55,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Csv\CompetitionSeries\Interfaces\IPlayerScore.cs" />
+    <Compile Include="Csv\CompetitionSeries\Interfaces\IScoreFilter.cs" />
     <Compile Include="Csv\CompetitionSeries\Interfaces\IScoreTypeAssigner.cs" />
     <Compile Include="Csv\CompetitionSeries\Interfaces\IStandingsComponentsFactory.cs" />
     <Compile Include="Csv\CompetitionSeries\Interfaces\IStandingsSorter.cs" />
+    <Compile Include="Csv\CompetitionSeries\Interfaces\ITotalScoreAssigner.cs" />
+    <Compile Include="Csv\CompetitionSeries\PlacesAndPoints\PlacesAndPointsScoreFilter.cs" />
     <Compile Include="Csv\CompetitionSeries\PlacesAndPoints\PlacesAndPointsComponentsFactory.cs" />
     <Compile Include="Csv\CompetitionSeries\PlacesAndPoints\PlacesAndPointsStandingsSorter.cs" />
     <Compile Include="Csv\CompetitionSeries\PlacesAndPoints\PointsAssigner.cs" />
     <Compile Include="Csv\CompetitionSeries\PlacesAndPoints\PointsScore.cs" />
+    <Compile Include="Csv\CompetitionSeries\PlacesAndPoints\TotalPointsAssigner.cs" />
     <Compile Include="Csv\CompetitionSeries\SeriesStandings.cs" />
     <Compile Include="Csv\CompetitionSeries\StandingsCreator.cs" />
     <Compile Include="Csv\CompetitionSeries\TimeSum\TimeAssigner.cs" />
     <Compile Include="Csv\CompetitionSeries\TimeSum\TimeScore.cs" />
     <Compile Include="Csv\CompetitionSeries\TimeSum\TimeSumComponentsFactory.cs" />
+    <Compile Include="Csv\CompetitionSeries\TimeSum\TimeSumScoreFilter.cs" />
     <Compile Include="Csv\CompetitionSeries\TimeSum\TimeSumStandingsSorter.cs" />
-    <Compile Include="Csv\CompetitionSeries\TotalScoreAssigner.cs" />
+    <Compile Include="Csv\CompetitionSeries\TimeSum\TotalTimeAssigner.cs" />
     <Compile Include="Csv\Converters\CsvColumnConverters.cs" />
     <Compile Include="Csv\CsvExporter.cs" />
     <Compile Include="Csv\CsvImporter.cs" />

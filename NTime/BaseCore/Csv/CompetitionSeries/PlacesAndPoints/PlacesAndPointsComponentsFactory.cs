@@ -11,7 +11,12 @@ namespace BaseCore.Csv.CompetitionSeries.PlacesAndPoints
     {
         public IPlayerScore CreateDefaultPlayerScore()
         {
-            return new PointsScore(0, false);
+            return new PointsScore(0, false, true);
+        }
+
+        public IScoreFilter CreateScoreFilter()
+        {
+            return new PlacesAndPointsScoreFilter();
         }
 
         public IScoreTypeAssigner CreateScoreTypeAssigner()
@@ -22,6 +27,11 @@ namespace BaseCore.Csv.CompetitionSeries.PlacesAndPoints
         public IStandingsSorter CreateStandingsSorter()
         {
             return new PlacesAndPointsStandingsSorter();
+        }
+
+        public ITotalScoreAssigner CreateTotalScoreAssigner()
+        {
+            return new TotalPointsAssigner();
         }
     }
 }

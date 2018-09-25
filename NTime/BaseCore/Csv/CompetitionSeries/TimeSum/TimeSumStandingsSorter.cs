@@ -15,9 +15,14 @@ namespace BaseCore.Csv.CompetitionSeries.TimeSum
             IEnumerable<PlayerWithScores> allCategoryPlayers)
         {
             if (standingsParameters.SortByStartsCountFirst)
-                return allCategoryPlayers.OrderByDescending(player => player.CompetitionsStarted).ThenBy(player => player.TotalScore.NumberValue);
+                return allCategoryPlayers
+                    .OrderByDescending(player => player.CompetitionsCompleted)
+                    .ThenByDescending(player => player.CompetitionsStarted)
+                    .ThenBy(player => player.TotalScore.NumberValue);
             else
-                return allCategoryPlayers.OrderBy(player => player.TotalScore.NumberValue);
+                return allCategoryPlayers
+                    .OrderByDescending(player => player.CompetitionsCompleted)
+                    .ThenBy(player => player.TotalScore.NumberValue);
         }
     }
 }
