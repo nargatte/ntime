@@ -36,18 +36,24 @@ namespace BaseCore.Csv.CompetitionSeries
                 IEnumerable<PlayerWithScores> allCategoryPlayers = new List<PlayerWithScores>(pair.Value);
                 allCategoryPlayers = standingsSorter.SortStandings(standingsParameters, allCategoryPlayers);
                 int iter = 0;
-                double previousValue = double.MinValue;
+                double previousScoreValue = double.MinValue;
+                int previousCompetitionsStarted = int.MinValue;
                 int exAequoCount = 1;
                 allCategoryPlayers.ToList().ForEach(player =>
                 {
-                    if (player.TotalScore.NumberValue == previousValue)
-                        exAequoCount++;
+                    if (player.TotalScore.NumberValue == previousScoreValue &&
+                            (!standingsParameters.SortByStartsCountFirst ||
+                                (standingsParameters.SortByStartsCountFirst && player.ApproximateCompetitionsStarted == previousCompetitionsStarted)))
+                        {
+                            exAequoCount++;
+                        }
                     else
                     {
                         iter += exAequoCount;
                         exAequoCount = 1;
                     }
-                    previousValue = player.TotalScore.NumberValue;
+                    previousScoreValue = player.TotalScore.NumberValue;
+                    previousCompetitionsStarted = player.ApproximateCompetitionsStarted;
                     player.CategoryStandingPlace = iter;
                 });
                 sortedCategoriesStandings.Add(pair.Key, allCategoryPlayers.ToList());
@@ -72,7 +78,7 @@ namespace BaseCore.Csv.CompetitionSeries
             foreach (var pair in categoriesStandings.OrderBy(pair => pair.Key))
             {
                 IEnumerable<PlayerWithScores> allCategoryPlayers = pair.Value;
-                if(standingsParameters.PrintBestOnly)
+                if (standingsParameters.PrintBestOnly)
                 {
                     allCategoryPlayers = allCategoryPlayers.Take(standingsParameters.PrintBestCount);
                 }
