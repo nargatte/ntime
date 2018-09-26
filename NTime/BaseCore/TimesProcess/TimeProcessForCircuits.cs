@@ -5,7 +5,7 @@ namespace BaseCore.TimesProcess
 {
     internal class TimeProcessForCircuits : TimeProcessForDistance
     {
-        public TimeProcessForCircuits(Player player, Distance distance, GatesOrderItem[] gateOrderItem, HashSet<int> gatesNumbers, TimeProcess timeProcess) : base(player, distance, gateOrderItem, gatesNumbers, timeProcess)
+        public TimeProcessForCircuits(Player player, Distance distance, GatesOrderItem[] gateOrderItem, HashSet<int> gatesNumbers, TimeProcessManager timeProcess) : base(player, distance, gateOrderItem, gatesNumbers, timeProcess)
         {
         }
 

@@ -15,13 +15,13 @@ namespace BaseCore.TimesProcess
         protected TimeRead[] TimeReads;
         protected HashSet<TimeRead> ExistingVoids = new HashSet<TimeRead>();
         protected decimal StartTime;
-        protected TimeProcess TimeProcess;
+        protected TimeProcessManager TimeProcess;
         protected int Laps;
         protected TimeRead LastSignificant; // Last correct Read. If null - no correct reads detected yet
         protected IEnumerator<GatesOrderItem> ExpectedReader;
         protected bool NoReadersRemaining;
 
-        protected internal TimeProcessForDistance(Player player, Distance distance, GatesOrderItem[] readerOrderItem, HashSet<int> readersNumbers,  TimeProcess timeProcess)
+        protected internal TimeProcessForDistance(Player player, Distance distance, GatesOrderItem[] readerOrderItem, HashSet<int> readersNumbers,  TimeProcessManager timeProcess)
         {
             Player = player;
             Distance = distance;

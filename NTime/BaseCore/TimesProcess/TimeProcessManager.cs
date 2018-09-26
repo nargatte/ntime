@@ -7,13 +7,13 @@ using BaseCore.DataBase;
 
 namespace BaseCore.TimesProcess
 {
-    public class TimeProcess
+    public class TimeProcessManager
     {
         internal Competition Competition;
 
         internal decimal MinRepeatSeconds;
 
-        public TimeProcess(Competition competition, decimal minRepeatSeconds = 60)
+        public TimeProcessManager(Competition competition, decimal minRepeatSeconds = 60)
         {
             Competition = competition;
             MinRepeatSeconds = minRepeatSeconds;
@@ -75,12 +75,6 @@ namespace BaseCore.TimesProcess
                     timeProcess = new TimeProcessForTime(player, distance, readerOrderItem, readersNumbers, this);
                     break;
             }
-            if (distance.DistanceTypeEnum == DistanceTypeEnum.DeterminedDistance)
-                timeProcess = new TimeProcessForDistance(player, distance, readerOrderItem, readersNumbers, this);
-            if (distance.DistanceTypeEnum == DistanceTypeEnum.DeterminedLaps)
-                timeProcess = new TimeProcessForCircuits(player, distance, readerOrderItem, readersNumbers, this);
-            if (distance.DistanceTypeEnum == DistanceTypeEnum.LimitedTime)
-                timeProcess = new TimeProcessForTime(player, distance, readerOrderItem, readersNumbers, this);
 
             if (timeProcess != null)
                 return timeProcess.FullProcess();

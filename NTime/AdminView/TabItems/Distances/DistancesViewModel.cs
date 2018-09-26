@@ -194,8 +194,19 @@ namespace AdminView.Distances
         {
             var distanceToDelete = sender as EditableDistance;
             _logsInfo.DistancesNames.Remove(distanceToDelete.Name);
-            await _distanceRepository.RemoveAsync(distanceToDelete.DbEntity);
-            Distances.Remove(distanceToDelete);
+            try
+            {
+                await _distanceRepository.RemoveAsync(distanceToDelete.DbEntity);
+                Distances.Remove(distanceToDelete);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Nie udało się usunąć dystansu." + Environment.NewLine +
+                                $"Błąd: {ex.Message}" + Environment.NewLine +
+                                $"Inner: {ex.InnerException.Message}");
+                
+            }
         }
 
         private bool CanAddDistance(out string errorMessage)

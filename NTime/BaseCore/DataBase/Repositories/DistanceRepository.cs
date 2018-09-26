@@ -25,6 +25,11 @@ namespace BaseCore.DataBase
                     p.Distance = null;
                     p.DistanceId = null;
                 });
+
+                await ctx.AgeCategoryDistances.Where(acd => acd.DistanceId == item.Id).ForEachAsync(acd =>
+                {
+                    ctx.AgeCategoryDistances.Remove(acd);
+                });
                 ctx.Distances.Remove(item);
                 await ctx.SaveChangesAsync();
             });

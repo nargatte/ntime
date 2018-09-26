@@ -153,7 +153,7 @@ namespace BaseCoreTests
                 new Tuple<GatesOrderItem, Gate>(new GatesOrderItem(1800), g1)
             });
 
-            TimeProcess timeProcess = new TimeProcess(com);
+            TimeProcessManager timeProcess = new TimeProcessManager(com);
 
             string mainPath = Path.GetTempPath();
 

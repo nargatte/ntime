@@ -73,7 +73,7 @@ namespace AdminView.Logs
 
         private async void OnProcessLogs()
         {
-            TimeProcess timeProcess = new TimeProcess(_currentCompetition.DbEntity);
+            TimeProcessManager timeProcess = new TimeProcessManager(_currentCompetition.DbEntity);
             await timeProcess.ProcessAllAsync();
             OnReloadlogs();
             MessageBox.Show("Przeliczono logi");
