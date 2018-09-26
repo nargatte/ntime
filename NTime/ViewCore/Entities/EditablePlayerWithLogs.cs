@@ -51,7 +51,7 @@ namespace ViewCore.Entities
 
         public string Distance
         {
-            get { return DbEntity?.Distance.Name; }
+            get { return DbEntity?.Distance?.Name; }
             set { }
         }
 

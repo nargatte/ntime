@@ -32,10 +32,12 @@ namespace ViewCore.Entities
         }
 
         private ILogsInfo logsInfo;
-        public EditableDistance(ILogsInfo logsInfo, ObservableCollection<IEditableGate> definedGates, IEditableCompetition currentCompetition) : this(currentCompetition)
+        public EditableDistance(ILogsInfo logsInfo, ObservableCollection<IEditableGate> definedGates, IEditableCompetition currentCompetition,
+                                int gatesCount) : this(currentCompetition)
         {
             _definedGates = definedGates;
             this.logsInfo = logsInfo;
+            _gatesCount = gatesCount;
         }
         #region Properties
 
@@ -62,13 +64,6 @@ namespace ViewCore.Entities
                 ResolveLapsCountCollapsed();
             }
         }
-
-        //private DistanceTypeEnum _distanceType;
-        //public DistanceTypeEnum DistanceType
-        //{
-        //    get { return _distanceType; }
-        //    set { SetProperty(ref _distanceType, value); }
-        //}
 
 
         private int _gatesCount;
@@ -115,16 +110,6 @@ namespace ViewCore.Entities
                     DbEntity.TimeLimit = SetProperty(DbEntity.TimeLimit, dateTime.ToDecimal());
             }
         }
-
-        //public string StartTime
-        //{
-        //    get { return DbEntity.StartTime.ConvertToString(); }
-        //    set
-        //    {
-        //        if (value.TryConvertToDateTime(out DateTime dateTime))
-        //            DbEntity.StartTime = SetProperty(DbEntity.StartTime, dateTime);
-        //    }
-        //}
 
         private bool _isValid;
         public bool IsValid
@@ -299,7 +284,7 @@ namespace ViewCore.Entities
         {
             if (GatesOrderItems == null || GatesOrderItems.Count == 0)
                 return false;
-            return GatesOrderItems.FirstOrDefault().Gate.Number == GatesOrderItems.LastOrDefault().Gate.Number;
+            return GatesOrderItems.FirstOrDefault().Gate?.Number == GatesOrderItems.LastOrDefault().Gate?.Number;
         }
         #endregion
 
@@ -315,7 +300,7 @@ namespace ViewCore.Entities
         /// <returns> Returns true if conversion was successful, if there were any expection returns false </returns>
         public static bool ConvertToGatesOrder(this string gatesOrderInput, out int[] gatesOrderOutput)
         {
-            List<int> gatesOrderList = new List<int>();
+            var gatesOrderList = new List<int>();
             try
             {
                 string[] measurementPoints = gatesOrderInput.Split(new char[] { ',', '.', ';' });

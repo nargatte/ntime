@@ -35,6 +35,7 @@ namespace AdminView.Distances
 
         private async void DownloadGatesInfoFromDatabaseAsync()
         {
+            DefinedGates = new ObservableCollection<IEditableGate>();
             var contextProvider = new ContextProvider();
             var dbGates = await _gateRepository.GetAllAsync();
             foreach (var dbGate in dbGates)
@@ -60,17 +61,18 @@ namespace AdminView.Distances
 
         private async void DownloadDistancesFromDatabase()
         {
+            Distances = new ObservableCollection<EditableDistance>();
             ContextProvider contextProvider = new ContextProvider();
             var dbDistances = await _distanceRepository.GetAllAsync();
             foreach (var dbDistance in dbDistances)
             {
-                EditableDistance distanceToAdd = new EditableDistance(_logsInfo, _definedGates, _currentCompetition)
-                {
-                    DbEntity = dbDistance,
-                    GatesOrderItems = new ObservableCollection<EditableGatesOrderItem>()
-                };
                 var gateOrderRepository = new GateOrderItemRepository(contextProvider, dbDistance);
                 var dbGateOrderItems = await gateOrderRepository.GetAllAsync();
+                var distanceToAdd = new EditableDistance(_logsInfo, _definedGates, _currentCompetition, gatesCount: dbGateOrderItems.Length)
+                {
+                    DbEntity = dbDistance,
+                    GatesOrderItems = new ObservableCollection<EditableGatesOrderItem>(),
+                };
                 AddDistanceToGUI(distanceToAdd);
                 foreach (var dbGateOrderItem in dbGateOrderItems)
                 {
@@ -160,7 +162,7 @@ namespace AdminView.Distances
             (bool canAdd, string errorMessage) = CanAddDistance();
             if (canAdd)
             {
-                var distanceToAdd = new EditableDistance(_logsInfo, _definedGates, _currentCompetition);
+                var distanceToAdd = new EditableDistance(_logsInfo, _definedGates, _currentCompetition, gatesCount: 0);
 
                 distanceToAdd.DbEntity = new Distance()
                 {
@@ -180,6 +182,7 @@ namespace AdminView.Distances
 
         private void AddDistanceToGUI(EditableDistance distanceToAdd)
         {
+            //distanceToAdd.GatesCount = gateOrderItemsCount;
             _logsInfo.DistancesNames.Add(distanceToAdd.Name);
             distanceToAdd.DeleteRequested += Distance_DeleteRequested;
             Distances.Add(distanceToAdd);
