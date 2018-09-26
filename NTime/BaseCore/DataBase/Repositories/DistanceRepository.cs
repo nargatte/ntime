@@ -30,6 +30,11 @@ namespace BaseCore.DataBase
                 {
                     ctx.AgeCategoryDistances.Remove(acd);
                 });
+
+                await ctx.GatesOrderItems.Where(go => go.DistanceId == item.Id).ForEachAsync(go =>
+                {
+                    ctx.GatesOrderItems.Remove(go);
+                });
                 ctx.Distances.Remove(item);
                 await ctx.SaveChangesAsync();
             });

@@ -66,8 +66,8 @@ namespace BaseCore.DataBase
 
             await ContextProvider.DoAsync(async ctx =>
             {
-                ctx.GatesOrder.RemoveRange(GetAllQuery(ctx.GatesOrder));
-                ctx.GatesOrder.AddRange(gatesOrder.Select(so => so.Item1));
+                ctx.GatesOrderItems.RemoveRange(GetAllQuery(ctx.GatesOrderItems));
+                ctx.GatesOrderItems.AddRange(gatesOrder.Select(so => so.Item1));
                 await ctx.SaveChangesAsync();
             });
         }

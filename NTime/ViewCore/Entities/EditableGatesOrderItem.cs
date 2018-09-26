@@ -26,8 +26,11 @@ namespace ViewCore.Entities
             }
             set
             {
-                DbEntity.Gate = SetProperty(DbEntity.Gate, value.DbEntity);
-                DbEntity.Gate.Number = SetProperty(DbEntity.Gate.Number, value.DbEntity.Number, "Number");
+                if (value != null)
+                {
+                    DbEntity.Gate = SetProperty(DbEntity.Gate, value.DbEntity);
+                    DbEntity.Gate.Number = SetProperty(DbEntity.Gate.Number, value.DbEntity.Number, "Number");
+                }
             }
         }
 
@@ -49,7 +52,7 @@ namespace ViewCore.Entities
         //    set { SetProperty(ref _dbDefinedGates, value); }
         //}
 
-        private ObservableCollection<IEditableGate> _definedGates;
+        private ObservableCollection<IEditableGate> _definedGates = new ObservableCollection<IEditableGate>();
         public ObservableCollection<IEditableGate> DefinedGates
         {
             get { return _definedGates; }

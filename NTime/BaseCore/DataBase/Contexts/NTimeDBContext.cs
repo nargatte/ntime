@@ -33,7 +33,7 @@ namespace BaseCore.DataBase
 
         public DbSet<Player> Players { get; set; }
 
-        public DbSet<GatesOrderItem> GatesOrder { get; set; }
+        public DbSet<GatesOrderItem> GatesOrderItems { get; set; }
 
         public DbSet<TimeRead> TimeReads { get; set; }
 
