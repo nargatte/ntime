@@ -83,6 +83,10 @@ namespace BaseCore.DataBase
                     p.AgeCategory = null;
                     p.AgeCategoryId = null;
                 });
+                await ctx.AgeCategoryDistances.Where(acd => acd.AgeCategoryId == item.Id).ForEachAsync(acd =>
+                {
+                    ctx.AgeCategoryDistances.Remove(acd);
+                });
                 ctx.AgeCategories.Remove(item);
                 await ctx.SaveChangesAsync();
             });

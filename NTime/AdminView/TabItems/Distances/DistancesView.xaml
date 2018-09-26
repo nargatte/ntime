@@ -11,7 +11,8 @@
              xmlns:db="clr-namespace:BaseCore.DataBase;assembly=BaseCore"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="800">
+             d:DesignHeight="800" d:DesignWidth="800"
+             MaxWidth="1000">
     <UserControl.Resources>
         <converters:BoolToCollapsedConverterClass x:Key="boolToCollapsedConverter"/>
         <converters:GateToNumberConverterClass x:Key="gateToNumberConverter"/>
@@ -162,8 +163,8 @@
                     </StackPanel>
                 </Expander>
                 <DataGrid x:Name="distancesDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected"
-                  ItemsSource="{Binding Distances}" EnableRowVirtualization="True" AutoGenerateColumns="False"
-                  ColumnWidth="Auto" SelectionMode="Extended" CanUserAddRows="False" Width="Auto" CanUserSortColumns="True">
+                  ItemsSource="{Binding Distances}" AutoGenerateColumns="False"
+                  ColumnWidth="Auto" SelectionMode="Single" CanUserAddRows="False" Width="Auto" CanUserSortColumns="False">
                     <DataGrid.RowDetailsTemplate>
                         <DataTemplate>
                             <ItemsControl ItemsSource="{Binding GatesOrderItems}" Background="LightGoldenrodYellow">
@@ -287,22 +288,22 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button Command="{Binding SaveDistanceCmd}">Zapisz
-                                        <!--<Button.Style>
+                                        <Button.Style>
                                             <Style TargetType="{x:Type Button}">
                                                 <Setter Property="IsEnabled" Value="False"/>
                                                 <Style.Triggers>
                                                     <MultiDataTrigger>
                                                         <MultiDataTrigger.Conditions>
                                                             <Condition Binding="{Binding ElementName=DistanceNameTB, Path=(Validation.HasError)}" Value="false" />
-                                                            <Condition Binding="{Binding ElementName=DistanceLengthTB, Path=(Validation.HasError)}" Value="false" />
-                                                            <Condition Binding="{Binding ElementName=DistanceStartTimeTB, Path=(Validation.HasError)}" Value="false" />
-                                                            <Condition Binding="{Binding ElementName=DistanceTimeLimitTB, Path=(Validation.HasError)}" Value="false" />
+                                                            <!--<Condition Binding="{Binding ElementName=DistanceLengthTB, Path=(Validation.HasError)}" Value="false" />-->
+                                                            <!--<Condition Binding="{Binding ElementName=DistanceStartTimeTB, Path=(Validation.HasError)}" Value="false" />-->
+                                                            <!--<Condition Binding="{Binding ElementName=DistanceTimeLimitTB, Path=(Validation.HasError)}" Value="false" />-->
                                                         </MultiDataTrigger.Conditions>
                                                         <Setter Property="IsEnabled" Value="True"/>
                                                     </MultiDataTrigger>
                                                 </Style.Triggers>
                                             </Style>
-                                        </Button.Style>-->
+                                        </Button.Style>
                                     </Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

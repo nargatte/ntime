@@ -16,7 +16,7 @@ namespace ViewCore.Entities
     public class EditableDistance : EditableBaseClass<Distance>
     {
         GateOrderItemRepository _gateOrderItemRepository;
-        ObservableCollection<IEditableGate> _definedGates;
+        ObservableCollection<IEditableGate> _definedGates = new ObservableCollection<IEditableGate>();
         DistanceRepository _distanceRepository;
         public enum CompetitionTypeEnumerator
         {
@@ -219,7 +219,6 @@ namespace ViewCore.Entities
                         };
                         gateOrderItem.UpdateGatesOrderItemRequested += GateOrderItem_UpdateGatesOrderItemRequestedAsync;
                         GatesOrderItems.Add(gateOrderItem);
-                        //await _gateOrderItemRepository.AddAsync(gateOrderItem.DbEntity);
                     }
                 }
                 else if (diff < 0)
@@ -228,12 +227,8 @@ namespace ViewCore.Entities
                     {
                         var gateOrderItem = GatesOrderItems.Last();
                         GatesOrderItems.Remove(gateOrderItem);
-                        //await _gateOrderItemRepository.RemoveAsync(gateOrderItem.DbEntity);
                     }
                 }
-                //var tab = GatesOrderItems
-                //    .Select(goi => new Tuple<GatesOrderItem, Gate>(goi.DbEntity, goi.Gate?.DbEntity)).ToArray();
-                //await _gateOrderItemRepository.ReplaceByAsync(tab);
             }
             else
             {
@@ -256,84 +251,55 @@ namespace ViewCore.Entities
         }
         public bool ValidateDistance()
         {
-            _isValid = IsDistanceValid(out string message);
+            var message = string.Empty;
+            (_isValid,  message) = IsDistanceValid();
             if (!_isValid)
                 MessageBox.Show(message);
             return IsValid;
         }
 
-        private bool IsDistanceValid(out string message)
+        private (bool result, string message) IsDistanceValid()
         {
-            message = "";
-            if (Length <= 0)
-            {
-                message = "Długość dystansu nie może być zerowa ani ujemna";
-                return false;
-            }
-            //if (StartTime == null)
-            //{
-            //    message = "Ustaw poprawnie czas startu";
-            //    return false;
-            //}
+            if (string.IsNullOrWhiteSpace(Name))
+                return (false, "Nazwa dystansu nie może być pusta");
 
-            if( GatesOrderItems == null ||  GatesOrderItems.Count == 0)
-            {
-                message = "Liczba bramek pomiarowych musi być większa od 0";
-                return false;
-            }
+            //if (Length <= 0)
+            //    return (false, "Długość dystansu nie może być zerowa ani ujemna");
+
+            //if (GatesOrderItems == null || GatesOrderItems.Count == 0)
+            //    return (false, "Liczba bramek pomiarowych musi być większa od 0");
 
             switch (DistanceType)
             {
                 case DistanceTypeEnum.DeterminedDistance:
                     if (LapsCount != 0)
-                    {
-                        message = "Liczba okrążeń musi być równa 0";
-                        return false;
-                    }
-
+                        return (false, "Liczba okrążeń musi być równa 0");
                     break;
                 case DistanceTypeEnum.DeterminedLaps:
                     if (LapsCount <= 0)
-                    {
-                        message = "Liczba okrążeń musi być większa od zera";
-                        return false;
-                    }
-                    if(!IsLapCorrect())
-                    {
-                        message = "Dla wyścigu z okrążeniami pierwsza i ostatnia bramka muszą być takie same";
-                        return false;
-                    }
+                        return (false, "Liczba okrążeń musi być większa od zera");
+                    if (!IsLapCorrect())
+                        return (false, "Dla wyścigu z okrążeniami pierwsza i ostatnia bramka muszą być takie same");
                     break;
                 case DistanceTypeEnum.LimitedTime:
                     if (LapsCount <= 0)
-                    {
-                        message = "Liczba okrążeń musi być większa od zera";
-                        return false;
-                    }
+                        return (false, "Liczba okrążeń musi być większa od zera");
                     if (!IsLapCorrect())
-                    {
-                        message = "Dla wyścigu z okrążeniami pierwsza i ostatnia bramka muszą być takie same";
-                        return false;
-                    }
-
+                        return (false, "Dla wyścigu z okrążeniami pierwsza i ostatnia bramka muszą być takie same");
                     if (TimeLimit == null)
-                    {
-                        message = "Ustaw poprawnie limit czasu";
-                        return false;
-                    }
-
+                        return (false, "Ustaw poprawnie limit czasu");
                     break;
                 default:
                     break;
             }
-
-
-            return true;
+            return (true, "Brak błędów");
         }
 
         private bool IsLapCorrect()
         {
-            return GatesOrderItems.First().Gate.Number == GatesOrderItems.Last().Gate.Number;
+            if (GatesOrderItems == null || GatesOrderItems.Count == 0)
+                return false;
+            return GatesOrderItems.FirstOrDefault().Gate.Number == GatesOrderItems.LastOrDefault().Gate.Number;
         }
         #endregion
 

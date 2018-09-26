@@ -27,35 +27,15 @@ namespace AdminView.Distances
             _logsInfo = new LogsInfo();
         }
 
-        private async void OnLoadLogsFromCSVsToDB()
-        {
-            try
-            {
-                await _playerRepository.ImportTimeReadsFromSourcesAsync();
-                MessageBox.Show("Wczytano pomiary z plików");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Nie udało się załadować pliku {ex.Message}");
-            }
-        }
-
         private void OnViewLoaded()
         {
-            InitializeCollections();
             DownloadGatesInfoFromDatabaseAsync();
             DownloadDistancesFromDatabase();
         }
 
-        private void InitializeCollections()
-        {
-            DefinedGates = new ObservableCollection<IEditableGate>();
-            Distances = new ObservableCollection<EditableDistance>();
-        }
-
         private async void DownloadGatesInfoFromDatabaseAsync()
         {
-            ContextProvider contextProvider = new ContextProvider();
+            var contextProvider = new ContextProvider();
             var dbGates = await _gateRepository.GetAllAsync();
             foreach (var dbGate in dbGates)
             {
@@ -102,6 +82,20 @@ namespace AdminView.Distances
                 distanceToAdd.HideFirstMinTime();
             }
         }
+
+        private async void OnLoadLogsFromCSVsToDB()
+        {
+            try
+            {
+                await _playerRepository.ImportTimeReadsFromSourcesAsync();
+                MessageBox.Show("Wczytano pomiary z plików");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Nie udało się załadować pliku {ex.Message}");
+            }
+        }
+
 
 
         private async void OnAddGateAsync()
@@ -163,7 +157,8 @@ namespace AdminView.Distances
 
         private async void OnAddDistance()
         {
-            if (CanAddDistance(out string errorMessage))
+            (bool canAdd, string errorMessage) = CanAddDistance();
+            if (canAdd)
             {
                 var distanceToAdd = new EditableDistance(_logsInfo, _definedGates, _currentCompetition);
 
@@ -205,34 +200,24 @@ namespace AdminView.Distances
                 MessageBox.Show("Nie udało się usunąć dystansu." + Environment.NewLine +
                                 $"Błąd: {ex.Message}" + Environment.NewLine +
                                 $"Inner: {ex.InnerException.Message}");
-                
+
             }
         }
 
-        private bool CanAddDistance(out string errorMessage)
+        private (bool result, string message) CanAddDistance()
         {
-            errorMessage = "";
             if (string.IsNullOrWhiteSpace(NewDistanceName))
-            {
-                errorMessage = "Nazwa dystansu nie może być pusta";
-                return false;
-            }
+                return (false, "Nazwa dystansu nie może być pusta");
             if (NewDistanceName != NewDistanceName.ToUpper())
-            {
-                errorMessage = "Nazwa dystansu może zawierać tylko wielkie litery";
-                return false;
-            }
+                return (false, "Nazwa dystansu może zawierać tylko wielkie litery");
             if (_logsInfo.DistancesNames.Contains(NewDistanceName))
-            {
-                errorMessage = "Taka nazwa dystansu już istnieje";
-                return false;
-            }
-            return true;
+                return (false, "Taka nazwa dystansu już istnieje");
+            return (true, "Brak błędów");
         }
 
         #region Properties
 
-        private ObservableCollection<IEditableGate> _definedGates;
+        private ObservableCollection<IEditableGate> _definedGates = new ObservableCollection<IEditableGate>();
         public ObservableCollection<IEditableGate> DefinedGates
         {
             get { return _definedGates; }
@@ -240,7 +225,7 @@ namespace AdminView.Distances
         }
 
 
-        private ObservableCollection<EditableDistance> _distances;
+        private ObservableCollection<EditableDistance> _distances = new ObservableCollection<EditableDistance>();
         public ObservableCollection<EditableDistance> Distances
         {
             get { return _distances; }
