@@ -8,6 +8,10 @@ namespace BaseCore.Csv.Records
 {
     public class DistanceRecord
     {
+        public DistanceRecord()
+        {
+
+        }
         public string Name { get; set; }
         public int Length { get; set; }
         public int GatesCount { get; set; }

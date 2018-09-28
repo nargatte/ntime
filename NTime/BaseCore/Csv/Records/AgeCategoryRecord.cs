@@ -9,6 +9,10 @@ namespace BaseCore.Csv.Records
 {
     public class AgeCategoryRecord
     {
+        public AgeCategoryRecord()
+        {
+
+        }
         public AgeCategoryRecord(AgeCategory ageCategory, string distanceName = "")
         {
             Name = ageCategory.Name;

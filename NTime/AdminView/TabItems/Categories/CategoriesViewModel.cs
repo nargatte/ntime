@@ -173,13 +173,15 @@ namespace AdminView.Categories
                     MessageBox.Show("Nie udało się pobrać kategorii wiekowych");
                 try
                 {
-                    await _ageCategoryRepository.AddRangeAsync(ageCategories);
+                    await AddAgeCategoriesToDb(ageCategories, _currentCompetition.DbEntity.Id);
                     AddAgeCategoriesRangeToGui(ageCategories);
                     MessageBox.Show("Kategorie zostały wczytane. Pamiętaj o połączeniu ich z dystansami");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Nie udało się dodać kategorii wiekowych do bazy danych: {ex.Message}");
+                    MessageBox.Show($"Nie udało się dodać kategorii wiekowych do bazy danych: {ex.Message}" +
+                        $"{Environment.NewLine}" +
+                        $"Inner {ex.InnerException}");
                 }
             }
             catch (Exception ex)
@@ -188,6 +190,15 @@ namespace AdminView.Categories
             }
         }
 
+        private async Task AddAgeCategoriesToDb(IEnumerable<AgeCategory> ageCategories, int competitionId)
+        {
+            var readyAgeCategories = new List<AgeCategory>(ageCategories);
+            foreach (var ageCategory in readyAgeCategories)
+            {
+                ageCategory.CompetitionId = competitionId;
+            }
+            await _ageCategoryRepository.AddRangeAsync(readyAgeCategories);
+        }
 
         private async void OnClearAgeCategories()
         {
