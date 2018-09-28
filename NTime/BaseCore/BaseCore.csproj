@@ -74,12 +74,16 @@
     <Compile Include="Csv\CompetitionSeries\TimeSum\TimeSumScoreFilter.cs" />
     <Compile Include="Csv\CompetitionSeries\TimeSum\TimeSumStandingsSorter.cs" />
     <Compile Include="Csv\CompetitionSeries\TimeSum\TotalTimeAssigner.cs" />
-    <Compile Include="Csv\Converters\CsvColumnConverters.cs" />
+    <Compile Include="Csv\Helpers\CsvColumnHelpers.cs" />
     <Compile Include="Csv\CsvExporter.cs" />
     <Compile Include="Csv\CsvImporter.cs" />
+    <Compile Include="Csv\Map\AgeCategoryMap.cs" />
+    <Compile Include="Csv\Map\DistanceMap.cs" />
     <Compile Include="Csv\Map\PlacePointsMap.cs" />
     <Compile Include="Csv\Map\PlayerScoreMap.cs" />
     <Compile Include="Csv\Map\PlayerWithPointsMap.cs" />
+    <Compile Include="Csv\Records\AgeCategoryRecord.cs" />
+    <Compile Include="Csv\Records\DistanceRecord.cs" />
     <Compile Include="Csv\Records\PlayerRecord.cs" />
     <Compile Include="Csv\Map\PlayerRecordMap.cs" />
     <Compile Include="Csv\Records\PlayerScoreRecord.cs" />

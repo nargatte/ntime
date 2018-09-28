@@ -16,8 +16,8 @@ namespace ViewCore.ManagersDesktop
     public class PlayerManagerDesktop : CompetitionItemBase, IPlayerManager
     {
         private PlayerRepository _playerRepository;
-        private ObservableCollection<EditableDistance> _definedDistances;
-        private ObservableCollection<EditableSubcategory> _definedSubcategories;
+        private readonly ObservableCollection<EditableDistance> _definedDistances;
+        private readonly ObservableCollection<EditableSubcategory> _definedSubcategories;
         private PlayerFilterOptions _playerFilter = new PlayerFilterOptions();
         private RangeInfo _recordsRangeInfo;
         private ObservableCollection<EditablePlayer> _players = new ObservableCollection<EditablePlayer>();
@@ -178,20 +178,18 @@ namespace ViewCore.ManagersDesktop
             }
         }
 
-
-
-
-
         public async Task AddPlayersFromCsvToDatabase()
         {
-            Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
-            dialog.Filter = "CSV files (*.csv)|*.csv";
+            Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog
+            {
+                Filter = "CSV files (*.csv)|*.csv"
+            };
             if (dialog.ShowDialog().Value)
             {
                 var path = dialog.FileName;
-                var temp = await _playerRepository.ImportPlayersAsync(path);
-                await AddPlayersFromDatabase(removeAllDisplayedBefore: true);
-                MessageBox.Show($"Odczytano {temp.Item2} zawodników, z czego {temp.Item1} zostało dodanych do bazy");
+                var (playersCount, playerRecordsCount) = await _playerRepository.ImportPlayersAsync(path);
+                await AddPlayersFromDatabase(removeAllDisplayedBefore: false);
+                MessageBox.Show($"Odczytano {playerRecordsCount} zawodników, z czego {playersCount} zostało dodanych do bazy");
             }
         }
 

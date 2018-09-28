@@ -13,15 +13,15 @@ namespace BaseCore.Csv.Map
     {
         public PlayerWithPointsMap(string[] competitionNames, char delimiter)
         {
-            Map(m => m.CategoryStandingPlace).Name("M.");
-            Map(m => m.FirstName).Name("imie");
-            Map(m => m.LastName).Name("nazwisko");
-            Map(m => m.BirthDate).Name("Rok").ConvertUsing(player => player.BirthDate.Year.ToString());
-            Map(m => m.AgeCategory).Name("kat_wiek");
-            Map(m => m.TotalScore).Name("punkty").ConvertUsing(player => player.TotalScore.ScoreString);
+            Map(record => record.CategoryStandingPlace).Name("M.");
+            Map(record => record.FirstName).Name("imie");
+            Map(record => record.LastName).Name("nazwisko");
+            Map(record => record.BirthDate).Name("Rok").ConvertUsing(player => player.BirthDate.Year.ToString());
+            Map(record => record.AgeCategory).Name("kat_wiek");
+            Map(record => record.TotalScore).Name("punkty").ConvertUsing(player => player.TotalScore.ScoreString);
             var otherDelimiter = delimiter == ';' ? ',' : ';';
             var joinedCompetitionNames = String.Join(otherDelimiter.ToString(), competitionNames);
-            Map(m => m.CompetitionsScoreExport).Name(joinedCompetitionNames);
+            Map(record => record.CompetitionsScoreExport).Name(joinedCompetitionNames);
         }
 
         private void CompetitionNameConverter(IWriterRow row)

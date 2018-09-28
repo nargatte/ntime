@@ -25,7 +25,7 @@ namespace Server.Controllers
     {
         private const string RegisterPrivateKey = "6LfUoFAUAAAAAEGYb9BcgluK0dDdqqhTTxieoVGU";
 
-        private static HttpClient httpClient = new HttpClient
+        private static readonly HttpClient httpClient = new HttpClient
         {
             BaseAddress = new Uri("https://www.google.com/")
         };
@@ -348,55 +348,24 @@ namespace Server.Controllers
         [System.Web.Http.Route("ExportFromCompetition/{id:int:min(1)}")]
         public async Task<HttpResponseMessage> GetExportFromCompetition(int id)
         {
-            char initialSeparator = '|';
-            char targetSeperator = ';';
-
             if (await InitCompetitionById(id) == false)
                 throw new Exception("Invalid competition id");
 
             if (await CanOrganizerAccess() == false)
                 throw new Exception("Unauthorized");
 
-            Player[] players = await _playerRepository.GetAllAsync();
-            
-            StringBuilder builder = new StringBuilder();
-            var csvHeaders = @"nr_startowy;imie;nazwisko;miejscowosc;klub;data_urodzenia;plec;telefon;pay;czas_startu;kategoria;kat_wiek;nazwa_dystansu";
-            if(!String.IsNullOrWhiteSpace(Competition.ExtraDataHeaders))
+            var stream = await _playerRepository.ExportPlayersToCsv();
+
+            HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                var extraHeaders = Competition.ExtraDataHeaders.Split(initialSeparator);
-                var extraHeadersToCsv = String.Join(targetSeperator.ToString(), extraHeaders);
-                csvHeaders += $"{targetSeperator}{extraHeadersToCsv}";
-            }
-            builder.AppendLine(csvHeaders);
-
-            foreach (Player p in players)
-            {
-                string birthDate = p.BirthDate.ToString("yyyy-MM-dd");
-                string sex = p.IsMale ? "M" : "K";
-                string pay = p.IsPaidUp ? "1" : "";
-                
-                var csvPlayerData = $"{p.StartNumber};{p.FirstName};{p.LastName};{p.City ?? ""};{p.Team ?? ""};{birthDate};{sex};{p.PhoneNumber ?? ""};{pay};{p.StartTime?.ToString("T") ?? ""};{p.FullCategory ?? ""};{p.AgeCategory?.Name ?? ""};{p.Distance?.Name ?? ""}";
-                if(!String.IsNullOrWhiteSpace(p.ExtraData))
-                {
-                    var extraData = p.ExtraData.Split(initialSeparator);
-                    var extraDataToCsv = String.Join(targetSeperator.ToString(), extraData);
-                    csvPlayerData += $"{targetSeperator}{extraDataToCsv}";
-                }
-                builder.AppendLine(csvPlayerData);
-            }
-
-            var stream = new MemoryStream();
-            var writer = new StreamWriter(stream);
-            writer.Write(builder.ToString());
-            writer.Flush();
-            stream.Position = 0;
-
-            HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
-            result.Content = new StreamContent(stream);
+                Content = new StreamContent(stream)
+            };
             result.Content.Headers.ContentDisposition =
-                new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
-            result.Content.Headers.ContentDisposition.FileName =
-                "zawodnicy " + DateTime.Now.ToString("d") + " " + DateTime.Now.ToString("t") + ".csv";
+                new ContentDispositionHeaderValue("attachment")
+                {
+                    FileName =
+                "zawodnicy " + DateTime.Now.ToString("d") + " " + DateTime.Now.ToString("t") + ".csv"
+                };
             result.Content.Headers.ContentType =
                 new MediaTypeHeaderValue("application/octet-stream");
             return result;

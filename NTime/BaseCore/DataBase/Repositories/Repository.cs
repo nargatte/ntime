@@ -11,6 +11,7 @@ namespace BaseCore.DataBase
         where T : class, IEntityId
     {
         protected IContextProvider ContextProvider;
+        protected char _defaultCsvDelimiter = ';';
 
         protected Repository(IContextProvider contextProvider)
         {

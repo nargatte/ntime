@@ -41,7 +41,6 @@ namespace BaseCore.TimesProcess
             if (TryParseInt(dividedString[1], out int minutes, 0, 59))
                 return false;
             var secondsString = dividedString[2].Split('.');
-            int seconds = 0;
             int miliseconds = 0;
             if (secondsString.Length == 0 || secondsString.Length > 2)
                 return false;
@@ -50,7 +49,7 @@ namespace BaseCore.TimesProcess
                 if (TryParseInt(secondsString[1], out miliseconds, 0, 999))
                     return false;
             }
-            if (TryParseInt(secondsString[0], out seconds, 0, 59))
+            if (TryParseInt(secondsString[0], out int seconds, 0, 59))
                 return false;
 
             dateTime = dateTime.AddHours(hours).AddMinutes(minutes).AddSeconds(seconds).AddMilliseconds(miliseconds);

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using BaseCore.Csv.Records;
+using System.Collections.Generic;
 
 namespace BaseCore.DataBase
 {
@@ -10,6 +11,11 @@ namespace BaseCore.DataBase
 
         public AgeCategory(string name, int yearFrom, int yearTo, bool male) : base(name, yearFrom, yearTo, male)
         {
+        }
+
+        public AgeCategory(AgeCategoryRecord record) : this(record.Name, record.YearFrom, record.YearTo, record.IsMale)
+        {
+
         }
 
         public int CompetitionId { get; set; }

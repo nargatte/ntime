@@ -19,10 +19,10 @@ namespace BaseCore.Csv.CompetitionSeries
     public class SeriesStandings
     {
         private Dictionary<int, string> _competitionsNames;
-        private SeriesStandingsParameters _standingsParamters;
-        private IEnumerable<string> _competitionsPaths;
+        private readonly SeriesStandingsParameters _standingsParamters;
+        private readonly IEnumerable<string> _competitionsPaths;
         private IStandingsComponentsFactory _componentsFactory;
-        private char _delimiter = ';';
+        private readonly char _delimiter = ';';
 
         public SeriesStandings(Dictionary<int, string> competitionsNames, SeriesStandingsParameters standingsParameters,
             IEnumerable<string> competitionsPaths)
@@ -115,11 +115,13 @@ namespace BaseCore.Csv.CompetitionSeries
             {
                 player.SetPointsForCompetitions();
             }
-            var dialog = new SaveFileDialog();
             var actualPath = "";
-            dialog.Filter = "csv files (*.csv)|*.csv";
-            dialog.RestoreDirectory = true;
-            dialog.Title = "Choose where to save the file";
+            var dialog = new SaveFileDialog
+            {
+                Filter = "csv files (*.csv)|*.csv",
+                RestoreDirectory = true,
+                Title = "Wybierz gdzie zapisać plik"
+            };
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 if (!string.IsNullOrWhiteSpace(dialog.FileName))

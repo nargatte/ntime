@@ -19,7 +19,8 @@ namespace BaseCoreTests.Csv
             T[] items;
             using (TextReader reader = new StringReader(CsvString))
             {
-                CsvImporter<T, TM> importer = new CsvImporter<T, TM>("");
+                char delimiter = ';';
+                CsvImporter<T, TM> importer = new CsvImporter<T, TM>("", delimiter);
                 items = importer.GetAllRecordsFromStream(reader);
             }
             Assert.AreEqual(items.Length, NumberOfExpectedItems);

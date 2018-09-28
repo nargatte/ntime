@@ -1,4 +1,4 @@
-﻿using BaseCore.Csv.Converters;
+﻿using BaseCore.Csv.Helpers;
 using BaseCore.Csv.Records;
 using CsvHelper;
 using CsvHelper.Configuration;
@@ -14,13 +14,13 @@ namespace BaseCore.Csv.Map
     {
         public PlayerScoreMap()
         {
-            Map(m => m.LastName).Name("nazwisko");
-            Map(m => m.FirstName).Name("imie");
-            Map(m => m.BirthDate).ConvertUsing(DateBirthConverter);
-            Map(m => m.AgeCategory).ConvertUsing(CategoryConverter);
-            Map(m => m.DistancePlaceNumber).ConvertUsing(DistancePlaceConverter);
-            Map(m => m.CategoryPlaceNumber).ConvertUsing(CategoryPlaceConverter);
-            Map(m => m.RaceTime).ConvertUsing(RaceTimeConverter);
+            Map(record => record.LastName).Name("nazwisko");
+            Map(record => record.FirstName).Name("imie");
+            Map(record => record.BirthDate).ConvertUsing(DateBirthConverter);
+            Map(record => record.AgeCategory).ConvertUsing(CategoryConverter);
+            Map(record => record.DistancePlaceNumber).ConvertUsing(DistancePlaceConverter);
+            Map(record => record.CategoryPlaceNumber).ConvertUsing(CategoryPlaceConverter);
+            Map(record => record.RaceTime).ConvertUsing(RaceTimeConverter);
             //Map(m => m.City).Name("miejscowosc");
             //Map(m => m.Subcategory).Name("rower");
             //Map(m => m.Distance).Name("nazwa_dystansu");
@@ -41,31 +41,31 @@ namespace BaseCore.Csv.Map
             string dateString = row.GetField<string>("data_urodzenia");
             if (string.IsNullOrWhiteSpace(dateString))
                 return DateTime.Today;
-            return CsvColumnConverters.ConvertStringToDateTime(dateString);
+            return CsvColumnHelpers.ConvertStringToDateTime(dateString);
         }
 
         private int DistancePlaceConverter(IReaderRow row)
         {
             string numberString = row.GetField<string>("msc_open_csv");
-            return CsvColumnConverters.ConvertStringToInteger(numberString);
+            return CsvColumnHelpers.ConvertStringToInteger(numberString);
         }
 
         private int CategoryPlaceConverter(IReaderRow row)
         {
             string numberString = row.GetField<string>("msc_kat_csv");
-            return CsvColumnConverters.ConvertStringToInteger(numberString);
+            return CsvColumnHelpers.ConvertStringToInteger(numberString);
         }
 
         private int LapsCountConverter(IReaderRow row)
         {
             string numberString = row.GetField<string>("liczba_pomiarow");
-            return CsvColumnConverters.ConvertStringToInteger(numberString);
+            return CsvColumnHelpers.ConvertStringToInteger(numberString);
         }
 
         private TimeSpan RaceTimeConverter(IReaderRow row)
         {
             string timeString = row.GetField<string>("czas_przejazdu");
-            return CsvColumnConverters.ConvertStringToTimeSpan(timeString);
+            return CsvColumnHelpers.ConvertStringToTimeSpan(timeString);
         }
     }
 }

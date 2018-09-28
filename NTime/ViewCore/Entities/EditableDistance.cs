@@ -16,7 +16,7 @@ namespace ViewCore.Entities
     public class EditableDistance : EditableBaseClass<Distance>
     {
         GateOrderItemRepository _gateOrderItemRepository;
-        ObservableCollection<IEditableGate> _definedGates = new ObservableCollection<IEditableGate>();
+        readonly ObservableCollection<IEditableGate> _definedGates = new ObservableCollection<IEditableGate>();
         DistanceRepository _distanceRepository;
         public enum CompetitionTypeEnumerator
         {
@@ -31,7 +31,7 @@ namespace ViewCore.Entities
             _distanceRepository = new DistanceRepository(contextProvider, _currentCompetition.DbEntity);
         }
 
-        private ILogsInfo logsInfo;
+        private readonly ILogsInfo logsInfo;
         public EditableDistance(ILogsInfo logsInfo, ObservableCollection<IEditableGate> definedGates, IEditableCompetition currentCompetition,
                                 int gatesCount) : this(currentCompetition)
         {

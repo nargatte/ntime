@@ -132,8 +132,10 @@ namespace AdminView.Settings
 
         private void PrepareNewExtraHeader()
         {
-            NewExtraHeader = new EditableHeaderPermutationPair(CurrentCompetition);
-            NewExtraHeader.PermutationElement = -1;
+            NewExtraHeader = new EditableHeaderPermutationPair(CurrentCompetition)
+            {
+                PermutationElement = -1
+            };
         }
 
         private void OnRemoveCompetition()

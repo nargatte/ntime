@@ -1,7 +1,13 @@
-﻿using System;
+﻿using BaseCore.Csv;
+using BaseCore.Csv.Map;
+using BaseCore.Csv.Records;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace BaseCore.DataBase
 {
@@ -101,6 +107,70 @@ namespace BaseCore.DataBase
                     acd.DistanceId == distance.Id);
             });
             return answer;
+        }
+
+        /// <summary>
+        /// To edit when AgeCategoryDistances are implemented properly
+        /// </summary>
+        /// <param name="ageCategories"></param>
+        /// <param name="distances"></param>
+        /// <returns></returns>
+        public async Task<bool> ExportAgeCategoriesToCsv(IEnumerable<AgeCategory> ageCategories, IEnumerable<Distance> distances)
+        {
+            // !!! Read above
+            var exportableAgeCategories = new List<AgeCategoryRecord>();
+            foreach (var ageCategory in ageCategories)
+            {
+                foreach (var distance in distances)
+                {
+                    exportableAgeCategories.Add(new AgeCategoryRecord(ageCategory, distance.Name));
+                }
+            }
+            var actualPath = "";
+            var dialog = new SaveFileDialog
+            {
+                Filter = "csv files (*.csv)|*.csv",
+                RestoreDirectory = true,
+                Title = "Wybierz gdzie zapisać plik"
+            };
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                if (!string.IsNullOrWhiteSpace(dialog.FileName))
+                {
+                    actualPath = dialog.FileName;
+                }
+                else return false;
+            }
+
+            var exporter = new CsvExporter<AgeCategoryRecord, AgeCategoryMap>(actualPath, _defaultCsvDelimiter);
+            return await exporter.SaveAllRecordsAsync(exportableAgeCategories);
+        }
+
+        public async Task<IEnumerable<AgeCategory>> ImportAgeCategoriesFromCsv()
+        {
+            var fileName = "";
+            var dialog = new OpenFileDialog
+            {
+                Filter = "csv files (*.csv)|*.csv",
+                RestoreDirectory = true,
+                Title = "Wybierz w dobrej kolejności wyniki dla cyklu",
+                Multiselect = false
+            };
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                fileName = dialog.FileName;
+            }
+            else
+            {
+                MessageBox.Show("Nie wybrano żadnych zawodów");
+                return null;
+            }
+            var importer = new CsvImporter<AgeCategoryRecord, AgeCategoryMap>(fileName, _defaultCsvDelimiter);
+            var ageCategories = await importer.GetAllRecordsAsync();
+            if (ageCategories == null)
+                return null;
+            return ageCategories.Select(record => new AgeCategory(record));
         }
 
     }

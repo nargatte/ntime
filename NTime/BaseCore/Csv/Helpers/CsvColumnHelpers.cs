@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BaseCore.Csv.Converters
+namespace BaseCore.Csv.Helpers
 {
-    internal static class CsvColumnConverters
+    internal static class CsvColumnHelpers
     {
         public static DateTime ConvertStringToDateTime(string fieldString)
         {
@@ -19,19 +19,22 @@ namespace BaseCore.Csv.Converters
             throw new Exception("Wrong date format");
         }
 
-        public static int ConvertStringToInteger(string fieldString)
+        public static int ConvertStringToInteger(string fieldString, bool throwException = true)
         {
             if (string.IsNullOrWhiteSpace(fieldString))
                 return -1;
             if (Int32.TryParse(fieldString, out int result))
                 return result;
-            throw new ArgumentException("This is not a number");
+            if (throwException)
+                throw new ArgumentException("This is not a number");
+            else
+                return -1;
         }
 
         public static bool ConvertStringToIsMale(string fieldString)
         {
-            if (fieldString == "M") return true;
-            if (fieldString == "K") return false;
+            if (fieldString.ToUpper() == "M") return true;
+            if (fieldString.ToUpper() == "K") return false;
             throw new ArgumentException("Wrong SexString");
         }
 

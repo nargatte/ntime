@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using BaseCore.Csv;
@@ -135,15 +137,13 @@ namespace BaseCore.DataBase
 
         private IQueryable<Player> GetStringQuery(IQueryable<Player> items, PlayerFilterOptions filterOptions)
         {
-            int oneNumenr;
-            int twoNumber;
 
             if (filterOptions.Query == null)
                 return items;
 
             string[] numberStrings = filterOptions.Query.Split('-');
-            if (numberStrings.Length == 2 && Int32.TryParse(numberStrings[0], out oneNumenr) &&
-                Int32.TryParse(numberStrings[1], out twoNumber))
+            if (numberStrings.Length == 2 && Int32.TryParse(numberStrings[0], out int oneNumenr) &&
+                Int32.TryParse(numberStrings[1], out int twoNumber))
             {
                 if (twoNumber < oneNumenr)
                 {
@@ -396,7 +396,8 @@ namespace BaseCore.DataBase
 
         public async Task<Tuple<int, int>> ImportTimeReadsAsync(string fileName, Gate gate)
         {
-            CsvImporter<TimeReadRecord, TimeReadRecordMap> csvImporter = new CsvImporter<TimeReadRecord, TimeReadRecordMap>(fileName);
+            char delimiter = ';';
+            CsvImporter<TimeReadRecord, TimeReadRecordMap> csvImporter = new CsvImporter<TimeReadRecord, TimeReadRecordMap>(fileName, delimiter);
 
             TimeReadRecord[] timeReads = await csvImporter.GetAllRecordsAsync();
 
@@ -421,8 +422,7 @@ namespace BaseCore.DataBase
 
             foreach (TimeReadRecord read in timeReads)
             {
-                Player p;
-                if (dictionaryPlayers.TryGetValue(read.StartNumber, out p))
+                if (dictionaryPlayers.TryGetValue(read.StartNumber, out Player p))
                     timeReadsList.Add(new TimeRead(read.Time) { PlayerId = p.Id, GateId = gate.Id });
             }
 
@@ -437,7 +437,7 @@ namespace BaseCore.DataBase
             return new Tuple<int, int>(timeReads.Length, timeReadsList.Count);
         }
 
-        public async Task<Tuple<int, int>> ImportPlayersAsync(string fileName)
+        public async Task<(int playersCount, int playerRecordsCount)> ImportPlayersAsync(string fileName)
         {
             CsvImporter<PlayerRecord, PlayerRecordMap> csvImporter = new CsvImporter<PlayerRecord, PlayerRecordMap>(fileName, ';');
 
@@ -454,37 +454,34 @@ namespace BaseCore.DataBase
                 ageCategories = await ctx.AgeCategories.Where(e => e.CompetitionId == Competition.Id).AsNoTracking().ToArrayAsync();
             });
 
-            Dictionary<string, Distance> distancesDictionary = new Dictionary<string, Distance>();
-            Dictionary<string, Subcategory> subcategoriesDictionary = new Dictionary<string, Subcategory>();
-            Dictionary<int, AgeCategory> ageCategoriesDictionary = new Dictionary<int, AgeCategory>();
+            var distancesDictionary = new Dictionary<string, Distance>();
+            var subcategoriesDictionary = new Dictionary<string, Subcategory>();
+            var ageCategoriesDictionary = new Dictionary<int, AgeCategory>();
 
-            foreach (Distance distance in distances)
+            foreach (var distance in distances)
             {
                 distancesDictionary.Add(distance.Name, distance);
             }
 
-            foreach (Subcategory subcategory in subcategories)
+            foreach (var subcategory in subcategories)
             {
                 subcategoriesDictionary.Add(subcategory.Name, subcategory);
             }
 
-            List<Player> players = new List<Player>();
+            var players = new List<Player>();
 
-            foreach (PlayerRecord record in playerRecords)
+            foreach (var record in playerRecords)
             {
-                if (record.StartNumber == -1) continue;
-                Player p = new Player(record.FirstName, record.LastName, record.BirthDate, record.IsMale, record.Team,
+                if (record.StartNumber < 0) continue;
+                var importedPlayer = new Player(record.FirstName, record.LastName, record.BirthDate, record.IsMale, record.Team,
                     record.StartNumber)
                 { StartTime = record.StartTime, ExtraData = record.ExtraData };
 
-                Distance distance;
-                distancesDictionary.TryGetValue(record.StringDistance, out distance);
+                distancesDictionary.TryGetValue(record.StringDistance, out Distance distance);
 
-                Subcategory subcategory;
-                subcategoriesDictionary.TryGetValue(record.StringAditionalInfo, out subcategory);
+                subcategoriesDictionary.TryGetValue(record.StringAditionalInfo, out Subcategory subcategory);
 
-                AgeCategory ageCategory;
-                if (!ageCategoriesDictionary.TryGetValue(record.BirthDate.Year, out ageCategory))
+                if (!ageCategoriesDictionary.TryGetValue(record.BirthDate.Year, out AgeCategory ageCategory))
                 {
                     ageCategory = ageCategories
                         .FirstOrDefault(a => a.YearFrom <= record.BirthDate.Year && record.BirthDate.Year <= a.YearTo);
@@ -494,9 +491,9 @@ namespace BaseCore.DataBase
                     }
                 }
 
-                p = PreparePlayer(p, distance, subcategory, ageCategory);
+                importedPlayer = PreparePlayer(importedPlayer, distance, subcategory, ageCategory);
 
-                players.Add(p);
+                players.Add(importedPlayer);
             }
 
             await ContextProvider.DoAsync(async ctx =>
@@ -505,7 +502,7 @@ namespace BaseCore.DataBase
                 await ctx.SaveChangesAsync();
             });
 
-            return new Tuple<int, int>(players.Count, playerRecords.Length);
+            return (players.Count, playerRecords.Length);
         }
 
         public Task RemoveAllTimeReads() =>
@@ -594,6 +591,47 @@ namespace BaseCore.DataBase
 
                 await ctx.SaveChangesAsync();
             });
+        }
+
+        public async Task<MemoryStream> ExportPlayersToCsv()
+        {
+            char initialSeparator = '|';
+            char targetSeperator = ';';
+
+            var players = await this.GetAllAsync();
+
+            var builder = new StringBuilder();
+            var csvHeaders = @"nr_startowy;imie;nazwisko;miejscowosc;klub;data_urodzenia;plec;telefon;pay;czas_startu;kategoria;kat_wiek;nazwa_dystansu";
+            if (!String.IsNullOrWhiteSpace(Competition.ExtraDataHeaders))
+            {
+                var extraHeaders = Competition.ExtraDataHeaders.Split(initialSeparator);
+                var extraHeadersToCsv = String.Join(targetSeperator.ToString(), extraHeaders);
+                csvHeaders += $"{targetSeperator}{extraHeadersToCsv}";
+            }
+            builder.AppendLine(csvHeaders);
+
+            foreach (Player p in players)
+            {
+                string birthDate = p.BirthDate.ToString("yyyy-MM-dd");
+                string sex = p.IsMale ? "M" : "K";
+                string pay = p.IsPaidUp ? "1" : "";
+
+                var csvPlayerData = $"{p.StartNumber};{p.FirstName};{p.LastName};{p.City ?? ""};{p.Team ?? ""};{birthDate};{sex};{p.PhoneNumber ?? ""};{pay};{p.StartTime?.ToString("T") ?? ""};{p.FullCategory ?? ""};{p.AgeCategory?.Name ?? ""};{p.Distance?.Name ?? ""}";
+                if (!String.IsNullOrWhiteSpace(p.ExtraData))
+                {
+                    var extraData = p.ExtraData.Split(initialSeparator);
+                    var extraDataToCsv = String.Join(targetSeperator.ToString(), extraData);
+                    csvPlayerData += $"{targetSeperator}{extraDataToCsv}";
+                }
+                builder.AppendLine(csvPlayerData);
+            }
+
+            var stream = new MemoryStream();
+            var writer = new StreamWriter(stream);
+            writer.Write(builder.ToString());
+            writer.Flush();
+            stream.Position = 0;
+            return stream;
         }
     }
 }

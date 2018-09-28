@@ -14,7 +14,7 @@
             x:Class="AdminView.Players.PlayersView"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="1000">
+             d:DesignHeight="300" d:DesignWidth="1200">
     <UserControl.Resources>
         <converters:BoolToSexConverterClass x:Key="BoolToSexConverter"/>
         <converters:IsMaleToSexEnumConverterClass x:Key="IsMaleToSexEnumConverter"/>
@@ -62,7 +62,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="225"/>
+                <ColumnDefinition Width="350"/>
             </Grid.ColumnDefinitions>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0">
                 <Button Height="30" Command="{Binding PreviousPageCmd}">
@@ -184,13 +184,12 @@
             </StackPanel>
             <StackPanel Name="SettingsButtons" Orientation="Horizontal" Grid.Column="2" Grid.RowSpan="1" Grid.Row="1">
                 <StackPanel  Orientation="Vertical" >
-
-                    <Button Command="{Binding UpdateFullCategoriesCmd}" Margin="0,0, 10, 5" Height="37" Width="100">
-                        <TextBlock TextWrapping="Wrap" FontSize="13" TextAlignment="Center" VerticalAlignment="Center">
-                            Przelicz kategorie
-                        </TextBlock>
+                    <Button  Command="{Binding ImportPlayersFromCsvCmd}" Margin="0,3, 10, 3" Height="37" Width="100" FontSize="13">
+                        Import z CSV
                     </Button>
-                    <Button Content="Wczytaj z CSV" Command="{Binding ReadPlayersFromCsvCmd}" Margin="0,3, 10, 3" Height="37" Width="100" FontSize="13"/>
+                    <Button  Command="{Binding ExportPlayersToCsvCmd}" Margin="0,3, 10, 3" Height="37" Width="100" FontSize="13">
+                        Export CSV
+                    </Button>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" >
                     <Button Command="{Binding DeleteAllPlayersCmd}" Margin="0,0, 10, 5" Height="37" Width="100" >
@@ -204,6 +203,11 @@
                         </TextBlock>
                     </Button>
                 </StackPanel>
+                <Button Command="{Binding UpdateFullCategoriesCmd}" Margin="0,0, 10, 5" Height="37" Width="100">
+                    <TextBlock TextWrapping="Wrap" FontSize="13" TextAlignment="Center" VerticalAlignment="Center">
+                            Przelicz kategorie
+                    </TextBlock>
+                </Button>
             </StackPanel>
         </Grid>
 

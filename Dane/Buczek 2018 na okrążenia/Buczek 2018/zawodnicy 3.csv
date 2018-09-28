@@ -1,0 +1,140 @@
+nr_startowy;imie;nazwisko;miejscowosc;klub;data_urodzenia;plec;czas_startu;kategoria;kat_wiek;nazwa_dystansu;start
+16;Marcin;Dusza;;;1991;M;13:36:00;108k M20;M20;108km;1
+43;Adam;Ostojski;Łask;GATTA BIKE-RS;1991-11-23;M;13:36:00;108k M20;M20;108km;1
+52;Adam;Skowroński;Ozorków;PELETON;1997-06-23;M;13:36:00;108k M20;M20;108km;1
+268;Mikołaj;Kuropatwa;;;1993;M;13:36:00;108k M20;M20;108km;1
+397;Arkadiusz;Piątkowski;;PTC Alpina Pabianice;1991;M;13:36:00;108k M20;M20;108km;1
+1;KRZYSZTOF;WOLSKI;OZORKÓW;PELETON;1979-06-22;M;13:36:00;108k M30;M30;108km;1
+32;Piotr;Stępnik;Zduńska Wola;GATTA BIKE-RS;1984-02-08;M;13:36:00;108k M30;M30;108km;1
+55;Łukasz;Matusiak;Łask;GATTA BIKE-RS;1988-07-15;M;13:36:00;108k M30;M30;108km;1
+66;Kamil;Malinowski;Pabianice;;1980-09-23;M;13:36:00;108k M30;M30;108km;1
+87;Jędrzej;Zaorski;Łódź;PTC ALPINA PABIANICE;1986-06-01;M;13:36:00;108k M30;M30;108km;1
+115;Paweł;Szyktanc;Pabianice;PTC Alpina Pabianice;1988-03-24;M;13:36:00;108k M30;M30;108km;1
+137;Tomasz;Wiśniewski;Łódź;Maxxbike Team;1981;M;13:36:00;108k M30;M30;108km;1
+144;Emil;Stańczykowski;Łódź;BIKE TIME;1979-10-25;M;13:36:00;108k M30;M30;108km;1
+222;Maciej;Stano;Łask;1981-02-12;1981;M;13:36:00;108k M30;M30;108km;1
+349;Michał;Olejnik;;PTC Alpina Pabianice;1984;M;13:36:00;108k M30;M30;108km;1
+363;Sylwester;Matusiak;;;1979;M;13:36:00;108k M30;M30;108km;1
+366;Maksymilian;Bieniasz;;;1985;M;13:36:00;108k M30;M30;108km;1
+372;Tomasz;Cichocki;;;1981;M;13:36:00;108k M30;M30;108km;1
+378;Dominik;Omiotek;;;1987;M;13:36:00;108k M30;M30;108km;1
+408;Mariusz;Pałyga;;;1986;M;13:36:00;108k M30;M30;108km;1
+420;Arkadiusz;Wróblewski;;;1980;M;13:36:00;108k M30;M30;108km;1
+421;Daniel;Packi;;;1983;M;13:36:00;108k M30;M30;108km;1
+428;Paweł;Czarnecki;Warszawa;KK Żoliber;1980-09-16;M;13:36:00;108k M30;M30;108km;1
+429;Baltazar;Brukalski;;;1980;M;13:36:00;108k M30;M30;108km;1
+2;Przemysław;Bienias;Ozorków;Peleton.eu;1973-07-02;M;13:41:00;108k M40;M40;108km;1
+13;Piotr;Uciński;Aleksandrów łódzki;Peleton;1970-01-11;M;13:41:00;108k M40;M40;108km;1
+17;Tomasz;Grzegory;Głuchów;GATTA BIKE TEAM;1978-08-06;M;13:41:00;108k M40;M40;108km;1
+22;PIOTR;SYSKA;ŁASK;AEROGRAFITI-ŁASK;1978;M;13:41:00;108k M40;M40;108km;1
+75;Michal;Kubiszewski;Konstantynów Łódzki;Peleton;1976-01-25;M;13:41:00;108k M40;M40;108km;1
+102;Krzysztof;Lasota;;;1970;M;13:41:00;108k M40;M40;108km;1
+164;Daniel;Sumara;Pabianice;GATTA BIKE-RS;1975-02-12;M;13:41:00;108k M40;M40;108km;1
+352;Aleksander;Samofał;Wrocław;Wrocławski Klub Kolarski;1970-09-15;M;13:41:00;108k M40;M40;108km;1
+357;Daniel;Pietrzak;Łask;Rajsport;1974-12-07;M;13:41:00;108k M40;M40;108km;1
+373;Dariusz;Miśkiewicz;;;1975;M;13:41:00;108k M40;M40;108km;1
+385;Piotr;Bugała;;Peleton H-Skrzydlecka;1971;M;13:41:00;108k M40;M40;108km;1
+390;Łukasz;Pawlak;Łódź;Cyklomaniacy;1978-10-24;M;13:41:00;108k M40;M40;108km;1
+392;Waldemar;Małczak;;;1969;M;13:41:00;108k M40;M40;108km;1
+395;Marek;Kalita;;;1970;M;13:41:00;108k M40;M40;108km;1
+399;Krzysztof;Spławski;Licheń Stary;;1977-02-07;M;13:41:00;108k M40;M40;108km;1
+410;Mariusz;Pawłowski;;;1969;M;13:41:00;108k M40;M40;108km;1
+411;Marek;Paluszkiewicz;Koło;KOŁO Cycling Team;1975-01-16;M;13:41:00;108k M40;M40;108km;1
+412;Krzysztof;Szurgot;;;1972;M;13:41:00;108k M40;M40;108km;1
+426;Piotr;Musiałowski;Warszawa;KK Żoliber;1977-06-09;M;13:41:00;108k M40;M40;108km;1
+25;Grzegorz;Stolarek;Łask;Jastrzębie Łaskie;1968-09-03;M;13:41:00;108k M50;M50;108km;1
+28;Jacek;Walczak;Koło;Koło;1968-05-30;M;13:41:00;108k M50;M50;108km;1
+33;Grzegorz;Turkiewicz;Zdunska Wola;GATTA BIKE-RS;1968-10-05;M;13:41:00;108k M50;M50;108km;1
+47;Zbigniew;Grosz;Turek;TTC Turek;1961-06-30;M;13:41:00;108k M50;M50;108km;1
+88;Janusz;Dębowski;;;1968;M;13:41:00;108k M50;M50;108km;1
+89;DARIUSZ;LEDUCHOWSKI;ŁÓDŹ;DANIELO SPORTSWEAR;1961-12-01;M;13:41:00;108k M50;M50;108km;1
+90;Andrzej;Liwiński;;;1968;M;13:41:00;108k M50;M50;108km;1
+228;Dariusz;Czarniecki;Środa Śląska;CCC ŚRODA ŚLĄSKA;1963-10-18;M;13:41:00;108k M50;M50;108km;1
+359;Stanisław;Szczęsny;;;1960;M;13:41:00;108k M50;M50;108km;1
+362;Prochoń;Zdzisław;;;1959;M;13:41:00;108k M50;M50;108km;1
+394;Dariusz;Siewier;Bełchatów;LSKK Lityński Bełchatów;1963-11-02;M;13:41:00;108k M50;M50;108km;1
+409;Piotr;Pawłowski;;;1966;M;13:41:00;108k M50;M50;108km;1
+19;Kamil;Wawrzyniak;;;1984;M;13:44:00;72km AMATOR;AMATOR;72km;1
+20;Jakub;Juszko;Pabianice;PTC ALIPNA PABIANICE;1992-04-23;M;13:44:00;72km AMATOR;AMATOR;72km;1
+44;Aleksander;Poniński;Orpelów;PTC ALPINA PABIANICE;1999-05-03;M;13:44:00;72km AMATOR;AMATOR;72km;1
+57;Wojciech;Golenia;;PTC Alpina;1971;M;13:44:00;72km AMATOR;AMATOR;72km;1
+71;Marek;Gawron;Bełchatów;WARACH-ROWERY;1964-04-01;M;13:44:00;72km AMATOR;AMATOR;72km;1
+77;Cezary;Maj;Tuszyn;PGR Pabianice;1982-05-12;M;13:44:00;72km AMATOR;AMATOR;72km;1
+96;Jacek;Filipczak;Brzeziny;;1980-01-25;M;13:44:00;72km AMATOR;AMATOR;72km;1
+108;Marcin;Supczyński;;PTC Alpina;1996;M;13:44:00;72km AMATOR;AMATOR;72km;1
+111;Dominik;Płóciennik;Lutomiersk;;1992-10-20;M;13:44:00;72km AMATOR;AMATOR;72km;1
+159;Robert;Bujnowicz;Zduńska Wola;GATTA BIKE-RS;1970-01-05;M;13:44:00;72km AMATOR;AMATOR;72km;1
+221;Sylwester;Szulc;Pabianice;PTC Alpina Pabianice;1981-09-06;M;13:44:00;72km AMATOR;AMATOR;72km;1
+313;Łukasz;Duliba;;;1980;M;13:44:00;72km AMATOR;AMATOR;72km;1
+327;Rafał;Rymarz;Piotrków Trybunalski;BodyiCoach Cycling Team;1996-05-04;M;13:44:00;72km AMATOR;AMATOR;72km;1
+328;Łukasz;Sęk;;;1980;M;13:44:00;72km AMATOR;AMATOR;72km;1
+337;Bartek;Wąsiakowski;Łódź;;1981-03-18;M;13:44:00;72km AMATOR;AMATOR;72km;1
+354;Robert;Szulc;;;1975;M;13:44:00;72km AMATOR;AMATOR;72km;1
+355;Andrzej;Mara;Łask;Jastrzębie Łaskie;1956-03-10;M;13:44:00;72km AMATOR;AMATOR;72km;1
+356;Marek;Górecki;;;1973;M;13:44:00;72km AMATOR;AMATOR;72km;1
+360;Adam;Jaros;Wojcieszyce;;1978-12-24;M;13:44:00;72km AMATOR;AMATOR;72km;1
+365;Tomasz;Nowakowski;Gniezno;Fast Bike Gniezno;1980-09-09;M;13:44:00;72km AMATOR;AMATOR;72km;1
+368;Piotr;Szyszyński;Stare Miasto;DANIELO SPORTSWEAR TEAM;1980-10-14;M;13:44:00;72km AMATOR;AMATOR;72km;1
+369;Grzegorz;Kostecki;;;1972;M;13:44:00;72km AMATOR;AMATOR;72km;1
+377;Wojciech;Janiczek;Piotrków Trybunalski;;1961-06-10;M;13:44:00;72km AMATOR;AMATOR;72km;1
+380;Jarosław;Paturaj;;PGR Pabianice;1974;M;13:44:00;72km AMATOR;AMATOR;72km;1
+381;Mariusz;Kazimierczak;;PGR Pabanice;1973;M;13:44:00;72km AMATOR;AMATOR;72km;1
+382;Marcin;Kucharek;;;1973;M;13:44:00;72km AMATOR;AMATOR;72km;1
+383;Marek;Kwiatkowski;Widawa;;1967-04-22;M;13:44:00;72km AMATOR;AMATOR;72km;1
+387;Paweł;Owczarek;;;1979;M;13:44:00;72km AMATOR;AMATOR;72km;1
+388;Jakub;Frontczak;;;1980;M;13:44:00;72km AMATOR;AMATOR;72km;1
+389;Artemij;Kloczko;;;1992;M;13:44:00;72km AMATOR;AMATOR;72km;1
+391;Dariusz;Marendziak;Łódź;;1965-04-19;M;13:44:00;72km AMATOR;AMATOR;72km;1
+393;Arkadiusz;Szafran;;;1984;M;13:44:00;72km AMATOR;AMATOR;72km;1
+396;Marcin;Witek;;;1990;M;13:44:00;72km AMATOR;AMATOR;72km;1
+398;Krzysztof;Kaszuba;Poddebice;;1976-05-22;M;13:44:00;72km AMATOR;AMATOR;72km;1
+401;Arkadiusz;Stępnik;;;1988;M;13:44:00;72km AMATOR;AMATOR;72km;1
+402;Przemek;Kozłowski;Łódź;Asseco Active Team;1983-08-10;M;13:44:00;72km AMATOR;AMATOR;72km;1
+403;Piotr;Kwiatkowski;Zduńska Wola;;1968-12-31;M;13:44:00;72km AMATOR;AMATOR;72km;1
+404;PAWEŁ;BALCERZAK;Słupca;SŁUPCA;1973-08-11;M;13:44:00;72km AMATOR;AMATOR;72km;1
+405;Klaudiusz;Bloch;Słupca;;1970-12-18;M;13:44:00;72km AMATOR;AMATOR;72km;1
+406;Dawid;Bloch;Słupca;;1998-03-06;M;13:44:00;72km AMATOR;AMATOR;72km;1
+407;Piotr;Oset;Sieradz;;1963-12-27;M;13:44:00;72km AMATOR;AMATOR;72km;1
+416;Arkadiusz;Łaździn;;;1974;M;13:44:00;72km AMATOR;AMATOR;72km;1
+417;Dariusz;Szafrański;ZDUŃSKA WOLA;;1976-03-04;M;13:44:00;72km AMATOR;AMATOR;72km;1
+418;Wiktor;Smołkowicz;92-432;Kulawe Ślimaki;2007-07-07;M;13:44:00;72km AMATOR;AMATOR;72km;1
+419;Bartosz;Bombalski;Łódź;;1989-04-07;M;13:44:00;72km AMATOR;AMATOR;72km;1
+422;Łukasz;Beeger;;;1979;M;13:44:00;72km AMATOR;AMATOR;72km;1
+424;Grzegorz;Urbański;Tuszyn;PGR Pabianice;1978;M;13:44:00;72km AMATOR;AMATOR;72km;1
+425;Piotr;Skibiński;Luciejów;Asseco Active Team;1977-12-02;M;13:44:00;72km AMATOR;AMATOR;72km;1
+427;Zbigniew;Faryś;Czestków B;;1966-03-03;M;13:44:00;72km AMATOR;AMATOR;72km;1
+430;Jurek;Perlinski;Zelów;Bieging Team Zelów;1986-02-25;M;13:44:00;72km AMATOR;AMATOR;72km;1
+431;Jan;Jagoda;Łódź;Hycom;1982-07-07;M;13:44:00;72km AMATOR;AMATOR;72km;1
+320;Igor;Golenia;;;2002;M;13:44:00;72km JUNIOR;JUNIOR;72km;1
+267;Sylwia;Gajdka;Pabianice;PTC Alpina Pabianice;1994-01-09;K;13:47:00;72km K20;K20;72km;1
+384;Julia;Kwiatkowska;Widawa;;1995-06-06;K;13:47:00;72km K20;K20;72km;1
+24;Małgorzata;Zimnicka;Łask;Huzar Bike Academy;1983-06-24;K;13:47:00;72km K30;K30;72km;1
+414;anna;rząsowska;warszawa;;1982-04-25;K;13:47:00;72km K30;K30;72km;1
+358;Marzena;Rataczyk;;PTC Alpina Pabianice;1975;K;13:47:00;72km K40;K40;72km;1
+364;Anetta;Chrzanowska;Zduńska Wola;;1974-09-16;K;13:47:00;72km K40;K40;72km;1
+367;Magdalena;Kizerwetter-Świda;;;1975;K;13:47:00;72km K40;K40;72km;1
+30;Sławomir;Warach;kolo;;1955-04-11;M;13:47:00;72km M60;M60;72km;1
+53;Jerzy;Jagieła;;;1956;M;13:47:00;72km M60;M60;72km;1
+74;Adam;Barcicki;;PELETON;1956;M;13:47:00;72km M60;M60;72km;1
+81;Maciej;Sztendel;;;1954;M;13:47:00;72km M60;M60;72km;1
+120;Piotr;Ruciński;Łódź;BIKE ZBYSZKO ANDRESPOL;1953-09-21;M;13:47:00;72km M60;M60;72km;1
+129;Longin;Kusal;;;1950;M;13:47:00;72km M60;M60;72km;1
+304;Jerzy;Bylicki;;;1950;M;13:47:00;72km M60;M60;72km;1
+351;Krzysztof;Masłowski;;;1958;M;13:47:00;72km M60;M60;72km;1
+361;Jacek;Skibicki;łódź;;1957-09-06;M;13:47:00;72km M60;M60;72km;1
+370;Stanisław;Czarnecki;;;1954;M;13:47:00;72km M60;M60;72km;1
+374;Marcin;Kruk;;;1949;M;13:47:00;72km M60;M60;72km;1
+375;Bogusław;Nowak;;;1958;M;13:47:00;72km M60;M60;72km;1
+376;Andrzej;Dymowski;;;1952;M;13:47:00;72km M60;M60;72km;1
+18;Henryk;Torbus;;;1946;M;13:50:00;54km M70;M70;54km;1
+26;Grzegorz;Trams;WARSZAWA;BDC BANASZEK TEAM;1947-09-20;M;13:50:00;54km M70;M70;54km;1
+41;Wacław;Fabijanowski;;;1947;M;13:50:00;54km M70;M70;54km;1
+63;Tadeusz;Chudobski;;;1941;M;13:50:00;54km M70;M70;54km;1
+64;Wielisław;Szymański;;;1943;M;13:50:00;54km M70;M70;54km;1
+99;Waldemar;Kaczmarek;;;1945;M;13:50:00;54km M70;M70;54km;1
+286;Radosław;Myszkowski;;;1943;M;13:50:00;54km M70;M70;54km;1
+371;Marian;Boruń;Buczek;;1948-09-08;M;13:50:00;72km M70;M70;72km;1
+123;Mieczysław;Frankowski;;;1930;M;13:50:00;36km M80;M80;36km;1
+127;JERZY;PODGÓRSKI;Łódź;Łódź;1937-08-05;M;13:50:00;36km M80;M80;36km;1
+255;Zbigniew;Michalski;Warszawa;Retro Rowery Duda Team;1935-03-10;M;13:50:00;36km M80;M80;36km;1
+353;Alfred;Sondel;;;1935;M;13:50:00;36km M80;M80;36km;1

@@ -55,11 +55,13 @@ namespace AdminView.CalculateStandings
 
             this._competitionsPaths = new List<string>();
             //competitionPaths.AddRange(resourceLoader.LoadFilesToTemp(filesDictionary.Skip(1).ToDictionary(x => x.Key, x => x.Value), Path.GetTempPath()));
-            var dialog = new OpenFileDialog();
-            dialog.Filter = "csv files (*.csv)|*.csv";
-            dialog.RestoreDirectory = true;
-            dialog.Title = "Wybierz w dobrej kolejności wyniki dla cyklu";
-            dialog.Multiselect = true;
+            var dialog = new OpenFileDialog
+            {
+                Filter = "csv files (*.csv)|*.csv",
+                RestoreDirectory = true,
+                Title = "Wybierz w dobrej kolejności wyniki dla cyklu",
+                Multiselect = true
+            };
 
             if (dialog.ShowDialog() == DialogResult.OK)
             {
@@ -101,11 +103,13 @@ namespace AdminView.CalculateStandings
             }
 
             var resourceLoader = new ResourceLoader();
-            var filesDictionary = new Dictionary<string, string>();
-            filesDictionary.Add("klasyki_punkty.csv", Properties.Resources.klasyki_punkty);
+            var filesDictionary = new Dictionary<string, string>
+            {
+                { "klasyki_punkty.csv", Properties.Resources.klasyki_punkty }
+            };
 
-            //try
-            //{
+            try
+            {
                 var seriesStandings = new SeriesStandings(_competitionNamesDict, SeriesStandingsParameters.DbEntity, _competitionsPaths);
 
                 var pointsPath = resourceLoader.LoadFilesToTemp(filesDictionary.Take(1).ToDictionary(x => x.Key, x => x.Value), Path.GetTempPath());
@@ -115,12 +119,12 @@ namespace AdminView.CalculateStandings
                     MessageBox.Show("Wyniki rankingu zostały przeliczone");
                 else
                     MessageBox.Show("Błąd. Nie udało się przeliczyć wyników rankingu");
-            //}
-            //catch (Exception e)
-            //{
-            //    MessageBox.Show("Nie udało sie przeliczyć wyników. Błąd: " + e.Message);
-            //    Application.Restart();
-            //}
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Nie udało sie przeliczyć wyników. Błąd: " + e.Message);
+                Application.Restart();
+            }
         }
 
 

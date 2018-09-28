@@ -19,6 +19,9 @@ using ViewCore.Factories.Distances;
 using ViewCore.Factories.Subcategories;
 using ViewCore.Factories.Players;
 using ViewCore.Factories;
+using System.Windows.Forms;
+using MessageBox = System.Windows.MessageBox;
+using System.IO;
 
 namespace AdminView.Players
 {
@@ -32,7 +35,8 @@ namespace AdminView.Players
             AddPlayerCmd = new RelayCommand(OnAddPlayerAsync);
             DeleteSelectedPlayersCmd = new RelayCommand(OnDeleteSelectedPlayersRequestedAsync);
             DeleteAllPlayersCmd = new RelayCommand(OnDeleteAllPlayersRequestedAsync);
-            ReadPlayersFromCsvCmd = new RelayCommand(OnReadPlayersFromCsvAsync);
+            ImportPlayersFromCsvCmd = new RelayCommand(OnImportPlayersFromCsvAsync);
+            ExportPlayersToCsvCmd = new RelayCommand(OnExportPlayersToCsv);
         }
 
         #region Properties
@@ -60,7 +64,8 @@ namespace AdminView.Players
         public RelayCommand AddPlayerCmd { get; private set; }
         public RelayCommand DeleteSelectedPlayersCmd { get; set; }
         public RelayCommand DeleteAllPlayersCmd { get; set; }
-        public RelayCommand ReadPlayersFromCsvCmd { get; set; }
+        public RelayCommand ImportPlayersFromCsvCmd { get; set; }
+        public RelayCommand ExportPlayersToCsvCmd { get; set; }
 
 
         private async void OnViewLoadedAsync()
@@ -91,7 +96,7 @@ namespace AdminView.Players
             });
         }
 
-        private async void OnReadPlayersFromCsvAsync()
+        private async void OnImportPlayersFromCsvAsync()
         {
             try
             {
@@ -102,6 +107,38 @@ namespace AdminView.Players
             catch (Exception ex)
             {
                 MessageBox.Show($"Nie udało się załadować pliku {ex.Message}");
+            }
+        }
+
+        private async void OnExportPlayersToCsv()
+        {
+            try
+            {
+                var fileStream = await _playerRepository.ExportPlayersToCsv();
+                var actualPath = "";
+                var dialog = new SaveFileDialog
+                {
+                    Filter = "csv files (*.csv)|*.csv",
+                    RestoreDirectory = true,
+                    Title = "Wybierz gdzie zapisać plik"
+                };
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    if (!string.IsNullOrWhiteSpace(dialog.FileName))
+                    {
+                        actualPath = dialog.FileName;
+                    }
+                    else return;
+                }
+                using (var fileWriter = new FileStream(actualPath, FileMode.CreateNew))
+                {
+                    fileStream.CopyTo(fileWriter);
+                    fileWriter.Flush();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Nie udało się zapisać pliku {ex.Message}");
             }
         }
 

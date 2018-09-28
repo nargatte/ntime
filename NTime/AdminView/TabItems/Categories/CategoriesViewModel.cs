@@ -24,8 +24,10 @@ namespace AdminView.Categories
             RepeatCategoriesForWomenCmd = new RelayCommand(OnRepeatCategoriesForWomen);
             PairCategoriesWithAllDistancesCmd = new RelayCommand(OnPairCategoriesWithAllDistancesAsync);
             AddSubcategoryCmd = new RelayCommand(OnAddSubcategoryAsync);
+            ExportAgeCategoriesToCsvCmd = new RelayCommand(OnExportAgeCategoriesToCsv);
+            ImportAgeCategoriesFromCsvCmd = new RelayCommand(OnImportAgeCategoriesFromCsv);
+            ClearAgeCategoriesCmd = new RelayCommand(OnClearAgeCategories);
         }
-
 
         private async void OnViewLoadedAsync()
         {
@@ -36,26 +38,31 @@ namespace AdminView.Categories
         }
 
 
-        #region Categories
+        #region AgeCategories
         private async Task DownloadAgeCategoriesFromDatabase(bool clearDisplayedCategoriesBefore = true)
         {
             if (clearDisplayedCategoriesBefore)
                 AgeCategories.Clear();
             var dbAgeCategories = await _ageCategoryRepository.GetAllAsync();
+            AddAgeCategoriesRangeToGui(dbAgeCategories);
+        }
+
+        private void AddAgeCategoriesRangeToGui(IEnumerable<AgeCategory> dbAgeCategories)
+        {
             foreach (var dbAgeCategory in dbAgeCategories)
             {
                 var categoryToAdd = new EditableAgeCategory(_currentCompetition)
                 {
                     DbEntity = dbAgeCategory
                 };
-                categoryToAdd.UpdateRequested += Category_UpdateRequestedAsync;
-                AddCategoryToGUI(categoryToAdd);
+                AddAgeCategoryToGui(categoryToAdd);
             }
         }
 
-        private void AddCategoryToGUI(EditableAgeCategory categoryToAdd)
+        private void AddAgeCategoryToGui(EditableAgeCategory categoryToAdd)
         {
             categoryToAdd.DeleteRequested += Category_DeleteRequestedAsync;
+            categoryToAdd.UpdateRequested += Category_UpdateRequestedAsync;
             AgeCategories.Add(categoryToAdd);
         }
 
@@ -72,7 +79,7 @@ namespace AdminView.Categories
             }
             var categoryToAdd = NewAgeCategory;
             categoryToAdd.UpdateRequested += Category_UpdateRequestedAsync;
-            AddCategoryToGUI(categoryToAdd);
+            AddAgeCategoryToGui(categoryToAdd);
             NewAgeCategory = new EditableAgeCategory(_currentCompetition);
             await _ageCategoryRepository.AddAsync(categoryToAdd.DbEntity);
         }
@@ -131,6 +138,77 @@ namespace AdminView.Categories
 
                 await _ageCategoryDistanceRepository.AddRangeAsync(AgeCategoryDistances);
                 await DownloadAgeCategoryDistancesFromDatabase(clearDisplayedCategoriesBefore: true);
+            }
+        }
+
+
+        private async void OnExportAgeCategoriesToCsv()
+        {
+            try
+            {
+                if (await _ageCategoryRepository.ExportAgeCategoriesToCsv(
+                        AgeCategories.Select(editable => editable.DbEntity),
+                        Distances.Select(editable => editable.DbEntity)))
+                {
+                    MessageBox.Show("Kategorie wiekowe zostały zapisane poprawnie");
+                }
+                else
+                {
+                    MessageBox.Show("Nie udało się zapisać kategorii wiekowych");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Wystąpił błąd podczas zapisywania kategorii wiekowych: {ex.Message}");
+            }
+        }
+
+
+        private async void OnImportAgeCategoriesFromCsv()
+        {
+            try
+            {
+                var ageCategories = await _ageCategoryRepository.ImportAgeCategoriesFromCsv();
+                if (ageCategories == null)
+                    MessageBox.Show("Nie udało się pobrać kategorii wiekowych");
+                try
+                {
+                    await _ageCategoryRepository.AddRangeAsync(ageCategories);
+                    AddAgeCategoriesRangeToGui(ageCategories);
+                    MessageBox.Show("Kategorie zostały wczytane. Pamiętaj o połączeniu ich z dystansami");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Nie udało się dodać kategorii wiekowych do bazy danych: {ex.Message}");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Wystąpił błąd podczas wczytywania kategorii wiekowych: {ex.Message}");
+            }
+        }
+
+
+        private async void OnClearAgeCategories()
+        {
+            MessageBoxResult result = MessageBox.Show(
+             $"Czy na pewno chcesz usunąć wszystkie kategorie wiekowe?",
+                $"",
+                MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    await _ageCategoryRepository.RemoveRangeAsync(AgeCategories.Select(editable => editable.DbEntity));
+                    AgeCategories.Clear();
+                    MessageBox.Show("Kategorie wiekowe zostały usunięte");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Wystąpił błąd podczas usuwania kategorii wiekowych: {ex.Message}" +
+                        $"{Environment.NewLine }" +
+                        $"Inner: {ex.InnerException}");
+                }
             }
         }
 
@@ -295,7 +373,10 @@ namespace AdminView.Categories
         public RelayCommand DeleteCategoryCmd { get; private set; }
         public RelayCommand RepeatCategoriesForWomenCmd { get; private set; }
         public RelayCommand PairCategoriesWithAllDistancesCmd { get; private set; }
-        public RelayCommand AddSubcategoryCmd { get; set; }
-        public RelayCommand DeleteSubcategoryCmd { get; set; }
+        public RelayCommand AddSubcategoryCmd { get; private set; }
+        public RelayCommand DeleteSubcategoryCmd { get; private set; }
+        public RelayCommand ExportAgeCategoriesToCsvCmd { get; private set; }
+        public RelayCommand ImportAgeCategoriesFromCsvCmd { get; private set; }
+        public RelayCommand ClearAgeCategoriesCmd { get; private set; }
     }
 }

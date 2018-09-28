@@ -8,8 +8,8 @@ namespace BaseCore.Csv
     {
         public TimeReadRecordMap()
         {
-            Map(m => m.StartNumber).ConvertUsing(StartNumberConverter);
-            Map(m => m.Time).ConvertUsing(ConvertTime);
+            Map(record => record.StartNumber).ConvertUsing(StartNumberConverter);
+            Map(record => record.Time).ConvertUsing(ConvertTime);
         }
 
         private decimal ConvertTime(IReaderRow row)
@@ -32,9 +32,7 @@ namespace BaseCore.Csv
 
             string decimalString = seconds.ToString() + ',' + numbers[3];
 
-            decimal ret;
-
-            if (!Decimal.TryParse(decimalString, out ret))
+            if (!Decimal.TryParse(decimalString, out decimal ret))
                 throw new ArgumentException("Decimal prase fail");
 
             return ret;
@@ -44,8 +42,7 @@ namespace BaseCore.Csv
         {
             string s = row.GetField<string>("num");
 
-            int result;
-            if (Int32.TryParse(s, out result))
+            if (Int32.TryParse(s, out int result))
                 return result;
 
             return -1;
