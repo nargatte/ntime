@@ -108,8 +108,8 @@ namespace AdminView.CalculateStandings
                 { "klasyki_punkty.csv", Properties.Resources.klasyki_punkty }
             };
 
-            try
-            {
+            //try
+            //{
                 var seriesStandings = new SeriesStandings(_competitionNamesDict, SeriesStandingsParameters.DbEntity, _competitionsPaths);
 
                 var pointsPath = resourceLoader.LoadFilesToTemp(filesDictionary.Take(1).ToDictionary(x => x.Key, x => x.Value), Path.GetTempPath());
@@ -119,12 +119,12 @@ namespace AdminView.CalculateStandings
                     MessageBox.Show("Wyniki rankingu zostały przeliczone");
                 else
                     MessageBox.Show("Błąd. Nie udało się przeliczyć wyników rankingu");
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Nie udało sie przeliczyć wyników. Błąd: " + e.Message);
-                Application.Restart();
-            }
+            //}
+            //catch (Exception e)
+            //{
+            //    MessageBox.Show("Nie udało sie przeliczyć wyników. Błąd: " + e.Message);
+            //    Application.Restart();
+            //}
         }
 
 

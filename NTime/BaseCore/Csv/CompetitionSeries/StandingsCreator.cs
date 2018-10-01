@@ -18,7 +18,12 @@ namespace BaseCore.Csv.CompetitionSeries
             var categoriesStandings = categories.ToDictionary(x => x, y => new List<PlayerWithScores>());
             if (standingsParameters.StrictMinStartsEnabled)
                 playersReadyForStandings = playersReadyForStandings.Where(player => player.ExactCompetitionsStarted >= standingsParameters.StrictMinStartsCount);
-            playersReadyForStandings.ToList().ForEach(player => categoriesStandings[player.AgeCategory].Add(player));
+            playersReadyForStandings.ToList().ForEach(player =>
+            {
+                bool categoryFound = categoriesStandings.TryGetValue(player.AgeCategory, out List<PlayerWithScores> categoryPlayers);
+                if (categoryFound)
+                    categoryPlayers.Add(player);
+            });
 
             var standingsSorter = componentsFactory.CreateStandingsSorter();
             categoriesStandings = AssignCategoryStandingPlaces(standingsParameters, categoriesStandings, standingsSorter);
@@ -44,9 +49,9 @@ namespace BaseCore.Csv.CompetitionSeries
                     if (player.TotalScore.NumberValue == previousScoreValue &&
                             (!standingsParameters.SortByStartsCountFirst ||
                                 (standingsParameters.SortByStartsCountFirst && player.ApproximateCompetitionsStarted == previousCompetitionsStarted)))
-                        {
-                            exAequoCount++;
-                        }
+                    {
+                        exAequoCount++;
+                    }
                     else
                     {
                         iter += exAequoCount;
