@@ -14,17 +14,10 @@ namespace ViewCore
 
         public int FirstItem => 1 + (PageNumber - 1) * ItemsPerPage;
 
-
-        public int LastItem
-        {
-            get
-            {
-                if (PageNumber * ItemsPerPage < TotalItemsCount)
-                    return PageNumber * ItemsPerPage;
-                else
-                    return TotalItemsCount;
-            }
-        }
+        public int LastItem =>
+            PageNumber * ItemsPerPage < TotalItemsCount ?
+            PageNumber * ItemsPerPage
+            : TotalItemsCount;
 
         private int _pageNumber;
         /// <summary>
@@ -73,14 +66,5 @@ namespace ViewCore
         }
 
         public event Action ChildUpdated = delegate { };
-
-    //    protected override void SetProperty<T>(ref T member, T val,
-    //[CallerMemberName] string propertyName = null)
-    //    {
-    //        if (object.Equals(member, val)) return;
-
-    //        member = val;
-    //        NotifyDisplayedProperties();
-    //    }
     }
 }
