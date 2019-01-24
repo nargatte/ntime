@@ -34,8 +34,11 @@
             <TextBlock Text="Pomożemy Ci szybko i sprawnie przeprowadzić zawody" TextWrapping="Wrap" FontSize="16" TextAlignment="Center"/>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Row="1">
-            <Button Command="{Binding CalculateStandingsCmd}" Height="40" Width="100" Grid.Column="2" FontWeight="Bold" VerticalAlignment="Top" Margin="0, 0, 0, 50">
+            <Button Command="{Binding CalculateStandingsCmd}" Height="40" Width="100" Grid.Column="2" FontWeight="Bold" VerticalAlignment="Top" Margin="0, 0, 0, 30">
                 Przelicz ranking
+            </Button>
+            <Button Command="{Binding CategoryTemplatesCmd}" Height="40" Width="110" Grid.Column="2" FontWeight="Bold" VerticalAlignment="Top" Margin="0, 0, 0, 30">
+                Szablony kategorii
             </Button>
             <Button  HorizontalAlignment="Center" MaxWidth="150" Height="40" VerticalAlignment="Bottom" Command="{Binding DisplayAddCompetitionViewCmd}">
                 <TextBlock Text="Stwórz nowe zawody" TextWrapping="Wrap" TextAlignment="Center" FontWeight="Bold"/>

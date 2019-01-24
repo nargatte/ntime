@@ -1,0 +1,68 @@
+﻿<Window x:Class="AdminView.AgeCategoryTemplates.CategoryTemplatesView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:validation="clr-namespace:AdminView.Validation;assembly=ViewCore"
+        xmlns:local="clr-namespace:AdminView.CalculateStandings"
+        xmlns:converters="clr-namespace:ViewCore.XamlConverters;assembly=ViewCore"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"
+        Title="CategoryTemplatesView" Height="600" Width="450">
+    <Window.Resources>
+        <converters:EnumToBoolConverterClass x:Key="EnumToBoolConverter"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="Szablony kategorii" HorizontalAlignment="Center" TextBlock.FontSize="20" TextBlock.FontWeight="Bold" Margin="10"/>
+        <StackPanel Grid.Row="1" Orientation="Vertical">
+            <TextBlock Margin="10" Text="Wybierz szablon kategorii" HorizontalAlignment="Center" FontSize="16"/>
+            <ComboBox ItemsSource="{Binding AgeCategoryCollections}" SelectedItem="{Binding SelectedAgeCategoryCollection, UpdateSourceTrigger=PropertyChanged}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" MinHeight="20" MaxHeight="30" MinWidth="30" Height="30" MaxWidth="150" Margin="15"
+                    VerticalAlignment="Bottom" HorizontalAlignment="Center" Command="{Binding CalculateStandingsCmd}">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="30">
+                    <Image Source="pack://application:,,,/AdminView;component/Images/add.png" Height="30" Width="20" />
+                    <TextBlock Text="Zapisz dane" Height="20"/>
+                </StackPanel>
+                <!--<Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="IsEnabled" Value="False"/>
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding ElementName=nameTextBox, Path=(Validation.HasError)}" Value="false" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="IsEnabled" Value="True"/>
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>-->
+            </Button>
+            <Button Grid.Column="1" Height="30" MinWidth="30" MaxWidth="100" Margin="15"
+                    VerticalAlignment="Bottom" HorizontalAlignment="Center" Command="{Binding CancelCmd}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="pack://application:,,,/AdminView;component/Images/delete.png" Height="30" Width="20"/>
+                    <TextBlock Text="Anuluj" Height="20"/>
+                </StackPanel>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

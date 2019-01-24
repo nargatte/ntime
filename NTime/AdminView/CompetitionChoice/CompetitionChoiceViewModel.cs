@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AdminView.AddCompetition;
 using AdminView.CalculateStandings;
+using AdminView.AgeCategoryTemplates;
 using BaseCore.Csv;
 using BaseCore.Csv.CompetitionSeries;
 using BaseCore.DataBase;
@@ -21,25 +22,21 @@ namespace AdminView.CompetitionChoice
 {
     class CompetitionChoiceViewModel : BindableBase, ISwitchableViewModel, ICompetitionChoiceBase
     {
-        private CompetitionChoiceBase _competitionChoiceViewModelBase;
-        public CompetitionChoiceBase CompetitionData => _competitionChoiceViewModelBase;
+        public CompetitionChoiceBase CompetitionData { get; }
         public string TabTitle { get; set; }
 
-        //public CompetitionChoiceViewModel()
-        //{
-
-        //}
 
         public CompetitionChoiceViewModel(DependencyContainer dependencyContainer)
         {
-            _competitionChoiceViewModelBase = new CompetitionChoiceBase(dependencyContainer);
-            CompetitionData.CompetitionSelected += CompetitionChoiceBase_CompetitionSelected;
+            CompetitionData = new CompetitionChoiceBase(dependencyContainer);
             DisplayAddCompetitionViewCmd = new RelayCommand(OnDisplayAddCompetitionView, CanDisplayAddCompetition);
-            AddCompetitionViewRequested += NavToAddCompetitionView;
-            CalculateStandingsViewRequested += NavToCalculateStandingsView;
             GoToCompetitionCmd = new RelayCommand(OnGoToCompetition, CanGoToCompetition);
             CalculateStandingsCmd = new RelayCommand(OnDisplayCalculateStandingsView);
-            //ViewLoadedCmd = new RelayCommand(OnViewLoaded);
+            CategoryTemplatesCmd = new RelayCommand(OnDisplayCategoryTemplatesView);
+
+            CompetitionData.CompetitionSelected += CompetitionChoiceBase_CompetitionSelected;
+            AddCompetitionViewRequested += NavToAddCompetitionView;
+            CalculateStandingsViewRequested += NavToCalculateStandingsView;
             OnViewLoaded();
         }
 
@@ -66,6 +63,11 @@ namespace AdminView.CompetitionChoice
             calculateStandingsViewModel.ShowWindowDialog();
         }
 
+        private void NavToCategoryTemplatesView()
+        {
+            var categoryTemplatesViewModel = new AgeCategoryTemplatesViewModel(); 
+        }
+
         private async void OnCompetitionAddedAsync(object sender, EventArgs e)
         {
             var addCompetitionViewModel = sender as AddCompetition.AddCompetitionViewModel;
@@ -74,9 +76,11 @@ namespace AdminView.CompetitionChoice
             await CompetitionData.CompetitionManager.AddAsync(competitionToAdd.DbEntity);
         }
 
-        private void OnDisplayAddCompetitionView() => AddCompetitionViewRequested();
+        private void OnDisplayAddCompetitionView() => AddCompetitionViewRequested?.Invoke();
 
-        private void OnDisplayCalculateStandingsView() => CalculateStandingsViewRequested();
+        private void OnDisplayCalculateStandingsView() => CalculateStandingsViewRequested?.Invoke();
+
+        private void OnDisplayCategoryTemplatesView() => CategoryTemplatesViewRequested?.Invoke();
 
         private bool CanDisplayAddCompetition() => true;
 
@@ -95,6 +99,7 @@ namespace AdminView.CompetitionChoice
 
         public event Action AddCompetitionViewRequested = delegate { };
         public event Action CalculateStandingsViewRequested = delegate { };
+        public event Action CategoryTemplatesViewRequested = delegate { };
         public event Action CompetitonViewRequested = delegate { };
         public event Action CompetitionManagerRequested = delegate { };
 
@@ -102,6 +107,7 @@ namespace AdminView.CompetitionChoice
         public RelayCommand GoToCompetitionCmd { get; private set; }
         public RelayCommand ViewLoadedCmd { get; private set; }
         public RelayCommand CalculateStandingsCmd { get; private set; }
+        public RelayCommand CategoryTemplatesCmd { get; private set; }
 
         #endregion
     }

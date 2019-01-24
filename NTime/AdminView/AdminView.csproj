@@ -131,6 +131,10 @@
       <DependentUpon>CalculateStandingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="CalculateStandings\CalculateStandingsViewModel.cs" />
+    <Compile Include="AgeCategoryTemplates\AgeCategoryTemplatesView.xaml.cs">
+      <DependentUpon>AgeCategoryTemplatesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AgeCategoryTemplates\AgeCategoryTemplatesViewModel.cs" />
     <Compile Include="TabItems\Categories\CategoriesView.xaml.cs">
       <DependentUpon>CategoriesView.xaml</DependentUpon>
     </Compile>
@@ -230,6 +234,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CalculateStandings\CalculateStandingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AgeCategoryTemplates\AgeCategoryTemplatesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
