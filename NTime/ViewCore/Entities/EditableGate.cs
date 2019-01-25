@@ -7,7 +7,7 @@ using BaseCore.DataBase;
 
 namespace ViewCore.Entities
 {
-    public class EditableGate : EditableBaseClass<Gate>, IEditableGate
+    public class EditableGate : EditableCompetitionItemBase<Gate>, IEditableGate
     {
         ILogsInfo logsInfo;
         public EditableGate(ILogsInfo logsInfo, IEditableCompetition currentCompetition) : base(currentCompetition)

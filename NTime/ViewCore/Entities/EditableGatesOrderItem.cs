@@ -9,7 +9,7 @@ using BaseCore.DataBase;
 
 namespace ViewCore.Entities
 {
-    public class EditableGatesOrderItem : EditableBaseClass<GatesOrderItem>
+    public class EditableGatesOrderItem : EditableCompetitionItemBase<GatesOrderItem>
     {
         public EditableGatesOrderItem(ObservableCollection<IEditableGate> definedGates, IEditableCompetition currentCompetition) : base(currentCompetition)
         {

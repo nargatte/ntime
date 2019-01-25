@@ -8,7 +8,7 @@ using BaseCore.DataBase;
 
 namespace ViewCore.Entities
 {
-    public class EditableAgeCategory : EditableBaseClass<AgeCategory>
+    public class EditableAgeCategory : EditableCompetitionItemBase<AgeCategory>
     {
         public EditableAgeCategory(IEditableCompetition currentComptetition) : base(currentComptetition)
         {

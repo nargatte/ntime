@@ -9,7 +9,7 @@ using BaseCore.TimesProcess;
 
 namespace ViewCore.Entities
 {
-    public class EditablePlayerWithLogs : EditableBaseClass<Player>
+    public class EditablePlayerWithLogs : EditableCompetitionItemBase<Player>
     {
         public EditablePlayerWithLogs(IEditableCompetition currentComptetition) : base(currentComptetition)
         {

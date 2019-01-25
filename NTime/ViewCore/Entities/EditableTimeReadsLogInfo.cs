@@ -5,7 +5,7 @@ using BaseCore.DataBase;
 
 namespace ViewCore.Entities
 {
-    public class EditableTimeReadsLogInfo : EditableBaseClass<TimeReadsLogInfo>
+    public class EditableTimeReadsLogInfo : EditableCompetitionItemBase<TimeReadsLogInfo>
     {
         ILogsInfo logsInfo;
         public EditableTimeReadsLogInfo(ILogsInfo logsInfo, IEditableCompetition currentCompetition) : base(currentCompetition)

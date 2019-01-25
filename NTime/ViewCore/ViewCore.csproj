@@ -54,6 +54,7 @@
     <Compile Include="Entities\EditableAgeCategoryTemplate.cs" />
     <Compile Include="Entities\EditableCompetitionFile.cs" />
     <Compile Include="Entities\EditableHeaderPermutationPair.cs" />
+    <Compile Include="Entities\EditableItemBase.cs" />
     <Compile Include="Entities\EditableSeriesStandingsParameters.cs" />
     <Compile Include="Factories\AgeCategories\AgeCategoryManagerFactoryDesktop.cs" />
     <Compile Include="Factories\AgeCategories\AgeCategoryManagerFactoryHttp.cs" />
@@ -115,7 +116,7 @@
     <Compile Include="ViewModelsData\PlayersViewModelBase.cs" />
     <Compile Include="TimeReadColorsLegendItem.cs" />
     <Compile Include="ViewModelsData\CompetitionItemBase.cs" />
-    <Compile Include="Entities\EditableBaseClass.cs" />
+    <Compile Include="Entities\EditableCompetitionItemBase.cs" />
     <Compile Include="Entities\EditableAgeCategory.cs" />
     <Compile Include="Entities\EditableCompetition.cs" />
     <Compile Include="Entities\EditableDistance.cs" />

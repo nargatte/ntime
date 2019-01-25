@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace ViewCore.Entities
 {
-    public class EditableAgeCategoryCollection : EditableBaseClass<AgeCategoryCollection>
+    public class EditableAgeCategoryCollection : EditableItemBase<AgeCategoryCollection>
     {
-        public EditableAgeCategoryCollection(IEditableCompetition currentComptetition) : base(currentComptetition)
+        public EditableAgeCategoryCollection()
         {
         }
 

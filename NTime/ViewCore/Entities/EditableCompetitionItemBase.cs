@@ -9,9 +9,9 @@ using ViewCore.Entities;
 
 namespace ViewCore
 {
-    public abstract class EditableBaseClass<T> : CompetitionItemBase
+    public abstract class EditableCompetitionItemBase<T> : CompetitionItemBase where T : class
     {
-        public EditableBaseClass(IEditableCompetition currentComptetition) : base(currentComptetition)
+        public EditableCompetitionItemBase(IEditableCompetition currentComptetition) : base(currentComptetition)
         {
             DbEntity = Activator.CreateInstance<T>();
         }

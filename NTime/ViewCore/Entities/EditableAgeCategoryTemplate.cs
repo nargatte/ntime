@@ -7,10 +7,19 @@ using System.Threading.Tasks;
 
 namespace ViewCore.Entities
 {
-    public class EditableAgeCategoryTemplate : EditableBaseClass<AgeCategoryTemplate>
+    public class EditableAgeCategoryTemplate : EditableItemBase<AgeCategoryTemplate>
     {
-        public EditableAgeCategoryTemplate(IEditableCompetition currentComptetition) : base(currentComptetition)
+        public EditableAgeCategoryTemplate()
         {
+        }
+
+        public EditableAgeCategoryTemplate(EditableAgeCategoryTemplate editableAgeCategory)
+        {
+            Name = editableAgeCategory.Name;
+            YearFrom = editableAgeCategory.YearFrom;
+            YearTo = editableAgeCategory.YearTo;
+            Male = editableAgeCategory.Male;
+            AgeCategoryCollectionId = editableAgeCategory.AgeCategoryCollectionId;
         }
 
         public string Name

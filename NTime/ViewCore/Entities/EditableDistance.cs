@@ -13,7 +13,7 @@ using BaseCore.DataBase;
 namespace ViewCore.Entities
 {
 
-    public class EditableDistance : EditableBaseClass<Distance>
+    public class EditableDistance : EditableCompetitionItemBase<Distance>
     {
         GateOrderItemRepository _gateOrderItemRepository;
         readonly ObservableCollection<IEditableGate> _definedGates = new ObservableCollection<IEditableGate>();

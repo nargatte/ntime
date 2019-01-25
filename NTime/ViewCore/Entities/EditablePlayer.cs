@@ -12,7 +12,7 @@ using System.Threading;
 
 namespace ViewCore.Entities
 {
-    public class EditablePlayer : EditableBaseClass<Player>, ICloneable
+    public class EditablePlayer : EditableCompetitionItemBase<Player>, ICloneable
     {
 
         public EditablePlayer(IEditableCompetition currentComptetition) : base(currentComptetition)

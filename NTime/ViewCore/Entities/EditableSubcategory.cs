@@ -8,7 +8,7 @@ using MvvmHelper;
 
 namespace ViewCore.Entities
 {
-    public class EditableSubcategory : EditableBaseClass<Subcategory>
+    public class EditableSubcategory : EditableCompetitionItemBase<Subcategory>
     {
         public EditableSubcategory(IEditableCompetition currentComptetition) : base(currentComptetition)
         {

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ViewCore.Entities
 {
-    public class EditableHeaderPermutationPair : EditableBaseClass<HeaderPermutationPair>
+    public class EditableHeaderPermutationPair : EditableCompetitionItemBase<HeaderPermutationPair>
     {
         public EditableHeaderPermutationPair(IEditableCompetition currentComptetition) : base(currentComptetition)
         {
