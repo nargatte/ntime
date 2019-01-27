@@ -151,8 +151,8 @@
     <Compile Include="DataBase\Contexts\NTimeDBInitializer.cs" />
     <Compile Include="DataBase\Enums\TimeReadTypeEnum.cs" />
     <Compile Include="DataBase\Repositories\AgeCategoryRepository.cs" />
-    <Compile Include="DataBase\Repositories\AgeCategoryCollectionRepository.cs" />
     <Compile Include="DataBase\Repositories\AgeCategoryTemplateRepository.cs" />
+    <Compile Include="DataBase\Repositories\AgeCategoryTemplateItemRepository.cs" />
     <Compile Include="DataBase\Repositories\CompetitionRepository.cs" />
     <Compile Include="DataBase\Repositories\DistanceRepository.cs" />
     <Compile Include="DataBase\Repositories\SubcategoryRepository.cs" />

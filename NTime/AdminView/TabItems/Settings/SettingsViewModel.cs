@@ -11,6 +11,7 @@ using BaseCore.Models;
 using MvvmHelper;
 using ViewCore;
 using ViewCore.Entities;
+using ViewCore.Helpers;
 
 namespace AdminView.Settings
 {
@@ -140,11 +141,7 @@ namespace AdminView.Settings
 
         private void OnRemoveCompetition()
         {
-            MessageBoxResult result = MessageBox.Show(
-             $"Czy na pewno chcesz usunąć te zawody? Zmiana jest nieodwracalna!!!",
-                $"",
-                MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes)
+            if (MessageBoxHelper.DisplayYesNo("Czy na pewno chcesz usunąć te zawody? Zmiana jest nieodwracalna!!!") == MessageBoxResult.Yes)
             {
                 repository.RemoveAsync(CurrentCompetition.DbEntity);
                 CompetitionRemoved?.Invoke();

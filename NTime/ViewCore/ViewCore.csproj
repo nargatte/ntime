@@ -50,8 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConnectionInfo.cs" />
-    <Compile Include="Entities\EditableAgeCategoryCollection.cs" />
     <Compile Include="Entities\EditableAgeCategoryTemplate.cs" />
+    <Compile Include="Entities\EditableAgeCategoryTemplateItem.cs" />
     <Compile Include="Entities\EditableCompetitionFile.cs" />
     <Compile Include="Entities\EditableHeaderPermutationPair.cs" />
     <Compile Include="Entities\EditableItemBase.cs" />
@@ -74,6 +74,7 @@
     <Compile Include="Factories\Players\IPlayerManagerFactory.cs" />
     <Compile Include="Factories\Players\PlayerManagerFactoryDesktop.cs" />
     <Compile Include="Factories\Players\PlayerManagerFactoryHttp.cs" />
+    <Compile Include="Helpers\MessageBoxHelper.cs" />
     <Compile Include="HttpClients\HttpAgeCategoryClient.cs" />
     <Compile Include="HttpClients\HttpAuthenticationClient.cs" />
     <Compile Include="HttpClients\CustomHttpRequestException.cs" />

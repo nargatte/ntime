@@ -7,7 +7,7 @@ namespace ViewCore.Entities
 {
     public class EditableTimeReadsLogInfo : EditableCompetitionItemBase<TimeReadsLogInfo>
     {
-        ILogsInfo logsInfo;
+        readonly ILogsInfo logsInfo;
         public EditableTimeReadsLogInfo(ILogsInfo logsInfo, IEditableCompetition currentCompetition) : base(currentCompetition)
         {
             this.logsInfo = logsInfo;

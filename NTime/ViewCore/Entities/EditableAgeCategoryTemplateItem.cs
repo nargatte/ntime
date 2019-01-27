@@ -1,31 +1,28 @@
-﻿using System;
+﻿using BaseCore.DataBase;
+using MvvmHelper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MvvmHelper;
-using BaseCore.DataBase;
 
 namespace ViewCore.Entities
 {
-    public class EditableAgeCategory : EditableCompetitionItemBase<AgeCategory>
+    public class EditableAgeCategoryTemplateItem : EditableItemBase<AgeCategoryTemplate>
     {
-        public EditableAgeCategory(IEditableCompetition currentComptetition) : base(currentComptetition)
+        public EditableAgeCategoryTemplateItem()
         {
             DeleteCategoryCmd = new RelayCommand(OnDeleteCategory);
             Male = true;
         }
 
-        public EditableAgeCategory(EditableAgeCategory editableAgeCategory) : base(editableAgeCategory._currentCompetition) 
+        public EditableAgeCategoryTemplateItem(EditableAgeCategoryTemplateItem editableAgeCategory)
         {
             Name = editableAgeCategory.Name;
             YearFrom = editableAgeCategory.YearFrom;
             YearTo = editableAgeCategory.YearTo;
             Male = editableAgeCategory.Male;
-            DbEntity.CompetitionId = editableAgeCategory.DbEntity.CompetitionId;
-            //DeleteCategoryCmd = editableAgeCategory.DeleteCategoryCmd;
-            //DeleteRequested = editableAgeCategory.DeleteRequested;
-            //UpdateRequested = editableAgeCategory.UpdateRequested;
+            AgeCategoryCollectionId = editableAgeCategory.AgeCategoryCollectionId;
         }
 
         public string Name
@@ -37,7 +34,6 @@ namespace ViewCore.Entities
                 OnUpdateRequested();
             }
         }
-
 
         public int YearFrom
         {
@@ -59,7 +55,6 @@ namespace ViewCore.Entities
             }
         }
 
-
         public bool Male
         {
             get { return DbEntity.Male; }
@@ -70,6 +65,15 @@ namespace ViewCore.Entities
             }
         }
 
+        public int AgeCategoryCollectionId
+        {
+            get { return DbEntity.AgeCategoryCollectionId; }
+            set
+            {
+                DbEntity.AgeCategoryCollectionId = SetProperty(DbEntity.AgeCategoryCollectionId, value);
+                OnUpdateRequested();
+            }
+        }
 
         public RelayCommand DeleteCategoryCmd { get; private set; }
         public event EventHandler DeleteRequested = delegate { };
@@ -84,7 +88,5 @@ namespace ViewCore.Entities
         {
             UpdateRequested?.Invoke(this, EventArgs.Empty);
         }
-
-
     }
 }

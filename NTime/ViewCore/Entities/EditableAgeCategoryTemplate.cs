@@ -1,4 +1,5 @@
 ﻿using BaseCore.DataBase;
+using MvvmHelper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,20 +8,24 @@ using System.Threading.Tasks;
 
 namespace ViewCore.Entities
 {
-    public class EditableAgeCategoryTemplate : EditableItemBase<AgeCategoryTemplate>
+    public class EditableAgeCategoryTemplate : EditableItemBase<AgeCategoryCollection>
     {
         public EditableAgeCategoryTemplate()
         {
+            DeleteCategoryCmd = new RelayCommand(OnDeleteCategory);
         }
 
-        public EditableAgeCategoryTemplate(EditableAgeCategoryTemplate editableAgeCategory)
+
+        public int Id
         {
-            Name = editableAgeCategory.Name;
-            YearFrom = editableAgeCategory.YearFrom;
-            YearTo = editableAgeCategory.YearTo;
-            Male = editableAgeCategory.Male;
-            AgeCategoryCollectionId = editableAgeCategory.AgeCategoryCollectionId;
+            get { return DbEntity.Id; }
+            set
+            {
+                DbEntity.Id = SetProperty(DbEntity.Id, value);
+                OnUpdateRequested();
+            }
         }
+
 
         public string Name
         {
@@ -28,40 +33,22 @@ namespace ViewCore.Entities
             set
             {
                 DbEntity.Name = SetProperty(DbEntity.Name, value);
+                OnUpdateRequested();
             }
         }
 
-        public int YearFrom
+        public RelayCommand DeleteCategoryCmd { get; private set; }
+        public event EventHandler DeleteRequested = delegate { };
+        public event EventHandler UpdateRequested = delegate { };
+
+        private void OnDeleteCategory()
         {
-            get { return DbEntity.YearFrom; }
-            set
-            {
-                DbEntity.YearFrom = SetProperty(DbEntity.YearFrom, value);
-            }
+            DeleteRequested?.Invoke(this, EventArgs.Empty);
         }
 
-        public int YearTo
+        private void OnUpdateRequested()
         {
-            get { return DbEntity.YearTo; }
-            set
-            {
-                DbEntity.YearTo = SetProperty(DbEntity.YearTo, value);
-            }
-        }
-
-        public bool Male
-        {
-            get { return DbEntity.Male; }
-            set
-            {
-                DbEntity.Male = SetProperty(DbEntity.Male, value);
-            }
-        }
-
-        public int AgeCategoryCollectionId
-        {
-            get { return DbEntity.AgeCategoryCollectionId; }
-            set { DbEntity.AgeCategoryCollectionId = SetProperty(DbEntity.AgeCategoryCollectionId, value); }
+            UpdateRequested?.Invoke(this, EventArgs.Empty);
         }
     }
 }

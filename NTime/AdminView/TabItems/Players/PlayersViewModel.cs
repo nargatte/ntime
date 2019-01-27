@@ -22,6 +22,7 @@ using ViewCore.Factories;
 using System.Windows.Forms;
 using MessageBox = System.Windows.MessageBox;
 using System.IO;
+using ViewCore.Helpers;
 
 namespace AdminView.Players
 {
@@ -144,11 +145,7 @@ namespace AdminView.Players
 
         private async void OnDeleteAllPlayersRequestedAsync()
         {
-            MessageBoxResult result = MessageBox.Show(
-                $"Czy na pewno chcesz usunąć wszystkich zawodników?",
-                $"",
-                MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes)
+            if (MessageBoxHelper.DisplayYesNo("Czy na pewno chcesz usunąć wszystkich zawodników?") == MessageBoxResult.Yes)
             {
                 await _playersManager.DeleteAllPlayersFromDatabaseAsync();
                 Players = _playersManager.GetPlayersToDisplay();
@@ -160,11 +157,7 @@ namespace AdminView.Players
 
         private void OnDeleteSelectedPlayersRequestedAsync()
         {
-            MessageBoxResult result = MessageBox.Show(
-             $"Czy na pewno chcesz usunąć {SelectedPlayersList.Count} zawodników?",
-                $"",
-                MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes)
+            if (MessageBoxHelper.DisplayYesNo($"Czy na pewno chcesz usunąć {SelectedPlayersList.Count} zawodników?") == MessageBoxResult.Yes)
             {
                 var selectedPlayersArray = SelectedPlayersList.Cast<EditablePlayer>().ToArray();
                 _playersManager.DeleteSelectedPlayersFromDatabaseAsync(selectedPlayersArray);

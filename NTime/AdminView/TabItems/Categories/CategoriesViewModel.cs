@@ -9,6 +9,7 @@ using ViewCore;
 using ViewCore.Entities;
 using BaseCore.DataBase;
 using System.Windows;
+using ViewCore.Helpers;
 
 namespace AdminView.Categories
 {
@@ -101,11 +102,7 @@ namespace AdminView.Categories
 
         private async void OnRepeatCategoriesForWomen()
         {
-            MessageBoxResult result = MessageBox.Show(
-             $"Czy na pewno chcesz stworzyć dla kobiet kopie kategorii męskich?",
-                $"",
-                MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes)
+            if (MessageBoxHelper.DisplayYesNo("Czy na pewno chcesz stworzyć dla kobiet kopie kategorii męskich?") == MessageBoxResult.Yes)
             {
                 var repeatedCategoriesForWomen = AgeCategories
                     .Where(ageCategory => ageCategory.Male == true)
@@ -125,11 +122,8 @@ namespace AdminView.Categories
 
         private async void OnPairCategoriesWithAllDistancesAsync()
         {
-            MessageBoxResult result = MessageBox.Show(
-             $"Czy na pewno chcesz połączyć kategorie za wszystkimi dystansami? Dotychczas zapisane pary zostaną usunięte!!!",
-                $"",
-                MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes)
+            if (MessageBoxHelper.DisplayYesNo(
+                "Czy na pewno chcesz połączyć kategorie za wszystkimi dystansami? Dotychczas zapisane pary zostaną usunięte!!!") == MessageBoxResult.Yes)
             {
                 await _ageCategoryDistanceRepository.RemoveRangeAsync(AgeCategoryDistances);
                 AgeCategoryDistances.Clear();
@@ -202,11 +196,7 @@ namespace AdminView.Categories
 
         private async void OnClearAgeCategories()
         {
-            MessageBoxResult result = MessageBox.Show(
-             $"Czy na pewno chcesz usunąć wszystkie kategorie wiekowe?",
-                $"",
-                MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes)
+            if (MessageBoxHelper.DisplayYesNo("Czy na pewno chcesz usunąć wszystkie kategorie wiekowe?") == MessageBoxResult.Yes)
             {
                 try
                 {

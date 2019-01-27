@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using BaseCore.TimesProcess;
 using MvvmHelper;
 using BaseCore.DataBase;
+using ViewCore.Helpers;
 
 namespace ViewCore.Entities
 {
@@ -148,10 +149,7 @@ namespace ViewCore.Entities
 
         private void OnDeleteDistance()
         {
-            MessageBoxResult result = MessageBox.Show("",
-                $"Czy na pewno chcesz usunąć dystans {Name} ?",
-                MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes)
+            if (MessageBoxHelper.DisplayYesNo($"Czy na pewno chcesz usunąć dystans {Name} ?") == MessageBoxResult.Yes)
                 DeleteDistance();
             else return;
         }

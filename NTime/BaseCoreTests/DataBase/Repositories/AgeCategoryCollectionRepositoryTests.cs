@@ -19,7 +19,7 @@ namespace BaseCoreTests.DataBase
 
         protected override Task BeforeDataSetUp(NTimeDBContext context)
         {
-            Repository = new AgeCategoryCollectionRepository(ContextProvider);
+            Repository = new AgeCategoryTemplateRepository(ContextProvider);
             return base.BeforeDataSetUp(context);
         }
 
