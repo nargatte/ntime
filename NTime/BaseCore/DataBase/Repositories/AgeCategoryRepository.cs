@@ -36,7 +36,7 @@ namespace BaseCore.DataBase
             {
                 AgeCategoryTemplateItem[] ageCategoryTemplates =
                     await ctx.AgeCategoryTemplateItems
-                        .Where(e => e.AgeCategoryCollectionId == ageCategoryCollection.Id).ToArrayAsync();
+                        .Where(e => e.AgeCategoryTemplateId == ageCategoryCollection.Id).ToArrayAsync();
                 AgeCategory[] ageCategories = ageCategoryTemplates
                     .Select(e => new AgeCategory(e.Name, e.YearFrom, e.YearTo, e.Male) { CompetitionId = Competition.Id })
                     .ToArray();
@@ -53,7 +53,7 @@ namespace BaseCore.DataBase
                 {
                     try
                     {
-                        ageCategoryCollection.AgeCategoryTemplates = null;
+                        ageCategoryCollection.AgeCategoryTemplateItems = null;
                         ctx.AgeCategoryTemplates.Add(ageCategoryCollection);
                         await ctx.SaveChangesAsync();
 
@@ -62,7 +62,7 @@ namespace BaseCore.DataBase
                             ageCategories
                                 .Select(a => new AgeCategoryTemplateItem(a.Name, a.YearFrom, a.YearTo, a.Male)
                                 {
-                                    AgeCategoryCollectionId = ageCategoryCollection.Id
+                                    AgeCategoryTemplateId = ageCategoryCollection.Id
                                 }).ToArray();
                         ctx.AgeCategoryTemplateItems.AddRange(ageCategoryTemplates);
                         await ctx.SaveChangesAsync();

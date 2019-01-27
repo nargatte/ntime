@@ -19,14 +19,13 @@ namespace BaseCore.DataBase
 
             return ContextProvider.DoAsync(async ctx =>
             {
-                var ageCategoryTemplateItemsToRemove = ctx.AgeCategoryTemplateItems.Where(act => act.AgeCategoryCollectionId == item.Id);
+                var ageCategoryTemplateItemsToRemove = ctx.AgeCategoryTemplateItems.Where(act => act.AgeCategoryTemplateId == item.Id);
                 ctx.AgeCategoryTemplateItems.RemoveRange(ageCategoryTemplateItemsToRemove);
 
                 ctx.AgeCategoryTemplates.Remove(item);
                 await ctx.SaveChangesAsync();
             });
 
-            //return base.RemoveAsync(item);
         }
     }
 }

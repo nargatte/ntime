@@ -67,10 +67,10 @@ namespace ViewCore.Entities
 
         public int AgeCategoryCollectionId
         {
-            get { return DbEntity.AgeCategoryCollectionId; }
+            get { return DbEntity.AgeCategoryTemplateId; }
             set
             {
-                DbEntity.AgeCategoryCollectionId = SetProperty(DbEntity.AgeCategoryCollectionId, value);
+                DbEntity.AgeCategoryTemplateId = SetProperty(DbEntity.AgeCategoryTemplateId, value);
                 OnUpdateRequested();
             }
         }

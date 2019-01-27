@@ -19,6 +19,6 @@ namespace BaseCore.DataBase
         [StringLength(255), Required]
         public string Name { get; set; }
 
-        public virtual ICollection<AgeCategoryTemplateItem> AgeCategoryTemplates { get; set; }
+        public virtual ICollection<AgeCategoryTemplateItem> AgeCategoryTemplateItems { get; set; }
     }
 }

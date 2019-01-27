@@ -5,26 +5,26 @@ namespace BaseCore.DataBase
 {
     public class AgeCategoryTemplateItemRepository : Repository<AgeCategoryTemplateItem>
     {
-        public AgeCategoryTemplateItemRepository(IContextProvider contextProvider, AgeCategoryTemplate ageCategoryCollection) : base(contextProvider) => AgeCategoryCollection = ageCategoryCollection;
+        public AgeCategoryTemplateItemRepository(IContextProvider contextProvider, AgeCategoryTemplate ageCategoryTemplate) : base(contextProvider) => AgeCategoryTemplate = ageCategoryTemplate;
 
-        protected AgeCategoryTemplate AgeCategoryCollection { get; set; }
+        protected AgeCategoryTemplate AgeCategoryTemplate { get; set; }
 
         protected override IQueryable<AgeCategoryTemplateItem> GetAllQuery(IQueryable<AgeCategoryTemplateItem> items) =>
-            items.Where(i => i.AgeCategoryCollectionId == AgeCategoryCollection.Id);
+            items.Where(i => i.AgeCategoryTemplateId == AgeCategoryTemplate.Id);
 
         protected override IQueryable<AgeCategoryTemplateItem> GetSortQuery(IQueryable<AgeCategoryTemplateItem> items) =>
             items.OrderBy(i => i.YearFrom);
 
         protected override void CheckItem(AgeCategoryTemplateItem item)
         {
-            if (item.AgeCategoryCollectionId != AgeCategoryCollection.Id)
+            if (item.AgeCategoryTemplateId != AgeCategoryTemplate.Id)
                 throw new ArgumentException("Wrong AgeCategoryCollectionId");
         }
 
         protected override void PrepareToAdd(AgeCategoryTemplateItem item)
         {
-            item.AgeCategoryCollectionId = AgeCategoryCollection.Id;
-            item.AgeCategoryCollection = null;
+            item.AgeCategoryTemplateId = AgeCategoryTemplate.Id;
+            item.AgeCategoryTemplate = null;
         }
 
 

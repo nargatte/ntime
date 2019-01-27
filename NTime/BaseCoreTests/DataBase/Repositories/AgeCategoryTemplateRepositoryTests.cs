@@ -26,7 +26,7 @@ namespace BaseCoreTests.DataBase
             if (entity1.Name != entity2.Name) return false;
             if (entity1.YearTo != entity2.YearTo) return false;
             if (entity1.YearFrom != entity2.YearFrom) return false;
-            if (entity1.AgeCategoryCollectionId != entity2.AgeCategoryCollectionId) return false;
+            if (entity1.AgeCategoryTemplateId != entity2.AgeCategoryTemplateId) return false;
             return true;
         }
 
@@ -36,7 +36,7 @@ namespace BaseCoreTests.DataBase
         protected override async Task BeforeDataSetUp(NTimeDBContext ctx)
         {
             Repository = new AgeCategoryTemplateItemRepository(ContextProvider, InitialAgeCategoryCollection);
-            InitialAgeCategoryCollection.AgeCategoryTemplates = null;
+            InitialAgeCategoryCollection.AgeCategoryTemplateItems = null;
             ctx.AgeCategoryTemplates.Add(InitialAgeCategoryCollection);
             await ctx.SaveChangesAsync();
         }
@@ -48,8 +48,8 @@ namespace BaseCoreTests.DataBase
 
         protected override void Reset(AgeCategoryTemplateItem item)
         {
-            item.AgeCategoryCollection = null;
-            item.AgeCategoryCollectionId = InitialAgeCategoryCollection.Id;
+            item.AgeCategoryTemplate = null;
+            item.AgeCategoryTemplateId = InitialAgeCategoryCollection.Id;
         }
     }
 }
