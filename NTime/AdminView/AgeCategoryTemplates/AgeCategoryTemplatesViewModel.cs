@@ -132,13 +132,19 @@ namespace AdminView.AgeCategoryTemplates
             }
         }
 
+        private async void SelectedAgeCategoryTemplateHasChanged(AgeCategoryTemplate ageCategoryTemplate)
+        {
+            _ageCategoryTemplateItemRepository = new AgeCategoryTemplateItemRepository(new ContextProvider(), ageCategoryTemplate);
+            await DownloadAgeCategoryTemplateItemsFromDatabase(clearDisplayedTemplateItemsBefore: true);
+        }
+
         #endregion
 
         #region AgeCategoryTemplateItems
 
         private async Task DownloadAgeCategoryTemplateItemsFromDatabase(bool clearDisplayedTemplateItemsBefore = true)
         {
-            if (CheckForNullTemplateItemsRepository())
+            if (!CheckTemplateItemsRepository())
                 return;
 
             try
@@ -178,7 +184,7 @@ namespace AdminView.AgeCategoryTemplates
 
         private async void AgeCategoryTemplateItem_UpdateRequested(object sender, EventArgs e)
         {
-            if (CheckForNullTemplateItemsRepository())
+            if (!CheckTemplateItemsRepository())
                 return;
 
             if (!(sender is EditableAgeCategoryTemplateItem ageCategoryTemplateItemToEdit))
@@ -199,7 +205,7 @@ namespace AdminView.AgeCategoryTemplates
 
         private async void AgeCategoryTemplateItem_DeleteRequested(object sender, EventArgs e)
         {
-            if (CheckForNullTemplateItemsRepository())
+            if (!CheckTemplateItemsRepository())
                 return;
 
             if (!(sender is EditableAgeCategoryTemplateItem ageCategoryTemplateItemToDelete))
@@ -220,7 +226,7 @@ namespace AdminView.AgeCategoryTemplates
 
         private async void OnAddAgeCategoryTemplateItemAsync()
         {
-            if (CheckForNullTemplateItemsRepository())
+            if (!CheckTemplateItemsRepository())
                 return;
 
             if (String.IsNullOrWhiteSpace(NewAgeCategoryTemplateItem.Name) ||
@@ -250,7 +256,7 @@ namespace AdminView.AgeCategoryTemplates
 
         private async void OnRepeatAgeCategoryTemplateItemsForWomen()
         {
-            if (CheckForNullTemplateItemsRepository())
+            if (!CheckTemplateItemsRepository())
                 return;
 
             if (MessageBoxHelper.DisplayYesNo("Czy na pewno chcesz stworzyć dla kobiet kopie kategorii męskich?") == MessageBoxResult.Yes)
@@ -271,19 +277,20 @@ namespace AdminView.AgeCategoryTemplates
             }
         }
 
-        private bool CheckForNullTemplateItemsRepository()
+        private bool CheckTemplateItemsRepository()
         {
-            if (_ageCategoryTemplateItemRepository == null)
+            if (_ageCategoryTemplateItemRepository == null || SelectedAgeCategoryTemplate == null
+                || _ageCategoryTemplateItemRepository.AgeCategoryTemplate.Id != SelectedAgeCategoryTemplate.Id)
             {
-                MessageBox.Show("Szablon kategorii wiekowych nie został wybrany");
-                return true;
+                MessageBox.Show("Szablon kategorii wiekowych nie został poprawnie wybrany");
+                return false;
             }
-            return false;
+            return true;
         }
 
         private async void OnClearAgeCategoryTemplates()
         {
-            if (CheckForNullTemplateItemsRepository())
+            if (!CheckTemplateItemsRepository())
                 return;
 
             if (MessageBoxHelper.DisplayYesNo("Czy na pewno chcesz usunąć wszystkie kategorie wiekowe dla tego szablonu?") == MessageBoxResult.Yes)
@@ -330,11 +337,15 @@ namespace AdminView.AgeCategoryTemplates
             set { SetProperty(ref _ageCategoryTemplates, value); }
         }
 
-        private EditableAgeCategoryTemplate _selectedAgeCategoryCollection = new EditableAgeCategoryTemplate();
-        public EditableAgeCategoryTemplate SelectedAgeCategoryCollection
+        private EditableAgeCategoryTemplate _selectedAgeCategoryTemplate;
+        public EditableAgeCategoryTemplate SelectedAgeCategoryTemplate
         {
-            get { return _selectedAgeCategoryCollection; }
-            set { SetProperty(ref _selectedAgeCategoryCollection, value); }
+            get { return _selectedAgeCategoryTemplate; }
+            set
+            {
+                SetProperty(ref _selectedAgeCategoryTemplate, value);
+                SelectedAgeCategoryTemplateHasChanged(_selectedAgeCategoryTemplate.DbEntity);
+            }
         }
 
 

@@ -7,7 +7,7 @@ namespace BaseCore.DataBase
     {
         public AgeCategoryTemplateItemRepository(IContextProvider contextProvider, AgeCategoryTemplate ageCategoryTemplate) : base(contextProvider) => AgeCategoryTemplate = ageCategoryTemplate;
 
-        protected AgeCategoryTemplate AgeCategoryTemplate { get; set; }
+        public AgeCategoryTemplate AgeCategoryTemplate { get; protected set; }
 
         protected override IQueryable<AgeCategoryTemplateItem> GetAllQuery(IQueryable<AgeCategoryTemplateItem> items) =>
             items.Where(i => i.AgeCategoryTemplateId == AgeCategoryTemplate.Id);
