@@ -23,13 +23,13 @@ namespace BaseCore.DataBase
 
         public DbSet<AgeCategory> AgeCategories { get; set; }
 
-        public DbSet<AgeCategoryCollection> AgeCategoryCollections { get; set; }
-
         public DbSet<AgeCategoryTemplate> AgeCategoryTemplates { get; set; }
+
+        public DbSet<AgeCategoryTemplateItem> AgeCategoryTemplateItems { get; set; }
 
         public DbSet<Distance> Distances { get; set; }
 
-        public DbSet<Subcategory> Subcategory { get; set; }
+        public DbSet<Subcategory> Subcategories { get; set; }
 
         public DbSet<Player> Players { get; set; }
 

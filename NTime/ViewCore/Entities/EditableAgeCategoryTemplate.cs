@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ViewCore.Entities
 {
-    public class EditableAgeCategoryTemplate : EditableItemBase<AgeCategoryCollection>
+    public class EditableAgeCategoryTemplate : EditableItemBase<AgeCategoryTemplate>
     {
         public EditableAgeCategoryTemplate()
         {

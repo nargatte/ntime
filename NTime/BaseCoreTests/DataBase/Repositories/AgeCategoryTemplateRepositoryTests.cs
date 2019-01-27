@@ -5,23 +5,23 @@ using NUnit.Framework;
 
 namespace BaseCoreTests.DataBase
 {
-    public class AgeCategoryTemplateRepositoryTests : RepositoryTests<AgeCategoryTemplate>
+    public class AgeCategoryTemplateRepositoryTests : RepositoryTests<AgeCategoryTemplateItem>
     {
-        protected override AgeCategoryTemplate[] InitialItems { get; set; } =
+        protected override AgeCategoryTemplateItem[] InitialItems { get; set; } =
         {
-            new AgeCategoryTemplate("Młodziki", 2000, 2005, false),
-            new AgeCategoryTemplate("Starsi", 1995, 2000, false),
-            new AgeCategoryTemplate("Starszaki", 1985, 1990, false)
+            new AgeCategoryTemplateItem("Młodziki", 2000, 2005, false),
+            new AgeCategoryTemplateItem("Starsi", 1995, 2000, false),
+            new AgeCategoryTemplateItem("Starszaki", 1985, 1990, false)
         };
 
-        private AgeCategoryCollection InitialAgeCategoryCollection { get; set; } = new AgeCategoryCollection("Collection");
+        private AgeCategoryTemplate InitialAgeCategoryCollection { get; set; } = new AgeCategoryTemplate("Collection");
 
-        protected override Repository<AgeCategoryTemplate> Repository { get; set; }
+        protected override Repository<AgeCategoryTemplateItem> Repository { get; set; }
 
         private AgeCategoryTemplateItemRepository AgeCategoryTemplateRepository =>
             (AgeCategoryTemplateItemRepository) Repository;
 
-        protected override bool TheSameData(AgeCategoryTemplate entity1, AgeCategoryTemplate entity2)
+        protected override bool TheSameData(AgeCategoryTemplateItem entity1, AgeCategoryTemplateItem entity2)
         {
             if (entity1.Name != entity2.Name) return false;
             if (entity1.YearTo != entity2.YearTo) return false;
@@ -30,23 +30,23 @@ namespace BaseCoreTests.DataBase
             return true;
         }
 
-        protected override bool SortTester(AgeCategoryTemplate before, AgeCategoryTemplate after) =>
+        protected override bool SortTester(AgeCategoryTemplateItem before, AgeCategoryTemplateItem after) =>
             before.YearFrom < after.YearFrom;
 
         protected override async Task BeforeDataSetUp(NTimeDBContext ctx)
         {
             Repository = new AgeCategoryTemplateItemRepository(ContextProvider, InitialAgeCategoryCollection);
             InitialAgeCategoryCollection.AgeCategoryTemplates = null;
-            ctx.AgeCategoryCollections.Add(InitialAgeCategoryCollection);
+            ctx.AgeCategoryTemplates.Add(InitialAgeCategoryCollection);
             await ctx.SaveChangesAsync();
         }
 
         protected override Task AfterDataTearDown(NTimeDBContext ctx)
         {
-            return Task.Factory.StartNew(() => ctx.AgeCategoryCollections.RemoveRange(ctx.AgeCategoryCollections));
+            return Task.Factory.StartNew(() => ctx.AgeCategoryTemplates.RemoveRange(ctx.AgeCategoryTemplates));
         }
 
-        protected override void Reset(AgeCategoryTemplate item)
+        protected override void Reset(AgeCategoryTemplateItem item)
         {
             item.AgeCategoryCollection = null;
             item.AgeCategoryCollectionId = InitialAgeCategoryCollection.Id;

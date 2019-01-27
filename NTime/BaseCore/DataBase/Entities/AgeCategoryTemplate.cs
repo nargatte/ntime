@@ -1,16 +1,24 @@
-﻿namespace BaseCore.DataBase
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace BaseCore.DataBase
 {
-    public class AgeCategoryTemplate : AgeCategoryBase
+    public class AgeCategoryTemplate : IEntityId
     {
         public AgeCategoryTemplate()
         {
         }
 
-        public AgeCategoryTemplate(string name, int yearFrom, int yearTo, bool male) : base(name, yearFrom, yearTo, male)
+        public AgeCategoryTemplate(string name)
         {
+            Name = name;
         }
 
-        public int AgeCategoryCollectionId { get; set; }
-        public virtual AgeCategoryCollection AgeCategoryCollection { get; set; }
+        public int Id { get; set; }
+
+        [StringLength(255), Required]
+        public string Name { get; set; }
+
+        public virtual ICollection<AgeCategoryTemplateItem> AgeCategoryTemplates { get; set; }
     }
 }

@@ -19,13 +19,13 @@ namespace BaseCore.DataBase
             CheckItem(item);
             return ContextProvider.DoAsync(async ctx =>
             {
-                ctx.Subcategory.Attach(item);
+                ctx.Subcategories.Attach(item);
                 await ctx.Players.Where(p => p.SubcategoryId == item.Id).ForEachAsync(p =>
                 {
                     p.Subcategory = null;
                     p.SubcategoryId = null;
                 });
-                ctx.Subcategory.Remove(item);
+                ctx.Subcategories.Remove(item);
                 await ctx.SaveChangesAsync();
             });
         }

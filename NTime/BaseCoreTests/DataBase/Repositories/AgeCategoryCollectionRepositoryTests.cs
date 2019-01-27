@@ -5,17 +5,17 @@ using NUnit.Framework;
 
 namespace BaseCoreTests.DataBase
 {
-    public class AgeCategoryCollectionRepositoryTests : RepositoryTests<AgeCategoryCollection>
+    public class AgeCategoryCollectionRepositoryTests : RepositoryTests<AgeCategoryTemplate>
     {
-        protected override AgeCategoryCollection[] InitialItems { get; set; } =
+        protected override AgeCategoryTemplate[] InitialItems { get; set; } =
         {
-            new AgeCategoryCollection("Olimpiada"),
-            new AgeCategoryCollection("Pływackie"),
-            new AgeCategoryCollection("Co roczne, wiosenne, Śląskie"),
-            new AgeCategoryCollection("Rowerowe Wrocławskie") 
+            new AgeCategoryTemplate("Olimpiada"),
+            new AgeCategoryTemplate("Pływackie"),
+            new AgeCategoryTemplate("Co roczne, wiosenne, Śląskie"),
+            new AgeCategoryTemplate("Rowerowe Wrocławskie") 
         };
 
-        protected override Repository<AgeCategoryCollection> Repository { get; set; }
+        protected override Repository<AgeCategoryTemplate> Repository { get; set; }
 
         protected override Task BeforeDataSetUp(NTimeDBContext context)
         {
@@ -23,13 +23,13 @@ namespace BaseCoreTests.DataBase
             return base.BeforeDataSetUp(context);
         }
 
-        protected override bool TheSameData(AgeCategoryCollection entity1, AgeCategoryCollection entity2)
+        protected override bool TheSameData(AgeCategoryTemplate entity1, AgeCategoryTemplate entity2)
         {
             if (entity1.Name != entity2.Name) return false;
             return true;
         }
 
-        protected override bool SortTester(AgeCategoryCollection before, AgeCategoryCollection after) => 
+        protected override bool SortTester(AgeCategoryTemplate before, AgeCategoryTemplate after) => 
             String.CompareOrdinal(before.Name, after.Name) <= 0;
     }
 }

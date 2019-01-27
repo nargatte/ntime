@@ -18,14 +18,21 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="6*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Text="Szablony kategorii" HorizontalAlignment="Center" TextBlock.FontSize="20" TextBlock.FontWeight="Bold" Margin="10"/>
         <StackPanel Grid.Row="1" Orientation="Vertical">
             <StackPanel Name="CategoryCollections" Orientation="Vertical">
-
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" DataContext="{Binding NewAgeCategory}">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="Nazwa"
+                                   VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
+                        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Width="200" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>
+                    </StackPanel>
+                    <Button Content="Dodaj szablon" Height="30" Margin="20,5,5,5" VerticalAlignment="Bottom"/>
+                </StackPanel>
                 <TextBlock Margin="10" Text="Wybierz szablon kategorii" HorizontalAlignment="Center" FontSize="16"/>
                 <ComboBox ItemsSource="{Binding AgeCategoryCollections}" Width="300"
                               SelectedItem="{Binding SelectedAgeCategoryCollection, UpdateSourceTrigger=PropertyChanged}">
@@ -36,8 +43,9 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
             </StackPanel>
+            <Separator Margin="0,20,0,20"/>
             <StackPanel Orientation="Vertical">
-                <TextBlock HorizontalAlignment="Center" Margin="0,20,0,0"> Kategorie</TextBlock>
+                <TextBlock HorizontalAlignment="Center" Margin="0,20,0,0"> Szablon</TextBlock>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" DataContext="{Binding NewAgeCategory}">
                         <StackPanel Orientation="Vertical">

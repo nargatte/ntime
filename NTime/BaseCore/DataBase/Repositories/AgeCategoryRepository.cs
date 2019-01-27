@@ -30,12 +30,12 @@ namespace BaseCore.DataBase
             return ret;
         }
 
-        public Task AddFormCollection(AgeCategoryCollection ageCategoryCollection)
+        public Task AddFormCollection(AgeCategoryTemplate ageCategoryCollection)
         {
             return ContextProvider.DoAsync(async ctx =>
             {
-                AgeCategoryTemplate[] ageCategoryTemplates =
-                    await ctx.AgeCategoryTemplates
+                AgeCategoryTemplateItem[] ageCategoryTemplates =
+                    await ctx.AgeCategoryTemplateItems
                         .Where(e => e.AgeCategoryCollectionId == ageCategoryCollection.Id).ToArrayAsync();
                 AgeCategory[] ageCategories = ageCategoryTemplates
                     .Select(e => new AgeCategory(e.Name, e.YearFrom, e.YearTo, e.Male) { CompetitionId = Competition.Id })
@@ -45,7 +45,7 @@ namespace BaseCore.DataBase
             });
         }
 
-        public Task SaveAsCollection(AgeCategoryCollection ageCategoryCollection)
+        public Task SaveAsCollection(AgeCategoryTemplate ageCategoryCollection)
         {
             return ContextProvider.DoAsync(async ctx =>
             {
@@ -54,17 +54,17 @@ namespace BaseCore.DataBase
                     try
                     {
                         ageCategoryCollection.AgeCategoryTemplates = null;
-                        ctx.AgeCategoryCollections.Add(ageCategoryCollection);
+                        ctx.AgeCategoryTemplates.Add(ageCategoryCollection);
                         await ctx.SaveChangesAsync();
 
                         AgeCategory[] ageCategories = await GetAllQuery(ctx.AgeCategories).ToArrayAsync();
-                        AgeCategoryTemplate[] ageCategoryTemplates =
+                        AgeCategoryTemplateItem[] ageCategoryTemplates =
                             ageCategories
-                                .Select(a => new AgeCategoryTemplate(a.Name, a.YearFrom, a.YearTo, a.Male)
+                                .Select(a => new AgeCategoryTemplateItem(a.Name, a.YearFrom, a.YearTo, a.Male)
                                 {
                                     AgeCategoryCollectionId = ageCategoryCollection.Id
                                 }).ToArray();
-                        ctx.AgeCategoryTemplates.AddRange(ageCategoryTemplates);
+                        ctx.AgeCategoryTemplateItems.AddRange(ageCategoryTemplates);
                         await ctx.SaveChangesAsync();
 
                         contextTransaction.Commit();

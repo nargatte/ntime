@@ -186,11 +186,8 @@ namespace ViewCore.Entities
             int diff = updatedGatesCount - currentGatesCount;
             if (diff == 0)
                 return;
-            MessageBoxResult result = MessageBox.Show(
-                $"Czy na pewno chcesz zmienić liczbę bramek pomiarowych z {currentGatesCount} na {updatedGatesCount}?",
-                "",
-                 MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes)
+            if (MessageBoxHelper.DisplayYesNo(
+                $"Czy na pewno chcesz zmienić liczbę bramek pomiarowych z {currentGatesCount} na {updatedGatesCount}?") == MessageBoxResult.Yes)
             {
                 if (diff > 0)
                 {
@@ -235,7 +232,7 @@ namespace ViewCore.Entities
         public bool ValidateDistance()
         {
             var message = string.Empty;
-            (_isValid,  message) = IsDistanceValid();
+            (_isValid, message) = IsDistanceValid();
             if (!_isValid)
                 MessageBox.Show(message);
             return IsValid;
