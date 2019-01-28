@@ -37,6 +37,7 @@ namespace AdminView.CompetitionChoice
             CompetitionData.CompetitionSelected += CompetitionChoiceBase_CompetitionSelected;
             AddCompetitionViewRequested += NavToAddCompetitionView;
             CalculateStandingsViewRequested += NavToCalculateStandingsView;
+            CategoryTemplatesViewRequested += NavToCategoryTemplatesView;
             OnViewLoaded();
         }
 
@@ -65,7 +66,8 @@ namespace AdminView.CompetitionChoice
 
         private void NavToCategoryTemplatesView()
         {
-            var categoryTemplatesViewModel = new AgeCategoryTemplatesViewModel(); 
+            var categoryTemplatesViewModel = new AgeCategoryTemplatesViewModel();
+            categoryTemplatesViewModel.ShowWindowDialog();
         }
 
         private async void OnCompetitionAddedAsync(object sender, EventArgs e)

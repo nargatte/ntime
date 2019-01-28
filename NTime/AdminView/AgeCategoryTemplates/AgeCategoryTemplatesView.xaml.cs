@@ -17,9 +17,9 @@ namespace AdminView.AgeCategoryTemplates
     /// <summary>
     /// Interaction logic for CategoryTemplatesView.xaml
     /// </summary>
-    public partial class CategoryTemplatesView : Window
+    public partial class AgeCategoryTemplatesView : Window
     {
-        public CategoryTemplatesView()
+        public AgeCategoryTemplatesView()
         {
             InitializeComponent();
         }

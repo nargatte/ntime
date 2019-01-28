@@ -1,4 +1,4 @@
-﻿<Window x:Class="AdminView.AgeCategoryTemplates.CategoryTemplatesView"
+﻿<Window x:Class="AdminView.AgeCategoryTemplates.AgeCategoryTemplatesView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -15,6 +15,7 @@
     <Window.Resources>
         <converters:EnumToBoolConverterClass x:Key="EnumToBoolConverter"/>
         <converters:IsMaleToSexEnumConverterClass x:Key="IsMaleToSexEnumConverter"/>
+        <converters:ObjectToVisibilityConverterClass x:Key="ObjectToVisibilityConverter"/>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -24,18 +25,18 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Text="Szablony kategorii" HorizontalAlignment="Center" TextBlock.FontSize="20" TextBlock.FontWeight="Bold" Margin="10"/>
         <StackPanel Grid.Row="1" Orientation="Vertical">
-            <StackPanel Name="CategoryCollections" Orientation="Vertical">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" DataContext="{Binding NewAgeCategory}">
-                    <StackPanel Orientation="Vertical">
+            <StackPanel Name="AgeCategoryTemplates" Orientation="Vertical">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+                    <StackPanel Orientation="Vertical" DataContext="{Binding NewAgeCategoryTemplate}">
                         <TextBlock Text="Nazwa"
                                    VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
                         <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Width="200" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>
                     </StackPanel>
-                    <Button Content="Dodaj szablon" Height="30" Margin="20,5,5,5" VerticalAlignment="Bottom"/>
+                    <Button Content="Dodaj szablon" Command="{Binding AddAgeCategoryTemplateCmd}" Height="30" Margin="20,5,5,5" VerticalAlignment="Bottom"/>
                 </StackPanel>
                 <TextBlock Margin="10" Text="Wybierz szablon kategorii" HorizontalAlignment="Center" FontSize="16"/>
-                <ComboBox ItemsSource="{Binding AgeCategoryCollections}" Width="300"
-                              SelectedItem="{Binding SelectedAgeCategoryCollection, UpdateSourceTrigger=PropertyChanged}">
+                <ComboBox ItemsSource="{Binding AgeCategoryTemplates}" Width="300"
+                              SelectedItem="{Binding SelectedAgeCategoryTemplate, UpdateSourceTrigger=PropertyChanged}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Name}"/>
@@ -44,10 +45,11 @@
                 </ComboBox>
             </StackPanel>
             <Separator Margin="0,20,0,20"/>
-            <StackPanel Orientation="Vertical">
-                <TextBlock HorizontalAlignment="Center" Margin="0,20,0,0"> Szablon</TextBlock>
+            <StackPanel Name="AgeCategoryTemplateItems" Orientation="Vertical"
+                        Visibility="{Binding SelectedAgeCategoryTemplate, Converter={StaticResource ObjectToVisibilityConverter}}">
+                <TextBlock Text="{Binding SelectedAgeCategoryTemplate.Name, StringFormat={}Szablon: {0}}"  HorizontalAlignment="Center" Margin="0,20,0,0"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" DataContext="{Binding NewAgeCategory}">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" DataContext="{Binding NewAgeCategoryTemplateItem}">
                         <StackPanel Orientation="Vertical">
                             <TextBlock Text="Nazwa"
                                    VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
@@ -73,17 +75,12 @@
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text=""
                                VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
-                        <Button Command="{Binding AddCategoryCmd}" Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                        <Button Command="{Binding AddAgeCategoryTemplateItemCmd}" Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
                             Content="Dodaj"   FontSize="15" Margin="30, 5, 5, 5"/>
-                    </StackPanel>
-                    <StackPanel  Orientation="Vertical"  HorizontalAlignment="Center" Margin="30,0,0,0">
-                        <Button  Command="{Binding ClearAgeCategoriesCmd}" Margin="0,3, 10, 3" Height="37" Width="100" FontSize="13">
-                            Usuń wszystkie
-                        </Button>
                     </StackPanel>
                 </StackPanel>
                 <DataGrid x:Name="ageCategoryDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="0,10" 
-                      ItemsSource="{Binding AgeCategories}" EnableRowVirtualization="True" AutoGenerateColumns="False"
+                      ItemsSource="{Binding AgeCategoryTemplateItems}" EnableRowVirtualization="True" AutoGenerateColumns="False"
                       ColumnWidth="*" SelectionMode="Extended" CanUserAddRows="False" Width="300">
                     <DataGrid.Columns>
                         <DataGridTextColumn x:Name="nameColumn" Header="Nazwa" Width="*" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}"/>
@@ -113,9 +110,12 @@
                     </DataGrid.Columns>
                 </DataGrid>
 
-                <StackPanel Name="Categories_actions"  Orientation="Horizontal" Margin="5" HorizontalAlignment="Center">
-                    <Button Margin="10" Width="130" Command="{Binding RepeatCategoriesForWomenCmd}">
+                <StackPanel Name="Categories_actions"  Orientation="Horizontal" Margin="0, 30" HorizontalAlignment="Center">
+                    <Button Margin="20, 0" Width="130" Height="40" Command="{Binding RepeatAgeCategoryTemplateItemsForWomenCmd}">
                         <TextBlock TextWrapping="Wrap" TextAlignment="Center">Stwórz dla kobiet kopie kategorii męskch</TextBlock>
+                    </Button>
+                    <Button  Command="{Binding ClearAgeCategoryTemplateItemsCmd}" Margin="20,0" Height="40"  Width="100" FontSize="13">
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center">Usuń kategorie dla szablonu</TextBlock>
                     </Button>
                 </StackPanel>
             </StackPanel>
@@ -125,13 +125,13 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" MinHeight="20" MaxHeight="30" MinWidth="30" Height="30" MaxWidth="150" Margin="15"
+            <!--<Button Grid.Column="0" MinHeight="20" MaxHeight="30" MinWidth="30" Height="30" MaxWidth="150" Margin="15"
                     VerticalAlignment="Bottom" HorizontalAlignment="Center" Command="{Binding CalculateStandingsCmd}">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="30">
                     <Image Source="pack://application:,,,/AdminView;component/Images/add.png" Height="30" Width="20" />
                     <TextBlock Text="Zapisz dane" Height="20"/>
                 </StackPanel>
-                <!--<Button.Style>
+                --><!--<Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="IsEnabled" Value="False"/>
                         <Style.Triggers>
@@ -143,13 +143,13 @@
                             </MultiDataTrigger>
                         </Style.Triggers>
                     </Style>
-                </Button.Style>-->
-            </Button>
+                </Button.Style>--><!--
+            </Button>-->
             <Button Grid.Column="1" Height="30" MinWidth="30" MaxWidth="100" Margin="15"
-                    VerticalAlignment="Bottom" HorizontalAlignment="Center" Command="{Binding CancelCmd}">
+                    VerticalAlignment="Bottom" HorizontalAlignment="Center" Command="{Binding CloseWindowCmd}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="pack://application:,,,/AdminView;component/Images/delete.png" Height="30" Width="20"/>
-                    <TextBlock Text="Anuluj" Height="20"/>
+                    <TextBlock Text="Zamkinij" Height="20"/>
                 </StackPanel>
             </Button>
         </Grid>

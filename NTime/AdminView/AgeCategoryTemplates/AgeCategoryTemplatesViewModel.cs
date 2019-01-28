@@ -14,6 +14,7 @@ namespace AdminView.AgeCategoryTemplates
 {
     public class AgeCategoryTemplatesViewModel : BindableBase
     {
+        Window _view;
         private const string AgeCategoryTemplateName = "Szablon kategorii wiekowych";
         private const string AgeCategoryTemplateItemName = "Kategoria wiekowa należąca do szablonu";
         private AgeCategoryTemplateRepository _ageCategoryTemplateRepository;
@@ -24,9 +25,9 @@ namespace AdminView.AgeCategoryTemplates
         {
             _ageCategoryTemplateRepository = new AgeCategoryTemplateRepository(new ContextProvider());
             ViewLoadedCmd = new RelayCommand(OnViewLoadedAsync);
-            AddAgeCategoryCollectionCmd = new RelayCommand(OnAddAgeCategoryTemplateAsync);
-            AddAgeCategoryTemplateCmd = new RelayCommand(OnAddAgeCategoryTemplateItemAsync);
-            ClearAgeCategoryTemplatesCmd = new RelayCommand(OnClearAgeCategoryTemplates);
+            AddAgeCategoryTemplateCmd = new RelayCommand(OnAddAgeCategoryTemplateAsync);
+            AddAgeCategoryTemplateItemCmd = new RelayCommand(OnAddAgeCategoryTemplateItemAsync);
+            ClearAgeCategoryTemplateItemsCmd = new RelayCommand(OnClearAgeCategoryTemplates);
             RepeatAgeCategoryTemplateItemsForWomenCmd = new RelayCommand(OnRepeatAgeCategoryTemplateItemsForWomen);
         }
 
@@ -35,6 +36,11 @@ namespace AdminView.AgeCategoryTemplates
             await DownloadAgeCategoryTemplatesFromDatabase();
         }
 
+        public void ShowWindowDialog()
+        {
+            _view = new AgeCategoryTemplatesView() { DataContext = this };
+            _view.ShowDialog();
+        }
 
         #region AgeCategoryTemplates
 
@@ -51,6 +57,7 @@ namespace AdminView.AgeCategoryTemplates
                 await _ageCategoryTemplateRepository.AddAsync(NewAgeCategoryTemplate.DbEntity);
                 AddAgeCategoryTemplateToGui(NewAgeCategoryTemplate);
                 NewAgeCategoryTemplate = new EditableAgeCategoryTemplate();
+                MessageBox.Show("Szablon został poprawnie dodany");
             }
             catch (Exception ex)
             {
@@ -245,6 +252,7 @@ namespace AdminView.AgeCategoryTemplates
                 await _ageCategoryTemplateItemRepository.AddAsync(NewAgeCategoryTemplateItem.DbEntity);
                 AddAgeCategoryTemplateItemToGui(NewAgeCategoryTemplateItem);
                 NewAgeCategoryTemplateItem = new EditableAgeCategoryTemplateItem();
+                MessageBox.Show("Kategoria została poprawnie dodana do szablonu");
             }
             catch (Exception ex)
             {
@@ -373,13 +381,15 @@ namespace AdminView.AgeCategoryTemplates
 
 
         public event EventHandler DeleteRequested = delegate { };
-        public RelayCommand ViewLoadedCmd { get; set; }
-        public RelayCommand AddAgeCategoryCollectionCmd { get; private set; }
+
+        public RelayCommand ViewLoadedCmd { get; private set; }
+        public RelayCommand CloseWindowCmd { get; private set; }
         public RelayCommand AddAgeCategoryTemplateCmd { get; private set; }
-        //public RelayCommand DeleteAgeCategoryCollectionCmd { get; private set; }
-        //public RelayCommand DeleteAgeCategoryTemplateCmd { get; private set; }
+        public RelayCommand AddAgeCategoryTemplateItemCmd { get; private set; }
         public RelayCommand RepeatAgeCategoryTemplateItemsForWomenCmd { get; private set; }
-        public RelayCommand ClearAgeCategoryTemplatesCmd { get; private set; }
+        public RelayCommand ClearAgeCategoryTemplateItemsCmd { get; private set; }
+        //public RelayCommand DeleteAgeCategoryTemplateCmd { get; private set; }
+        //public RelayCommand DeleteAgeCategoryTemplateItemCmd { get; private set; }
 
         #endregion
     }

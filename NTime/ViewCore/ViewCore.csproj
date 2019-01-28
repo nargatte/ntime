@@ -149,6 +149,7 @@
     <Compile Include="XamlConverters\EnumToBoolConverterClass.cs" />
     <Compile Include="XamlConverters\GateToNumberConverterClass.cs" />
     <Compile Include="XamlConverters\IsMaleToSexEnumConverterClass.cs" />
+    <Compile Include="XamlConverters\ObjectToVisibilityConverterClass.cs" />
     <Compile Include="XamlConverters\RecordsRangeToTextConverterClass.cs" />
     <Compile Include="XamlConverters\TimeReadTypeToColorConverterClass.cs" />
     <Compile Include="XamlConverters\UserNameConverterClass.cs" />
