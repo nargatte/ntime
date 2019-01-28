@@ -25,8 +25,10 @@ namespace AdminView.AgeCategoryTemplates
         {
             _ageCategoryTemplateRepository = new AgeCategoryTemplateRepository(new ContextProvider());
             ViewLoadedCmd = new RelayCommand(OnViewLoadedAsync);
+            CloseWindowCmd = new RelayCommand(CloseWindowDialog);
             AddAgeCategoryTemplateCmd = new RelayCommand(OnAddAgeCategoryTemplateAsync);
             AddAgeCategoryTemplateItemCmd = new RelayCommand(OnAddAgeCategoryTemplateItemAsync);
+            DeleteAgeCategoryTemplateCmd = new RelayCommand(OnDeleteSelectedAgeCategoryTemplate);
             ClearAgeCategoryTemplateItemsCmd = new RelayCommand(OnClearAgeCategoryTemplates);
             RepeatAgeCategoryTemplateItemsForWomenCmd = new RelayCommand(OnRepeatAgeCategoryTemplateItemsForWomen);
         }
@@ -40,6 +42,11 @@ namespace AdminView.AgeCategoryTemplates
         {
             _view = new AgeCategoryTemplatesView() { DataContext = this };
             _view.ShowDialog();
+        }
+
+        private void CloseWindowDialog()
+        {
+            _view.Close();
         }
 
         #region AgeCategoryTemplates
@@ -57,7 +64,7 @@ namespace AdminView.AgeCategoryTemplates
                 await _ageCategoryTemplateRepository.AddAsync(NewAgeCategoryTemplate.DbEntity);
                 AddAgeCategoryTemplateToGui(NewAgeCategoryTemplate);
                 NewAgeCategoryTemplate = new EditableAgeCategoryTemplate();
-                MessageBox.Show("Szablon został poprawnie dodany");
+                MessageBox.Show("Szablon kategorii został dodany");
             }
             catch (Exception ex)
             {
@@ -96,7 +103,6 @@ namespace AdminView.AgeCategoryTemplates
         private void AddAgeCategoryTemplateToGui(EditableAgeCategoryTemplate ageCategoryTemplate)
         {
             ageCategoryTemplate.UpdateRequested += AgeCategoryTemplate_UpdateRequested;
-            ageCategoryTemplate.DeleteRequested += AgeCategoryTemplate_DeleteRequested;
             AgeCategoryTemplates.Add(ageCategoryTemplate);
         }
 
@@ -118,11 +124,11 @@ namespace AdminView.AgeCategoryTemplates
             }
         }
 
-        private async void AgeCategoryTemplate_DeleteRequested(object sender, EventArgs e)
+        private async void OnDeleteSelectedAgeCategoryTemplate()
         {
             if (MessageBoxHelper.DisplayYesNo("Czy na pewno chcesz usunąć szablon kategorii?. Zmiana jest nieodwracalna") == MessageBoxResult.Yes)
             {
-                if (!(sender is EditableAgeCategoryTemplate ageCategoryTemplate))
+                if (SelectedAgeCategoryTemplate == null)
                 {
                     DisplayInvalidDeleteMessage(AgeCategoryTemplateName);
                     return;
@@ -130,7 +136,10 @@ namespace AdminView.AgeCategoryTemplates
 
                 try
                 {
-                    await _ageCategoryTemplateRepository.RemoveAsync(ageCategoryTemplate.DbEntity);
+                    await _ageCategoryTemplateRepository.RemoveAsync(SelectedAgeCategoryTemplate.DbEntity);
+                    AgeCategoryTemplateItems.Clear();
+                    AgeCategoryTemplates.Remove(SelectedAgeCategoryTemplate);
+                    SelectedAgeCategoryTemplate = null;
                 }
                 catch (Exception ex)
                 {
@@ -139,10 +148,17 @@ namespace AdminView.AgeCategoryTemplates
             }
         }
 
-        private async void SelectedAgeCategoryTemplateHasChanged(AgeCategoryTemplate ageCategoryTemplate)
+        private async void SelectedAgeCategoryTemplateHasChanged(EditableAgeCategoryTemplate ageCategoryTemplate)
         {
-            _ageCategoryTemplateItemRepository = new AgeCategoryTemplateItemRepository(new ContextProvider(), ageCategoryTemplate);
-            await DownloadAgeCategoryTemplateItemsFromDatabase(clearDisplayedTemplateItemsBefore: true);
+            if (ageCategoryTemplate == null)
+            {
+                _ageCategoryTemplateItemRepository = null;
+            }
+            else
+            {
+                _ageCategoryTemplateItemRepository = new AgeCategoryTemplateItemRepository(new ContextProvider(), ageCategoryTemplate.DbEntity);
+                await DownloadAgeCategoryTemplateItemsFromDatabase(clearDisplayedTemplateItemsBefore: true);
+            }
         }
 
         #endregion
@@ -224,6 +240,7 @@ namespace AdminView.AgeCategoryTemplates
             try
             {
                 await _ageCategoryTemplateItemRepository.RemoveAsync(ageCategoryTemplateItemToDelete.DbEntity);
+                AgeCategoryTemplateItems.Remove(ageCategoryTemplateItemToDelete);
             }
             catch (Exception ex)
             {
@@ -252,7 +269,6 @@ namespace AdminView.AgeCategoryTemplates
                 await _ageCategoryTemplateItemRepository.AddAsync(NewAgeCategoryTemplateItem.DbEntity);
                 AddAgeCategoryTemplateItemToGui(NewAgeCategoryTemplateItem);
                 NewAgeCategoryTemplateItem = new EditableAgeCategoryTemplateItem();
-                MessageBox.Show("Kategoria została poprawnie dodana do szablonu");
             }
             catch (Exception ex)
             {
@@ -352,7 +368,7 @@ namespace AdminView.AgeCategoryTemplates
             set
             {
                 SetProperty(ref _selectedAgeCategoryTemplate, value);
-                SelectedAgeCategoryTemplateHasChanged(_selectedAgeCategoryTemplate.DbEntity);
+                SelectedAgeCategoryTemplateHasChanged(_selectedAgeCategoryTemplate);
             }
         }
 
@@ -388,7 +404,7 @@ namespace AdminView.AgeCategoryTemplates
         public RelayCommand AddAgeCategoryTemplateItemCmd { get; private set; }
         public RelayCommand RepeatAgeCategoryTemplateItemsForWomenCmd { get; private set; }
         public RelayCommand ClearAgeCategoryTemplateItemsCmd { get; private set; }
-        //public RelayCommand DeleteAgeCategoryTemplateCmd { get; private set; }
+        public RelayCommand DeleteAgeCategoryTemplateCmd { get; private set; }
         //public RelayCommand DeleteAgeCategoryTemplateItemCmd { get; private set; }
 
         #endregion

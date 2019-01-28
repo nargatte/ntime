@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BaseCore.DataBase
@@ -22,7 +23,7 @@ namespace BaseCore.DataBase
                 var ageCategoryTemplateItemsToRemove = ctx.AgeCategoryTemplateItems.Where(act => act.AgeCategoryTemplateId == item.Id);
                 ctx.AgeCategoryTemplateItems.RemoveRange(ageCategoryTemplateItemsToRemove);
 
-                ctx.AgeCategoryTemplates.Remove(item);
+                ctx.Entry(item).State = EntityState.Deleted;
                 await ctx.SaveChangesAsync();
             });
 
