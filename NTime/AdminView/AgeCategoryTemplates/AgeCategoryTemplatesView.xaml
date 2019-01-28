@@ -9,7 +9,7 @@
         xmlns:converters="clr-namespace:ViewCore.XamlConverters;assembly=ViewCore"
         xmlns:db="clr-namespace:BaseCore.DataBase;assembly=BaseCore"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        WindowStyle="None"
+        WindowStyle="ToolWindow"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         Title="CategoryTemplatesView" Height="800" Width="600">
@@ -26,8 +26,7 @@
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="6*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Text="Szablony kategorii" HorizontalAlignment="Center" TextBlock.FontSize="20" TextBlock.FontWeight="Bold" Margin="10"/>
         <StackPanel Grid.Row="1" Orientation="Vertical">
@@ -139,40 +138,5 @@
                 </StackPanel>
             </StackPanel>
         </StackPanel>
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <!--<Button Grid.Column="0" MinHeight="20" MaxHeight="30" MinWidth="30" Height="30" MaxWidth="150" Margin="15"
-                    VerticalAlignment="Bottom" HorizontalAlignment="Center" Command="{Binding CalculateStandingsCmd}">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="30">
-                    <Image Source="pack://application:,,,/AdminView;component/Images/add.png" Height="30" Width="20" />
-                    <TextBlock Text="Zapisz dane" Height="20"/>
-                </StackPanel>
-                -->
-            <!--<Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="IsEnabled" Value="False"/>
-                        <Style.Triggers>
-                            <MultiDataTrigger>
-                                <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding ElementName=nameTextBox, Path=(Validation.HasError)}" Value="false" />
-                                </MultiDataTrigger.Conditions>
-                                <Setter Property="IsEnabled" Value="True"/>
-                            </MultiDataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>-->
-            <!--
-            </Button>-->
-            <Button Grid.Column="1" Height="30" MinWidth="30" MaxWidth="100" Margin="15"
-                    VerticalAlignment="Bottom" HorizontalAlignment="Center" Command="{Binding CloseWindowCmd}">
-                <StackPanel Orientation="Horizontal">
-                    <Image Source="pack://application:,,,/AdminView;component/Images/delete.png" Height="30" Width="20"/>
-                    <TextBlock Text="Zamkinij" Height="20"/>
-                </StackPanel>
-            </Button>
-        </Grid>
     </Grid>
 </Window>

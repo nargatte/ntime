@@ -253,13 +253,24 @@ namespace AdminView.AgeCategoryTemplates
             if (!CheckTemplateItemsRepository())
                 return;
 
-            if (String.IsNullOrWhiteSpace(NewAgeCategoryTemplateItem.Name) ||
-                String.IsNullOrWhiteSpace(NewAgeCategoryTemplateItem.YearFrom.ToString()) ||
-                String.IsNullOrWhiteSpace(NewAgeCategoryTemplateItem.YearTo.ToString()) ||
-                !int.TryParse(NewAgeCategoryTemplateItem.YearFrom.ToString(), out int result1) ||
-                !int.TryParse(NewAgeCategoryTemplateItem.YearFrom.ToString(), out int result2))
+            if (String.IsNullOrWhiteSpace(NewAgeCategoryTemplateItem.Name))
             {
-                MessageBox.Show("Kategorie i lata graniczne nie mogę być puste");
+                MessageBox.Show("Kategoria nie może być pusta");
+                return;
+            }
+
+            if (String.IsNullOrWhiteSpace(NewAgeCategoryTemplateItem.YearFrom?.ToString()) ||
+                String.IsNullOrWhiteSpace(NewAgeCategoryTemplateItem.YearTo?.ToString()) ||
+                !int.TryParse(NewAgeCategoryTemplateItem.YearFrom.ToString(), out int tempYearFrom) ||
+                !int.TryParse(NewAgeCategoryTemplateItem.YearTo.ToString(), out int tempYearTo))
+            {
+                MessageBox.Show("Lata graniczne mają nieprawidłowe wartości");
+                return;
+            }
+
+            if (tempYearFrom > tempYearTo)
+            {
+                MessageBox.Show("Pierwszy rocznik graniczny nie może być większy niż drugi");
                 return;
             }
 
