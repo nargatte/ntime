@@ -67,7 +67,7 @@ namespace AdminView.CompetitionChoice
         private void NavToCategoryTemplatesView()
         {
             var categoryTemplatesViewModel = new AgeCategoryTemplatesViewModel();
-            categoryTemplatesViewModel.ShowWindowDialog();
+            categoryTemplatesViewModel.ShowEditableDialog();
         }
 
         private async void OnCompetitionAddedAsync(object sender, EventArgs e)

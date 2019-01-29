@@ -15,6 +15,7 @@ namespace AdminView.AgeCategoryTemplates
     public class AgeCategoryTemplatesViewModel : BindableBase
     {
         Window _view;
+        private bool _returnAgeCategoryTemplateItems;
         private const string AgeCategoryTemplateName = "Szablon kategorii wiekowych";
         private const string AgeCategoryTemplateItemName = "Kategoria wiekowa należąca do szablonu";
         private AgeCategoryTemplateRepository _ageCategoryTemplateRepository;
@@ -25,29 +26,108 @@ namespace AdminView.AgeCategoryTemplates
         {
             _ageCategoryTemplateRepository = new AgeCategoryTemplateRepository(new ContextProvider());
             ViewLoadedCmd = new RelayCommand(OnViewLoadedAsync);
-            CloseWindowCmd = new RelayCommand(CloseWindowDialog);
             AddAgeCategoryTemplateCmd = new RelayCommand(OnAddAgeCategoryTemplateAsync);
             AddAgeCategoryTemplateItemCmd = new RelayCommand(OnAddAgeCategoryTemplateItemAsync);
             DeleteAgeCategoryTemplateCmd = new RelayCommand(OnDeleteSelectedAgeCategoryTemplate);
             ClearAgeCategoryTemplateItemsCmd = new RelayCommand(OnClearAgeCategoryTemplates);
             RepeatAgeCategoryTemplateItemsForWomenCmd = new RelayCommand(OnRepeatAgeCategoryTemplateItemsForWomen);
+            ReturnAgeCategoryTemplateItemsCmd = new RelayCommand(OnReturnAgeCategoryTemplateItems, CanReturnAgeCategoryTemplateItems);
+            _newAgeCategoryTemplateItem = new EditableAgeCategoryTemplateItem(IsEditable);
         }
+
+        #region Properties
+
+        private bool _isEditable;
+        public bool IsEditable
+        {
+            get { return _isEditable; }
+            set { SetProperty(ref _isEditable, value); }
+        }
+
+        private EditableAgeCategoryTemplate _newAgeCategoryTemplate = new EditableAgeCategoryTemplate();
+        public EditableAgeCategoryTemplate NewAgeCategoryTemplate
+        {
+            get { return _newAgeCategoryTemplate; }
+            set { SetProperty(ref _newAgeCategoryTemplate, value); }
+        }
+
+        private ObservableCollection<EditableAgeCategoryTemplate> _ageCategoryTemplates = new ObservableCollection<EditableAgeCategoryTemplate>();
+        public ObservableCollection<EditableAgeCategoryTemplate> AgeCategoryTemplates
+        {
+            get { return _ageCategoryTemplates; }
+            set { SetProperty(ref _ageCategoryTemplates, value); }
+        }
+
+        private EditableAgeCategoryTemplate _selectedAgeCategoryTemplate;
+        public EditableAgeCategoryTemplate SelectedAgeCategoryTemplate
+        {
+            get { return _selectedAgeCategoryTemplate; }
+            set
+            {
+                SetProperty(ref _selectedAgeCategoryTemplate, value);
+                SelectedAgeCategoryTemplateHasChanged(_selectedAgeCategoryTemplate);
+            }
+        }
+
+
+        private ObservableCollection<EditableAgeCategoryTemplateItem> _ageCategoryTemplateItems = new ObservableCollection<EditableAgeCategoryTemplateItem>();
+        public ObservableCollection<EditableAgeCategoryTemplateItem> AgeCategoryTemplateItems
+        {
+            get { return _ageCategoryTemplateItems; }
+            set { SetProperty(ref _ageCategoryTemplateItems, value); }
+        }
+
+        private EditableAgeCategoryTemplateItem _newAgeCategoryTemplateItem;
+        public EditableAgeCategoryTemplateItem NewAgeCategoryTemplateItem
+        {
+            get { return _newAgeCategoryTemplateItem; }
+            set
+            {
+                SetProperty(ref _newAgeCategoryTemplateItem, value);
+                //_newAgeCategory.DbEntity.Name = _newAgeCategory.Name;
+                //_newAgeCategory.DbEntity.YearFrom = _newAgeCategory.YearFrom;
+                //_newAgeCategory.DbEntity.YearTo = _newAgeCategory.YearTo;
+                //_newAgeCategory.DbEntity.Male = _newAgeCategory.Male;
+            }
+        }
+
+        #endregion
 
         private async void OnViewLoadedAsync()
         {
             await DownloadAgeCategoryTemplatesFromDatabase();
         }
 
-        public void ShowWindowDialog()
+        public void ShowEditableDialog()
+        {
+            IsEditable = true;
+            ShowDialog();
+        }
+
+        public List<AgeCategoryTemplateItem> ShowReadonlyDialog()
+        {
+            IsEditable = false;
+            ShowDialog();
+            if (_returnAgeCategoryTemplateItems && SelectedAgeCategoryTemplate != null)
+                return AgeCategoryTemplateItems.Select(item => item.DbEntity).ToList();
+            else
+                return null;
+        }
+
+        private void ShowDialog()
         {
             _view = new AgeCategoryTemplatesView() { DataContext = this };
             _view.ShowDialog();
         }
 
-        private void CloseWindowDialog()
+        private void OnReturnAgeCategoryTemplateItems()
         {
+            _returnAgeCategoryTemplateItems = true;
             _view.Close();
         }
+
+        private bool CanReturnAgeCategoryTemplateItems() => SelectedAgeCategoryTemplate != null;
+
 
         #region AgeCategoryTemplates
 
@@ -190,7 +270,7 @@ namespace AdminView.AgeCategoryTemplates
         {
             foreach (var dbAgeCategoryTemplateItem in ageCategoryTemplateItems)
             {
-                var categoryToAdd = new EditableAgeCategoryTemplateItem()
+                var categoryToAdd = new EditableAgeCategoryTemplateItem(IsEditable)
                 {
                     DbEntity = dbAgeCategoryTemplateItem
                 };
@@ -279,7 +359,7 @@ namespace AdminView.AgeCategoryTemplates
             {
                 await _ageCategoryTemplateItemRepository.AddAsync(NewAgeCategoryTemplateItem.DbEntity);
                 AddAgeCategoryTemplateItemToGui(NewAgeCategoryTemplateItem);
-                NewAgeCategoryTemplateItem = new EditableAgeCategoryTemplateItem();
+                NewAgeCategoryTemplateItem = new EditableAgeCategoryTemplateItem(IsEditable);
             }
             catch (Exception ex)
             {
@@ -358,64 +438,19 @@ namespace AdminView.AgeCategoryTemplates
 
         #region Properties and events
 
-        private EditableAgeCategoryTemplate _newAgeCategoryTemplate = new EditableAgeCategoryTemplate();
-        public EditableAgeCategoryTemplate NewAgeCategoryTemplate
-        {
-            get { return _newAgeCategoryTemplate; }
-            set { SetProperty(ref _newAgeCategoryTemplate, value); }
-        }
 
-        private ObservableCollection<EditableAgeCategoryTemplate> _ageCategoryTemplates = new ObservableCollection<EditableAgeCategoryTemplate>();
-        public ObservableCollection<EditableAgeCategoryTemplate> AgeCategoryTemplates
-        {
-            get { return _ageCategoryTemplates; }
-            set { SetProperty(ref _ageCategoryTemplates, value); }
-        }
-
-        private EditableAgeCategoryTemplate _selectedAgeCategoryTemplate;
-        public EditableAgeCategoryTemplate SelectedAgeCategoryTemplate
-        {
-            get { return _selectedAgeCategoryTemplate; }
-            set
-            {
-                SetProperty(ref _selectedAgeCategoryTemplate, value);
-                SelectedAgeCategoryTemplateHasChanged(_selectedAgeCategoryTemplate);
-            }
-        }
-
-
-        private ObservableCollection<EditableAgeCategoryTemplateItem> _ageCategoryTemplateItems = new ObservableCollection<EditableAgeCategoryTemplateItem>();
-        public ObservableCollection<EditableAgeCategoryTemplateItem> AgeCategoryTemplateItems
-        {
-            get { return _ageCategoryTemplateItems; }
-            set { SetProperty(ref _ageCategoryTemplateItems, value); }
-        }
-
-        private EditableAgeCategoryTemplateItem _newAgeCategoryTemplateItem = new EditableAgeCategoryTemplateItem();
-        public EditableAgeCategoryTemplateItem NewAgeCategoryTemplateItem
-        {
-            get { return _newAgeCategoryTemplateItem; }
-            set
-            {
-                SetProperty(ref _newAgeCategoryTemplateItem, value);
-                //_newAgeCategory.DbEntity.Name = _newAgeCategory.Name;
-                //_newAgeCategory.DbEntity.YearFrom = _newAgeCategory.YearFrom;
-                //_newAgeCategory.DbEntity.YearTo = _newAgeCategory.YearTo;
-                //_newAgeCategory.DbEntity.Male = _newAgeCategory.Male;
-            }
-        }
 
 
 
         public event EventHandler DeleteRequested = delegate { };
 
         public RelayCommand ViewLoadedCmd { get; private set; }
-        public RelayCommand CloseWindowCmd { get; private set; }
         public RelayCommand AddAgeCategoryTemplateCmd { get; private set; }
         public RelayCommand AddAgeCategoryTemplateItemCmd { get; private set; }
         public RelayCommand RepeatAgeCategoryTemplateItemsForWomenCmd { get; private set; }
         public RelayCommand ClearAgeCategoryTemplateItemsCmd { get; private set; }
         public RelayCommand DeleteAgeCategoryTemplateCmd { get; private set; }
+        public RelayCommand ReturnAgeCategoryTemplateItemsCmd { get; private set; }
         //public RelayCommand DeleteAgeCategoryTemplateItemCmd { get; private set; }
 
         #endregion

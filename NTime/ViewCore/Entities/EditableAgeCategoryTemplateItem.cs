@@ -10,13 +10,14 @@ namespace ViewCore.Entities
 {
     public class EditableAgeCategoryTemplateItem : EditableItemBase<AgeCategoryTemplateItem>
     {
-        public EditableAgeCategoryTemplateItem()
+        public EditableAgeCategoryTemplateItem(bool isEditable)
         {
             DeleteCategoryCmd = new RelayCommand(OnDeleteCategory);
             Male = true;
+            IsEditable = isEditable;
         }
 
-        public EditableAgeCategoryTemplateItem(EditableAgeCategoryTemplateItem editableAgeCategory)
+        public EditableAgeCategoryTemplateItem(EditableAgeCategoryTemplateItem editableAgeCategory) : this(editableAgeCategory.IsEditable)
         {
             Name = editableAgeCategory.Name;
             YearFrom = editableAgeCategory.YearFrom;
@@ -79,6 +80,14 @@ namespace ViewCore.Entities
                 DbEntity.AgeCategoryTemplateId = SetProperty(DbEntity.AgeCategoryTemplateId, value);
                 OnUpdateRequested();
             }
+        }
+
+
+        private bool _isEditable;
+        public bool IsEditable
+        {
+            get { return _isEditable; }
+            set { SetProperty(ref _isEditable, value); }
         }
 
         public RelayCommand DeleteCategoryCmd { get; private set; }

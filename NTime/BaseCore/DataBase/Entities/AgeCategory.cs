@@ -18,6 +18,11 @@ namespace BaseCore.DataBase
 
         }
 
+        public AgeCategory(AgeCategoryBase ageCategory): this(ageCategory.Name, ageCategory.YearFrom, ageCategory.YearTo, ageCategory.Male)
+        {
+
+        }
+
         public int CompetitionId { get; set; }
         public virtual Competition Competition { get; set; }
 

@@ -140,6 +140,7 @@
     <Compile Include="Validation\IsNumber30Rule.cs" />
     <Compile Include="Validation\IsPositiveDoubleRule.cs" />
     <Compile Include="Validation\TimeFormatRule.cs" />
+    <Compile Include="XamlConverters\BoolNegationConverterClass.cs" />
     <Compile Include="XamlConverters\BoolToCollapsedConverterClass.cs" />
     <Compile Include="XamlConverters\BoolToCollapsedNegativeConverterClass.cs" />
     <Compile Include="XamlConverters\BoolToSexConverterClass.cs" />
