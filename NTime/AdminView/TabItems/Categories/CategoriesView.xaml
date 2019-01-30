@@ -69,7 +69,7 @@
                 </StackPanel>
                 <DataGrid x:Name="ageCategoryDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="0,10" 
                       ItemsSource="{Binding AgeCategories}" EnableRowVirtualization="True" AutoGenerateColumns="False"
-                      ColumnWidth="*" SelectionMode="Extended" CanUserAddRows="False" Width="300">
+                      ColumnWidth="*" SelectionMode="Extended" CanUserAddRows="False" Width="400">
                     <DataGrid.Columns>
                         <DataGridTextColumn x:Name="nameColumn" Header="Nazwa" Width="*" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}"/>
                         <DataGridTextColumn x:Name="yearFromColumn" Header="Od roku" Width="*" Binding="{Binding YearFrom, UpdateSourceTrigger=LostFocus}"/>

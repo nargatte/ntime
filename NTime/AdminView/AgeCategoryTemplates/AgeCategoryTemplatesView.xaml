@@ -107,7 +107,7 @@
                 </StackPanel>
                 <DataGrid x:Name="ageCategoryDataGrid"  Margin="0,10"  RowDetailsVisibilityMode="VisibleWhenSelected"
                       ItemsSource="{Binding AgeCategoryTemplateItems}" EnableRowVirtualization="True" AutoGenerateColumns="False"
-                      ColumnWidth="*" SelectionMode="Extended" CanUserAddRows="False" Width="300" CanUserSortColumns="False"
+                      ColumnWidth="*" SelectionMode="Extended" CanUserAddRows="False" Width="400" CanUserSortColumns="False"
                           IsReadOnly="{Binding IsEditable, Converter={StaticResource BoolNegationConverter}}">
                     <DataGrid.Columns>
                         <DataGridTextColumn  x:Name="nameColumn" Header="Nazwa" Width="*" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}"/>

@@ -49,7 +49,7 @@ namespace AdminView.Categories
         private async void NavToCategoryTemplatesView()
         {
             var categoryTemplatesViewModel = new AgeCategoryTemplatesViewModel();
-            var importedAgeCategories = categoryTemplatesViewModel.ShowReadonlyDialog().Select(item => new AgeCategory(item));
+            var importedAgeCategories = categoryTemplatesViewModel.ShowReadonlyDialog()?.Select(item => new AgeCategory(item));
             if (importedAgeCategories == null)
                 MessageBox.Show("Kategorie wiekowe nie zostały zaimportowane z szablonu");
             else
@@ -351,10 +351,6 @@ namespace AdminView.Categories
         set
         {
             SetProperty(ref _newAgeCategory, value);
-            _newAgeCategory.DbEntity.Name = _newAgeCategory.Name;
-            _newAgeCategory.DbEntity.YearFrom = _newAgeCategory.YearFrom;
-            _newAgeCategory.DbEntity.YearTo = _newAgeCategory.YearTo;
-            _newAgeCategory.DbEntity.Male = _newAgeCategory.Male;
         }
     }
 

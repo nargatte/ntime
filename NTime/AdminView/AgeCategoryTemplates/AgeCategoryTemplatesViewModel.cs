@@ -84,10 +84,6 @@ namespace AdminView.AgeCategoryTemplates
             set
             {
                 SetProperty(ref _newAgeCategoryTemplateItem, value);
-                //_newAgeCategory.DbEntity.Name = _newAgeCategory.Name;
-                //_newAgeCategory.DbEntity.YearFrom = _newAgeCategory.YearFrom;
-                //_newAgeCategory.DbEntity.YearTo = _newAgeCategory.YearTo;
-                //_newAgeCategory.DbEntity.Male = _newAgeCategory.Male;
             }
         }
 
@@ -233,12 +229,14 @@ namespace AdminView.AgeCategoryTemplates
             if (ageCategoryTemplate == null)
             {
                 _ageCategoryTemplateItemRepository = null;
+                
             }
             else
             {
                 _ageCategoryTemplateItemRepository = new AgeCategoryTemplateItemRepository(new ContextProvider(), ageCategoryTemplate.DbEntity);
                 await DownloadAgeCategoryTemplateItemsFromDatabase(clearDisplayedTemplateItemsBefore: true);
             }
+            ReturnAgeCategoryTemplateItemsCmd.RaiseCanExecuteChanged();
         }
 
         #endregion

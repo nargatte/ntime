@@ -39,23 +39,29 @@ namespace ViewCore.Entities
         }
 
 
-        public int YearFrom
+        public int? YearFrom
         {
-            get { return DbEntity.YearFrom; }
+            get { return DbEntity.YearFrom != 0 ? DbEntity.YearFrom : (int?)null; }
             set
             {
-                DbEntity.YearFrom = SetProperty(DbEntity.YearFrom, value);
-                OnUpdateRequested();
+                if (value.HasValue)
+                {
+                    DbEntity.YearFrom = SetProperty(DbEntity.YearFrom, value.Value);
+                    OnUpdateRequested();
+                }
             }
         }
 
-        public int YearTo
+        public int? YearTo
         {
-            get { return DbEntity.YearTo; }
+            get { return DbEntity.YearTo != 0 ? DbEntity.YearTo : (int?)null; }
             set
             {
-                DbEntity.YearTo = SetProperty(DbEntity.YearTo, value);
-                OnUpdateRequested();
+                if (value.HasValue)
+                {
+                    DbEntity.YearTo = SetProperty(DbEntity.YearTo, value.Value);
+                    OnUpdateRequested();
+                }
             }
         }
 
