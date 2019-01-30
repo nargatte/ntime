@@ -1,0 +1,56 @@
+namespace BaseCore.Migrations
+{
+    using System;
+    using System.Data.Entity.Migrations;
+    
+    public partial class AgeCategoryTemplatesRenaming : DbMigration
+    {
+        public override void Up()
+        {
+            DropForeignKey("dbo.AgeCategoryTemplates", "AgeCategoryCollectionId", "dbo.AgeCategoryCollections");
+            DropIndex("dbo.AgeCategoryTemplates", new[] { "AgeCategoryCollectionId" });
+            CreateTable(
+                "dbo.AgeCategoryTemplateItems",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        AgeCategoryTemplateId = c.Int(nullable: false),
+                        Name = c.String(nullable: false, maxLength: 255),
+                        YearFrom = c.Int(nullable: false),
+                        YearTo = c.Int(nullable: false),
+                        Male = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.AgeCategoryTemplates", t => t.AgeCategoryTemplateId, cascadeDelete: true)
+                .Index(t => t.AgeCategoryTemplateId);
+            
+            DropColumn("dbo.AgeCategoryTemplates", "AgeCategoryCollectionId");
+            DropColumn("dbo.AgeCategoryTemplates", "YearFrom");
+            DropColumn("dbo.AgeCategoryTemplates", "YearTo");
+            DropColumn("dbo.AgeCategoryTemplates", "Male");
+            DropTable("dbo.AgeCategoryCollections");
+        }
+        
+        public override void Down()
+        {
+            CreateTable(
+                "dbo.AgeCategoryCollections",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(nullable: false, maxLength: 255),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            AddColumn("dbo.AgeCategoryTemplates", "Male", c => c.Boolean(nullable: false));
+            AddColumn("dbo.AgeCategoryTemplates", "YearTo", c => c.Int(nullable: false));
+            AddColumn("dbo.AgeCategoryTemplates", "YearFrom", c => c.Int(nullable: false));
+            AddColumn("dbo.AgeCategoryTemplates", "AgeCategoryCollectionId", c => c.Int(nullable: false));
+            DropForeignKey("dbo.AgeCategoryTemplateItems", "AgeCategoryTemplateId", "dbo.AgeCategoryTemplates");
+            DropIndex("dbo.AgeCategoryTemplateItems", new[] { "AgeCategoryTemplateId" });
+            DropTable("dbo.AgeCategoryTemplateItems");
+            CreateIndex("dbo.AgeCategoryTemplates", "AgeCategoryCollectionId");
+            AddForeignKey("dbo.AgeCategoryTemplates", "AgeCategoryCollectionId", "dbo.AgeCategoryCollections", "Id", cascadeDelete: true);
+        }
+    }
+}
