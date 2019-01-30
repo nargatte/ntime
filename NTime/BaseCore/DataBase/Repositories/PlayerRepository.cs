@@ -304,7 +304,7 @@ namespace BaseCore.DataBase
             await ContextProvider.DoAsync(async ctx =>
             {
                 AgeCategory[] ageCategories = await ctx.AgeCategories.Where(a => a.CompetitionId == Competition.Id).AsNoTracking().ToArrayAsync();
-                Subcategory[] subcategories = await ctx.Subcategories.Where(a => a.CompetitionId == Competition.Id).AsNoTracking().ToArrayAsync();
+                Subcategory[] subcategories = await ctx.Subcategory.Where(a => a.CompetitionId == Competition.Id).AsNoTracking().ToArrayAsync();
                 Distance[] distances = await ctx.Distances.Where(a => a.CompetitionId == Competition.Id).AsNoTracking().ToArrayAsync();
 
                 PlayerFilterOptions filterOptions = new PlayerFilterOptions()
@@ -450,7 +450,7 @@ namespace BaseCore.DataBase
             await ContextProvider.DoAsync(async ctx =>
             {
                 distances = await ctx.Distances.Where(d => d.CompetitionId == Competition.Id).AsNoTracking().ToArrayAsync();
-                subcategories = await ctx.Subcategories.Where(e => e.CompetitionId == Competition.Id).AsNoTracking().ToArrayAsync();
+                subcategories = await ctx.Subcategory.Where(e => e.CompetitionId == Competition.Id).AsNoTracking().ToArrayAsync();
                 ageCategories = await ctx.AgeCategories.Where(e => e.CompetitionId == Competition.Id).AsNoTracking().ToArrayAsync();
             });
 

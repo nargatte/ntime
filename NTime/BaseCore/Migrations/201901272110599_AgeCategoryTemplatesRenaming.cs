@@ -9,7 +9,6 @@ namespace BaseCore.Migrations
         {
             RenameTable(name: "AgeCategoryTemplates", newName: "AgeCategoryTemplateItems");
             RenameTable(name: "AgeCategoryCollections", newName: "AgeCategoryTemplates");
-            RenameTable(name: "Subcategory", newName: "Subcategories");
             RenameColumn(table: "AgeCategoryTemplateItems", name: "AgeCategoryCollectionId", newName: "AgeCategoryTemplateId");
         }
         
@@ -18,7 +17,6 @@ namespace BaseCore.Migrations
             RenameColumn(table: "AgeCategoryTemplateItems", name: "AgeCategoryTemplateId", newName: "AgeCategoryCollectionId");
             RenameTable(name: "AgeCategoryTemplates", newName: "AgeCategoryCollections");
             RenameTable(name: "AgeCategoryTemplateItems", newName: "AgeCategoryTemplates");
-            RenameTable(name: "Subcategories", newName: "Subcategory");
         }
     }
 }

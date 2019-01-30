@@ -29,7 +29,7 @@ namespace BaseCore.DataBase
 
         public DbSet<Distance> Distances { get; set; }
 
-        public DbSet<Subcategory> Subcategories { get; set; }
+        public DbSet<Subcategory> Subcategory { get; set; }
 
         public DbSet<Player> Players { get; set; }
 
