@@ -148,6 +148,7 @@
       <DependentUpon>201901272110599_AgeCategoryTemplatesRenaming.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\DatabaseSelectionModel.cs" />
     <Compile Include="Models\PageBindingModel.cs" />
     <Compile Include="Models\PageViewModel.cs" />
     <Compile Include="PlayerFilter\PlayerSort.cs" />

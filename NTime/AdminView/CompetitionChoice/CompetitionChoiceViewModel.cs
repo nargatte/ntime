@@ -1,22 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using AdminView.AddCompetition;
 using AdminView.CalculateStandings;
 using AdminView.AgeCategoryTemplates;
-using BaseCore.Csv;
-using BaseCore.Csv.CompetitionSeries;
 using BaseCore.DataBase;
 using MvvmHelper;
 using ViewCore;
 using ViewCore.Entities;
 using ViewCore.Factories;
-using ViewCore.ManagersDesktop;
+using BaseCore.Models;
 
 namespace AdminView.CompetitionChoice
 {
@@ -26,8 +18,30 @@ namespace AdminView.CompetitionChoice
         public string TabTitle { get; set; }
 
 
+        private ObservableCollection<DatabaseSelectionModel> _availableDatabases;
+        public ObservableCollection<DatabaseSelectionModel> AvailableDatabases
+        {
+            get { return _availableDatabases; }
+            set { SetProperty(ref _availableDatabases, value); }
+        }
+
+        private DatabaseSelectionModel _selectedDatabase;
+        public DatabaseSelectionModel SelectedDatabase
+        {
+            get { return _selectedDatabase; }
+            set
+            {
+                SetProperty(ref _selectedDatabase, value);
+                CompetitionData.DownloadCompetitionsFromDatabaseAndDisplay();
+            }
+        }
+
+
         public CompetitionChoiceViewModel(DependencyContainer dependencyContainer)
         {
+            AvailableDatabases = new ObservableCollection<DatabaseSelectionModel>(ContextProvider.AvailableDatabases);
+            _selectedDatabase = AvailableDatabases[0];
+
             CompetitionData = new CompetitionChoiceBase(dependencyContainer);
             DisplayAddCompetitionViewCmd = new RelayCommand(OnDisplayAddCompetitionView, CanDisplayAddCompetition);
             GoToCompetitionCmd = new RelayCommand(OnGoToCompetition, CanGoToCompetition);

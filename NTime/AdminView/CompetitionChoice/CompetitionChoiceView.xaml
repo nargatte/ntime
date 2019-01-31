@@ -8,7 +8,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
             x:Class="AdminView.CompetitionChoice.CompetitionChoiceView"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="300">
+             d:DesignHeight="600" d:DesignWidth="300">
     <UserControl.Resources>
         <converters:CompetitionToStringConverterClass x:Key="CompetitionToStringConverter"/>
         <Style TargetType="TextBlock">
@@ -46,9 +46,9 @@
                     <TextBlock Text="Stwórz nowe zawody" TextWrapping="Wrap" TextAlignment="Center" FontWeight="Bold"/>
                 </Button>
             </StackPanel>
-            <StackPanel Orientation="Vertical" Margin="0,70,0,0">
+            <StackPanel Name="CompetitionSelect" Orientation="Vertical" Margin="0,70,0,0">
 
-                <TextBlock Margin="10" Text="Wybierz istniejące zawody" HorizontalAlignment="Center" FontSize="16"/>
+                <TextBlock Margin="10" Text="Wybierz istniejące zawody" HorizontalAlignment="Center" TextAlignment="Center" FontSize="16"/>
                 <ComboBox ItemsSource="{Binding CompetitionData.Competitions}" SelectedItem="{Binding CompetitionData.SelectedCompetition, UpdateSourceTrigger=PropertyChanged}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
@@ -59,6 +59,18 @@
                 <Button Margin="0, 30" HorizontalAlignment="Center" MaxWidth="150" Height="40" VerticalAlignment="Bottom" Command="{Binding GoToCompetitionCmd}">
                     <TextBlock Text="Przejdź do wybranych zawodów" TextWrapping="Wrap" TextAlignment="Center" FontWeight="Bold"/>
                 </Button>
+            </StackPanel>
+            <StackPanel Name="DatabaseSelect" Orientation="Vertical" Margin="0,70,0,0">
+
+                <TextBlock Margin="10" Text="Zmień bazę danych" HorizontalAlignment="Center" TextAlignment="Center" FontSize="16"/>
+                <ComboBox ItemsSource="{Binding AvailableDatabases}" SelectedItem="{Binding SelectedDatabase, UpdateSourceTrigger=PropertyChanged}"
+                          Width="200">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding DatabaseDisplayName}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
             </StackPanel>
         </StackPanel>
     </Grid>
