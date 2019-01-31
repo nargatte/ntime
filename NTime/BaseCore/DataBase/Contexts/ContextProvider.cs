@@ -10,26 +10,26 @@ namespace BaseCore.DataBase
     {
         public ContextProvider()
         {
-            TempNameOrConnectionString = NameOrConnectionString;
+            UnitNameOrConnectionString = PersistanceNameOrConnectionString;
         }
 
-        public ContextProvider(string nameOrConnectionString)
+        public ContextProvider(string unitNameOrConnectionString)
         {
-            TempNameOrConnectionString = nameOrConnectionString;
+            UnitNameOrConnectionString = unitNameOrConnectionString;
         }
 
-        public static void SetNameOrConnectionString(string nameOrConnectionString)
+        public static void SetPersistanceNameOrConnectionString(string nameOrConnectionString)
         {
-            NameOrConnectionString = nameOrConnectionString;
+            PersistanceNameOrConnectionString = nameOrConnectionString;
         }
 
-        protected static string NameOrConnectionString { get; private set; } = "NTimeLocalDb";
+        protected static string PersistanceNameOrConnectionString { get; private set; } = "NTime";
 
-        protected string TempNameOrConnectionString { get; set; }
+        protected string UnitNameOrConnectionString { get; set; }
 
         public async Task DoAsync(Func<NTimeDBContext, Task> action)
         {
-            using (NTimeDBContext context = new NTimeDBContext(TempNameOrConnectionString))
+            using (NTimeDBContext context = new NTimeDBContext(UnitNameOrConnectionString))
             {
                 await action(context);
             }

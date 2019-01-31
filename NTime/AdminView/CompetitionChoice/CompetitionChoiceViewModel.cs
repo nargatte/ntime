@@ -32,6 +32,7 @@ namespace AdminView.CompetitionChoice
             set
             {
                 SetProperty(ref _selectedDatabase, value);
+                ContextProvider.SetPersistanceNameOrConnectionString(SelectedDatabase.DatabaseNameOrConnectionString);
                 CompetitionData.DownloadCompetitionsFromDatabaseAndDisplay();
             }
         }
@@ -39,10 +40,10 @@ namespace AdminView.CompetitionChoice
 
         public CompetitionChoiceViewModel(DependencyContainer dependencyContainer)
         {
-            AvailableDatabases = new ObservableCollection<DatabaseSelectionModel>(ContextProvider.AvailableDatabases);
-            _selectedDatabase = AvailableDatabases[0];
-
             CompetitionData = new CompetitionChoiceBase(dependencyContainer);
+            AvailableDatabases = new ObservableCollection<DatabaseSelectionModel>(ContextProvider.AvailableDatabases);
+            SelectedDatabase = AvailableDatabases[0];
+
             DisplayAddCompetitionViewCmd = new RelayCommand(OnDisplayAddCompetitionView, CanDisplayAddCompetition);
             GoToCompetitionCmd = new RelayCommand(OnGoToCompetition, CanGoToCompetition);
             CalculateStandingsCmd = new RelayCommand(OnDisplayCalculateStandingsView);
@@ -52,14 +53,14 @@ namespace AdminView.CompetitionChoice
             AddCompetitionViewRequested += NavToAddCompetitionView;
             CalculateStandingsViewRequested += NavToCalculateStandingsView;
             CategoryTemplatesViewRequested += NavToCategoryTemplatesView;
-            OnViewLoaded();
+            //OnViewLoaded();
         }
 
         private void CompetitionChoiceBase_CompetitionSelected() => GoToCompetitionCmd.RaiseCanExecuteChanged();
 
         #region Methods and Events
 
-        private void OnViewLoaded() => CompetitionData.DownloadCompetitionsFromDatabaseAndDisplay();
+        //private void OnViewLoaded() => CompetitionData.DownloadCompetitionsFromDatabaseAndDisplay();
 
         private void OnGoToCompetition() => CompetitionManagerRequested();
 
