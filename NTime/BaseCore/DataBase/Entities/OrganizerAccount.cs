@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using BaseCore.Models;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace BaseCore.DataBase
@@ -8,6 +9,7 @@ namespace BaseCore.DataBase
         public int Id { get; set; }
 
         public string AccountId { get; set; }
+        public virtual IApplicationUser Account { get; set; }
 
         public virtual ICollection<Competition> Competitions { get; set; }
     }

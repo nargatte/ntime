@@ -13,6 +13,9 @@ namespace BaseCore.DataBase
 
         protected override IQueryable<OrganizerAccount> GetSortQuery(IQueryable<OrganizerAccount> items) => items.OrderBy(item => item.AccountId);
 
+        protected override IQueryable<OrganizerAccount> GetIncludeQuery(IQueryable<OrganizerAccount> items) =>
+            items.Include(oa => oa.Account);
+
         //protected override IQueryable<OrganizerAccount> GetIncludeQuery(IQueryable<OrganizerAccount> items)
         //{
         //    return items.Include(account => account.);

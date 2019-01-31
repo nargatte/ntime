@@ -31,11 +31,11 @@ namespace Server.Controllers
         [Authorize(Roles = "Administrator")]
         public async Task<PageViewModel<OrganizerAccountDto>> GetSearch([FromUri] PageBindingModel pageBindingModel, string query = null)
         {
-            PageViewModel<OrganizerAccount> viewModel = await _organizerAccountRepository.GetByQuery(query, pageBindingModel);
+            PageViewModel<OrganizerAccount> organizerAccounts = await _organizerAccountRepository.GetByQuery(query, pageBindingModel);
             PageViewModel<OrganizerAccountDto> viewModelDto = new PageViewModel<OrganizerAccountDto>
             {
-                Items = viewModel.Items.Select(pa => new OrganizerAccountDto(pa)).ToArray(),
-                TotalCount = viewModel.TotalCount
+                Items = organizerAccounts.Items.Select(pa => new OrganizerAccountDto(pa, pa.Account)).ToArray(),
+                TotalCount = organizerAccounts.TotalCount
             };
             return viewModelDto;
         }

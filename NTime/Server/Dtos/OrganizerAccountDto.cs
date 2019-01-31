@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using BaseCore.DataBase;
+using BaseCore.Models;
 using Server.Models;
 
 namespace Server.Dtos
@@ -20,7 +21,7 @@ namespace Server.Dtos
             Id = organizerAccount.Id;
         }
 
-        public OrganizerAccountDto(OrganizerAccount organizerAccount, ApplicationUser applicationUser)
+        public OrganizerAccountDto(OrganizerAccount organizerAccount, IApplicationUser applicationUser)
         : this(organizerAccount)
         {
             FirstName = applicationUser.FirstName;
