@@ -34,7 +34,7 @@ namespace Server.Controllers
             PageViewModel<OrganizerAccount> organizerAccounts = await _organizerAccountRepository.GetByQuery(query, pageBindingModel);
             PageViewModel<OrganizerAccountDto> viewModelDto = new PageViewModel<OrganizerAccountDto>
             {
-                Items = organizerAccounts.Items.Select(pa => new OrganizerAccountDto(pa, pa.Account)).ToArray(),
+                Items = organizerAccounts.Items.Select(pa => new OrganizerAccountDto(pa)).ToArray(),
                 TotalCount = organizerAccounts.TotalCount
             };
             return viewModelDto;
