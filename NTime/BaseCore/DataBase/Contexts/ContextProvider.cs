@@ -20,12 +20,12 @@ namespace BaseCore.DataBase
 
         public static void SetPersistanceNameOrConnectionString(string nameOrConnectionString)
         {
-            PersistanceNameOrConnectionString = nameOrConnectionString;
+            UnitNameOrConnectionString = PersistanceNameOrConnectionString = nameOrConnectionString;
         }
 
         protected static string PersistanceNameOrConnectionString { get; private set; } = "NTime";
 
-        protected string UnitNameOrConnectionString { get; set; }
+        protected static string UnitNameOrConnectionString { get; set; }
 
         public async Task DoAsync(Func<NTimeDBContext, Task> action)
         {
@@ -33,15 +33,14 @@ namespace BaseCore.DataBase
             {
                 await action(context);
             }
+            UnitNameOrConnectionString = PersistanceNameOrConnectionString;
         }
 
         public static List<DatabaseSelectionModel> AvailableDatabases { get; } = new List<DatabaseSelectionModel>
         {
-            //new DatabaseSelectionModel("NTimeTestServer", "Serwer testowy"),
-            //new DatabaseSelectionModel("NTimeProductionServer", "Serwer produkcyjny"),
-            new DatabaseSelectionModel("NTimeLocalDb", "Baza lokalna1"),
-            new DatabaseSelectionModel("NTimeLocalDb", "Baza lokalna2"),
-            new DatabaseSelectionModel("NTimeLocalDb", "Baza lokalna3"),
+            new DatabaseSelectionModel("NTimeTestServer", "Serwer testowy"),
+            new DatabaseSelectionModel("NTimeProductionServer", "Serwer produkcyjny"),
+            new DatabaseSelectionModel("NTimeLocalDb", "Baza lokalna"),
         };
     }
 }
