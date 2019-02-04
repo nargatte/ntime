@@ -28,7 +28,7 @@
                                   CornerRadius="1"
                                   BorderThickness="1">
                             <Border.Background>
-                                <ImageBrush ImageSource= "pack://application:,,,/AdminView;component/Images/LeftArrow.jpg"  Stretch="Uniform"/>
+                                <ImageBrush ImageSource= "pack://application:,,,/Time2Win;component/Images/LeftArrow.jpg"  Stretch="Uniform"/>
                             </Border.Background>
                             <Border.Effect>
                                 <DropShadowEffect/>
@@ -68,7 +68,7 @@
                 <Button Height="30" Command="{Binding PreviousPageCmd}">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
-                            <Image Source="pack://application:,,,/AdminView;component/Images/LeftArrow.jpg"/>
+                            <Image Source="pack://application:,,,/Time2Win;component/Images/LeftArrow.jpg"/>
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
@@ -76,7 +76,7 @@
                 <Button Height="30" Command="{Binding NextPageCmd}">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
-                            <Image Source="pack://application:,,,/AdminView;component/Images/RightArrow.jpg"/>
+                            <Image Source="pack://application:,,,/Time2Win;component/Images/RightArrow.jpg"/>
                         </ControlTemplate>
                     </Button.Template>
                 </Button>

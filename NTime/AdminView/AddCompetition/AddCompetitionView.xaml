@@ -72,7 +72,7 @@
             <Button Grid.Column="0" MinHeight="20" MaxHeight="30" MinWidth="30" Height="30" MaxWidth="100" Margin="15"
                     VerticalAlignment="Bottom" HorizontalAlignment="Center" Command="{Binding AddCompetitionCmd}">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="30">
-                    <Image Source="pack://application:,,,/AdminView;component/Images/add.png" Height="30" Width="20" />
+                    <Image Source="pack://application:,,,/Time2Win;component/Images/add.png" Height="30" Width="20" />
                     <TextBlock Text="Dodaj zawody" Height="20"/>
                 </StackPanel>
                 <Button.Style>
@@ -92,7 +92,7 @@
             <Button Grid.Column="1" Height="30" MinWidth="30" MaxWidth="100" Margin="15"
                     VerticalAlignment="Bottom" HorizontalAlignment="Center" Command="{Binding CancelCmd}">
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="pack://application:,,,/AdminView;component/Images/delete.png" Height="30" Width="20"/>
+                    <Image Source="pack://application:,,,/Time2Win;component/Images/delete.png" Height="30" Width="20"/>
                     <TextBlock Text="Anuluj" Height="20"/>
                 </StackPanel>
             </Button>
