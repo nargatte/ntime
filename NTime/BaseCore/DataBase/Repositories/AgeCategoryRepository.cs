@@ -133,14 +133,11 @@ namespace BaseCore.DataBase
                 RestoreDirectory = true,
                 Title = "Wybierz gdzie zapisać plik"
             };
-            if (dialog.ShowDialog() == DialogResult.OK)
+            if (dialog.ShowDialog() == DialogResult.OK && !string.IsNullOrWhiteSpace(dialog.FileName))
             {
-                if (!string.IsNullOrWhiteSpace(dialog.FileName))
-                {
-                    actualPath = dialog.FileName;
-                }
-                else return false;
+                actualPath = dialog.FileName;
             }
+            else return false;
 
             var exporter = new CsvExporter<AgeCategoryRecord, AgeCategoryMap>(actualPath, _defaultCsvDelimiter);
             return await exporter.SaveAllRecordsAsync(exportableAgeCategories);

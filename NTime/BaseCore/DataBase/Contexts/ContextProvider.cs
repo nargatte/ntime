@@ -38,9 +38,9 @@ namespace BaseCore.DataBase
 
         public static List<DatabaseSelectionModel> AvailableDatabases { get; } = new List<DatabaseSelectionModel>
         {
+            //new DatabaseSelectionModel("NTimeLocalDb", "Baza lokalna"),
             new DatabaseSelectionModel("NTimeTestServer", "Serwer testowy"),
             new DatabaseSelectionModel("NTimeProductionServer", "Serwer produkcyjny"),
-            new DatabaseSelectionModel("NTimeLocalDb", "Baza lokalna"),
         };
     }
 }
