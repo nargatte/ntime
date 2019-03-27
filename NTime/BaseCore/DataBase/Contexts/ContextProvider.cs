@@ -8,6 +8,11 @@ namespace BaseCore.DataBase
 {
     public class ContextProvider : IContextProvider
     {
+        static ContextProvider()
+        {
+
+        }
+
         public ContextProvider()
         {
             UnitNameOrConnectionString = PersistanceNameOrConnectionString;
@@ -36,11 +41,17 @@ namespace BaseCore.DataBase
             UnitNameOrConnectionString = PersistanceNameOrConnectionString;
         }
 
-        public static List<DatabaseSelectionModel> AvailableDatabases { get; } = new List<DatabaseSelectionModel>
+        public static List<DatabaseSelectionModel> AvailableDatabases =>
+            System.Diagnostics.Debugger.IsAttached ?
+                availableDatabases.ToList() :
+                availableDatabases.Skip(1).ToList();
+
+        private static List<DatabaseSelectionModel> availableDatabases = new List<DatabaseSelectionModel>
         {
-            //new DatabaseSelectionModel("NTimeLocalDb", "Baza lokalna"),
+            new DatabaseSelectionModel("NTimeLocalDb", "Baza lokalna"),
             new DatabaseSelectionModel("NTimeTestServer", "Serwer testowy"),
             new DatabaseSelectionModel("NTimeProductionServer", "Serwer produkcyjny"),
         };
+
     }
 }
