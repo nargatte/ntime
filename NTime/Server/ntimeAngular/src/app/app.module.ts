@@ -52,6 +52,17 @@ import { EditPlayerTabComponent } from './Tabs/edit-player-tab/edit-player-tab.c
 import { CompetitionDetailsComponent } from './SharedComponents/Competitions/competition-details/competition-details.component';
 import { ConfirmActionDialogComponent } from './SharedComponents/Dialogs/confirm-action-dialog/confirm-action-dialog.component';
 
+// MetaData info about component
+// Services - exchanging data between components
+// AOT - Compile TS to JS before running the application
+// Prevent re-import of the core module - e.g. throwIfAlreadyLoaded (custom)
+// @Output() change = new EventEmitter() - najlepsze nazewnictwo i wrzucamu je w klasie - nie dodajemy najpierw 'on' przy eventach
+// Angular Console - wyklikiwanie tego co jest w Angular CLI
+// Prezentacja na Twitterze Dariusz Kalbarczyka ngKalbarczyk
+// ngx-bootstrap
+// ng-bootsrap
+// Prime NG - especially to business apps, lots of ready-made components
+//
 
 @NgModule({
     imports: [
