@@ -18,5 +18,7 @@ namespace BaseCore.DataBase
         public string Type { get; set; }
         public int? SortIndex { get; set; }
         public int MultiValueCount { get; set; }
+
+        public ICollection<ExtraColumnValue> ExtraColumnValues { get; set; }
     }
 }

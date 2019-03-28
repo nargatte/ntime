@@ -13,8 +13,8 @@ namespace BaseCore.DataBase
         public Player Player { get; set; }
         public int ColumnId { get; set; }
         public ExtraColumn Column { get; set; }
-        public int LookupId { get; set; }
-        public ExtraColumnValue Lookup { get; set; }
         public string CustomValue { get; set; }
+        public int? LookupId { get; set; }
+        public ExtraColumnValue Lookup { get; set; }
     }
 }

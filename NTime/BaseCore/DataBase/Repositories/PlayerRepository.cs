@@ -38,6 +38,21 @@ namespace BaseCore.DataBase
             });
         }
 
+        public override Task RemoveAsync(Player player)
+        {
+            CheckNull(player);
+            CheckItem(player);
+
+            return ContextProvider.DoAsync(async ctx =>
+            {
+                var extraColumnValues = await ctx.ExtraColumnValues.Where(value => value.PlayerId == player.Id).ToListAsync();
+                ctx.ExtraColumnValues.RemoveRange(extraColumnValues);
+
+                ctx.Players.Remove(player);
+                await ctx.SaveChangesAsync();
+            });
+        }
+
         public async Task<Tuple<Player[], int>> GetAllByFilterAsync(PlayerFilterOptions filterOptions, int pageNumber, int numberItemsOnPage)
         {
             var competitionRepository = new CompetitionRepository(new ContextProvider());

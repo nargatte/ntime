@@ -58,5 +58,7 @@ namespace BaseCore.DataBase
         public virtual ICollection<AgeCategory> AgeCategories { get; set; }
 
         public virtual ICollection<OrganizerAccount> OrganizerAccounts { get; set; }
+
+        public ICollection<ExtraColumn> ExtraColumns { get; set; }
     }
 }
