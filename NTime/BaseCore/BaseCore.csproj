@@ -103,6 +103,8 @@
     <Compile Include="DataBase\Entities\DistanceType.cs" />
     <Compile Include="DataBase\Entities\Distance.cs" />
     <Compile Include="DataBase\Entities\EnumTable.cs" />
+    <Compile Include="DataBase\Entities\ExtraColumn.cs" />
+    <Compile Include="DataBase\Entities\ExtraColumnValue.cs" />
     <Compile Include="DataBase\Entities\SeriesStandingsParameters.cs" />
     <Compile Include="DataBase\Entities\Subcategory.cs" />
     <Compile Include="DataBase\Entities\Gate.cs" />

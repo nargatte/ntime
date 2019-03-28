@@ -567,9 +567,9 @@ namespace BaseCore.DataBase
         {
             return ContextProvider.DoAsync(async ctx =>
             {
-                Player[] players = await ctx.Players.Where(p => p.CompetitionId == Competition.Id).ToArrayAsync();
+                var players = await ctx.Players.Where(p => p.CompetitionId == Competition.Id).ToArrayAsync();
 
-                foreach (Player player in players)
+                foreach (var player in players)
                 {
                     if (string.IsNullOrWhiteSpace(player.ExtraData))
                         player.ExtraData = String.Concat(Enumerable.Repeat(delimiter, permutations.Length - 1).ToArray());

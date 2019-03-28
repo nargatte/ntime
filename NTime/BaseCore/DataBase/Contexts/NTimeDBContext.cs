@@ -1,7 +1,4 @@
-﻿using System;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
 
 namespace BaseCore.DataBase
 {
@@ -48,5 +45,9 @@ namespace BaseCore.DataBase
         public DbSet<PlayerAccount> PlayerAccounts { get; set; }
 
         public DbSet<AgeCategoryDistance> AgeCategoryDistances { get; set; }
+
+        public DbSet<ExtraColumn> ExtraColumns { get; set; }
+
+        public DbSet<ExtraColumnValue> ExtraColumnValues { get; set; }
     }
 }
