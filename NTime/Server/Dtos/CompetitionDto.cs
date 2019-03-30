@@ -70,5 +70,7 @@ namespace Server.Dtos
         public string City { get; set; }
 
         public bool OrganizerEditLock { get; set; }
+
+        public ExtraColumn[] ExtraColumns { get; set; }
     }
 }

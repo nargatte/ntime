@@ -71,7 +71,7 @@
                     <Label Content="Blokada zapisów:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="8" VerticalAlignment="Center"/>
                     <CheckBox x:Name="organizerEditLockTextBox" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"  Margin="3" Grid.Row="8" IsChecked="{Binding OrganizerEditLock, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, UpdateSourceTrigger=PropertyChanged}"/>
                 </Grid>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" DataContext="{Binding NewExtraHeader}">
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                             <TextBlock Text="Stara dodatkowa kolumna"
@@ -111,7 +111,7 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
-                </DataGrid>
+                </DataGrid>-->
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" DataContext="{Binding NewExtraColumn}">

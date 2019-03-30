@@ -16,11 +16,12 @@ namespace Server.Dtos
 
         public async Task SetDetails(Competition competition, IContextProvider contextProvider)
         {
-            AgeCategoryRepository ageCategoryRepository = new AgeCategoryRepository(contextProvider, competition);
-            DistanceRepository distanceRepository = new DistanceRepository(contextProvider, competition);
-            SubcategoryRepository subcategoryRepository = new SubcategoryRepository(contextProvider, competition);
-            AgeCategoryDistanceRepository ageCategoryDistanceRepository = new AgeCategoryDistanceRepository(contextProvider, competition);
+            var ageCategoryRepository = new AgeCategoryRepository(contextProvider, competition);
+            var distanceRepository = new DistanceRepository(contextProvider, competition);
+            var subcategoryRepository = new SubcategoryRepository(contextProvider, competition);
+            var ageCategoryDistanceRepository = new AgeCategoryDistanceRepository(contextProvider, competition);
 
+            // TODO: change to Task.WhenAll - https://stackoverflow.com/questions/17197699/awaiting-multiple-tasks-with-different-results
             AgeCategories = (await ageCategoryRepository.GetAllAsync()).Select(ag => new AgeCategoryDto(ag))
                 .ToArray();
             Distances = (await distanceRepository.GetAllAsync()).Select(d => new DistanceDto(d)).ToArray();
