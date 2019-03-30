@@ -17,7 +17,9 @@ namespace BaseCore.DataBase
         public bool IsDisplayedInPublicDetails { get; set; }
         public string Type { get; set; }
         public int? SortIndex { get; set; }
-        public int MultiValueCount { get; set; }
+        public int? MultiValueCount { get; set; }
+        public int? MinCharactersValidation { get; set; }
+        public int? MaxCharactersValidation { get; set; }
 
         public ICollection<ExtraColumnValue> ExtraColumnValues { get; set; }
     }

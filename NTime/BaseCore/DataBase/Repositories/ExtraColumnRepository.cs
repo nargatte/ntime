@@ -7,11 +7,19 @@ using System.Threading.Tasks;
 
 namespace BaseCore.DataBase.Repositories
 {
-    public class ExtraColumnRepository : RepositoryCompetitionId<ExtraColumn>
+    public class ExtraColumnRepository : RepositoryCompetitionId<ExtraColumn>, IExtraColumnRepository
     {
         public ExtraColumnRepository(IContextProvider contextProvider, Competition competition) : base(contextProvider, competition)
         {
 
+        }
+
+        protected override IQueryable<ExtraColumn> GetSortQuery(IQueryable<ExtraColumn> items)
+        {
+            return items
+                .OrderBy(item => item.CompetitionId)
+                .ThenByDescending(item => item.SortIndex.HasValue)
+                .ThenBy(item => item.SortIndex.Value);
         }
 
         public override Task RemoveAsync(ExtraColumn item)

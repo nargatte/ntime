@@ -7,7 +7,7 @@ using BaseCore.Models;
 
 namespace BaseCore.DataBase
 {
-    public abstract class Repository<T>
+    public abstract class Repository<T> : IRepository<T>
         where T : class, IEntityId
     {
         protected IContextProvider ContextProvider;

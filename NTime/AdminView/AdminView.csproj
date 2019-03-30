@@ -291,6 +291,10 @@
       <Project>{becbcdb2-14bb-45bc-acef-2b00f7fd70e2}</Project>
       <Name>BaseCore</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NTime.Application\NTime.Application.csproj">
+      <Project>{0551179D-9A6B-4252-B55D-96A499F37E13}</Project>
+      <Name>NTime.Application</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ViewCore\ViewCore.csproj">
       <Project>{5f8eda1d-517c-4e20-9bc7-0bced5900a2b}</Project>
       <Name>ViewCore</Name>

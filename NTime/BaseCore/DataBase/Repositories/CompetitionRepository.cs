@@ -19,6 +19,8 @@ namespace BaseCore.DataBase
         protected override IQueryable<Competition> GetSortQuery(IQueryable<Competition> items) =>
             items.OrderByDescending(e => e.EventDate);
 
+
+
         public async Task<Competition> GetByRelatedEntityId<T>(int relatedEntityId)
             where T : class, ICompetitionId, IEntityId
         {

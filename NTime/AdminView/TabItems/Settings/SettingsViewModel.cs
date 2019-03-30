@@ -9,6 +9,7 @@ using BaseCore.DataBase;
 using BaseCore.DataBase.RepositoriesHelpers;
 using BaseCore.Models;
 using MvvmHelper;
+using NTime.Application.Services;
 using ViewCore;
 using ViewCore.Entities;
 using ViewCore.Helpers;
@@ -17,17 +18,26 @@ namespace AdminView.Settings
 {
     class SettingsViewModel : TabItemViewModel
     {
-        CompetitionRepository repository = new CompetitionRepository(new ContextProvider());
+        CompetitionRepository _repository;
+        private readonly IExtraColumnService _extraColumnService;
+
         public SettingsViewModel(ViewCore.Entities.IEditableCompetition currentCompetition) : base(currentCompetition)
         {
             TabTitle = "Ustawienia";
+            _repository = new CompetitionRepository(new ContextProvider());
+            _extraColumnService = new ExtraColumnService(currentCompetition.DbEntity);
+
             ViewLoadedCmd = new RelayCommand(OnViewLoadedAsync);
             SaveChangesCmd = new RelayCommand(OnSaveChangesAsync);
             RemoveCompetitionCmd = new RelayCommand(OnRemoveCompetition);
             AddExtraHeaderCmd = new RelayCommand(OnAddExtraHeader);
+            AddExtraColumnCmd = new RelayCommand(OnAddExtraColumn);
             PrepareNewExtraHeader();
+            PrepareNewExtraColumn();
         }
 
+
+        #region Properties
         public ViewCore.Entities.IEditableCompetition CurrentCompetition
         {
             get { return _currentCompetition; }
@@ -42,6 +52,14 @@ namespace AdminView.Settings
             set { SetProperty(ref _extraHeaders, value); }
         }
 
+
+        private ObservableCollection<EditableExtraColumn> _extraColumns = new ObservableCollection<EditableExtraColumn>();
+        public ObservableCollection<EditableExtraColumn> ExtraColumns
+        {
+            get { return _extraColumns; }
+            set { SetProperty(ref _extraColumns, value); }
+        }
+
         public List<EditableHeaderPermutationPair> OriginalExtraHeaders { get; set; } = new List<EditableHeaderPermutationPair>();
 
 
@@ -53,9 +71,20 @@ namespace AdminView.Settings
             set { SetProperty(ref _newExtraHeader, value); }
         }
 
-        private void OnViewLoadedAsync()
+
+        private EditableExtraColumn _newExtraColumn;
+        public EditableExtraColumn NewExtraColumn
+        {
+            get { return _newExtraColumn; }
+            set { SetProperty(ref _newExtraColumn, value); }
+        }
+
+        #endregion
+
+        private async void OnViewLoadedAsync()
         {
             DownloadExtraHeaders();
+            await DownloadExtraColumnsAsync();
         }
 
         private void DownloadExtraHeaders()
@@ -69,10 +98,19 @@ namespace AdminView.Settings
             OriginalExtraHeaders = new List<EditableHeaderPermutationPair>(ExtraHeaders);
         }
 
+        private async Task DownloadExtraColumnsAsync()
+        {
+            var extraColumns = await _extraColumnService.GetExtraColumnsForCompetition();
+            ExtraColumns = new ObservableCollection<EditableExtraColumn>(
+                extraColumns.Select(dbColumn => PrepareNewExtraColumn(dbColumn)));
+        }
+
+        
+
 
         private async void OnSaveChangesAsync()
         {
-            if (ExtraHeaders.Any(header => !IsHeaderInputCorrect(header)))
+            if (ExtraHeaders.Any(header => !IsHeaderInputCorrect(header.HeaderName)))
             {
                 MessageBox.Show("Nazwy kolumn nie mogą być puste");
                 return;
@@ -113,7 +151,7 @@ namespace AdminView.Settings
 
         private void OnAddExtraHeader()
         {
-            if (!IsHeaderInputCorrect(NewExtraHeader))
+            if (!IsHeaderInputCorrect(NewExtraColumn.Title))
             {
                 MessageBox.Show("Nagłówek nie może być pusty");
                 return;
@@ -123,13 +161,26 @@ namespace AdminView.Settings
         }
 
 
-        private bool IsHeaderInputCorrect(EditableHeaderPermutationPair editableHeader)
+        private void OnAddExtraColumn()
         {
-            if (String.IsNullOrWhiteSpace(editableHeader.HeaderName))
+            if (!IsHeaderInputCorrect(NewExtraColumn.Title))
+            {
+                MessageBox.Show("Nagłówek nie może być pusty");
+                return;
+            }
+            ExtraColumns.Add(PrepareNewExtraColumn(NewExtraColumn.DbEntity));
+            PrepareNewExtraColumn();
+        }
+
+        private bool IsHeaderInputCorrect(string title)
+        {
+            if (string.IsNullOrWhiteSpace(title))
                 return false;
             else
                 return true;
         }
+
+
 
         private void PrepareNewExtraHeader()
         {
@@ -137,15 +188,6 @@ namespace AdminView.Settings
             {
                 PermutationElement = -1
             };
-        }
-
-        private void OnRemoveCompetition()
-        {
-            if (MessageBoxHelper.DisplayYesNo("Czy na pewno chcesz usunąć te zawody? Zmiana jest nieodwracalna!!!") == MessageBoxResult.Yes)
-            {
-                repository.RemoveAsync(CurrentCompetition.DbEntity);
-                CompetitionRemoved?.Invoke();
-            }
         }
 
         private EditableHeaderPermutationPair PrepareNewExtraHeader(HeaderPermutationPair dbEntity)
@@ -156,6 +198,30 @@ namespace AdminView.Settings
             editableHeader.MoveDownRequested += EditableHeader_MoveDownRequested;
             return editableHeader;
         }
+
+        private void PrepareNewExtraColumn()
+        {
+            NewExtraColumn = new EditableExtraColumn(CurrentCompetition);
+        }
+
+        private EditableExtraColumn PrepareNewExtraColumn(ExtraColumn dbEntity)
+        {
+            var editableExtraColumn = new EditableExtraColumn(CurrentCompetition) { DbEntity = dbEntity };
+            editableExtraColumn.DeleteRequested += EditableHeader_DeleteRequested;
+            editableExtraColumn.MoveUpRequested += EditableHeader_MoveUpRequested;
+            editableExtraColumn.MoveDownRequested += EditableHeader_MoveDownRequested;
+            return editableExtraColumn;
+        }
+
+        private void OnRemoveCompetition()
+        {
+            if (MessageBoxHelper.DisplayYesNo("Czy na pewno chcesz usunąć te zawody? Zmiana jest nieodwracalna!!!") == MessageBoxResult.Yes)
+            {
+                _repository.RemoveAsync(CurrentCompetition.DbEntity);
+                CompetitionRemoved?.Invoke();
+            }
+        }
+
 
         private void EditableHeader_DeleteRequested(object sender, EventArgs e)
         {
@@ -186,6 +252,7 @@ namespace AdminView.Settings
         public RelayCommand RemoveCompetitionCmd { get; private set; }
         public RelayCommand ViewLoadedCmd { get; private set; }
         public RelayCommand AddExtraHeaderCmd { get; private set; }
+        public RelayCommand AddExtraColumnCmd { get; private set; }
 
         public event Action CompetitionRemoved = delegate { };
     }

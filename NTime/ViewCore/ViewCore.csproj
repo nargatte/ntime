@@ -53,6 +53,7 @@
     <Compile Include="Entities\EditableAgeCategoryTemplate.cs" />
     <Compile Include="Entities\EditableAgeCategoryTemplateItem.cs" />
     <Compile Include="Entities\EditableCompetitionFile.cs" />
+    <Compile Include="Entities\EditableExtraColumn.cs" />
     <Compile Include="Entities\EditableHeaderPermutationPair.cs" />
     <Compile Include="Entities\EditableItemBase.cs" />
     <Compile Include="Entities\EditableSeriesStandingsParameters.cs" />

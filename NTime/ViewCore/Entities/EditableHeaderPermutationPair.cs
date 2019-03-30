@@ -17,7 +17,7 @@ namespace ViewCore.Entities
             MoveDownExtraHeaderCmd = new RelayCommand(OnMoveDownRequested);
         }
 
-
+        #region Properties
         public int PermutationElement
         {
             get { return DbEntity.PermutationElement; }
@@ -38,6 +38,7 @@ namespace ViewCore.Entities
             }
         }
 
+        #endregion
 
         public RelayCommand DeleteExtraHeaderCmd { get; private set; }
         public RelayCommand MoveUpExtraHeaderCmd { get; private set; }

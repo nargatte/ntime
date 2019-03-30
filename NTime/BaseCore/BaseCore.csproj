@@ -134,6 +134,8 @@
     <Compile Include="DataBase\Repositories\ExtraColumnRepository.cs" />
     <Compile Include="DataBase\Repositories\ExtraColumnValueRepository.cs" />
     <Compile Include="DataBase\Repositories\GateRepository.cs" />
+    <Compile Include="DataBase\Repositories\Interfaces\IExtraColumnRepository.cs" />
+    <Compile Include="DataBase\Repositories\Interfaces\IRepository.cs" />
     <Compile Include="DataBase\Repositories\OrganizerAccountRepository.cs" />
     <Compile Include="DataBase\Repositories\PlayerAccountRepository.cs" />
     <Compile Include="DataBase\Repositories\Repository.cs" />

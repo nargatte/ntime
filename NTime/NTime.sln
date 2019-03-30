@@ -1,11 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-<<<<<<< HEAD
-VisualStudioVersion = 15.0.27130.0
-=======
 VisualStudioVersion = 15.0.27004.2006
->>>>>>> Grzegorz
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminView", "AdminView\AdminView.csproj", "{56BFED8C-878A-4E94-93A3-B46DBEF958B8}"
 EndProject
@@ -17,13 +13,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmHelper", "WpfMvvmHelper
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewCore", "ViewCore\ViewCore.csproj", "{5F8EDA1D-517C-4E20-9BC7-0BCED5900A2B}"
 EndProject
-<<<<<<< HEAD
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopClientView", "DesktopClientView\DesktopClientView.csproj", "{EE41F2CA-BEA7-4F35-BD03-95C2A47DC01D}"
-=======
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{253B1DE5-8E3E-45AD-A68B-27375662F148}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerTests", "ServerTests\ServerTests.csproj", "{882F8576-B45E-44B2-BFC5-DB754A618C9A}"
->>>>>>> Grzegorz
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NTime.Application", "NTime.Application\NTime.Application.csproj", "{0551179D-9A6B-4252-B55D-96A499F37E13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,12 +47,10 @@ Global
 		{5F8EDA1D-517C-4E20-9BC7-0BCED5900A2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F8EDA1D-517C-4E20-9BC7-0BCED5900A2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F8EDA1D-517C-4E20-9BC7-0BCED5900A2B}.Release|Any CPU.Build.0 = Release|Any CPU
-<<<<<<< HEAD
 		{EE41F2CA-BEA7-4F35-BD03-95C2A47DC01D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EE41F2CA-BEA7-4F35-BD03-95C2A47DC01D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE41F2CA-BEA7-4F35-BD03-95C2A47DC01D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE41F2CA-BEA7-4F35-BD03-95C2A47DC01D}.Release|Any CPU.Build.0 = Release|Any CPU
-=======
 		{253B1DE5-8E3E-45AD-A68B-27375662F148}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{253B1DE5-8E3E-45AD-A68B-27375662F148}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{253B1DE5-8E3E-45AD-A68B-27375662F148}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -65,7 +59,10 @@ Global
 		{882F8576-B45E-44B2-BFC5-DB754A618C9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{882F8576-B45E-44B2-BFC5-DB754A618C9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{882F8576-B45E-44B2-BFC5-DB754A618C9A}.Release|Any CPU.Build.0 = Release|Any CPU
->>>>>>> Grzegorz
+		{0551179D-9A6B-4252-B55D-96A499F37E13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0551179D-9A6B-4252-B55D-96A499F37E13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0551179D-9A6B-4252-B55D-96A499F37E13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0551179D-9A6B-4252-B55D-96A499F37E13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

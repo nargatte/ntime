@@ -74,7 +74,7 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" DataContext="{Binding NewExtraHeader}">
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                            <TextBlock Text="Dodatkowa kolumna"
+                            <TextBlock Text="Stara dodatkowa kolumna"
                                    VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
                             <TextBox Text="{Binding HeaderName, UpdateSourceTrigger=PropertyChanged}" Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>
                         </StackPanel>
@@ -103,6 +103,54 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTextColumn x:Name="headerName" Width="*" Header="Nazwa kolumny"  Binding="{Binding HeaderName, UpdateSourceTrigger=LostFocus}"/>
+                        <DataGridTemplateColumn Width="Auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Command="{Binding DeleteExtraHeaderCmd}">Usuń</Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" DataContext="{Binding NewExtraHeader}">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                            <TextBlock Text="Dodatkowa kolumna"
+                                   VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
+                            <TextBox Text="{Binding HeaderName, UpdateSourceTrigger=PropertyChanged}" Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>
+                        </StackPanel>
+
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text=""
+                               VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
+                        <Button Command="{Binding AddExtraHeaderCmd}" Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                            Content="Dodaj"   FontSize="15" Margin="30, 5, 5, 5"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <DataGrid x:Name="extraColumnsDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="0,10" 
+                      ItemsSource="{Binding ExtraColumns}" EnableRowVirtualization="True" AutoGenerateColumns="False"
+                      ColumnWidth="*" SelectionMode="Extended" CanUserAddRows="False" Width="800" CanUserSortColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Width="Auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Vertical">
+                                        <Button Command="{Binding MoveUpExtraHeaderCmd}" FontFamily="Marlett" Height="15" FontSize="15" Content="5"/>
+                                        <Button Command="{Binding MoveDownExtraHeaderCmd}" FontFamily="Marlett" Height="15" FontSize="15" Content="6"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn x:Name="headerTitle" Width="*" Header="Nazwa kolumny"  Binding="{Binding Title, UpdateSourceTrigger=LostFocus}"/>
+                        <DataGridCheckBoxColumn x:Name="isRequired" Width="*" Header="Czy wymagana"  Binding="{Binding IsRequired, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridCheckBoxColumn x:Name="isDisplayedInPublicList" Width="*" Header="W. lista"  Binding="{Binding IsDisplayedInPublicList, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridCheckBoxColumn x:Name="isDisplayedInPublicDetails" Width="*" Header="W. szczegóły"  Binding="{Binding IsDisplayedInPublicDetails, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn x:Name="multiValueCount" Width="*" Header="Liczba wyborów"  Binding="{Binding MultiValueCount, UpdateSourceTrigger=LostFocus}"/>
+                        <DataGridTextColumn x:Name="minCharactersValidation" Width="*" Header="Min. znaków"  Binding="{Binding MinCharactersValidation, UpdateSourceTrigger=LostFocus}"/>
+                        <DataGridTextColumn x:Name="maxCharactersValidation" Width="*" Header="Max. znaków"  Binding="{Binding MaxCharactersValidation, UpdateSourceTrigger=LostFocus}"/>
                         <DataGridTemplateColumn Width="Auto">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
