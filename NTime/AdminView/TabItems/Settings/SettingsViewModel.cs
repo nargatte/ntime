@@ -18,7 +18,6 @@ namespace AdminView.Settings
 {
     class SettingsViewModel : TabItemViewModel
     {
-        private readonly CompetitionRepository _competitionRepository;
         private readonly IExtraColumnService _extraColumnService;
 
         private List<ExtraColumn> _originalExtraColumns = new List<ExtraColumn>();
@@ -103,7 +102,7 @@ namespace AdminView.Settings
         private async Task DownloadExtraColumnsAsync()
         {
             var extraColumns = await _extraColumnService.GetExtraColumnsForCompetition();
-            _originalExtraColumns = extraColumns.ToList();
+            _originalExtraColumns = new List<ExtraColumn>(extraColumns.Select(column => new ExtraColumn(column)));
             ExtraColumns = new ObservableCollection<EditableExtraColumn>(
                 extraColumns.Select(dbColumn => GetNewExtraColumnWithEvents(dbColumn)));
         }
@@ -158,7 +157,7 @@ namespace AdminView.Settings
 
         private void OnAddExtraHeader()
         {
-            if (!IsHeaderInputCorrect(NewExtraColumn.Title))
+            if (!IsHeaderInputCorrect(NewExtraHeader.HeaderName))
             {
                 MessageBox.Show("Nagłówek nie może być pusty");
                 return;

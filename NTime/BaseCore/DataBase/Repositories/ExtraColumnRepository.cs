@@ -31,6 +31,7 @@ namespace BaseCore.DataBase.Repositories
                 var extraColumnValues = await ctx.ExtraColumnValues.Where(value => value.ColumnId == item.Id).ToListAsync();
                 ctx.ExtraColumnValues.RemoveRange(extraColumnValues);
 
+                ctx.ExtraColumns.Attach(item);
                 ctx.ExtraColumns.Remove(item);
                 await ctx.SaveChangesAsync();
             });

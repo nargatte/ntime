@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              HorizontalAlignment="Center"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             d:DesignHeight="600" d:DesignWidth="400" Loaded="UserControl_Loaded" Width="800">
+             d:DesignHeight="600" d:DesignWidth="400" Loaded="UserControl_Loaded" Width="1000">
     <UserControl.Resources>
         <CollectionViewSource x:Key="competitionViewSource" d:DesignSource="{d:DesignInstance {x:Type DataBase:Competition}, CreateList=True}"/>
         <Style TargetType="DataGridCell">
@@ -114,18 +114,18 @@
                 </DataGrid>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" DataContext="{Binding NewExtraHeader}">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" DataContext="{Binding NewExtraColumn}">
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                            <TextBlock Text="Dodatkowa kolumna"
+                            <TextBlock Text="Nowa dodatkowa kolumna"
                                    VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
-                            <TextBox Text="{Binding HeaderName, UpdateSourceTrigger=PropertyChanged}" Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>
+                            <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Margin="5"/>
                         </StackPanel>
 
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text=""
                                VerticalAlignment="Center" FontSize="15" Margin="5" HorizontalAlignment="Center"/>
-                        <Button Command="{Binding AddExtraHeaderCmd}" Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                        <Button Command="{Binding AddExtraColumnCmd}" Width="100" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
                             Content="Dodaj"   FontSize="15" Margin="30, 5, 5, 5"/>
                     </StackPanel>
                 </StackPanel>
@@ -146,11 +146,11 @@
                         </DataGridTemplateColumn>
                         <DataGridTextColumn x:Name="headerTitle" Width="*" Header="Nazwa kolumny"  Binding="{Binding Title, UpdateSourceTrigger=LostFocus}"/>
                         <DataGridCheckBoxColumn x:Name="isRequired" Width="*" Header="Czy wymagana"  Binding="{Binding IsRequired, UpdateSourceTrigger=PropertyChanged}"/>
-                        <DataGridCheckBoxColumn x:Name="isDisplayedInPublicList" Width="*" Header="W. lista"  Binding="{Binding IsDisplayedInPublicList, UpdateSourceTrigger=PropertyChanged}"/>
-                        <DataGridCheckBoxColumn x:Name="isDisplayedInPublicDetails" Width="*" Header="W. szczegóły"  Binding="{Binding IsDisplayedInPublicDetails, UpdateSourceTrigger=PropertyChanged}"/>
-                        <DataGridTextColumn x:Name="multiValueCount" Width="*" Header="Liczba wyborów"  Binding="{Binding MultiValueCount, UpdateSourceTrigger=LostFocus}"/>
-                        <DataGridTextColumn x:Name="minCharactersValidation" Width="*" Header="Min. znaków"  Binding="{Binding MinCharactersValidation, UpdateSourceTrigger=LostFocus}"/>
-                        <DataGridTextColumn x:Name="maxCharactersValidation" Width="*" Header="Max. znaków"  Binding="{Binding MaxCharactersValidation, UpdateSourceTrigger=LostFocus}"/>
+                        <DataGridCheckBoxColumn x:Name="isDisplayedInPublicList" Width="*" Header="Na liście"  Binding="{Binding IsDisplayedInPublicList, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridCheckBoxColumn x:Name="isDisplayedInPublicDetails" Width="*" Header="W szczegółach"  Binding="{Binding IsDisplayedInPublicDetails, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn x:Name="multiValueCount" Width="*" Header="Liczba wyborów" IsReadOnly="True" Binding="{Binding MultiValueCount, UpdateSourceTrigger=LostFocus}"/>
+                        <DataGridTextColumn x:Name="minCharactersValidation" Width="*" Header="Min. znaków" IsReadOnly="True"  Binding="{Binding MinCharactersValidation, UpdateSourceTrigger=LostFocus}"/>
+                        <DataGridTextColumn x:Name="maxCharactersValidation" Width="*" Header="Max. znaków" IsReadOnly="True"  Binding="{Binding MaxCharactersValidation, UpdateSourceTrigger=LostFocus}"/>
                         <DataGridTemplateColumn Width="Auto">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>

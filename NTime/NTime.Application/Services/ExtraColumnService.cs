@@ -39,9 +39,10 @@ namespace NTime.Application.Services
             await _extraColumnRepository.RemoveAsync(extraColumn);
         }
 
+        // TODO: Write tests for this method
         public bool ExtraColumnsChanged(IEnumerable<ExtraColumn> originalColumns, IEnumerable<ExtraColumn> updatedColumns)
         {
-            return originalColumns.SequenceEqual(updatedColumns, new ExtraColumnEqualityComparer());
+            return !originalColumns.SequenceEqual(updatedColumns, new ExtraColumnEqualityComparer());
         }
 
         public List<ExtraColumn> GetExtraColumnsWithSortIndices(IEnumerable<ExtraColumn> extraColumns)

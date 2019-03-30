@@ -9,6 +9,25 @@ namespace BaseCore.DataBase
 {
     public class ExtraColumn : IEntityId, ICompetitionId
     {
+        public ExtraColumn()
+        {
+
+        }
+        public ExtraColumn(ExtraColumn column)
+        {
+            this.Id = column.Id;
+            this.CompetitionId = column.CompetitionId;
+            this.Title = column.Title;
+            this.IsRequired = column.IsRequired;
+            this.IsDisplayedInPublicList = column.IsDisplayedInPublicList;
+            this.IsDisplayedInPublicDetails = column.IsDisplayedInPublicDetails;
+            this.MultiValueCount = column.MultiValueCount;
+            this.MinCharactersValidation = column.MinCharactersValidation;
+            this.MaxCharactersValidation = column.MaxCharactersValidation;
+            this.Type = column.Type;
+            this.SortIndex = column.SortIndex;
+        }
+
         public int Id { get; set; }
         public int CompetitionId { get; set; }
         public virtual Competition Competition { get; set; }

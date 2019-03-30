@@ -18,7 +18,7 @@ namespace BaseCore.Migrations
                         LookupId = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.ExtraColumns", t => t.ColumnId, cascadeDelete: true)
+                .ForeignKey("dbo.ExtraColumns", t => t.ColumnId, cascadeDelete: true) 
                 .ForeignKey("dbo.ExtraColumnValues", t => t.LookupId)
                 .ForeignKey("dbo.Players", t => t.PlayerId, cascadeDelete: true)
                 .Index(t => t.PlayerId)
