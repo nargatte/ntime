@@ -154,6 +154,10 @@
     <Compile Include="Migrations\201901272110599_AgeCategoryTemplatesRenaming.Designer.cs">
       <DependentUpon>201901272110599_AgeCategoryTemplatesRenaming.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903301334055_AddExtraColumns.cs" />
+    <Compile Include="Migrations\201903301334055_AddExtraColumns.Designer.cs">
+      <DependentUpon>201903301334055_AddExtraColumns.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DatabaseSelectionModel.cs" />
     <Compile Include="Models\PageBindingModel.cs" />
@@ -194,6 +198,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901272110599_AgeCategoryTemplatesRenaming.resx">
       <DependentUpon>201901272110599_AgeCategoryTemplatesRenaming.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903301334055_AddExtraColumns.resx">
+      <DependentUpon>201903301334055_AddExtraColumns.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
