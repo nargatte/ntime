@@ -67,19 +67,19 @@ namespace ViewCore.Entities
             set { DbEntity.SortIndex = SetProperty(DbEntity.SortIndex, value); }
         }
 
-        public int MultiValueCount
+        public int? MultiValueCount
         {
             get { return DbEntity.MultiValueCount; }
             set { DbEntity.MultiValueCount = SetProperty(DbEntity.MultiValueCount, value); }
         }
 
-        public int MinCharactersValidation
+        public int? MinCharactersValidation
         {
             get { return DbEntity.MinCharactersValidation; }
             set { DbEntity.MinCharactersValidation = SetProperty(DbEntity.MinCharactersValidation, value); }
         }
 
-        public int MaxCharactersValidation
+        public int? MaxCharactersValidation
         {
             get { return DbEntity.MaxCharactersValidation; }
             set { DbEntity.MaxCharactersValidation = SetProperty(DbEntity.MaxCharactersValidation, value); }

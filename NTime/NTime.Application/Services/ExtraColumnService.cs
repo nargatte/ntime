@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace NTime.Application.Services
 {
@@ -18,9 +19,9 @@ namespace NTime.Application.Services
             _competition = competition;
         }
 
-        public async Task<ExtraColumn> AddExtraColumn(int competitionId, ExtraColumn extraColumn)
+        public async Task AddExtraColumn(ExtraColumn extraColumn)
         {
-            throw new NotImplementedException();
+            await _extraColumnRepository.AddAsync(extraColumn);
         }
 
         public async Task<ExtraColumn[]> GetExtraColumnsForCompetition()
@@ -28,9 +29,29 @@ namespace NTime.Application.Services
             return await _extraColumnRepository.GetAllAsync();
         }
 
-        public async Task<ExtraColumn> UpdateExtraColumn(int competitionId, ExtraColumn extraColumn)
+        public async Task UpdateExtraColumns(IEnumerable<ExtraColumn> extraColumns)
         {
-            throw new NotImplementedException();
+            await _extraColumnRepository.UpdateRangeAsync(extraColumns);
+        }
+
+        public async Task RemoveExtraColumn(ExtraColumn extraColumn)
+        {
+            await _extraColumnRepository.RemoveAsync(extraColumn);
+        }
+
+        public bool ExtraColumnsChanged(IEnumerable<ExtraColumn> originalColumns, IEnumerable<ExtraColumn> updatedColumns)
+        {
+            return originalColumns.SequenceEqual(updatedColumns, new ExtraColumnEqualityComparer());
+        }
+
+        public List<ExtraColumn> GetExtraColumnsWithSortIndices(IEnumerable<ExtraColumn> extraColumns)
+        {
+            var extraColumnsCopy = new List<ExtraColumn>(extraColumns);
+            for (int i = 0; i < extraColumnsCopy.Count; i++)
+            {
+                extraColumnsCopy[i].SortIndex = i;
+            }
+            return extraColumnsCopy;
         }
     }
 }

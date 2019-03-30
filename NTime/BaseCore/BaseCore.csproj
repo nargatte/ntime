@@ -99,6 +99,7 @@
     <Compile Include="DataBase\Entities\AgeCategoryBase.cs" />
     <Compile Include="DataBase\Entities\AgeCategoryTemplateItem.cs" />
     <Compile Include="DataBase\Entities\AgeCategoryTemplate.cs" />
+    <Compile Include="DataBase\Entities\Comparers\ExtraColumnEqualityComparer.cs" />
     <Compile Include="DataBase\Entities\Competition.cs" />
     <Compile Include="DataBase\Entities\DistanceType.cs" />
     <Compile Include="DataBase\Entities\Distance.cs" />

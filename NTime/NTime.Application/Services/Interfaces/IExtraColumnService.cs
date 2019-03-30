@@ -8,8 +8,11 @@ namespace NTime.Application.Services
 {
     public interface IExtraColumnService
     {
-        Task<ExtraColumn> AddExtraColumn(int competitionId, ExtraColumn extraColumn);
+        Task AddExtraColumn(ExtraColumn extraColumn);
         Task<ExtraColumn[]> GetExtraColumnsForCompetition();
-        Task<ExtraColumn> UpdateExtraColumn(int competitionId, ExtraColumn extraColumn);
+        Task UpdateExtraColumns(IEnumerable<ExtraColumn> extraColumn);
+        Task RemoveExtraColumn(ExtraColumn extraColumn);
+        bool ExtraColumnsChanged(IEnumerable<ExtraColumn> originalColumns, IEnumerable<ExtraColumn> updatedColumns);
+        List<ExtraColumn> GetExtraColumnsWithSortIndices(IEnumerable<ExtraColumn> extraColumns);
     }
 }
