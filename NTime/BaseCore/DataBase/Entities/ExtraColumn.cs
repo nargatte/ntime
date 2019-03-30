@@ -11,7 +11,7 @@ namespace BaseCore.DataBase
     {
         public int Id { get; set; }
         public int CompetitionId { get; set; }
-        public Competition Competition { get; set; }
+        public virtual Competition Competition { get; set; }
 
         [Required]
         [StringLength(255)]
@@ -25,6 +25,6 @@ namespace BaseCore.DataBase
         public int? MinCharactersValidation { get; set; }
         public int? MaxCharactersValidation { get; set; }
 
-        public ICollection<ExtraColumnValue> ExtraColumnValues { get; set; }
+        public virtual ICollection<ExtraColumnValue> ExtraColumnValues { get; set; }
     }
 }

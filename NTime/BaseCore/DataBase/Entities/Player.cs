@@ -102,7 +102,7 @@ namespace BaseCore.DataBase
 
         public virtual ICollection<TimeRead> TimeReads { get; set; }
 
-        public ICollection<ExtraColumnValue> ExtraColumnValues { get; set; }
+        public virtual ICollection<ExtraColumnValue> ExtraColumnValues { get; set; }
 
         public override string ToString()
         {

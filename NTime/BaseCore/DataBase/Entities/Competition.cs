@@ -59,6 +59,6 @@ namespace BaseCore.DataBase
 
         public virtual ICollection<OrganizerAccount> OrganizerAccounts { get; set; }
 
-        public ICollection<ExtraColumn> ExtraColumns { get; set; }
+        public virtual ICollection<ExtraColumn> ExtraColumns { get; set; }
     }
 }

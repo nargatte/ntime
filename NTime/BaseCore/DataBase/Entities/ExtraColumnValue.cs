@@ -10,11 +10,11 @@ namespace BaseCore.DataBase
     {
         public int Id { get; set; }
         public int PlayerId { get; set; }
-        public Player Player { get; set; }
+        public virtual Player Player { get; set; }
         public int ColumnId { get; set; }
-        public ExtraColumn Column { get; set; }
+        public virtual ExtraColumn Column { get; set; }
         public string CustomValue { get; set; }
         public int? LookupId { get; set; }
-        public ExtraColumnValue Lookup { get; set; }
+        public virtual ExtraColumnValue Lookup { get; set; }
     }
 }
