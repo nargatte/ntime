@@ -26,7 +26,7 @@ namespace BaseCore.DataBase
             items.OrderBy(i => i.LastName);
 
         protected override IQueryable<Player> GetIncludeQuery(IQueryable<Player> items) =>
-            items.Include(p => p.Distance).Include(p => p.AgeCategory).Include(p => p.Subcategory);
+            items.Include(p => p.Distance).Include(p => p.AgeCategory).Include(p => p.Subcategory).Include(p => p.ExtraColumnValues);
 
         public async Task SetSelectedStartTimeAsync(Player[] players, DateTime startTime)
         {

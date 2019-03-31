@@ -13,10 +13,9 @@ namespace ViewCore.ManagersHttp
 {
     public class PlayerAccountManagerHttp : ManagerHttp, IPlayerAccountManager
     {
-        private HttpPlayerAccountClient _client;
-        private PlayerAccount _loggedInPlayer;
+        private readonly HttpPlayerAccountClient _client;
 
-        public PlayerAccount LoggedInPlayer => _loggedInPlayer;
+        public PlayerAccount LoggedInPlayer { get; private set; }
 
         public PlayerAccountManagerHttp(DependencyContainer dependencyContainer) : base(dependencyContainer.User, dependencyContainer.ConnectionInfo)
         {
@@ -27,32 +26,28 @@ namespace ViewCore.ManagersHttp
         {
             await TryCallApi(async () =>
             {
-                _loggedInPlayer = await GetLoggedInPlayerAccount();
+                LoggedInPlayer = await GetLoggedInPlayerAccount();
             });
             return LoggedInPlayer;
         }
 
-        public async Task UpdatePlayerTemplateData(PlayerAccount playerAccount)
+        public Task UpdatePlayerTemplateData(PlayerAccount playerAccount)
         {
-            await TryCallApi(async () =>
-            {
-                _loggedInPlayer = playerAccount;
-                await _client.UpdatePlayerAccountInfo(playerAccount);
-            });
-            if (IsSuccess)
-            {
-                MessageBox.Show("Dane został poprawnie zapisane");
-            }
+            //await TryCallApi(async () =>
+            //{
+            //    _loggedInPlayer = playerAccount;
+            //    await _client.UpdatePlayerAccountInfo(playerAccount);
+            //});
+            //if (IsSuccess)
+            //{
+            //    MessageBox.Show("Dane został poprawnie zapisane");
+            //}
+            throw new NotImplementedException();
         }
 
-        public async Task<PlayerAccount> GetLoggedInPlayerAccount()
+        public Task<PlayerAccount> GetLoggedInPlayerAccount()
         {
-            PlayerAccount loggedInPlayerAccount = new PlayerAccount();
-            await TryCallApi(async () =>
-            {
-                loggedInPlayerAccount = (await _client.GetLoggedInPlayerAccount()).CopyDataFromDto(new PlayerAccount());
-            });
-            return loggedInPlayerAccount;
+            throw new NotImplementedException();
         }
     }
 }

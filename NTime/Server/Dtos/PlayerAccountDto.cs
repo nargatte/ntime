@@ -8,67 +8,27 @@ using Server.Models;
 
 namespace Server.Dtos
 {
-    public class PlayerAccountDto : IDtoBase<PlayerAccount>
+    public class PlayerAccountDto : PlayerBaseDto
     {
-        public PlayerAccountDto()
+        public PlayerAccountDto(PlayerAccount account, ApplicationUser applicationUser) 
+            : base(new Player(account, applicationUser.FirstName, applicationUser.LastName))  
         {
-
-        }
-
-        /// <summary>
-        /// Use PlayerAccountDto(PlayerAccount account, ApplicationUser applicationUser) insstead
-        /// </summary>
-        /// <param name="playerAccount"></param>
-        public PlayerAccountDto(PlayerAccount playerAccount)
-        {
-            Id = playerAccount.Id;
-            BirthDate = playerAccount.BirthDate;
-            IsMale = playerAccount.IsMale;
-            Team = playerAccount.Team;
-            City = playerAccount.City;
-        }
-
-        public PlayerAccountDto(PlayerAccount account, ApplicationUser applicationUser)
-            : this(account)
-        {
-            FirstName = applicationUser.FirstName;
-            LastName = applicationUser.LastName;
             Email = applicationUser.Email;
             PhoneNumber = applicationUser.PhoneNumber;
         }
 
-        public PlayerAccount CopyDataFromDto(PlayerAccount playerAccount)
+        public (PlayerAccount, ApplicationUser) CopyDataFromDto(PlayerAccount playerAccount, ApplicationUser applicationUser)
         {
-            playerAccount.Id = Id;
-            playerAccount.BirthDate = BirthDate;
-            playerAccount.IsMale = IsMale;
-            playerAccount.Team = Team;
-            playerAccount.City = City;
-            return playerAccount;
+            base.CopyDataFromDto(new Player(playerAccount, applicationUser.FirstName, applicationUser.LastName));
+            applicationUser.PhoneNumber = PhoneNumber;
+            applicationUser.Email = Email;
+            return (playerAccount, applicationUser);
         }
 
-        public int Id { get; set; }
-
-        [StringLength(255), Required]
-        public string FirstName { get; set; }
-
-        [StringLength(255), Required]
-        public string LastName { get; set; }
-
-        [Required]
         public DateTime? BirthDate { get; set; }
-
-        public bool? IsMale { get; set; }
-
-        [StringLength(255)]
-        public string Team { get; set; }
-
         [Phone]
         public string PhoneNumber { get; set; }
-
         [EmailAddress]
         public string Email { get; set; }
-
-        public string City { get; set; }
     }
 }

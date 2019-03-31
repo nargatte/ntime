@@ -8,31 +8,15 @@ using BaseCore.DataBase;
 
 namespace Server.Dtos
 {
-    public class PlayerWithScoresDto : IDtoBase<Player>
+    public class PlayerWithScoresDto : PlayerListViewDto, IDtoBase<Player>
     {
-        public PlayerWithScoresDto()
-        {
 
-        }
-
-        public PlayerWithScoresDto(Player player)
+        public PlayerWithScoresDto(Player player) : base(player)
         {
-            Id = player.Id;
-            FirstName = player.FirstName;
-            LastName = player.LastName;
-            BirthDate = player.BirthDate;
             RegistrationDate = player.RegistrationDate;
-            IsMale = player.IsMale;
             PhoneNumber = player.PhoneNumber;
-            ExtraData = player.ExtraData;
-            Team = player.Team;
-            StartNumber = player.StartNumber;
-            StartTime = player.StartTime;
-            City = player.City;
-            IsPaidUp = player.IsPaidUp;
             Email = player.Email;
             IsStartTimeFromReader = player.IsStartTimeFromReader;
-            FullCategory = player.FullCategory;
             IsCategoryFixed = player.IsCategoryFixed;
             LapsCount = player.LapsCount;
             Time = player.Time;
@@ -45,23 +29,13 @@ namespace Server.Dtos
             PlayerAccountId = player.PlayerAccountId;
         }
 
-        public Player CopyDataFromDto(Player player)
+        public override Player CopyDataFromDto(Player player)
         {
-            player.Id = Id;
-            player.FirstName = FirstName;
-            player.LastName = LastName;
+            base.CopyDataFromDto(player);
             player.BirthDate = BirthDate;
-            player.IsMale = IsMale;
             player.PhoneNumber = PhoneNumber;
-            player.ExtraData = ExtraData;
-            player.Team = Team;
-            player.StartNumber = StartNumber;
-            player.StartTime = StartTime;
-            player.City = City;
-            player.IsPaidUp = IsPaidUp;
             player.Email = Email;
             player.IsStartTimeFromReader = IsStartTimeFromReader;
-            player.FullCategory = FullCategory;
             player.IsCategoryFixed = IsCategoryFixed;
             player.LapsCount = LapsCount;
             player.Time = Time;
@@ -96,64 +70,23 @@ namespace Server.Dtos
             return player;
         }
 
-
-        public int Id { get; set; }
-
-        [StringLength(255), Required]
-        public string FirstName { get; set; }
-
-        [StringLength(255), Required]
-        public string LastName { get; set; }
-
         [Required]
         public DateTime BirthDate { get; set; }
-
         public DateTime RegistrationDate { get; set; }
-
-        public bool IsMale { get; set; }
-
         [Phone]
         public string PhoneNumber { get; set; }
-
-        public string ExtraData { get; set; }
-
-        [StringLength(255)]
-        public string Team { get; set; }
-
-        public int StartNumber { get; set; }
-
-        public DateTime? StartTime { get; set; }
-
-        public string City { get; set; }
-
-        public bool IsPaidUp { get; set; }
-
         [EmailAddress]
         public string Email { get; set; }
-
         public bool IsStartTimeFromReader { get; set; }
-
-        [StringLength(255)]
-        public string FullCategory { get; set; }
-
         public bool IsCategoryFixed { get; set; }
-
         public int LapsCount { get; set; }
-
         public decimal Time { get; set; }
-
         public int DistancePlaceNumber { get; set; }
-
         public int CategoryPlaceNumber { get; set; }
-
         public bool CompetitionCompleted { get; set; }
-
         public int SubcategoryId { get; set; }
-
         public int DistanceId { get; set; }
-
         public int AgeCategoryId { get; set; }
-
         public int? PlayerAccountId { get; set; }
     }
 }

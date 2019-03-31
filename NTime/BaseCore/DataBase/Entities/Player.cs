@@ -21,12 +21,11 @@ namespace BaseCore.DataBase
             StartNumber = startNumber;
         }
 
-        public Player(PlayerAccount playerAccount, string firstName, string lastName, string phoneNumber)
+        public Player(PlayerAccount playerAccount, string firstName, string lastName)
         {
             FirstName = firstName;
             LastName = lastName;
             BirthDate = playerAccount.BirthDate ?? DateTime.Today;
-            PhoneNumber = phoneNumber;
             Team = playerAccount.Team;
             if (playerAccount.IsMale.HasValue)
             {

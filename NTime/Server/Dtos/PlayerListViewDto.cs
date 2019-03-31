@@ -7,69 +7,38 @@ using BaseCore.DataBase;
 
 namespace Server.Dtos
 {
-    public class PlayerListViewDto : IDtoBase<Player>
+    public class PlayerListViewDto : PlayerBaseDto, IDtoBase<Player>
     {
-        public PlayerListViewDto()
-        {
 
-        }
-
-        public PlayerListViewDto(Player player)
+        public PlayerListViewDto(Player player) : base(player)
         {
-            Id = player.Id;
-            FirstName = player.FirstName;
-            LastName = player.LastName;
-            IsMale = player.IsMale;
-            ExtraData = player.ExtraData;
-            Team = player.Team;
             StartNumber = player.StartNumber;
             StartTime = player.StartTime;
             FullCategory = player.FullCategory;
-            City = player.City;
             IsPaidUp = player.IsPaidUp;
+            ExtraData = player.ExtraData;
+            ExtraColumnValues = player.ExtraColumnValues.Select(columnValue => new ExtraColumnValueDto(columnValue)).ToArray();
         }
 
-        public Player CopyDataFromDto(Player player)
+        public override Player CopyDataFromDto(Player player)
         {
-            player.Id = Id;
-            player.FirstName = FirstName;
-            player.LastName = LastName;
-            player.IsMale = IsMale;
-            player.ExtraData = ExtraData;
-            player.Team = Team;
+            base.CopyDataFromDto(player);
             player.StartNumber = StartNumber;
             player.StartTime = StartTime;
             player.FullCategory = FullCategory;
-            player.City = City;
-            player.IsPaidUp = IsPaidUp;
+            player.IsPaidUp = IsPaidUp; 
+            player.ExtraData = ExtraData;
+            player.ExtraColumnValues = ExtraColumnValues.Select(extraColumn => extraColumn.CopyDataFromDto(new ExtraColumnValue())).ToArray();
             return player;
         }
 
-        public int Id { get; set; }
-
-        [StringLength(255), Required]
-        public string FirstName { get; set; }
-
-        [StringLength(255), Required]
-        public string LastName { get; set; }
-
-        public bool IsMale { get; set; }
-
-        public string ExtraData { get; set; }
-
-        [StringLength(255)]
-        public string Team { get; set; }
-
         public int StartNumber { get; set; }
-
         public DateTime? StartTime { get; set; }
-
         [StringLength(255)]
         public string FullCategory { get; set; }
-
-        public string City { get; set; }
-
         public bool IsPaidUp { get; set; }
+        public string ExtraData { get; set; }
+        public ExtraColumnValueDto[] ExtraColumnValues { get; set; }
 
     }
 }
