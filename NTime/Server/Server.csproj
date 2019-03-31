@@ -277,6 +277,7 @@
     <Compile Include="Dtos\ExtraColumnDto.cs" />
     <Compile Include="Dtos\ExtraColumnValueDto.cs" />
     <Compile Include="Dtos\PlayerBaseDto.cs" />
+    <Compile Include="Dtos\PlayerPublicDetailsDto.cs" />
     <Compile Include="Dtos\SubcategoryDto.cs" />
     <Compile Include="Dtos\IDtoBase.cs" />
     <Compile Include="Dtos\LoginDataDto.cs" />

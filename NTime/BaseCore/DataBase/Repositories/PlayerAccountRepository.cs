@@ -19,5 +19,7 @@ namespace BaseCore.DataBase
         public Task<PageViewModel<Player>> GetPlayersByPlayerAccount(string accountId, PageBindingModel bindingModel) =>
             PageTemplate<Player>(bindingModel,
                 e => e.Where(p => p.PlayerAccount.AccountId == accountId).OrderByDescending(p => p.Competition.EventDate));
+
+
     }
 }

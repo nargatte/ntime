@@ -23,9 +23,9 @@ namespace Server.Controllers
     [System.Web.Http.RoutePrefix("api/player")]
     public class PlayerController : ControllerNTimeBase
     {
-        private const string RegisterPrivateKey = "6LfUoFAUAAAAAEGYb9BcgluK0dDdqqhTTxieoVGU";
+        private const string _registerPrivateKey = "6LfUoFAUAAAAAEGYb9BcgluK0dDdqqhTTxieoVGU";
 
-        private static readonly HttpClient httpClient = new HttpClient
+        private static readonly HttpClient _httpClient = new HttpClient
         {
             BaseAddress = new Uri("https://www.google.com/")
         };
@@ -69,7 +69,7 @@ namespace Server.Controllers
 
             Dictionary<string, string> postData = new Dictionary<string, string>
             {
-                {"secret", RegisterPrivateKey},
+                {"secret", _registerPrivateKey},
                 {"response", token},
                 {"remoteip", HttpContext.Current.Request.UserHostAddress},
             };
@@ -327,7 +327,7 @@ namespace Server.Controllers
             Player player = new Player();
             await competitionRegisterDto.CopyDataFromDto(player, ContextProvider, Competition);
 
-            await CheckReCaptcha(RegisterPrivateKey, competitionRegisterDto.ReCaptchaToken);
+            await CheckReCaptcha(_registerPrivateKey, competitionRegisterDto.ReCaptchaToken);
 
             if (AmIPlayer())
             {

@@ -17,7 +17,9 @@ namespace Server.Dtos
             FullCategory = player.FullCategory;
             IsPaidUp = player.IsPaidUp;
             ExtraData = player.ExtraData;
-            ExtraColumnValues = player.ExtraColumnValues.Select(columnValue => new ExtraColumnValueDto(columnValue)).ToArray();
+            ExtraColumnValues = player.ExtraColumnValues
+                .Where(column => column.Column.IsDisplayedInPublicList)
+                .Select(columnValue => new ExtraColumnValueDto(columnValue)).ToArray();
         }
 
         public override Player CopyDataFromDto(Player player)

@@ -166,6 +166,9 @@ namespace BaseCore.DataBase
 
         protected virtual IQueryable<T> GetIncludeQuery(IQueryable<T> items) => items;
 
+        protected virtual IQueryable<T> GetAllFullQuery(IQueryable<T> items) =>
+             GetIncludeQuery(GetSortQuery(GetAllQuery(items)));
+
         protected virtual void CheckItem(T item) { }
 
         protected virtual void PrepareToAdd(T item) { }

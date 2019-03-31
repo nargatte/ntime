@@ -260,7 +260,7 @@ namespace BaseCore.DataBase
             return player;
         }
 
-        public async Task UpdateAsync(Player player, AgeCategory ageCategory, Distance distance, Subcategory subcategory)
+        public async Task UpdateAsync(Player player, AgeCategory ageCategory, Distance distance, Subcategory subcategory, ExtraColumnValue[] extraColumnValues)
         {
             player.Distance = distance;
             player.DistanceId = distance?.Id;
@@ -268,6 +268,11 @@ namespace BaseCore.DataBase
             player.SubcategoryId = subcategory?.Id;
             player.AgeCategory = ageCategory;
             player.AgeCategoryId = ageCategory?.Id;
+            player.ExtraColumnValues = extraColumnValues;
+            foreach (var extraColumnValue in player.ExtraColumnValues)
+            {
+                extraColumnValue.PlayerId = player.Id;
+            }
             player.FullCategory = GetFullCategory(distance, subcategory, ageCategory, player.IsMale);
             CheckNull(player);
             CheckItem(player);

@@ -109,22 +109,26 @@ namespace Server.Controllers
         // PUT api/PlayerAccount/1
         [Route("{id:int:min(1)}")]
         [Authorize(Roles = "Administrator,Player")]
-        public async Task<IHttpActionResult> Put(int id, PlayerAccountDto accountDto)
+        public /*async*/ Task<IHttpActionResult> Put(int id, PlayerAccountDto accountDto)
         {
-            accountDto.Id = id;
+            //accountDto.Id = id;
 
-            PlayerAccount playerAccount = await _playerAccountRepository.GetById(id);
+            //var playerAccount = await _playerAccountRepository.GetById(id);
 
-            if (playerAccount == null)
-                return NotFound();
+            //if (playerAccount == null)
+            //    return NotFound();
 
-            if (CanPlayerAccess(playerAccount) == false)
-                return Unauthorized();
+            //if (CanPlayerAccess(playerAccount) == false)
+            //    return Unauthorized();
 
-            accountDto.CopyDataFromDto(playerAccount);
+            //// TODO: We need to be able to Include ApplicationUser to the playerAccount
+            //var userAccount = _
 
-            await _playerAccountRepository.UpdateAsync(playerAccount);
-            return Ok();
+            //accountDto.CopyDataFromDto(playerAccount);
+
+            //await _playerAccountRepository.UpdateAsync(playerAccount);
+            //return Ok();
+            throw new NotImplementedException();
         }
 
         //public async Task<IHttpActionResult> Delete(int id)
