@@ -4,7 +4,7 @@ namespace Server.Dtos
 {
     public interface IDtoBase<T>
     {
-        T CopyDataFromDto(T entiti);
+        T CopyDataFromDto(T entity);
         int Id { get; set; }
     }
 }

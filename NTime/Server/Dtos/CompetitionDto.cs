@@ -26,7 +26,7 @@ namespace Server.Dtos
             Organizer = competition.Organizer;
             City = competition.City;
             OrganizerEditLock = competition.OrganizerEditLock;
-            ExtraColumns = competition.ExtraColumns.ToArray();
+            ExtraColumns = competition.ExtraColumns.Select(column => new ExtraColumnDto(column)).ToArray();
         }
 
         public virtual Competition CopyDataFromDto(Competition competition)
@@ -41,7 +41,7 @@ namespace Server.Dtos
             competition.LinkDisplayedName = LinkDisplayedName;
             competition.Organizer = Organizer;
             competition.City = City;
-            competition.ExtraColumns = ExtraColumns;
+            competition.ExtraColumns = ExtraColumns.Select(columnDto => columnDto.CopyDataFromDto(new ExtraColumn())).ToArray();
             return competition;
         }
 
@@ -74,6 +74,6 @@ namespace Server.Dtos
 
         public bool OrganizerEditLock { get; set; }
 
-        public ExtraColumn[] ExtraColumns { get; set; }
+        public ExtraColumnDto[] ExtraColumns { get; set; }
     }
 }
