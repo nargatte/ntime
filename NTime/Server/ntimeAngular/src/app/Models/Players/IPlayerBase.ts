@@ -1,4 +1,4 @@
-interface PlayerBaseDto {
+interface IPlayerBase {
   Id: number;
   FirstName: string;
   LastName: string;

@@ -1,13 +1,13 @@
-class PlayerBase implements IDtoBase<PlayerBaseDto> {
-  constructor(
-    public Id: number,
-    public FirstName: string,
-    public LastName: string,
-    public IsMale: boolean,
-    public City: string,
-    public Team: string
-  ) {}
-  CopyDataFromDto(dto: PlayerBaseDto): void {
+class PlayerBase implements IDtoBase<IPlayerBase> {
+  public Id: number;
+  public FirstName: string;
+  public LastName: string;
+  public IsMale: boolean;
+  public City: string;
+  public Team: string;
+
+  constructor() {}
+  copyDataFromDto(dto: IPlayerBase): void {
     this.Id = dto.Id;
     this.FirstName = dto.FirstName;
     this.LastName = dto.LastName;

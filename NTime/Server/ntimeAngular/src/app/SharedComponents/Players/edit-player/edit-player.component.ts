@@ -105,7 +105,7 @@ export class EditPlayerComponent implements OnInit, AfterViewInit {
     this.dataLoaded = false;
     this.editedPlayer = new PlayersWithScores();
     this.playerService.getPlayer(this.playerId).subscribe(
-      (player: PlayerWithScoresDto) => {
+      (player: IPlayerWithScores) => {
         this.editedPlayer.copyDataFromFullDto(player); // TODO: Try to make not static
         this.editedPlayerExtraData = this.editedPlayer.ExtraData.split(this.delimiter);
         this.messageService.addLog('Displaying downloaded player');
