@@ -22,6 +22,13 @@ namespace ViewCore.Entities
         {
             DbEntity = new Competition(name, eventDate, description, link, organiser, city, linkDisplayedName);
         }
+
+
+        public int Id
+        {
+            get { return DbEntity.Id; }
+            set { DbEntity.Id = SetProperty(DbEntity.Id, value); }
+        }
         public string Name
         {
             get { return DbEntity.Name; }

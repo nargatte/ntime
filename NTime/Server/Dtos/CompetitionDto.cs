@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using BaseCore.DataBase;
 using Server.Dtos;
 using Server.Models;
@@ -25,6 +26,7 @@ namespace Server.Dtos
             Organizer = competition.Organizer;
             City = competition.City;
             OrganizerEditLock = competition.OrganizerEditLock;
+            ExtraColumns = competition.ExtraColumns.ToArray();
         }
 
         public virtual Competition CopyDataFromDto(Competition competition)
@@ -39,6 +41,7 @@ namespace Server.Dtos
             competition.LinkDisplayedName = LinkDisplayedName;
             competition.Organizer = Organizer;
             competition.City = City;
+            competition.ExtraColumns = ExtraColumns;
             return competition;
         }
 

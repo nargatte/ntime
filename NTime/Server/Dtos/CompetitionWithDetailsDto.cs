@@ -21,12 +21,18 @@ namespace Server.Dtos
             var subcategoryRepository = new SubcategoryRepository(contextProvider, competition);
             var ageCategoryDistanceRepository = new AgeCategoryDistanceRepository(contextProvider, competition);
 
+            var ageCategoriesTask = ageCategoryRepository.GetAllAsync();
+            var distancesTask = distanceRepository.GetAllAsync();
+            var subcategoriesTask = subcategoryRepository.GetAllAsync();
+            var ageCategoryDistancesTask = ageCategoryDistanceRepository.GetAllAsync();
+
+            await Task.WhenAll(ageCategoriesTask, distancesTask, subcategoriesTask, ageCategoryDistancesTask);
             // TODO: change to Task.WhenAll - https://stackoverflow.com/questions/17197699/awaiting-multiple-tasks-with-different-results
-            AgeCategories = (await ageCategoryRepository.GetAllAsync()).Select(ag => new AgeCategoryDto(ag))
+            AgeCategories = (await ageCategoriesTask).Select(ag => new AgeCategoryDto(ag))
                 .ToArray();
-            Distances = (await distanceRepository.GetAllAsync()).Select(d => new DistanceDto(d)).ToArray();
-            Subcategories = (await subcategoryRepository.GetAllAsync()).Select(s => new SubcategoryDto(s)).ToArray();
-            AgeCategoryDistances = (await ageCategoryDistanceRepository.GetAllAsync())
+            Distances = (await distancesTask).Select(d => new DistanceDto(d)).ToArray();
+            Subcategories = (await subcategoriesTask).Select(s => new SubcategoryDto(s)).ToArray();
+            AgeCategoryDistances = (await ageCategoryDistancesTask)
                 .Select(acd => new AgeCategoryDistanceDto(acd)).ToArray();
         }
 
