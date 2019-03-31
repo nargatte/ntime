@@ -1,13 +1,7 @@
-interface PlayerCompetitionRegisterDto {
-    Id: number;
-    FirstName: string;
-    LastName: string;
-    BirthDate: Date;
-    IsMale: boolean;
-    Team: string;
+interface PlayerCompetitionRegisterDto extends PlayerBaseDto {
     PhoneNumber: string;
+    BirthDate: Date;
     ExtraData: string;
-    City: string;
     Email: string;
     SubcategoryId: number;
     DistanceId: number;
