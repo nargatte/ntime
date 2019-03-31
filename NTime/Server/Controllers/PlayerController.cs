@@ -212,7 +212,7 @@ namespace Server.Controllers
 
             await playerWithScoresDto.CopyDataFromDto(player, ContextProvider, Competition);
 
-            await _playerRepository.UpdateAsync(player, player.AgeCategory, player.Distance, player.Subcategory);
+            await _playerRepository.UpdateAsync(player, player.AgeCategory, player.Distance, player.Subcategory, player.ExtraColumnValues.ToArray());
 
             return Ok();
         }
@@ -235,7 +235,7 @@ namespace Server.Controllers
 
                 await p.CopyDataFromDto(player, ContextProvider, Competition);
 
-                await _playerRepository.UpdateAsync(player, player.AgeCategory, player.Distance, player.Subcategory);
+                await _playerRepository.UpdateAsync(player, player.AgeCategory, player.Distance, player.Subcategory, player.ExtraColumnValues.ToArray());
             }
 
             return Ok();
@@ -301,7 +301,7 @@ namespace Server.Controllers
 
             await competitionRegisterDto.CopyDataFromDto(player, ContextProvider, Competition);
 
-            await _playerRepository.UpdateAsync(player, player.AgeCategory, player.Distance, player.Subcategory);
+            await _playerRepository.UpdateAsync(player, player.AgeCategory, player.Distance, player.Subcategory, player.ExtraColumnValues.ToArray());
 
             return Ok();
         }

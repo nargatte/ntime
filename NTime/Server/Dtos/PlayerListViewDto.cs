@@ -17,6 +17,7 @@ namespace Server.Dtos
             FullCategory = player.FullCategory;
             IsPaidUp = player.IsPaidUp;
             ExtraData = player.ExtraData;
+            CompetitionId = player.CompetitionId;
             ExtraColumnValues = player.ExtraColumnValues
                 .Where(column => column.Column.IsDisplayedInPublicList)
                 .Select(columnValue => new ExtraColumnValueDto(columnValue)).ToArray();
@@ -30,6 +31,7 @@ namespace Server.Dtos
             player.FullCategory = FullCategory;
             player.IsPaidUp = IsPaidUp; 
             player.ExtraData = ExtraData;
+            player.CompetitionId = CompetitionId;
             player.ExtraColumnValues = ExtraColumnValues.Select(extraColumn => extraColumn.CopyDataFromDto(new ExtraColumnValue())).ToArray();
             return player;
         }
@@ -40,6 +42,7 @@ namespace Server.Dtos
         public string FullCategory { get; set; }
         public bool IsPaidUp { get; set; }
         public string ExtraData { get; set; }
+        public int CompetitionId { get; set; }
         public ExtraColumnValueDto[] ExtraColumnValues { get; set; }
 
     }

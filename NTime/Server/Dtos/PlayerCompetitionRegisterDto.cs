@@ -8,47 +8,32 @@ using BaseCore.DataBase;
 
 namespace Server.Dtos
 {
-    public class PlayerCompetitionRegisterDto : IDtoBase<Player>
+    public class PlayerCompetitionRegisterDto : PlayerListViewDto, IDtoBase<Player>
     {
-        public PlayerCompetitionRegisterDto()
-        {
 
-        }
-
-        public PlayerCompetitionRegisterDto(Player player)
+        public PlayerCompetitionRegisterDto(Player player) : base(player)
         {
-            Id = player.Id;
-            FirstName = player.FirstName;
-            LastName = player.LastName;
             BirthDate = player.BirthDate;
-            IsMale = player.IsMale;
-            Team = player.Team;
-            City = player.City;
             Email = player.Email;
             PhoneNumber = player.PhoneNumber;
             ExtraData = player.ExtraData;
             SubcategoryId = player.Subcategory.Id;
             DistanceId = player.Distance.Id;
             AgeCategoryId = player.AgeCategory.Id;
-            CompetitionId = player.CompetitionId;
+            ExtraColumnValues = player.ExtraColumnValues.Select(columnValue => new ExtraColumnValueDto(columnValue)).ToArray();
         }
 
-        public Player CopyDataFromDto(Player player)
+        public override Player CopyDataFromDto(Player player)
         {
-            player.Id = Id;
-            player.FirstName = FirstName;
-            player.LastName = LastName;
-            player.BirthDate = BirthDate;
-            player.IsMale = IsMale;
-            player.Team = Team;
-            player.City = City;
+            base.CopyDataFromDto(player);
             player.Email = Email;
+            player.BirthDate = BirthDate;
             player.PhoneNumber = PhoneNumber;
             player.ExtraData = ExtraData;
             player.SubcategoryId = SubcategoryId;
             player.DistanceId = DistanceId;
             player.AgeCategoryId = AgeCategoryId;
-            player.CompetitionId = CompetitionId;
+            player.ExtraColumnValues = ExtraColumnValues.Select(columnValue => columnValue.CopyDataFromDto(new ExtraColumnValue())).ToArray();
             return player;
         }
 
@@ -85,40 +70,16 @@ namespace Server.Dtos
             return player;
         }
 
-        public int Id { get; set; }
-
-        [StringLength(255), Required]
-        public string FirstName { get; set; }
-
-        [StringLength(255), Required]
-        public string LastName { get; set; }
 
         [Required]
         public DateTime BirthDate { get; set; }
-
-        public bool IsMale { get; set; }
-
         [Phone]
         public string PhoneNumber { get; set; }
-
-        public string ExtraData { get; set; }
-
-        [StringLength(255)]
-        public string Team { get; set; }
-
-        public string City { get; set; }
-
         [EmailAddress]
         public string Email { get; set; }
-
         public int SubcategoryId { get; set; }
-
         public int DistanceId { get; set; }
-
         public int AgeCategoryId { get; set; }
-
-        public int CompetitionId { get; set; }
-
         public string ReCaptchaToken { get; set; }
     }
 }
