@@ -34,6 +34,21 @@ namespace BaseCore.DataBase
             return competition;
         }
 
+        public override async Task<Competition> GetById(int id)
+        {
+            Competition item = null;
+            await ContextProvider.DoAsync(async ctx =>
+            {
+                item = await GetAllFullQuery(ctx.Set<Competition>()).AsNoTracking<Competition>().FirstOrDefaultAsync(i => i.Id == id);
+                item.ExtraColumns = item.ExtraColumns
+                    .OrderByDescending(column => column.SortIndex.HasValue)
+                    .ThenBy(column => column.SortIndex.Value)
+                    .ToArray();
+            });
+            return item;
+        }
+
+
         public async Task<Competition[]> GetOpens()
         {
             Competition[] competitions = null;

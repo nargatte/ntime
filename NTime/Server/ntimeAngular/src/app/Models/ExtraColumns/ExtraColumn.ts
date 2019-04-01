@@ -13,11 +13,12 @@ export class ExtraColumn implements IExtraColumn {
   public MinCharactersValidation: number;
   public MaxCharactersValidation: number;
 
-  getCellValue = (player: PlayerListView) => 'test1';
-  // public getCellValue: (player: PlayerListView) => string = (player: PlayerListView) => 'test1';
-  // player.ExtraColumnValues.find(
-  //   columnValue => columnValue.ColumnId === this.Id
-  // )
+  public getCellValue = (player: PlayerListView) => {
+    const columnValue = player.ExtraColumnValues.find(
+      value => value.ColumnId === this.Id
+    );
+    return columnValue ? columnValue.CustomValue : null;
+  }
 
   copyDataFromDto(dto: IExtraColumn): ExtraColumn {
     this.Id = dto.Id;

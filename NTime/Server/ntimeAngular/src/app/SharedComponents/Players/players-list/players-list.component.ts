@@ -48,7 +48,6 @@ import {
 })
 export class PlayersListComponent implements AfterViewInit, OnInit {
   @Input() competition: Competition;
-  test = 'test2';
   public todayDate: Date;
   public dataLoaded = false;
   private competitionId: number;
@@ -65,7 +64,6 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
     'team',
     'fullCategory',
     'isPaidUp',
-    '1004'
   ];
   oldExtraColumns: ExtraDataDefinition[] = [];
   dataSource: MatTableDataSource<PlayerListView>;
@@ -202,6 +200,8 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
     this.oldExtraColumns
       .map(x => x.columnDef)
       .forEach(c => this.displayedColumns.push(c));
+
+    this.competition.ExtraColumns.map(column => column.Id).forEach(id => this.displayedColumns.push(id.toString()));
   }
 
   search(term: string): void {
