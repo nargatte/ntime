@@ -154,7 +154,7 @@ namespace ViewCore.ManagersDesktop
         {
             var playerToUpdate = sender as EditablePlayer;
             await _playerRepository.UpdateAsync(playerToUpdate.DbEntity, playerToUpdate.DbEntity.AgeCategory, playerToUpdate.DbEntity.Distance,
-                playerToUpdate.DbEntity.Subcategory);
+                playerToUpdate.DbEntity.Subcategory, playerToUpdate.DbEntity.ExtraColumnValues.ToArray());
             playerToUpdate.UpdateFullCategoryDisplay();
         }
 

@@ -19,7 +19,7 @@ import { FailedActionDialogComponent } from '../../Dialogs/failed-action-dialog/
 import { PlayersWithScores } from '../../../Models/Players/PlayerWithScores';
 import { PlayerSort } from '../../../Models/Enums/PlayerSort';
 import { SortHelper } from '../../../Helpers/SortHelper';
-import { ExtraColumnDefinition } from '../../../Models/CDK/ExtraColumnDefinition';
+import { ExtraDataDefinition } from '../../../Models/CDK/ExtraDataDefinition';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ConfirmActionDialogComponent } from '../../Dialogs/confirm-action-dialog/confirm-action-dialog.component';
 
@@ -42,7 +42,7 @@ export class PlayersSelectComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatTable) table: MatTable<PlayerListView>;
   displayedColumns = ['select', 'firstName', 'lastName', 'city', 'team', 'fullCategory', 'isPaidUp'];
-  extraColumns: ExtraColumnDefinition[] = [];
+  extraColumns: ExtraDataDefinition[] = [];
   dataSource: MatTableDataSource<PlayersWithScores> = new MatTableDataSource<PlayersWithScores>(this.players);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -218,7 +218,7 @@ export class PlayersSelectComponent implements OnInit, AfterViewInit {
     let iterator = 0;
     splitColumns.forEach(columnString => {
       this.extraColumns.push(
-        new ExtraColumnDefinition(iterator.toString(), columnString, iterator, this.delimiter)
+        new ExtraDataDefinition(iterator.toString(), columnString, iterator, this.delimiter)
       );
       iterator++;
     });

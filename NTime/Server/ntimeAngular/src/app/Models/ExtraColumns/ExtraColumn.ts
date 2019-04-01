@@ -1,4 +1,6 @@
-class ExtraColumn implements IExtraColumn {
+import { PlayerListView } from '../Players/PlayerListView';
+
+export class ExtraColumn implements IExtraColumn {
   public Id: number;
   public CompetitionId: number;
   public Title: string;
@@ -10,6 +12,11 @@ class ExtraColumn implements IExtraColumn {
   public MultiValueCount: number;
   public MinCharactersValidation: number;
   public MaxCharactersValidation: number;
+
+  // public getCellValue = (player: PlayerListView) => 'test';
+  // player.ExtraColumnValues.find(
+  //   columnValue => columnValue.ColumnId === this.Id
+  // )
 
   copyDataFromDto(dto: IExtraColumn): void {
     this.Id = dto.Id;

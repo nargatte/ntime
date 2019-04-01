@@ -30,17 +30,25 @@ import { ActivatedRoute } from '@angular/router';
 import { MockPlayersListView } from '../../../MockData/MockPlayers';
 import { PlayerSort } from '../../../Models/Enums/PlayerSort';
 import { SortHelper } from '../../../Helpers/SortHelper';
-import { ExtraColumnDefinition } from '../../../Models/CDK/ExtraColumnDefinition';
-import { debounceTime, distinctUntilChanged, switchMap } from '../../../../../node_modules/rxjs/operators';
-
+import { ExtraDataDefinition } from '../../../Models/CDK/ExtraDataDefinition';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  switchMap
+} from '../../../../../node_modules/rxjs/operators';
 
 @Component({
   selector: 'app-players-list',
   templateUrl: './players-list.component.html',
-  styleUrls: ['./players-list.component.css', '../../../app.component.css', '../../../Styles/mobile-style.css']
+  styleUrls: [
+    './players-list.component.css',
+    '../../../app.component.css',
+    '../../../Styles/mobile-style.css'
+  ]
 })
 export class PlayersListComponent implements AfterViewInit, OnInit {
   @Input() competition: Competition;
+  test = 'test2';
   public todayDate: Date;
   public dataLoaded = false;
   private competitionId: number;
@@ -49,10 +57,17 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
   private delimiter = '|';
   private searchTerms = new Subject<string>();
 
-
   @ViewChild(MatTable) table: MatTable<PlayerListView>;
-  displayedColumns = ['firstName', 'lastName', 'city', 'team', 'fullCategory', 'isPaidUp'];
-  extraColumns: ExtraColumnDefinition[] = [];
+  displayedColumns = [
+    'firstName',
+    'lastName',
+    'city',
+    'team',
+    'fullCategory',
+    'isPaidUp',
+    '1004'
+  ];
+  oldExtraColumns: ExtraDataDefinition[] = [];
   dataSource: MatTableDataSource<PlayerListView>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -64,7 +79,7 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
   constructor(
     private playerService: PlayerService,
     private messageService: MessageService,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) {
     // this.setDataSource();
     this.todayDate = new Date(Date.now());
@@ -77,9 +92,7 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
     this.prepareExtraColumns();
   }
 
-  ngAfterViewInit() {
-
-  }
+  ngAfterViewInit() {}
 
   getPlayers(
     competitionId: number,
@@ -89,7 +102,11 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
   ): void {
     this.dataLoaded = false;
     this.playerService
-      .getPlayerListView(competitionId, playerFilterOptions, pageSize, pageNumber
+      .getPlayerListView(
+        competitionId,
+        playerFilterOptions,
+        pageSize,
+        pageNumber
       )
       .subscribe(
         (page: PageViewModel<PlayerListView>) => {
@@ -132,7 +149,6 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
     this.pageSize = event.pageSize;
     this.pageNumber = event.pageIndex;
     this.getFilteredPlayers();
-
   }
 
   onSortEvent(event: Sort) {
@@ -159,21 +175,30 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
 
   prepareExtraColumns(): void {
     this.messageService.addObject(this.competition);
-    this.messageService.addLog(`ExtraDataHeaders: ${this.competition.ExtraDataHeaders}`);
+    this.messageService.addLog(
+      `ExtraDataHeaders: ${this.competition.ExtraDataHeaders}`
+    );
     if (String.IsNullOrWhiteSpace(this.competition.ExtraDataHeaders)) {
       return;
     }
 
-    const splitColumns = this.competition.ExtraDataHeaders.split(this.delimiter);
+    const splitColumns = this.competition.ExtraDataHeaders.split(
+      this.delimiter
+    );
     let iterator = 0;
     splitColumns.forEach(columnString => {
-      this.extraColumns.push(
-        new ExtraColumnDefinition(iterator.toString(), columnString, iterator, this.delimiter)
+      this.oldExtraColumns.push(
+        new ExtraDataDefinition(
+          (iterator + 100).toString(),
+          columnString,
+          iterator,
+          this.delimiter
+        )
       );
       iterator++;
     });
 
-    this.extraColumns
+    this.oldExtraColumns
       .map(x => x.columnDef)
       .forEach(c => this.displayedColumns.push(c));
   }
