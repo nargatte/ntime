@@ -1,4 +1,5 @@
 import { PlayerListView } from './PlayerListView';
+import { BasicPlayerArguments } from './BasicPlayerArguments';
 
 export class PlayerPublicDetails extends PlayerListView implements IPlayerPublicDetails {
   public RegistrationDate: Date;
@@ -11,6 +12,10 @@ export class PlayerPublicDetails extends PlayerListView implements IPlayerPublic
   public DistanceId: number;
   public AgeCategoryId: number;
   public PlayerAccountId: number;
+
+  constructor(args?: BasicPlayerArguments) {
+    super(args);
+  }
 
   copyDataFromDto(dto: IPlayerPublicDetails): void {
     super.copyDataFromDto(dto);

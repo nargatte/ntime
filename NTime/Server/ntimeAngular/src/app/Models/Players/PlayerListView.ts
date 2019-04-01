@@ -1,3 +1,6 @@
+import { BasicPlayerArguments } from './BasicPlayerArguments';
+import {PlayerBase} from './PlayerBase';
+
 export class PlayerListView extends PlayerBase implements IPlayerListView {
   public StartNumber: number;
   public StartTime: number;
@@ -5,13 +8,21 @@ export class PlayerListView extends PlayerBase implements IPlayerListView {
   public ExtraData: string;
   public IsPaidUp: boolean;
   public CompetitionId: number;
-  public ExtraColumnValues: IExtraColumnValue[];
+  public ExtraColumnValues: ExtraColumnValue[];
 
-  constructor(id: number, firstName: string, lastName: string) {
+  constructor(args?: BasicPlayerArguments) {
     super();
-    this.Id = id;
-    this.FirstName = firstName;
-    this.LastName = lastName;
+    if (args) {
+      if (args.Id) {
+        this.Id = args.Id;
+      }
+      if (args.FirstName) {
+        this.FirstName = args.FirstName;
+      }
+      if (args.LastName) {
+        this.LastName = args.LastName;
+      }
+    }
   }
 
   copyDataFromDto(dto: IPlayerListView): void {

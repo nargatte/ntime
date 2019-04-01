@@ -1,5 +1,6 @@
-import { BasicPlayerArguments } from './PlayerCompetitionRegister';
 import { PlayerPublicDetails } from './PlayerPublicDetails';
+import { BasicPlayerArguments } from './BasicPlayerArguments';
+import { AgeCategory } from '../AgeCategory';
 
 export class PlayersWithScores extends PlayerPublicDetails
   implements IPlayerWithScores {
@@ -26,5 +27,26 @@ export class PlayersWithScores extends PlayerPublicDetails
     this.CategoryPlaceNumber = playerDto.CategoryPlaceNumber;
     this.CompetitionCompleted = playerDto.CompetitionCompleted;
     this.PlayerAccountId = playerDto.PlayerAccountId;
+  }
+
+  public resolveAgeCategory(
+    availableAgeCategories: AgeCategory[]
+  ): AgeCategory {
+    const categoriesAfterSexFilter = availableAgeCategories.filter(
+      ageCategory2 =>
+        new Date(this.BirthDate).getFullYear() >= ageCategory2.YearFrom &&
+        new Date(this.BirthDate).getFullYear() <= ageCategory2.YearTo
+    );
+
+    const resolvedAgeCategories = categoriesAfterSexFilter.filter(
+      ageCategory => String(ageCategory.Male) === String(this.IsMale)
+    );
+
+    if (resolvedAgeCategories === null || resolvedAgeCategories.length === 0) {
+      return null;
+    } else {
+      this.AgeCategoryId = resolvedAgeCategories[0].Id;
+      return resolvedAgeCategories[0];
+    }
   }
 }

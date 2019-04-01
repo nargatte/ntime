@@ -1,4 +1,4 @@
-class PlayerBase implements IDtoBase<IPlayerBase> {
+export class PlayerBase implements IPlayerBase {
   public Id: number;
   public FirstName: string;
   public LastName: string;

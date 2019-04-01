@@ -1,5 +1,4 @@
-interface IPlayerBase {
-  Id: number;
+interface IPlayerBase extends IDtoBase<IPlayerBase> {
   FirstName: string;
   LastName: string;
   IsMale: boolean;

@@ -1,5 +1,6 @@
 ﻿import { AgeCategory } from '../AgeCategory';
 import { PlayerListView } from './PlayerListView';
+import { BasicPlayerArguments } from './BasicPlayerArguments';
 
 export class PlayerCompetitionRegister extends PlayerListView
   implements IPlayerCompetitionRegister {
@@ -12,18 +13,7 @@ export class PlayerCompetitionRegister extends PlayerListView
   public ReCaptchaToken: string;
 
   constructor(args?: BasicPlayerArguments) {
-    super(args.Id, args.FirstName, args.LastName);
-    // if (args) {
-    //   if (args.Id) {
-    //     this.Id = args.Id;
-    //   }
-    //   if (args.FirstName) {
-    //     this.FirstName = args.FirstName;
-    //   }
-    //   if (args.LastName) {
-    //     this.LastName = args.LastName;
-    //   }
-    // }
+    super(args);
   }
 
   public resolveAgeCategory(
@@ -61,13 +51,3 @@ export class PlayerCompetitionRegister extends PlayerListView
   }
 }
 
-export class BasicPlayerArguments {
-  constructor(id: number, firstName: string, lastName: string) {
-    this.Id = id;
-    this.FirstName = firstName;
-    this.LastName = lastName;
-  }
-  Id: number;
-  FirstName: string;
-  LastName: string;
-}
