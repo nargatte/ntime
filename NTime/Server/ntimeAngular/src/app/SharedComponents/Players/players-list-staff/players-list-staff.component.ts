@@ -32,9 +32,9 @@ export class PlayersListStaffComponent implements OnInit {
   getCompetition(id: number): void {
     this.dataLoaded = false;
     this.competitionService.getCompetition(id).subscribe(
-      (competition: Competition) => {
+      (dto: Competition) => {
         this.dataLoaded = true;
-        this.competition = Competition.convertDates(competition); // TODO: Try to make not static
+        this.competition = new Competition().copyDataFromDto(dto);
       },
       error => this.onError(error), // Errors
     );

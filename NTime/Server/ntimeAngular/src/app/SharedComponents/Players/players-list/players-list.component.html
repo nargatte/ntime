@@ -1,25 +1,41 @@
 <mat-spinner *ngIf="dataLoaded === false"></mat-spinner>
 <ng-container>
   <mat-form-field id="search-box">
-    <input matInput placeholder="Filtr" name="filter" #searchBox (keyup)="search(searchBox.value)">
+    <input
+      matInput
+      placeholder="Filtr"
+      name="filter"
+      #searchBox
+      (keyup)="search(searchBox.value)"
+    />
   </mat-form-field>
 </ng-container>
 
 <div class="example-container mat-elevation-z8">
-  <mat-table #table [dataSource]="dataSource" matSort (matSortChange)="onSortEvent($event)">
+  <mat-table
+    #table
+    [dataSource]="dataSource"
+    matSort
+    (matSortChange)="onSortEvent($event)"
+  >
     <!-- [class.isMobile]="isMobile" -->
     <ng-container matColumnDef="firstName">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Imię </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Imię
+      </mat-header-cell>
       <mat-cell *matCellDef="let player">
         <span class="mobile-label">Imię:</span>
-        {{player.FirstName}} </mat-cell>
+        {{ player.FirstName }}
+      </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="lastName">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Nazwisko </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Nazwisko
+      </mat-header-cell>
       <mat-cell *matCellDef="let player">
         <span class="mobile-label">Nazwisko:</span>
-        {{player.LastName}}
+        {{ player.LastName }}
       </mat-cell>
     </ng-container>
 
@@ -27,7 +43,7 @@
       <mat-header-cell *matHeaderCellDef> Miasto </mat-header-cell>
       <mat-cell *matCellDef="let player">
         <span class="mobile-label">Miasto:</span>
-        {{player.City}}
+        {{ player.City }}
       </mat-cell>
     </ng-container>
 
@@ -45,18 +61,22 @@
     </ng-container>
 
     <ng-container matColumnDef="team">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Klub </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Klub
+      </mat-header-cell>
       <mat-cell *matCellDef="let player">
         <span class="mobile-label">Klub:</span>
-        {{player.Team}}
+        {{ player.Team }}
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="fullCategory">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Kategoria </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Kategoria
+      </mat-header-cell>
       <mat-cell *matCellDef="let player">
         <span class="mobile-label">Kategoria:</span>
-        {{player.FullCategory}}
+        {{ player.FullCategory }}
       </mat-cell>
     </ng-container>
 
@@ -73,28 +93,54 @@
       </mat-cell>
     </ng-container>
 
-    <ng-container *ngFor="let column of oldExtraColumns" [cdkColumnDef]="column.columnDef.toString()">
-      <mat-header-cell *cdkHeaderCellDef mat-sort-header>{{ column.header }}</mat-header-cell>
+    <ng-container
+      *ngFor="let column of oldExtraColumns"
+      [cdkColumnDef]="column.columnDef.toString()"
+    >
+      <mat-header-cell *cdkHeaderCellDef mat-sort-header>{{
+        column.header
+      }}</mat-header-cell>
       <mat-cell *cdkCellDef="let player">
         <span class="mobile-label">{{ column.header }}: </span>
-        {{ column.getCellValue(player) }}</mat-cell>
+        {{ column.getCellValue(player) }}</mat-cell
+      >
     </ng-container>
 
-    <ng-container *ngFor="let column of competition.ExtraColumns" [cdkColumnDef]= "column.Id.toString()">
-      <mat-header-cell *cdkHeaderCellDef mat-sort-header>2</mat-header-cell>
+    <ng-container
+      *ngFor="let column of competition.ExtraColumns"
+      [cdkColumnDef]="column.Id.toString()"
+    >
+      <mat-header-cell *cdkHeaderCellDef mat-sort-header>{{
+        column.Title
+      }}</mat-header-cell>
       <mat-cell *cdkCellDef="let player">
-        <span class="mobile-label">2: </span>
-        dasdasdasda
+        <span class="mobile-label">{{ column.Title }}: </span>
+        {{column.getCellValue(player)}}
       </mat-cell>
     </ng-container>
 
-
-    <mat-header-row *matHeaderRowDef="displayedColumns;  sticky: true"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" [ngStyle]="{'background-color':row.IsPaidUp === true ? 'rgb(205, 255, 205)' : 'white' }"></mat-row>
+    <mat-header-row
+      *matHeaderRowDef="displayedColumns; sticky: true"
+    ></mat-header-row>
+    <mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      [ngStyle]="{
+        'background-color':
+          row.IsPaidUp === true ? 'rgb(205, 255, 205)' : 'white'
+      }"
+    ></mat-row>
   </mat-table>
 
-  <mat-paginator #paginator [(pageIndex)]="pageNumber" [pageSize]="50" [pageSizeOptions]="[20, 50, 100]" sticky [showFirstLastButtons]="true"
-    [(length)]="playersCount" (page)="onPageEvent($event)">
+  <mat-paginator
+    #paginator
+    [(pageIndex)]="pageNumber"
+    [pageSize]="50"
+    [pageSizeOptions]="[20, 50, 100]"
+    sticky
+    [showFirstLastButtons]="true"
+    [(length)]="playersCount"
+    (page)="onPageEvent($event)"
+  >
   </mat-paginator>
   <!-- <button mat-button (click)="onClick()">Set paginator</button> -->
 </div>

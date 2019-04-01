@@ -1,5 +1,5 @@
 import { BasicPlayerArguments } from './BasicPlayerArguments';
-import {PlayerBase} from './PlayerBase';
+import { PlayerBase } from './PlayerBase';
 
 export class PlayerListView extends PlayerBase implements IPlayerListView {
   public StartNumber: number;
@@ -25,7 +25,7 @@ export class PlayerListView extends PlayerBase implements IPlayerListView {
     }
   }
 
-  copyDataFromDto(dto: IPlayerListView): void {
+  copyDataFromDto(dto: IPlayerListView): PlayerListView {
     super.copyDataFromDto(dto);
     this.StartNumber = dto.StartNumber;
     this.StartTime = dto.StartTime;
@@ -33,6 +33,9 @@ export class PlayerListView extends PlayerBase implements IPlayerListView {
     this.ExtraData = dto.ExtraData;
     this.IsPaidUp = dto.IsPaidUp;
     this.CompetitionId = dto.CompetitionId;
-    this.ExtraColumnValues = dto.ExtraColumnValues;
+    this.ExtraColumnValues = dto.ExtraColumnValues.map(columnValueDto =>
+      new ExtraColumnValue().copyDataFromDto(columnValueDto)
+    );
+    return this;
   }
 }

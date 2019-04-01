@@ -1,4 +1,4 @@
 interface IDtoBase<T> {
   Id: number;
-  copyDataFromDto(entity: T): void;
+  copyDataFromDto(entity: T): T;
 }

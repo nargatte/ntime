@@ -5,6 +5,7 @@ import { MockCompetitions } from '../../../MockData/mockCompetitions';
 import { Competition } from '../../../Models/Competitions/Competition';
 import { CompetitionService } from '../../../Services/competition.service';
 import { MessageService } from '../../../Services/message.service';
+import { ICompetition } from 'src/app/Models/Competitions/ICompetition';
 
 @Component({
   selector: 'app-players-list-unauthorized',
@@ -33,8 +34,8 @@ export class PlayersListUnauthorizedComponent implements OnInit, OnChanges {
   getCompetition(id: number): void {
     this.dataLoaded = false;
     this.competitionService.getCompetition(id).subscribe(
-      (competition: Competition) => {
-        this.competition = Competition.convertDates(competition); // TODO: Try to make not static
+      (competition: ICompetition) => {
+        this.competition = new Competition().copyDataFromDto(competition);
       },
       error => this.onError(error),
       () => this.dataLoaded = true// Errors

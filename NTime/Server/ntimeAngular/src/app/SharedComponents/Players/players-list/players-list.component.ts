@@ -82,6 +82,7 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
     private route: ActivatedRoute
   ) {
     // this.setDataSource();
+    this.competition = new Competition();
     this.todayDate = new Date(Date.now());
     this.competitionId = +this.route.snapshot.paramMap.get('id');
   }

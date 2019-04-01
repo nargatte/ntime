@@ -13,12 +13,13 @@ export class ExtraColumn implements IExtraColumn {
   public MinCharactersValidation: number;
   public MaxCharactersValidation: number;
 
-  // public getCellValue = (player: PlayerListView) => 'test';
+  getCellValue = (player: PlayerListView) => 'test1';
+  // public getCellValue: (player: PlayerListView) => string = (player: PlayerListView) => 'test1';
   // player.ExtraColumnValues.find(
   //   columnValue => columnValue.ColumnId === this.Id
   // )
 
-  copyDataFromDto(dto: IExtraColumn): void {
+  copyDataFromDto(dto: IExtraColumn): ExtraColumn {
     this.Id = dto.Id;
     this.CompetitionId = dto.CompetitionId;
     this.Title = dto.Title;
@@ -30,5 +31,6 @@ export class ExtraColumn implements IExtraColumn {
     this.MultiValueCount = dto.MultiValueCount;
     this.MinCharactersValidation = dto.MinCharactersValidation;
     this.MaxCharactersValidation = dto.MaxCharactersValidation;
+    return this;
   }
 }

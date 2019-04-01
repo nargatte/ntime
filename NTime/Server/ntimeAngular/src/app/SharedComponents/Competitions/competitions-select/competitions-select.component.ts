@@ -59,8 +59,7 @@ export class CompetitionsSelectComponent implements AfterViewInit {
                 (organizer: OrganizerAccount) => {
                     this.messageService.addLog(`Items: ${organizer.CompetitionDtos.length}`);
                     this.competitionsCount = organizer.CompetitionDtos.length;
-                    this.competitions = organizer.CompetitionDtos;
-                    this.competitions.forEach(competition => Competition.convertDates(competition));
+                    this.competitions = organizer.CompetitionDtos.map(dto => new Competition().copyDataFromDto(dto));
                 },
                 error => this.messageService.addError(error), // Errors
                 () => this.setDataSource() // Success
@@ -70,8 +69,7 @@ export class CompetitionsSelectComponent implements AfterViewInit {
                 (page: PageViewModel<Competition>) => {
                     this.messageService.addLog(`Items: ${page.TotalCount}`);
                     this.competitionsCount = page.TotalCount;
-                    this.competitions = page.Items;
-                    this.competitions.forEach(competition => Competition.convertDates(competition));
+                    this.competitions = page.Items.map(dto => new Competition().copyDataFromDto(dto));
                 },
                 error => this.messageService.addError(error), // Errors
                 () => this.setDataSource() // Success

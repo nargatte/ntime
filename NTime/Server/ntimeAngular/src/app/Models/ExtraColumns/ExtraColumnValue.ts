@@ -5,11 +5,12 @@ class ExtraColumnValue implements IExtraColumnValue {
   public CustomValue: string;
   public LookupId: number;
 
-  copyDataFromDto(dto: IExtraColumnValue): void {
+  copyDataFromDto(dto: IExtraColumnValue): ExtraColumnValue {
     this.Id = dto.Id;
     this.PlayerId = dto.PlayerId;
     this.ColumnId = dto.ColumnId;
     this.CustomValue = dto.CustomValue;
     this.LookupId = dto.LookupId;
+    return this;
   }
 }

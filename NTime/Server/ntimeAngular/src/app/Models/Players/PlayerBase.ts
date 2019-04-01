@@ -7,12 +7,13 @@ export class PlayerBase implements IPlayerBase {
   public Team: string;
 
   constructor() {}
-  copyDataFromDto(dto: IPlayerBase): void {
+  copyDataFromDto(dto: IPlayerBase): PlayerBase {
     this.Id = dto.Id;
     this.FirstName = dto.FirstName;
     this.LastName = dto.LastName;
     this.IsMale = dto.IsMale;
     this.City = dto.City;
     this.Team = dto.Team;
+    return this;
   }
 }

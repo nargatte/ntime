@@ -4,6 +4,7 @@ import { Subcategory } from '../Subcategory';
 import { AgeCategoryDistance } from '../AgeCategoryDistance';
 import { Competition } from './Competition';
 import { ICompetitionWithDetails } from './ICompetitionWithDetails';
+import { BasicCompetitionModel } from 'src/app/MockData/mockCompetitions';
 
 export class CompetitionWithDetails extends Competition
   implements ICompetitionWithDetails {
@@ -12,13 +13,9 @@ export class CompetitionWithDetails extends Competition
   Subcategories: Subcategory[];
   AgeCategoryDistances: AgeCategoryDistance[];
 
-  constructor(
-    public Id: number,
-    public City: string,
-    public EventDate: Date,
-    public SignUpEndDate: Date
+  constructor(args?: BasicCompetitionModel
   ) {
-    super(Id, City, EventDate, SignUpEndDate);
+    super(args);
   }
 
   public static convertDates(
@@ -29,11 +26,12 @@ export class CompetitionWithDetails extends Competition
     return competition;
   }
 
-  copyDataFromDto(dto: ICompetitionWithDetails): void {
+  copyDataFromDto(dto: ICompetitionWithDetails): CompetitionWithDetails {
     super.copyDataFromDto(dto);
     this.AgeCategories = dto.AgeCategories;
     this.Distances = dto.Distances;
     this.Subcategories = dto.Subcategories;
     this.AgeCategoryDistances = dto.AgeCategoryDistances;
+    return this;
   }
 }

@@ -22,7 +22,7 @@ describe('PlayersTabHeaderUnauthorizedComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PlayersTabHeaderUnauthorizedComponent);
     component = fixture.componentInstance;
-    component.competition = new Competition(1, 'Kolumna', new Date(Date.now()), new Date(Date.now()));
+    component.competition = new Competition();
     fixture.detectChanges();
   });
 
