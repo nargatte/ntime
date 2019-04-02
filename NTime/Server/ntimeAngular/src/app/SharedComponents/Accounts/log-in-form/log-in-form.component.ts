@@ -77,10 +77,10 @@ export class LogInFormComponent implements OnInit {
 
   private onFailedLogin(errorResponse: HttpErrorResponse) {
     this.dataLoaded = true;
-    this.messageService.addError('Logowanie nieprawidłowe');
-    this.messageService.addError(errorResponse.message);
+    // this.messageService.addError('Logowanie nieprawidłowe');
+    // this.messageService.addError(errorResponse.message);
     this.messageService.addObject(errorResponse);
-    this.failedModalUp();
+    this.failedModalUp(errorResponse);
   }
 
   public successModalUp() {
@@ -90,10 +90,10 @@ export class LogInFormComponent implements OnInit {
     });
   }
 
-  public failedModalUp() {
+  public failedModalUp(errorResponse: HttpErrorResponse) {
     this.dataLoaded = true;
     this.dialog.open(FailedActionDialogComponent, {
-      data: { text: 'Wystąpił błąd podczas logowania'}
+      data: { text: `Wystąpił błąd podczas logowania: ${errorResponse.message}`}
     });
   }
 

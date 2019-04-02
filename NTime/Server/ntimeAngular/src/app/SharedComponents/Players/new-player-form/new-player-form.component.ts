@@ -3,28 +3,25 @@ import {
   OnInit,
   Input,
   ViewChild,
-  Inject,
   AfterViewInit
 } from '@angular/core';
-import { Competition } from '../../../Models/Competitions/Competition';
-import { CompetitionService } from '../../../Services/competition.service';
 import { MessageService } from '../../../Services/message.service';
-import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { PlayerCompetitionRegister } from '../../../Models/Players/PlayerCompetitionRegister';
 import { Subcategory } from '../../../Models/Subcategory';
 import { Distance } from '../../../Models/Distance';
 import { PlayerService } from '../../../Services/player.service';
 import { ActivatedRoute } from '@angular/router';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { PlayerAddedDialogComponent } from '../../Dialogs/player-added-dialog/player-added-dialog.component';
 import { SingUpEndDateErrorDialogComponent } from '../../Dialogs/sing-up-end-date-error-dialog/sing-up-end-date-error-dialog.component';
 import { FailedActionDialogComponent } from '../../Dialogs/failed-action-dialog/failed-action-dialog.component';
 import { ExtraFieldDefinition } from '../../../Models/CDK/ExtraFieldDefinition';
-import { String, StringBuilder } from 'typescript-string-operations';
 import { AgeCategory } from '../../../Models/AgeCategory';
 import { AgeCategoryDistance } from '../../../Models/AgeCategoryDistance';
 import { CompetitionWithDetails } from '../../../Models/Competitions/CompetitionWithDetails';
 import { ExtraColumnValue } from '../../../Models/ExtraColumns/ExtraColumnValue';
+import { HttpErrorResponse } from '@angular/common/http';
 // import { ExtraColumnValue } from 'src/app/Models/ExtraColumns/ExtraColumnValue';
 
 @Component({
@@ -51,7 +48,6 @@ export class NewPlayerFormComponent implements OnInit, AfterViewInit {
   private competitionId: number;
   private recaptchaId: number;
   public extraFields: ExtraFieldDefinition[] = [];
-  private delimiter = '|';
   public newPlayerExtraData: string[] = [];
 
   public checkboxes: boolean[] = [false, false, false];
@@ -60,6 +56,7 @@ export class NewPlayerFormComponent implements OnInit, AfterViewInit {
 
   public getExtraColumnValue = (columnId: number) =>
     this.newPlayer.ExtraColumnValues.find(value => value.ColumnId === columnId)
+      .CustomValue
 
   constructor(
     private route: ActivatedRoute,
@@ -82,13 +79,18 @@ export class NewPlayerFormComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.assignCompetitionParts();
-    this.prepareExtraFields();
+    // this.prepareExtraFields();
     this.createNewPlayer();
   }
 
   ngAfterViewInit() {
     this.recaptchaId = window['grecaptcha'].render(
       'NewPlayerFormComponentButton'
+    );
+
+    this.messageService.addLogAndObject(
+      `Display player after view init`,
+      this.newPlayer
     );
   }
 
@@ -110,11 +112,16 @@ export class NewPlayerFormComponent implements OnInit, AfterViewInit {
 
   public addPlayer(reCaptchaToken: string) {
     this.dataLoaded = false;
-    this.newPlayer.ExtraData = String.Join(
-      this.delimiter,
-      this.newPlayerExtraData
+    // this.newPlayer.ExtraData = String.Join(
+    //   this.delimiter,
+    //   this.newPlayerExtraData
+    // );
+    this.messageService.addLogAndObject(
+      'Before setting extra columns displaying the competition',
+      this.competition
     );
-    this.messageService.addLog(`Set ExtraData: ${this.newPlayer.ExtraData}`);
+    this.messageService.addLog(`Set ExtraColumns:`);
+    this.messageService.addObject(this.newPlayer.ExtraColumnValues);
     if (this.subcategories.length === 1) {
       this.newPlayer.SubcategoryId = this.subcategories[0].Id;
     }
@@ -126,8 +133,15 @@ export class NewPlayerFormComponent implements OnInit, AfterViewInit {
     this.messageService.addObject(resolvedAgeCategory);
 
     this.newPlayer.ReCaptchaToken = reCaptchaToken;
+    const filteredColumns = this.newPlayer.ExtraColumnValues.filter(
+      value => value
+    );
+    this.newPlayer.ExtraColumnValues = filteredColumns;
+    this.messageService.addLogAndObject(
+      `Adding a player. ExtraColumns length: ${filteredColumns.length}`,
+      this.newPlayer
+    );
 
-    this.log('Trying to add Player');
     if (this.competition.SignUpEndDate > this.todayDate) {
       this.playerService
         .addPlayer(this.newPlayer, this.competitionId)
@@ -135,7 +149,7 @@ export class NewPlayerFormComponent implements OnInit, AfterViewInit {
           player => this.onSuccessfulAddPlayer(player),
           error => {
             this.log(`Wystąpił problem podczas dodawania zawodnika: ${error}`);
-            this.failedModalUp();
+            this.failedModalUp(error);
           }
         );
     } else {
@@ -168,45 +182,63 @@ export class NewPlayerFormComponent implements OnInit, AfterViewInit {
     });
   }
 
-  public failedModalUp() {
+  public failedModalUp(error?: HttpErrorResponse) {
     this.dataLoaded = true;
     this.dialog.open(FailedActionDialogComponent, {
-      data: { text: 'Wystąpił błąd podczas rejestracji' }
+      data: { text: `Wystąpił błąd podczas rejestracji: ${error.message}` }
     });
   }
 
-  private prepareExtraFields() {
-    this.messageService.addObject(this.competition);
-    this.messageService.addLog(
-      `ExtraDataHeaders: ${this.competition.ExtraDataHeaders}`
-    );
-    if (String.IsNullOrWhiteSpace(this.competition.ExtraDataHeaders)) {
-      return;
-    }
+  // private prepareExtraFields() {
+  //   this.messageService.addObject(this.competition);
+  //   this.messageService.addLog(
+  //     `ExtraDataHeaders: ${this.competition.ExtraDataHeaders}`
+  //   );
+  //   if (String.IsNullOrWhiteSpace(this.competition.ExtraDataHeaders)) {
+  //     return;
+  //   }
 
-    const splitFields = this.competition.ExtraDataHeaders.split(this.delimiter);
-    let iterator = 0;
-    splitFields.forEach(fieldString => {
-      this.extraFields.push(
-        new ExtraFieldDefinition(
-          iterator.toString(),
-          fieldString,
-          iterator,
-          this.delimiter
-        )
-      );
-      this.newPlayerExtraData.push(String.Empty);
-      iterator++;
-    });
-  }
+  //   const splitFields = this.competition.ExtraDataHeaders.split(this.delimiter);
+  //   let iterator = 0;
+  //   splitFields.forEach(fieldString => {
+  //     this.extraFields.push(
+  //       new ExtraFieldDefinition(
+  //         iterator.toString(),
+  //         fieldString,
+  //         iterator,
+  //         this.delimiter
+  //       )
+  //     );
+  //     this.newPlayerExtraData.push(String.Empty);
+  //     iterator++;
+  //   });
+  // }
 
   private createNewPlayer() {
-    const extraColumnValues = this.competition.ExtraColumns.map(
-      column => new ExtraColumnValue(column.Id)
+    this.messageService.addLogAndObject(
+      'Creating new player, but first displayed competition',
+      this.competition
     );
-    this.newPlayer = new PlayerCompetitionRegister(
-      undefined,
-      extraColumnValues
+    // const extraColumnValues = this.competition.ExtraColumns.map(
+    //   column => new ExtraColumnValue(column.Id)
+    // );
+    this.messageService.addLog(
+      `Count of columns: ${this.competition.ExtraColumns.length}`
     );
+    const extraColumnValues: ExtraColumnValue[] = [];
+    for (let i = 0; i < this.competition.ExtraColumns.length; i++) {
+      extraColumnValues.push(
+        new ExtraColumnValue(this.competition.ExtraColumns[i].Id)
+      );
+    }
+
+    const filteredColumns = extraColumnValues.filter(value => value);
+    this.messageService.addLogAndObject(
+      'Displaying created column Values',
+      filteredColumns
+    );
+    this.newPlayer = new PlayerCompetitionRegister(undefined, filteredColumns);
+
+    this.messageService.addLogAndObject('Created new player: ', this.newPlayer);
   }
 }

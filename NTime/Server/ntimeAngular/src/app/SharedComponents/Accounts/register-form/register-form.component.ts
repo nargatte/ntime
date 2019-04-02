@@ -56,10 +56,10 @@ export class RegisterFormComponent implements OnInit {
     this.successModalUp();
   }
 
-  private onFailedRegisterUser(error: HttpErrorResponse) {
-    this.messageService.addError('Error while trying to register');
-    this.messageService.addObject(error);
-    this.failedModalUp();
+  private onFailedRegisterUser(errorResponse: HttpErrorResponse) {
+    // this.messageService.addError('Error while trying to register');
+    this.messageService.addObject(errorResponse);
+    this.failedModalUp(errorResponse);
   }
 
   private successModalUp() {
@@ -69,10 +69,10 @@ export class RegisterFormComponent implements OnInit {
     });
   }
 
-  public failedModalUp() {
+  public failedModalUp(errorResponse: HttpErrorResponse) {
     this.dataLoaded = true;
     this.dialog.open(FailedActionDialogComponent, {
-      data: { text: 'Wystąpił błąd podczas rejestracji' }
+      data: { text: `Wystąpił błąd podczas rejestracji: ${errorResponse.message}` }
     });
   }
 
