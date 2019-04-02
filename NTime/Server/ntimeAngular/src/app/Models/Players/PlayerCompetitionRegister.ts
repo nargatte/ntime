@@ -2,6 +2,7 @@
 import { PlayerListView } from './PlayerListView';
 import { BasicPlayerArguments } from './BasicPlayerArguments';
 import { IPlayerCompetitionRegister } from './IPlayerCompetitionRegister';
+import { ExtraColumnValue } from '../ExtraColumns/ExtraColumnValue';
 
 export class PlayerCompetitionRegister extends PlayerListView
   implements IPlayerCompetitionRegister {
@@ -13,8 +14,8 @@ export class PlayerCompetitionRegister extends PlayerListView
   public AgeCategoryId: number;
   public ReCaptchaToken: string;
 
-  constructor(args?: BasicPlayerArguments) {
-    super(args);
+  constructor(args?: BasicPlayerArguments, extraColumnValues?: ExtraColumnValue[]) {
+    super(args, extraColumnValues);
   }
 
   public resolveAgeCategory(

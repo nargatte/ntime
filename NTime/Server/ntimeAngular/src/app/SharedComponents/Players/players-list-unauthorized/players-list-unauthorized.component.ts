@@ -5,7 +5,7 @@ import { MockCompetitions } from '../../../MockData/mockCompetitions';
 import { Competition } from '../../../Models/Competitions/Competition';
 import { CompetitionService } from '../../../Services/competition.service';
 import { MessageService } from '../../../Services/message.service';
-import { ICompetition } from 'src/app/Models/Competitions/ICompetition';
+import { ICompetition } from '../../../Models/Competitions/ICompetition';
 
 @Component({
   selector: 'app-players-list-unauthorized',

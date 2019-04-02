@@ -4,7 +4,7 @@ import { Subcategory } from '../Subcategory';
 import { AgeCategoryDistance } from '../AgeCategoryDistance';
 import { Competition } from './Competition';
 import { ICompetitionWithDetails } from './ICompetitionWithDetails';
-import { BasicCompetitionModel } from 'src/app/MockData/mockCompetitions';
+import { BasicCompetitionModel } from '../../MockData/mockCompetitions';
 
 export class CompetitionWithDetails extends Competition
   implements ICompetitionWithDetails {

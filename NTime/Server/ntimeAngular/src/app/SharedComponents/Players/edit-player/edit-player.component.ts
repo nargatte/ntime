@@ -20,7 +20,7 @@ import { PlayersWithScores } from '../../../Models/Players/PlayerWithScores';
 import { CompetitionWithDetails } from '../../../Models/Competitions/CompetitionWithDetails';
 import { AgeCategory } from '../../../Models/AgeCategory';
 import { AgeCategoryDistance } from '../../../Models/AgeCategoryDistance';
-import { IPlayerWithScores } from 'src/app/Models/Players/IPlayerWithScores';
+import { IPlayerWithScores } from '../../../Models/Players/IPlayerWithScores';
 
 @Component({
   selector: 'app-edit-player',

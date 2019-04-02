@@ -7,6 +7,12 @@ export class ExtraColumnValue implements IExtraColumnValue {
   public CustomValue: string;
   public LookupId: number;
 
+  constructor(columnId?: number) {
+    if (columnId) {
+      this.ColumnId = columnId;
+    }
+  }
+
   copyDataFromDto(dto: IExtraColumnValue): ExtraColumnValue {
     this.Id = dto.Id;
     this.PlayerId = dto.PlayerId;

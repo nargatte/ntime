@@ -12,7 +12,10 @@ export class PlayerListView extends PlayerBase implements IPlayerListView {
   public CompetitionId: number;
   public ExtraColumnValues: ExtraColumnValue[];
 
-  constructor(args?: BasicPlayerArguments) {
+  constructor(
+    args?: BasicPlayerArguments,
+    extraColumnValues?: ExtraColumnValue[]
+  ) {
     super();
     if (args) {
       if (args.Id) {
@@ -24,6 +27,9 @@ export class PlayerListView extends PlayerBase implements IPlayerListView {
       if (args.LastName) {
         this.LastName = args.LastName;
       }
+    }
+    if (extraColumnValues) {
+      this.ExtraColumnValues = extraColumnValues;
     }
   }
 

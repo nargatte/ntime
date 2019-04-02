@@ -1,6 +1,6 @@
 ﻿import { ExtraColumn } from '../ExtraColumns/ExtraColumn';
 import { ICompetition } from './ICompetition';
-import { BasicCompetitionModel } from 'src/app/MockData/mockCompetitions';
+import { BasicCompetitionModel } from '../../MockData/mockCompetitions';
 
 export class Competition implements ICompetition {
   public Id: number;
