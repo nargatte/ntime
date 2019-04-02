@@ -10,6 +10,10 @@ namespace Server.Dtos
 {
     public class PlayerAccountDto : PlayerBaseDto
     {
+        public PlayerAccountDto()
+        {
+
+        }
         public PlayerAccountDto(PlayerAccount account, ApplicationUser applicationUser) 
             : base(new Player(account, applicationUser.FirstName, applicationUser.LastName))  
         {

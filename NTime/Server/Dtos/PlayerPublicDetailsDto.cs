@@ -10,6 +10,10 @@ namespace Server.Dtos
 {
     public class PlayerPublicDetailsDto : PlayerListViewDto, IDtoBase<Player>
     {
+        public PlayerPublicDetailsDto()
+        {
+
+        }
         public PlayerPublicDetailsDto(Player player) : base(player)
         {
             RegistrationDate = player.RegistrationDate;

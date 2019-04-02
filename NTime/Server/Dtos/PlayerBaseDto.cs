@@ -9,6 +9,10 @@ namespace Server.Dtos
 {
     public class PlayerBaseDto : IDtoBase<Player>
     {
+        public PlayerBaseDto()
+        {
+
+        }
         public PlayerBaseDto(Player player)
         {
             Id = player.Id;

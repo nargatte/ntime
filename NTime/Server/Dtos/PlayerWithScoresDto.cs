@@ -10,7 +10,10 @@ namespace Server.Dtos
 {
     public class PlayerWithScoresDto : PlayerPublicDetailsDto, IDtoBase<Player>
     {
+        public PlayerWithScoresDto()
+        {
 
+        }
         public PlayerWithScoresDto(Player player) : base(player)
         {
             BirthDate = player.BirthDate;

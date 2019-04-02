@@ -11,6 +11,11 @@ namespace Server.Dtos
         public string username { get; private set; }
         public string password { get; private set; }
 
+        public LoginDataDto()
+        {
+
+        }
+
         public LoginDataDto(string userName, string password, string grantType = "password")
         {
             this.username = userName;

@@ -4,6 +4,10 @@ namespace Server.Dtos
 {
     public class AgeCategoryDistanceDto : IDtoBase<AgeCategoryDistance>
     {
+        public AgeCategoryDistanceDto()
+        {
+
+        }
         public AgeCategoryDistanceDto(AgeCategoryDistance ageCategoryDistance)
         {
             Id = ageCategoryDistance.Id;

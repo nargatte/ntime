@@ -10,6 +10,10 @@ namespace Server.Dtos
 {
     public class PlayerCompetitionRegisterDto : PlayerListViewDto, IDtoBase<Player>
     {
+        public PlayerCompetitionRegisterDto()
+        {
+
+        }
 
         public PlayerCompetitionRegisterDto(Player player) : base(player)
         {

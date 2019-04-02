@@ -8,6 +8,10 @@ namespace Server.Dtos
 {
     public class ExtraColumnValueDto : IDtoBase<ExtraColumnValue>
     {
+        public ExtraColumnValueDto()
+        {
+
+        }
         public ExtraColumnValueDto(ExtraColumnValue extraColumnValue)
         {
             Id = extraColumnValue.Id;

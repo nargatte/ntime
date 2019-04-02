@@ -9,6 +9,10 @@ namespace Server.Dtos
 {
     public class PlayerListViewDto : PlayerBaseDto, IDtoBase<Player>
     {
+        public PlayerListViewDto()
+        {
+
+        }
 
         public PlayerListViewDto(Player player) : base(player)
         {
