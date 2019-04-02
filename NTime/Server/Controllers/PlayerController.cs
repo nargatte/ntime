@@ -15,6 +15,7 @@ using BaseCore.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Newtonsoft.Json;
+using NTime.Application.Exceptions;
 using Server.Dtos;
 using Server.Models;
 
@@ -325,7 +326,14 @@ namespace Server.Controllers
                 return Conflict();
 
             Player player = new Player();
-            await competitionRegisterDto.CopyDataFromDto(player, ContextProvider, Competition);
+            try
+            {
+                await competitionRegisterDto.CopyDataFromDto(player, ContextProvider, Competition);
+            }
+            catch (CustomHttpException ex)
+            {
+                return BadRequest(ex.Message);
+            }
 
             await CheckReCaptcha(_registerPrivateKey, competitionRegisterDto.ReCaptchaToken);
 
@@ -369,7 +377,7 @@ namespace Server.Controllers
             result.Content.Headers.ContentType =
                 new MediaTypeHeaderValue("application/octet-stream");
             return result;
-            
+
         }
     }
 }

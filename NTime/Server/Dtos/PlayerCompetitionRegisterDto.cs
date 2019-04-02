@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using BaseCore.DataBase;
+using NTime.Application.Exceptions;
 
 namespace Server.Dtos
 {
@@ -53,22 +54,22 @@ namespace Server.Dtos
             player.AgeCategory = await ageCategoryRepository.GetById(AgeCategoryId);
 
             if (player.Subcategory == null)
-                throw new Exception($"Nie ma podkategorii o id {SubcategoryId} skorelowanego z zawodami o id {CompetitionId}.");
+                throw new CustomHttpException($"Nie ma podkategorii o id {SubcategoryId} skorelowanego z zawodami o id {CompetitionId}.");
 
             if(player.Distance == null)
-                throw new Exception($"Nie ma dystansu o id {DistanceId} skorelowanego z zawodami o id {CompetitionId}.");
+                throw new CustomHttpException($"Nie ma dystansu o id {DistanceId} skorelowanego z zawodami o id {CompetitionId}.");
 
             if (player.AgeCategory == null)
-                throw new Exception($"Nie ma kategorii wiekowej o id {AgeCategoryId} skorelowanego z zawodami o id {CompetitionId}.");
+                throw new CustomHttpException($"Nie ma kategorii wiekowej o id {AgeCategoryId} skorelowanego z zawodami o id {CompetitionId}.");
 
             if (player.AgeCategory.Male != player.IsMale) 
-                throw new Exception($"Płeć zawodnika nie zgadza się z płcią kategorii wiekowej {player.AgeCategory.Name}.");
+                throw new CustomHttpException($"Płeć zawodnika nie zgadza się z płcią kategorii wiekowej {player.AgeCategory.Name}.");
 
             if (!(await ageCategoryRepository.IsAgeCategoryAndDistanceMatch(player.AgeCategory, player.Distance)))
-                throw new Exception($"Kategoria wiekowa {player.AgeCategory.Name} i dystans {player.Distance.Name} nie są ze sobą skorelowane.");
+                throw new CustomHttpException($"Kategoria wiekowa {player.AgeCategory.Name} i dystans {player.Distance.Name} nie są ze sobą skorelowane.");
 
             if ((await ageCategoryRepository.GetFittingAsync(player)).All(ac => ac.Id != player.AgeCategory.Id))
-                throw new Exception(
+                throw new CustomHttpException(
                     $"Wybrana kategoria wiekowa {player.AgeCategory.Name} nie zawiera wieku zawodnika {player.BirthDate:d}, wiek powinien się zawierać w przedziale od {player.AgeCategory.YearFrom} do {player.AgeCategory.YearTo}");
 
             return player;
