@@ -56,7 +56,10 @@ export class NewPlayerFormComponent implements OnInit, AfterViewInit {
 
   public getExtraColumnValue = (columnId: number) =>
     this.newPlayer.ExtraColumnValues.find(value => value.ColumnId === columnId)
-      .CustomValue
+      .CustomValue;
+
+  public getColumnValue = (columnId: number) =>
+    this.newPlayer.ExtraColumnValues.find(value => value.ColumnId === columnId);
 
   constructor(
     private route: ActivatedRoute,
@@ -149,6 +152,7 @@ export class NewPlayerFormComponent implements OnInit, AfterViewInit {
           player => this.onSuccessfulAddPlayer(player),
           error => {
             this.log(`Wystąpił problem podczas dodawania zawodnika: ${error}`);
+            this.messageService.addObject(error);
             this.failedModalUp(error);
           }
         );
@@ -182,10 +186,14 @@ export class NewPlayerFormComponent implements OnInit, AfterViewInit {
     });
   }
 
-  public failedModalUp(error?: HttpErrorResponse) {
+  public failedModalUp(error?: any) {
     this.dataLoaded = true;
     this.dialog.open(FailedActionDialogComponent, {
-      data: { text: `Wystąpił błąd podczas rejestracji: ${error.message}` }
+      data: {
+        text: `Wystąpił błąd podczas rejestracji: ${error.Message ||
+          error ||
+          ''}`
+      }
     });
   }
 

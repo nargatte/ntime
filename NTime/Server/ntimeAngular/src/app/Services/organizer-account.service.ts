@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { BaseHttpService } from './base-http.service';
@@ -11,8 +11,8 @@ import { OrganizerAccount } from '../Models/OrganizerAccount';
 @Injectable()
 export class OrganizerAccountService extends BaseHttpService {
 
-  constructor(http: HttpClient, messageService: MessageService, authenticatedUserService: AuthenticatedUserService) {
-    super(http, 'OrganizerAccount', messageService, authenticatedUserService);
+  constructor(injector: Injector) {
+    super(injector, 'OrganizerAccount');
   }
 
   // public getOrganizerAccountInfo(organizerId: number): Observable<OrganizerAccount> {

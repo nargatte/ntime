@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable, Inject, Injector } from '@angular/core';
 import { Observable, of, from, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
@@ -16,12 +16,17 @@ export abstract class BaseHttpService {
   private httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
   private httpOptionsUrlEncoded = { headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }) };
 
+  protected http: HttpClient;
+  protected messageService: MessageService;
+  protected authenticatedUserService: AuthenticatedUserService;
+
   constructor(
-    private http: HttpClient,
-    @Inject('controllerName') protected controllerName: string,
-    protected messageService: MessageService,
-    private authenticatedUserService: AuthenticatedUserService
+    injector: Injector,
+    @Inject('controllerName') protected controllerName: string
   ) {
+    this.http = injector.get(HttpClient);
+    this.messageService = injector.get(MessageService);
+    this.authenticatedUserService = injector.get(AuthenticatedUserService);
     this.updateAuthorizedUser();
   }
 
@@ -172,26 +177,26 @@ export abstract class BaseHttpService {
   }
 
   private log(message: string): void {
-    this.messageService.addLog('CompetitionService: ' + message);
+    // this.messageService.addLog('CompetitionService: ' + message);
   }
 
   private logError(errorMessage: string) {
-    this.messageService.addError(errorMessage);
+    // this.messageService.addError(errorMessage);
   }
 
   private logObject(item: any) {
-    this.messageService.addObject(item);
+    // this.messageService.addObject(item);
   }
 
   private handleError(errorResponse: HttpErrorResponse) {
     if (errorResponse.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
-      this.messageService.addError(`An error occured ${errorResponse.error.message}`);
+      // this.messageService.addError(`An error occured ${errorResponse.error.message}`);
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
-      this.messageService.addError(`Backend return code ${errorResponse.status}`);
-      this.messageService.addObject(errorResponse.error);
+      // this.messageService.addError(`Backend return code ${errorResponse.status}`);
+      // this.messageService.addObject(errorResponse.error);
     }
     // return an ErrorObservable with a user-facing error message
     return throwError(`Something bad happened; please try again later`);

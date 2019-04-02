@@ -93,7 +93,8 @@ export class LogInFormComponent implements OnInit {
   public failedModalUp(errorResponse: HttpErrorResponse) {
     this.dataLoaded = true;
     this.dialog.open(FailedActionDialogComponent, {
-      data: { text: `Wystąpił błąd podczas logowania: ${errorResponse.message}`}
+      // data: { text: `Wystąpił błąd podczas logowania: ${errorResponse}`} // TODO
+      data: { text: `Wystąpił błąd podczas logowania`}
     });
   }
 

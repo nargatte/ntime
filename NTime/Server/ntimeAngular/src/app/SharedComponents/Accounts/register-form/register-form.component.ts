@@ -72,7 +72,8 @@ export class RegisterFormComponent implements OnInit {
   public failedModalUp(errorResponse: HttpErrorResponse) {
     this.dataLoaded = true;
     this.dialog.open(FailedActionDialogComponent, {
-      data: { text: `Wystąpił błąd podczas rejestracji: ${errorResponse.message}` }
+      // data: { text: `Wystąpił błąd podczas rejestracji: ${errorResponse.ExceptionMessage}` } // TODO
+      data: { text: `Wystąpił błąd podczas rejestracji` }
     });
   }
 

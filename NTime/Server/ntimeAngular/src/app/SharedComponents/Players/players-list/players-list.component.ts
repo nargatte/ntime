@@ -63,7 +63,7 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
     'city',
     'team',
     'fullCategory',
-    'isPaidUp',
+    'isPaidUp'
   ];
   oldExtraColumns: ExtraDataDefinition[] = [];
   dataSource: MatTableDataSource<PlayerListView>;
@@ -201,7 +201,11 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
       .map(x => x.columnDef)
       .forEach(c => this.displayedColumns.push(c));
 
-    this.competition.ExtraColumns.map(column => column.Id).forEach(id => this.displayedColumns.push(id.toString()));
+    this.competition.ExtraColumns.filter(
+      column => column.IsDisplayedInPublicList
+    )
+      .map(column => column.Id)
+      .forEach(id => this.displayedColumns.push(id.toString()));
   }
 
   search(term: string): void {

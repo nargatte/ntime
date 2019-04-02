@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -16,8 +16,8 @@ import { RoleViewModel } from '../Models/Authentication/RoleViewModel';
 
 @Injectable()
 export class AuthenticationService extends BaseHttpService {
-  constructor(http: HttpClient, messageService: MessageService, authenticatedUserService: AuthenticatedUserService) {
-    super(http, 'Account', messageService, authenticatedUserService);
+  constructor(injector: Injector) {
+    super(injector, 'Account');
   }
 
   public registerUser(registerModel: RegisterBindingModel, role: RoleEnum): Observable<RegisterBindingModel> {

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PageViewModel } from '../Models/PageViewModel';
@@ -22,8 +22,8 @@ export class PlayerService extends BaseHttpService {
   private fullListUrl = '/takeFullList/FromCompetition';
   private playerRegisterUrl = '/register/intocompetition';
 
-  constructor(http: HttpClient, messageService: MessageService, authenticatedUserService: AuthenticatedUserService) {
-    super(http, 'Player', messageService, authenticatedUserService);
+  constructor(injector: Injector) {
+    super(injector, 'Player');
   }
 
   public getPlayerListView(competitionId: number, playerFilterOptions: PlayerFilterOptions, pageSize: number, pageNumber: number):
