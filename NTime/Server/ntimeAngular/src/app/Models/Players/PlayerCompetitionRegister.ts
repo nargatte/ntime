@@ -1,6 +1,7 @@
 ﻿import { AgeCategory } from '../AgeCategory';
 import { PlayerListView } from './PlayerListView';
 import { BasicPlayerArguments } from './BasicPlayerArguments';
+import { IPlayerCompetitionRegister } from './IPlayerCompetitionRegister';
 
 export class PlayerCompetitionRegister extends PlayerListView
   implements IPlayerCompetitionRegister {
@@ -37,7 +38,7 @@ export class PlayerCompetitionRegister extends PlayerListView
     }
   }
 
-  copyDataFromDto(dto: IPlayerCompetitionRegister) {
+  copyDataFromDto(dto: IPlayerCompetitionRegister): PlayerCompetitionRegister {
     super.copyDataFromDto(dto);
     this.PhoneNumber = dto.PhoneNumber;
     this.BirthDate = dto.BirthDate;
@@ -48,6 +49,6 @@ export class PlayerCompetitionRegister extends PlayerListView
     this.AgeCategoryId = dto.AgeCategoryId;
     this.CompetitionId = dto.CompetitionId;
     this.ReCaptchaToken = dto.ReCaptchaToken;
+    return this;
   }
 }
-

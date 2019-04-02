@@ -1,5 +1,6 @@
 import { PlayerListView } from './PlayerListView';
 import { BasicPlayerArguments } from './BasicPlayerArguments';
+import { IPlayerPublicDetails } from './IPlayerPublicDetails';
 
 export class PlayerPublicDetails extends PlayerListView implements IPlayerPublicDetails {
   public RegistrationDate: Date;
@@ -17,7 +18,7 @@ export class PlayerPublicDetails extends PlayerListView implements IPlayerPublic
     super(args);
   }
 
-  copyDataFromDto(dto: IPlayerPublicDetails): void {
+  copyDataFromDto(dto: IPlayerPublicDetails): PlayerPublicDetails {
     super.copyDataFromDto(dto);
     this.RegistrationDate = dto.RegistrationDate;
     this.LapsCount = dto.LapsCount;
@@ -29,5 +30,6 @@ export class PlayerPublicDetails extends PlayerListView implements IPlayerPublic
     this.DistanceId = dto.DistanceId;
     this.AgeCategoryId = dto.AgeCategoryId;
     this.PlayerAccountId = dto.PlayerAccountId;
+    return this;
   }
 }

@@ -1,4 +1,4 @@
-interface IExtraColumnValue extends IDtoBase<IExtraColumnValue> {
+export interface IExtraColumnValue extends IDtoBase<IExtraColumnValue> {
   PlayerId: number;
   ColumnId: number;
   CustomValue: string;

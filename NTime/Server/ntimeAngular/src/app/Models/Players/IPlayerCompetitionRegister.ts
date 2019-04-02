@@ -1,4 +1,6 @@
-interface IPlayerCompetitionRegister extends IPlayerListView {
+import { IPlayerListView } from './IPlayerListView';
+
+export interface IPlayerCompetitionRegister extends IPlayerListView {
   Email: string;
   BirthDate: Date;
   PhoneNumber: string;

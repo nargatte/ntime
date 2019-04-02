@@ -20,6 +20,7 @@ import { PlayersWithScores } from '../../../Models/Players/PlayerWithScores';
 import { CompetitionWithDetails } from '../../../Models/Competitions/CompetitionWithDetails';
 import { AgeCategory } from '../../../Models/AgeCategory';
 import { AgeCategoryDistance } from '../../../Models/AgeCategoryDistance';
+import { IPlayerWithScores } from 'src/app/Models/Players/IPlayerWithScores';
 
 @Component({
   selector: 'app-edit-player',
@@ -106,7 +107,7 @@ export class EditPlayerComponent implements OnInit, AfterViewInit {
     this.editedPlayer = new PlayersWithScores();
     this.playerService.getPlayer(this.playerId).subscribe(
       (player: IPlayerWithScores) => {
-        this.editedPlayer.copyDataFromFullDto(player); // TODO: Try to make not static
+        this.editedPlayer.copyDataFromFullDto(player);
         this.editedPlayerExtraData = this.editedPlayer.ExtraData.split(this.delimiter);
         this.messageService.addLog('Displaying downloaded player');
         this.messageService.addObject(this.editedPlayer);

@@ -1,5 +1,7 @@
 import { BasicPlayerArguments } from './BasicPlayerArguments';
 import { PlayerBase } from './PlayerBase';
+import { IPlayerListView } from './IPlayerListView';
+import { ExtraColumnValue } from '../ExtraColumns/ExtraColumnValue';
 
 export class PlayerListView extends PlayerBase implements IPlayerListView {
   public StartNumber: number;

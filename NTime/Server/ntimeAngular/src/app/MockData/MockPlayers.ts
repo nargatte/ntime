@@ -1,7 +1,5 @@
 import { PlayerListView } from '../Models/Players/PlayerListView';
 import { PageViewModel } from '../Models/PageViewModel';
-import { PlayersWithScores } from '../Models/Players/PlayerWithScores';
-import { PlayerCompetitionRegister } from '../Models/Players/PlayerCompetitionRegister';
 import { BasicPlayerArguments } from '../Models/Players/BasicPlayerArguments';
 
 

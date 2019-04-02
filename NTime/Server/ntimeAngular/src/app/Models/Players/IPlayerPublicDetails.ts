@@ -1,4 +1,6 @@
-interface IPlayerPublicDetails extends IPlayerListView {
+import { IPlayerListView } from './IPlayerListView';
+
+export interface IPlayerPublicDetails extends IPlayerListView {
   RegistrationDate: Date;
   LapsCount: number;
   Time: number;

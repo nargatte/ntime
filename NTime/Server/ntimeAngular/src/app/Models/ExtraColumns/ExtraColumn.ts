@@ -1,4 +1,5 @@
 import { PlayerListView } from '../Players/PlayerListView';
+import { IExtraColumn } from './IExtraColumn';
 
 export class ExtraColumn implements IExtraColumn {
   public Id: number;

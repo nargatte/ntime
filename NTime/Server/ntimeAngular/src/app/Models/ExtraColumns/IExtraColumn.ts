@@ -1,4 +1,4 @@
-interface IExtraColumn extends IDtoBase<IExtraColumn> {
+export interface IExtraColumn extends IDtoBase<IExtraColumn> {
   CompetitionId: number;
   Title: string;
   IsRequired: boolean;

@@ -1,4 +1,6 @@
-class ExtraColumnValue implements IExtraColumnValue {
+import { IExtraColumnValue } from './IExtraColumnValue';
+
+export class ExtraColumnValue implements IExtraColumnValue {
   public Id: number;
   public PlayerId: number;
   public ColumnId: number;

@@ -1,3 +1,5 @@
+import { IPlayerBase } from './IPlayerBase';
+
 export class PlayerBase implements IPlayerBase {
   public Id: number;
   public FirstName: string;

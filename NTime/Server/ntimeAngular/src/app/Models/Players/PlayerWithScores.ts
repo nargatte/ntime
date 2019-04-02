@@ -1,6 +1,7 @@
 import { PlayerPublicDetails } from './PlayerPublicDetails';
 import { BasicPlayerArguments } from './BasicPlayerArguments';
 import { AgeCategory } from '../AgeCategory';
+import { IPlayerWithScores } from './IPlayerWithScores';
 
 export class PlayersWithScores extends PlayerPublicDetails
   implements IPlayerWithScores {
@@ -14,7 +15,7 @@ export class PlayersWithScores extends PlayerPublicDetails
     super(args);
   }
 
-  public copyDataFromFullDto(playerDto: IPlayerWithScores) {
+  public copyDataFromFullDto(playerDto: IPlayerWithScores): PlayersWithScores {
     super.copyDataFromDto(playerDto);
     this.StartNumber = playerDto.StartNumber;
     this.StartTime = playerDto.StartTime;
@@ -27,6 +28,7 @@ export class PlayersWithScores extends PlayerPublicDetails
     this.CategoryPlaceNumber = playerDto.CategoryPlaceNumber;
     this.CompetitionCompleted = playerDto.CompetitionCompleted;
     this.PlayerAccountId = playerDto.PlayerAccountId;
+    return this;
   }
 
   public resolveAgeCategory(
