@@ -122,7 +122,7 @@ export class EditPlayerComponent implements OnInit, AfterViewInit {
     this.editedPlayer = new PlayersWithScores();
     this.playerService.getPlayer(this.playerId).subscribe(
       (player: IPlayerWithScores) => {
-        this.editedPlayer.copyDataFromFullDto(player);
+        this.editedPlayer = new PlayersWithScores().copyDataFromFullDto(player);
         this.messageService.addLog('Displaying downloaded player');
         this.messageService.addObject(this.editedPlayer);
       },

@@ -19,17 +19,11 @@ export class PlayersWithScores extends PlayerPublicDetails
 
   public copyDataFromFullDto(playerDto: IPlayerWithScores): PlayersWithScores {
     super.copyDataFromDto(playerDto);
-    this.StartNumber = playerDto.StartNumber;
-    this.StartTime = playerDto.StartTime;
-    this.IsPaidUp = playerDto.IsPaidUp;
+    this.BirthDate = new Date(playerDto.BirthDate);
+    this.PhoneNumber = playerDto.PhoneNumber;
+    this.Email = playerDto.Email;
     this.IsStartTimeFromReader = playerDto.IsStartTimeFromReader;
-    this.FullCategory = playerDto.FullCategory;
-    this.LapsCount = playerDto.LapsCount;
-    this.Time = playerDto.Time;
-    this.DistancePlaceNumber = playerDto.DistancePlaceNumber;
-    this.CategoryPlaceNumber = playerDto.CategoryPlaceNumber;
-    this.CompetitionCompleted = playerDto.CompetitionCompleted;
-    this.PlayerAccountId = playerDto.PlayerAccountId;
+    this.IsCategoryFixed = playerDto.IsCategoryFixed;
     return this;
   }
 
