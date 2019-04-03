@@ -25,7 +25,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationRevision>5</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -292,7 +292,7 @@
       <Name>BaseCore</Name>
     </ProjectReference>
     <ProjectReference Include="..\NTime.Application\NTime.Application.csproj">
-      <Project>{0551179D-9A6B-4252-B55D-96A499F37E13}</Project>
+      <Project>{75CAAA60-A7B5-46BB-BED6-09F894BCD5D2}</Project>
       <Name>NTime.Application</Name>
     </ProjectReference>
     <ProjectReference Include="..\ViewCore\ViewCore.csproj">
