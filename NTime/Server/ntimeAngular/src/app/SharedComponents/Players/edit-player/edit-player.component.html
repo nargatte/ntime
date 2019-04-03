@@ -11,7 +11,7 @@
           <mat-form-field>
             <input matInput placeholder="Imię" name="firstName" required minlength="4" [(ngModel)]="editedPlayer.FirstName" #firstName="ngModel">
             <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger">
-              <div *ngIf="firstName.errors.required">
+              <div *ngIf="!!firstName.errors.required">
                 Imię jest wymagane
               </div>
             </div>
@@ -20,7 +20,7 @@
           <mat-form-field>
             <input matInput placeholder="Nazwisko" name="lastName" required [(ngModel)]="editedPlayer.LastName" #lastName="ngModel">
             <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger">
-              <div *ngIf="lastName.errors.required">
+              <div *ngIf="!!lastName.errors.required">
                 Nazwisko jest wymagane
               </div>
             </div>
@@ -32,7 +32,7 @@
               <mat-option value="true">Mężczyzna</mat-option>
             </mat-select>
             <div *ngIf="isMale.invalid && (isMale.dirty || isMale.touched)" class="alert alert-danger">
-              <div *ngIf="isMale.errors.required">
+              <div *ngIf="!!isMale.errors.required">
                 Płeć jest wymagana
               </div>
             </div>
@@ -44,7 +44,7 @@
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker startView="multi-year"></mat-datepicker>
             <div *ngIf="birthDate.invalid && (birthDate.dirty || birthDate.touched)" class="alert alert-danger">
-              <div *ngIf="birthDate.errors.required">
+              <div *ngIf="!!birthDate.errors.required">
                 Data urodzenia jest wymagana
               </div>
             </div>
@@ -53,49 +53,77 @@
           <mat-form-field>
             <input matInput placeholder="Miejscowość zamieszkania" name="city" required [(ngModel)]="editedPlayer.City" #city="ngModel">
             <div *ngIf="city.invalid && (city.dirty || city.touched)" class="alert alert-danger">
-              <div *ngIf="city.errors.required">
+              <div *ngIf="!!city.errors.required">
                 Miejscowość zamieszkania jest wymagana
               </div>
             </div>
           </mat-form-field>
 
+
+          <mat-form-field>
+              <mat-select placeholder="Dystans" name="distance" required [(ngModel)]="editedPlayer.DistanceId" #distance="ngModel">
+                <mat-option *ngFor="let dist of distances" [(value)]="dist.Id">
+                  {{dist.Name}}
+                </mat-option>
+              </mat-select>
+              <div *ngIf="distance.invalid && (distance.dirty || distance.touched)" class="alert alert-danger">
+                <div *ngIf="!!distance.errors.required">
+                  Dystans jest wymagany
+                </div>
+              </div>
+            </mat-form-field>
+
+            <mat-form-field *ngIf="subcategories.length>1">
+              <mat-select placeholder="Podkategoria" name="subcategory" required [(ngModel)]="editedPlayer.SubcategoryId" #subcategory="ngModel">
+                <mat-option *ngFor="let info of subcategories" [(value)]="info.Id">
+                  {{info.Name}}
+                </mat-option>
+              </mat-select>
+              <div *ngIf="subcategory.invalid && (subcategory.dirty || subcategory.touched)" class="alert alert-danger">
+                <div *ngIf="!!subcategory.errors.required">
+                  Podkategoria jest wymagana
+                </div>
+              </div>
+            </mat-form-field>
+
+              <ng-container *ngFor="let column of competition.ExtraColumns">
+                  <ng-container *ngIf="editedPlayer && editedPlayer.ExtraColumnValues && getColumnValue(column.Id)">
+                    <mat-form-field *ngIf="column.IsRequired;else notRequired">
+                      <input matInput type="text" placeholder="{{ column.Title}}" name="{{column.Id}}" required
+                      [(ngModel)]="getColumnValue(column.Id).CustomValue"
+                      >
+                      <!-- #{{column.Id}}="ngModel" -->
+                      <div *ngIf="!!column.Id.invalid && (!!column.Id.dirty || !!column.Id.touched)" class="alert alert-danger">
+                        <div *ngIf="!!column.Id.errors.required">
+                          Pole jest wymagane
+                        </div>
+                      </div>
+                    </mat-form-field>
+                    <ng-template #notRequired>
+                      <mat-form-field>
+                        <input matInput type="text" placeholder="{{ column.Title}}" name="{{column.Id}}"
+                        [(ngModel)]="getColumnValue(column.Id).CustomValue"
+                        >
+                        <!-- #{{column.Id}}="ngModel" -->
+                      </mat-form-field>
+                    </ng-template>
+                  </ng-container>
+                </ng-container>
+
+
+
           <ng-container *ngFor="let field of extraFields">
             <mat-form-field>
               <input matInput type="text" placeholder="{{ field.placeholder}}" name="{{field.fieldName}}" required [(ngModel)]="editedPlayerExtraData[field.fieldIndex]"
                 #{{field.fieldName}}="ngModel">
-              <div *ngIf="field.fieldName.invalid && (field.fieldName.dirty || field.fieldName.touched)" class="alert alert-danger">
-                <div *ngIf="field.fieldName.errors.required">
+              <div *ngIf="!!field.fieldName.invalid && (!!field.fieldName.dirty || !!field.fieldName.touched)" class="alert alert-danger">
+                <div *ngIf="!!field.fieldName.errors.required">
                   Pole jest wymagane
                 </div>
               </div>
             </mat-form-field>
           </ng-container>
 
-          <mat-form-field>
-            <mat-select placeholder="Dystans" name="distance" required [(ngModel)]="editedPlayer.DistanceId" #distance="ngModel">
-              <mat-option *ngFor="let dist of distances" [(value)]="dist.Id">
-                {{dist.Name}}
-              </mat-option>
-            </mat-select>
-            <div *ngIf="distance.invalid && (distance.dirty || distance.touched)" class="alert alert-danger">
-              <div *ngIf="distance.errors.required">
-                Dystans jest wymagany
-              </div>
-            </div>
-          </mat-form-field>
-
-          <mat-form-field *ngIf="subcategories.length>1">
-            <mat-select placeholder="Podkategoria" name="subcategory" required [(ngModel)]="editedPlayer.SubcategoryId" #subcategory="ngModel">
-              <mat-option *ngFor="let info of subcategories" [(value)]="info.Id">
-                {{info.Name}}
-              </mat-option>
-            </mat-select>
-            <div *ngIf="subcategory.invalid && (subcategory.dirty || subcategory.touched)" class="alert alert-danger">
-              <div *ngIf="subcategory.errors.required">
-                Podkategoria jest wymagana
-              </div>
-            </div>
-          </mat-form-field>
 
           <mat-form-field>
             <textarea matInput placeholder="Klub" name="team" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5" [(ngModel)]="editedPlayer.Team"
@@ -114,27 +142,6 @@
         </div>
       </mat-card-content>
 
-      <!-- <div class="giodo-declarations">
-        <mat-card class="example-card">
-          <mat-card-content>
-            <mat-checkbox name="ch1" [(ngModel)]="checkboxes[0]" required #ch1="ngModel"></mat-checkbox>
-            <div *ngIf="ch1.invalid && (ch1.dirty || ch1.touched)" class="alert alert-danger">
-              <div *ngIf="ch1.errors.required">
-                Zgoda jest wymagana
-              </div>
-            </div>
-            <p>
-              Oświadczam, że zawodnik upoważnił Organizatora oraz firmę Time2Win do przetwarzania danych osobowych przekazanych do wypełnienia
-              niniejszego formularza. Dane te mogą zostać wykorzystane, w celu przeprowadzenia niniejszych zawodów, przekazywania
-              komunikatów informacyjnych związanych z organizacją niniejszej imprezy, archiwizacji oraz prowadzenia klasyfikacji
-              zawodów i jeśli dotyczy również w ramach całego cyklu.
-              <br/> Oświadczam także, iż zawodnik został pouczony o prawie wglądu do własnych danych osobowych, prawie żądania
-              ich poprawienia, a także prawie żądania zaprzestania przetwarzania danych osobowych oraz możliwości przekazania
-              swoich danych osobowych uprawnionym organom.
-            </p>
-          </mat-card-content>
-        </mat-card>
-      </div> -->
       <mat-card-actions>
         <button mat-raised-button color="primary" type="submit" [disabled]="editPlayerForm.invalid" (click)="ButtonClick()">
           Edytuj uczestnika

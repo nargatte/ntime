@@ -114,11 +114,25 @@
       </mat-cell>
     </ng-container>
 
-    <ng-container *ngFor="let column of extraColumns" [cdkColumnDef]="column.columnDef">
+    <!-- <ng-container *ngFor="let column of oldExtraColumns" [cdkColumnDef]="column.columnDef">
       <mat-header-cell *cdkHeaderCellDef mat-sort-header>{{ column.header }}</mat-header-cell>
       <mat-cell *cdkCellDef="let row">
           <span class="mobile-label">{{ column.header }}: </span>
-        {{ column.cell(row) }}</mat-cell>
+        {{ column.getCellValue(row) }}</mat-cell>
+    </ng-container> -->
+
+
+    <ng-container
+      *ngFor="let column of competition.ExtraColumns"
+      [cdkColumnDef]="column.Id.toString()"
+    >
+      <mat-header-cell *cdkHeaderCellDef mat-sort-header>{{
+        column.Title
+      }}</mat-header-cell>
+      <mat-cell *cdkCellDef="let player">
+        <span class="mobile-label">{{ column.Title }}: </span>
+        {{column.getCellValue(player)}}
+      </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

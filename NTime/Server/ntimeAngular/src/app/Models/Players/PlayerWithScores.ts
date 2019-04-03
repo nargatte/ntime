@@ -2,6 +2,7 @@ import { PlayerPublicDetails } from './PlayerPublicDetails';
 import { BasicPlayerArguments } from './BasicPlayerArguments';
 import { AgeCategory } from '../AgeCategory';
 import { IPlayerWithScores } from './IPlayerWithScores';
+import { ExtraColumnValue } from '../ExtraColumns/ExtraColumnValue';
 
 export class PlayersWithScores extends PlayerPublicDetails
   implements IPlayerWithScores {
@@ -11,8 +12,9 @@ export class PlayersWithScores extends PlayerPublicDetails
   IsStartTimeFromReader: boolean;
   IsCategoryFixed: boolean;
 
-  constructor(args?: BasicPlayerArguments) {
-    super(args);
+  constructor(args?: BasicPlayerArguments,
+    extraColumnValues?: ExtraColumnValue[]) {
+    super(args, extraColumnValues);
   }
 
   public copyDataFromFullDto(playerDto: IPlayerWithScores): PlayersWithScores {

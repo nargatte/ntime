@@ -173,33 +173,33 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
   }
 
   prepareExtraColumns(): void {
-    this.messageService.addObject(this.competition);
-    this.messageService.addLog(
-      `ExtraDataHeaders: ${this.competition.ExtraDataHeaders}`
-    );
-    if (String.IsNullOrWhiteSpace(this.competition.ExtraDataHeaders)) {
-      return;
-    }
+    // this.messageService.addObject(this.competition);
+    // this.messageService.addLog(
+    //   `ExtraDataHeaders: ${this.competition.ExtraDataHeaders}`
+    // );
+    // if (String.IsNullOrWhiteSpace(this.competition.ExtraDataHeaders)) {
+    //   return;
+    // }
 
-    const splitColumns = this.competition.ExtraDataHeaders.split(
-      this.delimiter
-    );
-    let iterator = 0;
-    splitColumns.forEach(columnString => {
-      this.oldExtraColumns.push(
-        new ExtraDataDefinition(
-          (iterator + 100).toString(),
-          columnString,
-          iterator,
-          this.delimiter
-        )
-      );
-      iterator++;
-    });
+    // const splitColumns = this.competition.ExtraDataHeaders.split(
+    //   this.delimiter
+    // );
+    // let iterator = 0;
+    // splitColumns.forEach(columnString => {
+    //   this.oldExtraColumns.push(
+    //     new ExtraDataDefinition(
+    //       (iterator + 100).toString(),
+    //       columnString,
+    //       iterator,
+    //       this.delimiter
+    //     )
+    //   );
+    //   iterator++;
+    // });
 
-    this.oldExtraColumns
-      .map(x => x.columnDef)
-      .forEach(c => this.displayedColumns.push(c));
+    // this.oldExtraColumns
+    //   .map(x => x.columnDef)
+    //   .forEach(c => this.displayedColumns.push(c));
 
     this.competition.ExtraColumns.filter(
       column => column.IsDisplayedInPublicList

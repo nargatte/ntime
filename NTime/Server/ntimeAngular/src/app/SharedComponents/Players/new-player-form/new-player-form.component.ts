@@ -54,12 +54,8 @@ export class NewPlayerFormComponent implements OnInit, AfterViewInit {
 
   @ViewChild('newPlayerForm') newPlayerForm: NgForm;
 
-  public getExtraColumnValue = (columnId: number) =>
-    this.newPlayer.ExtraColumnValues.find(value => value.ColumnId === columnId)
-      .CustomValue;
-
   public getColumnValue = (columnId: number) =>
-    this.newPlayer.ExtraColumnValues.find(value => value.ColumnId === columnId);
+    this.newPlayer.ExtraColumnValues.find(value => value.ColumnId === columnId)
 
   constructor(
     private route: ActivatedRoute,
@@ -247,6 +243,5 @@ export class NewPlayerFormComponent implements OnInit, AfterViewInit {
     );
     this.newPlayer = new PlayerCompetitionRegister(undefined, filteredColumns);
 
-    this.messageService.addLogAndObject('Created new player: ', this.newPlayer);
   }
 }

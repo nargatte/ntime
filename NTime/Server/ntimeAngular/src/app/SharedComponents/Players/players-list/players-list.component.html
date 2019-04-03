@@ -93,7 +93,7 @@
       </mat-cell>
     </ng-container>
 
-    <ng-container
+    <!-- <ng-container
       *ngFor="let column of oldExtraColumns"
       [cdkColumnDef]="column.columnDef.toString()"
     >
@@ -104,7 +104,7 @@
         <span class="mobile-label">{{ column.header }}: </span>
         {{ column.getCellValue(player) }}</mat-cell
       >
-    </ng-container>
+    </ng-container> -->
 
     <ng-container
       *ngFor="let column of competition.ExtraColumns"

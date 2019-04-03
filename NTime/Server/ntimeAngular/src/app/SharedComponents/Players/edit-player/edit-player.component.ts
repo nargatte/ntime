@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, ViewChild, Inject, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  ViewChild,
+  Inject,
+  AfterViewInit
+} from '@angular/core';
 import { Competition } from '../../../Models/Competitions/Competition';
 import { CompetitionService } from '../../../Services/competition.service';
 import { MessageService } from '../../../Services/message.service';
@@ -21,13 +28,16 @@ import { CompetitionWithDetails } from '../../../Models/Competitions/Competition
 import { AgeCategory } from '../../../Models/AgeCategory';
 import { AgeCategoryDistance } from '../../../Models/AgeCategoryDistance';
 import { IPlayerWithScores } from '../../../Models/Players/IPlayerWithScores';
+import { ExtraColumnValue } from '../../../Models/ExtraColumns/ExtraColumnValue';
 
 @Component({
   selector: 'app-edit-player',
   templateUrl: './edit-player.component.html',
   styleUrls: ['./edit-player.component.css', '../../../app.component.css'],
   entryComponents: [
-    SuccessfullActionDialogComponent, FailedActionDialogComponent, SingUpEndDateErrorDialogComponent
+    SuccessfullActionDialogComponent,
+    FailedActionDialogComponent,
+    SingUpEndDateErrorDialogComponent
   ]
 })
 export class EditPlayerComponent implements OnInit, AfterViewInit {
@@ -53,6 +63,11 @@ export class EditPlayerComponent implements OnInit, AfterViewInit {
 
   @ViewChild('editPlayerForm') editPlayerForm: NgForm;
 
+  public getColumnValue = (columnId: number) =>
+    this.editedPlayer.ExtraColumnValues.find(
+      value => value.ColumnId === columnId
+    )
+
   constructor(
     private route: ActivatedRoute,
     private messageService: MessageService,
@@ -66,9 +81,9 @@ export class EditPlayerComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    // this.createNewPlayer();
     this.getPlayerData();
     this.assignCompetitionParts();
-    this.prepareExtraFields();
   }
 
   private assignCompetitionParts(): void {
@@ -85,7 +100,6 @@ export class EditPlayerComponent implements OnInit, AfterViewInit {
     // this.recaptchaId = window['grecaptcha'].render('NewPlayerFormComponentButton');
   }
 
-
   log(message: string): void {
     this.messageService.addLog(message);
   }
@@ -96,7 +110,8 @@ export class EditPlayerComponent implements OnInit, AfterViewInit {
   // }
 
   private authorizeEdit() {
-    this.canOrganizerEdit = this.authenticatedUserService.IsAuthenticated &&
+    this.canOrganizerEdit =
+      this.authenticatedUserService.IsAuthenticated &&
       (this.authenticatedUserService.User.Role === RoleEnum.Organizer ||
         this.authenticatedUserService.User.Role === RoleEnum.Administrator ||
         this.authenticatedUserService.User.Role === RoleEnum.Moderator);
@@ -108,12 +123,11 @@ export class EditPlayerComponent implements OnInit, AfterViewInit {
     this.playerService.getPlayer(this.playerId).subscribe(
       (player: IPlayerWithScores) => {
         this.editedPlayer.copyDataFromFullDto(player);
-        this.editedPlayerExtraData = this.editedPlayer.ExtraData.split(this.delimiter);
         this.messageService.addLog('Displaying downloaded player');
         this.messageService.addObject(this.editedPlayer);
       },
       error => this.failedToLoadPlayer(error),
-      () => this.dataLoaded = true // Errors
+      () => (this.dataLoaded = true) // Errors
     );
   }
 
@@ -125,13 +139,18 @@ export class EditPlayerComponent implements OnInit, AfterViewInit {
 
   public editPlayer() {
     this.dataLoaded = false;
-    this.editedPlayer.ExtraData = String.Join(this.delimiter, this.editedPlayerExtraData);
+    this.editedPlayer.ExtraData = String.Join(
+      this.delimiter,
+      this.editedPlayerExtraData
+    );
     this.messageService.addLog(`Set ExtraData: ${this.editedPlayer.ExtraData}`);
     if (this.subcategories.length === 1) {
       this.editedPlayer.SubcategoryId = this.subcategories[0].Id;
     }
 
-    const resolvedAgeCategory = this.editedPlayer.resolveAgeCategory(this.ageCategories);
+    const resolvedAgeCategory = this.editedPlayer.resolveAgeCategory(
+      this.ageCategories
+    );
     this.messageService.addLog('Resolved ageCategory');
     this.messageService.addObject(resolvedAgeCategory);
 
@@ -139,7 +158,9 @@ export class EditPlayerComponent implements OnInit, AfterViewInit {
     this.playerService.editPlayer(this.editedPlayer, this.playerId).subscribe(
       player => this.onSuccessfulEditPlayer(player),
       error => {
-        this.log(`Wystąpił problem podczas edytowania zawodnika zawodnika: ${error}`);
+        this.log(
+          `Wystąpił problem podczas edytowania zawodnika zawodnika: ${error}`
+        );
         this.failedModalUp('Wystąpił błąd podczas edycji danych zawodnika');
       }
     );
@@ -175,22 +196,54 @@ export class EditPlayerComponent implements OnInit, AfterViewInit {
     });
   }
 
-  private prepareExtraFields() {
-    this.messageService.addObject(this.competition);
-    this.messageService.addLog(`ExtraDataHeaders: ${this.competition.ExtraDataHeaders}`);
-    if (String.IsNullOrWhiteSpace(this.competition.ExtraDataHeaders)) {
-      return;
+  private createNewPlayer() {
+    this.messageService.addLogAndObject(
+      'Creating new player, but first displayed competition',
+      this.competition
+    );
+    // const extraColumnValues = this.competition.ExtraColumns.map(
+    //   column => new ExtraColumnValue(column.Id)
+    // );
+    this.messageService.addLog(
+      `Count of columns: ${this.competition.ExtraColumns.length}`
+    );
+    const extraColumnValues: ExtraColumnValue[] = [];
+    for (let i = 0; i < this.competition.ExtraColumns.length; i++) {
+      extraColumnValues.push(
+        new ExtraColumnValue(this.competition.ExtraColumns[i].Id)
+      );
     }
 
-    const splitFields = this.competition.ExtraDataHeaders.split(this.delimiter);
-    let iterator = 0;
-    splitFields.forEach(fieldString => {
-      this.extraFields.push(
-        new ExtraFieldDefinition(iterator.toString(), fieldString, iterator, this.delimiter)
-      );
-      this.editedPlayerExtraData.push(String.Empty);
-      iterator++;
-    });
-  }
+    const filteredColumns = extraColumnValues.filter(value => value);
+    this.messageService.addLogAndObject(
+      'Displaying created column Values',
+      filteredColumns
+    );
+    this.editedPlayer = new PlayersWithScores(undefined, filteredColumns);
 
+    // private prepareExtraFields() {
+    //   this.messageService.addObject(this.competition);
+    //   this.messageService.addLog(
+    //     `ExtraDataHeaders: ${this.competition.ExtraDataHeaders}`
+    //   );
+    //   if (String.IsNullOrWhiteSpace(this.competition.ExtraDataHeaders)) {
+    //     return;
+    //   }
+
+    //   const splitFields = this.competition.ExtraDataHeaders.split(this.delimiter);
+    //   let iterator = 0;
+    //   splitFields.forEach(fieldString => {
+    //     this.extraFields.push(
+    //       new ExtraFieldDefinition(
+    //         iterator.toString(),
+    //         fieldString,
+    //         iterator,
+    //         this.delimiter
+    //       )
+    //     );
+    //     this.editedPlayerExtraData.push(String.Empty);
+    //     iterator++;
+    //   });
+    // }
+  }
 }

@@ -1,6 +1,7 @@
 import { PlayerListView } from './PlayerListView';
 import { BasicPlayerArguments } from './BasicPlayerArguments';
 import { IPlayerPublicDetails } from './IPlayerPublicDetails';
+import { ExtraColumnValue } from '../ExtraColumns/ExtraColumnValue';
 
 export class PlayerPublicDetails extends PlayerListView implements IPlayerPublicDetails {
   public RegistrationDate: Date;
@@ -14,8 +15,9 @@ export class PlayerPublicDetails extends PlayerListView implements IPlayerPublic
   public AgeCategoryId: number;
   public PlayerAccountId: number;
 
-  constructor(args?: BasicPlayerArguments) {
-    super(args);
+  constructor(args?: BasicPlayerArguments,
+    extraColumnValues?: ExtraColumnValue[]) {
+    super(args, extraColumnValues);
   }
 
   copyDataFromDto(dto: IPlayerPublicDetails): PlayerPublicDetails {
