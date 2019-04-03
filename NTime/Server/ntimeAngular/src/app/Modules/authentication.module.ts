@@ -4,10 +4,11 @@ import { RegisterFormComponent } from '../SharedComponents/Accounts/register-for
 import { LogInFormComponent } from '../SharedComponents/Accounts/log-in-form/log-in-form.component';
 import { MaterialCustomModule } from './material-custom.module';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
-    CommonModule, MaterialCustomModule, FormsModule
+    CommonModule, MaterialCustomModule, FormsModule, RouterModule
   ],
   declarations: [
     LogInFormComponent, RegisterFormComponent

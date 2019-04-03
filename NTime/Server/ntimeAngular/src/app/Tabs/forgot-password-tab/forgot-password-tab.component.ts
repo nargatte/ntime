@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { AuthenticationService } from '../../Services/authentication.service';
+// tslint:disable-next-line:max-line-length
+import { SuccessfullActionDialogComponent } from '../../SharedComponents/Dialogs/successfull-action-dialog/successfull-action-dialog.component';
+import { FailedActionDialogComponent } from '../../SharedComponents/Dialogs/failed-action-dialog/failed-action-dialog.component';
 
 @Component({
   selector: 'app-forgot-password-tab',
@@ -7,10 +12,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ForgotPasswordTabComponent implements OnInit {
   public emailAddress = '';
+  public dataLoaded = true;
 
-  constructor() { }
+  constructor(private dialog: MatDialog, private authenticationService: AuthenticationService) {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  public successModalUp() {
+    this.dataLoaded = true;
+    this.dialog.open(SuccessfullActionDialogComponent, {
+      data: { text: 'Mail z instrukcjami został wysłany na podany adres' }
+    });
   }
 
+  public failedModalUp(message?: string) {
+    this.dataLoaded = true;
+    this.dialog.open(FailedActionDialogComponent, {
+      data: { text: message }
+    });
+  }
+
+  public ButtonClick() {
+    if (!this.emailAddress || this.emailAddress === '') {
+      this.failedModalUp('Wypełnij poprawnie pole z adresem mailowym');
+    }
+
+    console.log(this.emailAddress);
+    this.authenticationService.SendForgotPassword(this.emailAddress).subscribe(
+      () => this.successModalUp(),
+      () => this.failedModalUp(`Użytkownik o podanym adresie nie istnieje w bazie`)
+    );
+
+  }
 }

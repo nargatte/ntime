@@ -59,4 +59,13 @@ export class AuthenticationService extends BaseHttpService {
     );
   }
 
+  public SendForgotPassword(emailAddress: string) {
+    return super.get(
+      new UrlBuilder()
+      .addControllerName('Account')
+      .addCustomUrlPart(`/ForgotPassword?email=${emailAddress}`)
+      .toString()
+    );
+  }
+
 }
