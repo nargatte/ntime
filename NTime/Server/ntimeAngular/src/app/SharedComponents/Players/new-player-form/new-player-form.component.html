@@ -6,20 +6,20 @@
       <div class="form-container">
         <mat-form-field>
           <input matInput placeholder="Imię" name="firstName" required minlength="4" [(ngModel)]="newPlayer.FirstName" #firstName="ngModel">
-          <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger">
+          <mat-error *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger">
             <div *ngIf="firstName?.errors.required">
               Imię jest wymagane
             </div>
-          </div>
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field>
           <input matInput placeholder="Nazwisko" name="lastName" required [(ngModel)]="newPlayer.LastName" #lastName="ngModel">
-          <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger">
+          <mat-error *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger">
             <div *ngIf="lastName?.errors.required">
               Nazwisko jest wymagane
             </div>
-          </div>
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field>
@@ -39,20 +39,20 @@
             #birthDate="ngModel">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker startView="multi-year"></mat-datepicker>
-          <div *ngIf="birthDate.invalid && (birthDate.dirty || birthDate.touched)" class="alert alert-danger">
+          <mat-error *ngIf="birthDate.invalid && (birthDate.dirty || birthDate.touched)" class="alert alert-danger">
             <div *ngIf="birthDate?.errors.required">
               Data urodzenia jest wymagana
             </div>
-          </div>
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field>
           <input matInput placeholder="Miejscowość zamieszkania" name="city" required [(ngModel)]="newPlayer.City" #city="ngModel">
-          <div *ngIf="city.invalid && (city.dirty || city.touched)" class="alert alert-danger">
+          <mat-error *ngIf="city.invalid && (city.dirty || city.touched)" class="alert alert-danger">
             <div *ngIf="!!city.errors.required">
               Miejscowość zamieszkania jest wymagana
             </div>
-          </div>
+          </mat-error>
         </mat-form-field>
 
         <!-- <ng-container *ngFor="let field of extraFields">
@@ -73,11 +73,11 @@
               {{dist.Name}}
             </mat-option>
           </mat-select>
-          <div *ngIf="distance.invalid && (distance.dirty || distance.touched)" class="alert alert-danger">
+          <mat-error *ngIf="distance.invalid && (distance.dirty || distance.touched)" class="alert alert-danger">
             <div *ngIf="distance?.errors.required">
               Dystans jest wymagany
             </div>
-          </div>
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field *ngIf="subcategories.length>1">
@@ -86,25 +86,25 @@
               {{info.Name}}
             </mat-option>
           </mat-select>
-          <div *ngIf="subcategory.invalid && (subcategory.dirty || subcategory.touched)" class="alert alert-danger">
+          <mat-error *ngIf="subcategory.invalid && (subcategory.dirty || subcategory.touched)" class="alert alert-danger">
             <div *ngIf="subcategory?.errors.required">
               Podkategoria jest wymagana
             </div>
-          </div>
+          </mat-error>
         </mat-form-field>
 
         <ng-container *ngFor="let column of competition.ExtraColumns">
-          <ng-container *ngIf="newPlayer && newPlayer.ExtraColumnValues &&  getColumnValue(column.Id)">
+          <ng-container *ngIf="newPlayer && newPlayer.ExtraColumnValues &&  getColumnValue(column.Id)" class="form-field-container">
             <mat-form-field *ngIf="column.IsRequired;else notRequired">
               <input matInput type="text" placeholder="{{ column.Title}}" name="{{column.Id}}" required
               [(ngModel)]="getColumnValue(column.Id).CustomValue"
               >
               <!-- #{{column.Id}}="ngModel" -->
-              <div *ngIf="!!column.Id.invalid && (!!column.Id.dirty || !!column.Id.touched)" class="alert alert-danger">
+              <mat-error *ngIf="!!column.Id.invalid && (!!column.Id.dirty || !!column.Id.touched)" class="alert alert-danger">
                 <div *ngIf="!!column.Id.errors.required">
                   Pole jest wymagane
                 </div>
-              </div>
+              </mat-error>
             </mat-form-field>
 
             <ng-template #notRequired>
