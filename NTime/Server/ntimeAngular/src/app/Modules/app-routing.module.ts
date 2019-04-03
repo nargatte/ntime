@@ -13,19 +13,21 @@ import { RegistrationTabComponent } from '../Tabs/registration-tab/registration-
 import { PlayersListTabComponent } from '../Tabs/players-list-tab/players-list-tab.component';
 import { RegisterConfirmationComponent } from '../SharedComponents/Accounts/register-confirmation/register-confirmation.component';
 import { EditPlayerTabComponent } from '../Tabs/edit-player-tab/edit-player-tab.component';
+import { ForgotPasswordTabComponent } from '../Tabs/forgot-password-tab/forgot-password-tab.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/zawody', pathMatch: 'full' },
     { path: 'o-nas', component: AboutUsTabComponent, data: { name: 'about' } },
-    { path: 'kontakt', component: ContactTabComponent, data: { name: 'contact' } },
-    { path: 'konto', component: MyAccountTabComponent, data: { name: 'account' } },
-    { path: 'wyloguj', redirectTo: '/konto?logout=true', pathMatch: 'full' },
-    { path: 'oferta', component: OfferTabComponent, data: { name: 'offer' } },
     { path: 'zawody', component: CompetitionTabComponent, data: { name: 'competitions' } },
-    { path: 'zapisy/:id', component: RegistrationTabComponent },
-    { path: 'lista-zawodnikow/:id', component: PlayersListTabComponent },
-    { path: 'potwierdzenie-rejestracji', component: RegisterConfirmationComponent },
-    { path: 'zawodnik/:competition-id/:player-id', component: EditPlayerTabComponent },
+      { path: 'zapisy/:id', component: RegistrationTabComponent },
+      { path: 'lista-zawodnikow/:id', component: PlayersListTabComponent },
+      { path: 'zawodnik/:competition-id/:player-id', component: EditPlayerTabComponent },
+    { path: 'konto', component: MyAccountTabComponent, data: { name: 'account' } },
+      { path: 'potwierdzenie-rejestracji', component: RegisterConfirmationComponent },
+      { path: 'reset-hasla', component: ForgotPasswordTabComponent },
+      { path: 'wyloguj', redirectTo: '/konto?logout=true', pathMatch: 'full' },
+    { path: 'oferta', component: OfferTabComponent, data: { name: 'offer' } },
+    { path: 'kontakt', component: ContactTabComponent, data: { name: 'contact' } },
     { path: '**', redirectTo: '/zawody', pathMatch: 'full' },
     // { path: 'wyniki', component: ScoresTabComponent, data: { name: 'scores' } },
 ];
