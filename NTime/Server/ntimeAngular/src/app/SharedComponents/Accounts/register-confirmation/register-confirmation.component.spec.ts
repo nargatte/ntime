@@ -27,8 +27,8 @@ import { PlayersListComponent } from '../../Players/players-list/players-list.co
 import { PlayerAddedDialogComponent } from '../../Dialogs/player-added-dialog/player-added-dialog.component';
 import { SingUpEndDateErrorDialogComponent } from '../../Dialogs/sing-up-end-date-error-dialog/sing-up-end-date-error-dialog.component';
 import { PlayersSelectComponent } from '../../Players/players-select/players-select.component';
-import { PlayersListUnauthorizedComponent } from '../../Players/players-list-unauthorized/players-list-unauthorized.component';
-import { PlayersListStaffComponent } from '../../Players/players-list-staff/players-list-staff.component';
+import { PlayersListUnauthorizedComponent } from '../../../Tabs/players-list-tab/players-list-unauthorized/players-list-unauthorized.component';
+import { PlayersListStaffComponent } from '../../../Tabs/players-list-tab/players-list-staff/players-list-staff.component';
 // tslint:disable-next-line:max-line-length
 import { PlayersTabHeaderUnauthorizedComponent } from '../../Players/players-tab-header-unauthorized/players-tab-header-unauthorized.component';
 import { PlayersTabHeaderStaffComponent } from '../../Players/players-tab-header-staff/players-tab-header-staff.component';
