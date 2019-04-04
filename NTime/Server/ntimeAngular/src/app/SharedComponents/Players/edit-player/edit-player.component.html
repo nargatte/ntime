@@ -9,7 +9,7 @@
       <mat-card-content>
         <div class="form-container">
           <mat-form-field>
-            <input matInput placeholder="Imię" name="firstName" required minlength="4" [(ngModel)]="editedPlayer.FirstName" #firstName="ngModel">
+            <input matInput placeholder="Imię" name="firstName" required [(ngModel)]="editedPlayer.FirstName" #firstName="ngModel">
             <mat-error *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger">
               <div *ngIf="!!firstName.errors.required">
                 Imię jest wymagane

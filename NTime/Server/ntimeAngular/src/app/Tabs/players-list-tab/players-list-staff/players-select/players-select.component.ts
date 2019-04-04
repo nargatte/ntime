@@ -19,30 +19,31 @@ import { DataSource } from '@angular/cdk/table';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { String, StringBuilder } from 'typescript-string-operations';
 
-import { PlayerService } from '../../../Services/player.service';
-import { MessageService } from '../../../Services/message.service';
-import { PageViewModel } from '../../../Models/PageViewModel';
-import { PlayerListView } from '../../../Models/Players/PlayerListView';
-import { Competition } from '../../../Models/Competitions/Competition';
-import { PlayerFilterOptions } from '../../../Models/Players/PlayerFilterOptions';
+import { PlayerService } from '../../../../Services/player.service';
+import { MessageService } from '../../../../Services/message.service';
+import { PageViewModel } from '../../../../Models/PageViewModel';
+import { PlayerListView } from '../../../../Models/Players/PlayerListView';
+import { Competition } from '../../../../Models/Competitions/Competition';
+import { PlayerFilterOptions } from '../../../../Models/Players/PlayerFilterOptions';
 import { ActivatedRoute } from '@angular/router';
 import { SelectionModel } from '@angular/cdk/collections';
-import { SuccessfullActionDialogComponent } from '../../Dialogs/successfull-action-dialog/successfull-action-dialog.component';
-import { FailedActionDialogComponent } from '../../Dialogs/failed-action-dialog/failed-action-dialog.component';
-import { PlayersWithScores } from '../../../Models/Players/PlayerWithScores';
-import { PlayerSort } from '../../../Models/Enums/PlayerSort';
-import { SortHelper } from '../../../Helpers/SortHelper';
-import { ExtraDataDefinition } from '../../../Models/CDK/ExtraDataDefinition';
+// tslint:disable-next-line:max-line-length
+import { SuccessfullActionDialogComponent } from '../../../../SharedComponents/Dialogs/successfull-action-dialog/successfull-action-dialog.component';
+import { FailedActionDialogComponent } from '../../../../SharedComponents/Dialogs/failed-action-dialog/failed-action-dialog.component';
+import { PlayersWithScores } from '../../../../Models/Players/PlayerWithScores';
+import { PlayerSort } from '../../../../Models/Enums/PlayerSort';
+import { SortHelper } from '../../../../Helpers/SortHelper';
+import { ExtraDataDefinition } from '../../../../Models/CDK/ExtraDataDefinition';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { ConfirmActionDialogComponent } from '../../Dialogs/confirm-action-dialog/confirm-action-dialog.component';
+import { ConfirmActionDialogComponent } from '../../../../SharedComponents/Dialogs/confirm-action-dialog/confirm-action-dialog.component';
 
 @Component({
   selector: 'app-players-select',
   templateUrl: './players-select.component.html',
   styleUrls: [
     './players-select.component.css',
-    '../../../app.component.css',
-    '../../../Styles/mobile-style.css'
+    '../../../../app.component.css',
+    '../../../../Styles/mobile-style.css'
   ]
 })
 export class PlayersSelectComponent implements OnInit, AfterViewInit {

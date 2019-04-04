@@ -23,15 +23,15 @@ import { AppComponent } from '../../../app.component';
 import { NavbarComponent } from '../../Navbar/navbar.component';
 import { CompetitionsSelectComponent } from '../../Competitions/competitions-select/competitions-select.component';
 import { NewPlayerFormComponent } from '../../Players/new-player-form/new-player-form.component';
-import { PlayersListComponent } from '../../Players/players-list/players-list.component';
+import { PlayersListComponent } from '../../../Tabs/players-list-tab/players-list-unauthorized/players-list/players-list.component';
 import { PlayerAddedDialogComponent } from '../../Dialogs/player-added-dialog/player-added-dialog.component';
 import { SingUpEndDateErrorDialogComponent } from '../../Dialogs/sing-up-end-date-error-dialog/sing-up-end-date-error-dialog.component';
-import { PlayersSelectComponent } from '../../Players/players-select/players-select.component';
-import { PlayersListUnauthorizedComponent } from '../../Players/players-list-unauthorized/players-list-unauthorized.component';
-import { PlayersListStaffComponent } from '../../Players/players-list-staff/players-list-staff.component';
+import { PlayersSelectComponent } from '../../../Tabs/players-list-tab/players-list-staff/players-select/players-select.component';
+import { PlayersListUnauthorizedComponent } from '../../../Tabs/players-list-tab/players-list-unauthorized/players-list-unauthorized.component';
+import { PlayersListStaffComponent } from '../../../Tabs/players-list-tab/players-list-staff/players-list-staff.component';
 // tslint:disable-next-line:max-line-length
-import { PlayersTabHeaderUnauthorizedComponent } from '../../Players/players-tab-header-unauthorized/players-tab-header-unauthorized.component';
-import { PlayersTabHeaderStaffComponent } from '../../Players/players-tab-header-staff/players-tab-header-staff.component';
+import { PlayersTabHeaderUnauthorizedComponent } from '../../../Tabs/players-list-tab/players-list-unauthorized/players-tab-header-unauthorized/players-tab-header-unauthorized.component';
+import { PlayersTabHeaderStaffComponent } from '../../../Tabs/players-list-tab/players-list-staff/players-tab-header-staff/players-tab-header-staff.component';
 import { AppModule } from '../../../app.module';
 import { AuthenticationModule } from '../../../Modules/authentication.module';
 

@@ -29,7 +29,7 @@ import { NewPlayerFormComponent } from './SharedComponents/Players/new-player-fo
 import { PlayerService } from './Services/player.service';
 import { DistanceService } from './Services/distance.service';
 import { SubcategoryService } from './Services/subcategory.service';
-import { PlayersListComponent } from './SharedComponents/Players/players-list/players-list.component';
+import { PlayersListComponent } from './Tabs/players-list-tab/players-list-unauthorized/players-list/players-list.component';
 import { PlayerAddedDialogComponent } from './SharedComponents/Dialogs/player-added-dialog/player-added-dialog.component';
 import {
     SingUpEndDateErrorDialogComponent
@@ -40,12 +40,12 @@ import { UserRegisteredDialogComponent } from './SharedComponents/Dialogs/user-r
 import { SuccessfullActionDialogComponent } from './SharedComponents/Dialogs/successfull-action-dialog/successfull-action-dialog.component';
 import { FailedActionDialogComponent } from './SharedComponents/Dialogs/failed-action-dialog/failed-action-dialog.component';
 import { AuthenticatedUserService } from './Services/authenticated-user.service';
-import { PlayersSelectComponent } from './SharedComponents/Players/players-select/players-select.component';
-import { PlayersListUnauthorizedComponent } from './SharedComponents/Players/players-list-unauthorized/players-list-unauthorized.component';
-import { PlayersListStaffComponent } from './SharedComponents/Players/players-list-staff/players-list-staff.component';
+import { PlayersSelectComponent } from './Tabs/players-list-tab/players-list-staff/players-select/players-select.component';
+import { PlayersListUnauthorizedComponent } from './Tabs/players-list-tab/players-list-unauthorized/players-list-unauthorized.component';
+import { PlayersListStaffComponent } from './Tabs/players-list-tab/players-list-staff/players-list-staff.component';
 // tslint:disable-next-line:max-line-length
-import { PlayersTabHeaderUnauthorizedComponent } from './SharedComponents/Players/players-tab-header-unauthorized/players-tab-header-unauthorized.component';
-import { PlayersTabHeaderStaffComponent } from './SharedComponents/Players/players-tab-header-staff/players-tab-header-staff.component';
+import { PlayersTabHeaderUnauthorizedComponent } from './Tabs/players-list-tab/players-list-unauthorized/players-tab-header-unauthorized/players-tab-header-unauthorized.component';
+import { PlayersTabHeaderStaffComponent } from './Tabs/players-list-tab/players-list-staff/players-tab-header-staff/players-tab-header-staff.component';
 import { OrganizerAccountService } from './Services/organizer-account.service';
 import { EditPlayerComponent } from './SharedComponents/Players/edit-player/edit-player.component';
 import { EditPlayerTabComponent } from './Tabs/edit-player-tab/edit-player-tab.component';
