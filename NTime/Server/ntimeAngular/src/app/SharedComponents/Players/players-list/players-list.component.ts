@@ -3,39 +3,30 @@ import {
   OnInit,
   ViewChild,
   AfterViewInit,
-  Input,
-  EventEmitter
-} from '@angular/core';
-import { FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+  Input} from '@angular/core';
 import {
   MatPaginator,
   MatTableDataSource,
   MatTable,
   PageEvent,
-  MatSort,
   Sort
 } from '@angular/material';
-import { DataSource } from '@angular/cdk/table';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { String, StringBuilder } from 'typescript-string-operations';
+import { Subject } from 'rxjs';
 
 import { PlayerService } from '../../../Services/player.service';
 import { MessageService } from '../../../Services/message.service';
 import { PageViewModel } from '../../../Models/PageViewModel';
 import { PlayerListView } from '../../../Models/Players/PlayerListView';
-import { Competition } from '../../../Models/Competitions/Competition';
 import { PlayerFilterOptions } from '../../../Models/Players/PlayerFilterOptions';
 import { ActivatedRoute } from '@angular/router';
-import { MockPlayersListView } from '../../../MockData/MockPlayers';
 import { PlayerSort } from '../../../Models/Enums/PlayerSort';
 import { SortHelper } from '../../../Helpers/SortHelper';
 import { ExtraDataDefinition } from '../../../Models/CDK/ExtraDataDefinition';
 import {
   debounceTime,
-  distinctUntilChanged,
-  switchMap
-} from '../../../../../node_modules/rxjs/operators';
+  distinctUntilChanged} from '../../../../../node_modules/rxjs/operators';
+import { CompetitionWithDetails } from '../../../Models/Competitions/CompetitionWithDetails';
+// import { CompetitionWithDetails } from '../../../Models/Competitions/CompetitionWithDetails';
 
 @Component({
   selector: 'app-players-list',
@@ -47,14 +38,12 @@ import {
   ]
 })
 export class PlayersListComponent implements AfterViewInit, OnInit {
-  @Input() competition: Competition;
+  @Input() competition: CompetitionWithDetails;
   public todayDate: Date;
   public dataLoaded = false;
   private competitionId: number;
   private players: PlayerListView[] = [];
   private filter: PlayerFilterOptions = new PlayerFilterOptions();
-  private delimiter = '|';
-  private searchTerms = new Subject<string>();
 
   @ViewChild(MatTable) table: MatTable<PlayerListView>;
   displayedColumns = [
@@ -80,7 +69,7 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
     private route: ActivatedRoute
   ) {
     // this.setDataSource();
-    this.competition = new Competition();
+    // this.competition = new Competition();
     this.todayDate = new Date(Date.now());
     this.competitionId = +this.route.snapshot.paramMap.get('id');
   }
@@ -93,19 +82,12 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
 
   ngAfterViewInit() {}
 
-  getPlayers(
-    competitionId: number,
-    playerFilterOptions: PlayerFilterOptions,
-    pageSize: number,
-    pageNumber: number
+  getPlayers(competitionId: number, playerFilterOptions: PlayerFilterOptions,
+    pageSize: number, pageNumber: number
   ): void {
     this.dataLoaded = false;
     this.playerService
-      .getPlayerListView(
-        competitionId,
-        playerFilterOptions,
-        pageSize,
-        pageNumber
+      .getPlayerListView(competitionId, playerFilterOptions, pageSize, pageNumber
       )
       .subscribe(
         (page: PageViewModel<PlayerListView>) => {
@@ -126,11 +108,7 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
 
   getFilteredPlayers(): void {
     this.dataLoaded = false;
-    this.getPlayers(
-      this.competitionId,
-      this.filter,
-      this.pageSize,
-      this.pageNumber
+    this.getPlayers(this.competitionId, this.filter, this.pageSize, this.pageNumber
     );
   }
 
@@ -173,34 +151,6 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
   }
 
   prepareExtraColumns(): void {
-    // this.messageService.addObject(this.competition);
-    // this.messageService.addLog(
-    //   `ExtraDataHeaders: ${this.competition.ExtraDataHeaders}`
-    // );
-    // if (String.IsNullOrWhiteSpace(this.competition.ExtraDataHeaders)) {
-    //   return;
-    // }
-
-    // const splitColumns = this.competition.ExtraDataHeaders.split(
-    //   this.delimiter
-    // );
-    // let iterator = 0;
-    // splitColumns.forEach(columnString => {
-    //   this.oldExtraColumns.push(
-    //     new ExtraDataDefinition(
-    //       (iterator + 100).toString(),
-    //       columnString,
-    //       iterator,
-    //       this.delimiter
-    //     )
-    //   );
-    //   iterator++;
-    // });
-
-    // this.oldExtraColumns
-    //   .map(x => x.columnDef)
-    //   .forEach(c => this.displayedColumns.push(c));
-
     this.competition.ExtraColumns.filter(
       column => column.IsDisplayedInPublicList
     )

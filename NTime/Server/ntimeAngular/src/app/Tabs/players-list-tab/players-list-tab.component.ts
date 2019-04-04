@@ -18,6 +18,5 @@ export class PlayersListTabComponent {
   ) {
     const competitionId = +this.route.snapshot.paramMap.get('id');
     this.isStaffViewDisplayed = RoleHelpers.resolveIsStaffViewDisplayed(this.authenticatedUserService);
-    // this.isStaffViewDisplayed = true;
   }
 }

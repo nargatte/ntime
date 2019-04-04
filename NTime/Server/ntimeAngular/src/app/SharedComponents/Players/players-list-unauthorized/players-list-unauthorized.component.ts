@@ -1,11 +1,9 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PageViewModel } from '../../../Models/PageViewModel';
-import { MockCompetitions } from '../../../MockData/mockCompetitions';
-import { Competition } from '../../../Models/Competitions/Competition';
 import { CompetitionService } from '../../../Services/competition.service';
 import { MessageService } from '../../../Services/message.service';
-import { ICompetition } from '../../../Models/Competitions/ICompetition';
+import { CompetitionWithDetails } from '../../../Models/Competitions/CompetitionWithDetails';
+import { ICompetitionWithDetails } from '../../../Models/Competitions/ICompetitionWithDetails';
 
 @Component({
   selector: 'app-players-list-unauthorized',
@@ -14,7 +12,7 @@ import { ICompetition } from '../../../Models/Competitions/ICompetition';
 })
 export class PlayersListUnauthorizedComponent implements OnInit, OnChanges {
   public competitionId: number;
-  public competition: Competition;
+  public competition: CompetitionWithDetails;
   public dataLoaded = false;
 
   constructor(
@@ -34,8 +32,8 @@ export class PlayersListUnauthorizedComponent implements OnInit, OnChanges {
   getCompetition(id: number): void {
     this.dataLoaded = false;
     this.competitionService.getCompetition(id).subscribe(
-      (competition: ICompetition) => {
-        this.competition = new Competition().copyDataFromDto(competition);
+      (competition: ICompetitionWithDetails) => {
+        this.competition = new CompetitionWithDetails().copyDataFromDto(competition);
       },
       error => this.onError(error),
       () => this.dataLoaded = true// Errors

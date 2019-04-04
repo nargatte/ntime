@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PageViewModel } from '../../../Models/PageViewModel';
-import { MockCompetitions } from '../../../MockData/mockCompetitions';
-import { Competition } from '../../../Models/Competitions/Competition';
 import { CompetitionService } from '../../../Services/competition.service';
 import { MessageService } from '../../../Services/message.service';
+import { CompetitionWithDetails } from '../../../Models/Competitions/CompetitionWithDetails';
+import { ICompetitionWithDetails } from '../../../Models/Competitions/ICompetitionWithDetails';
 
 @Component({
   selector: 'app-players-list-staff',
@@ -14,7 +13,7 @@ import { MessageService } from '../../../Services/message.service';
 export class PlayersListStaffComponent implements OnInit {
 
   public competitionId: number;
-  public competition: Competition;
+  public competition: CompetitionWithDetails;
   public dataLoaded = false;
 
 
@@ -32,9 +31,9 @@ export class PlayersListStaffComponent implements OnInit {
   getCompetition(id: number): void {
     this.dataLoaded = false;
     this.competitionService.getCompetition(id).subscribe(
-      (dto: Competition) => {
+      (dto: ICompetitionWithDetails) => {
         this.dataLoaded = true;
-        this.competition = new Competition().copyDataFromDto(dto);
+        this.competition = new CompetitionWithDetails().copyDataFromDto(dto);
       },
       error => this.onError(error), // Errors
     );
