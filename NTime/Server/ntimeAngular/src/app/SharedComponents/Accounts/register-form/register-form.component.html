@@ -11,33 +11,39 @@
         <mat-form-field>
           <input matInput type="email" placeholder="Adres e-mail" name="email" required [(ngModel)]="registerData.Email" [email]="registerData.Email!='' && registerData.Email!=null"
             #email="ngModel">
-          <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
-            <ng-container *ngIf="email.errors.required; else notEmtyTemplate">
+          <mat-error *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+            <ng-container *ngIf="!!email.errors.required; else notEmtyTemplate">
               E-mail jest wymagany
             </ng-container>
             <ng-template #notEmtyTemplate>
               E-mail jest nieprawidłowy
             </ng-template>
-          </div>
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput type="password" placeholder="Hasło" name="password" required [(ngModel)]="registerData.Password" #password="ngModel" autocomplete="new-password">
-          <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
-            <div *ngIf="password.errors.required">
+          <input matInput type="password" placeholder="Hasło" name="password" minlength="8" required [(ngModel)]="registerData.Password" #password="ngModel" autocomplete="new-password">
+          <mat-error *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+            <div *ngIf="!!password.errors.required; else minEightCharactersTemplate">
               Hasło jest wymagane
             </div>
-          </div>
+            <ng-template #minEightCharactersTemplate>
+              Hasło musi mieć minimum 8 znaków
+            </ng-template>
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput type="password" placeholder="Powtórz hasło" name="confirmPassword" required [(ngModel)]="registerData.ConfirmPassword"
+          <input matInput type="password" placeholder="Powtórz hasło" name="confirmPassword" minlength="8" required [(ngModel)]="registerData.ConfirmPassword"
             #confirmPassword="ngModel">
-          <div *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)" class="alert alert-danger">
-            <div *ngIf="confirmPassword.errors.required">
+          <mat-error *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)" class="alert alert-danger">
+            <div *ngIf="!!confirmPassword.errors.required; else minEightCharactersTemplate">
               Powtórzone hasło jest wymagane
             </div>
-          </div>
+            <ng-template #minEightCharactersTemplate>
+              Hasło musi mieć minimum 8 znaków
+            </ng-template>
+          </mat-error>
         </mat-form-field>
 
       </div>
