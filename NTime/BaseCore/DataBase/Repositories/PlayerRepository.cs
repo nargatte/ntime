@@ -38,17 +38,19 @@ namespace BaseCore.DataBase
             });
         }
 
-        public override Task RemoveAsync(Player player)
+        public override async Task RemoveAsync(Player player)
         {
             CheckNull(player);
             CheckItem(player);
 
-            return ContextProvider.DoAsync(async ctx =>
+            await ContextProvider.DoAsync(async ctx =>
             {
                 var extraColumnValues = await ctx.ExtraColumnValues.Where(value => value.PlayerId == player.Id).ToListAsync();
+                var refreshedPLayer = await ctx.Players.FirstOrDefaultAsync(p => p.Id == player.Id);
+                if (refreshedPLayer == null)
+                    throw new NullReferenceException("Player does not exist in the database");
                 ctx.ExtraColumnValues.RemoveRange(extraColumnValues);
-
-                ctx.Players.Remove(player);
+                ctx.Players.Remove(refreshedPLayer);
                 await ctx.SaveChangesAsync();
             });
         }
