@@ -13,19 +13,19 @@ import {
 } from '@angular/material';
 import { Subject } from 'rxjs';
 
-import { PlayerService } from '../../../Services/player.service';
-import { MessageService } from '../../../Services/message.service';
-import { PageViewModel } from '../../../Models/PageViewModel';
-import { PlayerListView } from '../../../Models/Players/PlayerListView';
-import { PlayerFilterOptions } from '../../../Models/Players/PlayerFilterOptions';
+import { PlayerService } from '../../../../Services/player.service';
+import { MessageService } from '../../../../Services/message.service';
+import { PageViewModel } from '../../../../Models/PageViewModel';
+import { PlayerListView } from '../../../../Models/Players/PlayerListView';
+import { PlayerFilterOptions } from '../../../../Models/Players/PlayerFilterOptions';
 import { ActivatedRoute } from '@angular/router';
-import { PlayerSort } from '../../../Models/Enums/PlayerSort';
-import { SortHelper } from '../../../Helpers/SortHelper';
-import { ExtraDataDefinition } from '../../../Models/CDK/ExtraDataDefinition';
+import { PlayerSort } from '../../../../Models/Enums/PlayerSort';
+import { SortHelper } from '../../../../Helpers/SortHelper';
+import { ExtraDataDefinition } from '../../../../Models/CDK/ExtraDataDefinition';
 import {
   debounceTime,
-  distinctUntilChanged} from '../../../../../node_modules/rxjs/operators';
-import { CompetitionWithDetails } from '../../../Models/Competitions/CompetitionWithDetails';
+  distinctUntilChanged} from 'rxjs/operators';
+import { CompetitionWithDetails } from '../../../../Models/Competitions/CompetitionWithDetails';
 // import { CompetitionWithDetails } from '../../../Models/Competitions/CompetitionWithDetails';
 
 @Component({
@@ -33,8 +33,8 @@ import { CompetitionWithDetails } from '../../../Models/Competitions/Competition
   templateUrl: './players-list.component.html',
   styleUrls: [
     './players-list.component.css',
-    '../../../app.component.css',
-    '../../../Styles/mobile-style.css'
+    '../../../../app.component.css',
+    '../../../../Styles/mobile-style.css'
   ]
 })
 export class PlayersListComponent implements AfterViewInit, OnInit {

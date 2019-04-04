@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PlayersTabHeaderStaffComponent } from './players-tab-header-staff.component';
-import { AppModule } from '../../../app.module';
-import { Competition } from '../../../Models/Competitions/Competition';
+import { AppModule } from '../../../../app.module';
+import { Competition } from '../../../../Models/Competitions/Competition';
 
 describe('PlayersTabHeaderAdminComponent', () => {
   let component: PlayersTabHeaderStaffComponent;
