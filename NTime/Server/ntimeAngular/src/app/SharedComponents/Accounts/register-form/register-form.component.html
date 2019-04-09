@@ -10,7 +10,7 @@
 
         <mat-form-field>
           <input matInput type="email" placeholder="Adres e-mail" name="email" required [(ngModel)]="registerData.Email" [email]="registerData.Email!='' && registerData.Email!=null"
-            #email="ngModel">
+            #email="ngModel" autocomplete="off">
           <mat-error *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
             <ng-container *ngIf="!!email.errors.required; else notEmtyTemplate">
               E-mail jest wymagany
@@ -22,7 +22,7 @@
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput type="password" placeholder="Hasło" name="password" minlength="8" required [(ngModel)]="registerData.Password" #password="ngModel" autocomplete="new-password">
+          <input matInput type="password" placeholder="Hasło" name="password" minlength="8" required [(ngModel)]="registerData.Password" #password="ngModel" autocomplete="off">
           <mat-error *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
             <div *ngIf="!!password.errors.required; else minEightCharactersTemplate">
               Hasło jest wymagane
@@ -34,7 +34,7 @@
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput type="password" placeholder="Powtórz hasło" name="confirmPassword" minlength="8" required [(ngModel)]="registerData.ConfirmPassword"
+          <input matInput type="password" placeholder="Powtórz hasło" name="confirmPassword" minlength="8" required [(ngModel)]="registerData.ConfirmPassword" autocomplete="off"
             #confirmPassword="ngModel">
           <mat-error *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)" class="alert alert-danger">
             <div *ngIf="!!confirmPassword.errors.required; else minEightCharactersTemplate">

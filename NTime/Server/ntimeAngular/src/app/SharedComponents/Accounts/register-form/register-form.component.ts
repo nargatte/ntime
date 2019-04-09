@@ -35,6 +35,10 @@ export class RegisterFormComponent implements OnInit {
   }
 
   public registerButtonClick() {
+    if (this.registerData.Password !== this.registerData.ConfirmPassword) {
+      this.failedModalUp('Obydwie wersje hasła muszą być identyczne');
+      return;
+    }
     this.dataLoaded = false;
     let roleString = 'player';
     this.activatedRoute.queryParams.subscribe((params: Params) => {
@@ -59,7 +63,7 @@ export class RegisterFormComponent implements OnInit {
   private onFailedRegisterUser(errorResponse: HttpErrorResponse) {
     // this.messageService.addError('Error while trying to register');
     this.messageService.addObject(errorResponse);
-    this.failedModalUp(errorResponse);
+    this.failedModalUp(`Wystąpił błąd podczas rejestracji`);
   }
 
   private successModalUp() {
@@ -69,11 +73,11 @@ export class RegisterFormComponent implements OnInit {
     });
   }
 
-  public failedModalUp(errorResponse: HttpErrorResponse) {
+  public failedModalUp(message?: string) {
     this.dataLoaded = true;
     this.dialog.open(FailedActionDialogComponent, {
       // data: { text: `Wystąpił błąd podczas rejestracji: ${errorResponse.ExceptionMessage}` } // TODO
-      data: { text: `Wystąpił błąd podczas rejestracji` }
+      data: { text: message }
     });
   }
 
