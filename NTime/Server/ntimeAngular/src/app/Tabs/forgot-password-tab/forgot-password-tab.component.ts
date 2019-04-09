@@ -21,7 +21,7 @@ export class ForgotPasswordTabComponent implements OnInit {
   public successModalUp() {
     this.dataLoaded = true;
     this.dialog.open(SuccessfullActionDialogComponent, {
-      data: { text: 'Mail z instrukcjami został wysłany na podany adres' }
+      data: { text: 'Wiadomość z instrukcjami została wysłana na podany adres email' }
     });
   }
 
@@ -35,12 +35,15 @@ export class ForgotPasswordTabComponent implements OnInit {
   public ButtonClick() {
     if (!this.emailAddress || this.emailAddress === '') {
       this.failedModalUp('Wypełnij poprawnie pole z adresem mailowym');
+      return;
     }
 
     console.log(this.emailAddress);
+    this.dataLoaded = false;
     this.authenticationService.SendForgotPassword(this.emailAddress).subscribe(
       () => this.successModalUp(),
-      () => this.failedModalUp(`Użytkownik o podanym adresie nie istnieje w bazie`)
+      () => this.failedModalUp(`Użytkownik o podanym adresie nie istnieje w bazie`),
+      () => this.dataLoaded = true
     );
 
   }

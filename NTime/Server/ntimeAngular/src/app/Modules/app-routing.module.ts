@@ -14,6 +14,7 @@ import { PlayersListTabComponent } from '../Tabs/players-list-tab/players-list-t
 import { RegisterConfirmationComponent } from '../SharedComponents/Accounts/register-confirmation/register-confirmation.component';
 import { EditPlayerTabComponent } from '../Tabs/edit-player-tab/edit-player-tab.component';
 import { ForgotPasswordTabComponent } from '../Tabs/forgot-password-tab/forgot-password-tab.component';
+import { NewPasswordTabComponent } from '../Tabs/new-password-tab/new-password-tab.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/zawody', pathMatch: 'full' },
@@ -25,6 +26,7 @@ const routes: Routes = [
     { path: 'konto', component: MyAccountTabComponent, data: { name: 'account' } },
       { path: 'potwierdzenie-rejestracji', component: RegisterConfirmationComponent },
       { path: 'reset-hasla', component: ForgotPasswordTabComponent },
+      { path: 'nowe-haslo', component: NewPasswordTabComponent },
       { path: 'wyloguj', redirectTo: '/konto?logout=true', pathMatch: 'full' },
     { path: 'oferta', component: OfferTabComponent, data: { name: 'offer' } },
     { path: 'kontakt', component: ContactTabComponent, data: { name: 'contact' } },

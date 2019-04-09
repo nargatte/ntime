@@ -455,7 +455,7 @@ namespace Server.Controllers
 
             string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
             await UserManager.SendEmailAsync(user.Id, "Resetowanie hasła do serwisu Time2Win", "Kliknij w link żeby zresetować hasło: <a href=\"" +
-            Url.Content("/reset-hasla?userId=" + user.Id + "&token=" + code) + "\">KLIKNIJ</a>");
+            Url.Content("/nowe-haslo?userId=" + user.Id + "&token=" + code) + "\">KLIKNIJ</a>");
 
             return Ok();
         }
@@ -466,7 +466,8 @@ namespace Server.Controllers
         [System.Web.Http.AllowAnonymous]
         public async Task<IHttpActionResult> ResetPassword(ResetPasswordBindingModel model)
         {
-            var result = await UserManager.ResetPasswordAsync(model.UserId, model.Token, model.NewPassword);
+            var convertedToken = model.Token.Replace(' ', '+');
+            var result = await UserManager.ResetPasswordAsync(model.UserId, convertedToken, model.NewPassword);
             if (result.Succeeded)
                 return Ok();
             return Conflict();

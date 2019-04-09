@@ -13,6 +13,7 @@ import { TokenInfo } from '../Models/Authentication/TokenInfo';
 import { AuthenticatedUserService } from './authenticated-user.service';
 import { RoleEnum } from '../Models/Enums/RoleEnum';
 import { RoleViewModel } from '../Models/Authentication/RoleViewModel';
+import { ResetPasswordBindingModel } from '../Models/Authentication/ResetPasswordBindingModel';
 
 @Injectable()
 export class AuthenticationService extends BaseHttpService {
@@ -65,6 +66,16 @@ export class AuthenticationService extends BaseHttpService {
       .addControllerName('Account')
       .addCustomUrlPart(`/ForgotPassword?email=${emailAddress}`)
       .toString()
+    );
+  }
+
+  public SendResetPassword(newPasswordData: ResetPasswordBindingModel) {
+    return super.post<void, ResetPasswordBindingModel>(
+      new UrlBuilder()
+      .addControllerName('Account')
+      .addCustomUrlPart('/ResetPassword')
+      .toString(),
+      newPasswordData
     );
   }
 
