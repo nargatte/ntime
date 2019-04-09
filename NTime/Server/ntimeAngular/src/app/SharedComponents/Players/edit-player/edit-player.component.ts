@@ -61,6 +61,8 @@ export class EditPlayerComponent implements OnInit, AfterViewInit {
 
   public checkboxes: boolean[] = [false, false, false];
 
+  private emptyExtraColumnValues: ExtraColumnValue[];
+
   @ViewChild('editPlayerForm') editPlayerForm: NgForm;
 
   public getColumnValue = (columnId: number) =>
@@ -81,7 +83,7 @@ export class EditPlayerComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    // this.createNewPlayer();
+    this.createNewPlayer();
     this.getPlayerData();
     this.assignCompetitionParts();
   }
@@ -122,7 +124,7 @@ export class EditPlayerComponent implements OnInit, AfterViewInit {
     this.editedPlayer = new PlayersWithScores();
     this.playerService.getPlayer(this.playerId).subscribe(
       (player: IPlayerWithScores) => {
-        this.editedPlayer = new PlayersWithScores().copyDataFromFullDto(player);
+        this.editedPlayer = new PlayersWithScores(undefined, this.emptyExtraColumnValues).copyDataFromFullDto(player);
         this.messageService.addLog('Displaying downloaded player');
         this.messageService.addObject(this.editedPlayer);
       },
@@ -214,36 +216,6 @@ export class EditPlayerComponent implements OnInit, AfterViewInit {
       );
     }
 
-    const filteredColumns = extraColumnValues.filter(value => value);
-    this.messageService.addLogAndObject(
-      'Displaying created column Values',
-      filteredColumns
-    );
-    this.editedPlayer = new PlayersWithScores(undefined, filteredColumns);
-
-    // private prepareExtraFields() {
-    //   this.messageService.addObject(this.competition);
-    //   this.messageService.addLog(
-    //     `ExtraDataHeaders: ${this.competition.ExtraDataHeaders}`
-    //   );
-    //   if (String.IsNullOrWhiteSpace(this.competition.ExtraDataHeaders)) {
-    //     return;
-    //   }
-
-    //   const splitFields = this.competition.ExtraDataHeaders.split(this.delimiter);
-    //   let iterator = 0;
-    //   splitFields.forEach(fieldString => {
-    //     this.extraFields.push(
-    //       new ExtraFieldDefinition(
-    //         iterator.toString(),
-    //         fieldString,
-    //         iterator,
-    //         this.delimiter
-    //       )
-    //     );
-    //     this.editedPlayerExtraData.push(String.Empty);
-    //     iterator++;
-    //   });
-    // }
+    this.emptyExtraColumnValues = extraColumnValues;
   }
 }

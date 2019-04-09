@@ -54,7 +54,6 @@ export class NewPasswordTabComponent implements OnInit {
       return;
     }
 
-    this.messageService.addLog(this.newPasswordData.NewPassword);
     this.messageService.addLog(this.newPasswordData.Token);
     this.messageService.addLog(this.newPasswordData.UserId);
     this.dataLoaded = false;

@@ -41,7 +41,7 @@ export class EditPlayerTabComponent implements OnInit {
   getCompetition(id: number): void {
     this.competitionService.getCompetition(id).subscribe(
       (competition: CompetitionWithDetails) => {
-        this.competition = CompetitionWithDetails.convertDates(competition); // TODO: Try to make it unmutabel
+        this.competition = new CompetitionWithDetails().copyDataFromDto(competition); // TODO: Try to make it unmutabel
       },
       error => this.messageService.addError(error), // Errors
     );

@@ -41,9 +41,21 @@ export class PlayerListView extends PlayerBase implements IPlayerListView {
     this.ExtraData = dto.ExtraData;
     this.IsPaidUp = dto.IsPaidUp;
     this.CompetitionId = dto.CompetitionId;
-    this.ExtraColumnValues = dto.ExtraColumnValues.map(columnValueDto =>
+    const downloadedExtraColumnValues = dto.ExtraColumnValues.map(columnValueDto =>
       new ExtraColumnValue().copyDataFromDto(columnValueDto)
     );
+    if (this.ExtraColumnValues) {
+      for (let i = 0; i < this.ExtraColumnValues.length; i++) {
+        const downloadedValue = downloadedExtraColumnValues.find(downloaded =>
+          downloaded.ColumnId === this.ExtraColumnValues[i].ColumnId);
+        if (downloadedValue) {
+          this.ExtraColumnValues[i] = downloadedValue;
+        }
+      }
+    } else {
+      this.ExtraColumnValues = downloadedExtraColumnValues;
+    }
+
     return this;
   }
 }

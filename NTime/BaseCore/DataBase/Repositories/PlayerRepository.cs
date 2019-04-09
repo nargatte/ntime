@@ -262,25 +262,26 @@ namespace BaseCore.DataBase
             return player;
         }
 
-        public async Task UpdateAsync(Player player, AgeCategory ageCategory, Distance distance, Subcategory subcategory, ExtraColumnValue[] extraColumnValues)
+        public async Task UpdateAsync(Player playerDto, AgeCategory ageCategory, Distance distance, Subcategory subcategory, ExtraColumnValue[] extraColumnValues)
         {
-            player.Distance = distance;
-            player.DistanceId = distance?.Id;
-            player.Subcategory = subcategory;
-            player.SubcategoryId = subcategory?.Id;
-            player.AgeCategory = ageCategory;
-            player.AgeCategoryId = ageCategory?.Id;
-            player.ExtraColumnValues = extraColumnValues;
-            foreach (var extraColumnValue in player.ExtraColumnValues)
+            foreach (var extraColumnValue in playerDto.ExtraColumnValues)
             {
-                extraColumnValue.PlayerId = player.Id;
+                extraColumnValue.PlayerId = playerDto.Id;
             }
-            player.FullCategory = GetFullCategory(distance, subcategory, ageCategory, player.IsMale);
-            CheckNull(player);
-            CheckItem(player);
+            playerDto.FullCategory = GetFullCategory(distance, subcategory, ageCategory, playerDto.IsMale);
+            CheckNull(playerDto);
+            CheckItem(playerDto);
             await ContextProvider.DoAsync(async ctx =>
             {
-                ctx.Players.AddOrUpdate(player);
+                var player = ctx.Players
+                    .FirstOrDefault(p => p.Id == playerDto.Id);
+                if (player == null)
+                    throw new NullReferenceException("Player not found in the database");
+
+                player.DistanceId = distance?.Id;
+                player.SubcategoryId = subcategory?.Id;
+                player.AgeCategoryId = ageCategory?.Id;
+                player.ExtraColumnValues = extraColumnValues;
 
                 await ctx.SaveChangesAsync();
             });
