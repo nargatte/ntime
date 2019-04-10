@@ -212,6 +212,12 @@ namespace BaseCore.DataBase
                 else
                     return items.OrderByDescending(p => p.LapsCount).ThenBy(p => p.Time);
 
+            if (filterOptions.PlayerSort == PlayerSort.ByRegisterDate)
+                if (filterOptions.DescendingSort)
+                    return items.OrderBy(p => 0);
+                else
+                    return items.OrderByDescending(p => 0);
+
             return GetDirectedSortQuery(items, FuncStringFilterSort(filterOptions), filterOptions.DescendingSort);
         }
 

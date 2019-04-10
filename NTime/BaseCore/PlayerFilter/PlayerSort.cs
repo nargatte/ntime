@@ -6,6 +6,8 @@ namespace BaseCore.PlayerFilter
     [TypeConverter(typeof(EnumDescriptionTypeConverter))]
     public enum PlayerSort
     {
+        [Description("Kolejność zapisy")]
+        ByRegisterDate,
         [Description("Nazwisko")]
         ByLastName,
         [Description("Imię")]

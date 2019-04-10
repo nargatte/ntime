@@ -194,7 +194,7 @@ export class PlayersSelectComponent implements OnInit, AfterViewInit {
   }
 
   setDefaultSorting() {
-    this.filter.PlayerSort = PlayerSort.ByLastName;
+    this.filter.PlayerSort = PlayerSort.ByRegisterDate;
     this.filter.DescendingSort = false;
   }
 

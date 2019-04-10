@@ -1,4 +1,5 @@
 export enum PlayerSort {
+  ByRegisterDate,
   ByLastName,
   ByFirstName,
   ByTeam,
@@ -7,5 +8,5 @@ export enum PlayerSort {
   ByFullCategory,
   ByBirthDate,
   ByRank,
-  ByExtraData,
+  ByExtraData
 }

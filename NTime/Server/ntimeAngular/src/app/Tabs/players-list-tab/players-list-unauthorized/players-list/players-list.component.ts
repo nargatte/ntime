@@ -146,7 +146,7 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
   }
 
   setDefaultSorting() {
-    this.filter.PlayerSort = PlayerSort.ByLastName;
+    this.filter.PlayerSort = PlayerSort.ByRegisterDate;
     this.filter.DescendingSort = false;
   }
 
