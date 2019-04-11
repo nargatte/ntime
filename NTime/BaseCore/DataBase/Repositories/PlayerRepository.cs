@@ -268,22 +268,17 @@ namespace BaseCore.DataBase
             return player;
         }
 
-        public async Task UpdateAsync(Player playerDto, AgeCategory ageCategory, Distance distance, Subcategory subcategory, ExtraColumnValue[] extraColumnValueDtos)
+        public async Task UpdateAsync(Player player, AgeCategory ageCategory, Distance distance, Subcategory subcategory, ExtraColumnValue[] extraColumnValueDtos)
         {
-            foreach (var extraColumnValue in playerDto.ExtraColumnValues)
+            foreach (var extraColumnValue in player.ExtraColumnValues)
             {
-                extraColumnValue.PlayerId = playerDto.Id;
+                extraColumnValue.PlayerId = player.Id;
             }
-            playerDto.FullCategory = GetFullCategory(distance, subcategory, ageCategory, playerDto.IsMale);
-            CheckNull(playerDto);
-            CheckItem(playerDto);
+            player.FullCategory = GetFullCategory(distance, subcategory, ageCategory, player.IsMale);
+            CheckNull(player);
+            CheckItem(player);
             await ContextProvider.DoAsync(async ctx =>
             {
-                var player = await ctx.Players
-                    .FirstOrDefaultAsync(p => p.Id == playerDto.Id);
-                if (player == null)
-                    throw new NullReferenceException("Player not found in the database");
-
                 player.DistanceId = distance?.Id;
                 player.SubcategoryId = subcategory?.Id;
                 player.AgeCategoryId = ageCategory?.Id;
@@ -308,6 +303,9 @@ namespace BaseCore.DataBase
 
                 ctx.ExtraColumnValues.AddOrUpdate(extraColumnsValuesToUpdate);
                 ctx.ExtraColumnValues.AddRange(extraColumnValuesToAdd);
+
+                player.ExtraColumnValues = null;
+                ctx.Entry(player).State = EntityState.Modified;
 
                 await ctx.SaveChangesAsync();
             });
@@ -650,7 +648,7 @@ namespace BaseCore.DataBase
             var players = await this.GetAllAsync();
 
             var builder = new StringBuilder();
-            var csvHeaders = @"nr_startowy;imie;nazwisko;miejscowosc;klub;data_urodzenia;plec;telefon;pay;czas_startu;kategoria;kat_wiek;nazwa_dystansu";
+            var csvHeaders = @"nr_startowy;imie;nazwisko;miejscowosc;klub;data_urodzenia;plec;rower;telefon;pay;czas_startu;kategoria;kat_wiek;nazwa_dystansu";
             if (!String.IsNullOrWhiteSpace(Competition.ExtraDataHeaders))
             {
                 var extraHeaders = Competition.ExtraDataHeaders.Split(initialSeparator);
@@ -665,7 +663,7 @@ namespace BaseCore.DataBase
                 string sex = p.IsMale ? "M" : "K";
                 string pay = p.IsPaidUp ? "1" : "";
 
-                var csvPlayerData = $"{p.StartNumber};{p.FirstName};{p.LastName};{p.City ?? ""};{p.Team ?? ""};{birthDate};{sex};{p.PhoneNumber ?? ""};{pay};{p.StartTime?.ToString("T") ?? ""};{p.FullCategory ?? ""};{p.AgeCategory?.Name ?? ""};{p.Distance?.Name ?? ""}";
+                var csvPlayerData = $"{p.StartNumber};{p.FirstName};{p.LastName};{p.City ?? ""};{p.Team ?? ""};{birthDate};{sex};{p.Subcategory?.Name ?? ""};{p.PhoneNumber ?? ""};{pay};{p.StartTime?.ToString("T") ?? ""};{p.FullCategory ?? ""};{p.AgeCategory?.Name ?? ""};{p.Distance?.Name ?? ""}";
                 if (!String.IsNullOrWhiteSpace(p.ExtraData))
                 {
                     var extraData = p.ExtraData.Split(initialSeparator);
