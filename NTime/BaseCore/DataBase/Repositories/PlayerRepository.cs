@@ -268,7 +268,7 @@ namespace BaseCore.DataBase
             return player;
         }
 
-        public async Task UpdateAsync(Player playerDto, AgeCategory ageCategory, Distance distance, Subcategory subcategory, ExtraColumnValue[] extraColumnValues)
+        public async Task UpdateAsync(Player playerDto, AgeCategory ageCategory, Distance distance, Subcategory subcategory, ExtraColumnValue[] extraColumnValueDtos)
         {
             foreach (var extraColumnValue in playerDto.ExtraColumnValues)
             {
@@ -279,15 +279,35 @@ namespace BaseCore.DataBase
             CheckItem(playerDto);
             await ContextProvider.DoAsync(async ctx =>
             {
-                var player = ctx.Players
-                    .FirstOrDefault(p => p.Id == playerDto.Id);
+                var player = await ctx.Players
+                    .FirstOrDefaultAsync(p => p.Id == playerDto.Id);
                 if (player == null)
                     throw new NullReferenceException("Player not found in the database");
 
                 player.DistanceId = distance?.Id;
                 player.SubcategoryId = subcategory?.Id;
                 player.AgeCategoryId = ageCategory?.Id;
-                player.ExtraColumnValues = extraColumnValues;
+
+                var extraColumnValueIds = extraColumnValueDtos
+                        .Select(dto => dto.Id);
+                var extraColumnsValuesToUpdate = await ctx.ExtraColumnValues
+                                            .Where(value => extraColumnValueIds.Contains(value.Id))
+                                            .ToArrayAsync();
+                foreach (var toUpdate in extraColumnsValuesToUpdate)
+                {
+                    var changedValue = extraColumnValueDtos.FirstOrDefault(dto => toUpdate.PlayerId == dto.PlayerId && toUpdate.ColumnId == dto.ColumnId);
+                    if (changedValue == null)
+                        throw new ArgumentException("Could not find ExtraColumnValue");
+                    toUpdate.CustomValue = changedValue.CustomValue;
+                }
+                var extraColumnValuesToAdd = extraColumnValueDtos
+                                                .Where(value => !extraColumnsValuesToUpdate
+                                                    .Any(dto => dto.PlayerId == value.PlayerId && dto.ColumnId == value.ColumnId))
+                                                .Where(value => !string.IsNullOrWhiteSpace(value.CustomValue))
+                                                .ToArray();
+
+                ctx.ExtraColumnValues.AddOrUpdate(extraColumnsValuesToUpdate);
+                ctx.ExtraColumnValues.AddRange(extraColumnValuesToAdd);
 
                 await ctx.SaveChangesAsync();
             });
