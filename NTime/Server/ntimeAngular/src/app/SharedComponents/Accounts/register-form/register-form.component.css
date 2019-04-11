@@ -1,14 +1,22 @@
 .form-container {
     display: flex;
     flex-direction: column;
-    max-width: 20em;
+    max-width: 25em;
   }
-  
+
   .form-container > * {
-    max-width: 20em;
-    width: 100%;
+    max-width: 25em;
   }
 
 .alert{
   color: red;
+}
+
+.left-to-right{
+  float: left;
+  width: 25em;
+}
+
+.mat-form-field{
+  width: 20em;
 }

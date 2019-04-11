@@ -11,6 +11,7 @@ import {
   MatSortModule,
   MatExpansionModule,
   MatProgressSpinnerModule,
+  MatTooltipModule,
 } from '@angular/material';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
@@ -25,7 +26,7 @@ import { CdkTableModule } from '../../../node_modules/@angular/cdk/table';
     MatMomentDateModule, MatDatepickerModule, MatDialogModule,
     MatFormFieldModule, MatIconModule, MatInputModule, MatPaginatorModule,
     MatProgressSpinnerModule, MatSelectModule, MatSidenavModule, MatSortModule,
-    MatTableModule, MatTabsModule, MatToolbarModule, CdkTableModule,
+    MatTableModule, MatTabsModule, MatToolbarModule, CdkTableModule, MatTooltipModule
   ],
   exports: [
     FlexLayoutModule,
@@ -33,7 +34,7 @@ import { CdkTableModule } from '../../../node_modules/@angular/cdk/table';
     MatMomentDateModule, MatDatepickerModule, MatDialogModule,
     MatFormFieldModule, MatIconModule, MatInputModule, MatPaginatorModule,
     MatProgressSpinnerModule, MatSelectModule, MatSidenavModule, MatSortModule,
-    MatTableModule, MatTabsModule, MatToolbarModule, CdkTableModule,
+    MatTableModule, MatTabsModule, MatToolbarModule, CdkTableModule, MatTooltipModule
   ],
   providers: [
     { provide: MatPaginatorIntl, useClass: PolishPaginatorIntl },
