@@ -50,12 +50,11 @@ export class PlayersSelectComponent implements OnInit, AfterViewInit {
   selection = new SelectionModel<PlayersWithScores>(true, []);
 
   @Input() competition: Competition;
+  public todayDate: Date;
+  public dataLoaded = false;
   public competitionId: number;
   private players: PlayersWithScores[] = [];
-  public todayDate: Date;
   private filter: PlayerFilterOptions = new PlayerFilterOptions();
-  private delimiter = '|';
-  public dataLoaded = false;
 
   @ViewChild(MatTable) table: MatTable<PlayerListView>;
   displayedColumns = [
@@ -67,7 +66,6 @@ export class PlayersSelectComponent implements OnInit, AfterViewInit {
     'fullCategory',
     'isPaidUp'
   ];
-  oldExtraColumns: ExtraDataDefinition[] = [];
   dataSource: MatTableDataSource<PlayersWithScores> = new MatTableDataSource<
     PlayersWithScores
   >(this.players);
@@ -169,8 +167,8 @@ export class PlayersSelectComponent implements OnInit, AfterViewInit {
   }
 
   setDataSource() {
-    this.dataLoaded = true;
     this.dataSource = new MatTableDataSource<PlayersWithScores>(this.players);
+    this.dataLoaded = true;
   }
 
   onPageEvent(event: PageEvent) {
@@ -256,34 +254,6 @@ export class PlayersSelectComponent implements OnInit, AfterViewInit {
   }
 
   prepareExtraColumns(): void {
-    // this.messageService.addObject(this.competition);
-    // this.messageService.addLog(
-    //   `ExtraDataHeaders: ${this.competition.ExtraDataHeaders}`
-    // );
-    // if (String.IsNullOrWhiteSpace(this.competition.ExtraDataHeaders)) {
-    //   return;
-    // }
-
-    // const splitColumns = this.competition.ExtraDataHeaders.split(
-    //   this.delimiter
-    // );
-    // let iterator = 0;
-    // splitColumns.forEach(columnString => {
-    //   this.oldExtraColumns.push(
-    //     new ExtraDataDefinition(
-    //       iterator.toString(),
-    //       columnString,
-    //       iterator,
-    //       this.delimiter
-    //     )
-    //   );
-    //   iterator++;
-    // });
-
-    // this.oldExtraColumns
-    //   .map(x => x.columnDef)
-    //   .forEach(c => this.displayedColumns.push(c));
-
     this.competition.ExtraColumns.map(column => column.Id).forEach(id =>
       this.displayedColumns.push(id.toString())
     );
