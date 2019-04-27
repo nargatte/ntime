@@ -73,9 +73,20 @@ export abstract class PlayersBaseListComponent<TPlayer extends PlayerListView> i
     this.setDefaultSorting();
     this.getFilteredPlayers();
     this.prepareExtraColumns();
+    this.extraOnInitMethods();
   }
 
   ngAfterViewInit() { }
+
+  protected abstract getPlayersFromService(
+    competitionId: number,
+    playerFilterOptions: PlayerFilterOptions,
+    pageSize: number,
+    pageNumber: number): Observable<PageViewModel<TPlayer> | {}>;
+
+  protected abstract filterExtraColumns(extraColumns: ExtraColumn[]): ExtraColumn[];
+
+  protected extraOnInitMethods() {  }
 
   getPlayers(competitionId: number, playerFilterOptions: PlayerFilterOptions,
     pageSize: number, pageNumber: number
@@ -95,11 +106,6 @@ export abstract class PlayersBaseListComponent<TPlayer extends PlayerListView> i
       );
   }
 
-  protected abstract getPlayersFromService(
-    competitionId: number,
-    playerFilterOptions: PlayerFilterOptions,
-    pageSize: number,
-    pageNumber: number): Observable<PageViewModel<TPlayer> | {}>;
 
   onError(message: any) {
     this.dataLoaded = true;
@@ -155,8 +161,6 @@ export abstract class PlayersBaseListComponent<TPlayer extends PlayerListView> i
       .map(column => column.Id)
       .forEach(id => this.displayedColumns.push(id.toString()));
   }
-
-  protected abstract filterExtraColumns(extraColumns: ExtraColumn[]): ExtraColumn[];
 
   public textFilterChanged(term: string): void {
     debounceTime(300);

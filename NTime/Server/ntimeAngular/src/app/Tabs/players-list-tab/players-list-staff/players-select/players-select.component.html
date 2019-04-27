@@ -1,6 +1,10 @@
 <mat-spinner *ngIf="dataLoaded === false"></mat-spinner>
 
-<app-player-filter (textFilterChanged)="search($event)"></app-player-filter>
+<app-player-filter [competition]="competition" (textFilterChanged)="textFilterChanged($event)"
+  (distanceFilterChanged)="distanceFilterChanged($event)" (subCategoryFilterChanged)="subCategoryFilterChanged($event)"
+  (ageCategoryFilterChanged)="ageCategoryFilterChanged($event)" (isPaidUpFilterChanged)="isPaidUpFilterChanged($event)"
+  (isMaleFilterChanged)="isMaleFilterChanged($event)">
+</app-player-filter>
 
 <mat-card>
   <mat-card-actions>

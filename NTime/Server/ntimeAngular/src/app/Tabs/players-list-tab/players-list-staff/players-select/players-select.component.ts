@@ -5,8 +5,6 @@ import {
   AfterViewInit,
   Input
 } from '@angular/core';
-import { FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {
   MatPaginator,
   MatTableDataSource,
@@ -15,9 +13,7 @@ import {
   MatDialog,
   Sort
 } from '@angular/material';
-import { DataSource } from '@angular/cdk/table';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { String, StringBuilder } from 'typescript-string-operations';
+import { Observable } from 'rxjs';
 
 import { PlayerService } from '../../../../Services/player.service';
 import { MessageService } from '../../../../Services/message.service';
@@ -33,9 +29,11 @@ import { FailedActionDialogComponent } from '../../../../SharedComponents/Dialog
 import { PlayersWithScores } from '../../../../Models/Players/PlayerWithScores';
 import { PlayerSort } from '../../../../Models/Enums/PlayerSort';
 import { SortHelper } from '../../../../Helpers/SortHelper';
-import { ExtraDataDefinition } from '../../../../Models/CDK/ExtraDataDefinition';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ConfirmActionDialogComponent } from '../../../../SharedComponents/Dialogs/confirm-action-dialog/confirm-action-dialog.component';
+import { PlayersBaseListComponent } from '../../players-base-list.component';
+import { templateJitUrl } from '@angular/compiler';
+import { ExtraColumn } from '../../../../Models/ExtraColumns/ExtraColumn';
 
 @Component({
   selector: 'app-players-select',
@@ -46,55 +44,34 @@ import { ConfirmActionDialogComponent } from '../../../../SharedComponents/Dialo
     '../../../../Styles/mobile-style.css'
   ]
 })
-export class PlayersSelectComponent implements OnInit, AfterViewInit {
+export class PlayersSelectComponent extends PlayersBaseListComponent<PlayersWithScores> implements OnInit, AfterViewInit {
   selection = new SelectionModel<PlayersWithScores>(true, []);
 
-  @Input() competition: Competition;
-  public todayDate: Date;
-  public dataLoaded = false;
-  public competitionId: number;
-  private players: PlayersWithScores[] = [];
-  private filter: PlayerFilterOptions = new PlayerFilterOptions();
-
-  @ViewChild(MatTable) table: MatTable<PlayerListView>;
-  displayedColumns = [
-    'select',
-    'firstName',
-    'lastName',
-    'city',
-    'team',
-    'fullCategory',
-    'isPaidUp'
-  ];
-  dataSource: MatTableDataSource<PlayersWithScores> = new MatTableDataSource<
-    PlayersWithScores
-  >(this.players);
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  public defaultPageNumber = 0;
-  public defaultPageSize = 50;
-  public pageSizeOptions = [50, 100, 500];
-  public playersCount = 0;
-
   constructor(
-    private playerService: PlayerService,
-    private messageService: MessageService,
-    private route: ActivatedRoute,
-    private dialog: MatDialog
+    protected playerService: PlayerService,
+    protected messageService: MessageService,
+    protected route: ActivatedRoute,
+    protected dialog: MatDialog
   ) {
-    this.todayDate = new Date(Date.now());
-    this.competitionId = +this.route.snapshot.paramMap.get('id');
-    this.setPagetOptions();
+    super(playerService, messageService, route);
+    // this.addStaffColumns();
   }
 
-  ngOnInit() {
-    this.setDefaultSorting();
-    this.getFullFilteredPlayers();
-    this.prepareExtraColumns();
-    this.addActionsColumns();
+  protected getPlayersFromService(
+    competitionId: number,
+    playerFilterOptions: PlayerFilterOptions,
+    pageSize: number,
+    pageNumber: number): Observable<PageViewModel<PlayersWithScores> | {}> {
+      return this.playerService.getPlayersWithScores(competitionId, playerFilterOptions, pageSize, pageNumber);
   }
 
-  ngAfterViewInit() { }
+  protected filterExtraColumns(extraColumns: ExtraColumn[]): ExtraColumn[] {
+    return extraColumns;
+  }
+
+  protected extraOnInitMethods() {
+    this.addStaffColumns();
+    }
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;
@@ -108,94 +85,13 @@ export class PlayersSelectComponent implements OnInit, AfterViewInit {
       : this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
-  // getPlayersList(competitionId: number, playerFilterOptions: PlayerFilterOptions, pageSize: number, pageNumber: number): void {
-  //   this.playerService.getPlayerListView(competitionId, playerFilterOptions, pageSize, pageNumber).subscribe(
-  //     (page: PageViewModel<PlayerListView>) => {
-  //       this.log(page.toString());
-  //       this.log(`Items: ${page.TotalCount}`);
-  //       this.players = page.Items;
-  //       this.playersCount = page.TotalCount;
-  //     },
-  //     error => this.log(error), // Errors
-  //     () => this.setDataSource() // Success
-  //   );
-  // }
 
-  getFullPlayers(
-    competitionId: number,
-    playerFilterOptions: PlayerFilterOptions,
-    pageSize: number,
-    pageNumber: number
-  ): void {
-    this.dataLoaded = false;
-    this.playerService
-      .getPlayersWithScores(
-        competitionId,
-        playerFilterOptions,
-        pageSize,
-        pageNumber
-      )
-      .subscribe(
-        (page: PageViewModel<PlayersWithScores>) => {
-          this.log(page.toString());
-          this.log(`Items: ${page.TotalCount}`);
-          this.players = page.Items;
-          this.playersCount = page.TotalCount;
-        },
-        error => this.onError(error), // Errors
-        () => this.setDataSource() // Success
-      );
+  private addStaffColumns(): void {
+    this.displayedColumns.unshift('select');
+    this.displayedColumns.push('editPlayer');
+    this.displayedColumns.push('deletePlayer');
   }
 
-  getFullFilteredPlayers(): void {
-    this.dataLoaded = false;
-    this.getFullPlayers(
-      this.competitionId,
-      this.filter,
-      this.defaultPageSize,
-      this.defaultPageNumber
-    );
-  }
-
-  onError(message: any) {
-    this.dataLoaded = true;
-    this.messageService.addError(message);
-  }
-
-  log(message: string): void {
-    this.messageService.addLog(message);
-  }
-
-  setDataSource() {
-    this.dataSource = new MatTableDataSource<PlayersWithScores>(this.players);
-    this.dataLoaded = true;
-  }
-
-  onPageEvent(event: PageEvent) {
-    this.defaultPageSize = event.pageSize;
-    this.defaultPageNumber = event.pageIndex;
-    this.getFullFilteredPlayers();
-  }
-
-  onSortEvent(event: Sort) {
-    const sortOrder = SortHelper.isSortDescending(event.direction);
-    if (sortOrder === null) {
-      this.setDefaultSorting();
-    } else {
-      this.filter.DescendingSort = sortOrder;
-      this.filter.PlayerSort = SortHelper.getPlayerSort(event.active);
-      if (this.filter.PlayerSort === PlayerSort.ByExtraData) {
-        this.filter.ExtraDataSortIndex = Number.parseInt(event.active);
-      }
-    }
-
-    this.getFullFilteredPlayers();
-  }
-
-  setDefaultSorting() {
-    this.filter.PlayerSort = PlayerSort.ByRegisterDate;
-    this.filter.DescendingSort = false;
-  }
 
   public paidButtonClick(): void {
     this.saveSelectedPlayersPaid(true);
@@ -212,9 +108,9 @@ export class PlayersSelectComponent implements OnInit, AfterViewInit {
       player.IsPaidUp = isPaid;
     });
     this.playerService.updateMulitplePlayers(selectedPlayers).subscribe(
-      result => {
+      () => {
         this.selection.clear();
-        this.getFullPlayers(
+        this.getPlayers(
           this.competition.Id,
           this.filter,
           this.defaultPageSize,
@@ -227,6 +123,35 @@ export class PlayersSelectComponent implements OnInit, AfterViewInit {
         this.messageService.addObject(error);
         this.onFailureDialog('Nie udało się zapisać zmian');
       }
+    );
+  }
+
+  public onDeletePlayerClicked(playerToDelete: PlayersWithScores): void {
+    this.onConfirmDialog(
+      'Czy na pewno chcesz usunąć tego zawodnika? Zmiana jest nieodwracalna.'
+    ).subscribe(dialogResult => {
+      this.messageService.addLog(`Dialog result: ${dialogResult}`);
+      if (dialogResult === true) {
+        this.deletePlayer(playerToDelete);
+      }
+    });
+  }
+
+  public deletePlayer(playerToDelete: PlayersWithScores): void {
+    this.messageService.addLog(
+      `Player with id: ${playerToDelete.Id} to delete`
+    );
+    this.dataLoaded = false;
+    this.playerService.deletePlayer(playerToDelete.Id).subscribe(
+      () => {
+        this.onSuccessDialog('Zawodnik został usunięty');
+        this.getFilteredPlayers();
+      },
+      (error: Error) =>
+        this.onFailureDialog(
+          `Nie udało się usunąć zawodnika: ${error.message}`
+        ),
+      () => (this.dataLoaded = true)
     );
   }
 
@@ -253,58 +178,98 @@ export class PlayersSelectComponent implements OnInit, AfterViewInit {
     return dialogRef.afterClosed();
   }
 
-  prepareExtraColumns(): void {
-    this.competition.ExtraColumns.map(column => column.Id).forEach(id =>
-      this.displayedColumns.push(id.toString())
-    );
-  }
+  // getFullPlayers(
+  //   competitionId: number,
+  //   playerFilterOptions: PlayerFilterOptions,
+  //   pageSize: number,
+  //   pageNumber: number
+  // ): void {
+  //   this.dataLoaded = false;
+  //   this.playerService
+  //     .getPlayersWithScores(
+  //       competitionId,
+  //       playerFilterOptions,
+  //       pageSize,
+  //       pageNumber
+  //     )
+  //     .subscribe(
+  //       (page: PageViewModel<PlayersWithScores>) => {
+  //         this.log(page.toString());
+  //         this.log(`Items: ${page.TotalCount}`);
+  //         this.players = page.Items;
+  //         this.playersCount = page.TotalCount;
+  //       },
+  //       error => this.onError(error), // Errors
+  //       () => this.setDataSource() // Success
+  //     );
+  // }
 
-  private addActionsColumns(): void {
-    this.displayedColumns.push('editPlayer');
-    this.displayedColumns.push('deletePlayer');
-  }
+  // getFullFilteredPlayers(): void {
+  //   this.dataLoaded = false;
+  //   this.getFullPlayers(
+  //     this.competitionId,
+  //     this.filter,
+  //     this.defaultPageSize,
+  //     this.defaultPageNumber
+  //   );
+  // }
 
-  public search(term: string): void {
-    this.defaultPageNumber = 0;
-    debounceTime(300);
-    distinctUntilChanged();
-    this.filter.Query = term;
-    this.getFullFilteredPlayers();
-  }
+  // onError(message: any) {
+  //   this.dataLoaded = true;
+  //   this.messageService.addError(message);
+  // }
 
-  public onDeletePlayerClicked(playerToDelete: PlayersWithScores): void {
-    this.onConfirmDialog(
-      'Czy na pewno chcesz usunąć tego zawodnika? Zmiana jest nieodwracalna.'
-    ).subscribe(dialogResult => {
-      this.messageService.addLog(`Dialog result: ${dialogResult}`);
-      if (dialogResult === true) {
-        this.deletePlayer(playerToDelete);
-      }
-    });
-  }
+  // log(message: string): void {
+  //   this.messageService.addLog(message);
+  // }
 
-  public deletePlayer(playerToDelete: PlayersWithScores): void {
-    this.messageService.addLog(
-      `Player with id: ${playerToDelete.Id} to delete`
-    );
-    this.dataLoaded = false;
-    this.playerService.deletePlayer(playerToDelete.Id).subscribe(
-      (player: PlayersWithScores) => {
-        this.onSuccessDialog('Zawodnik został usunięty');
-        this.getFullFilteredPlayers();
-      },
-      (error: Error) =>
-        this.onFailureDialog(
-          `Nie udało się usunąć zawodnika: ${error.message}`
-        ),
-      () => (this.dataLoaded = true)
-    );
-  }
+  // setDataSource() {
+  //   this.dataSource = new MatTableDataSource<PlayersWithScores>(this.players);
+  //   this.dataLoaded = true;
+  // }
 
-  private setPagetOptions() {
-    const pageOptions = this.playerService.getPaginationInfo();
-    this.defaultPageNumber = pageOptions.defaultPageNumber;
-    this.defaultPageSize = pageOptions.defaultPageSize;
-    this.pageSizeOptions = pageOptions.pageSizeOptions;
-  }
+  // onPageEvent(event: PageEvent) {
+  //   this.defaultPageSize = event.pageSize;
+  //   this.defaultPageNumber = event.pageIndex;
+  //   this.getFullFilteredPlayers();
+  // }
+
+  // onSortEvent(event: Sort) {
+  //   const sortOrder = SortHelper.isSortDescending(event.direction);
+  //   if (sortOrder === null) {
+  //     this.setDefaultSorting();
+  //   } else {
+  //     this.filter.DescendingSort = sortOrder;
+  //     this.filter.PlayerSort = SortHelper.getPlayerSort(event.active);
+  //     if (this.filter.PlayerSort === PlayerSort.ByExtraData) {
+  //       this.filter.ExtraDataSortIndex = Number.parseInt(event.active);
+  //     }
+  //   }
+
+  //   this.getFullFilteredPlayers();
+  // }
+
+  // prepareExtraColumns(): void {
+  //   this.competition.ExtraColumns.map(column => column.Id).forEach(id =>
+  //     this.displayedColumns.push(id.toString())
+  //   );
+  // }
+
+
+  // public search(term: string): void {
+  //   this.defaultPageNumber = 0;
+  //   debounceTime(300);
+  //   distinctUntilChanged();
+  //   this.filter.Query = term;
+  //   this.getFilteredPlayers();
+  // }
+
+
+
+  // private setPagetOptions() {
+  //   const pageOptions = this.playerService.getPaginationInfo();
+  //   this.defaultPageNumber = pageOptions.defaultPageNumber;
+  //   this.defaultPageSize = pageOptions.defaultPageSize;
+  //   this.pageSizeOptions = pageOptions.pageSizeOptions;
+  // }
 }
