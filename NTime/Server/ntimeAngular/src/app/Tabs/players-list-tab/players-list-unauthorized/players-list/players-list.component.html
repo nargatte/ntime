@@ -133,9 +133,9 @@
 
   <mat-paginator
     #paginator
-    [(pageIndex)]="pageNumber"
-    [pageSize]="50"
-    [pageSizeOptions]="[20, 50, 100]"
+    [(pageIndex)]="defaultPageNumber"
+    [pageSize]="defaultPageSize"
+    [pageSizeOptions]="pageSizeOptions"
     sticky
     [showFirstLastButtons]="true"
     [(length)]="playersCount"

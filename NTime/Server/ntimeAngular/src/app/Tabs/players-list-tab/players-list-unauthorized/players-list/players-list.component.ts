@@ -3,7 +3,8 @@ import {
   OnInit,
   ViewChild,
   AfterViewInit,
-  Input} from '@angular/core';
+  Input
+} from '@angular/core';
 import {
   MatPaginator,
   MatTableDataSource,
@@ -24,7 +25,8 @@ import { SortHelper } from '../../../../Helpers/SortHelper';
 import { ExtraDataDefinition } from '../../../../Models/CDK/ExtraDataDefinition';
 import {
   debounceTime,
-  distinctUntilChanged} from 'rxjs/operators';
+  distinctUntilChanged
+} from 'rxjs/operators';
 import { CompetitionWithDetails } from '../../../../Models/Competitions/CompetitionWithDetails';
 // import { CompetitionWithDetails } from '../../../Models/Competitions/CompetitionWithDetails';
 
@@ -58,9 +60,9 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
   dataSource: MatTableDataSource<PlayerListView>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  public pageNumber = 0;
-  public pageSize = 50;
-  public pageSizeOptions = [20, 50, 100];
+  public defaultPageNumber: number;
+  public defaultPageSize: number;
+  public pageSizeOptions: number[];
   public playersCount = 0;
 
   constructor(
@@ -72,6 +74,7 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
     // this.competition = new Competition();
     this.todayDate = new Date(Date.now());
     this.competitionId = +this.route.snapshot.paramMap.get('id');
+    this.setPagetOptions();
   }
 
   ngOnInit(): void {
@@ -80,7 +83,7 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
     this.prepareExtraColumns();
   }
 
-  ngAfterViewInit() {}
+  ngAfterViewInit() { }
 
   getPlayers(competitionId: number, playerFilterOptions: PlayerFilterOptions,
     pageSize: number, pageNumber: number
@@ -108,7 +111,7 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
 
   getFilteredPlayers(): void {
     this.dataLoaded = false;
-    this.getPlayers(this.competitionId, this.filter, this.pageSize, this.pageNumber
+    this.getPlayers(this.competitionId, this.filter, this.defaultPageSize, this.defaultPageNumber
     );
   }
 
@@ -123,8 +126,8 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
   }
 
   onPageEvent(event: PageEvent) {
-    this.pageSize = event.pageSize;
-    this.pageNumber = event.pageIndex;
+    this.defaultPageSize = event.pageSize;
+    this.defaultPageNumber = event.pageIndex;
     this.getFilteredPlayers();
   }
 
@@ -159,10 +162,17 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
   }
 
   search(term: string): void {
-    this.pageNumber = 0;
+    this.defaultPageNumber = 0;
     debounceTime(300);
     distinctUntilChanged();
     this.filter.Query = term;
     this.getFilteredPlayers();
+  }
+
+  private setPagetOptions() {
+    const pageOptions = this.playerService.getPaginationInfo();
+    this.defaultPageNumber = pageOptions.defaultPageNumber;
+    this.defaultPageSize = pageOptions.defaultPageSize;
+    this.pageSizeOptions = pageOptions.pageSizeOptions;
   }
 }

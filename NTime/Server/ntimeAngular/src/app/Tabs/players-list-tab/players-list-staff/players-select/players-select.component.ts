@@ -73,9 +73,9 @@ export class PlayersSelectComponent implements OnInit, AfterViewInit {
   >(this.players);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  public pageNumber = 0;
-  public pageSize = 50;
-  public pageSizeOptions = [20, 50, 100];
+  public defaultPageNumber = 0;
+  public defaultPageSize = 50;
+  public pageSizeOptions = [50, 100, 500];
   public playersCount = 0;
 
   constructor(
@@ -86,6 +86,7 @@ export class PlayersSelectComponent implements OnInit, AfterViewInit {
   ) {
     this.todayDate = new Date(Date.now());
     this.competitionId = +this.route.snapshot.paramMap.get('id');
+    this.setPagetOptions();
   }
 
   ngOnInit() {
@@ -95,7 +96,7 @@ export class PlayersSelectComponent implements OnInit, AfterViewInit {
     this.addActionsColumns();
   }
 
-  ngAfterViewInit() {}
+  ngAfterViewInit() { }
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;
@@ -153,8 +154,8 @@ export class PlayersSelectComponent implements OnInit, AfterViewInit {
     this.getFullPlayers(
       this.competitionId,
       this.filter,
-      this.pageSize,
-      this.pageNumber
+      this.defaultPageSize,
+      this.defaultPageNumber
     );
   }
 
@@ -173,8 +174,8 @@ export class PlayersSelectComponent implements OnInit, AfterViewInit {
   }
 
   onPageEvent(event: PageEvent) {
-    this.pageSize = event.pageSize;
-    this.pageNumber = event.pageIndex;
+    this.defaultPageSize = event.pageSize;
+    this.defaultPageNumber = event.pageIndex;
     this.getFullFilteredPlayers();
   }
 
@@ -218,8 +219,8 @@ export class PlayersSelectComponent implements OnInit, AfterViewInit {
         this.getFullPlayers(
           this.competition.Id,
           this.filter,
-          this.pageSize,
-          this.pageNumber
+          this.defaultPageSize,
+          this.defaultPageNumber
         );
         this.onSuccessDialog('Zmiany zostały zapisane');
       },
@@ -294,7 +295,7 @@ export class PlayersSelectComponent implements OnInit, AfterViewInit {
   }
 
   public search(term: string): void {
-    this.pageNumber = 0;
+    this.defaultPageNumber = 0;
     debounceTime(300);
     distinctUntilChanged();
     this.filter.Query = term;
@@ -328,5 +329,12 @@ export class PlayersSelectComponent implements OnInit, AfterViewInit {
         ),
       () => (this.dataLoaded = true)
     );
+  }
+
+  private setPagetOptions() {
+    const pageOptions = this.playerService.getPaginationInfo();
+    this.defaultPageNumber = pageOptions.defaultPageNumber;
+    this.defaultPageSize = pageOptions.defaultPageSize;
+    this.pageSizeOptions = pageOptions.pageSizeOptions;
   }
 }

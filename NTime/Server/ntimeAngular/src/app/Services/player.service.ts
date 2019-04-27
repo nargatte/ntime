@@ -15,6 +15,7 @@ import { BaseHttpService } from './base-http.service';
 import { UrlBuilder } from '../Helpers/url-builder';
 import { AuthenticatedUserService } from './authenticated-user.service';
 import { PlayersWithScores } from '../Models/Players/PlayerWithScores';
+import { PageOptions } from '../Models/PageOptions';
 
 @Injectable()
 export class PlayerService extends BaseHttpService {
@@ -83,5 +84,13 @@ export class PlayerService extends BaseHttpService {
   }
   public deletePlayer(playerId: number): Observable<PlayersWithScores> {
     return super.deleteById<PlayersWithScores>(playerId);
+  }
+
+  public getPaginationInfo(): PageOptions {
+    const defaultPageNumber = 0;
+    const defaultPageSize = 50;
+    const pageSizeOptions = [50, 100, 500];
+
+    return new PageOptions(defaultPageNumber, defaultPageSize, pageSizeOptions);
   }
 }

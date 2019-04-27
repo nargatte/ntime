@@ -8,8 +8,10 @@
 
 <mat-card>
   <mat-card-actions>
-    <button mat-raised-button color="primary" class="arrangeRight" (click)="paidButtonClick()">Oznacz wybrane jako opłacone</button>
-    <button mat-raised-button color="primary" class="arrangeRight" (click)="notPaidButtonClick()">Oznacz wybrane jako nieopłacone</button>
+    <button mat-raised-button color="primary" class="arrangeRight" (click)="paidButtonClick()">Oznacz wybrane jako
+      opłacone</button>
+    <button mat-raised-button color="primary" class="arrangeRight" (click)="notPaidButtonClick()">Oznacz wybrane jako
+      nieopłacone</button>
   </mat-card-actions>
 </mat-card>
 
@@ -22,11 +24,13 @@
     <!--If I wanna make it CDK table I can just change mat to cdk in the lines below-->
     <ng-container matColumnDef="select">
       <mat-header-cell *matHeaderCellDef>
-        <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
+        <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+          [indeterminate]="selection.hasValue() && !isAllSelected()">
         </mat-checkbox>
       </mat-header-cell>
       <mat-cell *matCellDef="let row">
-        <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
+        <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+          [checked]="selection.isSelected(row)">
         </mat-checkbox>
       </mat-cell>
     </ng-container>
@@ -122,10 +126,7 @@
     </ng-container> -->
 
 
-    <ng-container
-      *ngFor="let column of competition.ExtraColumns"
-      [cdkColumnDef]="column.Id.toString()"
-    >
+    <ng-container *ngFor="let column of competition.ExtraColumns" [cdkColumnDef]="column.Id.toString()">
       <mat-header-cell *cdkHeaderCellDef mat-sort-header>{{
         column.Title
       }}</mat-header-cell>
@@ -136,10 +137,12 @@
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" [ngStyle]="{'background-color':row.IsPaidUp === true ? 'rgb(205, 255, 205)' : 'white' }"></mat-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"
+      [ngStyle]="{'background-color':row.IsPaidUp === true ? 'rgb(205, 255, 205)' : 'white' }"></mat-row>
   </mat-table>
 
-  <mat-paginator #paginator [(pageIndex)]="pageNumber" [pageSize]="50" [pageSizeOptions]="[20, 50, 100]" sticky [showFirstLastButtons]="true"
-    [(length)]="playersCount" (page)="onPageEvent($event)">
+  <mat-paginator #paginator [(pageIndex)]="defaultPageNumber" [pageSize]="defaultPageSize"
+    [pageSizeOptions]="pageSizeOptions" sticky [showFirstLastButtons]="true" [(length)]="playersCount"
+    (page)="onPageEvent($event)">
   </mat-paginator>
 </div>
