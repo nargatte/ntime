@@ -1,0 +1,65 @@
+<ng-container>
+  <mat-form-field class="filter" id="search-box">
+    <input matInput placeholder="Filtr tekstowy" name="filter" #searchBox
+      (keyup)="textFilterChanged.emit(searchBox.value)" />
+  </mat-form-field>
+</ng-container>
+<br />
+
+<ng-container>
+  <mat-form-field class="selection-filter">
+    <mat-select placeholder="Filtr dystansów" name="distance" [(ngModel)]="selectedDistance" #distance="ngModel"
+      (selectionChange)="distanceFilterChanged.emit(distance.value)">
+      <mat-option>--Usuń filtr--</mat-option>
+      <mat-option *ngFor="let distance of competition.Distances" [(value)]="distance.Id">
+        {{distance.Name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</ng-container>
+
+<ng-container>
+  <mat-form-field *ngIf="competition.Subcategories.length>1" class="selection-filter">
+    <mat-select placeholder="Filtr podkategorii" name="subCategory" [(ngModel)]="selectedSubCategory"
+      #subCategory="ngModel" (selectionChange)="subCategoryFilterChanged.emit(subCategory.value)">
+      <mat-option>--Usuń filtr--</mat-option>
+      <mat-option *ngFor="let subCategory of competition.Subcategories" [(value)]="subCategory.Id">
+        {{subCategory.Name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</ng-container>
+
+<ng-container>
+    <mat-form-field class="selection-filter">
+      <mat-select placeholder="Filtr płci" name="isMale" [(ngModel)]="selectedIsMale" #isMale="ngModel"
+        (selectionChange)="isMaleFilterChanged.emit(isMale.value)">
+        <mat-option>--Usuń filtr--</mat-option>
+        <mat-option [value]="true">Mężczyźni</mat-option>
+        <mat-option [value]="false">Kobiety</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </ng-container>
+
+<ng-container>
+  <mat-form-field class="selection-filter">
+    <mat-select placeholder="Filtr kategorii wiekowych" name="ageCategory" [(ngModel)]="selectedAgeCategory"
+      #ageCategory="ngModel" (selectionChange)="ageCategoryFilterChanged.emit(ageCategory.value)">
+      <mat-option>--Usuń filtr--</mat-option>
+      <mat-option *ngFor="let ageCategory of competition.AgeCategories" [(value)]="ageCategory.Id">
+        {{ageCategory.Name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</ng-container>
+
+<ng-container>
+  <mat-form-field class="selection-filter">
+    <mat-select placeholder="Filtr opłaconych" name="isPaidUp" [(ngModel)]="selectedIsPaidUp" #isPaidUp="ngModel"
+      (selectionChange)="isPaidUpFilterChanged.emit(isPaidUp.value)">
+      <mat-option>--Usuń filtr--</mat-option>
+      <mat-option [value]="true">Opłaceni</mat-option>
+      <mat-option [value]="false">Nieopłaceni</mat-option>
+    </mat-select>
+  </mat-form-field>
+</ng-container>

@@ -54,6 +54,7 @@ import { ConfirmActionDialogComponent } from './SharedComponents/Dialogs/confirm
 import { ForgotPasswordTabComponent } from './Tabs/forgot-password-tab/forgot-password-tab.component';
 import { NewPasswordTabComponent } from './Tabs/new-password-tab/new-password-tab.component';
 import { PasswordRequirementsInfoComponent } from './SharedComponents/Accounts/password-requirements-info/password-requirements-info.component';
+import { PlayerFilterComponent } from './SharedComponents/Players/player-filter/player-filter.component';
 
 // MetaData info about component
 // Services - exchanging data between components
@@ -80,7 +81,7 @@ import { PasswordRequirementsInfoComponent } from './SharedComponents/Accounts/p
         PlayersSelectComponent, PlayersTabHeaderStaffComponent, PlayersTabHeaderUnauthorizedComponent,
         RegisterConfirmationComponent, RegistrationTabComponent, ScoresTabComponent,
         SingUpEndDateErrorDialogComponent, SuccessfullActionDialogComponent, UserRegisteredDialogComponent,
-        EditPlayerComponent, EditPlayerTabComponent, CompetitionDetailsComponent, ConfirmActionDialogComponent,
+        EditPlayerComponent, EditPlayerTabComponent, CompetitionDetailsComponent, ConfirmActionDialogComponent, PlayerFilterComponent,
     ],
     providers: [
         AuthenticatedUserService, AuthenticationService, CompetitionService, DistanceService,

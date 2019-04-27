@@ -9,11 +9,12 @@ namespace Server.Models
         public bool DescendingSort { get; set; }
         public int ExtraDataSortIndex { get; set; }
         public string Query { get; set; }
-        public bool? Men { get; set; }
+        public bool? IsMale { get; set; }
         public bool? WithoutStartTime { get; set; }
         public bool? Invalid { get; set; }
-        public bool? CompleatedCompetition { get; set; }
+        public bool? CompletedCompetition { get; set; }
         public bool? HasVoid { get; set; }
+        public bool? IsPaidUp { get; set; }
         public int? Distance { get; set; }
         public int? AgeCategory { get; set; }
         public int? Subcategory { get; set; }
@@ -29,11 +30,12 @@ namespace Server.Models
             DescendingSort = filterOptions.DescendingSort;
             ExtraDataSortIndex = filterOptions.ExtraDataSortIndex;
             Query = filterOptions.Query;
-            Men = filterOptions.Men;
+            IsMale = filterOptions.IsMale;
             WithoutStartTime = filterOptions.WithoutStartTime;
             Invalid = filterOptions.Invalid;
-            CompleatedCompetition = filterOptions.CompletedCompetition;
+            CompletedCompetition = filterOptions.CompletedCompetition;
             HasVoid = filterOptions.HasVoid;
+            IsPaidUp = filterOptions.IsPaidUp;
             if (filterOptions.Distance != null)
                 Distance = filterOptions.Distance.Id;
             if (filterOptions.AgeCategory != null)
@@ -49,11 +51,12 @@ namespace Server.Models
             filterOptions.DescendingSort = DescendingSort;
             filterOptions.ExtraDataSortIndex = ExtraDataSortIndex;
             filterOptions.Query = Query;
-            filterOptions.Men = Men;
+            filterOptions.IsMale = IsMale;
             filterOptions.WithoutStartTime = WithoutStartTime;
             filterOptions.Invalid = Invalid;
-            filterOptions.CompletedCompetition = CompleatedCompetition;
+            filterOptions.CompletedCompetition = CompletedCompetition;
             filterOptions.HasVoid = HasVoid;
+            filterOptions.IsPaidUp = IsPaidUp;
             if (Distance != null)
                 filterOptions.Distance = new Distance() { Id = Distance.Value };
             if (AgeCategory != null)

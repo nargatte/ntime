@@ -1,23 +1,12 @@
 <mat-spinner *ngIf="dataLoaded === false"></mat-spinner>
-<ng-container>
-  <mat-form-field id="search-box">
-    <input
-      matInput
-      placeholder="Filtr"
-      name="filter"
-      #searchBox
-      (keyup)="search(searchBox.value)"
-    />
-  </mat-form-field>
-</ng-container>
+<app-player-filter [competition]="competition" (textFilterChanged)="textFilterChanged($event)"
+  (distanceFilterChanged)="distanceFilterChanged($event)" (subCategoryFilterChanged)="subCategoryFilterChanged($event)"
+  (ageCategoryFilterChanged)="ageCategoryFilterChanged($event)" (isPaidUpFilterChanged)="isPaidUpFilterChanged($event)"
+  (isMaleFilterChanged)="isMaileFilterChanged($event)">
+</app-player-filter>
 
 <div class="example-container mat-elevation-z8">
-  <mat-table
-    #table
-    [dataSource]="dataSource"
-    matSort
-    (matSortChange)="onSortEvent($event)"
-  >
+  <mat-table #table [dataSource]="dataSource" matSort (matSortChange)="onSortEvent($event)">
     <!-- [class.isMobile]="isMobile" -->
     <ng-container matColumnDef="firstName">
       <mat-header-cell *matHeaderCellDef mat-sort-header>
@@ -106,10 +95,7 @@
       >
     </ng-container> -->
 
-    <ng-container
-      *ngFor="let column of competition.ExtraColumns"
-      [cdkColumnDef]="column.Id.toString()"
-    >
+    <ng-container *ngFor="let column of competition.ExtraColumns" [cdkColumnDef]="column.Id.toString()">
       <mat-header-cell *cdkHeaderCellDef mat-sort-header>{{
         column.Title
       }}</mat-header-cell>
@@ -119,28 +105,16 @@
       </mat-cell>
     </ng-container>
 
-    <mat-header-row
-      *matHeaderRowDef="displayedColumns; sticky: true"
-    ></mat-header-row>
-    <mat-row
-      *matRowDef="let row; columns: displayedColumns"
-      [ngStyle]="{
+    <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns" [ngStyle]="{
         'background-color':
           row.IsPaidUp === true ? 'rgb(205, 255, 205)' : 'white'
-      }"
-    ></mat-row>
+      }"></mat-row>
   </mat-table>
 
-  <mat-paginator
-    #paginator
-    [(pageIndex)]="defaultPageNumber"
-    [pageSize]="defaultPageSize"
-    [pageSizeOptions]="pageSizeOptions"
-    sticky
-    [showFirstLastButtons]="true"
-    [(length)]="playersCount"
-    (page)="onPageEvent($event)"
-  >
+  <mat-paginator #paginator [(pageIndex)]="defaultPageNumber" [pageSize]="defaultPageSize"
+    [pageSizeOptions]="pageSizeOptions" sticky [showFirstLastButtons]="true" [(length)]="playersCount"
+    (page)="onPageEvent($event)">
   </mat-paginator>
   <!-- <button mat-button (click)="onClick()">Set paginator</button> -->
 </div>

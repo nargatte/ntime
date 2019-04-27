@@ -1,16 +1,20 @@
 import { PlayerSort } from '../Enums/PlayerSort';
+import { Distance } from '../Distance';
+import { AgeCategory } from '../AgeCategory';
+import { Subcategory } from '../Subcategory';
 
 export class PlayerFilterOptions {
   PlayerSort: PlayerSort = PlayerSort.ByLastName;
   DescendingSort = false;
   ExtraDataSortIndex: number;
   Query?: string;
-  Men?: boolean;
+  IsMale?: boolean;
   WithoutStartTime?: boolean;
   Invalid?: boolean;
   CompletedCompetition?: boolean;
   HasVoid?: boolean;
-  Distance?: number;
-  AgeCategory?: number;
-  Subcategory?: number;
+  IsPaidUp?: boolean;
+  Distance?: Distance;
+  AgeCategory?: AgeCategory;
+  Subcategory?: Subcategory;
 }

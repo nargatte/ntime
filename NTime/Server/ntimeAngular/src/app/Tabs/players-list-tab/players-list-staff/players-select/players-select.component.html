@@ -1,10 +1,6 @@
 <mat-spinner *ngIf="dataLoaded === false"></mat-spinner>
 
-<ng-container>
-  <mat-form-field id="search-box">
-    <input matInput placeholder="Filtr" name="filter" #searchBox (keyup)="search(searchBox.value)">
-  </mat-form-field>
-</ng-container>
+<app-player-filter (textFilterChanged)="search($event)"></app-player-filter>
 
 <mat-card>
   <mat-card-actions>

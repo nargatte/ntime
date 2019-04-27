@@ -18,14 +18,18 @@ namespace BaseCore.DataBase
         }
 
         protected override IQueryable<AgeCategory> GetSortQuery(IQueryable<AgeCategory> items) =>
-            items.OrderBy(e => e.YearFrom);
+            items.OrderBy(category => category.Male)
+                .ThenByDescending(category => category.YearFrom);
 
         public async Task<AgeCategory[]> GetFittingAsync(Player player)
         {
             AgeCategory[] ret = null;
             await ContextProvider.DoAsync(async ctx =>
             {
-                ret = await GetAllQuery(ctx.AgeCategories).AsNoTracking().Where(i => i.YearFrom <= player.BirthDate.Year && player.BirthDate.Year <= i.YearTo && player.IsMale == i.Male).ToArrayAsync();
+                ret = await  GetIncludeQuery(GetSortQuery(
+                    GetAllQuery(ctx.AgeCategories).AsNoTracking()
+                    .Where(i => i.YearFrom <= player.BirthDate.Year && player.BirthDate.Year <= i.YearTo && player.IsMale == i.Male)))
+                    .ToArrayAsync();
             });
             return ret;
         }

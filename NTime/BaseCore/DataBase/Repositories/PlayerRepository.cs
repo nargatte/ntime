@@ -130,8 +130,8 @@ namespace BaseCore.DataBase
             if (filterOptions.Subcategory != null)
                 items = items.Where(i => i.SubcategoryId == filterOptions.Subcategory.Id);
 
-            if (filterOptions.Men != null)
-                items = items.Where(i => i.IsMale == filterOptions.Men);
+            if (filterOptions.IsMale != null)
+                items = items.Where(i => i.IsMale == filterOptions.IsMale);
 
             if (filterOptions.WithoutStartTime != null)
                 items = items.Where(i => (i.IsStartTimeFromReader || i.StartTime == null) ^ !filterOptions.WithoutStartTime.Value);
@@ -146,6 +146,7 @@ namespace BaseCore.DataBase
             if (filterOptions.HasVoid != null)
                 items = items.Where(i => i.TimeReads.All(t => t.TimeReadTypeId != (int)TimeReadTypeEnum.Void) !=
                                          filterOptions.HasVoid);
+
             if (filterOptions.IsPaidUp != null)
                 items = items.Where(i => i.IsPaidUp == filterOptions.IsPaidUp);
 
@@ -366,7 +367,7 @@ namespace BaseCore.DataBase
 
                 for (int ism = 0; ism <= 1; ism++)
                 {
-                    filterOptions.Men = ism != 0;
+                    filterOptions.IsMale = ism != 0;
                     foreach (Distance distance in distances)
                     {
                         filterOptions.Distance = distance;

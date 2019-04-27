@@ -28,6 +28,9 @@ import {
   distinctUntilChanged
 } from 'rxjs/operators';
 import { CompetitionWithDetails } from '../../../../Models/Competitions/CompetitionWithDetails';
+import { Distance } from '../../../../Models/Distance';
+import { Subcategory } from '../../../../Models/Subcategory';
+import { AgeCategory } from '../../../../Models/AgeCategory';
 // import { CompetitionWithDetails } from '../../../Models/Competitions/CompetitionWithDetails';
 
 @Component({
@@ -161,11 +164,42 @@ export class PlayersListComponent implements AfterViewInit, OnInit {
       .forEach(id => this.displayedColumns.push(id.toString()));
   }
 
-  search(term: string): void {
-    this.defaultPageNumber = 0;
+
+
+  public textFilterChanged(term: string): void {
     debounceTime(300);
     distinctUntilChanged();
     this.filter.Query = term;
+    this.filtersChanged();
+  }
+
+  public distanceFilterChanged(distance: Distance) {
+    this.filter.Distance = distance;
+    this.filtersChanged();
+  }
+
+  public subCategoryFilterChanged(subCategory: Subcategory) {
+    this.filter.Subcategory = subCategory;
+    this.filtersChanged();
+  }
+
+  public ageCategoryFilterChanged(ageCategory: AgeCategory) {
+    this.filter.AgeCategory = ageCategory;
+    this.filtersChanged();
+  }
+
+  public isPaidUpFilterChanged(isPaidUp: boolean) {
+    this.filter.IsPaidUp = isPaidUp;
+    this.filtersChanged();
+  }
+
+  public isMaileFilterChanged(isMale: boolean) {
+    this.filter.IsMale = isMale;
+    this.filtersChanged();
+  }
+
+  private filtersChanged() {
+    this.defaultPageNumber = 0;
     this.getFilteredPlayers();
   }
 

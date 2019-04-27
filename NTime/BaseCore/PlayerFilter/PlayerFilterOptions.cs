@@ -8,7 +8,7 @@ namespace BaseCore.PlayerFilter
         public bool DescendingSort { get; set; }
         public int ExtraDataSortIndex { get; set; }
         public string Query { get; set; }
-        public bool? Men { get; set; }
+        public bool? IsMale { get; set; }
         public bool? WithoutStartTime { get; set; }
         public bool? Invalid { get; set; }
         public bool? CompletedCompetition { get; set; }
