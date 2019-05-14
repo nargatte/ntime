@@ -270,7 +270,7 @@ namespace BaseCore.DataBase
         }
 
         public async Task UpdateAsync(Player player, AgeCategory ageCategory, Distance distance, Subcategory subcategory, ExtraColumnValue[] extraColumnValueDtos)
-        {
+        { 
             foreach (var extraColumnValue in player.ExtraColumnValues)
             {
                 extraColumnValue.PlayerId = player.Id;

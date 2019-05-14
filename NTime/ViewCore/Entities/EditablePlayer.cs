@@ -156,6 +156,17 @@ namespace ViewCore.Entities
             }
         }
 
+        public ICollection<ExtraColumnValue> ExtraColumnValues
+        {
+            get => DbEntity.ExtraColumnValues;
+            set
+            {
+                // TODO: Look if this property is correct
+                DbEntity.ExtraColumnValues = SetProperty(DbEntity.ExtraColumnValues, value);
+                OnUpdateRequested();
+            }
+        }
+
 
         public string ExtraData
         {

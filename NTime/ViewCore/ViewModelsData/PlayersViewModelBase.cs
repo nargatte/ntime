@@ -228,6 +228,10 @@ namespace ViewCore
             MessageBox.Show("Kategorie zostały przeliczone poprawnie");
             //await task;
             Players = _playersManager.GetPlayersToDisplay();
+            foreach (var player in Players)
+            {
+                player.UpdateFullCategoryDisplay();
+            }
             UpdateRecordsRangeInfo(_playersManager.GetRecordsRangeInfo());
         }
 
