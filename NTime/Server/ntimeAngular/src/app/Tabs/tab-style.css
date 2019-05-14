@@ -1,8 +1,14 @@
-p{
+p, div{
     font-size: 130%;
 }
 
 button{
     font-size: 120%;
+}
+
+a{
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 105%;
 }
 
