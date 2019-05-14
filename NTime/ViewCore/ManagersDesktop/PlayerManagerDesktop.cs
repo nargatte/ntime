@@ -156,6 +156,7 @@ namespace ViewCore.ManagersDesktop
             await _playerRepository.UpdateAsync(playerToUpdate.DbEntity, playerToUpdate.DbEntity.AgeCategory, playerToUpdate.DbEntity.Distance,
                 playerToUpdate.DbEntity.Subcategory, playerToUpdate.DbEntity.ExtraColumnValues?.ToArray());
             playerToUpdate.DbEntity = await _playerRepository.GetById(playerToUpdate.DbEntity.Id);
+            playerToUpdate.UpdateFullCategoryDisplay();
         }
 
         

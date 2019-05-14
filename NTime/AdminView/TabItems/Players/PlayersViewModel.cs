@@ -37,7 +37,7 @@ namespace AdminView.Players
             DeleteSelectedPlayersCmd = new RelayCommand(OnDeleteSelectedPlayersRequestedAsync);
             DeleteAllPlayersCmd = new RelayCommand(OnDeleteAllPlayersRequestedAsync);
             ImportPlayersFromCsvCmd = new RelayCommand(OnImportPlayersFromCsvAsync);
-            ExportPlayersToCsvCmd = new RelayCommand(OnExportPlayersToCsv);
+            ExportPlayersToCsvCmd = new RelayCommand(OnExportPlayersToCsvAsync);
         }
 
         #region Properties
@@ -111,11 +111,14 @@ namespace AdminView.Players
             }
         }
 
-        private void OnExportPlayersToCsv()
+        private async void OnExportPlayersToCsvAsync()
         {
             try
             {
-                var fileStream = _playerRepository.ExportPlayersToCsv(Players.Select(p => p.DbEntity));
+                var playersToExport = Players.Select(p => p.DbEntity);
+                if (string.IsNullOrWhiteSpace(FilterGeneral))
+                    playersToExport = await _playerRepository.GetAllAsync();
+                var fileStream = _playerRepository.ExportPlayersToCsv(playersToExport);
                 var actualPath = "";
                 var dialog = new SaveFileDialog
                 {
@@ -131,7 +134,7 @@ namespace AdminView.Players
                     }
                     else return;
                 }
-                using (var fileWriter = new FileStream(actualPath, FileMode.CreateNew))
+                using (var fileWriter = new FileStream(actualPath, FileMode.OpenOrCreate))
                 {
                     fileStream.CopyTo(fileWriter);
                     fileWriter.Flush();

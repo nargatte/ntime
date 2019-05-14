@@ -18,8 +18,11 @@ namespace BaseCore.DataBase
 {
     public class PlayerRepository : RepositoryCompetitionId<Player>
     {
+        private AgeCategoryRepository _ageCategoryRepository;
+
         public PlayerRepository(IContextProvider contextProvider, Competition competition) : base(contextProvider, competition)
         {
+            _ageCategoryRepository = new AgeCategoryRepository(contextProvider, competition);
         }
 
         protected override IQueryable<Player> GetSortQuery(IQueryable<Player> items) =>
@@ -270,12 +273,13 @@ namespace BaseCore.DataBase
         }
 
         public async Task UpdateAsync(Player player, AgeCategory ageCategory, Distance distance, Subcategory subcategory, ExtraColumnValue[] extraColumnValueDtos)
-        { 
+        {
             foreach (var extraColumnValue in player.ExtraColumnValues)
             {
                 extraColumnValue.PlayerId = player.Id;
             }
-            player.FullCategory = GetFullCategory(distance, subcategory, ageCategory, player.IsMale);
+            var newAgeCategory = (await _ageCategoryRepository.GetFittingAsync(player)).FirstOrDefault();
+            player.FullCategory = GetFullCategory(distance, subcategory, newAgeCategory, player.IsMale);
             CheckNull(player);
             CheckItem(player);
             await ContextProvider.DoAsync(async ctx =>
@@ -327,8 +331,8 @@ namespace BaseCore.DataBase
                     if (!ageCategoriesDictionary.TryGetValue(player.BirthDate.Year, out AgeCategory ageCategory))
                     {
                         ageCategory = categories
-                            .FirstOrDefault(a =>
-                                a.YearFrom <= player.BirthDate.Year && player.BirthDate.Year <= a.YearTo);
+                            .FirstOrDefault(ac =>
+                                ac.Male == player.IsMale && ac.YearFrom <= player.BirthDate.Year && player.BirthDate.Year <= ac.YearTo);
                         if (ageCategory != null)
                         {
                             ageCategoriesDictionary.Add(player.BirthDate.Year, ageCategory);
@@ -412,7 +416,7 @@ namespace BaseCore.DataBase
             player.SubcategoryId = subcategory?.Id;
             player.Subcategory = null;
 
-            AgeCategory ageCategory = (await (new AgeCategoryRepository(ContextProvider, Competition)).GetFittingAsync(player))[0];
+            AgeCategory ageCategory = (await (new AgeCategoryRepository(ContextProvider, Competition)).GetFittingAsync(player)).FirstOrDefault();
             player.AgeCategoryId = ageCategory?.Id;
             player.AgeCategory = null;
 
@@ -437,10 +441,15 @@ namespace BaseCore.DataBase
             return player;
         }
 
-        protected virtual string GetFullCategory(Distance distance, Subcategory subcategory, AgeCategory ageCategory,
-            bool male) =>
-            (distance == null || subcategory == null || ageCategory == null) ? null :
-            distance.Name.Substring(0, Math.Min(4, distance.Name.Length)) + " " + ageCategory.Name + (subcategory.ShortName == "*" ? "" : subcategory.ShortName);
+        protected virtual string GetFullCategory(Distance distance, Subcategory subcategory, AgeCategory ageCategory, bool male)
+        {
+            if (distance == null || subcategory == null || ageCategory == null)
+                return null;
+            else
+                return distance.Name.Substring(0, Math.Min(4, distance.Name.Length)) + " " +
+                    ageCategory.Name + 
+                    (subcategory.ShortName == "*" ? "" : subcategory.ShortName);
+        }
 
         public async Task<Tuple<int, int>> ImportTimeReadsAsync(string fileName, Gate gate)
         {

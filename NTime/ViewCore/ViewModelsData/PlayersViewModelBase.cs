@@ -227,11 +227,9 @@ namespace ViewCore
             await _playerRepository.UpdateFullCategoryAllAsync();
             MessageBox.Show("Kategorie zostały przeliczone poprawnie");
             //await task;
+            await _playersManager.AddPlayersFromDatabase(removeAllDisplayedBefore: true);
+
             Players = _playersManager.GetPlayersToDisplay();
-            foreach (var player in Players)
-            {
-                player.UpdateFullCategoryDisplay();
-            }
             UpdateRecordsRangeInfo(_playersManager.GetRecordsRangeInfo());
         }
 
@@ -248,7 +246,7 @@ namespace ViewCore
         {
             if (_currentCompetition != null && _playersManager != null)
             {
-                _playersManager.UpdateFilterInfo(pageNumber: 1, query: FilterGeneral, sortOrder: SortOrder, sortCriteria: SortCriteria,
+                await _playersManager.UpdateFilterInfo(pageNumber: 1, query: FilterGeneral, sortOrder: SortOrder, sortCriteria: SortCriteria,
                                                         distanceSortCriteria: DistanceSortCriteria, subcategorySortCriteria: SubcategorySortCriteria,
                                                         ageCategorySortCriteria: AgeCategorySortCriteria);
                 Players = _playersManager.GetPlayersToDisplay();
