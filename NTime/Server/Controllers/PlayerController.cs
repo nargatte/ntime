@@ -362,7 +362,8 @@ namespace Server.Controllers
             if (await CanOrganizerAccess() == false)
                 throw new Exception("Unauthorized");
 
-            var stream = await _playerRepository.ExportPlayersToCsv();
+            var players = await _playerRepository.GetAllAsync();
+            var stream = _playerRepository.ExportPlayersToCsv(players);
 
             HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK)
             {

@@ -111,11 +111,11 @@ namespace AdminView.Players
             }
         }
 
-        private async void OnExportPlayersToCsv()
+        private void OnExportPlayersToCsv()
         {
             try
             {
-                var fileStream = await _playerRepository.ExportPlayersToCsv();
+                var fileStream = _playerRepository.ExportPlayersToCsv(Players.Select(p => p.DbEntity));
                 var actualPath = "";
                 var dialog = new SaveFileDialog
                 {
@@ -136,6 +136,7 @@ namespace AdminView.Players
                     fileStream.CopyTo(fileWriter);
                     fileWriter.Flush();
                 }
+                MessageBox.Show("Plik został poprawnie zapisany");
             }
             catch (Exception ex)
             {

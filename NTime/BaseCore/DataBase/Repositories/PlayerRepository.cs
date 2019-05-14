@@ -641,35 +641,36 @@ namespace BaseCore.DataBase
             });
         }
 
-        public async Task<MemoryStream> ExportPlayersToCsv()
+        public MemoryStream ExportPlayersToCsv(IEnumerable<Player> players)
         {
-            char initialSeparator = '|';
             char targetSeperator = ';';
-
-            var players = await this.GetAllAsync();
+            var sortexExtraColumns = Competition.ExtraColumns.OrderBy(column => column.SortIndex).ToList();
 
             var builder = new StringBuilder();
             var csvHeaders = @"nr_startowy;imie;nazwisko;miejscowosc;klub;data_urodzenia;plec;rower;telefon;pay;czas_startu;kategoria;kat_wiek;nazwa_dystansu";
-            if (!String.IsNullOrWhiteSpace(Competition.ExtraDataHeaders))
+
+            if (sortexExtraColumns.Any())
             {
-                var extraHeaders = Competition.ExtraDataHeaders.Split(initialSeparator);
-                var extraHeadersToCsv = String.Join(targetSeperator.ToString(), extraHeaders);
-                csvHeaders += $"{targetSeperator}{extraHeadersToCsv}";
+                var extraColumnHeaders = string.Join(targetSeperator.ToString(), Competition.ExtraColumns.Select(column => column.Title));
+                csvHeaders += $"{targetSeperator}{extraColumnHeaders}";
             }
             builder.AppendLine(csvHeaders);
 
-            foreach (Player p in players)
+            foreach (var player in players)
             {
-                string birthDate = p.BirthDate.ToString("yyyy-MM-dd");
-                string sex = p.IsMale ? "M" : "K";
-                string pay = p.IsPaidUp ? "1" : "";
+                string birthDate = player.BirthDate.ToString("yyyy-MM-dd");
+                string sex = player.IsMale ? "M" : "K";
+                string pay = player.IsPaidUp ? "1" : "";
 
-                var csvPlayerData = $"{p.StartNumber};{p.FirstName};{p.LastName};{p.City ?? ""};{p.Team ?? ""};{birthDate};{sex};{p.Subcategory?.Name ?? ""};{p.PhoneNumber ?? ""};{pay};{p.StartTime?.ToString("T") ?? ""};{p.FullCategory ?? ""};{p.AgeCategory?.Name ?? ""};{p.Distance?.Name ?? ""}";
-                if (!String.IsNullOrWhiteSpace(p.ExtraData))
+                var csvPlayerData = string.Join(targetSeperator.ToString(),
+                    player.StartNumber, player.FirstName, player.LastName, player.City ?? "", player.Team ?? "", birthDate,
+                    sex, player.Subcategory?.Name ?? "", player.PhoneNumber ?? "", pay, player.StartTime?.ToString("T") ?? "",
+                    player.FullCategory ?? "", player.AgeCategory?.Name ?? "", player.Distance?.Name ?? "");
+
+                foreach (var extraColumn in sortexExtraColumns)
                 {
-                    var extraData = p.ExtraData.Split(initialSeparator);
-                    var extraDataToCsv = String.Join(targetSeperator.ToString(), extraData);
-                    csvPlayerData += $"{targetSeperator}{extraDataToCsv}";
+                    var extraColumnValueToCsv = player.ExtraColumnValues.FirstOrDefault(columnValue => columnValue.ColumnId == extraColumn.Id)?.CustomValue ?? "";
+                    csvPlayerData += $"{targetSeperator}{extraColumnValueToCsv}";
                 }
                 builder.AppendLine(csvPlayerData);
             }
